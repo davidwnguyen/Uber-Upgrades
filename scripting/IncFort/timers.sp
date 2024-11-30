@@ -1698,7 +1698,7 @@ public Action:GiveMaxAmmo(Handle timer, any:userid)
 			{
 				char TutorialString[32];
 				GetClientCookie(client, EngineerTutorial, TutorialString, sizeof(TutorialString));
-				if(!strcmp("0", TutorialString))
+				if(StrEqual("0", TutorialString))
 				{
 					SetClientCookie(client, EngineerTutorial, "1"); 
 					

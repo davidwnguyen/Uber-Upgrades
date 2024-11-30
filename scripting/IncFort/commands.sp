@@ -224,19 +224,19 @@ public Action:Menu_QuickBuyUpgrade(client, args)
 		{
 			arg2_ = -1
 			arg3_ = -1
-			if(!strcmp("1", arg1)){
+			if(StrEqual("1", arg1)){
 			arg1_ = 4;
 			}
-			if(!strcmp("2", arg1)){
+			if(StrEqual("2", arg1)){
 			arg1_ = 0;
 			}
-			if(!strcmp("3", arg1)){
+			if(StrEqual("3", arg1)){
 			arg1_ = 1;
 			}
-			if(!strcmp("4", arg1)){
+			if(StrEqual("4", arg1)){
 			arg1_ = 2;
 			}
-			if(!strcmp("5", arg1)){
+			if(StrEqual("5", arg1)){
 			arg1_ = 3;
 			}
 			if (arg1_ > -1 && arg1_ < 6 && GetCmdArg(2, arg2, sizeof(arg2)))

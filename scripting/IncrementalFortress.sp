@@ -23,6 +23,8 @@
 #include <takehealth_proxy>
 #include <classdefs/CTakeDamageInfo.sp>
 #include <tf2_sentryfirebullet>
+#include <tf_econ_dynamic>
+
 #pragma tabsize 0
 
 #define SecondaryCostReduction 1.0

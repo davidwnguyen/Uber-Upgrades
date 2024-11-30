@@ -530,7 +530,7 @@ public GetUpgrade_CatList(char[] WCName)
 	
 	for (i = wis, w_id = -1; i < WCNAMELISTSIZE; ++i)
 	{
-		if (!strcmp(wcnamelist[i], WCName, false))
+		if (StrEqual(wcnamelist[i], WCName, false))
 		{
 			w_id = wcname_l_idx[i]
 			

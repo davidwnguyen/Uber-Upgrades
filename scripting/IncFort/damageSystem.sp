@@ -71,7 +71,7 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 			if(IsValidEdict(inflictor)){
 				char classname[32]; 
 				GetEdictClassname(inflictor, classname, sizeof(classname));
-				isSentry = !strcmp("obj_sentrygun", classname) || !strcmp("tf_projectile_sentryrocket", classname);
+				isSentry = StrEqual("obj_sentrygun", classname) || StrEqual("tf_projectile_sentryrocket", classname);
 			}
 
 			if(IsValidWeapon(weapon) && !isSentry)
@@ -1598,7 +1598,7 @@ public float genericSentryDamageModification(victim, attacker, inflictor, float 
 {
 	char classname[64];
 	GetEdictClassname(inflictor, classname, sizeof(classname));
-	if(!strcmp("tf_projectile_sentryrocket", classname)){
+	if(StrEqual("tf_projectile_sentryrocket", classname)){
 		inflictor = getOwner(inflictor);
 		GetEdictClassname(inflictor, classname, sizeof(classname));
 	}
@@ -1609,7 +1609,7 @@ public float genericSentryDamageModification(victim, attacker, inflictor, float 
 	if (isVictimPlayer && StrEqual(classname, "obj_attachment_sapper"))
 		TF2_AddCondition(victim, TFCond_Sapped, 2.0);
 
-	if ((!strcmp("obj_sentrygun", classname)) || weaponIdx == 140)
+	if ((StrEqual("obj_sentrygun", classname)) || weaponIdx == 140)
 	{
 		int owner; 
 		owner = GetEntPropEnt(inflictor, Prop_Send, "m_hBuilder");
@@ -1660,7 +1660,7 @@ public float genericSentryDamageModification(victim, attacker, inflictor, float 
 			if(IsValidWeapon(secondary)){
 				damage *= 1+GetEntProp(inflictor, Prop_Send, "m_iKills")*GetAttribute(secondary, "sentry dmg bonus per kill", 0.0);
 			}
-			if((!strcmp("obj_sentrygun", classname) && GetEntProp(inflictor, Prop_Send, "m_bMiniBuilding") == 1))
+			if((StrEqual("obj_sentrygun", classname) && GetEntProp(inflictor, Prop_Send, "m_bMiniBuilding") == 1))
 			{//Minisentries deal 4 damage base.
 				damage *= 0.5
 			}

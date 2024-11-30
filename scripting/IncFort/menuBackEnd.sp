@@ -1,12 +1,3 @@
-public MenuHandler_AccessDenied(Handle menu, MenuAction:action, client, param2)
-{
-	if (action == MenuAction_Select)
-	{
-		PrintToChat(client, "This feature is donators/VIPs only")
-	}
-    if (action == MenuAction_End)
-        CloseHandle(menu);
-}
 public MenuHandler_UpgradeChoice(Handle menu, MenuAction:action, client, param2)
 {
 	if(action == MenuAction_DisplayItem)
@@ -476,7 +467,7 @@ public MenuHandler_Choosecat(Handle menu, MenuAction:action, client, param2)
 				{
 					char TutorialString[32];
 					GetClientCookie(client, ArmorTutorial, TutorialString, sizeof(TutorialString));
-					if(!strcmp("0", TutorialString))
+					if(StrEqual("0", TutorialString))
 					{
 						SetClientCookie(client, ArmorTutorial, "1"); 
 						
@@ -491,7 +482,7 @@ public MenuHandler_Choosecat(Handle menu, MenuAction:action, client, param2)
 				{
 					char TutorialString[32];
 					GetClientCookie(client, ArcaneTutorial, TutorialString, sizeof(TutorialString));
-					if(!strcmp("0", TutorialString))
+					if(StrEqual("0", TutorialString))
 					{
 						SetClientCookie(client, ArcaneTutorial, "1"); 
 						
@@ -592,7 +583,7 @@ public MenuHandler_BuyUpgrade(Handle menu, MenuAction:action, client, param2)
 				{
 					char TutorialString[32];
 					GetClientCookie(client, WeaponTutorial, TutorialString, sizeof(TutorialString));
-					if(!strcmp("0", TutorialString))
+					if(StrEqual("0", TutorialString))
 					{
 						SetClientCookie(client, WeaponTutorial, "1"); 
 

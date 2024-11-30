@@ -84,20 +84,20 @@ BrowseAttributesKV(Handle kv)
 			if (KvGetDataType(kv, NULL_STRING) != KvData_None)
 			{
 				KvGetSectionName(kv, Buf, sizeof(Buf));
-				if (!strcmp(Buf,"ref"))
+				if (StrEqual(Buf,"ref"))
 				{
 					KvGetString(kv, "", Buf, 64);
 					strcopy(upgrades[_u_id].name, 64, Buf);
 					SetTrieValue(_upg_names, Buf, _u_id, true);
 				}
-				else if (!strcmp(Buf,"name"))
+				else if (StrEqual(Buf,"name"))
 				{
 					KvGetString(kv, "", Buf, 64);
 					if (strcmp(Buf,""))
 					{
 						for (int i_ = 1; i_ < MAX_ATTRIBUTES; i_++)
 						{
-							if (!strcmp(upgrades[i_].attr_name, Buf))
+							if (StrEqual(upgrades[i_].attr_name, Buf))
 							{
 								upgrades[_u_id].to_a_id = i_
 								break;
@@ -105,47 +105,47 @@ BrowseAttributesKV(Handle kv)
 						}
 					}
 				}
-				else if (!strcmp(Buf,"cost"))
+				else if (StrEqual(Buf,"cost"))
 				{
 					KvGetString(kv, "", Buf, 64);
 					upgrades[_u_id].cost = RoundToCeil(ParseShorthand(Buf,64));
 				}
-				else if (!strcmp(Buf,"increase_ratio"))
+				else if (StrEqual(Buf,"increase_ratio"))
 				{
 					KvGetString(kv, "", Buf, 64);
 					upgrades[_u_id].cost_inc_ratio = StringToFloat(Buf)
 				}
-				else if (!strcmp(Buf,"value"))
+				else if (StrEqual(Buf,"value"))
 				{
 					KvGetString(kv, "", Buf, 64);
 					upgrades[_u_id].ratio = StringToFloat(Buf)
 				}
-				else if (!strcmp(Buf,"init"))
+				else if (StrEqual(Buf,"init"))
 				{
 					KvGetString(kv, "", Buf, 64);
 					upgrades[_u_id].i_val = StringToFloat(Buf)
 				}
-				else if(!strcmp(Buf,"restriction_category"))
+				else if(StrEqual(Buf,"restriction_category"))
 				{
 					KvGetString(kv, "", Buf, 64);
 					upgrades[_u_id].restriction_category = StringToInt(Buf)
 				}
-				else if(!strcmp(Buf,"display_style"))
+				else if(StrEqual(Buf,"display_style"))
 				{
 					KvGetString(kv, "", Buf, 64);
 					upgrades[_u_id].display_style = StringToInt(Buf)
 				}
-				else if(!strcmp(Buf,"description"))
+				else if(StrEqual(Buf,"description"))
 				{
 					KvGetString(kv, "", Buf, 256);
 					upgrades[_u_id].description = Buf;
 				}
-				else if(!strcmp(Buf,"requirement"))
+				else if(StrEqual(Buf,"requirement"))
 				{
 					KvGetString(kv, "", Buf, 64);
 					upgrades[_u_id].requirement = ParseShorthand(Buf, 64);
 				}
-				else if(!strcmp(Buf, "staged_max"))
+				else if(StrEqual(Buf, "staged_max"))
 				{
 					KvGetString(kv, "", Buf, 64);
 					char parts[MAX_STAGES][256];
@@ -157,7 +157,7 @@ BrowseAttributesKV(Handle kv)
 						upgrades[_u_id].staged_max[i] = StringToFloat(parts[i-1]);
 					}
 				}
-				else if (!strcmp(Buf,"max"))
+				else if (StrEqual(Buf,"max"))
 				{
 					KvGetString(kv, "", Buf, 64);
 					upgrades[_u_id].m_val = StringToFloat(Buf)
@@ -192,7 +192,7 @@ BrowseAttListKV(Handle kv, &w_id = -1, &w_sub_id = -1, &w_subcat_id = 0,w_sub_at
 		if (level == 2)
 		{
 			KvGetSectionName(kv, Buf, sizeof(Buf))
-			if (!strcmp(Buf, "special_tweaks_listid"))
+			if (StrEqual(Buf, "special_tweaks_listid"))
 			{
 				KvGetString(kv, "", Buf, 64);
 				
@@ -280,22 +280,22 @@ BrowseSpeTweaksKV(Handle kv, &u_id = -1, att_id = -1, level = 0)
 		if (level == 3)
 		{
 			KvGetSectionName(kv, Buf, sizeof(Buf));
-			if(!strcmp("requirement", Buf))
+			if(StrEqual("requirement", Buf))
 			{
 				KvGetString(kv, "", Buf, 64);
 				tweaks[u_id].requirement = ParseShorthand(Buf,64)
 			}
-			else if(!strcmp("cost", Buf))
+			else if(StrEqual("cost", Buf))
 			{
 				KvGetString(kv, "", Buf, 64);
 				tweaks[u_id].cost = ParseShorthand(Buf,64)
 			}
-			else if(!strcmp("restriction", Buf))
+			else if(StrEqual("restriction", Buf))
 			{
 				KvGetString(kv, "", Buf, 64);
 				tweaks[u_id].restriction = StringToInt(Buf);
 			}
-			else if(!strcmp("gamestage", Buf))
+			else if(StrEqual("gamestage", Buf))
 			{
 				KvGetString(kv, "", Buf, 64);
 				tweaks[u_id].gamestage_requirement = StringToInt(Buf);
@@ -342,33 +342,33 @@ BrowseWeaponsListKV(Handle kv, &u_id = -1, att_id = -1, level = 0)
 		if (level == 2)
 		{
 			KvGetSectionName(kv, Buf, sizeof(Buf));
-			if(!strcmp("index", Buf))
+			if(StrEqual("index", Buf))
 			{
 				KvGetString(kv, "", Buf, 64);
 				upgrades_weapon_index[u_id] = StringToInt(Buf)
 			}
-			else if(!strcmp("cost", Buf))
+			else if(StrEqual("cost", Buf))
 			{
 				KvGetString(kv, "", Buf, 64);
 				upgrades_weapon_cost[u_id] = StringToFloat(Buf)
 			}
-			else if(!strcmp("weapon_class", Buf))
+			else if(StrEqual("weapon_class", Buf))
 			{
 				KvGetString(kv, "", Buf, 64);
 				upgrades_weapon_class[u_id] = Buf
 			}
-			else if(!strcmp("weapon_menu", Buf))
+			else if(StrEqual("weapon_menu", Buf))
 			{
 				KvGetString(kv, "", Buf, 64);
 				upgrades_weapon_class_menu[u_id] = Buf
 			}
-			else if(!strcmp("description", Buf))
+			else if(StrEqual("description", Buf))
 			{
 				char Description[512];
 				KvGetString(kv, "", Description, 512);
 				upgrades_weapon_description[u_id] = Description
 			}
-			else if(!strcmp("class", Buf))
+			else if(StrEqual("class", Buf))
 			{
 				KvGetString(kv, "", Buf, 64);
 				upgrades_weapon_class_restrictions[u_id] = Buf

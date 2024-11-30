@@ -3775,7 +3775,7 @@ public Event_PlayerRespawn(Handle event, const char[] name, bool:dontBroadcast)
 				if(IsValidForDamage(TankTeleporter) && !GetEntProp(TankTeleporter, Prop_Send, "m_bDisabled")){
 					char classname[128]; 
 					GetEdictClassname(TankTeleporter, classname, sizeof(classname)); 
-					if(!strcmp("tank_boss", classname)){
+					if(StrEqual("tank_boss", classname)){
 						float telePos[3];
 						GetEntPropVector(TankTeleporter,Prop_Send, "m_vecOrigin",telePos);
 						telePos[2]+= 220.0;
@@ -3945,7 +3945,7 @@ public TF2Items_OnGiveNamedItem_Post(client, char[] classname, itemDefinitionInd
 			int slot = TF2Econ_GetItemLoadoutSlot(itemDefinitionIndex, TF2_GetPlayerClass(client));
 			if (current_class[client] == TFClass_Spy)
 			{
-				if (!strcmp(classname, "tf_weapon_pda_spy"))
+				if (StrEqual(classname, "tf_weapon_pda_spy"))
 				{
 					/*current_class[client] = TF2_GetPlayerClass(client)
 					currentitem_classname[client][1] = "tf_weapon_pda_spy"
@@ -3960,7 +3960,7 @@ public TF2Items_OnGiveNamedItem_Post(client, char[] classname, itemDefinitionInd
 			}
 			if (current_class[client] == TFClass_Engineer)
 			{
-				if (!strcmp(classname, "tf_weapon_pda_engineer_build"))
+				if (StrEqual(classname, "tf_weapon_pda_engineer_build"))
 				{
 					/*current_class[client] = TF2_GetPlayerClass(client)
 					currentitem_classname[client][1] = "tf_weapon_pda_spy"
@@ -3976,7 +3976,7 @@ public TF2Items_OnGiveNamedItem_Post(client, char[] classname, itemDefinitionInd
 			currentitem_catidx[client][4] = _:TF2_GetPlayerClass(client) - 1;
 			if (slot != 3 && slot <= NB_SLOTS_UED)
 			{
-				if (!strcmp(classname, "tf_weapon_revolver"))
+				if (StrEqual(classname, "tf_weapon_revolver"))
 					slot =0;
 				
 				GetEntityClassname(entityIndex, currentitem_classname[client][slot], 64);
@@ -3989,7 +3989,7 @@ public TF2Items_OnGiveNamedItem_Post(client, char[] classname, itemDefinitionInd
 				{
 					case (TFClass_Scout):
 					{
-						if (!strcmp(classname, "tf_weapon_scattergun")){
+						if (StrEqual(classname, "tf_weapon_scattergun")){
 							currentitem_catidx[client][slot] = GetUpgrade_CatList("tf_weapon_scattergun_")
 						}
 						else{
@@ -3998,10 +3998,10 @@ public TF2Items_OnGiveNamedItem_Post(client, char[] classname, itemDefinitionInd
 					}
 					case (TFClass_Soldier):
 					{
-						if (!strcmp(classname, "tf_weapon_shotgun")){
+						if (StrEqual(classname, "tf_weapon_shotgun")){
 							currentitem_catidx[client][slot] = GetUpgrade_CatList("tf_weapon_shotgun_soldier")
 						}				
-						else if (!strcmp(classname, "tf_weapon_grenadelauncher")){
+						else if (StrEqual(classname, "tf_weapon_grenadelauncher")){
 							currentitem_catidx[client][slot] = GetUpgrade_CatList("tf_weapon_libertylauncher")
 						}	
 						else{
@@ -4010,7 +4010,7 @@ public TF2Items_OnGiveNamedItem_Post(client, char[] classname, itemDefinitionInd
 					}
 					case (TFClass_Pyro):
 					{
-						if (!strcmp(classname, "tf_weapon_flaregun")){
+						if (StrEqual(classname, "tf_weapon_flaregun")){
 							if (itemDefinitionIndex == 39 || itemDefinitionIndex == 1081){
 								currentitem_catidx[client][slot] = GetUpgrade_CatList("tf_weapon_flaregun")
 							}
@@ -4021,10 +4021,10 @@ public TF2Items_OnGiveNamedItem_Post(client, char[] classname, itemDefinitionInd
 								currentitem_catidx[client][slot] = GetUpgrade_CatList(classname)
 							}
 						}
-						else if (!strcmp(classname, "tf_weapon_shotgun") || !strcmp(classname, "tf_weapon_shotgun_pyro")){
+						else if (StrEqual(classname, "tf_weapon_shotgun") || StrEqual(classname, "tf_weapon_shotgun_pyro")){
 							currentitem_catidx[client][slot] = GetUpgrade_CatList("tf_weapon_shotgun_pyro")
 						}
-						else if(!strcmp(classname, "tf_weapon_flamethrower") && itemDefinitionIndex == 594){
+						else if(StrEqual(classname, "tf_weapon_flamethrower") && itemDefinitionIndex == 594){
 							currentitem_catidx[client][slot] = GetUpgrade_CatList("pyroweapp")
 						}
 						else{
@@ -4033,17 +4033,17 @@ public TF2Items_OnGiveNamedItem_Post(client, char[] classname, itemDefinitionInd
 					}
 					case (TFClass_DemoMan):
 					{
-						if (!strcmp(classname, "tf_wearable") && 
+						if (StrEqual(classname, "tf_wearable") && 
 						(itemDefinitionIndex == 405 || itemDefinitionIndex == 608)){
 							currentitem_catidx[client][slot] = GetUpgrade_CatList("tf_wear_alishoes")
 						}		
-						else if (!strcmp(classname, "tf_weapon_grenadelauncher") && itemDefinitionIndex == 1151){
+						else if (StrEqual(classname, "tf_weapon_grenadelauncher") && itemDefinitionIndex == 1151){
 							currentitem_catidx[client][slot] = GetUpgrade_CatList("tf_iron_bomber")
 						}
-						else if (!strcmp(classname, "tf_weapon_pipebomblauncher") && itemDefinitionIndex == 1150){
+						else if (StrEqual(classname, "tf_weapon_pipebomblauncher") && itemDefinitionIndex == 1150){
 							currentitem_catidx[client][slot] = GetUpgrade_CatList("tf_quickiebomb")
 						}
-						else if (!strcmp(classname, "tf_weapon_cannon")){
+						else if (StrEqual(classname, "tf_weapon_cannon")){
 							currentitem_catidx[client][slot] = GetUpgrade_CatList("tf_weapon_libertylauncher")
 						}
 						else{
@@ -4052,10 +4052,10 @@ public TF2Items_OnGiveNamedItem_Post(client, char[] classname, itemDefinitionInd
 					}
 					case (TFClass_Heavy):
 					{
-						if (!strcmp(classname, "tf_weapon_minigun") && (itemDefinitionIndex == 312 || itemDefinitionIndex == 811)){
+						if (StrEqual(classname, "tf_weapon_minigun") && (itemDefinitionIndex == 312 || itemDefinitionIndex == 811)){
 							currentitem_catidx[client][slot] = GetUpgrade_CatList("brassBeast")
 						}
-						else if (!strcmp(classname, "tf_weapon_shotgun")){
+						else if (StrEqual(classname, "tf_weapon_shotgun")){
 							currentitem_catidx[client][1] = GetUpgrade_CatList("tf_weapon_shotgun_hwg")
 						}
 						else{
@@ -4064,13 +4064,13 @@ public TF2Items_OnGiveNamedItem_Post(client, char[] classname, itemDefinitionInd
 					}
 					case (TFClass_Engineer):
 					{
-						if (!strcmp(classname, "tf_weapon_shotgun") && currentitem_level[client][slot] != 242){
+						if (StrEqual(classname, "tf_weapon_shotgun") && currentitem_level[client][slot] != 242){
 							currentitem_catidx[client][0] = GetUpgrade_CatList("tf_weapon_shotgun_primary")
 						}
-						else if (!strcmp(classname, "tf_weapon_shotgun_primary") && itemDefinitionIndex == 527){
+						else if (StrEqual(classname, "tf_weapon_shotgun_primary") && itemDefinitionIndex == 527){
 							currentitem_catidx[client][0] = GetUpgrade_CatList("tf_weapon_shotgun_primary_")
 						}
-						else if (!strcmp(classname, "saxxy")){
+						else if (StrEqual(classname, "saxxy")){
 							currentitem_catidx[client][2] = GetUpgrade_CatList("tf_weapon_wrench")
 						}
 						else{
@@ -4079,7 +4079,7 @@ public TF2Items_OnGiveNamedItem_Post(client, char[] classname, itemDefinitionInd
 					}
 					case (TFClass_Sniper):
 					{
-						if(!strcmp(classname, "tf_weapon_grenadelauncher")){
+						if(StrEqual(classname, "tf_weapon_grenadelauncher")){
 							currentitem_catidx[client][0] = GetUpgrade_CatList("autofirebow")
 						}
 						else if(itemDefinitionIndex == 752){
@@ -4091,7 +4091,7 @@ public TF2Items_OnGiveNamedItem_Post(client, char[] classname, itemDefinitionInd
 					}
 					case (TFClass_Medic):
 					{
-						if (!strcmp(classname, "tf_weapon_medigun") && itemDefinitionIndex == 998){
+						if (StrEqual(classname, "tf_weapon_medigun") && itemDefinitionIndex == 998){
 							currentitem_catidx[client][slot] = GetUpgrade_CatList("vaccinator")
 						}
 						else{
