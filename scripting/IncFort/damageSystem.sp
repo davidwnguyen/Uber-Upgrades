@@ -1676,8 +1676,6 @@ public float genericSentryDamageModification(victim, attacker, inflictor, float 
 public void applyDamageAffinities(&victim, &attacker, &inflictor, float &damage, &weapon, &damagetype, &damagecustom, char[] damageCategory)
 {
 	//Now's the time!
-	extendedDamageTypes bits;
-	bits = currentDamageType[attacker];
 
 	if(!IsValidWeapon(weapon))
 		return;
@@ -1692,32 +1690,9 @@ public void applyDamageAffinities(&victim, &attacker, &inflictor, float &damage,
 			if(dmgTakenMultAddr != Address_Null)
 				damage *= TF2Attrib_GetValue(dmgTakenMultAddr);
 		}
-
-		Address dmgMasteryAddr = TF2Attrib_GetByName(attacker, "physical damage affinity");
-		if(dmgMasteryAddr != Address_Null){
-			damage *= TF2Attrib_GetValue(dmgMasteryAddr)*TF2Attrib_GetValue(dmgMasteryAddr);
-
-			if(IsValidEdict(inflictor) && !IsValidClient3(inflictor) && !HasEntProp(inflictor, Prop_Send, "m_iItemDefinitionIndex"))
-				{damagetype |= DMG_CLUB;damagetype |= DMG_BULLET;}
-
-			if(damagetype & DMG_BULLET || damagetype & DMG_BUCKSHOT)
-			{
-				//Deal 3 piercing damage.
-				currentDamageType[attacker].second |= DMG_PIERCING;
-				currentDamageType[attacker].second |= DMG_IGNOREHOOK;
-				SDKHooks_TakeDamage(victim, attacker, attacker, 3.0, DMG_PREVENT_PHYSICS_FORCE, weapon);
-			}
-		}
 	}
 	else if(StrContains(damageCategory, "fire") != -1)
 	{
-		Address dmgMasteryAddr = TF2Attrib_GetByName(attacker, "fire damage affinity");
-		if(dmgMasteryAddr != Address_Null){
-			damage *= TF2Attrib_GetValue(dmgMasteryAddr)*TF2Attrib_GetValue(dmgMasteryAddr);
-			if(isVictimPlayer)
-				damage *= 1.0+(TF2Util_GetPlayerBurnDuration(victim)*0.05);
-		}
-
 		if(GetAttribute(attacker, "supernova powerup", 0.0) == 2){
 			damage *= 1.7;
 
@@ -1746,18 +1721,8 @@ public void applyDamageAffinities(&victim, &attacker, &inflictor, float &damage,
 			}
 		}
 	}
-	else if(StrContains(damageCategory, "blast") != -1)
-	{
-		Address dmgMasteryAddr = TF2Attrib_GetByName(attacker, "explosive damage affinity");
-		if(dmgMasteryAddr != Address_Null)
-			damage *= TF2Attrib_GetValue(dmgMasteryAddr)*TF2Attrib_GetValue(dmgMasteryAddr);
-	}
 	else if(StrContains(damageCategory, "electric") != -1)
 	{
-		Address dmgMasteryAddr = TF2Attrib_GetByName(attacker, "electric damage affinity");
-		if(dmgMasteryAddr != Address_Null)
-			damage *= TF2Attrib_GetValue(dmgMasteryAddr)*TF2Attrib_GetValue(dmgMasteryAddr);
-
 		if(GetAttribute(attacker, "supernova powerup", 0.0) == 3){
 			float buff = 1.0;
 			for(int i = 1;i<=MaxClients;++i){
@@ -1774,16 +1739,5 @@ public void applyDamageAffinities(&victim, &attacker, &inflictor, float &damage,
 			if(dmgTakenMultAddr != Address_Null)
 				damage *= TF2Attrib_GetValue(dmgTakenMultAddr);
 		}
-		Address dmgMasteryAddr = TF2Attrib_GetByName(attacker, "arcane damage affinity");
-		if(dmgMasteryAddr != Address_Null)
-			damage *= TF2Attrib_GetValue(dmgMasteryAddr)*TF2Attrib_GetValue(dmgMasteryAddr);
-	}
-
-	if(StrContains(damageCategory, "crit") != -1)
-	{
-		Address dmgMasteryAddr = TF2Attrib_GetByName(attacker, "crit damage affinity");
-		if(dmgMasteryAddr != Address_Null)
-			damage = Pow(damage, TF2Attrib_GetValue(dmgMasteryAddr) + (bits.second & DMG_ACTUALCRIT ? 0.2 : 0.0) );
-
 	}
 }

@@ -4,6 +4,7 @@
 #include <sourcemod>
 #define REQUIRE_EXTENSIONS
 #include <tf2items>
+#include <tf_econ_data>
 
 // ====[ CONSTANTS ]===================================================
 #define PLUGIN_NAME "[TF2Items] Manager"
@@ -393,7 +394,7 @@ void ParseItemsEntry(KeyValues kv, Handle entry) {
 					
 					// Split the information in two buffers
 					ExplodeString(buffer2, ";", split, 2, 64);
-					int attribute = StringToInt(split[0]);
+					int attribute = TF2Econ_TranslateAttributeNameToDefinitionIndex(split[0]);
 					float value = StringToFloat(split[1]);
 					
 					// Attribute found, set information.

@@ -71,6 +71,8 @@ BrowseWeaponsCatKV(Handle kv)
 BrowseAttributesKV(Handle kv)
 {
 	char Buf[256];
+    TF2EconDynAttribute attrib = new TF2EconDynAttribute();
+    bool ShouldRegister = false;
 	do
 	{
 		if (KvGotoFirstSubKey(kv, false))
@@ -104,6 +106,13 @@ BrowseAttributesKV(Handle kv)
 							}
 						}
 					}
+				}
+				else if (StrEqual(Buf, "attr_class"))
+				{
+					KvGetString(kv, "", Buf, 64);
+                    attrib.SetName(upgrades[_u_id].attr_name);
+                    attrib.SetClass(Buf);
+					ShouldRegister = true;
 				}
 				else if (StrEqual(Buf,"cost"))
 				{
@@ -163,6 +172,8 @@ BrowseAttributesKV(Handle kv)
 					upgrades[_u_id].m_val = StringToFloat(Buf)
 					upgrades[_u_id].staged_max[0] = upgrades[_u_id].m_val;
 					_u_id++//Finish the attribute here.
+                    if(ShouldRegister)
+                        attrib.Register();
 				}
 			}
 		}

@@ -5,332 +5,307 @@
 		"526,30665"//The Machina
 		{
 			"preserve_attributes"	"1"
-
-			"1"				"305 ; 0"
-			"2"				"161 ; 3.0"
+			"1"				"sniper fires tracer;0"
+			"2"				"flame size penalty;3.0"
 		}
 		"642"//Cozy Camper
 		{
 			"preserve_attributes"	"1"
-			
-			"1"				"800 ; 1.75"
-			"2"				"377 ; 0"
-			"3"				"489 ; 1.15"
-			"4"				"610 ; 1.50"
+			"1"				"patient overheal penalty;1.75"
+			"2"				"aiming knockback resistance;0"
+			"3"				"SET BONUS: move speed set bonus; 1.15"
+			"4"				"increased air control;1.50"
 		}
 		"231"//Darwin's Danger Shield
 		{
-			"preserve_attributes"	"1"//makes it so the vanilla stats stay.
-			
-			"1"				"377 ; 0"
-			"2"				"376 ; 1"
+			"preserve_attributes"	"1"
+			"1"				"aiming knockback resistance;0"
+			"2"				"aiming no flinch;1"
 		}
 		"140,30668"//The Wrangler
 		{
 			"preserve_attributes"	"1"
-			
-			"1"				"488 ; 1"
-			"2"				"343 ; 0.80"
+			"1"				"rocket specialist;1"
+			"2"				"engy sentry fire rate increased;0.80"
 		}
 		"812,833"//The Flying Guillotine
 		{
 			"preserve_attributes"	"1"
-		
-			"1"				"437 ; 65536"
+			"1"				"crit vs stunned players;65536"
 		}
 		"810,831"//The Red Tape Recorder
 		{
-			"1"				"425 ; 2.0"
-			"2"				"840 ; 0.1"
+			"1"				"sapper damage bonus;2.0"
+			"2"				"holster_anim_time;0.1"
 		}
 		"735,736,933,1080,1102"//The Sapper
 		{
 			"preserve_attributes"	"1"
-			"1"				"840 ; 0.1"
+			"1"				"holster_anim_time;0.1"
 		}
-		"131"//The Chargin' Targe
+		"131,1144"//The Chargin' Targe
 		{
-			"1"				"4632 ; 750.0"
-			"2"				"26 ; 50"
-		}
-		"1144"//Festive Targe
-		{
-			"1"				"4632 ; 750.0"
-			"2"				"26 ; 50"
+			"1"				"Charging Velocity;750.0"
+			"2"				"max health additive bonus;50"
 		}
 		"406"//Splendid Screen
 		{
-			"1"				"4632 ; 750.0"
-			"2"				"248 ; 1.7"
+			"1"				"Charging Velocity;750.0"
+			"2"				"charge impact damage increased;1.7"
 		}
 		"1099"//Tide Turner
 		{
-			"1"				"4632 ; 750.0"
-			"2"				"6021 ; 1.5"
-			"3"				"248 ; 1.7"
-			"4"				"138 ; 50.0"
-			"5"				"442 ; 1.35"
+			"1"				"Charging Velocity;750.0"
+			"2"				"damage taken mult 2;1.5"
+			"3"				"charge impact damage increased;1.7"
+			"4"				"mult charge turn control;50.0"
+			"5"				"major move speed bonus;1.35"
 		}
-		"39"//The Flare Gun
+		"39,1081"//The Flare Gun
 		{
 			"preserve_attributes"	"1"
-			
-			"1"				"362 ; 35"
-			"2"				"20 ; 1"
-		}
-		"1081"//Festive Flare Gun
-		{
-			"preserve_attributes"	"1"
-			
-			"1"				"362 ; 35"
-			"2"				"20 ; 1"
+			"1"				"crit from behind;35"
+			"2"				"crit vs burning players;1"
 		}
 		"59"//The Dead Ringer
 		{
 			"preserve_attributes"	"1"
-			
-			"1"				"50 ; 0.2"
+			"1"				"absorb damage while cloaked;0.2"
 		}
 		"45,1078"//Force-A-Nature
 		{
 			"preserve_attributes"	"1"
-			
-			"1"				"518 ; 2.0"
+			"1"				"scattergun knockback mult;2.0"
 		}
 		"1178"//Dragon's Fury
 		{
 			"preserve_attributes"	"1"
-			"1"				"273 ; 500.0"
-			"2"				"6023 ; 1.0"
+			"1"				"critboost;500.0"
+			"2"				"Converts Firerate to Damage;1.0"
 		}
 		"426"//Eviction Notice
 		{
-			"1"				"6012 ; 0.5"
-			"2"				"6023 ; 1"
-			"3"				"6026 ; 0.5"
+			"1"				"damage mult 13;0.5"
+			"2"				"Converts Firerate to Damage;1"
+			"3"				"firerate player buff;0.5"
 		}
 		"1101"//B.A.S.E Jumper
 		{
 			"preserve_attributes"	"1"
-			"1"				"66 ; 0.8"
+			"1"				"dmg taken from bullets reduced;0.8"
 		}
 		"133"//Gunboats
 		{
 			"preserve_attributes"	"1"
-			"1"				"64 ; 0.8"
+			"1"				"dmg taken from bullets reduced;0.8"
 		}
-		"411"//The Quick-Fix
+		"projectile spread angle penalty"//The Quick-Fix
 		{
 			"preserve_attributes"	"1"
-			"1"				"90 ; 0.03"
+			"1"				"SRifle Charge rate increased;0.03"
 		}
 		"311"//Buffalo Steak Sandvich
 		{
 			"preserve_attributes"	"1"
-			"2"				"184 ; 1"
+			"2"				"duel loser account id;1"
 		}
 		"449"//Winger
 		{
 			"preserve_attributes"	"1"
-			"1"				"241 ; 3.0"
-			"2"				"6361 ; 7.0"
+			"1"				"reload time increased hidden;3.0"
+			"2"				"weapon ability id;7.0"
 		}
 		"173"//Vita-Saw
 		{
 			"preserve_attributes"	"1"
-			"1"				"144 ; 0.0"
+			"1"				"lunchbox adds minicrits;0.0"
 		}
 		"129"//Buff Banner
 		{
 			"preserve_attributes"	"1"
-			"1"				"116 ; 2.0"
+			"1"				"mod soldier buff type;2.0"
 		}
 		"163"//Crit-a-Cola
 		{
 			"preserve_attributes"	"1"
-			"1"				"814 ; 0.001"
+			"1"				"mod_mark_attacker_for_death;0.001"
 		}
 		"230"//Sydney Sleeper
 		{
-			"1"				"2000 ; 2.0"
+			"1"				"recipe component defined item damage penalty;2.0"
 		}
 		"355"// Fan O'War
 		{
-			"1"				"2000 ; 4.0"
-			"2"				"372 ; 1.75"
-			"3"				"6012 ; 0.6"
+			"1"				"recipe component defined item damage penalty;4.0"
+			"2"				"accepted wedding ring account id damage penalty;1.75"
+			"3"				"damage mult 13; 0.6"
 		}
 		"525"//Diamondback
 		{
 			"preserve_attributes"	"1"
-			"1"				"6023 ; 1.0"
-			"2"				"4521 ; -3"
-			"3"				"4522 ; 2"
+			"1"				"Converts Firerate to Damage; 1.0"
+			"2"				"burst fire count;-3"
+			"3"				"burst fire rate mult;2"
 		}
 		"127"//Direct Hit
 		{
 			"preserve_attributes"	"1"
-			"1"				"2 ; 1.7"
+			"1"				"damage bonus;1.7"
 		}
 		"751"//Cleaner's Carbine
 		{
 			"preserve_attributes"	"1"
-			"1"				"6023 ; 1.0"
-			"2"				"619 ; 1.0"
+			"1"				"Converts Firerate to Damage; 1.0"
+			"2"				"closerange backattack minicrits;1.0"
 		}
 		"1092"//Fortified Compound
 		{
 			"preserve_attributes"	"1"
-			"1"				"6023 ; 1.0"
-			"2"				"6012 ; 16.0"
-			"3"				"6026 ; 4.0"
-			"4"				"183 ; 0.01"
+			"1"				"Converts Firerate to Damage; 1.0"
+			"2"				"damage mult 13; 16.0"
+			"3"				"firerate player buff; 4.0"
+			"4"				"aiming movespeed decreased;0.01"
 		}
 		"595"//The Manmelter
 		{
 			"preserve_attributes"	"1"
-			"1"				"6023 ; 1.0"
-			"2"				"726 ; 12.0"
+			"1"				"Converts Firerate to Damage; 1.0"
+			"2"				"cloak_consume_on_feign_death_activate;12.0"
 		}
 		"588,442"//Pomson 6000 & Righteous Bison
 		{
 			"preserve_attributes"	"1"
-			"1"				"6023 ; 1.0"
-			"2"				"6026 ; 0.25"
-			"3"				"6031 ; 1.25"
-			"4"				"280 ; 1"
+			"1"				"Converts Firerate to Damage; 1.0"
+			"2"				"firerate player buff; 0.25"
+			"3"				"conference call damage;1.25"
+			"4"				"override projectile type;1"
 		}
-		"441"//Cow Mangler 5000
+		"auto fires full clip all at once"//Cow Mangler 5000
 		{
 			"preserve_attributes"	"1"
-			"1"				"284 ; 1.0"
+			"1"				"energy weapon no hurt building;1.0"
 		}
 		"1150"//Quickiebomb
 		{
 			"preserve_attributes"	"1"
-			"1"				"6023 ; 1.0"
-			"2"				"6361 ; 12.0"
-			"3"				"6012 ; 0.75"
-			"4"				"89 ; -6.0"
+			"1"				"Converts Firerate to Damage; 1.0"
+			"2"				"weapon ability id;12.0"
+			"3"				"damage mult 13; 0.75"
+			"4"				"max pipebombs decreased;-6.0"
 		}
 		"348"//Sharpened Volcano Fragment
 		{
 			"preserve_attributes"	"1"
-			"1"				"6023 ; 1.0"
-			"2"				"389 ; 15.0"
-			"3"				"6012 ; 0.5"
+			"1"				"Converts Firerate to Damage; 1.0"
+			"2"				"shot penetrate all players;15.0"
+			"3"				"damage mult 13; 0.5"
 		}
 		"44"//Sandman
 		{
 			"preserve_attributes"	"1"
-			"1"				"38 ; 10.0"
-			"2"				"27 ; 1"
+			"1"				"mod bat launches balls;10.0"
+			"2"				"alt-fire disabled;1"
 		}
 		"648"//Wrap Assassin
 		{
 			"preserve_attributes"	"1"
-			"1"				"346 ; 10.0"
-			"2"				"27 ; 1"
+			"1"				"mod bat launches ornaments;10.0"
+			"2"				"alt-fire disabled;1"
 		}
 		"1104" //Air Strike
 		{
 			"preserve_attributes"	"1"
-			"1"				"100 ; 0.9"
-			"2"				"1 ; 0.85"
-			"3"				"135 ; 0.6"
-			"4"				"621 ; 0.7"
-			"5"				"644 ; 15"
+			"1"				"Blast radius decreased;0.9"
+			"2"				"damage penalty;0.85"
+			"3"				"rocket jump damage reduction;0.6"
+			"4"				"rocketjump attackrate bonus;0.7"
+			"5"				"clipsize increase on kill;15"
 		}
 		"61,1006" //Ambassador
 		{
 			"preserve_attributes"	"1"
-			"1"				"6023 ; 1.0"
-			"2"				"774 ; 1.0"
-			"3"				"6034 ; 2.0"
-		}
-		"1103" //Backscatter
-		{
-			"preserve_attributes"	"1"
-			"1"				"58 ; 3.0"
+			"1"				"Converts Firerate to Damage; 1.0"
+			"2"				"charge time decreased;1.0"
+			"3"				"weapon fire rate;2.0"
 		}
 		"461" //Big Earner
 		{
 			"preserve_attributes"	"1"
-			"1"				"107 ; 1.15"
+			"1"				"move speed bonus;1.15"
 		}
 		"228,1085" //Black Box
 		{
 			"preserve_attributes"	"1"
-			"1"				"4391 ; 2.0"
-			"2"				"6034 ; 2.0"
-			"3"				"128 ; 1.0"
-			"4"				"411 ; 3.0"
+			"1"				"mult projectile count;2.0"
+			"2"				"weapon fire rate;2.0"
+			"3"				"provide on active;1.0"
+			"4"				"projectile spread angle penalty;3.0"
 		}
 		"36" //Blutsauger
 		{
 			"preserve_attributes"	"1"
-			"1"				"6358 ; 0.1"
+			"1"				"lifesteal ability;0.1"
 		}
 		"312" //Brass Beast
 		{
 			"preserve_attributes"	"1"
-			"1"				"280 ; 42.0"
-			"2"				"6034 ; 3.0"
+			"1"				"override projectile type;42.0"
+			"2"				"weapon fire rate;3.0"
 		}
 		"232" //Bushwacka
 		{
 			"preserve_attributes"	"1"
-			"1"				"280 ; 41.0"
-			"2"				"348 ; 4.0"
+			"1"				"override projectile type;41.0"
+			"2"				"fire rate penalty HIDDEN;4.0"
 		}
 		"1098" //The Classic
 		{
 			"preserve_attributes"	"1"
-			"1"				"305 ; 0"
-			"2"				"647 ; 0"
-			"3"				"247 ; 1.6"
+			"1"				"sniper fires tracer;0"
+			"2"				"sniper fires tracer HIDDEN;0"
+			"3"				"no charge impact range;1.6"
 		}
 		"305,1079" //Crusader's Crossbow
 		{
 			"preserve_attributes"	"1"
-			"1"				"475 ; 1.1"
+			"1"				"Projectile speed increased HIDDEN;1.1"
 		}
 		"215" //Degreaser
 		{
 			"preserve_attributes"	"1"
-			"1"				"6012 ; 0.8"
-			"2"				"255 ; 1.4"
-			"3"				"264 ; 1.25"
+			"1"				"damage mult 13; 0.8"
+			"2"				"airblast pushback scale;1.4"
+			"3"				"melee range multiplier;1.25"
 		}
 		"460" //Enforcer
 		{
 			"preserve_attributes"	"1"
-			"1"				"298 ; 2.0"
-			"2"				"348 ; 0.5"
-			"3"				"241 ; 7.0"
+			"1"				"mod ammo per shot;2.0"
+			"2"				"fire rate penalty HIDDEN;0.5"
+			"3"				"reload time increased hidden;7.0"
 		}
 		"45,1078" //Force a Nature
 		{
 			"preserve_attributes"	"1"
-			"1"				"348 ; 0.5"
-			"2"				"6012 ; 0.8"
-			"3"				"6 ; 1.0"
+			"1"				"fire rate penalty HIDDEN;0.5"
+			"2"				"damage mult 13; 0.8"
+			"3"				"fire rate bonus;1.0"
 		}
 		"1180" //Gas Passer
 		{
 			"preserve_attributes"	"1"
-			"1"				"801 ; 5.0"
-			"2"				"2059 ; 0.0"
+			"1"				"item_meter_charge_rate;5.0"
+			"2"				"item_meter_damage_for_full_charge;0.0"
 		}
 		"752" //Hitman's Heatmaker
 		{
 			"preserve_attributes"	"1"
-			"1"				"244 ; 1.0"
-			"2"				"319 ; 0.35"
-			"3"				"305 ; 0.0"
-			"4"				"280 ; 2.0"
-			"5"				"103 ; 1000.0"
-			"6"				"4388 ; 0.0"
+			"1"				"mod rage on hit bonus;1.0"
+			"2"				"increase buff duration;0.35"
+			"3"				"sniper fires tracer;0.0"
+			"4"				"override projectile type;2.0"
+			"5"				"Projectile speed increased;1000.0"
+			"6"				"explosive bullets;0.0"
 		}
 		"1181" //Hot hand
 		{
@@ -341,149 +316,149 @@
 		{
 			"preserve_attributes"	"1"
 			"classname"		"tf_weapon_grenadelauncher"
-			"1"				"280 ; 8.0"
-			"2"				"2 ; 1.2"
-			"3"				"424 ; 0.5"
-			"4"				"103 ; 2.5"
-			"5"				"182 ; 1.0"
+			"1"				"override projectile type;8.0"
+			"2"				"damage bonus;1.2"
+			"3"				"clip size penalty HIDDEN;0.5"
+			"4"				"Projectile speed increased;2.5"
+			"5"				"slow enemy on hit major;1.0"
 		}
 		"811" //Huo-long Heater
 		{
 			"preserve_attributes"	"1"
-			"1"				"280 ; 6.0"
-			"2"				"103 ; 3.0"
-			"3"				"726 ; 0.01"
-			"4"				"99 ; 1.65"
-			"5"				"411 ; 2.0"
-			"6"				"6361 ; 6.0"
-			"7"				"6023 ; 1.0"
+			"1"				"override projectile type;6.0"
+			"2"				"Projectile speed increased;3.0"
+			"3"				"cloak_consume_on_feign_death_activate;0.01"
+			"4"				"Blast radius increased;1.65"
+			"5"				"projectile spread angle penalty;2.0"
+			"6"				"weapon ability id;6.0"
+			"7"				"Converts Firerate to Damage; 1.0"
 		}
 		"1151" //Iron Bomber
 		{
 			"preserve_attributes"	"1"
-			"1"				"6023 ; 1.0"
+			"1"				"Converts Firerate to Damage; 1.0"
 		}
 		"329" //Jag
 		{
 			"preserve_attributes"	"1"
-			"1"				"348 ; 0.85"
-			"2"				"6012 ; 0.8"
+			"1"				"fire rate penalty HIDDEN;0.85"
+			"2"				"damage mult 13; 0.8"
 		}
 		"43" //KGB
 		{	
 			"preserve_attributes"	"1"
-			"1"				"613 ; 2.0"
-			"2"				"31 ; 0.0"
+			"1"				"minicritboost on kill;2.0"
+			"2"				"critboost on kill;0.0"
 		}
 		"414" //Liberty Launcher
 		{	
 			"preserve_attributes"	"1"
 			"classname"		"tf_weapon_grenadelauncher"
-			"1"				"6012 ; 0.5"
-			"2"				"441 ; 1.0"
-			"3"				"280 ; 2.0"
-			"4"				"411 ; 2.0"
-			"5"				"241 ; 0.4"
-			"6"				"5 ; 6.0"
+			"1"				"damage mult 13; 0.5"
+			"2"				"auto fires full clip all at once;1.0"
+			"3"				"override projectile type;2.0"
+			"4"				"projectile spread angle penalty;2.0"
+			"5"				"reload time increased hidden;0.4"
+			"6"				"fire rate penalty;6.0"
 		}
 		"308" //Loch-n-Load
 		{
 			"preserve_attributes"	"1"
-			"1"				"2 ; 1.2"
-			"2"				"726 ; 4.0"
-			"3"				"4430 ; 1"
+			"1"				"damage bonus;1.2"
+			"2"				"cloak_consume_on_feign_death_activate;4.0"
+			"3"				"grenade explode on impact;1"
 		}
 		"996" //Loose Cannon
 		{
 			"preserve_attributes"	"1"
-			"1"				"6012 ; 0.5"
-			"2"				"441 ; 1.0"
-			"3"				"280 ; 17.0"
-			"4"				"411 ; 2.0"
-			"5"				"241 ; 0.4"
-			"6"				"5 ; 6.0"
+			"1"				"damage mult 13; 0.5"
+			"2"				"auto fires full clip all at once;1.0"
+			"3"				"override projectile type;17.0"
+			"4"				"projectile spread angle penalty;2.0"
+			"5"				"reload time increased hidden;0.4"
+			"6"				"fire rate penalty;6.0"
 		}
 		"416" //Market Gardener
 		{
 			"preserve_attributes"	"1"
-			"1"				"869 ; 1.0"
-			"2"				"117 ; 1.0"
-			"3"				"128 ; 1.0"
+			"1"				"crits_become_minicrits;1.0"
+			"2"				"dmg falloff increased;1.0"
+			"3"				"provide on active;1.0"
 		}
 		"36" //Overdose
 		{
 			"preserve_attributes"	"1"
-			"1"				"372 ; 6.0"
+			"1"				"accepted wedding ring account id damage penalty;6.0"
 		}
 		"130" //Scottish Resistance
 		{
 			"preserve_attributes"	"1"
-			"1"				"89 ; 60.0"
+			"1"				"max pipebombs decreased;60.0"
 		}
 		"528" //Short Circuit
 		{
 			"preserve_attributes"	"1"
-			"1"				"4388 ; 140.0"
-			"2"				"842 ; 1.0"
+			"1"				"explosive bullets;140.0"
+			"2"				"flame_ignore_player_velocity;1.0"
 		}
 		"220" //Shortstop
 		{
 			"preserve_attributes"	"1"
-			"1"				"6020 ; 1.15"
-			"2"				"107 ; 1.15"
+			"1"				"damage taken mult 1;1.15"
+			"2"				"move speed bonus;1.15"
 		}
 		"448" //Soda Popper
 		{
 			"preserve_attributes"	"1"
-			"1"				"809 ; 1.0"
-			"2"				"851 ; 1.8"
-			"3"				"54 ; 0.8"
-			"4"				"855 ; 25"
+			"1"				"fixed_shot_pattern;1.0"
+			"2"				"mult_player_movespeed_active;1.8"
+			"3"				"move speed penalty;0.8"
+			"4"				"mod_maxhealth_drain_rate;25"
 		}
 		"349" //Sun on a Stick
 		{
-			"1"				"389 ; 15.0"
-			"2"				"6012 ; 0.5"
-			"3"				"842 ; 1.0"
+			"1"				"shot penetrate all players;15.0"
+			"2"				"damage mult 13; 0.5"
+			"3"				"flame_ignore_player_velocity;1.0"
 		}
 		"17,204" //Syringe Gun 
 		{
 			"preserve_attributes"	"1"
-			"1"				"372 ; 4.0"
+			"1"				"accepted wedding ring account id damage penalty;4.0"
 		}
 		"37,1003" //Ubersaw
 		{
 			"preserve_attributes"	"1"
-			"1"				"17 ; 0.03"
+			"1"				"add uber charge on hit;0.03"
 		}
 		"310" //Warrior's Spirit
 		{
 			"preserve_attributes"	"1"
-			"1"				"6012 ; 0.45"
-			"2"				"280 ; 40.0"
-			"3"				"362 ; 150.0"
+			"1"				"damage mult 13; 0.45"
+			"2"				"override projectile type;40.0"
+			"3"				"crit from behind;150.0"
 		}
 		"222,1121,58,1083,1105" //Jars
 		{
 			"preserve_attributes"	"1"
-			"1"				"280 ; 8.0"
+			"1"				"override projectile type;8.0"
 		}
 		"730"//Beggar's Bazooka
 		{
 			"preserve_attributes"	"1"
-			"1"				"394 ; 0.3"
-			"2"				"6012 ; 0.4"
+			"1"				"fire rate bonus HIDDEN;0.3"
+			"2"				"damage mult 13; 0.4"
 		}
 		"142"//Gunslinger
 		{
 			"preserve_attributes"	"1"
-			"1"				"6033 ; 5.0"
-			"2"				"6361 ; 17.0"
+			"1"				"sentry amount;5.0"
+			"2"				"weapon ability id;17.0"
 		}
 		"307"//Ullapool Caber
 		{
 			"preserve_attributes"	"1"
-			"1"				"4384 ; 1.0"
+			"1"				"regenerate stickbomb;1.0"
 		}
 	}
 }

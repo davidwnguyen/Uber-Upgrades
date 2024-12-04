@@ -422,8 +422,13 @@ void ParseItemsEntry(KeyValues kv, Handle entry) {
 					
 					// Split the information in two buffers
 					ExplodeString(buffer2, ";", split, 2, 64);
-					int attribute = StringToInt(split[0]);
+					int attribute = TF2Econ_TranslateAttributeNameToDefinitionIndex(split[0]);
 					float value = StringToFloat(split[1]);
+
+					if(!attribute){
+						PrintToServer("Errored on adding attribute [\"%s\" | \"%i\"] for item \"%i\"", split[0], attribute, TF2Items_GetItemIndex(item));
+						break;
+					}
 					
 					// Attribute found, set information.
 					TF2Items_SetAttribute(item, attributeCount, attribute, value);
