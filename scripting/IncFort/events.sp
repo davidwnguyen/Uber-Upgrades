@@ -2935,6 +2935,8 @@ public OnGameFrame()
 						}
 					}
 				}
+				SetEntPropVector(client, Prop_Send, "m_vecPunchAngle", {0.0, 0.0, 0.0});
+				SetEntPropVector(client, Prop_Send, "m_vecPunchAngleVel", {-5.0, 0.0, 0.0});
 			}
 
 			if(LightningEnchantmentDuration[client] > currentGameTime)

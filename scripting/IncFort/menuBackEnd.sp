@@ -118,7 +118,7 @@ public MenuHandler_UpgradeChoice(Handle menu, MenuAction:action, client, param2)
 						amount = RoundFloat((currentupgrades_val[client][slot][inum] - upgrades[upgrade_choice].i_val)/ upgrades[upgrade_choice].ratio)
 					
 					//really... why
-					GivePowerupDescription(client, upgrades[upgrades[upgrade_choice].to_a_id].attr_name, amount);
+					GivePowerupDescription(client, upgrades[upgrade_choice].attr_name, amount);
 				}
 			}
 		}

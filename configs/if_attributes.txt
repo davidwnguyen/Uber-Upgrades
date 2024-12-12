@@ -7,6 +7,7 @@
 		{
 			"name"		"arcane focus max"
 			"ref"		"Max Focus"
+			"attr_class"	"arcane_focus_max"
 			"cost"		"300"
 			"increase_ratio"	"0.05"
 			"value"		"100"
@@ -18,6 +19,7 @@
 		{
 			"name"		"arcane focus regeneration"
 			"ref"		"Focus Regeneration"
+			"attr_class"	"arcane_focus_regeneration"
 			"cost"		"750"
 			"increase_ratio"	"0.3"
 			"value"		"0.25"
@@ -29,19 +31,21 @@
 		{
 			"name"		"arcane power"
 			"ref"		"Arcane Power"
+			"attr_class"	"arcane_power"
 			"cost"		"350"
 			"increase_ratio"	"1.0"
 			"value"		"0.01"
 			"init"		"1"
 			"staged_max"		"1.9,2.1,2.3"
 			"description"	"Multiplies all arcane stats by ^2.\nMultiplies arcane damage by ^4."
-			"display_style"	"5"
+			"optimizer_style"	"5"
 			"max"		"1.7"
 		}
 		"1541.1"
 		{
 			"name"		"arcane attunement slots"
 			"ref"		"Attunement Slots"
+			"attr_class"	"arcane_attunement_slots"
 			"cost"		"2000"
 			"increase_ratio"	"0.0"
 			"value"		"1"
@@ -54,12 +58,13 @@
 		{
 			"name"		"arcane damage"
 			"ref"		"Arcane Damage"
+			"attr_class"	"arcane_damage"
 			"cost"		"1000"
 			"increase_ratio"	"0.8"
 			"value"		"1"
 			"init"		"1"
 			"description"	"Multiplies arcane damage."
-			"display_style"	"4"
+			"optimizer_style"	"4"
 			"max"		"500"
 		}
 		"1541.3"
@@ -78,6 +83,7 @@
 		{
 			"name"		"arcane zap"
 			"ref"		"Arcane - Zap"
+			"attr_class"	"arcane_zap"
 			"cost"		"500"
 			"increase_ratio"	"20"
 			"value"		"1"
@@ -90,6 +96,7 @@
 		{
 			"name"		"arcane lightning strike"
 			"ref"		"Arcane - Lightning Strike"
+			"attr_class"	"arcane_lightning_strike"
 			"cost"		"2000"
 			"increase_ratio"	"20"
 			"value"		"1"
@@ -102,6 +109,7 @@
 		{
 			"name"		"arcane projected healing"
 			"ref"		"Arcane - Healing Aura"
+			"attr_class"	"arcane_projected_healing"
 			"cost"		"3000"
 			"increase_ratio"	"20"
 			"value"		"1"
@@ -114,6 +122,7 @@
 		{
 			"name"		"arcane a call beyond"
 			"ref"		"Arcane - A Call Beyond"
+			"attr_class"	"arcane_call_beyond"
 			"cost"		"40000"
 			"increase_ratio"	"20"
 			"value"		"1"
@@ -126,6 +135,7 @@
 		{
 			"name"		"arcane blacksky eye"
 			"ref"		"Arcane - Blacksky Eye"
+			"attr_class"	"arcane_blacksky_eye"
 			"cost"		"2000"
 			"increase_ratio"	"20"
 			"value"		"1"
@@ -138,6 +148,7 @@
 		{
 			"name"		"arcane sunlight spear"
 			"ref"		"Arcane - Sunlight Spear"
+			"attr_class"	"arcane_sunlight_spear"
 			"cost"		"3000"
 			"increase_ratio"	"20"
 			"value"		"1"
@@ -150,6 +161,7 @@
 		{
 			"name"		"arcane lightning enchantment"
 			"ref"		"Arcane - Lightning Enchantment"
+			"attr_class"	"arcane_lightning_enchantment"
 			"cost"		"3000"
 			"increase_ratio"	"20"
 			"value"		"1"
@@ -162,6 +174,7 @@
 		{
 			"name"		"arcane snap freeze"
 			"ref"		"Arcane - Snap Freeze"
+			"attr_class"	"arcane_snap_freeze"
 			"cost"		"1000"
 			"increase_ratio"	"20"
 			"value"		"1"
@@ -174,6 +187,7 @@
 		{
 			"name"		"arcane prison"
 			"ref"		"Arcane - Arcane Prison"
+			"attr_class"	"arcane_prison"
 			"cost"		"10000"
 			"increase_ratio"	"20"
 			"value"		"1"
@@ -186,6 +200,7 @@
 		{
 			"name"		"arcane darkmoon blade"
 			"ref"		"Arcane - Darkmoon Blade"
+			"attr_class"	"arcane_darkmoon_blade"
 			"cost"		"5000"
 			"increase_ratio"	"20"
 			"value"		"1"
@@ -199,6 +214,7 @@
 		{
 			"name"		"arcane speed aura"
 			"ref"		"Arcane - Speed Aura"
+			"attr_class"	"arcane_speed_aura"
 			"cost"		"1000"
 			"increase_ratio"	"20"
 			"value"		"1"
@@ -211,6 +227,7 @@
 		{
 			"name"		"arcane aerial strike"
 			"ref"		"Arcane - Aerial Strike"
+			"attr_class"	"arcane_aerial_strike"
 			"cost"		"15000"
 			"increase_ratio"	"20"
 			"value"		"1"
@@ -223,6 +240,7 @@
 		{
 			"name"		"arcane inferno"
 			"ref"		"Arcane - Inferno"
+			"attr_class"	"arcane_inferno"
 			"cost"		"15000"
 			"increase_ratio"	"20"
 			"value"		"1"
@@ -235,6 +253,7 @@
 		{
 			"name"		"arcane mine field"
 			"ref"		"Arcane - Mine Field"
+			"attr_class"	"arcane_mine_field"
 			"cost"		"15000"
 			"increase_ratio"	"20"
 			"value"		"1"
@@ -247,6 +266,7 @@
 		{
 			"name"		"arcane shockwave"
 			"ref"		"Arcane - Shockwave"
+			"attr_class"	"arcane_shockwave"
 			"cost"		"10000"
 			"increase_ratio"	"20"
 			"value"		"1"
@@ -259,6 +279,7 @@
 		{
 			"name"		"arcane autosentry"
 			"ref"		"Arcane - Auto-Sentry"
+			"attr_class"	"arcane_autosentry"
 			"cost"		"10000"
 			"increase_ratio"	"20"
 			"value"		"1"
@@ -270,6 +291,7 @@
 		{
 			"name"		"arcane soothing sunlight"
 			"ref"		"Arcane - Soothing Sunlight"
+			"attr_class"	"arcane_soothing_sunlight"
 			"cost"		"30000"
 			"increase_ratio"	"20"
 			"value"		"1"
@@ -282,6 +304,7 @@
 		{
 			"name"		"arcane hunter"
 			"ref"		"Arcane - Arcane Hunter"
+			"attr_class"	"arcane_hunter"
 			"cost"		"25000"
 			"increase_ratio"	"20"
 			"value"		"1"
@@ -294,6 +317,7 @@
 		{
 			"name"		"arcane mark for death"
 			"ref"		"Arcane - Mark-For-Death"
+			"attr_class"	"arcane_mark_for_death"
 			"cost"		"15000"
 			"increase_ratio"	"20"
 			"value"		"1"
@@ -305,6 +329,7 @@
 		{
 			"name"		"arcane infernal enchantment"
 			"ref"		"Arcane - Infernal Enchantment"
+			"attr_class"	"arcane_infernal_enchantment"
 			"cost"		"40000"
 			"increase_ratio"	"20"
 			"value"		"1"
@@ -317,6 +342,7 @@
 		{
 			"name"		"arcane splitting thunder"
 			"ref"		"Arcane - Splitting Thunder"
+			"attr_class"	"arcane_splitting_thunder"
 			"cost"		"40000"
 			"increase_ratio"	"20"
 			"value"		"1"
@@ -329,6 +355,7 @@
 		{
 			"name"		"arcane antiseptic blast"
 			"ref"		"Arcane - Antiseptic Blast"
+			"attr_class"	"arcane_antiseptic_blast"
 			"cost"		"40000"
 			"increase_ratio"	"20"
 			"value"		"1"
@@ -341,6 +368,7 @@
 		{
 			"name"		"arcane karmic justice"
 			"ref"		"Arcane - Karmic Justice"
+			"attr_class"	"arcane_karmic_justice"
 			"cost"		"15000"
 			"increase_ratio"	"20"
 			"value"		"1"
@@ -353,6 +381,7 @@
 		{
 			"name"		"arcane snowstorm"
 			"ref"		"Arcane - Snowstorm"
+			"attr_class"	"arcane_snowstorm"
 			"cost"		"13000"
 			"increase_ratio"	"20"
 			"value"		"1"
@@ -365,6 +394,7 @@
 		{
 			"name"		"damage mult 1"
 			"ref"		"damage mult 1"
+			"attr_class"	"dmg_outgoing_mult"
 			"increase_ratio" "0.07"
 			"cost"		"0"
 			"value"		"0.30"
@@ -377,7 +407,7 @@
 			"ref"		"damage bonus (clea)"
 			"increase_ratio" "0.06"
 			"cost"		"200"
-			"display_style"		"1"
+			"optimizer_style"		"1"
 			"value"		"0.30"
 			"init"		"1.00"
 			"max"		"100000000.00"
@@ -400,7 +430,7 @@
 			"cost"		"187.5"
 			"value"		"0.25"
 			"init"		"1.00"
-			"display_style" "1"
+			"optimizer_style" "1"
 			"description"	"1:1 pure damage multiplier.\nIncreases in cost by +$65.5 per purchase."
 			"max"		"100000.00"
 		}
@@ -412,7 +442,7 @@
 			"increase_ratio" "0.07"
 			"value"			"0.25"
 			"init"			"1.00"
-			"display_style" "1"
+			"optimizer_style" "1"
 			"description"	"1:1 pure damage multiplier.\nIncreases in cost by +$28 per purchase."
 			"max"			"100000.00"
 		}
@@ -424,7 +454,7 @@
 			"increase_ratio" "0.09"
 			"value"			"0.20"
 			"init"			"1.00"
-			"display_style" "1"
+			"optimizer_style" "1"
 			"description"	"1:1 pure damage multiplier.\nIncreases in cost by +$40.5 per purchase."
 			"max"			"100000.00"
 		}
@@ -436,7 +466,7 @@
 			"increase_ratio" "0.05"
 			"value"			"0.30"
 			"init"			"1.00"
-			"display_style" "1"
+			"optimizer_style" "1"
 			"description"	"1:1 pure damage multiplier.\nIncreases in cost by +$19.5 per purchase."
 			"max"			"100000.00"
 		}
@@ -448,7 +478,7 @@
 			"increase_ratio" "0.05"
 			"value"			"0.35"
 			"init"			"1.00"
-			"display_style" "1"
+			"optimizer_style" "1"
 			"description"	"1:1 pure damage multiplier.\nIncreases in cost by +$15 per purchase."
 			"max"			"100000.00"
 		}
@@ -544,7 +574,7 @@
 			"increase_ratio" 	"0.035"
 			"value"		"0.25"
 			"init"		"1.00"
-			"display_style" "1"
+			"optimizer_style" "1"
 			"description"	"1:1 pure fire rate multiplier.\nAll fire-rate not contributing to\nnext tick threshold is converted\ninto damage."
 			"max"		"28.0"
 		}
@@ -556,7 +586,7 @@
 			"increase_ratio" 	"0.035"
 			"value"		"0.25"
 			"init"		"1.00"
-			"display_style" "1"
+			"optimizer_style" "1"
 			"description"	"1:1 pure fire rate multiplier.\nAll fire-rate not contributing to\nnext tick threshold is converted\ninto damage."
 			"max"		"7.0"
 		}
@@ -568,7 +598,7 @@
 			"increase_ratio" 	"0.0"
 			"value"		"1.0"
 			"init"		"1.00"
-			"display_style" "1"
+			"optimizer_style" "1"
 			"description"	"1:1 pure fire rate multiplier.\nNever increases in cost."
 			"max"		"70.0"
 		}
@@ -580,7 +610,7 @@
 			"value"		"0.25"
 			"increase_ratio" 	"0.35"
 			"init"		"1.00"
-			"display_style" "1"
+			"optimizer_style" "1"
 			"max"		"500.00"
 		}
 		"15"
@@ -812,7 +842,7 @@
 			"increase_ratio" "0.45"
 			"value"		"0.5"
 			"init"		"1.00"
-			"display_style" "1"
+			"optimizer_style" "1"
 			"max"		"5.0"
 		}
 		"38"
@@ -823,7 +853,7 @@
 			"increase_ratio" "1.00"
 			"value"		"1.00"
 			"init"		"1.00"
-			"display_style" "1"
+			"optimizer_style" "1"
 			"max"		"5.00"
 		}
 		"40"
@@ -978,6 +1008,7 @@
 		{
 			"name"		"weapon self dmg push force increased"
 			"ref"		"weapon self dmg push force increased"
+			"attr_class"	"new_self_push_force"
 			"cost"		"300"
 			"increase_ratio"	"0.4"
 			"value"		"0.1"
@@ -2057,6 +2088,7 @@
 		{
 			"name"		"knockback resistance"
 			"ref"		"knockback resistance"
+			"attr_class"	"knockback_resistance"
 			"cost"		"300"
 			"increase_ratio" 	"0.5"
 			"value"		"-0.1"
@@ -2186,7 +2218,7 @@
 			"increase_ratio" 	"0.15"
 			"value"		"0.35"
 			"init"		"1.00"
-			"display_style"		"1"
+			"optimizer_style"		"1"
 			"description"		"1:1 pure damage multiplier.\nIncreases in cost by +$35 per purchase."
 			"max"		"1441.00"
 		}
@@ -2451,7 +2483,7 @@
 			"increase_ratio" 	"0.05"
 			"value"		"0.334"
 			"init"		"1.00"
-			"display_style"		"1"
+			"optimizer_style"		"1"
 			"max"		"27.0"
 		}
 		"197.5"
@@ -2462,7 +2494,7 @@
 			"increase_ratio" 	"0.05"
 			"value"		"0.334"
 			"init"		"1.00"
-			"display_style"		"1"
+			"optimizer_style"		"1"
 			"max"		"27.0"
 		}
 		"198"
@@ -2877,7 +2909,7 @@
 			"cost"		"1000"
 			"value"		"0.25"
 			"init"		"1.00"
-			"display_style" "1"
+			"optimizer_style" "1"
 			"description"	"1:1 pure damage multiplier.\nIncreases in cost by +$350 per purchase."
 			"max"		"1000.00"		
 		}
@@ -3297,7 +3329,7 @@
 			"value"		"0.2"
 			"increase_ratio"	"0.60"
 			"init"		"1"
-			"display_style" "1"
+			"optimizer_style" "1"
 			"max"		"10"
 		}
 		"298"
@@ -3308,7 +3340,7 @@
 			"increase_ratio"	"0.25"
 			"value"		"0.1"
 			"init"		"1"
-			"display_style" "1"
+			"optimizer_style" "1"
 			"max"		"2"
 		}
 		"299"
@@ -3327,7 +3359,7 @@
 			"ref"		"Overall Damage"
 			"cost"		"275"
 			"increase_ratio"	"0.3"
-			"display_style"		"1"
+			"optimizer_style"		"1"
 			"value"		"0.25"
 			"init"		"1"
 			"max"		"30"
@@ -3350,7 +3382,7 @@
 			"cost"		"550"
 			"value"		"0.25"
 			"init"		"1.00"
-			"display_style" "1"
+			"optimizer_style" "1"
 			"description"	"1:1 pure damage multiplier.\nIncreases in cost by +$165 per purchase."
 			"max"		"101.00"
 		}
@@ -3362,7 +3394,7 @@
 			"increase_ratio"	"0.3"
 			"value"		"0.20"
 			"init"		"1.00"
-			"display_style" "1"
+			"optimizer_style" "1"
 			"description"	"1:1 pure damage multiplier.\nIncreases in cost by +$150 per purchase."
 			"max"		"8.0"
 		}
@@ -3374,7 +3406,7 @@
 			"increase_ratio"	"0.7"
 			"value"		"0.25"
 			"init"		"1.00"
-			"display_style" "1"
+			"optimizer_style" "1"
 			"description"	"1:1 pure damage multiplier.\nIncreases in cost by +$455 per purchase."
 			"max"		"4.0"
 		}
@@ -3385,7 +3417,7 @@
 			"cost"		"0"
 			"value"		"0.1"
 			"init"		"1.00"
-			"display_style" "1"
+			"optimizer_style" "1"
 			"description"	"1:1 pure damage multiplier.\nIncreases in cost by +$455 per purchase."
 			"max"		"50.0"
 		}
@@ -3426,7 +3458,7 @@
 			"increase_ratio"	"0.3"
 			"value"		"0.25"
 			"init"		"1"
-			"display_style" "1"
+			"optimizer_style" "1"
 			"description"	"As your charge gets closer to full,\nthe more damage you deal.\nFormula is (val-1)*chargePCT+1"
 			"max"		"9"
 		}
@@ -3467,7 +3499,7 @@
 			"increase_ratio" 	"0.35"
 			"value"		"0.25"
 			"init"		"1.00"
-			"display_style" "1"
+			"optimizer_style" "1"
 			"max"		"15.0"
 		}
 		"309.75"
@@ -3523,7 +3555,7 @@
 			"value"		"0.3"
 			"increase_ratio"	"0.0"
 			"init"		"1"
-			"display_style" "1"
+			"optimizer_style" "1"
 			"description"	"1:1 pure damage multiplier.\nIncreases in cost by +$480 per purchase."
 			"max"		"10"
 		}
@@ -3535,7 +3567,7 @@
 			"cost"		"350"
 			"value"		"0.35"
 			"init"		"1"
-			"display_style" "1"
+			"optimizer_style" "1"
 			"description"	"1:1 pure damage multiplier.\nIncreases in cost by +$84 per purchase."
 			"max"		"120"
 		}
@@ -3943,7 +3975,7 @@
 			"value"		"0.5"
 			"increase_ratio" 	"0.2"
 			"init"		"1.00"
-			"display_style" "1"
+			"optimizer_style" "1"
 			"description"	"1:1 pure damage multiplier.\nIncreases in cost by +$80 per purchase."
 			"max"		"5000.0"
 		}
@@ -3951,11 +3983,12 @@
 		{
 			"name"		"ignition explosion damage bonus"
 			"ref"		"Gas Passer Explosion Damage"
+			"attr_class"	"explosion_damage_bonus"
 			"cost"		"350"
 			"value"		"0.5"
 			"increase_ratio" 	"0.25"
 			"init"		"1.00"
-			"display_style" "1"
+			"optimizer_style" "1"
 			"description"	"Multiplies damage dealt by\ngas passer explosions."
 			"max"		"5000.0"
 		}
@@ -4023,6 +4056,7 @@
 		{
 			"name"		"fireball distance"
 			"ref"		"Projectile Distance Increased"
+			"attr_class"	"fireball_distance"
 			"cost"		"350"
 			"value"		"100"
 			"init"		"500"
@@ -4313,7 +4347,7 @@
 			"increase_ratio"	"0.4"
 			"init"		"0"
 			"staged_max"		"150.0,300.0,1000.0"
-			"display_style"		"6"
+			"optimizer_style"		"6"
 			"description"	"Multiplies damage by 1.05x\nper purchase.\nFormula is 1.05^value."
 			"max"		"60"
 		}
@@ -4473,6 +4507,7 @@
 		{
 			"name"		"max health multiplier"
 			"ref"		"Health Bonus"
+			"attr_class"	"max_health_multiplier"
 			"cost"		"600"
 			"increase_ratio"	"0.03"
 			"value"		"0.75"
@@ -4518,7 +4553,7 @@
 			"value"		"1"
 			"init"		"1"
 			"description"	"Divides total damage taken.\nFormula is damage/(DR*DRMult)^2\nCheck stats page to see effectiveness."
-			"display_style"	"2"
+			"optimizer_style"	"2"
 			"max"		"1000"
 		}
 		"1509"
@@ -4529,7 +4564,7 @@
 			"increase_ratio"	"0.2"
 			"value"		"0.35"
 			"init"		"1"
-			"display_style" "1"
+			"optimizer_style" "1"
 			"description"	"1:1 pure damage multiplier.\nIncreases in cost by +$40 per purchase."
 			"max"		"100"
 		}
@@ -4541,7 +4576,7 @@
 			"increase_ratio"	"0.15"
 			"value"		"0.20"
 			"init"		"1"
-			"display_style" "1"
+			"optimizer_style" "1"
 			"description"	"1:1 pure damage multiplier.\nIncreases in cost by +$67.5 per purchase."
 			"max"		"9"
 		}
@@ -4553,7 +4588,7 @@
 			"increase_ratio"	"0.3"
 			"value"		"0.20"
 			"init"		"1"
-			"display_style" "1"
+			"optimizer_style" "1"
 			"description"	"1:1 pure damage multiplier.\nIncreases in cost by +$150 per purchase."
 			"max"		"7"
 		}
@@ -4565,7 +4600,7 @@
 			"increase_ratio"	"0.2"
 			"value"		"0.35"
 			"init"		"1"
-			"display_style" "1"
+			"optimizer_style" "1"
 			"description"	"1:1 pure damage multiplier.\nIncreases in cost by +$40 per purchase."
 			"max"		"100"
 		}
@@ -4597,7 +4632,7 @@
 			"increase_ratio"	"0.4"
 			"value"		"0.1"
 			"init"		"1"
-			"display_style" "1"
+			"optimizer_style" "1"
 			"description"	"1:1 pure damage multiplier.\nIncreases in cost by +$600 per purchase.\nOnly works while held."
 			"max"		"3"
 		}
@@ -4609,7 +4644,7 @@
 			"increase_ratio"	"0.1"
 			"value"		"0.25"
 			"init"		"1"
-			"display_style" "1"
+			"optimizer_style" "1"
 			"description"	"1:1 pure damage multiplier.\nIncreases in cost by +$94 per purchase."
 			"max"		"18"
 		}
@@ -4657,6 +4692,7 @@
 		{
 			"name"		"lifesteal ability"
 			"ref"		"lifesteal ability"
+			"attr_class"	"lifesteal_ability"
 			"cost"		"1500"
 			"increase_ratio"	"0.1"
 			"value"		"0.01"
@@ -4695,20 +4731,11 @@
 			"description"	"Gives damage boost to player healed.\nStacks additively with other medics' boost"
 			"max"		"1"
 		}
-		"1525"
-		{
-			"name"		"mod_cloak_no_regen_from_items"
-			"ref"		"Dragons Fury Range"
-			"cost"		"500"
-			"increase_ratio"	"0.5"
-			"value"		"750"
-			"init"		"3500"
-			"max"		"8500"
-		}
 		"1528"
 		{
 			"name"		"weapon ability id"
 			"ref"		"Ability : Charge"
+			"attr_class"	"weapon_ability_id"
 			"cost"		"12500"
 			"increase_ratio"	"0"
 			"value"		"1"
@@ -4916,7 +4943,7 @@
 			"value"		"0.15"
 			"init"		"1"
 			"description"	"Multiplies input Damage Reduction for formula.\nCheck stats page to see effectiveness."
-			"display_style"	"3"
+			"optimizer_style"	"3"
 			"max"		"100"
 		}
 		"1538"
@@ -4947,6 +4974,7 @@
 		{
 			"name"		"sentry bullets per shot"
 			"ref"		"sentry bullets per shot"
+			"attr_class"	"sentry_bullets_per_shot"
 			"cost"		"3000"
 			"increase_ratio"	"0"
 			"value"		"1"
@@ -4967,7 +4995,7 @@
 			"description"	"Sentry shoots out projectile bolts that deal 35 base damage.\nApplies +4 bleed buildup on hit and penetrates victims."
 			"max"		"34"
 		}
-		"1539"
+		"1538.4"
 		{
 			"name"		"zoom speed mod disabled"
 			"ref"		"Teleporter Gives Buffs"
@@ -5065,6 +5093,7 @@
 		{
 			"name"		"Charging Velocity"
 			"ref"		"Charging Velocity"
+			"attr_class"	"shield_charge_velocity"
 			"cost"		"300"
 			"increase_ratio"	"0.4"
 			"value"		"100.0"
@@ -5126,6 +5155,7 @@
 		{
 			"name"		"Converts Firerate to Damage"
 			"ref"		"Converts Firerate to Damage"
+			"attr_class"	"convert_firerate_to_damage"
 			"cost"		"0"
 			"value"		"1"
 			"init"		"0"
@@ -5135,6 +5165,7 @@
 		{
 			"name"		"arcane weapon scaling"
 			"ref"		"Arcane Weapon Scaling"
+			"attr_class"	"arcane_weapon_scaling"
 			"cost"		"0"
 			"value"		"1"
 			"init"		"0"
@@ -5377,6 +5408,7 @@
 		{
 			"name"		"explosive bullets radius"
 			"ref"		"Explosive Bullets Radius"
+			"attr_class"	"explosive_bullets_radius"
 			"cost"		"1000"
 			"increase_ratio"	"0.5"
 			"value"		"30.0"
@@ -5397,6 +5429,7 @@
 		{
 			"name"		"dragon bullets radius"
 			"ref"		"Dragon Bullets Radius"
+			"attr_class"	"dragon_bullets_radius"
 			"cost"		"0"
 			"increase_ratio"	"0"
 			"value"		"1.0"
@@ -5477,6 +5510,7 @@
 		{
 			"name"		"direct damage taken reduced"
 			"ref"		"Direct Damage Taken Reduced"
+			"attr_class"	"direct_damage_taken_reduced"
 			"cost"		"10000"
 			"increase_ratio"	"1.0"
 			"requirement"		"1000000.0"
@@ -5488,6 +5522,7 @@
 		{
 			"name"		"arcane damage taken reduced"
 			"ref"		"Arcane Damage Taken Reduced"
+			"attr_class"	"arcane_damage_taken_reduced"
 			"cost"		"10000"
 			"increase_ratio"	"1.0"
 			"requirement"		"1000000.0"
@@ -5495,112 +5530,17 @@
 			"init"		"1.0"
 			"max"		"0.25"
 		}
-		"1600"
-		{
-			"name"		"endurance bonus"
-			"ref"		"Endurance"
-			"cost"		"10000"
-			"increase_ratio"	"1.0"
-			"requirement"		"5000000.0"
-			"value"		"0.05"
-			"staged_max"		"1.2,1.4,1.6"
-			"description"		"Reduces damage taken by ^2 of value.\nDecreases duration of negative effects."
-			"init"		"1.0"
-			"max"		"1.2"
-		}
 		"1601"
 		{
 			"name"		"slow resistance"
 			"ref"		"Slow Resistance"
+			"attr_class"	"slow_resistance"
 			"cost"		"300"
 			"increase_ratio"	"0.2"
 			"value"		"-0.1"
 			"init"		"1.0"
 			"description"	"Decreases the duration of slow effects."
 			"max"		"0.1"
-		}
-		"1602"
-		{
-			"name"		"physical damage affinity"
-			"ref"		"physical damage affinity"
-			"cost"		"10000"
-			"increase_ratio"	"1.0"
-			"requirement"		"5000000.0"
-			"value"		"0.05"
-			"staged_max"		"1.2,1.4,1.6"
-			"init"		"1.0"
-			"description"		"All physical damage is multiplied by value^2\nBullets are given armor piercing damage\nMelee is given armor debuff on hit\nProjectiles benefit from both"
-			"restriction_category"	"2"
-			"max"		"1.2"
-		}
-		"1603"
-		{
-			"name"		"fire damage affinity"
-			"ref"		"fire damage affinity"
-			"cost"		"10000"
-			"increase_ratio"	"1.0"
-			"requirement"		"5000000.0"
-			"value"		"0.05"
-			"staged_max"		"1.2,1.4,1.6"
-			"init"		"1.0"
-			"description"		"All fire damage is multiplied by value^2\nFor every second of burn duration, increases overall damage."
-			"restriction_category"	"2"
-			"max"		"1.2"
-		}
-		"1604"
-		{
-			"name"		"explosive damage affinity"
-			"ref"		"explosive damage affinity"
-			"cost"		"10000"
-			"increase_ratio"	"1.0"
-			"requirement"		"5000000.0"
-			"value"		"0.05"
-			"staged_max"		"1.2,1.4,1.6"
-			"init"		"1.0"
-			"description"		"All explosive damage is multiplied by value^2\nIncreases damage VS armor."
-			"restriction_category"	"2"
-			"max"		"1.2"
-		}
-		"1605"
-		{
-			"name"		"electric damage affinity"
-			"ref"		"electric damage affinity"
-			"cost"		"10000"
-			"increase_ratio"	"1.0"
-			"requirement"		"5000000.0"
-			"value"		"0.05"
-			"staged_max"		"1.2,1.4,1.6"
-			"init"		"1.0"
-			"description"		"All electric damage is multiplied by value^2\nIncreases chain damage."
-			"restriction_category"	"2"
-			"max"		"1.2"
-		}
-		"1606"
-		{
-			"name"		"crit damage affinity"
-			"ref"		"crit damage affinity"
-			"cost"		"10000"
-			"increase_ratio"	"1.0"
-			"requirement"		"5000000.0"
-			"value"		"0.05"
-			"staged_max"		"1.2,1.4,1.6"
-			"init"		"1.0"
-			"description"		"All critical damage is multiplied by value^2\nCrits do a portion of armor piercing damage."
-			"restriction_category"	"2"
-			"max"		"1.2"
-		}
-		"1607"
-		{
-			"name"		"weapon advancement"
-			"ref"		"weapon advancement"
-			"cost"		"1000000"
-			"increase_ratio"	"9.0"
-			"requirement"		"5000000.0"
-			"value"		"1"
-			"staged_max"		"1,1,2"
-			"init"		"0"
-			"description"		"Prestiges your weapon loadout\nwhich drastically improves stats and specifies abilities."
-			"max"		"1"
 		}
 		"1608"
 		{
@@ -5615,6 +5555,7 @@
 		{
 			"name"		"additional ubers bit"
 			"ref"		"Additional Uber Effects"
+			"attr_class"	"additional_ubers"
 			"cost"		"0"
 			"value"		"1"
 			"init"		"0"
@@ -5633,6 +5574,7 @@
 		{
 			"name"		"bullets per shot mult"
 			"ref"		"bullets per shot mult"
+			"attr_class"	"mult_bullets_per_shot_if"
 			"cost"		"0"
 			"value"		"-0.1"
 			"init"		"1"
@@ -5642,6 +5584,7 @@
 		{
 			"name"		"bullets per shot mult 2"
 			"ref"		"bullets per shot mult 2"
+			"attr_class"	"mult_bullets_per_shot_if"
 			"cost"		"0"
 			"value"		"0.0"
 			"init"		"1"
@@ -5669,6 +5612,7 @@
 		{
 			"name"		"weapon fire rate"
 			"ref"		"weapon fire rate"
+			"attr_class"	"mult_postfiredelay"
 			"cost"		"0"
 			"value"		"-1"
 			"init"		"1"
@@ -5732,6 +5676,7 @@
 		{
 			"name"		"sapper pulls enemies"
 			"ref"		"sapper pulls enemies"
+			"attr_class"	"sapper_pulls_enemies"
 			"cost"		"10000"
 			"value"		"50"
 			"init"		"0"
@@ -5741,6 +5686,7 @@
 		{
 			"name"		"backstab tanks capability"
 			"ref"		"backstab tanks capability"
+			"attr_class"	"backstab_tanks_capability"
 			"cost"		"20000"
 			"increase_ratio"	"0.5"
 			"value"		"100"
@@ -5841,6 +5787,7 @@
 		{
 			"name"		"additive piercing damage"
 			"ref"		"additive piercing damage"
+			"attr_class"	"additive_piercing_damage"
 			"cost"		"0"
 			"increase_ratio"	"0"
 			"value"		"1"
@@ -5871,6 +5818,7 @@
 		{
 			"name"		"airblast flings enemy"
 			"ref"		"airblast flings enemy"
+			"attr_class"	"airblast_flings_enemy"
 			"cost"		"0"
 			"increase_ratio"	"0"
 			"value"		"0"
@@ -5891,6 +5839,7 @@
 		{
 			"name"		"damage causes freeze"
 			"ref"		"damage causes freeze"
+			"attr_class"	"damage_causes_freeze"
 			"cost"		"0"
 			"increase_ratio"	"0"
 			"value"		"1"
@@ -5911,6 +5860,7 @@
 		{
 			"name"		"strong homing projectile radius"
 			"ref"		"strong homing projectile radius"
+			"attr_class"	"strong_homing_projectile_radius"
 			"cost"		"0"
 			"increase_ratio"	"0"
 			"value"		"1"
@@ -5971,6 +5921,7 @@
 		{
 			"name"		"magnify patient damage"
 			"ref"		"magnify patient damage"
+			"attr_class"	"magnify_patient_damage"
 			"cost"		"0"
 			"increase_ratio"	"0"
 			"value"		"1"
@@ -5981,6 +5932,7 @@
 		{
 			"name"		"ubercharge effectiveness"
 			"ref"		"ubercharge effectiveness"
+			"attr_class"	"add_uber_time"
 			"cost"		"0"
 			"increase_ratio"	"0"
 			"value"		"0.1"
@@ -5991,6 +5943,7 @@
 		{
 			"name"		"healing patient power"
 			"ref"		"healing patient power"
+			"attr_class"	"healing_patient_power"
 			"cost"		"0"
 			"increase_ratio"	"0"
 			"value"		"0.1"
@@ -6001,6 +5954,7 @@
 		{
 			"name"		"patient overheal to damage mult"
 			"ref"		"patient overheal to damage mult"
+			"attr_class"	"patient_overheal_to_damage_mult"
 			"cost"		"0"
 			"increase_ratio"	"0"
 			"value"		"0.1"
@@ -6011,6 +5965,7 @@
 		{
 			"name"		"escape plan healing"
 			"ref"		"escape plan healing"
+			"attr_class"	"escape_plan_healing" 
 			"cost"		"0"
 			"increase_ratio"	"0"
 			"value"		"1"
@@ -6021,6 +5976,7 @@
 		{
 			"name"		"healing aoe radius"
 			"ref"		"healing aoe radius"
+			"attr_class"	"healing_aoe_radius"
 			"cost"		"0"
 			"increase_ratio"	"0"
 			"value"		"1"
@@ -6031,6 +5987,7 @@
 		{
 			"name"		"patient damage taken to uber"
 			"ref"		"patient damage taken to uber"
+			"attr_class"	"patient_damage_taken_to_uber"
 			"cost"		"0"
 			"increase_ratio"	"0"
 			"value"		"0.1"
@@ -6041,6 +5998,7 @@
 		{
 			"name"		"patient damage taken to self heal"
 			"ref"		"patient damage taken to self heal"
+			"attr_class"	"patient_damage_taken_to_self_heal"
 			"cost"		"0"
 			"increase_ratio"	"0"
 			"value"		"0.1"
@@ -6071,6 +6029,7 @@
 		{
 			"name"		"dps inheritance ratio"
 			"ref"		"dps inheritance ratio"
+			"attr_class"	"dps_inheritance_ratio"
 			"cost"		"0"
 			"increase_ratio"	"0"
 			"value"		"0.1"
@@ -6081,6 +6040,7 @@
 		{
 			"name"		"lifesteal to team"
 			"ref"		"lifesteal to team"
+			"attr_class"	"lifesteal_to_team"
 			"cost"		"0"
 			"increase_ratio"	"0"
 			"value"		"0.1"
@@ -6101,6 +6061,7 @@
 		{
 			"name"		"lifesteal effectiveness"
 			"ref"		"lifesteal effectiveness"
+			"attr_class"	"lifesteal_effectiveness"
 			"cost"		"0"
 			"increase_ratio"	"0"
 			"value"		"0.1"
@@ -6120,6 +6081,7 @@
 		{
 			"name"		"jar applies armor decay"
 			"ref"		"jar applies armor decay"
+			"attr_class"	"jar_applies_armor_decay"
 			"cost"		"0"
 			"value"		"1.00"
 			"init"		"0.00"
@@ -6129,6 +6091,7 @@
 		{
 			"name"		"jar gives armor penetration"
 			"ref"		"jar gives armor penetration"
+			"attr_class"	"jar_gives_armor_penetration"
 			"cost"		"0"
 			"value"		"1.00"
 			"init"		"0.00"
@@ -6138,6 +6101,7 @@
 		{
 			"name"		"buff movement speed"
 			"ref"		"buff movement speed"
+			"attr_class"	"buff_movement_speed"
 			"cost"		"0"
 			"value"		"0.10"
 			"init"		"0.00"
@@ -6147,6 +6111,7 @@
 		{
 			"name"		"buff damage taken"
 			"ref"		"buff damage taken"
+			"attr_class"	"buff_damage_taken"
 			"cost"		"0"
 			"value"		"0.10"
 			"init"		"1.00"
@@ -6156,6 +6121,7 @@
 		{
 			"name"		"buff fire rate"
 			"ref"		"buff fire rate"
+			"attr_class"	"buff_fire_rate"
 			"cost"		"0"
 			"value"		"0.10"
 			"init"		"1.00"
@@ -6165,6 +6131,7 @@
 		{
 			"name"		"buff plunder multiplier"
 			"ref"		"buff plunder multiplier"
+			"attr_class"	"buff_plunder_multiplier"
 			"cost"		"0"
 			"value"		"0.10"
 			"init"		"1.00"
@@ -6174,6 +6141,7 @@
 		{
 			"name"		"buff barrage"
 			"ref"		"buff barrage"
+			"attr_class"	"buff_barrage"
 			"cost"		"0"
 			"value"		"1"
 			"init"		"0.00"
@@ -6183,15 +6151,17 @@
 		{
 			"name"		"jetpack charge damage"
 			"ref"		"jetpack charge damage"
+			"attr_class"	"jetpack_charge_damage"
 			"cost"		"0"
 			"value"		"0.10"
 			"init"		"0.00"
 			"max"		"0.00"
 		}
-		"1665"
+		"1665.5"
 		{
 			"name"		"immolation ratio"
 			"ref"		"immolation ratio"
+			"attr_class"	"immolation_ratio"
 			"cost"		"0"
 			"value"		"0.10"
 			"init"		"0.00"
@@ -6201,6 +6171,7 @@
 		{
 			"name"		"fireworks chance"
 			"ref"		"fireworks chance"
+			"attr_class"	"fireworks_chance"
 			"cost"		"0"
 			"value"		"0.10"
 			"init"		"0.00"
@@ -6210,6 +6181,7 @@
 		{
 			"name"		"explosion wasps"
 			"ref"		"explosion wasps"
+			"attr_class"	"explosion_wasps"
 			"cost"		"0"
 			"value"		"1"
 			"init"		"0.00"
@@ -6219,6 +6191,7 @@
 		{
 			"name"		"dmg per sticky detonated"
 			"ref"		"dmg per sticky detonated"
+			"attr_class"	"dmg_per_sticky_detonated"
 			"cost"		"0"
 			"value"		"0.10"
 			"init"		"0.00"
@@ -6228,6 +6201,7 @@
 		{
 			"name"		"sticky recursive explosion chance"
 			"ref"		"sticky recursive explosion chance"
+			"attr_class"	"sticky_recursive_explosion_chance"
 			"cost"		"0"
 			"value"		"0.10"
 			"init"		"0.00"
@@ -6237,6 +6211,7 @@
 		{
 			"name"		"chain charge on kill"
 			"ref"		"chain charge on kill"
+			"attr_class"	"chain_charge_on_kill"
 			"cost"		"0"
 			"value"		"1"
 			"init"		"0.00"
@@ -6246,6 +6221,7 @@
 		{
 			"name"		"savior sacrifice attribute"
 			"ref"		"savior sacrifice attribute"
+			"attr_class"	"savior_sacrifice_attribute"
 			"cost"		"0"
 			"value"		"0.1"
 			"init"		"0.00"
@@ -6255,6 +6231,7 @@
 		{
 			"name"		"damage reduction to additive damage"
 			"ref"		"damage reduction to additive damage"
+			"attr_class"	"damage_reduction_to_additive_damage"
 			"cost"		"0"
 			"value"		"0.1"
 			"init"		"0.00"
@@ -6264,6 +6241,7 @@
 		{
 			"name"		"enraged meter filled when eaten"
 			"ref"		"enraged meter filled when eaten"
+			"attr_class"	"enraged_meter_filled_when_eaten"
 			"cost"		"0"
 			"value"		"1"
 			"init"		"0.00"
@@ -6273,6 +6251,7 @@
 		{
 			"name"		"chain lightning meter on hit"
 			"ref"		"chain lightning meter on hit"
+			"attr_class"	"chain_lightning_meter_on_hit"
 			"cost"		"0"
 			"value"		"0.1"
 			"init"		"0.00"
@@ -6282,6 +6261,7 @@
 		{
 			"name"		"sunstar beam"
 			"ref"		"sunstar beam"
+			"attr_class"	"sunstar_beam"
 			"cost"		"0"
 			"value"		"0.1"
 			"init"		"0.00"
@@ -6291,6 +6271,7 @@
 		{
 			"name"		"sentry dmg bonus per kill"
 			"ref"		"sentry dmg bonus per kill"
+			"attr_class"	"sentry_dmg_bonus_per_kill"
 			"cost"		"0"
 			"value"		"0.1"
 			"init"		"0.00"
@@ -6300,6 +6281,7 @@
 		{
 			"name"		"vaccinator exhaust attribute"
 			"ref"		"vaccinator exhaust attribute"
+			"attr_class"	"vaccinator exhaust attribute"
 			"cost"		"0"
 			"value"		"1"
 			"init"		"0.00"
@@ -6309,6 +6291,7 @@
 		{
 			"name"		"weapon push force multiplier"
 			"ref"		"weapon push force multiplier"
+			"attr_class"	"new_self_push_force"
 			"cost"		"0"
 			"value"		"0.1"
 			"init"		"1.00"
@@ -6318,6 +6301,17 @@
 		{
 			"name"		"dmg per pct hp missing"
 			"ref"		"dmg per pct hp missing"
+			"attr_class"	"dmg_per_pct_hp_missing"
+			"cost"		"0"
+			"value"		"0.1"
+			"init"		"0.00"
+			"max"		"0.00"
+		}
+		"1679.5"
+		{
+			"name"		"dmg taken divided"
+			"ref"		"dmg taken divided"
+			"attr_class"	"dmg_taken_divided"
 			"cost"		"0"
 			"value"		"0.1"
 			"init"		"0.00"
@@ -6327,6 +6321,7 @@
 		{
 			"name"		"firerate player buff"
 			"ref"		"firerate player buff"
+			"attr_class"	"mult_postfiredelay"
 			"cost"		"0"
 			"value"		"0.1"
 			"init"		"0.00"
@@ -6336,6 +6331,7 @@
 		{
 			"name"		"conference call damage"
 			"ref"		"conference call damage"
+			"attr_class"	"conference_call_damage"
 			"cost"		"0"
 			"value"		"0.1"
 			"init"		"0.00"
@@ -6372,6 +6368,47 @@
 		{
 			"name"		"energy weapon no clip"
 			"ref"		"energy weapon no clip"
+			"attr_class"	"energy_weapon_no_clip"
+			"cost"		"0"
+			"value"		"1"
+			"init"		"0.00"
+			"max"		"0.00"
+		}
+		"1686"
+		{
+			"name"		"recharge rate player buff"
+			"ref"		"recharge rate player buff"
+			"attr_class"	"mult_item_meter_charge_rate"
+			"cost"		"0"
+			"value"		"1"
+			"init"		"0.00"
+			"max"		"0.00"
+		}
+		"1687"
+		{
+			"name"		"dispenser amount"
+			"ref"		"dispenser amount"
+			"attr_class"	"dispenser_amount"
+			"cost"		"0"
+			"value"		"1"
+			"init"		"0.00"
+			"max"		"0.00"
+		}
+		"1688"
+		{
+			"name"		"sentry amount"
+			"ref"		"sentry amount"
+			"attr_class"	"sentry_amount"
+			"cost"		"0"
+			"value"		"1"
+			"init"		"0.00"
+			"max"		"0.00"
+		}
+		"1689"
+		{
+			"name"		"additive damage bonus"
+			"ref"		"additive damage bonus"
+			"attr_class"	"additive_damage"
 			"cost"		"0"
 			"value"		"1"
 			"init"		"0.00"
@@ -6382,6 +6419,7 @@
 		{
 			"name"		"damage mult 2"
 			"ref"		"damage mult 2"
+			"attr_class"	"dmg_outgoing_mult"
 			"cost"		"0"
 			"value"		"0.1"
 			"init"		"0.00"
@@ -6391,6 +6429,7 @@
 		{
 			"name"		"damage mult 3"
 			"ref"		"damage mult 3"
+			"attr_class"	"dmg_outgoing_mult"
 			"cost"		"0"
 			"value"		"0.1"
 			"init"		"0.00"
@@ -6400,6 +6439,7 @@
 		{
 			"name"		"damage mult 4"
 			"ref"		"damage mult 4"
+			"attr_class"	"dmg_outgoing_mult"
 			"cost"		"0"
 			"value"		"0.1"
 			"init"		"0.00"
@@ -6409,6 +6449,7 @@
 		{
 			"name"		"damage mult 5"
 			"ref"		"damage mult 5"
+			"attr_class"	"dmg_outgoing_mult"
 			"cost"		"0"
 			"value"		"0.1"
 			"init"		"0.00"
@@ -6418,6 +6459,7 @@
 		{
 			"name"		"damage mult 6"
 			"ref"		"damage mult 6"
+			"attr_class"	"dmg_outgoing_mult"
 			"cost"		"0"
 			"value"		"0.1"
 			"init"		"0.00"
@@ -6427,6 +6469,7 @@
 		{
 			"name"		"damage mult 7"
 			"ref"		"damage mult 7"
+			"attr_class"	"dmg_outgoing_mult"
 			"cost"		"0"
 			"value"		"0.1"
 			"init"		"0.00"
@@ -6436,6 +6479,7 @@
 		{
 			"name"		"damage mult 8"
 			"ref"		"damage mult 8"
+			"attr_class"	"dmg_outgoing_mult"
 			"cost"		"0"
 			"value"		"0.1"
 			"init"		"0.00"
@@ -6445,6 +6489,7 @@
 		{
 			"name"		"damage mult 9"
 			"ref"		"damage mult 9"
+			"attr_class"	"dmg_outgoing_mult"
 			"cost"		"0"
 			"value"		"0.1"
 			"init"		"0.00"
@@ -6454,6 +6499,7 @@
 		{
 			"name"		"damage mult 10"
 			"ref"		"damage mult 10"
+			"attr_class"	"dmg_outgoing_mult"
 			"cost"		"0"
 			"value"		"0.1"
 			"init"		"0.00"
@@ -6463,6 +6509,7 @@
 		{
 			"name"		"damage mult 11"
 			"ref"		"damage mult 11"
+			"attr_class"	"dmg_outgoing_mult"
 			"cost"		"0"
 			"value"		"0.1"
 			"init"		"0.00"
@@ -6472,6 +6519,7 @@
 		{
 			"name"		"damage mult 12"
 			"ref"		"damage mult 12"
+			"attr_class"	"dmg_outgoing_mult"
 			"cost"		"0"
 			"value"		"0.1"
 			"init"		"0.00"
@@ -6481,6 +6529,7 @@
 		{
 			"name"		"damage mult 13"
 			"ref"		"damage mult 13"
+			"attr_class"	"dmg_outgoing_mult"
 			"cost"		"0"
 			"value"		"0.1"
 			"init"		"0.00"
@@ -6490,6 +6539,7 @@
 		{
 			"name"		"damage mult 14"
 			"ref"		"damage mult 14"
+			"attr_class"	"dmg_outgoing_mult"
 			"cost"		"0"
 			"value"		"0.1"
 			"init"		"0.00"
@@ -6499,6 +6549,7 @@
 		{
 			"name"		"damage mult 15"
 			"ref"		"damage mult 15"
+			"attr_class"	"dmg_outgoing_mult"
 			"cost"		"0"
 			"value"		"0.1"
 			"init"		"0.00"
@@ -6508,6 +6559,7 @@
 		{
 			"name"		"damage taken mult 1"
 			"ref"		"damage taken mult 1"
+			"attr_class"	"dmg_incoming_mult"
 			"cost"		"0"
 			"value"		"0.1"
 			"init"		"0.00"
@@ -6517,6 +6569,7 @@
 		{
 			"name"		"damage taken mult 2"
 			"ref"		"damage taken mult 2"
+			"attr_class"	"dmg_incoming_mult"
 			"cost"		"0"
 			"value"		"0.1"
 			"init"		"0.00"
@@ -6526,6 +6579,7 @@
 		{
 			"name"		"damage taken mult 3"
 			"ref"		"damage taken mult 3"
+			"attr_class"	"dmg_incoming_mult"
 			"cost"		"0"
 			"value"		"0.1"
 			"init"		"0.00"
@@ -6535,6 +6589,7 @@
 		{
 			"name"		"damage taken mult 4"
 			"ref"		"damage taken mult 4"
+			"attr_class"	"dmg_incoming_mult"
 			"cost"		"0"
 			"value"		"0.1"
 			"init"		"0.00"
@@ -6544,6 +6599,27 @@
 		{
 			"name"		"movespeed player buff"
 			"ref"		"movespeed player buff"
+			"attr_class"	"mult_player_movespeed"
+			"cost"		"0"
+			"value"		"0.1"
+			"init"		"0.00"
+			"max"		"0.00"
+		}
+		"1900.2"
+		{
+			"name"		"armor penetration buff"
+			"ref"		"armor penetration buff"
+			"attr_class"	"armor_penetration_buff"
+			"cost"		"0"
+			"value"		"0.1"
+			"init"		"0.00"
+			"max"		"0.00"
+		}
+		"1900.2"
+		{
+			"name"		"add health bonus"
+			"ref"		"add health bonus"
+			"attr_class"	"add_maxhealth"
 			"cost"		"0"
 			"value"		"0.1"
 			"init"		"0.00"
@@ -6558,7 +6634,7 @@
 			"cost"		"15000"
 			"value"		"3.0"
 			"init"		"1.00"
-			"display_style" "1"
+			"optimizer_style" "1"
 			"description"	"1:1 pure damage multiplier.\nNever increases in cost."
 			"max"		"100000000.00"
 		}
@@ -6570,7 +6646,7 @@
 			"cost"		"5000"
 			"value"		"1.33"
 			"init"		"1.00"
-			"display_style" "1"
+			"optimizer_style" "1"
 			"description"	"1:1 pure damage multiplier.\nNever increases in cost."
 			"max"		"100000000.00"
 		}
@@ -6582,7 +6658,7 @@
 			"cost"		"3000"
 			"value"		"0.26"
 			"init"		"1.00"
-			"display_style" "1"
+			"optimizer_style" "1"
 			"description"	"1:1 pure damage multiplier.\nNever increases in cost."
 			"max"		"100000000.00"
 		}
@@ -6594,7 +6670,7 @@
 			"cost"		"6650"
 			"value"		"0.88"
 			"init"		"1.00"
-			"display_style" "1"
+			"optimizer_style" "1"
 			"description"	"1:1 pure damage multiplier.\nNever increases in cost."
 			"max"		"100000000.00"
 		}
@@ -6606,7 +6682,7 @@
 			"cost"		"5250"
 			"value"		"0.77"
 			"init"		"1.00"
-			"display_style" "1"
+			"optimizer_style" "1"
 			"description"	"1:1 pure damage multiplier.\nNever increases in cost."
 			"max"		"100000000.00"
 		}
@@ -6618,7 +6694,7 @@
 			"cost"		"3500"
 			"value"		"0.4"
 			"init"		"1.00"
-			"display_style" "1"
+			"optimizer_style" "1"
 			"description"	"1:1 pure damage multiplier.\nNever increases in cost."
 			"max"		"100000000.00"
 		}
@@ -6630,7 +6706,7 @@
 			"cost"		"3600"
 			"value"		"0.96"
 			"init"		"1.00"
-			"display_style" "1"
+			"optimizer_style" "1"
 			"description"	"1:1 pure damage multiplier.\nNever increases in cost."
 			"max"		"100000000.00"
 		}
@@ -6642,7 +6718,7 @@
 			"cost"		"3000"
 			"value"		"1.35"
 			"init"		"1.00"
-			"display_style" "1"
+			"optimizer_style" "1"
 			"description"	"1:1 pure damage multiplier.\nNever increases in cost."
 			"max"		"100000000.00"
 		}
@@ -6654,7 +6730,7 @@
 			"cost"		"3600"
 			"value"		"0.75"
 			"init"		"1.00"
-			"display_style" "1"
+			"optimizer_style" "1"
 			"description"	"1:1 pure damage multiplier.\nNever increases in cost."
 			"max"		"100000000.00"
 		}
@@ -6666,7 +6742,7 @@
 			"cost"		"6650"
 			"value"		"0.88"
 			"init"		"1.00"
-			"display_style" "1"
+			"optimizer_style" "1"
 			"description"	"1:1 pure damage multiplier.\nNever increases in cost."
 			"max"		"100000000.00"
 		}
@@ -6678,7 +6754,7 @@
 			"cost"		"4725"
 			"value"		"0.5"
 			"init"		"1.00"
-			"display_style" "1"
+			"optimizer_style" "1"
 			"description"	"1:1 pure damage multiplier.\nNever increases in cost."
 			"max"		"100000000.00"
 		}
@@ -6690,7 +6766,7 @@
 			"cost"		"1000"
 			"value"		"0.65"
 			"init"		"1.00"
-			"display_style" "1"
+			"optimizer_style" "1"
 			"description"	"1:1 pure damage multiplier.\nNever increases in cost."
 			"max"		"100000000.00"
 		}
@@ -6699,12 +6775,13 @@
 		{
 			"name"		"strength powerup"
 			"ref"		"Strength Powerup"
+			"attr_class"	"strength_powerup"
 			"restriction_category"	"1"
 			"cost"		"40000"
 			"increase_ratio"	"-0.5"
 			"value"		"1"
 			"init"		"0.00"
-			"display_style" "8"
+			"optimizer_style" "8"
 			"staged_max"		"3,3,3"
 			"max"		"2.00"
 		}
@@ -6712,12 +6789,13 @@
 		{
 			"name"		"resistance powerup"
 			"ref"		"Resistance Powerup"
+			"attr_class"	"resistance_powerup"
 			"restriction_category"	"1"
 			"cost"		"40000"
 			"increase_ratio"	"-0.5"
 			"value"		"1"
 			"init"		"0.00"
-			"display_style" "8"
+			"optimizer_style" "8"
 			"staged_max"		"3,3,3"
 			"max"		"2.00"
 		}
@@ -6725,12 +6803,13 @@
 		{
 			"name"		"vampire powerup"
 			"ref"		"Vampire Powerup"
+			"attr_class"	"vampire_powerup"
 			"restriction_category"	"1"
 			"cost"		"40000"
 			"increase_ratio"	"-0.5"
 			"value"		"1"
 			"init"		"0.00"
-			"display_style" "8"
+			"optimizer_style" "8"
 			"staged_max"		"3,3,3"
 			"max"		"2.00"
 		}
@@ -6738,12 +6817,13 @@
 		{
 			"name"		"revenge powerup"
 			"ref"		"Revenge Powerup"
+			"attr_class"	"revenge_powerup"
 			"restriction_category"	"1"
 			"cost"		"40000"
 			"increase_ratio"	"-0.5"
 			"value"		"1"
 			"init"		"0.00"
-			"display_style" "8"
+			"optimizer_style" "8"
 			"staged_max"		"3,3,3"
 			"max"		"2.00"
 		}
@@ -6751,12 +6831,13 @@
 		{
 			"name"		"regeneration powerup"
 			"ref"		"Regeneration Powerup"
+			"attr_class"	"regeneration_powerup"
 			"restriction_category"	"1"
 			"cost"		"40000"
 			"increase_ratio"	"-0.5"
 			"value"		"1"
 			"init"		"0.00"
-			"display_style" "8"
+			"optimizer_style" "8"
 			"staged_max"		"3,3,3"
 			"max"		"2.00"
 		}
@@ -6764,12 +6845,13 @@
 		{
 			"name"		"precision powerup"
 			"ref"		"Precision Powerup"
+			"attr_class"	"precision_powerup"
 			"restriction_category"	"1"
 			"cost"		"40000"
 			"increase_ratio"	"-0.5"
 			"value"		"1"
 			"init"		"0.00"
-			"display_style" "8"
+			"optimizer_style" "8"
 			"staged_max"		"3,3,3"
 			"max"		"2.00"
 		}
@@ -6777,12 +6859,13 @@
 		{
 			"name"		"agility powerup"
 			"ref"		"Agility Powerup"
+			"attr_class"	"agility_powerup"
 			"restriction_category"	"1"
 			"cost"		"40000"
 			"increase_ratio"	"-0.5"
 			"value"		"1"
 			"init"		"0.00"
-			"display_style" "8"
+			"optimizer_style" "8"
 			"staged_max"		"3,3,3"
 			"max"		"2.00"
 		}
@@ -6790,12 +6873,13 @@
 		{
 			"name"		"knockout powerup"
 			"ref"		"Knockout Powerup"
+			"attr_class"	"knockout_powerup"
 			"restriction_category"	"1"
 			"cost"		"40000"
 			"increase_ratio"	"-0.5"
 			"value"		"1"
 			"init"		"0.00"
-			"display_style" "8"
+			"optimizer_style" "8"
 			"staged_max"		"3,3,3"
 			"max"		"2.00"
 		}
@@ -6803,12 +6887,13 @@
 		{
 			"name"		"king powerup"
 			"ref"		"King Powerup"
+			"attr_class"	"king_powerup"
 			"restriction_category"	"1"
 			"cost"		"40000"
 			"increase_ratio"	"-0.5"
 			"value"		"1"
 			"init"		"0.00"
-			"display_style" "8"
+			"optimizer_style" "8"
 			"staged_max"		"3,3,3"
 			"max"		"2.00"
 		}
@@ -6816,12 +6901,13 @@
 		{
 			"name"		"plague powerup"
 			"ref"		"Plague Powerup"
+			"attr_class"	"plague_powerup"
 			"restriction_category"	"1"
 			"cost"		"40000"
 			"increase_ratio"	"-0.5"
 			"value"		"1"
 			"init"		"0.00"
-			"display_style" "8"
+			"optimizer_style" "8"
 			"staged_max"		"3,3,3"
 			"max"		"2.00"
 		}
@@ -6829,12 +6915,13 @@
 		{
 			"name"		"supernova powerup"
 			"ref"		"Supernova Powerup"
+			"attr_class"	"supernova_powerup"
 			"restriction_category"	"1"
 			"cost"		"40000"
 			"increase_ratio"	"-0.5"
 			"value"		"1"
 			"init"		"0.00"
-			"display_style" "8"
+			"optimizer_style" "8"
 			"staged_max"		"3,3,3"
 			"max"		"2.00"
 		}
@@ -6842,12 +6929,27 @@
 		{
 			"name"		"inverter powerup"
 			"ref"		"Inverter Powerup"
+			"attr_class"	"inverter_powerup"
 			"restriction_category"	"1"
 			"cost"		"40000"
 			"increase_ratio"	"-0.5"
 			"value"		"1"
 			"init"		"0.00"
-			"display_style" "8"
+			"optimizer_style" "8"
+			"staged_max"		"3,3,3"
+			"max"		"2.00"
+		}
+		"2100.15"
+		{
+			"name"		"relentless powerup"
+			"ref"		"Relentless Powerup"
+			"attr_class"	"relentless_powerup"
+			"restriction_category"	"1"
+			"cost"		"40000"
+			"increase_ratio"	"-0.5"
+			"value"		"1"
+			"init"		"0.00"
+			"optimizer_style" "8"
 			"staged_max"		"3,3,3"
 			"max"		"2.00"
 		}

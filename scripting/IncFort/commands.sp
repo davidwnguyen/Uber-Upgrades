@@ -523,7 +523,7 @@ public Action:Menu_QuickBuyUpgrade(client, args)
 }
 public Action:ReloadCfgFiles(client, args)
 {
-	CreateTimer(0.1, Timer_WaitForTF2Econ, _);	   
+	InitializeConfigs();  
 	for (int cl = 0; cl <= MaxClients; cl++)
 	{
 		if(IsValidClient3(cl))

@@ -43,10 +43,10 @@ enum struct Upgrade{
     float cost_inc_ratio;
     float staged_max[MAX_STAGES];
     float requirement;
-    int to_a_id;
     int cost;
     int restriction_category;
     int display_style;
+	char display[16];
     char name[64];
     char attr_name[64];
     char description[256];

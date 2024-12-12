@@ -1,15 +1,8 @@
-public Action:Timer_WaitForTF2Econ(Handle timer)
+InitializeConfigs()
 {
 	int i = 0
 	if (TF2Econ_IsValidAttributeDefinition(1))
 	{
-		for (i = 0; i < 7000; ++i)
-		{
-			if(TF2Econ_IsValidAttributeDefinition(i))
-			{
-				TF2Econ_GetAttributeName( i, upgrades[i].attr_name, 64 );
-			}
-		}
 		for (i = 0; i < MAX_ATTRIBUTES; ++i)
 		{
 			upgrades[i].ratio = 0.0;
@@ -27,8 +20,7 @@ public Action:Timer_WaitForTF2Econ(Handle timer)
 			given_upgrd_classnames_tweak_idx[i] = -1
 			given_upgrd_list_nb[i] = 0
 		}
-		_load_cfg_files()
-		KillTimer(timer);
+		_load_cfg_files();
 	}
 	PrintToChatAll("IF Configs Reloaded");
 }
@@ -68,7 +60,7 @@ public UberShopDefineUpgradeTabs()
 	current_slot_name[4] = "Body"
 	current_slot_name[5] = "Buildings"
 	upgrades[0].name = "";
-	CreateTimer(0.3, Timer_WaitForTF2Econ, _);
+	InitializeConfigs();
 }
 public UberShopinitMenusHandlers()
 {

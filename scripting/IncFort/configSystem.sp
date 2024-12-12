@@ -72,12 +72,11 @@ BrowseAttributesKV(Handle kv)
 {
 	char Buf[256];
     TF2EconDynAttribute attrib = new TF2EconDynAttribute();
-    bool ShouldRegister = false;
+	bool ShouldRegister = false;
 	do
 	{
 		if (KvGotoFirstSubKey(kv, false))
 		{
-			
 			BrowseAttributesKV(kv);
 			KvGoBack(kv);
 		}
@@ -94,18 +93,7 @@ BrowseAttributesKV(Handle kv)
 				}
 				else if (StrEqual(Buf,"name"))
 				{
-					KvGetString(kv, "", Buf, 64);
-					if (strcmp(Buf,""))
-					{
-						for (int i_ = 1; i_ < MAX_ATTRIBUTES; i_++)
-						{
-							if (StrEqual(upgrades[i_].attr_name, Buf))
-							{
-								upgrades[_u_id].to_a_id = i_
-								break;
-							}
-						}
-					}
+					KvGetString(kv, "", upgrades[_u_id].attr_name, 64);
 				}
 				else if (StrEqual(Buf, "attr_class"))
 				{
@@ -113,6 +101,7 @@ BrowseAttributesKV(Handle kv)
                     attrib.SetName(upgrades[_u_id].attr_name);
                     attrib.SetClass(Buf);
 					ShouldRegister = true;
+					PrintToServer("Registered Attribute \"%s\" to class \"%s\".", upgrades[_u_id].attr_name, Buf);
 				}
 				else if (StrEqual(Buf,"cost"))
 				{
@@ -139,11 +128,22 @@ BrowseAttributesKV(Handle kv)
 					KvGetString(kv, "", Buf, 64);
 					upgrades[_u_id].restriction_category = StringToInt(Buf)
 				}
-				else if(StrEqual(Buf,"display_style"))
+				else if(StrEqual(Buf,"optimizer_style"))
 				{
 					KvGetString(kv, "", Buf, 64);
 					upgrades[_u_id].display_style = StringToInt(Buf)
 				}
+                else if(StrEqual(Buf,"display"))
+                {
+                    KvGetString(kv, "", Buf, sizeof(Buf));
+                    strcopy(upgrades[_u_id].display, 64, Buf);
+                    if(StrContains(Buf, "%%") != -1){
+                        attrib.SetDescriptionFormat("value_is_percentage");
+                    }
+                    else{
+                        attrib.SetDescriptionFormat("value_is_additive");
+                    }
+                }
 				else if(StrEqual(Buf,"description"))
 				{
 					KvGetString(kv, "", Buf, 256);
@@ -172,13 +172,16 @@ BrowseAttributesKV(Handle kv)
 					upgrades[_u_id].m_val = StringToFloat(Buf)
 					upgrades[_u_id].staged_max[0] = upgrades[_u_id].m_val;
 					_u_id++//Finish the attribute here.
-                    if(ShouldRegister)
+                    if(ShouldRegister){
+						ShouldRegister = false;
                         attrib.Register();
+					}
 				}
 			}
 		}
 	}
 	while (KvGotoNextKey(kv, false));
+	delete attrib;
 	return (_u_id)
 }
 
@@ -434,8 +437,6 @@ public _load_cfg_files()
 	BrowseAttributesKV(kv)
 	PrintToServer("[Incremental Fortress] %d attributes loaded", _u_id)
 	CloseHandle(kv);
-
-
 
 	int static_uid = 1
 	kv = CreateKeyValues("special_tweaks");

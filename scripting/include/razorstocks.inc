@@ -1721,9 +1721,9 @@ stock Action Timer_TerminateParticle(Handle timer, any data)
 stock Action Timer_MoveParticle(Handle timer, any data)
 {
 	int entity = EntRefToEntIndex(data);
-	if (IsValidEdict(entity))
+	if (IsValidEdict(entity)){
 		TeleportEntity(entity, {9999.0,9999.0,9999.0}, NULL_VECTOR, NULL_VECTOR);
-	
+	}
 	return Plugin_Stop;
 }
 stock Action Timer_RemoveEntity(Handle timer, any data)

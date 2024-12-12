@@ -775,11 +775,10 @@ public GiveNewUpgradedWeapon_(client, slot)
 		{
 			for(int a = 0; a < iNumAttributes ; a++ )
 			{
-				int ifid = upgrades[currentupgrades_idx[client][slot][a]].to_a_id;
-				if (upgrades[ifid].attr_name[0] == '\0')
+				if (upgrades[currentupgrades_idx[client][slot][a]].attr_name[0] == '\0')
 					continue;
 					
-				TF2Attrib_SetByName(iEnt, upgrades[ifid].attr_name,currentupgrades_val[client][slot][a]);
+				TF2Attrib_SetByName(iEnt, upgrades[currentupgrades_idx[client][slot][a]].attr_name,currentupgrades_val[client][slot][a]);
 			}
 		}
 

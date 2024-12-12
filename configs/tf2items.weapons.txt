@@ -132,12 +132,12 @@
 		}
 		"230"//Sydney Sleeper
 		{
-			"1"				"recipe component defined item damage penalty;2.0"
+			"1"				"recipe component defined item 1;2.0"
 		}
 		"355"// Fan O'War
 		{
-			"1"				"recipe component defined item damage penalty;4.0"
-			"2"				"accepted wedding ring account id damage penalty;1.75"
+			"1"				"recipe component defined item 1;4.0"
+			"2"				"accepted wedding ring account id 1;1.75"
 			"3"				"damage mult 13; 0.6"
 		}
 		"525"//Diamondback
@@ -388,7 +388,7 @@
 		"36" //Overdose
 		{
 			"preserve_attributes"	"1"
-			"1"				"accepted wedding ring account id damage penalty;6.0"
+			"1"				"accepted wedding ring account id 1;6.0"
 		}
 		"130" //Scottish Resistance
 		{
@@ -424,7 +424,7 @@
 		"17,204" //Syringe Gun 
 		{
 			"preserve_attributes"	"1"
-			"1"				"accepted wedding ring account id damage penalty;4.0"
+			"1"				"accepted wedding ring account id 1;4.0"
 		}
 		"37,1003" //Ubersaw
 		{
