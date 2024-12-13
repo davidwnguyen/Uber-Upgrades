@@ -53,8 +53,9 @@ public void OnPluginStart() {
 	
 	RegConsoleCmd("tf2items_enable", CmdEnable);
 	RegConsoleCmd("tf2items_disable", CmdDisable);
-	
-	// Parse the items list
+}
+
+public void OnAllPluginsLoaded(){
 	ParseItems();
 }
 

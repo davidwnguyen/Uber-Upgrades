@@ -67,7 +67,6 @@ Action:Menu_UpgradeChoice(client, subcat_choice, cat_choice, char[] TitleStr, in
 	{
 		int w_id = current_w_list_id[client]
 
-		char desc_str[512]
 		int tmp_up_idx
 		int tmp_ref_idx
 		int up_cost
@@ -75,7 +74,6 @@ Action:Menu_UpgradeChoice(client, subcat_choice, cat_choice, char[] TitleStr, in
 		float val
 		float tmp_ratio
 		int slot
-		char plus_sign[4]
 		current_w_sc_list_id[client] = subcat_choice;
 		current_w_c_list_id[client] = cat_choice;
 		slot = current_slot_used[client]
@@ -189,110 +187,21 @@ Action:Menu_UpgradeChoice(client, subcat_choice, cat_choice, char[] TitleStr, in
 				t_up_cost = float(up_cost);
 			}
 
-			if (tmp_ratio*times > 0.0)
-			{
-				plus_sign = "+"
-			}
-			else
-			{
-				tmp_ratio *= -1.0
-				plus_sign = "-"
-			}
 
+			char Buffer[128];
+			char DisplayBuffer[64];
+			char TotalDisplayBuffer[64];
+			char MaximumDisplayBuffer[64];
 
-			char buf[128]
 			bool itemDisabled;
-			Format(buf, sizeof(buf), "%T", upgrades[tmp_up_idx].name, client)
-			if (FloatAbs(tmp_ratio) < 0.99)
-			{
-				if(RoundFloat(val*100) == RoundFloat(upgrades[tmp_up_idx].m_val * 100))
-				{
-					Format(desc_str, sizeof(desc_str), "$%.0f - %s\n\t\t\t%s%i%%\t(%i%%) MAXED",
-						t_up_cost, buf,
-						plus_sign, RoundFloat(tmp_ratio * 100 * times), RoundFloat(tmp_val * 100))
-					itemDisabled = true;
-					attributeDisabled[tmp_up_idx] = true;
-				}
-				else if(upgrades[tmp_up_idx].requirement > StartMoney + additionalstartmoney)
-				{
-					Format(desc_str, sizeof(desc_str), "$%.0f - %s\n\t\t\t%s%i%%\t(%i%%) REQ - $%s",
-						t_up_cost, buf,
-						plus_sign, RoundFloat(tmp_ratio * 100 * times), RoundFloat(tmp_val * 100), GetAlphabetForm(upgrades[tmp_up_idx].requirement))
-					itemDisabled = true;
-					attributeDisabled[tmp_up_idx] = true;
-				}
-				else if(upgrades[tmp_up_idx].restriction_category != 0 && (val == 0.0 || val - upgrades[tmp_up_idx].i_val == 0.0))
-				{
-					for(int it = 0;it<5;++it)
-					{
-						if(currentupgrades_restriction[client][slot][it] == upgrades[tmp_up_idx].restriction_category)
-						{
-							Format(desc_str, sizeof(desc_str), "$%.0f - %s\n\t\t\t%s%i%%\t(%i%%) !",
-								t_up_cost, buf,
-								plus_sign, RoundFloat(tmp_ratio * 100 * times), (RoundFloat(tmp_val * 100)))
-							itemDisabled = true;
-							attributeDisabled[tmp_up_idx] = true;
-						}
-					}
-					if(!itemDisabled)
-					{
-						Format(desc_str, sizeof(desc_str), "$%.0f - %s\n\t\t\t%s%i%%\t(%i%%)",
-							t_up_cost, buf,
-							plus_sign, RoundFloat(tmp_ratio * 100 * times), (RoundFloat(tmp_val * 100)))
-					}
-				}
-				else
-				{
-					Format(desc_str, sizeof(desc_str), "$%.0f - %s\n\t\t\t%s%i%%\t(%i%%)",
-						t_up_cost, buf,
-						plus_sign, RoundFloat(tmp_ratio * 100 * times), (RoundFloat(tmp_val * 100)))
-				}
-			}
-			else
-			{
-				if(RoundFloat(val*100) == RoundFloat(upgrades[tmp_up_idx].m_val * 100))
-				{
-					Format(desc_str, sizeof(desc_str), "$%.0f - %s\n\t\t\t%s%3.1f\t(%.1f) MAXED",
-						t_up_cost, buf,
-						plus_sign, tmp_ratio * times, tmp_val)
-					itemDisabled = true
-					attributeDisabled[tmp_up_idx] = true;
-				}
-				else if(upgrades[tmp_up_idx].requirement > StartMoney + additionalstartmoney)
-				{
-					Format(desc_str, sizeof(desc_str), "$%.0f - %s\n\t\t\t%s%3.1f\t(%.1f) REQ - $%s",
-						t_up_cost, buf,
-						plus_sign, tmp_ratio * times, tmp_val, GetAlphabetForm(upgrades[tmp_up_idx].requirement))
-					itemDisabled = true
-					attributeDisabled[tmp_up_idx] = true;
-				}
-				else if(upgrades[tmp_up_idx].restriction_category != 0 && (val == 0.0 || val - upgrades[tmp_up_idx].i_val == 0.0))
-				{
-					for(int it = 0;it<5;++it)
-					{
-						if(currentupgrades_restriction[client][slot][it] == upgrades[tmp_up_idx].restriction_category)
-						{
-							Format(desc_str, sizeof(desc_str), "$%.0f - %s\n\t\t\t%s%3.1f\t(%.1f) !",
-								t_up_cost, buf,
-								plus_sign, RoundFloat(tmp_ratio * 100 * times), (RoundFloat(tmp_val * 100)))
-							itemDisabled = true;
-							attributeDisabled[tmp_up_idx] = true;
-						}
-					}
-					if(!itemDisabled)
-					{
-						Format(desc_str, sizeof(desc_str), "$%.0f - %s\n\t\t\t%s%3.1f\t(%.1f)",
-							t_up_cost, buf,
-							plus_sign, tmp_ratio * times, tmp_val)
-					}
-				}
-				else
-				{
-					Format(desc_str, sizeof(desc_str), "$%.0f - %s\n\t\t\t%s%3.1f\t(%.1f)",
-						t_up_cost, buf,
-						plus_sign, tmp_ratio * times, tmp_val)
-				}
-			}
+            Format(DisplayBuffer, sizeof(DisplayBuffer), upgrades[tmp_up_idx].display, StrContains(upgrades[tmp_up_idx].display, "%%") != -1 ? float(RoundFloat(tmp_ratio*times*100.0)) : tmp_ratio*times);
+
+            Format(TotalDisplayBuffer, sizeof(TotalDisplayBuffer), upgrades[tmp_up_idx].display, StrContains(upgrades[tmp_up_idx].display, "%%") != -1 ? float(RoundFloat(tmp_val*100.0)) : tmp_val);
+            
+            Format(MaximumDisplayBuffer, sizeof(MaximumDisplayBuffer), upgrades[tmp_up_idx].display, StrContains(upgrades[tmp_up_idx].display, "%%") != -1 ? float(RoundFloat((upgrades[tmp_up_idx].m_val-upgrades[tmp_up_idx].i_val)*100.0)) : upgrades[tmp_up_idx].m_val-upgrades[tmp_up_idx].i_val);
+
+            Format(Buffer, sizeof(Buffer), "%t | $%.0f\n\t%s%s\t[%s%s/%s]", upgrades[tmp_up_idx].name, t_up_cost, tmp_ratio*times > 0 ? "+" : "", DisplayBuffer, tmp_val > 0 ? "+" : "", TotalDisplayBuffer, MaximumDisplayBuffer);
+
 			if(canBypassRestriction[client]){ attributeDisabled[tmp_up_idx] = false; itemDisabled = false;}
 			if(!itemDisabled)
 			{
@@ -344,7 +253,7 @@ Action:Menu_UpgradeChoice(client, subcat_choice, cat_choice, char[] TitleStr, in
 						}
 
 						float delta = Pow((arcaneDamageMult+upgrades[tmp_up_idx].ratio) * Pow(arcanePower, 4.0), 2.45) - Pow(arcaneDamageMult * Pow(arcanePower, 4.0), 2.45);
-						Format(desc_str, sizeof(desc_str), "%s (+%.1f)", desc_str, delta);
+						Format(Buffer, sizeof(Buffer), "%s (+%.1f)", Buffer, delta);
 					}
 					case 5:
 					{
@@ -365,11 +274,11 @@ Action:Menu_UpgradeChoice(client, subcat_choice, cat_choice, char[] TitleStr, in
 						}
 
 						float delta = Pow(arcaneDamageMult * Pow(arcanePower+upgrades[tmp_up_idx].ratio, 4.0), 2.45) - Pow(arcaneDamageMult * Pow(arcanePower, 4.0), 2.45);
-						Format(desc_str, sizeof(desc_str), "%s (+%.1f)", desc_str, delta);
+						Format(Buffer, sizeof(Buffer), "%s (+%.1f)", Buffer, delta);
 					}
 				}
 			}
-			AddMenuItem(menu, "upgrade", desc_str);
+			AddMenuItem(menu, "upgrade", Buffer);
 		}
 		if(efficiencyCalculationTimer[client] < currentGameTime)
 		{

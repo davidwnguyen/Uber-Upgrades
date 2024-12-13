@@ -2709,8 +2709,8 @@
 	"flame size bonus"{
 		"en"		"Flame Size Bonus"
 	}
-	"flame life bonus"{
-		"en"		"Increased Flame Lifetime"
+	"flame duration bonus"{
+		"en"		"Increased Flame Duration"
 	}
 	"charged airblast"{
 		"en"		"Charged Airblast"

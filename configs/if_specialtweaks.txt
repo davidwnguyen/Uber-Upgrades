@@ -26,7 +26,7 @@
 		{
 			"gamestage"						"1"
 			"restriction"					"1"
-			"Honorbound"					"1.0"
+			"honorbound"					"1.0"
 			"percent of hp healed on kill"	"5.0"
 			"weapon fire rate"				"0.8"
 		}

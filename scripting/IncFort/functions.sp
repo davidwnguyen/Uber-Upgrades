@@ -123,7 +123,7 @@ stock Action DOTDamage(Handle timer,any:data)
 	CloseHandle(data);
 	return Plugin_Continue;
 }
-stock int CreateParticle(iEntity, char[] strParticle, bool bAttach = false, char[] strAttachmentPoint="", float time = 2.0,float fOffset[3]={0.0, 0.0, 0.0}, bool parentAngle = false, attachType = 0, bool terminate = false)
+stock int CreateParticle(iEntity, char[] strParticle, bool bAttach = false, char[] strAttachmentPoint="", float time = 2.0,float fOffset[3]={0.0, 0.0, 0.0}, bool parentAngle = false, attachType = 0)
 {
 	if(attachType == 0)
 	{
