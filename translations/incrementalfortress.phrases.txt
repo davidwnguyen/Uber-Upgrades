@@ -103,7 +103,7 @@
 		"en"		"Explosive Bullets"
 	}
 	"conference call damage"{
-		"en"		"Crossfire Damage %%"
+		"en"		"Crossfire Damage Multiplier"
 	}
 	"firerate player buff"{
 		"en"		"Firerate Multiplier"
