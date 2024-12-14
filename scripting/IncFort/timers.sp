@@ -614,7 +614,7 @@ public Action:Timer_Every100MS(Handle timer)
 					currentDamageType[decay.inflictor].second |= DMG_PIERCING;
 					SDKHooks_TakeDamage(client, decay.inflictor, decay.inflictor, 10.0 + GetClientHealth(client)*0.008, DMG_PREVENT_PHYSICS_FORCE);
 					currentDamageType[decay.inflictor].second |= DMG_IGNOREHOOK;
-					SDKHooks_TakeDamage(client, decay.inflictor, decay.inflictor, 9.0,DMG_RADIATION+DMG_DISSOLVE,_,_,_,false);
+					SDKHooks_TakeDamage(client, decay.inflictor, decay.inflictor, 9.0,DMG_RADIATION|DMG_DISSOLVE,_,_,_,false);
 				}
 			}
 			if(hasBuffIndex(client, Buff_InfernalDOT)){

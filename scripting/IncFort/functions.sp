@@ -123,6 +123,7 @@ stock Action DOTDamage(Handle timer,any:data)
 	CloseHandle(data);
 	return Plugin_Continue;
 }
+
 stock int CreateParticle(iEntity, char[] strParticle, bool bAttach = false, char[] strAttachmentPoint="", float time = 2.0,float fOffset[3]={0.0, 0.0, 0.0}, bool parentAngle = false, attachType = 0)
 {
 	if(attachType == 0)
@@ -224,9 +225,6 @@ void CreateParticleEx(iEntity, char[] strParticle, m_iAttachType = 0, m_iAttachm
 //Replaces any old buff with same details, else inserts a new one.
 public void insertBuff(int client, Buff newBuff){
 	int replacementID = getNextBuff(client);
-
-	if(!isBonus[newBuff.id])
-		newBuff.duration /= GetAttribute(client, "endurance bonus", 1.0);
 		
 	for(int i = 0;i < MAXBUFFS;++i){
 		if(playerBuffs[client][i].id == newBuff.id && playerBuffs[client][i].priority <= newBuff.priority)
@@ -594,6 +592,7 @@ stock EntityExplosion(owner, float damage, float radius, float pos[3], soundType
 					if(IsValidEdict(weapon) && IsValidClient3(i))
 					{
 						currentDamageType[owner].second |= DMG_IGNOREHOOK;
+						PrintToServer("secondBits = %i | %i", currentDamageType[owner].second, secondBits);
 						SDKHooks_TakeDamage(i,owner,owner,damage, damagetype,weapon,_,_,false)
 						if(knockback > 0.0)
 							PushEntity(i, owner, knockback, 200.0);

@@ -1350,8 +1350,8 @@
 		"Flamethrower specific upgrades"
 		{
 			"Attr17"	"flame_speed"
-			"Attr2"		"flame duration bonus"
 			"Attr14"	"Flame Size"
+			"Attr2"		"flame_reflect_on_collision"
 		}
 		"Special Tweaks"
 		{
@@ -1379,8 +1379,8 @@
 		{
 			"Attr3"		"increase buff duration"
 			"Attr17"	"flame_speed"
-			"Attr2"		"flame duration bonus"
 			"Attr14"	"Flame Size"
+			"Attr2"		"flame_reflect_on_collision"
 		}
 		"Special Tweaks"
 		{

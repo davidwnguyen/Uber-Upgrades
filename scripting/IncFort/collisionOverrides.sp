@@ -58,7 +58,7 @@ public Action:OnStartTouchStomp(client, other)
 			if(currentDPS > strongestDPS)
 				strongestDPS = currentDPS;
 		}
-		EntityExplosion(client, playerBuffs[client][getBuffInArray(client, Buff_InfernalLunge)].severity*strongestDPS, 500.0, ClientPos, 0,_,_,_,DMG_BLAST+DMG_BURN,CWeapon,0.25, _,_,_,_,_,_,300.0);
+		EntityExplosion(client, playerBuffs[client][getBuffInArray(client, Buff_InfernalLunge)].severity*strongestDPS, 500.0, ClientPos, 0,_,_,_,DMG_BLAST|DMG_BURN,CWeapon,0.25, _,_,_,_,_,_,300.0);
 		playerBuffs[client][getBuffInArray(client, Buff_InfernalLunge)].clear();
 	}
 }
@@ -552,6 +552,7 @@ public Action:OnCollisionMoonveil(entity, client)
 				{
 					float mult = 1.0/GetAttribute(CWeapon, "fire rate bonus", 1.0);
 					currentDamageType[owner].second |= DMG_ARCANE;
+					currentDamageType[owner].second |= DMG_ARCANESCALING;
 					currentDamageType[owner].second |= DMG_IGNOREHOOK;
 					SDKHooks_TakeDamage(client,owner,owner,mult*40.0,DMG_GENERIC,CWeapon, _,_,false);
 				}
@@ -1099,7 +1100,7 @@ public Action:OnTouchChaos(entity, other)
 			GetEntPropVector(entity, Prop_Data, "m_vecOrigin", vOrigin);
 			CreateParticleEx(entity, "heavy_ring_of_fire", 0, 0, vOrigin);
 			vOrigin[2]+= 30.0;
-			EntityExplosion(owner, 80.0, 500.0, vOrigin, 0,_,entity,1.0,DMG_SONIC+DMG_PREVENT_PHYSICS_FORCE+DMG_RADIUS_MAX,CWeapon,0.75);
+			EntityExplosion(owner, 80.0, 500.0, vOrigin, 0,_,entity,1.0,DMG_GENERIC,CWeapon,0.75, _, _, _, DMG_ARCANE|DMG_ARCANESCALING);
 			RemoveEntity(entity);
 		}
 	}

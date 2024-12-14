@@ -539,7 +539,7 @@
 			"increase_ratio" "0.125"
 			"value"		"0.25"
 			"init"		"1.00"
-			"max"		"80.00"
+			"max"		"51.00"
 		}
 		"9"
 		{
@@ -550,7 +550,7 @@
 			"increase_ratio" "0.125"
 			"value"		"0.25"
 			"init"		"1.00"
-			"max"		"80.0"
+			"max"		"51.0"
 		}
 		"10"
 		{
@@ -561,7 +561,7 @@
 			"increase_ratio" "0.05"
 			"value"		"1.00"
 			"init"		"1.00"
-			"max"		"400.0"
+			"max"		"401.0"
 		}
 		"11"
 		{
@@ -3911,14 +3911,14 @@
 		}
 		"328"
 		{
-			"name"		"mult_end_flame_size"
+			"name"		"flame size bonus"
 			"ref"		"Flame Size"
 			"display"		"%.0f%%"
 			"cost"		"160"
+			"increase_ratio"	"0.8"
 			"value"		"0.25"
 			"init"		"1"
-			"max"		"8.50"
-			"increase_ratio"	"0.8"
+			"max"		"3.00"
 		}
 		"330"
 		{
@@ -4133,15 +4133,14 @@
 		}
 		"356"
 		{
-			"name"		"flame duration bonus"
-			"ref"		"flame duration bonus"
-			"attr_class"	"flame_lifetime"
-			"display"		"%.0f%%"
-			"cost"		"500"
-			"increase_ratio"	"0.2"
-			"value"		"0.25"
-			"init"		"1.0"
-			"max"		"3.0"
+			"name"		"flame_reflect_on_collision"
+			"ref"		"flame_reflect_on_collision"
+			"display"		"%.0f"
+			"cost"		"2500"
+			"increase_ratio"	"0.0"
+			"value"		"1.0"
+			"init"		"0.0"
+			"max"		"1.0"
 		}
 		"357"
 		{

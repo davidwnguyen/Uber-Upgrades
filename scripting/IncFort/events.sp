@@ -831,7 +831,7 @@ public MRESReturn CheckEntityVelocity(Address pPlayerShared, Handle hReturn)  {
 	return MRES_Supercede;
 }
 public MRESReturn OnRecoilApplied(int entity, Handle hParams)  {
-	DHookSetParamVector(hParams, 1, {0.0,0.0,0.0});
+	//DHookSetParamVector(hParams, 1, {0.0,0.0,0.0});
 	return MRES_ChangedHandled;
 }
 public MRESReturn OnCurrencySpawn(int entity, Handle hParams)  {
@@ -3060,7 +3060,7 @@ public MRESReturn OnBlastExplosion(int entity, Handle hReturn){
 			currentDamageType[owner].second |= DMG_IGNOREHOOK;
 			SDKHooks_TakeDamage(target, owner, owner, damage,_,_,_,_,false);
 			currentDamageType[owner].second |= DMG_IGNOREHOOK;
-			SDKHooks_TakeDamage(target, owner, owner, 3.0, DMG_RADIATION+DMG_DISSOLVE,_,_,_,false);
+			SDKHooks_TakeDamage(target, owner, owner, 3.0, DMG_RADIATION|DMG_DISSOLVE,_,_,_,false);
 
 			if(hitParticle[target]+0.2 <= currentGameTime){
 				GetEntPropVector(target, Prop_Data, "m_vecOrigin", victimPosition);

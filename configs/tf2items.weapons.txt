@@ -72,11 +72,6 @@
 			"preserve_attributes"	"1"
 			"1"				"absorb damage while cloaked;0.2"
 		}
-		"45,1078"//Force-A-Nature
-		{
-			"preserve_attributes"	"1"
-			"1"				"scattergun knockback mult;2.0"
-		}
 		"1178"//Dragon's Fury
 		{
 			"preserve_attributes"	"1"
@@ -287,8 +282,8 @@
 		"45,1078" //Force a Nature
 		{
 			"preserve_attributes"	"1"
+			"classname"		"tf_weapon_handgun_scout_primary"
 			"1"				"fire rate penalty HIDDEN;0.5"
-			"2"				"damage mult 13; 0.8"
 			"3"				"fire rate bonus;1.0"
 		}
 		"1180" //Gas Passer

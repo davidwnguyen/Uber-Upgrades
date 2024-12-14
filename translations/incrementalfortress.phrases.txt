@@ -1,5 +1,8 @@
 "Phrases"
 {
+	"flame_reflect_on_collision"{
+		"en"		"Flames Reflect on Walls"
+	}
 	"Sentry Upgrades"{
 		"en"		"Sentry Upgrades"
 	}

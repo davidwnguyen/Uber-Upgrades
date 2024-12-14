@@ -386,7 +386,7 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 		}
 		if(IsValidEdict(inflictor))
 			ShouldNotHome[inflictor][victim] = true;
-		if(damagetype == (DMG_RADIATION+DMG_DISSOLVE))//Radiation.
+		if(damagetype == (DMG_RADIATION|DMG_DISSOLVE))//Radiation.
 		{
 			if(GetAttribute(attacker, "knockout powerup", 0.0) == 2)
 				damage *= 3;
@@ -560,7 +560,7 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 				float ReflectMult = TF2Attrib_GetValue(ReflectDamageMultiplier);
 				ReflectDamage *= ReflectMult
 				currentDamageType[victim].second |= DMG_IGNOREHOOK;
-				SDKHooks_TakeDamage(attacker, victim, victim, ReflectDamage, (DMG_PREVENT_PHYSICS_FORCE+DMG_ENERGYBEAM),_,_,_,false);
+				SDKHooks_TakeDamage(attacker, victim, victim, ReflectDamage, (DMG_PREVENT_PHYSICS_FORCE|DMG_ENERGYBEAM),_,_,_,false);
 			}
 		}
 
@@ -598,7 +598,7 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 					}
 					if(damage > GetClientHealth(victim) && GetAttribute(i, "king powerup", 0.0) == 3.0){
 						currentDamageType[attacker].second |= DMG_IGNOREHOOK;
-						SDKHooks_TakeDamage(i, attacker, attacker, damage, (DMG_PREVENT_PHYSICS_FORCE+DMG_ENERGYBEAM),_,_,_,false);
+						SDKHooks_TakeDamage(i, attacker, attacker, damage, (DMG_PREVENT_PHYSICS_FORCE|DMG_ENERGYBEAM),_,_,_,false);
 						currentDamageType[attacker].second |= DMG_PIERCING;
 						currentDamageType[attacker].second |= DMG_IGNOREHOOK;
 						SDKHooks_TakeDamage(i, attacker, attacker, GetClientHealth(i) * 0.15, DMG_PREVENT_PHYSICS_FORCE);
@@ -730,6 +730,12 @@ public Action TF2_OnTakeDamage(int victim, int &attacker, int &inflictor, float 
 	}
 	currentDamageType[attacker].first = damagetype;
 
+	if(currentDamageType[attacker].second & DMG_ARCANESCALING)
+	{
+		damage *= Pow(ArcaneDamage[attacker] * Pow(ArcanePower[attacker], 4.0), spellScaling[gameStage+1]);
+		changed = Plugin_Changed;
+	}
+		
 	if(IsValidClient3(victim)){
 		if(damagetype & DMG_SLASH){
 			damagetype |= DMG_PREVENT_PHYSICS_FORCE
@@ -1547,7 +1553,7 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 		float arcaneWeaponScaling = GetAttribute(weapon,"arcane weapon scaling",0.0);
 		if(arcaneWeaponScaling != 0.0){
 			currentDamageType[attacker].second |= DMG_IGNOREHOOK;
-			SDKHooks_TakeDamage(victim,attacker,attacker,10.0 + (Pow(ArcaneDamage[attacker] * Pow(ArcanePower[attacker], 4.0), spellScaling[2]) * arcaneWeaponScaling),_,_,_,_,false);
+			SDKHooks_TakeDamage(victim,attacker,attacker,10.0 + (Pow(ArcaneDamage[attacker] * Pow(ArcanePower[attacker], 4.0), spellScaling[gameStage+1]) * arcaneWeaponScaling),_,_,_,_,false);
 		}
 		
 		if(weaponFireRate[weapon] > 0.0){

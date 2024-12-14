@@ -101,7 +101,7 @@ BrowseAttributesKV(Handle kv)
                     attrib.SetName(upgrades[_u_id].attr_name);
                     attrib.SetClass(Buf);
 					ShouldRegister = true;
-					PrintToServer("Registered Attribute \"%s\" to class \"%s\".", upgrades[_u_id].attr_name, Buf);
+					//PrintToServer("Registered Attribute \"%s\" to class \"%s\".", upgrades[_u_id].attr_name, Buf);
 				}
 				else if (StrEqual(Buf,"cost"))
 				{

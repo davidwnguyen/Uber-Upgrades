@@ -27,6 +27,7 @@ Yeah.
 #define DMG_ACTUALCRIT 1 << 4
 #define DMG_FROST 1 << 5
 #define DMG_IGNOREHOOK 1 << 6
+#define DMG_ARCANESCALING 1 << 7
 
 //Uber Stuff
 #define UBER_INVULN 1 << 0

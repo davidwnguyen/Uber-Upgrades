@@ -1561,7 +1561,7 @@ DoZap(client,victim,spellLevel)
 	
 	float LightningDamage = (20.0 + (Pow(level * Pow(ArcanePower[client], 4.0), spellScaling[spellLevel]) * 3.0));
 	float radiationAmount[] = {0.0,6.0,10.0,25.0};
-	SDKHooks_TakeDamage(victim,client,client, radiationAmount[spellLevel], (DMG_RADIATION+DMG_DISSOLVE), _, _, _, false);
+	SDKHooks_TakeDamage(victim,client,client, radiationAmount[spellLevel], (DMG_RADIATION|DMG_DISSOLVE), _, _, _, false);
 	currentDamageType[client].second |= DMG_IGNOREHOOK;
 	SDKHooks_TakeDamage(victim,client,client, LightningDamage, 1073741824, -1, NULL_VECTOR, NULL_VECTOR, false);
 	float chance[] = {0.0,0.3,0.6,0.9};
