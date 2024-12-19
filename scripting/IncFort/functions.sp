@@ -592,7 +592,6 @@ stock EntityExplosion(owner, float damage, float radius, float pos[3], soundType
 					if(IsValidEdict(weapon) && IsValidClient3(i))
 					{
 						currentDamageType[owner].second |= DMG_IGNOREHOOK;
-						PrintToServer("secondBits = %i | %i", currentDamageType[owner].second, secondBits);
 						SDKHooks_TakeDamage(i,owner,owner,damage, damagetype,weapon,_,_,false)
 						if(knockback > 0.0)
 							PushEntity(i, owner, knockback, 200.0);
