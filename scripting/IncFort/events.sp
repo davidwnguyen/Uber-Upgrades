@@ -4079,7 +4079,7 @@ public TF2Items_OnGiveNamedItem_Post(client, char[] classname, itemDefinitionInd
 					}
 					case (TFClass_Sniper):
 					{
-						if(StrEqual(classname, "tf_weapon_grenadelauncher")){
+						if(StrEqual(classname, "tf_weapon_crossbow")){
 							currentitem_catidx[client][0] = GetUpgrade_CatList("autofirebow")
 						}
 						else if(itemDefinitionIndex == 752){

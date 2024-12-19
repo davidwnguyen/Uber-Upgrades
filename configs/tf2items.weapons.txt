@@ -282,7 +282,6 @@
 		"45,1078" //Force a Nature
 		{
 			"preserve_attributes"	"1"
-			"classname"		"tf_weapon_handgun_scout_primary"
 			"1"				"fire rate penalty HIDDEN;0.5"
 			"3"				"fire rate bonus;1.0"
 		}
@@ -310,11 +309,8 @@
 		"56,1005" //Huntsman
 		{
 			"preserve_attributes"	"1"
-			"classname"		"tf_weapon_grenadelauncher"
+			"classname"		"tf_weapon_crossbow"
 			"1"				"override projectile type;8.0"
-			"2"				"damage bonus;1.2"
-			"3"				"clip size penalty HIDDEN;0.5"
-			"4"				"Projectile speed increased;2.5"
 			"5"				"slow enemy on hit major;1.0"
 		}
 		"811" //Huo-long Heater
@@ -454,6 +450,17 @@
 		{
 			"preserve_attributes"	"1"
 			"1"				"regenerate stickbomb;1.0"
+		}
+		"41"//Natascha
+		{
+			"preserve_attributes"	"1"
+			"1"				"sniper fires tracer;1.0"
+			"2"				"bullets per shot mult;0.25"
+			"3"				"Converts Firerate to Damage;1.0"
+			"4"				"spread penalty;0.3"
+			"5"				"damage penalty;1.0"
+			"6"				"weapon fire rate;2.0"
+			"7"				"damage mult 13; 6.0"
 		}
 	}
 }

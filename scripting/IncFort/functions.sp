@@ -1214,6 +1214,10 @@ DisplayItemChange(client,itemidx)
 			ChangeString = "Ullapool Caber | Infinite explosive charges.";
 		}
 		//Heavy Primaries
+		case 41:
+		{
+			ChangeString = "Natascha | Shoots only 1 bullet per shot at 2x slower fire rate, but deals 6x damage and has tracer rounds. -70% spread. Converts fire rate into damage.";
+		}
 		case 312:
 		{
 			ChangeString = "The Brass Beast | Shoots rockets that have 90 base damage and 200HU blast radius and can penetrate enemies. Cannot hit enemies multiple times. 3x slower fire rate.";

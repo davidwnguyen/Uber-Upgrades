@@ -2582,6 +2582,7 @@
 			"Attr2"		"fire rate bonus(multshit)"
 			"Attr3"		"clip size bonus (B)"
 			"Attr4"		"faster reload rate (U)"
+			"Attr5"		"Projectile speed increased"
 			"Attr8"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
