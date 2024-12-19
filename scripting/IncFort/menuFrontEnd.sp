@@ -484,22 +484,17 @@ public Action:Menu_SpecialUpgradeChoice(client, cat_choice, char[] TitleStr, sel
 					tmp_ratio *= -1.0
 					plus_sign = "-"
 				}
-				char buf[256]
+
+				tmp_ratio *= tweaks[tmp_spe_up_idx].att_ratio[j]
+
+				char buf[64]
+				char DisplayIncreaseBuffer[32];
+				char DisplayCurrentBuffer[32];
 				Format(buf, sizeof(buf), "%T", upgrades[tmp_up_idx].name, client)
-				if (tmp_ratio < 0.99)
-				{
-					tmp_ratio *= tweaks[tmp_spe_up_idx].att_ratio[j]
-					Format(desc_str, sizeof(desc_str), "%s\n%\t-%s\n\t\t\t%s%i%%\t(%i%%)",
-						desc_str, buf,
-						plus_sign, RoundFloat(tmp_ratio * 100), RoundFloat(tmp_val * 100))
-				}
-				else
-				{
-					tmp_ratio *= tweaks[tmp_spe_up_idx].att_ratio[j]
-					Format(desc_str, sizeof(desc_str), "%s\n\t-%s\n\t\t\t%s%3.1f\t(%.1f)",
-						desc_str, buf,
-						plus_sign, tmp_ratio, tmp_val)
-				}
+				Format(DisplayIncreaseBuffer, sizeof(DisplayIncreaseBuffer), upgrades[tmp_up_idx].display, StrContains(upgrades[tmp_up_idx].display, "%%") != -1 ? float(RoundFloat(tmp_ratio*100.0)) : tmp_ratio);
+				Format(DisplayCurrentBuffer, sizeof(DisplayCurrentBuffer), upgrades[tmp_up_idx].display, StrContains(upgrades[tmp_up_idx].display, "%%") != -1 ? float(RoundFloat(tmp_val*100.0)) : tmp_val);
+				
+				Format(desc_str, sizeof(desc_str), "%s\n%\t-%s\n\t\t\t%s%s\t(%s)",desc_str, buf, plus_sign, DisplayIncreaseBuffer, DisplayCurrentBuffer);
 			}
 			AddMenuItem(menu, "upgrade", desc_str, restricted ? ITEMDRAW_DISABLED : ITEMDRAW_DEFAULT);
 		}
