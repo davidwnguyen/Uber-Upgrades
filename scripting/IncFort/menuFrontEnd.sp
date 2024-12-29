@@ -130,7 +130,7 @@ Action:Menu_UpgradeChoice(client, subcat_choice, cat_choice, char[] TitleStr, in
 							upgrades_val += upgrades[tmp_up_idx].ratio
 						}
 						else if(nextcost < CurrencyOwned[client] && upgrades[tmp_up_idx].ratio < 0.0 && 
-						(canBypassRestriction[client] == true || RoundFloat(upgrades_val*100.0)/100.0 > m_val))
+						(canBypassRestriction[client] == true || RoundFloat(upgrades_val*100.0)/100.0 > upgrades[tmp_up_idx].m_val))
 						{
 							t_up_cost += up_cost + RoundFloat(up_cost * (idx_currentupgrades_val * upgrades[tmp_up_idx].cost_inc_ratio))
 							++idx_currentupgrades_val	
