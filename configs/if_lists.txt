@@ -7,10 +7,10 @@
 		{
 			"Attr0"		"Health Bonus"
 			"Attr1"		"health regen"
-			"Attr3"		"Armor Capability"
-			"Attr19"	"Defense"
-			"Attr16"	"patient overheal bonus"
-			"Attr10"	"health from healers increased"
+			"Attr2"		"Armor Capability"
+			"Attr3"		"Defense"
+			"Attr5"		"patient overheal bonus"
+			"Attr6"		"health from healers increased"
 		}
 		"Physical upgrades"
 		{
@@ -1975,7 +1975,7 @@
 		}
 		"Special Tweaks"
 		{
-			"Sp0"		"Sanity Depletion"
+			"Sp0"		"Berserker's Fury"
 			"Sp1"		"Weapon Inheritance"
 		}
 	}
@@ -2601,6 +2601,7 @@
 		}
 		"Special Tweaks"
 		{
+			"Sp0"		"Berserker's Fury"
 			"Sp1"		"Weapon Inheritance"
 		}
 	}	

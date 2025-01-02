@@ -29,6 +29,7 @@ float GetResistance(int client, bool includeReduction = false, float increaseBas
 				TotalResistance /= TF2Attrib_GetValue(dmgReduction);
 		}
 		TotalResistance /= TF2Attrib_HookValueFloat(1.0, "dmg_incoming_mult", client);
+		TotalResistance *= TF2Attrib_HookValueFloat(1.0, "dmg_taken_divided", client);
 
 		Address DodgeBody = TF2Attrib_GetByName(client, "SET BONUS: chance of hunger decrease");
 		if(DodgeBody != Address_Null)
@@ -1918,7 +1919,17 @@ refreshUpgrades(client, slot)
 			Address healthActive = TF2Attrib_GetByName(client, "max health multiplier");
 			if(healthActive != Address_Null)
 			{
-				TF2Attrib_SetByName(client,"add health bonus", float(RoundToCeil(GetClientBaseHP(client)*(TF2Attrib_GetValue(healthActive)-1.0))) );
+				float mult = TF2Attrib_GetValue(healthActive);
+				float drConversion = GetAttributeAccumulateAdditive(client, "convert health to damage reduction", 0.0);
+				if(drConversion > 0 && mult > 0){
+					float dr = 1+drConversion*(mult-1);
+					TF2Attrib_SetByName(client, "dmg taken divided", dr);
+					mult /= dr;
+				}else{
+					TF2Attrib_SetByName(client, "dmg taken divided", 1.0);
+				}
+
+				TF2Attrib_SetByName(client,"add health bonus", float(RoundToCeil(GetClientBaseHP(client)* (mult-1)) ) );
 				if(current_class[client] == TFClass_Engineer)
 					TF2Attrib_SetByName(client,"engy building health bonus", TF2Attrib_GetValue(healthActive));
 			}

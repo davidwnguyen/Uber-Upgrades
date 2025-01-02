@@ -244,4 +244,19 @@
 		"paintkit_proto_def_index"	"390"
 		"set_item_texture_wear"		"0.0"
 	}
+	"big sloppa 1"
+	{
+		"index"			"220"
+		"weapon_class"	"tf_weapon_handgun_scout_primary"
+		"weapon_menu"	"tf_weapon_scattergun"
+		"class"			"scout"
+		"description"	"Fires a burst of 4 shots rapidly.\nConverts all fire rate into damage."
+		"cost"			"30000.0"
+		"Converts Firerate to Damage"	"1"
+		"burst fire count"		"-4"
+		"burst fire rate mult"		"20"
+		"weapon fire rate"		"0.1"
+		"paintkit_proto_def_index"	"430"
+		"set_item_texture_wear"		"0.0"
+	}
 }

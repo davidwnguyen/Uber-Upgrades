@@ -392,13 +392,14 @@
 			"damage reduction to additive damage"	"2.0"
 			"dmg per pct hp missing"	"0.1"
 		}
-		"Sanity Depletion"
+		"Berserker's Fury"
 		{
 			"gamestage"						"1"
 			"restriction"					"1"
 			"buff damage taken"				"3.0"
 			"buff fire rate"				"3.5"
 			"enraged meter filled when eaten"	"15"
+			"convert health to damage reduction"	"0.25"
 		}
 		"Lightning Affinity"
 		{

@@ -6898,6 +6898,17 @@
 			"init"		"0.00"
 			"max"		"0.00"
 		}
+		"1691"
+		{
+			"name"		"convert health to damage reduction"
+			"ref"		"convert health to damage reduction"
+			"display"		"%.0f%%"
+			"attr_class"	"health_to_damage_reduction"
+			"cost"		"0"
+			"value"		"1.0"
+			"init"		"0.00"
+			"max"		"1.00"
+		}
 		//Filler
 		"1900.0"
 		{
@@ -7124,7 +7135,7 @@
 			"name"		"add health bonus"
 			"ref"		"add health bonus"
 			"attr_class"	"add_maxhealth"
-			"display"		"%.0f%%"
+			"display"		"%.0f"
 			"cost"		"0"
 			"value"		"0.1"
 			"init"		"0.00"

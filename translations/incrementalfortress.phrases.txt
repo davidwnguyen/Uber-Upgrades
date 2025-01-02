@@ -1,5 +1,8 @@
 "Phrases"
 {
+	"convert health to damage reduction"{
+		"en"		"Convert Health Bonus to Damage Reduction"
+	}
 	"flame_reflect_on_collision"{
 		"en"		"Flames Reflect on Walls"
 	}
@@ -138,8 +141,8 @@
 	"Lightning Affinity"{
 		"en"		"Lightning Affinity"
 	}
-	"Sanity Depletion"{
-		"en"		"Sanity Depletion"
+	"Berserker's Fury"{
+		"en"		"Berserker's Fury"
 	}
 	"Divine Bloodline"{
 		"en"		"Divine Bloodline"
