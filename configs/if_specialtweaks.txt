@@ -99,7 +99,7 @@
 			"gamestage"						"1"
 			"restriction"					"1"
 			"bullets per shot mult"			"7.5"
-			"Overall Damage"				"70"
+			"Overall Damage"				"90"
 			"Explosive Bullets Radius (tweak)"	"350.0"
 			"fire rate penalty(unremoveable)"	"50"
 		}
@@ -108,7 +108,7 @@
 			"gamestage"						"1"
 			"restriction"					"1"
 			"bullets per shot mult"			"7.5"
-			"Overall Damage"				"70"
+			"Overall Damage"				"80"
 			"Explosive Bullets Radius (tweak)"	"350.0"
 			"fire rate penalty(unremoveable)"	"50"
 		}
@@ -116,10 +116,10 @@
 		{
 			"gamestage"						"1"
 			"restriction"					"1"
-			"bullets per shot mult"			"5.0"
+			"bullets per shot mult"			"7.5"
 			"Overall Damage"				"70"
-			"Explosive Bullets Radius (tweak)"	"150.0"
-			"fire rate penalty(unremoveable)"	"50"
+			"Explosive Bullets Radius (tweak)"	"200.0"
+			"fire rate penalty(unremoveable)"	"30"
 		}
 		"Lacerating Rounds"
 		{
