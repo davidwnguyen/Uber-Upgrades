@@ -6909,6 +6909,193 @@
 			"init"		"0.00"
 			"max"		"1.00"
 		}
+		"1692"
+		{
+			"name"		"chromatic weakness on crit"
+			"ref"		"chromatic weakness on crit"
+			"display"		"%.0f%%"
+			"attr_class"	"chromatic_weakness_on_crit"
+			"cost"		"0"
+			"value"		"1.0"
+			"init"		"0.00"
+			"max"		"1.00"
+		}
+		"1693"
+		{
+			"name"		"chromatic shield on crit"
+			"ref"		"chromatic shield on crit"
+			"display"		"%.0f%%"
+			"attr_class"	"chromatic_shield_on_crit"
+			"cost"		"0"
+			"value"		"1.0"
+			"init"		"0.00"
+			"max"		"1.00"
+		}
+		"1694"
+		{
+			"name"		"damage taken to focus"
+			"ref"		"damage taken to focus"
+			"display"		"%.0f%%"
+			"attr_class"	"damage_taken_to_focus"
+			"cost"		"0"
+			"value"		"1.0"
+			"init"		"0.00"
+			"max"		"1.00"
+		}
+		"1695"
+		{
+			"name"		"damage taken to metal"
+			"ref"		"damage taken to metal"
+			"display"		"%.0f%%"
+			"attr_class"	"damage_taken_to_metal"
+			"cost"		"0"
+			"value"		"1.0"
+			"init"		"0.00"
+			"max"		"1.00"
+		}
+		"1696"
+		{
+			"name"		"health regen to lifesteal"
+			"ref"		"health regen to lifesteal"
+			"display"		"%.0f%%"
+			"attr_class"	"health_regen_to_lifesteal"
+			"cost"		"0"
+			"value"		"1.0"
+			"init"		"0.00"
+			"max"		"1.00"
+		}
+		"1697"
+		{
+			"name"		"incoming heal to heal efficiency"
+			"ref"		"incoming heal to heal efficiency"
+			"display"		"%.0f%%"
+			"attr_class"	"incoming_heal_to_heal_efficiency"
+			"cost"		"0"
+			"value"		"1.0"
+			"init"		"0.00"
+			"max"		"1.00"
+		}
+		"1698"
+		{
+			"name"		"focus leech"
+			"ref"		"focus leech"
+			"display"		"%.0f%%"
+			"attr_class"	"focus_leech_pct"
+			"cost"		"0"
+			"value"		"1.0"
+			"init"		"0.00"
+			"max"		"1.00"
+		}
+		"1699"
+		{
+			"name"		"focus harvest on kill"
+			"ref"		"focus harvest on kill"
+			"display"		"%.0f%%"
+			"attr_class"	"focus_harvest_on_kill"
+			"cost"		"0"
+			"value"		"1.0"
+			"init"		"0.00"
+			"max"		"1.00"
+		}
+		"1700"
+		{
+			"name"		"upgrade effectiveness"
+			"ref"		"upgrade effectiveness"
+			"display"		"%.0f%%"
+			"attr_class"	"upgrade_effectiveness_mult"
+			"cost"		"0"
+			"value"		"1.0"
+			"init"		"1.00"
+			"max"		"1.00"
+		}
+		"1701"
+		{
+			"name"		"brace on hit percentage"
+			"ref"		"brace on hit percentage"
+			"display"		"%.0f%%"
+			"attr_class"	"brace_on_hit_percentage"
+			"cost"		"0"
+			"value"		"1.0"
+			"init"		"0.00"
+			"max"		"1.00"
+		}
+		"1702"
+		{
+			"name"		"brace percentage max"
+			"ref"		"brace percentage max"
+			"display"		"%.0f%%"
+			"attr_class"	"brace_percentage_max"
+			"cost"		"0"
+			"value"		"1.0"
+			"init"		"0.00"
+			"max"		"1.00"
+		}
+		"1703"
+		{
+			"name"		"critical rating"
+			"ref"		"critical rating"
+			"display"		"%.0f"
+			"attr_class"	"critical_rating"
+			"cost"		"0"
+			"value"		"1.0"
+			"init"		"0.00"
+			"max"		"1.00"
+		}
+		"1704"
+		{
+			"name"		"critical rating"
+			"ref"		"critical rating"
+			"display"		"%.0f"
+			"attr_class"	"critical_rating"
+			"cost"		"0"
+			"value"		"1.0"
+			"init"		"0.00"
+			"max"		"1.00"
+		}
+		"1705"
+		{
+			"name"		"critical block rating"
+			"ref"		"critical block rating"
+			"display"		"%.0f"
+			"attr_class"	"critical_block_rating"
+			"cost"		"0"
+			"value"		"1.0"
+			"init"		"0.00"
+			"max"		"1.00"
+		}
+		"1706"
+		{
+			"name"		"critical block rating"
+			"ref"		"critical block rating"
+			"display"		"%.0f"
+			"attr_class"	"critical_block_rating"
+			"cost"		"0"
+			"value"		"1.0"
+			"init"		"0.00"
+			"max"		"1.00"
+		}
+		"1707"
+		{
+			"name"		"damage bonus vs non health"
+			"ref"		"damage bonus vs non health"
+			"display"		"%.0f"
+			"attr_class"	"dmg_mult_vs_non_health"
+			"cost"		"0"
+			"value"		"1.0"
+			"init"		"1.00"
+			"max"		"1.00"
+		}
+		"1708"
+		{
+			"name"		"damage penetrates reductions"
+			"ref"		"damage penetrates reductions"
+			"display"		"%.0f%%"
+			"attr_class"	"dmg_dr_penetration"
+			"cost"		"0"
+			"value"		"1.0"
+			"init"		"0.00"
+			"max"		"1.00"
+		}
 		//Filler
 		"1900.0"
 		{

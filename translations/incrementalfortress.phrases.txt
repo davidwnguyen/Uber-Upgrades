@@ -1,5 +1,8 @@
 "Phrases"
 {
+	"chromatic weakness on crit"{
+		"en"		"Chromatic Weakness on Crit"
+	}
 	"convert health to damage reduction"{
 		"en"		"Convert Health Bonus to Damage Reduction"
 	}

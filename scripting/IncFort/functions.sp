@@ -3727,11 +3727,11 @@ GivePowerupDescription(int client, char[] name, int amount){
 	}
 	else if(StrEqual("resistance powerup", name)){
 		if(amount == 2){
-			CPrintToChat(client, "{community}Fray Powerup {default}| {lightcyan}Every 1s, avoid one hit taken. Refreshed on kill. +20%% movement speed.\nOn activation: gives +3s of defense and speed boost to you and nearby teammates.");
+			CPrintToChat(client, "{community}Fray Powerup {default}| {lightcyan}Every 1s, avoid one hit taken. Refreshed on kill. 1.2x movement speed.\nOn activation: gives +3s of defense and speed boost to you and nearby teammates.");
 		}else if(amount == 3){
 			CPrintToChat(client, "{community}Stronghold Powerup {default}| {lightcyan}1/2x damage taken, middle click to enter stronghold, completely immobilizing you but giving crit and status immunities with 1.33x healing. Nearby teammates get stronghold bonus.");
 		}else{
-			CPrintToChat(client, "{community}Resistance Powerup {default}| {lightcyan}1/2x damage taken. Immunity to crit.");
+			CPrintToChat(client, "{community}Resistance Powerup {default}| {lightcyan}1/2x damage taken. 1.5x critical block rating.");
 		}
 	}
 	else if(StrEqual("vampire powerup", name)){
@@ -4151,7 +4151,7 @@ stock float TF2_GetWeaponclassDPS(client, weapon)
 			}
 			else if(StrEqual(Classname,"tf_weapon_flamethrower",false))
 			{
-				weaponDPS = 170.0;
+				weaponDPS = 90.0;
 			}
 			else if(StrEqual(Classname,"tf_weapon_rocketlauncher_fireball",false))
 			{
