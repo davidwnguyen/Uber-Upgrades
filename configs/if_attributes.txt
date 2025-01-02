@@ -6465,7 +6465,7 @@
 			"name"		"dps inheritance ratio"
 			"ref"		"dps inheritance ratio"
 			"attr_class"	"dps_inheritance_ratio"
-			"display"		"%.0f"
+			"display"		"%.0f%%"
 			"cost"		"0"
 			"increase_ratio"	"0"
 			"value"		"0.1"
