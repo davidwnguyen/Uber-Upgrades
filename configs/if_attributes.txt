@@ -3716,11 +3716,11 @@
 		{
 			"name"		"stickybomb charge rate"
 			"ref"		"stickybomb charge rate"
-			"display"		"%.2f%%"
+			"display"		"%.0f%%"
 			"cost"		"175"
 			"value"		"-0.05"
 			"init"		"1"
-			"max"		"0.005"
+			"max"		"0.008"
 		}
 		"303"
 		{
