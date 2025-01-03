@@ -3649,7 +3649,7 @@
 			"optimizer_style"		"1"
 			"value"		"0.25"
 			"init"		"1"
-			"max"		"30"
+			"max"		"15"
 		}
 		"300.5"
 		{
@@ -3673,7 +3673,7 @@
 			"init"		"1.00"
 			"optimizer_style" "1"
 			"description"	"1:1 pure damage multiplier.\nIncreases in cost by +$165 per purchase."
-			"max"		"101.00"
+			"max"		"5.00"
 		}
 		"300.7"
 		{
@@ -4891,7 +4891,7 @@
 			"init"		"1"
 			"optimizer_style" "1"
 			"description"	"1:1 pure damage multiplier.\nIncreases in cost by +$40 per purchase."
-			"max"		"100"
+			"max"		"30"
 		}
 		"1509.5"
 		{

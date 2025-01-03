@@ -311,7 +311,8 @@
 			"preserve_attributes"	"1"
 			"classname"		"tf_weapon_crossbow"
 			"1"				"override projectile type;8.0"
-			"5"				"slow enemy on hit major;1.0"
+			"2"				"weapon fire rate;3.0"
+			"3"				"slow enemy on hit major;1.0"
 		}
 		"811" //Huo-long Heater
 		{
