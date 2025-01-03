@@ -1733,7 +1733,7 @@
 		{
 			"name"		"sticky arm time bonus"
 			"ref"		"sticky arm time bonus"
-			"display"		"%.2f"
+			"display"		"%.2fs"
 			"cost"		"300"
 			"value"		"-0.20"
 			"init"		"0.00"
@@ -3895,7 +3895,7 @@
 			"increase_ratio"	"0"
 			"value"		"0.25"
 			"init"		"1"
-			"max"		"1000000000"
+			"max"		"1000"
 		}
 		"328"
 		{
