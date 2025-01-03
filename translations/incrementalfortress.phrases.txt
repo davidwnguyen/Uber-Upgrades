@@ -547,7 +547,7 @@
 		"en"		"Knockback Resistance"
 	}
 	"Increased Overall Damage(T)"{
-		"en"		"Compensated Damage Bonus"
+		"en"		"Increased Overall Damage"
 	}
 	"Slow Resistance"{
 		"en"		"Slow Resistance"

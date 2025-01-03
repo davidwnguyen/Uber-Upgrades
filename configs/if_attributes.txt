@@ -3172,19 +3172,6 @@
 			"init"		"1.00"
 			"max"		"10.00"		
 		}
-		"242"
-		{
-			"name"		"damage mult 5"
-			"ref"		"Extra damage bonus"
-			"display"		"%.0f%%"
-			"increase_ratio"	"0.35"
-			"cost"		"1000"
-			"value"		"0.25"
-			"init"		"1.00"
-			"optimizer_style" "1"
-			"description"	"1:1 pure damage multiplier.\nIncreases in cost by +$350 per purchase."
-			"max"		"1001.0"	
-		}
 		"247"
 		{
 			"name"		"CARD: dmg taken from bullets reduced"
@@ -3706,12 +3693,13 @@
 			"name"		"damage mult 10"
 			"ref"		"Increased Overall Damage(T)"
 			"display"		"%.0f%%"
-			"cost"		"0"
-			"value"		"0.1"
+			"cost"		"650"
+			"increase_ratio"	"0.7"
+			"value"		"0.25"
 			"init"		"1.00"
 			"optimizer_style" "1"
 			"description"	"1:1 pure damage multiplier.\nIncreases in cost by +$455 per purchase."
-			"max"		"50.0"
+			"max"		"8.0"
 		}
 		"301"
 		{

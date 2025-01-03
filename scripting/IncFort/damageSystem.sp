@@ -69,9 +69,14 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 		{
 			bool isSentry = false;
 			if(IsValidEdict(inflictor)){
+				ShouldNotHome[inflictor][victim] = true;
 				char classname[32]; 
 				GetEdictClassname(inflictor, classname, sizeof(classname));
 				isSentry = StrEqual("obj_sentrygun", classname) || StrEqual("tf_projectile_sentryrocket", classname);
+
+				if(projectileHomingDegree[inflictor] > 0.0 && StrEqual(classname, "tf_projectile_flare")){
+					projectileHomingDegree[inflictor] = 0.0;
+				}
 			}
 
 			if(IsValidWeapon(weapon) && !isSentry)
@@ -384,8 +389,6 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 				checkRadiation(victim,attacker);
 			}
 		}
-		if(IsValidEdict(inflictor))
-			ShouldNotHome[inflictor][victim] = true;
 		if(damagetype == (DMG_RADIATION|DMG_DISSOLVE))//Radiation.
 		{
 			if(GetAttribute(attacker, "knockout powerup", 0.0) == 2)

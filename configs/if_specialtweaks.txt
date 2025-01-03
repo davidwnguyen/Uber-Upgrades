@@ -149,7 +149,7 @@
 			"gamestage"						"1"
 			"restriction"					"1"
 			"additive piercing damage"		"100"
-			"damage causes freeze"			"150"
+			"damage causes freeze"			"120"
 			"mult crit dmg"				"10.0"
 		}
 		"Fireball Volley"
@@ -174,7 +174,7 @@
 			"gamestage"						"1"
 			"restriction"					"1"
 			"additive piercing damage"		"10"
-			"damage causes freeze"			"200"
+			"damage causes freeze"			"140"
 			"mult crit dmg"				"5.0"
 			"bleeding duration"				"5"
 			"projectile penetration"		"1"
