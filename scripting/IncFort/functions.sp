@@ -1438,11 +1438,11 @@ RespawnEffect(client)
 	fl_CurrentFocus[client] = fl_MaxFocus[client];
 	LightningEnchantmentDuration[client] = 0.0;
 	DarkmoonBladeDuration[client] = 0.0;
-	TF2Attrib_SetByName(client,"deploy time decreased", 0.0);
 	TF2Attrib_SetByName(client,"airblast_pushback_no_stun", 1.0);
 	TF2Attrib_SetByName(client,"airblast_destroy_projectile", 1.0);
 	TF2Attrib_SetByName(client,"ignores other projectiles", 1.0);
 	TF2Attrib_SetByName(client,"penetrate teammates", 1.0);
+	TF2Attrib_SetByName(client,"dmg pierces resists absorbs", 1.0);
 	TF2Attrib_SetByName(client,"no damage view flinch", 1.0);
 	CreateTimer(0.2,GiveMaxHealth,GetClientUserId(client));
 	CreateTimer(0.2,GiveMaxAmmo,GetClientUserId(client));
@@ -1944,6 +1944,7 @@ refreshUpgrades(client, slot)
 			TF2Attrib_RemoveByName(client,"blast dmg to self increased");
 			TF2Attrib_RemoveByName(client,"damage mult 1");
 			TF2Attrib_RemoveByName(client,"fire rate penalty");
+			TF2Attrib_RemoveByName(client,"damage penetrates reductions");
 			TF2Attrib_RemoveByName(client,"major move speed bonus");
 			TF2Attrib_RemoveByName(client,"self dmg push force increased");
 			TF2Attrib_RemoveByName(client,"SET BONUS: chance of hunger decrease");
@@ -1998,6 +1999,7 @@ refreshUpgrades(client, slot)
 
 				if(precisionPowerupValue == 3){
 					TF2Attrib_SetByName(client,"fire rate penalty", 4.0);
+					TF2Attrib_SetByName(client,"damage penetrates reductions", 0.35);
 				}
 			}
 			
@@ -3747,7 +3749,7 @@ GivePowerupDescription(int client, char[] name, int amount){
 		if(amount == 2){
 			CPrintToChat(client, "{community}Aimless Powerup {default}| {lightcyan}Projectiles randomly sway and deal up to +300%% damage based on distance of landing. Note that only projectiles that sway deal extra damage.");
 		}else if(amount == 3){
-			CPrintToChat(client, "{community}Railgun Powerup {default}| {lightcyan}All weapons have 4x slower fire rate, but 4x damage.");
+			CPrintToChat(client, "{community}Railgun Powerup {default}| {lightcyan}All weapons have 4x slower fire rate, but 4x damage. Grants +35%% conditional damage reduction pierce.");
 		}else{
 			CPrintToChat(client, "{community}Precision Powerup {default}| {lightcyan}+100%% projectile speed, charge rate, and no spread. 1.35x damage and hitscan can headshot. Certain projectiles will home aggressively.");
 		}
@@ -3822,6 +3824,70 @@ GivePowerupDescription(int client, char[] name, int amount){
 			CPrintToChat(client, "{community}Insulator Powerup {default}| {lightcyan}Nullifies all ailments and buffs (You do not recieve any buffs or ailments, and cancel enemy buffs on hit).");
 		}else{
 			CPrintToChat(client, "{community}Inverter Powerup {default}| {lightcyan}0.8x incoming damage taken. Flips the effects of ailments (eg: jarate -> battalion's backup)");
+		}
+	}
+	else if(StrEqual("glass powerup", name)){
+		if(amount == 2){
+			CPrintToChat(client, "{community}Shrike Powerup {default}| {lightcyan}Enter Shrike for 15s upon using the given ability. While in Shrike:");
+			CPrintToChat(client, "{lightcyan}Deal unhealable damage & fully pierce conditional damage reductions. For every 30%% of HP you deal to a victim, attack another time. Every attack decreases your duration by 1s.");
+			CPrintToChat(client, "{lightcyan}Decreases your max health by 40%% every time you leave, triggering a 5s cooldown.");
+		}else if(amount == 3){
+			CPrintToChat(client, "{community}Chaotic Powerup {default}| {lightcyan}Deal 0.33x to 3x dmg randomly on a gaussian dist.");
+			CPrintToChat(client, "{lightcyan}Every 5 hits, guarantee a min or max roll on damage.");
+			CPrintToChat(client, "{lightcyan}Every 7 hits, deal an additional attack.");
+			CPrintToChat(client, "{lightcyan}Every 11 hits, deal self damage & deal 13%% of the missing health of the victim.");
+		}else{
+			CPrintToChat(client, "{community}Glass Powerup {default}| {lightcyan}2x incoming damage taken. Full conditional damage reduction pierce. 80%% of HP Bonus -> DR. +50%% damage.");
+		}
+	}
+	else if(StrEqual("diffusion powerup", name)){
+		if(amount == 2){
+			CPrintToChat(client, "{community}Chromatic Powerup {default}| {lightcyan}Converts damage taken to your highest resistance type.");
+			CPrintToChat(client, "{lightcyan}Fire grants afterburn immunity, blast grants damage spreading, & bullet gives double crit block.");
+		}else if(amount == 3){
+			CPrintToChat(client, "{community}Adaptive Powerup {default}| {lightcyan}Upon taking damage from a damage type, swap to that resistance");
+			CPrintToChat(client, "{lightcyan}and grant +3%% resistance per hit, stacking up to -90%% damage taken.");
+		}else{
+			CPrintToChat(client, "{community}Diffusion Powerup {default}| {lightcyan}Turns all damage into damage taken over 20s. 1.75x health regen.");
+		}
+	}
+	else if(StrEqual("balance powerup", name)){
+		if(amount == 2){
+			CPrintToChat(client, "{community}Counterweight Powerup {default}| {lightcyan}The complimentary stat of your highest invested stat is also equal magnitude.");
+		}else if(amount == 3){
+			CPrintToChat(client, "{community}Fortune Powerup {default}| {lightcyan}Rolls chance related mechanics twice, favoring the more advantageous outcome.");
+		}else{
+			CPrintToChat(client, "{community}Balance Powerup {default}| {lightcyan}+20%% fire rate, reload rate, damage, ammo, health, defense, move speed, focus, and health sustain.");
+		}
+	}
+	else if(StrEqual("catalyst powerup", name)){
+		if(amount == 2){
+			CPrintToChat(client, "{community}Conduit Powerup {default}| {lightcyan}Every buff applied to you is also applied to the entire team. 0.66x dmg taken.");
+		}else if(amount == 3){
+			CPrintToChat(client, "{community}Empowerment Powerup {default}| {lightcyan}Gives the skill Empowerment:");
+			CPrintToChat(client, "{lightcyan}Clears buffs to nearby enemies and debuffs to nearby teammates. (400 HU)");
+			CPrintToChat(client, "{lightcyan}Grants a temporary buff that stores +20 flat damage per every debuff and buff consumed.");
+		}else{
+			CPrintToChat(client, "{community}Catalyst Powerup {default}| {lightcyan}Grants 1%% focus & health leech on hit, which spread to nearby teammates. 0.66x dmg taken.");
+		}
+	}
+	else if(StrEqual("warlock powerup", name)){
+		if(amount == 2){
+			CPrintToChat(client, "{community}Elementalist Powerup {default}| {lightcyan}For every different spell you cast within 15s, gain +25%% arcane damage.");
+			CPrintToChat(client, "{lightcyan}Fire spells apply lightning weakness, lightning spells apply cold weakness, and cold spells apply fire weakness. (1.3x dmg taken)");
+		}else if(amount == 3){
+			CPrintToChat(client, "{community}Archmage Powerup {default}| {lightcyan}For every 100 max focus you have, you gain +5 flat damage on your spells. Adds +5%% max focus cost to spells.");
+		}else{
+			CPrintToChat(client, "{community}Warlock Powerup {default}| {lightcyan}1.75x focus regeneration, 1.65x arcane damage, 0.66x spell cost & cooldown.");
+		}
+	}
+	else if(StrEqual("sanctuary powerup", name)){
+		if(amount == 2){
+			CPrintToChat(client, "{community}Wellspring Powerup {default}| {lightcyan}In a 800 HU radius, 50%% of lost health and focus is recouped for teammates over 5s. 0.66x damage taken.");
+		}else if(amount == 3){
+			CPrintToChat(client, "{community}Rejuvenation Powerup {default}| {lightcyan}For every 500 max health, give +1 damage reduction rating and +10%% health regeneration.");
+		}else{
+			CPrintToChat(client, "{community}Sanctuary Powerup {default}| {lightcyan}1.75x focus regeneration, 1.65x arcane damage, 0.66x spell cost & cooldown.");
 		}
 	}
 }
@@ -4640,6 +4706,17 @@ public void RespawnPlayer(int ref){
 	int client = EntRefToEntIndex(ref);
 	if(IsValidClient3(client))
 		TF2_RespawnPlayer(client);
+}
+
+float ConsumePierce(float res, float& pierce){
+	if(pierce > 1-res){
+		pierce -= 1-res;
+		res = 1.0;
+	}else{
+		res += pierce;
+		pierce = 0.0;
+	}
+	return res;
 }
 
 /*public void theBoxness(int client, int melee, const float pos[3], const float angle[3]){

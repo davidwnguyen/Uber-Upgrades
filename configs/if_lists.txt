@@ -81,21 +81,27 @@
 				"Attr3"		"Precision Powerup"
 				"Attr4"		"Knockout Powerup"
 				"Attr5"		"Supernova Powerup"
+				"Attr6"		"Glass Powerup"
 			}
 			"!Defensive Powerups"
 			{
 				"Attr0"		"Resistance Powerup"
 				"Attr1"		"Regeneration Powerup"
 				"Attr2"		"Inverter Powerup"
+				"Attr3"		"Diffusion Powerup"
 			}
 			"!Support Powerups"
 			{
 				"Attr0"		"King Powerup"
 				"Attr1"		"Plague Powerup"
+				"Attr2"		"Catalyst Powerup"
+				"Attr3"		"Sanctuary Powerup"
 			}
 			"!Misc. Powerups"
 			{
 				"Attr0"		"Agility Powerup"
+				"Attr1"		"Balance Powerup"
+				"Attr2"		"Warlock Powerup"
 			}
 		}
 	}
@@ -180,21 +186,27 @@
 				"Attr3"		"Precision Powerup"
 				"Attr4"		"Knockout Powerup"
 				"Attr5"		"Supernova Powerup"
+				"Attr6"		"Glass Powerup"
 			}
 			"!Defensive Powerups"
 			{
 				"Attr0"		"Resistance Powerup"
 				"Attr1"		"Regeneration Powerup"
 				"Attr2"		"Inverter Powerup"
+				"Attr3"		"Diffusion Powerup"
 			}
 			"!Support Powerups"
 			{
 				"Attr0"		"King Powerup"
 				"Attr1"		"Plague Powerup"
+				"Attr2"		"Catalyst Powerup"
+				"Attr3"		"Sanctuary Powerup"
 			}
 			"!Misc. Powerups"
 			{
 				"Attr0"		"Agility Powerup"
+				"Attr1"		"Balance Powerup"
+				"Attr2"		"Warlock Powerup"
 			}
 		}
 	}
@@ -279,21 +291,27 @@
 				"Attr3"		"Precision Powerup"
 				"Attr4"		"Knockout Powerup"
 				"Attr5"		"Supernova Powerup"
+				"Attr6"		"Glass Powerup"
 			}
 			"!Defensive Powerups"
 			{
 				"Attr0"		"Resistance Powerup"
 				"Attr1"		"Regeneration Powerup"
 				"Attr2"		"Inverter Powerup"
+				"Attr3"		"Diffusion Powerup"
 			}
 			"!Support Powerups"
 			{
 				"Attr0"		"King Powerup"
 				"Attr1"		"Plague Powerup"
+				"Attr2"		"Catalyst Powerup"
+				"Attr3"		"Sanctuary Powerup"
 			}
 			"!Misc. Powerups"
 			{
 				"Attr0"		"Agility Powerup"
+				"Attr1"		"Balance Powerup"
+				"Attr2"		"Warlock Powerup"
 			}
 		}
 	}
@@ -377,21 +395,27 @@
 				"Attr3"		"Precision Powerup"
 				"Attr4"		"Knockout Powerup"
 				"Attr5"		"Supernova Powerup"
+				"Attr6"		"Glass Powerup"
 			}
 			"!Defensive Powerups"
 			{
 				"Attr0"		"Resistance Powerup"
 				"Attr1"		"Regeneration Powerup"
 				"Attr2"		"Inverter Powerup"
+				"Attr3"		"Diffusion Powerup"
 			}
 			"!Support Powerups"
 			{
 				"Attr0"		"King Powerup"
 				"Attr1"		"Plague Powerup"
+				"Attr2"		"Catalyst Powerup"
+				"Attr3"		"Sanctuary Powerup"
 			}
 			"!Misc. Powerups"
 			{
 				"Attr0"		"Agility Powerup"
+				"Attr1"		"Balance Powerup"
+				"Attr2"		"Warlock Powerup"
 			}
 		}
 	}
@@ -476,21 +500,27 @@
 				"Attr3"		"Precision Powerup"
 				"Attr4"		"Knockout Powerup"
 				"Attr5"		"Supernova Powerup"
+				"Attr6"		"Glass Powerup"
 			}
 			"!Defensive Powerups"
 			{
 				"Attr0"		"Resistance Powerup"
 				"Attr1"		"Regeneration Powerup"
 				"Attr2"		"Inverter Powerup"
+				"Attr3"		"Diffusion Powerup"
 			}
 			"!Support Powerups"
 			{
 				"Attr0"		"King Powerup"
 				"Attr1"		"Plague Powerup"
+				"Attr2"		"Catalyst Powerup"
+				"Attr3"		"Sanctuary Powerup"
 			}
 			"!Misc. Powerups"
 			{
 				"Attr0"		"Agility Powerup"
+				"Attr1"		"Balance Powerup"
+				"Attr2"		"Warlock Powerup"
 			}
 		}
 	}
@@ -575,21 +605,27 @@
 				"Attr3"		"Precision Powerup"
 				"Attr4"		"Knockout Powerup"
 				"Attr5"		"Supernova Powerup"
+				"Attr6"		"Glass Powerup"
 			}
 			"!Defensive Powerups"
 			{
 				"Attr0"		"Resistance Powerup"
 				"Attr1"		"Regeneration Powerup"
 				"Attr2"		"Inverter Powerup"
+				"Attr3"		"Diffusion Powerup"
 			}
 			"!Support Powerups"
 			{
 				"Attr0"		"King Powerup"
 				"Attr1"		"Plague Powerup"
+				"Attr2"		"Catalyst Powerup"
+				"Attr3"		"Sanctuary Powerup"
 			}
 			"!Misc. Powerups"
 			{
 				"Attr0"		"Agility Powerup"
+				"Attr1"		"Balance Powerup"
+				"Attr2"		"Warlock Powerup"
 			}
 		}
 	}
@@ -673,21 +709,27 @@
 				"Attr3"		"Precision Powerup"
 				"Attr4"		"Knockout Powerup"
 				"Attr5"		"Supernova Powerup"
+				"Attr6"		"Glass Powerup"
 			}
 			"!Defensive Powerups"
 			{
 				"Attr0"		"Resistance Powerup"
 				"Attr1"		"Regeneration Powerup"
 				"Attr2"		"Inverter Powerup"
+				"Attr3"		"Diffusion Powerup"
 			}
 			"!Support Powerups"
 			{
 				"Attr0"		"King Powerup"
 				"Attr1"		"Plague Powerup"
+				"Attr2"		"Catalyst Powerup"
+				"Attr3"		"Sanctuary Powerup"
 			}
 			"!Misc. Powerups"
 			{
 				"Attr0"		"Agility Powerup"
+				"Attr1"		"Balance Powerup"
+				"Attr2"		"Warlock Powerup"
 			}
 		}
 	}
@@ -774,21 +816,27 @@
 				"Attr3"		"Precision Powerup"
 				"Attr4"		"Knockout Powerup"
 				"Attr5"		"Supernova Powerup"
+				"Attr6"		"Glass Powerup"
 			}
 			"!Defensive Powerups"
 			{
 				"Attr0"		"Resistance Powerup"
 				"Attr1"		"Regeneration Powerup"
 				"Attr2"		"Inverter Powerup"
+				"Attr3"		"Diffusion Powerup"
 			}
 			"!Support Powerups"
 			{
 				"Attr0"		"King Powerup"
 				"Attr1"		"Plague Powerup"
+				"Attr2"		"Catalyst Powerup"
+				"Attr3"		"Sanctuary Powerup"
 			}
 			"!Misc. Powerups"
 			{
 				"Attr0"		"Agility Powerup"
+				"Attr1"		"Balance Powerup"
+				"Attr2"		"Warlock Powerup"
 			}
 		}
 	}
@@ -876,21 +924,27 @@
 				"Attr3"		"Precision Powerup"
 				"Attr4"		"Knockout Powerup"
 				"Attr5"		"Supernova Powerup"
+				"Attr6"		"Glass Powerup"
 			}
 			"!Defensive Powerups"
 			{
 				"Attr0"		"Resistance Powerup"
 				"Attr1"		"Regeneration Powerup"
 				"Attr2"		"Inverter Powerup"
+				"Attr3"		"Diffusion Powerup"
 			}
 			"!Support Powerups"
 			{
 				"Attr0"		"King Powerup"
 				"Attr1"		"Plague Powerup"
+				"Attr2"		"Catalyst Powerup"
+				"Attr3"		"Sanctuary Powerup"
 			}
 			"!Misc. Powerups"
 			{
 				"Attr0"		"Agility Powerup"
+				"Attr1"		"Balance Powerup"
+				"Attr2"		"Warlock Powerup"
 			}
 		}
 	}
@@ -2427,7 +2481,7 @@
 	}
 	"vacc"
 	{
-		"special_tweaks_listid"		"2"
+		"special_tweaks_listid"		"1"
 		"Medigun Specific upgrades"
 		{
 			"Attr7"		"Medigun Heal Range Bonus"
@@ -2439,12 +2493,6 @@
 			"Attr6"		"ubercharge rate multiplier"
 			"Attr8"		"Damage Multiplier for healed player"
 			"Attr9"		"Healing for Buildings"
-		}
-		"Vaccinator Upgrades"
-		{
-			"Attr0"		"medigun bullet resist passive"
-			"Attr1"		"medigun blast resist passive"
-			"Attr2"		"medigun fire resist passive"
 		}
 		"Special Tweaks"
 		{

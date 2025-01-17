@@ -690,6 +690,24 @@
 	"Supernova Powerup"{
 		"en"		"Supernova Powerup"
 	}
+	"Glass Powerup"{
+		"en"		"Glass Powerup"
+	}
+	"Diffusion Powerup"{
+		"en"		"Diffusion Powerup"
+	}
+	"Catalyst Powerup"{
+		"en"		"Catalyst Powerup"
+	}
+	"Sanctuary Powerup"{
+		"en"		"Sanctuary Powerup"
+	}
+	"Balance Powerup"{
+		"en"		"Balance Powerup"
+	}
+	"Warlock Powerup"{
+		"en"		"Warlock Powerup"
+	}
 	"fire rate bonus(fortified)"{
 		"en"		"Fire Rate Bonus"
 	}

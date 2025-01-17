@@ -423,40 +423,48 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 			miniCritStatusAttacker[victim] = 0.0;
 		}
 
+		float pierce = 0.0;
+		if(IsValidWeapon(weapon))
+			pierce = GetAttribute(weapon, "damage penetrates reductions", 0.0);
+
+		if(TF2_IsPlayerInCondition(victim, TFCond_DefenseBuffed) && TF2_IsPlayerInCondition(victim, TFCond_DefenseBuffNoCritBlock))
+			damage *= ConsumePierce(0.65, pierce);
+
+		ApplyVaccinatorDamageReduction(victim, damagetype, damage, pierce);
+
 		if(GetAttribute(victim, "resistance powerup", 0.0) == 1 || GetAttribute(victim, "resistance powerup", 0.0) == 3)
-			damage *= 0.5;
+			damage *= ConsumePierce(0.5, pierce);
 
 		//Just in case in the future I ever want multiple powerups...
 		if(GetAttribute(victim, "revenge powerup", 0.0) == 1)
-			damage *= 0.8;
+			damage *= ConsumePierce(0.8, pierce);
 
 		if(GetAttribute(victim, "knockout powerup", 0.0) == 1)
-			damage *= 0.8;
+			damage *= ConsumePierce(0.8, pierce);
 		else if(GetAttribute(victim, "knockout powerup", 0.0) == 2)
-			damage *= 0.66;
+			damage *= ConsumePierce(0.66, pierce);
 
 		if(GetAttribute(victim, "king powerup", 0.0) == 1)
-			damage *= 0.8;
+			damage *= ConsumePierce(0.8, pierce);
 		
 		if(GetAttribute(victim, "supernova powerup", 0.0) == 1)
-			damage *= 0.8;
+			damage *= ConsumePierce(0.8, pierce);
 
 		if(GetAttribute(victim, "inverter powerup", 0.0) == 1)
-			damage *= 0.8;
+			damage *= ConsumePierce(0.8, pierce);
 		else if(GetAttribute(victim, "inverter powerup", 0.0) == 2)
-			damage *= 0.5;
+			damage *= ConsumePierce(0.5, pierce);
 
 		if(GetAttribute(victim, "regeneration powerup", 0.0) == 1)
-			damage *= 0.75;
+			damage *= ConsumePierce(0.75, pierce);
 
 		if(GetAttribute(victim, "vampire powerup", 0.0) == 1)
-			damage *= 0.75;
+			damage *= ConsumePierce(0.75, pierce);
 
 		//This is actually valid.
-		if(1 <= GetAttribute(victim, "plague powerup", 0.0) <= 2){
-			damage *= 0.75;
-		}
-		
+		if(1 <= GetAttribute(victim, "plague powerup", 0.0) <= 2)
+			damage *= ConsumePierce(0.75, pierce);
+
 		if(TF2_IsPlayerInCondition(attacker, TFCond_Plague))
 		{
 			int plagueInflictor = TF2Util_GetPlayerConditionProvider(attacker, TFCond_Plague);
@@ -1071,7 +1079,7 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 	if(!IsOnDifferentTeams(victim, attacker))
 		return damage;
 
-	damage += GetAttribute(attacker, "additive damage bonus", 0.0);
+	damage += TF2Attrib_HookValueInt(0, "additive_damage", attacker);
 	if(IsValidWeapon(weapon)){
 		if(GetAttribute(weapon, "damage reduction to additive damage", 0.0) > 0.0)
 			damage += GetAttribute(attacker, "tool escrow until date", 0.0) * GetAttribute(attacker, "is throwable chargeable", 0.0) * GetAttribute(weapon, "damage reduction to additive damage", 0.0)
@@ -1747,6 +1755,28 @@ public void applyDamageAffinities(&victim, &attacker, &inflictor, float &damage,
 			Address dmgTakenMultAddr = TF2Attrib_GetByName(victim, "arcane damage taken reduced");
 			if(dmgTakenMultAddr != Address_Null)
 				damage *= TF2Attrib_GetValue(dmgTakenMultAddr);
+		}
+	}
+}
+
+void ApplyVaccinatorDamageReduction(int victim, int damagetype, float& damage, float& pierce){
+	if(damagetype & DMG_BLAST){
+		if(TF2_IsPlayerInCondition(victim, TFCond_UberBlastResist)){
+			damage *= ConsumePierce(0.25, pierce);
+		}else if(TF2_IsPlayerInCondition(victim, TFCond_SmallBlastResist)){
+			damage *= ConsumePierce(0.9, pierce);
+		}
+	}else if(damagetype & DMG_BURN | DMG_IGNITE){
+		if(TF2_IsPlayerInCondition(victim, TFCond_UberFireResist)){
+			damage *= ConsumePierce(0.25, pierce);
+		}else if(TF2_IsPlayerInCondition(victim, TFCond_SmallFireResist)){
+			damage *= ConsumePierce(0.9, pierce);
+		}
+	}else if(damagetype & DMG_BULLET){
+		if(TF2_IsPlayerInCondition(victim, TFCond_UberBulletResist)){
+			damage *= ConsumePierce(0.25, pierce);
+		}else if(TF2_IsPlayerInCondition(victim, TFCond_SmallBulletResist)){
+			damage *= ConsumePierce(0.9, pierce);
 		}
 	}
 }
