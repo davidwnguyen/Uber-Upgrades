@@ -322,22 +322,16 @@ public Action:Timer_FixedVariables(Handle timer)
 			{
 				Format(ArmorLeft, sizeof(ArmorLeft), "%s\nFocus  | %.0f / %.0f", ArmorLeft, fl_CurrentFocus[client],fl_MaxFocus[client]); 
 				char spellHUD[1024]
-				Format(spellHUD, sizeof(spellHUD), "Current Spells Active | \n");
+				Format(spellHUD, sizeof(spellHUD), "Current Spells: \n");
 				int activeSpells = 0;
-				int attunement = 1;
-				Address attuneActive = TF2Attrib_GetByName(client, "arcane attunement slots");
-				if(attuneActive != Address_Null)
+				for(int i = 0;i<Max_Attunement_Slots;++i)
 				{
-					attunement += RoundToNearest(TF2Attrib_GetValue(attuneActive));
-				}
-				for(int i = 0;i<Max_Attunement_Slots && attunement > activeSpells;++i)
-				{
-					if(AttunedSpells[client][i] != 0.0)
+					if(AttunedSpells[client][i] != 0)
 					{
 						activeSpells++;
 						int spellID = RoundToNearest(AttunedSpells[client][i]-1.0)
 						char spellnum[64]
-						Format(spellnum, sizeof(spellnum),"%i - %s | Cooldown %.1f\n", i+1, SpellList[spellID], SpellCooldowns[client][i]);
+						Format(spellnum, sizeof(spellnum),"%i - %s | %.1fs\n", i+1, SpellList[spellID], SpellCooldowns[client][i]);
 						StrCat(spellHUD,sizeof(spellHUD),spellnum);
 					}
 				}

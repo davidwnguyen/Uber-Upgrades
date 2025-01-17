@@ -38,7 +38,7 @@
 #define WCNAMELISTSIZE 100
 #define MAX_TWEAKS 60
 #define NB_WEAPONS 50
-#define Max_Attunement_Slots 10
+#define Max_Attunement_Slots 7
 #define MAX_STAGES 5
 
 //Change to tickrate of how your server operates

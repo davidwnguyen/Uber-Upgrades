@@ -286,6 +286,7 @@ int snowstormParticle[MAXPLAYERS+1];
 int tagTeamTarget[MAXPLAYERS+1];
 int enragedKills[MAXPLAYERS+1];
 int stickiesDetonated[MAXPLAYERS+1];
+int AttunedSpells[MAXPLAYERS+1][Max_Attunement_Slots];
 
 //Floats
 float currentGameTime
@@ -314,7 +315,6 @@ float MadmilkDuration[MAXPLAYERS+1];
 float fl_MaxFocus[MAXPLAYERS+1];
 float fl_CurrentFocus[MAXPLAYERS+1];
 float fl_RegenFocus[MAXPLAYERS+1];
-float AttunedSpells[MAXPLAYERS+1][Max_Attunement_Slots];
 float SpellCooldowns[MAXPLAYERS+1][Max_Attunement_Slots];
 float ArcanePower[MAXPLAYERS+1];
 float ArcaneDamage[MAXPLAYERS+1];

@@ -3636,7 +3636,7 @@ public OnClientDisconnect(client)
 	int i;
 	for(i = 0; i < Max_Attunement_Slots; ++i)
 	{
-		AttunedSpells[client][i] = 0.0;
+		AttunedSpells[client][i] = 0;
 	}
 	for(i = 1;i<=MaxClients;++i){
 		isTagged[i][client] = false;
@@ -3660,7 +3660,7 @@ public OnClientPutInServer(client)
 	canBypassRestriction[client] = false;
 	for(int i = 0; i < Max_Attunement_Slots; ++i)
 	{
-		AttunedSpells[client][i] = 0.0;
+		AttunedSpells[client][i] = 0;
 	}
 	
 	if(!b_Hooked[client])
@@ -3823,7 +3823,7 @@ public Event_PlayerChangeClass(Handle event, const char[] name, bool:dontBroadca
 			}
 			for(int i = 0; i < Max_Attunement_Slots; ++i)
 			{
-				AttunedSpells[client][i] = 0.0;
+				AttunedSpells[client][i] = 0;
 			}
 		}
 	}

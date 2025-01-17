@@ -43,7 +43,6 @@
 				"Attr2"		"Focus Regeneration"
 				"Attr3"		"Arcane Power"
 				"Attr4"		"Arcane Damage"
-				"Attr5"		"Attunement Slots"
 				"Attr6"		"Arcane Cooldown Reduction"
 			}
 			"!Tier 1 Arcane Spells"
@@ -148,7 +147,6 @@
 				"Attr2"		"Focus Regeneration"
 				"Attr3"		"Arcane Power"
 				"Attr4"		"Arcane Damage"
-				"Attr5"		"Attunement Slots"
 				"Attr6"		"Arcane Cooldown Reduction"
 			}
 			"!Tier 1 Arcane Spells"
@@ -253,7 +251,6 @@
 				"Attr2"		"Focus Regeneration"
 				"Attr3"		"Arcane Power"
 				"Attr4"		"Arcane Damage"
-				"Attr5"		"Attunement Slots"
 				"Attr6"		"Arcane Cooldown Reduction"
 			}
 			"!Tier 1 Arcane Spells"
@@ -357,7 +354,6 @@
 				"Attr2"		"Focus Regeneration"
 				"Attr3"		"Arcane Power"
 				"Attr4"		"Arcane Damage"
-				"Attr5"		"Attunement Slots"
 				"Attr6"		"Arcane Cooldown Reduction"
 			}
 			"!Tier 1 Arcane Spells"
@@ -462,7 +458,6 @@
 				"Attr2"		"Focus Regeneration"
 				"Attr3"		"Arcane Power"
 				"Attr4"		"Arcane Damage"
-				"Attr5"		"Attunement Slots"
 				"Attr6"		"Arcane Cooldown Reduction"
 			}
 			"!Tier 1 Arcane Spells"
@@ -567,7 +562,6 @@
 				"Attr2"		"Focus Regeneration"
 				"Attr3"		"Arcane Power"
 				"Attr4"		"Arcane Damage"
-				"Attr5"		"Attunement Slots"
 				"Attr6"		"Arcane Cooldown Reduction"
 			}
 			"!Tier 1 Arcane Spells"
@@ -671,7 +665,6 @@
 				"Attr2"		"Focus Regeneration"
 				"Attr3"		"Arcane Power"
 				"Attr4"		"Arcane Damage"
-				"Attr5"		"Attunement Slots"
 				"Attr6"		"Arcane Cooldown Reduction"
 			}
 			"!Tier 1 Arcane Spells"
@@ -778,15 +771,14 @@
 				"Attr2"		"Focus Regeneration"
 				"Attr3"		"Arcane Power"
 				"Attr4"		"Arcane Damage"
-				"Attr5"		"Attunement Slots"
 				"Attr6"		"Arcane Cooldown Reduction"
 			}
 			"!Tier 1 Arcane Spells"
 			{
 				"Attr1"		"Arcane - Zap"
-				"Attr2"		"Arcane - Blacksky Eye"
-				"Attr3"		"Arcane - Lightning Strike"
-				"Attr4"		"Arcane - Healing Aura"
+				"Attr2"		"Arcane - Lightning Strike"
+				"Attr3"		"Arcane - Healing Aura"
+				"Attr4"		"Arcane - Blacksky Eye"
 				"Attr5"		"Arcane - Darkmoon Blade"
 				"Attr6"		"Arcane - Mark-For-Death"
 			}
@@ -886,7 +878,6 @@
 				"Attr2"		"Focus Regeneration"
 				"Attr3"		"Arcane Power"
 				"Attr4"		"Arcane Damage"
-				"Attr5"		"Attunement Slots"
 				"Attr6"		"Arcane Cooldown Reduction"
 			}
 			"!Tier 1 Arcane Spells"

@@ -499,7 +499,7 @@ public void OnPluginStart()
 		CurrencyOwned[client] = (StartMoney + additionalstartmoney);
 		
 		for(int i = 0; i < Max_Attunement_Slots; ++i){
-			AttunedSpells[client][i] = 0.0;
+			AttunedSpells[client][i] = 0;
 		}
 		CreateTimer(0.2, ClChangeClassTimer, GetClientUserId(client));
 	}

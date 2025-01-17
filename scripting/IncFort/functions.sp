@@ -713,7 +713,7 @@ CheckForAttunement(client)
 	bool flag = false;
 	for(int i = 0;i<Max_Attunement_Slots;++i)
 	{
-		if(AttunedSpells[client][i] != 0.0)
+		if(AttunedSpells[client][i] != 0)
 		{
 			flag = true;
 			break;
@@ -962,7 +962,7 @@ public ResetClientUpgrade_slot(client, slot)
 		GiveNewUpgradedWeapon_(client, slot)
 		for(int i = 0; i < Max_Attunement_Slots; ++i)
 		{
-			AttunedSpells[client][i] = 0.0;
+			AttunedSpells[client][i] = 0;
 		}
 	}
 }
@@ -1659,261 +1659,23 @@ refreshUpgrades(client, slot)
 		}
 		if(slot == 4)
 		{
-			bool isUsed[32];
+			int arcaneBitwise = TF2Attrib_HookValueInt(0, "arcane_spells_1", client);
+			int arcaneSlot = 0;
+			//Clear out attuned spells
 			for(int i = 0; i<Max_Attunement_Slots;++i)
 			{
-				AttunedSpells[client][i] = 0.0;
-				Address zapActive = TF2Attrib_GetByName(client, "arcane zap");
-				Address lightningActive = TF2Attrib_GetByName(client, "arcane lightning strike");
-				Address healingAuraActive = TF2Attrib_GetByName(client, "arcane projected healing");
-				Address callBeyondActive = TF2Attrib_GetByName(client, "arcane a call beyond");
-				Address blackskyEyeActive = TF2Attrib_GetByName(client, "arcane blacksky eye");
-				Address sunlightSpearActive = TF2Attrib_GetByName(client, "arcane sunlight spear");
-				Address lightningenchantmentActive = TF2Attrib_GetByName(client, "arcane lightning enchantment");
-				Address snapfreezeActive = TF2Attrib_GetByName(client, "arcane snap freeze");
-				Address arcaneprisonActive = TF2Attrib_GetByName(client, "arcane prison");
-				Address darkmoonbladeActive = TF2Attrib_GetByName(client, "arcane darkmoon blade");
-				if(zapActive != Address_Null && !isUsed[1])
-				{
-					if(TF2Attrib_GetValue(zapActive) > 0.1)
-					{
-						AttunedSpells[client][i] = 1.0;
-						isUsed[1] = true
-						continue;
-					}
-				}
-				if(lightningActive != Address_Null && !isUsed[2])
-				{
-					if(TF2Attrib_GetValue(lightningActive) > 0.1)
-					{
-						AttunedSpells[client][i] = 2.0;
-						isUsed[2] = true
-						continue;
-					}
-				}
-				if(healingAuraActive != Address_Null && !isUsed[3])
-				{
-					if(TF2Attrib_GetValue(healingAuraActive) > 0.1)
-					{
-						AttunedSpells[client][i] = 3.0;
-						isUsed[3] = true
-						continue;
-					}
-				}
-				if(callBeyondActive != Address_Null && !isUsed[4])
-				{
-					if(TF2Attrib_GetValue(callBeyondActive) > 0.1)
-					{
-						AttunedSpells[client][i] = 4.0;
-						isUsed[4] = true
-						continue;
-					}
-				}
-				if(blackskyEyeActive != Address_Null && !isUsed[5])
-				{
-					if(TF2Attrib_GetValue(blackskyEyeActive) > 0.1)
-					{
-						AttunedSpells[client][i] = 5.0;
-						isUsed[5] = true
-						continue;
-					}
-				}
-				if(sunlightSpearActive != Address_Null && !isUsed[6])
-				{
-					if(TF2Attrib_GetValue(sunlightSpearActive) > 0.1)
-					{
-						AttunedSpells[client][i] = 6.0;
-						isUsed[6] = true
-						continue;
-					}
-				}
-				if(lightningenchantmentActive != Address_Null && !isUsed[7])
-				{
-					if(TF2Attrib_GetValue(lightningenchantmentActive) > 0.1)
-					{
-						AttunedSpells[client][i] = 7.0;
-						isUsed[7] = true
-						continue;
-					}
-				}
-				if(snapfreezeActive != Address_Null && !isUsed[8])
-				{
-					if(TF2Attrib_GetValue(snapfreezeActive) > 0.1)
-					{
-						AttunedSpells[client][i] = 8.0;
-						isUsed[8] = true
-						continue;
-					}
-				}
-				if(arcaneprisonActive != Address_Null && !isUsed[9])
-				{
-					if(TF2Attrib_GetValue(arcaneprisonActive) > 0.1)
-					{
-						AttunedSpells[client][i] = 9.0;
-						isUsed[9] = true
-						continue;
-					}
-				}
-				if(darkmoonbladeActive != Address_Null && !isUsed[10])
-				{
-					if(TF2Attrib_GetValue(darkmoonbladeActive) > 0.1)
-					{
-						AttunedSpells[client][i] = 10.0;
-						isUsed[10] = true
-						continue;
-					}
-				}
-			
-				//Class Specifics
-				switch(current_class[client])
-				{
-					case TFClass_Scout:
-					{
-						Address speedAuraActive = TF2Attrib_GetByName(client, "arcane speed aura");//Scout
-						if(speedAuraActive != Address_Null && !isUsed[11])
-						{
-							if(TF2Attrib_GetValue(speedAuraActive) > 0.1)
-							{
-								AttunedSpells[client][i] = 11.0;
-								isUsed[11] = true
-								continue;
-							}
-						}
-					}
-					case TFClass_Soldier:
-					{
-						Address aerialStrikeActive = TF2Attrib_GetByName(client, "arcane aerial strike");
-						if(aerialStrikeActive != Address_Null && !isUsed[12])
-						{
-							if(TF2Attrib_GetValue(aerialStrikeActive) > 0.1)
-							{
-								AttunedSpells[client][i] = 12.0;
-								isUsed[12] = true
-								continue;
-							}
-						}
-					}
-					case TFClass_Pyro:
-					{
-						Address infernoActive = TF2Attrib_GetByName(client, "arcane inferno");
-						if(infernoActive != Address_Null && !isUsed[13])
-						{
-							if(TF2Attrib_GetValue(infernoActive) > 0.1)
-							{
-								AttunedSpells[client][i] = 13.0;
-								isUsed[13] = true
-								continue;
-							}
-						}
-					}
-					case TFClass_DemoMan:
-					{
-						Address mineFieldActive = TF2Attrib_GetByName(client, "arcane mine field");
-						if(mineFieldActive != Address_Null && !isUsed[14])
-						{
-							if(TF2Attrib_GetValue(mineFieldActive) > 0.1)
-							{
-								AttunedSpells[client][i] = 14.0;
-								isUsed[14] = true
-								continue;
-							}
-						}
-					}
-					case TFClass_Heavy:
-					{
-						Address shockwaveActive = TF2Attrib_GetByName(client, "arcane shockwave");
-						if(shockwaveActive != Address_Null && !isUsed[15])
-						{
-							if(TF2Attrib_GetValue(shockwaveActive) > 0.1)
-							{
-								AttunedSpells[client][i] = 15.0;
-								isUsed[15] = true
-								continue;
-							}
-						}
-					}
-					case TFClass_Engineer:
-					{
-						Address autoSentryActive = TF2Attrib_GetByName(client, "arcane autosentry");
-						if(autoSentryActive != Address_Null && !isUsed[16])
-						{
-							if(TF2Attrib_GetValue(autoSentryActive) > 0.1)
-							{
-								AttunedSpells[client][i] = 16.0;
-								isUsed[16] = true
-								continue;
-							}
-						}
-					}
-					case TFClass_Medic:
-					{
-						Address soothingSunlightActive = TF2Attrib_GetByName(client, "arcane soothing sunlight");
-						if(soothingSunlightActive != Address_Null && !isUsed[17])
-						{
-							if(TF2Attrib_GetValue(soothingSunlightActive) > 0.1)
-							{
-								AttunedSpells[client][i] = 17.0;
-								isUsed[17] = true
-								continue;
-							}
-						}
-					}
-					case TFClass_Sniper:
-					{
-						Address arcaneHunterActive = TF2Attrib_GetByName(client, "arcane hunter");
-						if(arcaneHunterActive != Address_Null && !isUsed[18])
-						{
-							if(TF2Attrib_GetValue(arcaneHunterActive) > 0.1)
-							{
-								AttunedSpells[client][i] = 18.0;
-								isUsed[18] = true
-								continue;
-							}
-						}
-					}
-					case TFClass_Spy:
-					{
-						Address markForDeathActive = TF2Attrib_GetByName(client, "arcane mark for death");
-						if(markForDeathActive != Address_Null && !isUsed[19])
-						{
-							if(TF2Attrib_GetValue(markForDeathActive) > 0.1)
-							{
-								AttunedSpells[client][i] = 19.0;
-								isUsed[19] = true
-								continue;
-							}
-						}
-					}
-				}
-				if(GetAttribute(client, "arcane infernal enchantment", 0.0) > 0.0 && !isUsed[20])
-				{
-					AttunedSpells[client][i] = 20.0;
-					isUsed[20] = true
-					continue;
-				}
-				if(GetAttribute(client, "arcane splitting thunder", 0.0) > 0.0 && !isUsed[21])
-				{
-					AttunedSpells[client][i] = 21.0;
-					isUsed[21] = true
-					continue;
-				}
-				if(GetAttribute(client, "arcane antiseptic blast", 0.0) > 0.0 && !isUsed[22])
-				{
-					AttunedSpells[client][i] = 22.0;
-					isUsed[22] = true
-					continue;
-				}
-				if(GetAttribute(client, "arcane karmic justice", 0.0) > 0.0 && !isUsed[23])
-				{
-					AttunedSpells[client][i] = 23.0;
-					isUsed[23] = true
-					continue;
-				}
-				if(GetAttribute(client, "arcane snowstorm", 0.0) > 0.0 && !isUsed[24])
-				{
-					AttunedSpells[client][i] = 24.0;
-					isUsed[24] = true
-					continue;
+				AttunedSpells[client][i] = 0;
+			}
+
+			//Bit slop
+			for(int i = 0; i<32;++i)
+			{
+				if(arcaneSlot == Max_Attunement_Slots)
+					break;
+					
+				if(arcaneBitwise & 1 << i){
+					AttunedSpells[client][arcaneSlot] = i+1;
+					arcaneSlot++;
 				}
 			}
 			Address healthActive = TF2Attrib_GetByName(client, "max health multiplier");
@@ -2871,7 +2633,7 @@ public bool applyArcaneRestrictions(int client, int attuneSlot, float focusCost,
 	if(SpellCooldowns[client][attuneSlot] > 0.0)
 		return true;
 
-	PrintHintText(client, "Used %s! -%.2f focus.",SpellList[RoundToNearest(AttunedSpells[client][attuneSlot])-1],focusCost);
+	PrintHintText(client, "Used %s! -%.2f focus.",SpellList[AttunedSpells[client][attuneSlot]-1],focusCost);
 	fl_CurrentFocus[client] -= focusCost;
 	if(DisableCooldowns != 1)
 		SpellCooldowns[client][attuneSlot] = cooldown;
