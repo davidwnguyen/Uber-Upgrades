@@ -380,10 +380,10 @@ char upgrades_weapon[NB_WEAPONS][128];
 char ArmorXPos[MAXPLAYERS+1][64];
 char ArmorYPos[MAXPLAYERS+1][64];
 char missionName[512];
-char SpellList[][] = {"Zap","Lightning Strike","Projected Healing","A Call Beyond","Blacksky Eye","Sunlight Spear",
+char ArcaneSpellList[][] = {"Zap","Lightning Strike","Projected Healing","A Call Beyond","Blacksky Eye","Sunlight Spear",
 "Lightning Enchantment","Snap Freeze","Arcane Prison","Darkmoon Blade","Speed Aura","Aerial Strike","Inferno",
 "Mine Field","Shockwave","Auto-Sentry","Soothing Sunlight","Arcane Hunter","Sabotage","Infernal Enchantment",
-"Splitting Thunder", "Antiseptic Blast", "Karmic Justice", "Snowstorm"}
+"Splitting Thunder", "Antiseptic Blast", "Karmic Justice", "Snowstorm", "Stun Shot", "Fireball Volley", "Dash", "Transient Moonlight", "Corpse Piler", "Homing Flares", "Silent Dash"};
 
 //Bools
 bool inScore[MAXPLAYERS+1];

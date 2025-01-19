@@ -331,7 +331,7 @@ public Action:Timer_FixedVariables(Handle timer)
 						activeSpells++;
 						int spellID = RoundToNearest(AttunedSpells[client][i]-1.0)
 						char spellnum[64]
-						Format(spellnum, sizeof(spellnum),"%i - %s | %.1fs\n", i+1, SpellList[spellID], SpellCooldowns[client][i]);
+						Format(spellnum, sizeof(spellnum),"%i - %s | %.1fs\n", i+1, ArcaneSpellList[spellID], SpellCooldowns[client][i]);
 						StrCat(spellHUD,sizeof(spellHUD),spellnum);
 					}
 				}

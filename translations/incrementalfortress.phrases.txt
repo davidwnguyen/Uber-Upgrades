@@ -1,5 +1,8 @@
 "Phrases"
 {
+	"Arcane Spell Level"{
+		"en"		"Arcane Spell Level"
+	}
 	"chromatic weakness on crit"{
 		"en"		"Chromatic Weakness on Crit"
 	}

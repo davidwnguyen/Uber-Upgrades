@@ -98,6 +98,34 @@ public void CastSpell(int client, int param2){
 		{
 			CastSnowstorm(client, param2);
 		}
+		case 25:
+		{
+			CastStunShot(client, param2);
+		}
+		case 26:
+		{
+			CastFireballVolley(client, param2);
+		}
+		case 27:
+		{
+			CastDash(client, param2);
+		}
+		case 28:
+		{
+			CastTransientMoonlight(client, param2);
+		}
+		case 29:
+		{
+			CastCorpsePiler(client, param2);
+		}
+		case 30:
+		{
+			CastHomingFlares(client, param2);
+		}
+		case 31:
+		{
+			CastSilentDash(client, param2);
+		}
 		default:
 		{
 			PrintHintText(client, "Sorry, we havent implemented this yet!");
@@ -120,7 +148,7 @@ public Menu_ShowArcane(client)
 				continue;
 
 			char fstr[32]
-			Format(fstr, sizeof(fstr), "Use %s", SpellList[AttunedSpells[client][s]-1]);
+			Format(fstr, sizeof(fstr), "Use %s", ArcaneSpellList[AttunedSpells[client][s]-1]);
 			AddMenuItem(menu, "spell", fstr);
 		}
 		if (IsValidClient(client) && IsPlayerAlive(client))
@@ -1494,7 +1522,7 @@ CastZap(client, attuneSlot)
 		if(DisableCooldowns != 1)
 			SpellCooldowns[client][attuneSlot] = 0.1;
 		applyArcaneCooldownReduction(client, attuneSlot);
-		PrintHintText(client, "Used %s! -%.2f focus.",SpellList[0],focusCost);
+		PrintHintText(client, "Used %s! -%.2f focus.",ArcaneSpellList[0],focusCost);
 	}
 }
 DoZap(client,victim,spellLevel)
@@ -1759,4 +1787,255 @@ CastWarp(client){
 		CreateTimer(1.0, Timer_KillParticle, EntIndexToEntRef(iPart2));
 	}
 	CreateParticle(client, "teleportedin_red");
+}
+
+CastStunShot(int client, int attuneSlot){
+	if(applyArcaneRestrictions(client, attuneSlot, fl_MaxFocus[client]*0.1, 15.0))
+		return;
+	
+	int CWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
+	if(!IsValidWeapon(CWeapon))
+		return;
+
+	TF2Attrib_SetByName(client, "bullets per shot bonus", 5.0);
+	refreshAllWeapons(client);
+	SetEntPropFloat(CWeapon, Prop_Send, "m_flNextPrimaryAttack", currentGameTime);
+	shouldAttack[client] = true;
+	StunShotBPS[client] = true;
+	StunShotStun[client] = true;
+	RequestFrame(StunShotFunc, client);
+}
+
+CastFireballVolley(int client, int attuneSlot){
+	if(applyArcaneRestrictions(client, attuneSlot, fl_MaxFocus[client]*0.1, 5.0))
+		return;
+	
+	int CWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
+	if(!IsValidWeapon(CWeapon))
+		return;
+
+	for(int i = 0;i<5;++i)
+	{
+		int iEntity = CreateEntityByName("tf_projectile_spellfireball");
+		if (!IsValidEdict(iEntity)) 
+			continue;
+
+		int iTeam = GetClientTeam(client);
+		float fAngles[3]
+		float fOrigin[3]
+		float vBuffer[3]
+		float fVelocity[3]
+		float fwd[3]
+		SetEntPropEnt(iEntity, Prop_Send, "m_hOwnerEntity", client);
+		SetEntProp(iEntity, Prop_Send, "m_iTeamNum", iTeam);
+		GetClientEyeAngles(client, fAngles);
+		GetClientEyePosition(client, fOrigin);
+		
+		fAngles[1] -= 10.0*(5/2);
+		fAngles[1] += i*10.0;
+
+		GetAngleVectors(fAngles,fwd, NULL_VECTOR, NULL_VECTOR);
+		ScaleVector(fwd, 30.0);
+		
+		AddVectors(fOrigin, fwd, fOrigin);
+		GetAngleVectors(fAngles, vBuffer, NULL_VECTOR, NULL_VECTOR);
+		
+		float velocity = 1300.0;
+		fVelocity[0] = vBuffer[0]*velocity;
+		fVelocity[1] = vBuffer[1]*velocity;
+		fVelocity[2] = vBuffer[2]*velocity;
+		
+		TeleportEntity(iEntity, fOrigin, fAngles, fVelocity);
+		DispatchSpawn(iEntity);
+		SDKHook(iEntity, SDKHook_StartTouch, OnStartTouchDragonsBreath);
+		CreateTimer(10.0,SelfDestruct,EntIndexToEntRef(iEntity));
+		homingRadius[iEntity] = 400.0;
+		homingTickRate[iEntity] = 3;
+	}
+}
+
+CastDash(int client, int attuneSlot){
+	if(applyArcaneRestrictions(client, attuneSlot, 0.0, 1.0))
+		return;
+	
+	float flSpeed = GetEntPropFloat(client, Prop_Data, "m_flMaxspeed") * 2.0;
+	float flVel[3],flAng[3], vBuffer[3]
+	GetClientEyeAngles(client,flAng)
+	GetAngleVectors(flAng, vBuffer, NULL_VECTOR, NULL_VECTOR)
+	flVel[0] = flSpeed * vBuffer[0] * 1.5;
+	flVel[1] = flSpeed * vBuffer[1] * 1.5;
+	flVel[2] = 100.0 + (flSpeed * (vBuffer[2] * 0.75));
+	if(GetEntityFlags(client) & FL_ONGROUND)
+		flVel[2] += 200;
+	TeleportEntity(client, NULL_VECTOR,NULL_VECTOR, flVel)
+	EmitSoundToAll(SOUND_DASH, client, -1, 80, 0, 1.0);
+}
+
+CastTransientMoonlight(int client, int attuneSlot){
+	if(applyArcaneRestrictions(client, attuneSlot, fl_MaxFocus[client]*0.1, 5.0))
+		return;
+	
+	int CWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
+	if(!IsValidWeapon(CWeapon))
+		return;
+
+	float fAngles[3], fVelocity[3], fOrigin[3], vBuffer[3], fwd[3];
+	char projName[32] = "tf_projectile_arrow";
+	int iEntity = CreateEntityByName(projName);
+	if (IsValidEdict(iEntity)) 
+	{
+		int iTeam = GetClientTeam(client);
+		SetEntPropEnt(iEntity, Prop_Send, "m_hOwnerEntity", client);
+
+		SetEntProp(iEntity, Prop_Send, "m_iTeamNum", iTeam);
+		SetEntPropEnt(iEntity, Prop_Send, "m_hLauncher", client);
+		GetClientEyePosition(client, fOrigin);
+		GetClientEyeAngles(client, fAngles);
+		GetAngleVectors(fAngles, vBuffer, NULL_VECTOR, NULL_VECTOR);
+		GetAngleVectors(fAngles,fwd, NULL_VECTOR, NULL_VECTOR);
+		ScaleVector(fwd, 50.0);
+		AddVectors(fOrigin, fwd, fOrigin);
+		float velocity = 5000.0;
+		fVelocity[0] = vBuffer[0]*velocity;
+		fVelocity[1] = vBuffer[1]*velocity;
+		fVelocity[2] = vBuffer[2]*velocity;
+		
+		TeleportEntity(iEntity, fOrigin, fAngles, fVelocity);
+		DispatchSpawn(iEntity);
+		SetEntPropVector(iEntity, Prop_Send, "m_vInitialVelocity", fVelocity );
+		if(HasEntProp(iEntity, Prop_Send, "m_hLauncher"))
+		{
+			SetEntPropEnt(iEntity, Prop_Send, "m_hLauncher", CWeapon);
+		}
+		SetEntPropEnt(iEntity, Prop_Send, "m_hOriginalLauncher", client);
+		SetEntProp(iEntity, Prop_Send, "m_usSolidFlags", 0x0008);
+		SetEntProp(iEntity, Prop_Data, "m_nSolidType", 6);
+		SetEntProp(iEntity, Prop_Send, "m_CollisionGroup", 13);
+		SDKHook(iEntity, SDKHook_StartTouch, OnStartTouchMoonveil);
+		
+		float vecBossMin[3], vecBossMax[3];
+		GetEntPropVector(iEntity, Prop_Send, "m_vecMins", vecBossMin);
+		GetEntPropVector(iEntity, Prop_Send, "m_vecMaxs", vecBossMax);
+		
+		float vecScaledBossMin[3], vecScaledBossMax[3];
+		
+		vecScaledBossMin = vecBossMin;
+		vecScaledBossMax = vecBossMax;
+		
+		//PrintToChat(client, "%.2f | %.2f",vecScaledBossMin[0],vecScaledBossMax[0])
+		//PrintToChat(client, "%.2f | %.2f",vecScaledBossMin[1],vecScaledBossMax[1])
+		//PrintToChat(client, "%.2f | %.2f",vecScaledBossMin[2],vecScaledBossMax[2])
+
+		vecScaledBossMin[0] -= 10.0;
+		vecScaledBossMax[0] += 10.0;
+		vecScaledBossMin[1] -= 10.0;
+		vecScaledBossMax[1] += 10.0;
+		vecScaledBossMin[2] -= 20.0;
+		vecScaledBossMax[2] += 20.0;
+		
+		
+		SetEntPropVector(iEntity, Prop_Send, "m_vecMins", vecScaledBossMin);
+		SetEntPropVector(iEntity, Prop_Send, "m_vecMaxs", vecScaledBossMax);
+		
+		float particleOffset[3];
+		CreateParticle(iEntity, "utaunt_auroraglow_purple_parent", true, _, 5.0, particleOffset);
+		particleOffset[2] -= 20.0;
+		CreateParticle(iEntity, "utaunt_auroraglow_purple_parent", true, _, 5.0, particleOffset);
+		particleOffset[2] += 40.0;
+		CreateParticle(iEntity, "utaunt_auroraglow_purple_parent", true, _, 5.0, particleOffset);
+	}
+}
+
+CastCorpsePiler(int client, int attuneSlot){
+	if(applyArcaneRestrictions(client, attuneSlot, 0.0, 30.0))
+		return;
+	
+	int CWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
+	if(!IsValidWeapon(CWeapon))
+		return;
+
+	shouldAttack[client] = true;
+	SetEntPropFloat(CWeapon, Prop_Send, "m_flNextPrimaryAttack", currentGameTime+1.5);
+
+	for(int i=0;i<20;++i)
+	{
+		Handle hPack = CreateDataPack();
+		WritePackCell(hPack, EntIndexToEntRef(CWeapon));
+		WritePackCell(hPack, EntIndexToEntRef(client));
+		CreateTimer(0.06*i, CreateBloodTracer, hPack);
+	}
+}
+
+CastHomingFlares(int client, int attuneSlot){
+	if(applyArcaneRestrictions(client, attuneSlot, 0.0, 7.0))
+		return;
+	
+	int CWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
+	if(!IsValidWeapon(CWeapon))
+		return;
+		
+	int iTeam = GetClientTeam(client);
+	float fAngles[3],fOrigin[3],vBuffer[3],vRight[3],fVelocity[3],fwd[3]
+	for(int i=0;i<3;++i)
+	{
+		int iEntity = CreateEntityByName("tf_projectile_flare");
+		if (!IsValidEdict(iEntity)) 
+			continue;
+
+		SetEntityRenderColor(iEntity, 255, 255, 255, 0);
+		SetEntPropEnt(iEntity, Prop_Send, "m_hOwnerEntity", client);
+
+		SetEntProp(iEntity, Prop_Send, "m_iTeamNum", iTeam, 1);
+		SetEntProp(iEntity, Prop_Send, "m_nSkin", (iTeam-2));
+		SetEntPropEnt(iEntity, Prop_Data, "m_hOwnerEntity", client);
+		SetEntPropEnt(iEntity, Prop_Send, "m_hLauncher", client);
+		SetEntProp(iEntity, Prop_Send, "m_usSolidFlags", 0x0008 + 0x0004);
+		SetEntProp(iEntity, Prop_Data, "m_nSolidType", 6);
+		SetEntProp(iEntity, Prop_Send, "m_CollisionGroup", 2);
+					
+		GetClientEyePosition(client, fOrigin);
+		GetClientEyeAngles(client,fAngles);
+		
+		GetAngleVectors(fAngles, vBuffer, vRight, NULL_VECTOR);
+		GetAngleVectors(fAngles,fwd, NULL_VECTOR, NULL_VECTOR);
+		ScaleVector(fwd, 60.0);
+		ScaleVector(vRight, 30.0*(i-1))
+		AddVectors(fOrigin, vRight, fOrigin);
+		AddVectors(fOrigin, fwd, fOrigin);
+		
+		float Speed = 1200.0;
+		fVelocity[0] = vBuffer[0]*Speed;
+		fVelocity[1] = vBuffer[1]*Speed;
+		fVelocity[2] = vBuffer[2]*Speed;
+		SetEntPropVector(iEntity, Prop_Send, "m_vInitialVelocity", fVelocity );
+		TeleportEntity(iEntity, fOrigin, fAngles, fVelocity);
+		DispatchSpawn(iEntity);
+		SetEntityGravity(iEntity,0.01);
+		
+		SDKHook(iEntity, SDKHook_Touch, OnCollisionPhotoViscerator);
+		CreateTimer(0.01, HomingFlareThink, EntIndexToEntRef(iEntity), TIMER_REPEAT|TIMER_FLAG_NO_MAPCHANGE);
+		CreateParticle(iEntity, "utaunt_auroraglow_green_parent", true, _, 5.0);
+		CreateTimer(5.0, SelfDestruct, EntIndexToEntRef(iEntity));
+	}
+}
+
+CastSilentDash(int client, int attuneSlot){
+	if(applyArcaneRestrictions(client, attuneSlot, 0.0, 1.0))
+		return;
+
+	float flSpeed = GetEntPropFloat(client, Prop_Data, "m_flMaxspeed") * 2.0
+	float flVel[3],flAng[3],vBuffer[3]
+	GetClientEyeAngles(client,flAng)
+	GetAngleVectors(flAng, vBuffer, NULL_VECTOR, NULL_VECTOR)
+	flVel[0] = flSpeed * vBuffer[0] * 1.5;
+	flVel[1] = flSpeed * vBuffer[1] * 1.5;
+	flVel[2] = 100.0 + (flSpeed * vBuffer[2]);
+	
+	if(flVel[2] < -100.0)
+		flVel[2] *= 2.5;
+
+	if(GetEntityFlags(client) & FL_ONGROUND)
+		flVel[2] += 200;
+
+	TeleportEntity(client, NULL_VECTOR,NULL_VECTOR, flVel)
 }

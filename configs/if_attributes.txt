@@ -77,13 +77,14 @@
 			"name"		"arcane spell level"
 			"ref"		"Arcane Spell Level"
 			"attr_class"	"arcane_spell_level"
-			"display"		"%.0f%%"
-			"cost"		"3000"
-			"increase_ratio"	"0.4"
-			"value"		"-0.1"
-			"staged_max"		"1,2,3"
+			"display"		"%.0f"
+			"cost"		"10000"
+			"increase_ratio"	"4.0"
+			"value"		"1"
+			"requirement"		"1000000.0"
+			"staged_max"		"2,2,3"
 			"init"		"1"
-			"max"		"1"
+			"max"		"2"
 		}
 		"1542"
 		{
@@ -5029,14 +5030,15 @@
 		}
 		"1529.1"
 		{
-			"name"		"weapon ability id"
+			"name"		"weapon spell id"
 			"ref"		"Ability : Stun Shot"
+			"attr_class"	"arcane_spells_1"
 			"display"		"%.0f"
 			"cost"		"20000"
 			"increase_ratio"	"0"
-			"value"		"3"
+			"value"		"16777216"
 			"init"		"0"
-			"max"		"3"
+			"max"		"16777216"
 		}
 		"1529.2"
 		{
@@ -5051,47 +5053,47 @@
 		}
 		"1529.3"
 		{
-			"name"		"weapon ability id"
+			"name"		"weapon spell id"
 			"ref"		"Ability : Fireball Volley"
 			"display"		"%.0f"
 			"cost"		"15000"
 			"increase_ratio"	"0"
-			"value"		"5"
+			"value"		"33554432"
 			"init"		"0"
-			"max"		"5"
+			"max"		"33554432"
 		}
 		"1529.4"
 		{
-			"name"		"weapon ability id"
+			"name"		"weapon spell id"
 			"ref"		"Ability : Transient Moonlight"
 			"display"		"%.0f"
 			"cost"		"0"
 			"increase_ratio"	"0"
-			"value"		"8"
+			"value"		"134217728"
 			"init"		"0"
-			"max"		"8"
+			"max"		"134217728"
 		}
 		"1529.5"
 		{
-			"name"		"weapon ability id"
+			"name"		"weapon spell id"
 			"ref"		"Ability : Corpse Piler"
 			"display"		"%.0f"
 			"cost"		"0"
 			"increase_ratio"	"0"
-			"value"		"9"
+			"value"		"268435456"
 			"init"		"0"
-			"max"		"9"
+			"max"		"268435456"
 		}
 		"1529.6"
 		{
-			"name"		"weapon ability id"
+			"name"		"weapon spell id"
 			"ref"		"Ability : Homing Flares"
 			"display"		"%.0f"
 			"cost"		"0"
 			"increase_ratio"	"0"
-			"value"		"10"
+			"value"		"536870912"
 			"init"		"0"
-			"max"		"10"
+			"max"		"536870912"
 		}
 		"1529.7"
 		{
@@ -5106,14 +5108,14 @@
 		}
 		"1529.8"
 		{
-			"name"		"weapon ability id"
+			"name"		"weapon spell id"
 			"ref"		"Ability : Silent Dash"
 			"display"		"%.0f"
 			"cost"		"0"
 			"increase_ratio"	"0"
-			"value"		"12"
+			"value"		"1073741824"
 			"init"		"0"
-			"max"		"12"
+			"max"		"1073741824"
 		}	
 		"1529.9"
 		{

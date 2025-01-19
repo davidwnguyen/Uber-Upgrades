@@ -44,6 +44,7 @@
 				"Attr3"		"Arcane Power"
 				"Attr4"		"Arcane Damage"
 				"Attr6"		"Arcane Cooldown Reduction"
+				"Attr7"		"Arcane Spell Level"
 			}
 			"!Tier 1 Arcane Spells"
 			{
@@ -148,6 +149,7 @@
 				"Attr3"		"Arcane Power"
 				"Attr4"		"Arcane Damage"
 				"Attr6"		"Arcane Cooldown Reduction"
+				"Attr7"		"Arcane Spell Level"
 			}
 			"!Tier 1 Arcane Spells"
 			{
@@ -252,6 +254,7 @@
 				"Attr3"		"Arcane Power"
 				"Attr4"		"Arcane Damage"
 				"Attr6"		"Arcane Cooldown Reduction"
+				"Attr7"		"Arcane Spell Level"
 			}
 			"!Tier 1 Arcane Spells"
 			{
@@ -355,6 +358,7 @@
 				"Attr3"		"Arcane Power"
 				"Attr4"		"Arcane Damage"
 				"Attr6"		"Arcane Cooldown Reduction"
+				"Attr7"		"Arcane Spell Level"
 			}
 			"!Tier 1 Arcane Spells"
 			{
@@ -459,6 +463,7 @@
 				"Attr3"		"Arcane Power"
 				"Attr4"		"Arcane Damage"
 				"Attr6"		"Arcane Cooldown Reduction"
+				"Attr7"		"Arcane Spell Level"
 			}
 			"!Tier 1 Arcane Spells"
 			{
@@ -563,6 +568,7 @@
 				"Attr3"		"Arcane Power"
 				"Attr4"		"Arcane Damage"
 				"Attr6"		"Arcane Cooldown Reduction"
+				"Attr7"		"Arcane Spell Level"
 			}
 			"!Tier 1 Arcane Spells"
 			{
@@ -666,6 +672,7 @@
 				"Attr3"		"Arcane Power"
 				"Attr4"		"Arcane Damage"
 				"Attr6"		"Arcane Cooldown Reduction"
+				"Attr7"		"Arcane Spell Level"
 			}
 			"!Tier 1 Arcane Spells"
 			{
@@ -772,6 +779,7 @@
 				"Attr3"		"Arcane Power"
 				"Attr4"		"Arcane Damage"
 				"Attr6"		"Arcane Cooldown Reduction"
+				"Attr7"		"Arcane Spell Level"
 			}
 			"!Tier 1 Arcane Spells"
 			{
@@ -879,6 +887,7 @@
 				"Attr3"		"Arcane Power"
 				"Attr4"		"Arcane Damage"
 				"Attr6"		"Arcane Cooldown Reduction"
+				"Attr7"		"Arcane Spell Level"
 			}
 			"!Tier 1 Arcane Spells"
 			{

@@ -1659,25 +1659,7 @@ refreshUpgrades(client, slot)
 		}
 		if(slot == 4)
 		{
-			int arcaneBitwise = TF2Attrib_HookValueInt(0, "arcane_spells_1", client);
-			int arcaneSlot = 0;
-			//Clear out attuned spells
-			for(int i = 0; i<Max_Attunement_Slots;++i)
-			{
-				AttunedSpells[client][i] = 0;
-			}
-
-			//Bit slop
-			for(int i = 0; i<32;++i)
-			{
-				if(arcaneSlot == Max_Attunement_Slots)
-					break;
-					
-				if(arcaneBitwise & 1 << i){
-					AttunedSpells[client][arcaneSlot] = i+1;
-					arcaneSlot++;
-				}
-			}
+			UpdatePlayerSpellSlots(client);
 			Address healthActive = TF2Attrib_GetByName(client, "max health multiplier");
 			if(healthActive != Address_Null)
 			{
@@ -2633,7 +2615,7 @@ public bool applyArcaneRestrictions(int client, int attuneSlot, float focusCost,
 	if(SpellCooldowns[client][attuneSlot] > 0.0)
 		return true;
 
-	PrintHintText(client, "Used %s! -%.2f focus.",SpellList[AttunedSpells[client][attuneSlot]-1],focusCost);
+	PrintHintText(client, "Used %s! -%.2f focus.",ArcaneSpellList[AttunedSpells[client][attuneSlot]-1],focusCost);
 	fl_CurrentFocus[client] -= focusCost;
 	if(DisableCooldowns != 1)
 		SpellCooldowns[client][attuneSlot] = cooldown;
@@ -4479,6 +4461,29 @@ float ConsumePierce(float res, float& pierce){
 		pierce = 0.0;
 	}
 	return res;
+}
+
+void UpdatePlayerSpellSlots(int client){
+	int arcaneBitwise = TF2Attrib_HookValueInt(0, "arcane_spells_1", client);
+	int arcaneSlot = 0;
+
+	//Clear out attuned spells
+	for(int i = 0; i<Max_Attunement_Slots;++i)
+	{
+		AttunedSpells[client][i] = 0;
+	}
+
+	//Bit slop
+	for(int i = 0; i<sizeof(ArcaneSpellList);++i)
+	{
+		if(arcaneSlot == Max_Attunement_Slots)
+			break;
+			
+		if(arcaneBitwise & 1 << i){
+			AttunedSpells[client][arcaneSlot] = i+1;
+			arcaneSlot++;
+		}
+	}
 }
 
 /*public void theBoxness(int client, int melee, const float pos[3], const float angle[3]){
