@@ -110,9 +110,7 @@ public Action:OnSplittingThunderCollision(entity, client)
 	if(!IsValidClient3(owner) || client == owner)
 		return Plugin_Continue;
 	
-	int spellLevel = RoundToNearest(GetAttribute(owner, "arcane splitting thunder", 0.0));
-	if(spellLevel < 1)
-		return Plugin_Continue;
+	int spellLevel = RoundToNearest(GetAttribute(owner, "arcane spell level", 1.0));
 	
 	float origin[3];
 	GetEntPropVector(entity, Prop_Data, "m_vecOrigin", origin);
@@ -141,9 +139,7 @@ public Action:OnSunlightSpearCollision(entity, client)
 			int owner = GetEntPropEnt(entity, Prop_Send, "m_hOwnerEntity")
 			if(IsOnDifferentTeams(owner,client))
 			{
-				int spellLevel = RoundToNearest(GetAttribute(owner, "arcane sunlight spear", 0.0));
-				if(spellLevel < 1)
-					return Plugin_Continue;
+				int spellLevel = RoundToNearest(GetAttribute(owner, "arcane spell level", 1.0));
 
 				float scaling[] = {0.0, 35.0, 70.0, 140.0};
 				float ProjectileDamage = 140.0 + (Pow(ArcaneDamage[owner]*Pow(ArcanePower[owner], 4.0),spellScaling[spellLevel]) * scaling[spellLevel]);
@@ -188,11 +184,7 @@ public Action:BlackskyEyeCollision(entity, client)
 	if(StrEqual(strName,"tf_projectile_arrow",false))
 		return Plugin_Continue;
 
-	Address BlackskyEyeActive = TF2Attrib_GetByName(owner, "arcane blacksky eye");
-	int spellLevel = BlackskyEyeActive == Address_Null ? 0 : RoundToNearest(TF2Attrib_GetValue(BlackskyEyeActive));
-	
-	if(spellLevel < 1)
-		return Plugin_Continue;
+	int spellLevel = RoundToNearest(GetAttribute(owner, "arcane spell level", 1.0));
 
 	float projvec[3];
 	float radius[] = {0.0, 300.0,500.0,800.0};

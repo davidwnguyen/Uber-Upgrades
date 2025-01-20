@@ -22,12 +22,12 @@
 			"ref"		"Focus Regeneration"
 			"attr_class"	"arcane_focus_regeneration"
 			"display"		"%.0f%%"
-			"cost"		"750"
+			"cost"		"1500"
 			"increase_ratio"	"0.3"
-			"value"		"0.25"
+			"value"		"0.2"
 			"init"		"1"
 			"description"	"Multiplies focus gained per second."
-			"max"		"9"
+			"max"		"3"
 		}
 		"1541"
 		{
@@ -5032,7 +5032,7 @@
 		{
 			"name"		"weapon spell id"
 			"ref"		"Ability : Stun Shot"
-			"attr_class"	"arcane_spells_1"
+			"attr_class"	"weapon_spell_id"
 			"display"		"%.0f"
 			"cost"		"20000"
 			"increase_ratio"	"0"

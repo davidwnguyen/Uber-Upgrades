@@ -45,33 +45,10 @@ public Action:Timer_Second(Handle timer)
 				GetClientCookie(client, hArmorYPos, ArmorYPos[client], sizeof(ArmorYPos));
 			}
 
-			//Arcane
-			float arcanePower = 1.0;
-			
-			Address ArcaneActive = TF2Attrib_GetByName(client, "arcane power")
-			if(ArcaneActive != Address_Null)
-				arcanePower = TF2Attrib_GetValue(ArcaneActive);
-
-			ArcanePower[client] = arcanePower;
-			
-			float arcaneDamageMult = 1.0;
-			Address ArcaneDamageActive = TF2Attrib_GetByName(client, "arcane damage")
-			if(ArcaneDamageActive != Address_Null)
-				arcaneDamageMult = TF2Attrib_GetValue(ArcaneDamageActive);
-
-			ArcaneDamage[client] = arcaneDamageMult;
-
-			Address focusActive = TF2Attrib_GetByName(client, "arcane focus max")
-			if(focusActive != Address_Null)
-				fl_MaxFocus[client] = (TF2Attrib_GetValue(focusActive)+100.0)* Pow(arcanePower, 2.0);
-			else
-				fl_MaxFocus[client] = 100.0*arcanePower;
-
-			Address regenActive = TF2Attrib_GetByName(client, "arcane focus regeneration")
-			if(regenActive != Address_Null)
-				fl_RegenFocus[client] = fl_MaxFocus[client] * 0.00015 * TF2Attrib_GetValue(regenActive) *  Pow(arcanePower, 2.0);
-			else
-				fl_RegenFocus[client] = fl_MaxFocus[client] * 0.00015 *  Pow(arcanePower, 2.0);
+			ArcanePower[client] = TF2Attrib_HookValueFloat(1.0, "arcane_power", client);
+			ArcaneDamage[client] = TF2Attrib_HookValueFloat(1.0, "arcane_damage", client);
+			fl_MaxFocus[client] = (100.0+TF2Attrib_HookValueInt(0, "arcane_focus_max", client)) * Pow(ArcanePower[client], 2.0);
+			fl_RegenFocus[client] = fl_MaxFocus[client] * TICKINTERVAL * 0.05 * TF2Attrib_HookValueFloat(1.0, "arcane_focus_regeneration", client) * Pow(ArcanePower[client], 2.0);
 		}
 	}
 	if(IsMvM())
@@ -323,12 +300,10 @@ public Action:Timer_FixedVariables(Handle timer)
 				Format(ArmorLeft, sizeof(ArmorLeft), "%s\nFocus  | %.0f / %.0f", ArmorLeft, fl_CurrentFocus[client],fl_MaxFocus[client]); 
 				char spellHUD[1024]
 				Format(spellHUD, sizeof(spellHUD), "Current Spells: \n");
-				int activeSpells = 0;
 				for(int i = 0;i<Max_Attunement_Slots;++i)
 				{
 					if(AttunedSpells[client][i] != 0)
 					{
-						activeSpells++;
 						int spellID = RoundToNearest(AttunedSpells[client][i]-1.0)
 						char spellnum[64]
 						Format(spellnum, sizeof(spellnum),"%i - %s | %.1fs\n", i+1, ArcaneSpellList[spellID], SpellCooldowns[client][i]);
