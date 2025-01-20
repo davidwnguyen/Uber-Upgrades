@@ -1660,23 +1660,7 @@ refreshUpgrades(client, slot)
 		if(slot == 4)
 		{
 			UpdatePlayerSpellSlots(client);
-			Address healthActive = TF2Attrib_GetByName(client, "max health multiplier");
-			if(healthActive != Address_Null)
-			{
-				float mult = TF2Attrib_GetValue(healthActive);
-				float drConversion = GetAttributeAccumulateAdditive(client, "convert health to damage reduction", 0.0);
-				if(drConversion > 0 && mult > 0){
-					float dr = 1+drConversion*(mult-1);
-					TF2Attrib_SetByName(client, "dmg taken divided", dr);
-					mult /= dr;
-				}else{
-					TF2Attrib_SetByName(client, "dmg taken divided", 1.0);
-				}
-
-				TF2Attrib_SetByName(client,"add health bonus", float(RoundToCeil(GetClientBaseHP(client)* (mult-1)) ) );
-				if(current_class[client] == TFClass_Engineer)
-					TF2Attrib_SetByName(client,"engy building health bonus", TF2Attrib_GetValue(healthActive));
-			}
+			UpdatePlayerMaxHealth(client);
 			
 			TF2Attrib_RemoveByName(client,"ubercharge rate bonus");
 			TF2Attrib_RemoveByName(client,"heal rate bonus");
@@ -4484,6 +4468,31 @@ void UpdatePlayerSpellSlots(int client){
 			arcaneSlot++;
 		}
 	}
+}
+
+void UpdatePlayerMaxHealth(int client){
+	//thanks sourcepawn :3
+	float percentageHealth = float(GetClientHealth(client))/float(TF2Util_GetEntityMaxHealth(client));
+
+	Address healthActive = TF2Attrib_GetByName(client, "max health multiplier");
+	if(healthActive != Address_Null)
+	{
+		float mult = TF2Attrib_GetValue(healthActive);
+		float drConversion = GetAttributeAccumulateAdditive(client, "convert health to damage reduction", 0.0);
+		if(drConversion > 0 && mult > 0){
+			float dr = 1+drConversion*(mult-1);
+			TF2Attrib_SetByName(client, "dmg taken divided", dr);
+			mult /= dr;
+		}else{
+			TF2Attrib_SetByName(client, "dmg taken divided", 1.0);
+		}
+
+		TF2Attrib_SetByName(client,"add health bonus", float(RoundToCeil(GetClientBaseHP(client)* (mult-1)) ) );
+		if(current_class[client] == TFClass_Engineer)
+			TF2Attrib_SetByName(client,"engy building health bonus", TF2Attrib_GetValue(healthActive));
+	}
+
+	SetEntityHealth(client, RoundFloat(percentageHealth*TF2Util_GetEntityMaxHealth(client)));
 }
 
 /*public void theBoxness(int client, int melee, const float pos[3], const float angle[3]){

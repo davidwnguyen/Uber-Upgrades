@@ -1205,6 +1205,7 @@ public Action WeaponSwitch(client, weapon){
 		return Plugin_Continue;
 	}
 	RequestFrame(UpdatePlayerSpellSlots, client);
+	RequestFrame(UpdatePlayerMaxHealth, client);
 
 	if(TF2_GetPlayerClass(client)!=TFClass_Engineer){
 		return Plugin_Continue;
