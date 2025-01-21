@@ -4449,7 +4449,6 @@ float ConsumePierce(float res, float& pierce){
 
 void UpdatePlayerSpellSlots(int client){
 	int arcaneBitwise = TF2Attrib_HookValueInt(0, "arcane_spells_1", client) | TF2Attrib_HookValueInt(0, "weapon_spell_id", client);
-	PrintToServer("%i arcaneBitwise", arcaneBitwise)
 	int arcaneSlot = 0;
 
 	//Clear out attuned spells
