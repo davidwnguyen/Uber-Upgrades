@@ -132,6 +132,7 @@ public Action:OnSunlightSpearCollision(entity, client)
 {
 	char strName[32];
 	GetEntityClassname(client, strName, 32)
+
 	if(IsValidForDamage(client))
 	{
 		if(HasEntProp(entity, Prop_Send, "m_hOwnerEntity"))
@@ -145,21 +146,26 @@ public Action:OnSunlightSpearCollision(entity, client)
 				float ProjectileDamage = 140.0 + scaling[spellLevel]*ArcaneDamage[owner];
 				currentDamageType[owner].second |= DMG_IGNOREHOOK;
 				SDKHooks_TakeDamage(client, owner, owner, ProjectileDamage, DMG_SHOCK,_,_,_,false);
-				RemoveEntity(entity);
+				RemoveEdict(entity);
 				CreateParticleEx(client, "dragons_fury_effect_parent", 1);
 			}
 		}
 	}
-	if(StrContains(strName,"trigger_",false) || StrEqual(strName,"tf_projectile_arrow",false) || client == -1)
-	{	
-		if(StrEqual(strName,"tf_projectile_arrow",false))
-		{
-			float origin[3];
-			GetEntPropVector(entity, Prop_Data, "m_vecOrigin", origin);
-			origin[0] += GetRandomFloat(-4.0,4.0)
-			origin[1] += GetRandomFloat(-4.0,4.0)
-			TeleportEntity(entity, origin,NULL_VECTOR,NULL_VECTOR);
-		}
+
+	if(StrEqual(strName,"tf_projectile_arrow",false))
+	{
+		float origin[3];
+		GetEntPropVector(entity, Prop_Data, "m_vecOrigin", origin);
+		origin[0] += GetRandomFloat(-4.0,4.0)
+		origin[1] += GetRandomFloat(-4.0,4.0)
+		TeleportEntity(entity, origin,NULL_VECTOR,NULL_VECTOR);
+	}
+	else if(entitySpawnTime[entity] + 0.1 < GetGameTime())
+	{
+		float origin[3];
+		GetEntPropVector(entity, Prop_Data, "m_vecOrigin", origin);
+		CreateParticleEx(entity, "drg_cow_explosioncore_charged", -1, -1, origin);
+		RemoveEdict(entity);
 	}
 	SDKUnhook(entity, SDKHook_Touch, OnSunlightSpearCollision);
 	return Plugin_Stop;
@@ -193,7 +199,15 @@ public Action:BlackskyEyeCollision(entity, client)
 	if(HasEntProp(entity, Prop_Data, "m_vecOrigin"))
 	{
 		GetEntPropVector(entity, Prop_Data, "m_vecOrigin", projvec);
-		EntityExplosion(owner,ProjectileDamage,radius[spellLevel], projvec,0,false,entity,_,1073741824);
+		if(IsValidForDamage(client))
+		{
+			EntityExplosion(owner,2.5*ProjectileDamage,radius[spellLevel], projvec,0,_,entity,0.75,1073741824);
+			RemoveEntity(entity);
+		}
+		else
+		{
+			EntityExplosion(owner,ProjectileDamage,radius[spellLevel], projvec,0,_,entity,0.65,1073741824,_,_,_,_,_,_,_,"ExplosionCore_sapperdestroyed");
+		}
 	}
 		
 	return Plugin_Continue;
@@ -220,12 +234,13 @@ public Action:CallBeyondCollision(entity, client)
 		
 	float projvec[3];
 	int spellLevel = RoundToNearest(GetAttribute(owner, "arcane spell level", 1.0));
-	float scaling[] = {0.0, 80.0, 100.0, 120.0};
+	float scaling[] = {0.0, 250.0, 400.0, 650.0};
 	float ProjectileDamage = 90.0 + scaling[spellLevel]*ArcaneDamage[owner];
 	if(HasEntProp(entity, Prop_Data, "m_vecOrigin"))
 	{
 		GetEntPropVector(entity, Prop_Data, "m_vecOrigin", projvec);
-		EntityExplosion(owner,ProjectileDamage,500.0, projvec,0,false,entity,_,1073741824);
+		EntityExplosion(owner,ProjectileDamage,500.0, projvec,0,_,entity,0.75,1073741824);
+		RemoveEntity(entity);
 	}
 		
 	return Plugin_Continue;

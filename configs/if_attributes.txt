@@ -39,10 +39,10 @@
 			"increase_ratio"	"1.0"
 			"value"		"0.05"
 			"init"		"1"
-			"staged_max"		"2,2.5,3"
+			"staged_max"		"3,4,5"
 			"description"	"Multiplies all arcane stats by ^2."
 			"optimizer_style"	"5"
-			"max"		"1.5"
+			"max"		"2.0"
 		}
 		"1541.2"
 		{
@@ -78,13 +78,11 @@
 			"ref"		"Arcane Spell Level"
 			"attr_class"	"arcane_spell_level"
 			"display"		"%.0f"
-			"cost"		"10000"
+			"cost"		"20000"
 			"increase_ratio"	"4.0"
 			"value"		"1"
-			"requirement"		"1000000.0"
-			"staged_max"		"2,2,3"
 			"init"		"1"
-			"max"		"2"
+			"max"		"3"
 		}
 		"1542"
 		{

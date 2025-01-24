@@ -267,9 +267,8 @@ CastMarkForDeath(client, attuneSlot)
 }
 CastSunlightSpear(client, attuneSlot)
 {
-	int spellLevel = RoundToNearest(GetAttribute(client, "arcane sunlight spear", 0.0));
-	if(spellLevel < 1)
-		return;
+	int spellLevel = RoundToNearest(GetAttribute(client, "arcane spell level", 1.0));
+
 	if(applyArcaneRestrictions(client, attuneSlot, 30.0 + (20.0 * TF2Attrib_HookValueFloat(1.0, "arcane_damage", client)), 0.4))
 		return; 
 
@@ -280,8 +279,9 @@ CastSunlightSpear(client, attuneSlot)
 	float projectileSpeed[] = {0.0,2500.0,4000.0,6000.0};
 	for(int i=0;i<projectileAmount[spellLevel];++i){
 		int iEntity = CreateEntityByName("tf_projectile_arrow");
-		if (!IsValidEdict(iEntity)) 
-			return;
+		if (!IsValidEntity(iEntity)) 
+			continue;
+
 		float fAngles[3],fOrigin[3], vBuffer[3],fVelocity[3],fwd[3],right[3];
 		int iTeam = GetClientTeam(client);
 		SetEntPropEnt(iEntity, Prop_Send, "m_hOwnerEntity", client);
@@ -302,7 +302,7 @@ CastSunlightSpear(client, attuneSlot)
 		AddVectors(fOrigin, fwd, fOrigin);
 
 		if(projectileAmount[spellLevel] > 2){
-			ScaleVector(right, (-10.0*projectileAmount[spellLevel]) + (20.0*i));
+			ScaleVector(right, (-10.0*(projectileAmount[spellLevel]-1)) + (20.0*i));
 			AddVectors(fOrigin, right, fOrigin);
 		}else if(projectileAmount[spellLevel] == 2){
 			ScaleVector(right, i == 0 ? -10.0 : 10.0);
@@ -317,15 +317,15 @@ CastSunlightSpear(client, attuneSlot)
 		DispatchSpawn(iEntity);
 		SDKHook(iEntity, SDKHook_StartTouch, OnStartTouchSunlightSpear);
 		SDKHook(iEntity, SDKHook_Touch, AddArrowCollisionFunction);
-		
-		CreateParticleEx(iEntity, "raygun_projectile_red_crit", 1);
-		CreateParticleEx(iEntity, "raygun_projectile_red", 1);
+
 		
 		TE_SetupKillPlayerAttachments(iEntity);
 		TE_SendToAll();
 		int color[4]={255, 200, 0,225};
 		TE_SetupBeamFollow(iEntity,Laser,0,0.2,3.0,3.0,1,color);
 		TE_SendToAll();
+		CreateParticleEx(iEntity, "raygun_projectile_red_crit", 1);
+		CreateParticleEx(iEntity, "raygun_projectile_red", 1);
 	}
 }
 CastLightningEnchantment(client, attuneSlot)
@@ -1371,7 +1371,7 @@ CastBlackskyEye(client, attuneSlot)
 		TeleportEntity(iEntity, fOrigin, fAngles, fVelocity);
 		DispatchSpawn(iEntity);
 
-		CreateParticleEx(iEntity, "drg_cow_rockettrail_charged_blue", 1);
+		CreateParticleEx(iEntity, "drg_cow_rockettrail_normal_blue", 1);
 		
 		SDKHook(iEntity, SDKHook_StartTouchPost, BlackskyEyeCollision);
 		SDKHook(iEntity, SDKHook_Touch, AddArrowCollisionFunction);
@@ -1455,7 +1455,7 @@ public Action:ACallBeyond(Handle timer, client)
 		
 		homingRadius[iEntity] = radius[spellLevel];
 		homingTickRate[iEntity] = tickRate[spellLevel];
-		homingDelay[iEntity] = 0.4;
+		homingDelay[iEntity] = 0.15;
 	}
 
 	float clientpos[3];
