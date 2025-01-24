@@ -108,7 +108,6 @@ public UberShopinitMenusHandlers()
 	RegAdminCmd("sm_test", TestCommand, ADMFLAG_ROOT, "Filler Test");
 	RegAdminCmd("sm_damage", Command_DealDamage, ADMFLAG_ROOT, "Deals damage to a player.")
 	RegAdminCmd("sm_giveKills", Command_GiveKills, ADMFLAG_ROOT, "Feeds kills to a strange weapon.")
-	RegAdminCmd("sm_ifautooptimize", Command_AutoOptimize, ADMFLAG_ROOT, "Automatically upgrades a weapon with max money.");
 	
 	RegConsoleCmd("sm_scoreboard", ShowStats, "Shows everyones statisics");
 	RegConsoleCmd("scoreboard", ShowStats, "Shows everyones statisics");
@@ -454,7 +453,6 @@ public void OnPluginStart()
 	//Cookies
 	hArmorXPos = RegClientCookie("razor_armorxpos", "X Coordinate of armor bar.", CookieAccess_Protected);
 	hArmorYPos = RegClientCookie("razor_armorypos", "Y Coordinate of armor bar.", CookieAccess_Protected);
-	disableOptimizer = RegClientCookie("if_disableoptimizer", "Toggles the in-game optimizer.", CookieAccess_Protected);
 	respawnMenu = RegClientCookie("if_respawnmenu", "Toggles if you get the respawn menu on spawn.", CookieAccess_Protected);
 	EngineerTutorial = RegClientCookie("tutorial_engineer", "State of Tutorial", CookieAccess_Protected);
 	ArmorTutorial = RegClientCookie("tutorial_armor", "State of Tutorial", CookieAccess_Protected);

@@ -115,8 +115,8 @@ public Action:OnSplittingThunderCollision(entity, client)
 	float origin[3];
 	GetEntPropVector(entity, Prop_Data, "m_vecOrigin", origin);
 
-	float scaling[] = {0.0, 200.0, 400.0, 800.0};
-	float ProjectileDamage = 5000.0 + (Pow(ArcaneDamage[owner]*Pow(ArcanePower[owner], 4.0),spellScaling[spellLevel]) * scaling[spellLevel]);
+	float scaling[] = {0.0, 300.0, 400.0, 600.0};
+	float ProjectileDamage = 5000.0 + scaling[spellLevel] * ArcaneDamage[owner];
 	EntityExplosion(owner, ProjectileDamage, 300.0, origin, _, _, entity);
 	RemoveEntity(entity);
 
@@ -142,7 +142,7 @@ public Action:OnSunlightSpearCollision(entity, client)
 				int spellLevel = RoundToNearest(GetAttribute(owner, "arcane spell level", 1.0));
 
 				float scaling[] = {0.0, 35.0, 70.0, 140.0};
-				float ProjectileDamage = 140.0 + (Pow(ArcaneDamage[owner]*Pow(ArcanePower[owner], 4.0),spellScaling[spellLevel]) * scaling[spellLevel]);
+				float ProjectileDamage = 140.0 + scaling[spellLevel]*ArcaneDamage[owner];
 				currentDamageType[owner].second |= DMG_IGNOREHOOK;
 				SDKHooks_TakeDamage(client, owner, owner, ProjectileDamage, DMG_SHOCK,_,_,_,false);
 				RemoveEntity(entity);
@@ -189,7 +189,7 @@ public Action:BlackskyEyeCollision(entity, client)
 	float projvec[3];
 	float radius[] = {0.0, 300.0,500.0,800.0};
 	float scaling[] = {0.0, 7.5, 8.5, 12.0};
-	float ProjectileDamage = 10.0 + (Pow(ArcaneDamage[owner]*Pow(ArcanePower[owner], 4.0),spellScaling[spellLevel]) * scaling[spellLevel]);
+	float ProjectileDamage = 10.0 + scaling[spellLevel]*ArcaneDamage[owner];
 	if(HasEntProp(entity, Prop_Data, "m_vecOrigin"))
 	{
 		GetEntPropVector(entity, Prop_Data, "m_vecOrigin", projvec);
@@ -219,9 +219,9 @@ public Action:CallBeyondCollision(entity, client)
 		return Plugin_Continue;
 		
 	float projvec[3];
-	
-	float level = ArcaneDamage[owner];
-	float ProjectileDamage = 90.0 + (Pow(level*Pow(ArcanePower[owner], 4.0),2.45) * 120.0);
+	int spellLevel = RoundToNearest(GetAttribute(owner, "arcane spell level", 1.0));
+	float scaling[] = {0.0, 80.0, 100.0, 120.0};
+	float ProjectileDamage = 90.0 + scaling[spellLevel]*ArcaneDamage[owner];
 	if(HasEntProp(entity, Prop_Data, "m_vecOrigin"))
 	{
 		GetEntPropVector(entity, Prop_Data, "m_vecOrigin", projvec);

@@ -15,7 +15,6 @@ Handle cvar_BotMultiplier
 //Handle DB = null;
 Handle hArmorXPos;
 Handle hArmorYPos;
-Handle disableOptimizer;
 Handle respawnMenu;
 Handle particleToggle;
 Handle knockbackToggle;
@@ -50,6 +49,7 @@ enum struct Upgrade{
     char name[64];
     char attr_name[64];
     char description[256];
+	bool is_global;
 }
 enum struct Tweak{
     float cost;
@@ -218,7 +218,6 @@ int gameStage;
 int given_upgrd_list_nb[LISTS]
 int given_upgrd_subcat_nb[LISTS][LISTS_CATEGORIES]
 int given_upgrd_list[LISTS][LISTS_CATEGORIES][LISTS_CATEGORIES][128]
-int upgrades_efficiency_list[MAXPLAYERS+1][NB_SLOTS_UED+1][MAX_ATTRIBUTES]
 int given_upgrd_classnames_tweak_idx[LISTS]
 int given_upgrd_classnames_tweak_nb[LISTS]
 int given_upgrd_subcat[LISTS][LISTS_CATEGORIES]
@@ -292,10 +291,8 @@ int AttunedSpells[MAXPLAYERS+1][Max_Attunement_Slots];
 float currentGameTime
 float MoneyBonusKill
 float StartMoney
-float efficiencyCalculationTimer[MAXPLAYERS+1]
 float currentupgrades_i[MAXPLAYERS+1][NB_SLOTS_UED+1][MAX_ATTRIBUTES_ITEM]
 float currentupgrades_val[MAXPLAYERS+1][NB_SLOTS_UED+1][MAX_ATTRIBUTES_ITEM]
-float upgrades_efficiency[MAXPLAYERS+1][NB_SLOTS_UED+1][MAX_ATTRIBUTES]
 float client_spent_money[MAXPLAYERS+1][NB_SLOTS_UED+1]
 float client_tweak_highest_requirement[MAXPLAYERS+1][NB_SLOTS_UED+1]
 float additionalstartmoney;

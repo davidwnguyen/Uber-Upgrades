@@ -46,9 +46,9 @@ public Action:Timer_Second(Handle timer)
 			}
 
 			ArcanePower[client] = TF2Attrib_HookValueFloat(1.0, "arcane_power", client);
-			ArcaneDamage[client] = TF2Attrib_HookValueFloat(1.0, "arcane_damage", client);
-			fl_MaxFocus[client] = (100.0+TF2Attrib_HookValueInt(0, "arcane_focus_max", client)) * Pow(ArcanePower[client], 2.0);
-			fl_RegenFocus[client] = fl_MaxFocus[client] * TICKINTERVAL * 0.05 * TF2Attrib_HookValueFloat(1.0, "arcane_focus_regeneration", client) * Pow(ArcanePower[client], 2.0);
+			ArcaneDamage[client] = TF2Attrib_HookValueFloat(1.0, "arcane_damage", client) * GetAttribute(client, "damage mult 4", 1.0) * ArcanePower[client]*ArcanePower[client];
+			fl_MaxFocus[client] = (100.0+TF2Attrib_HookValueInt(0, "arcane_focus_max", client)) * ArcanePower[client]*ArcanePower[client];
+			fl_RegenFocus[client] = fl_MaxFocus[client] * TICKINTERVAL * 0.05 * TF2Attrib_HookValueFloat(1.0, "arcane_focus_regeneration", client) * ArcanePower[client]*ArcanePower[client];
 		}
 	}
 	if(IsMvM())

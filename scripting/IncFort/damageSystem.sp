@@ -743,7 +743,7 @@ public Action TF2_OnTakeDamage(int victim, int &attacker, int &inflictor, float 
 
 	if(currentDamageType[attacker].second & DMG_ARCANESCALING)
 	{
-		damage *= Pow(ArcaneDamage[attacker] * Pow(ArcanePower[attacker], 4.0), spellScaling[gameStage+1]);
+		damage *= ArcaneDamage[attacker]
 		changed = Plugin_Changed;
 	}
 		
@@ -1564,7 +1564,7 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 		float arcaneWeaponScaling = GetAttribute(weapon,"arcane weapon scaling",0.0);
 		if(arcaneWeaponScaling != 0.0){
 			currentDamageType[attacker].second |= DMG_IGNOREHOOK;
-			SDKHooks_TakeDamage(victim,attacker,attacker,10.0 + (Pow(ArcaneDamage[attacker] * Pow(ArcanePower[attacker], 4.0), spellScaling[gameStage+1]) * arcaneWeaponScaling),_,_,_,_,false);
+			SDKHooks_TakeDamage(victim,attacker,attacker,10.0 + ArcaneDamage[attacker] * arcaneWeaponScaling,_,_,_,_,false);
 		}
 		
 		if(weaponFireRate[weapon] > 0.0){

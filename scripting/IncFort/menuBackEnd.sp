@@ -1,57 +1,6 @@
 public MenuHandler_UpgradeChoice(Handle menu, MenuAction:action, client, param2)
 {
-	if(action == MenuAction_DisplayItem)
-	{
-		char desc_str[128];
-		char info_str[16];
-		char title_str[64];
-		int style;
-		GetMenuTitle(menu, title_str, sizeof(title_str));
-		GetMenuItem(menu, param2, info_str, sizeof(info_str), style, desc_str, sizeof(desc_str));
-		int slot = current_slot_used[client]
-		int w_id = current_w_list_id[client]
-		int cat_id = current_w_c_list_id[client]
-		int subcat_id = current_w_sc_list_id[client]
-		int upgrade_choice = given_upgrd_list[w_id][cat_id][subcat_id][param2]
-		playerUpgradeMenuPage[client] = param2;
-
-		if(upgrades[upgrade_choice].display_style == 0)
-			return RedrawMenuItem(desc_str);
-
-		char ToggleEnabled[32];
-		GetClientCookie(client, disableOptimizer, ToggleEnabled, sizeof(ToggleEnabled));
-		if(StringToInt(ToggleEnabled))
-			return RedrawMenuItem(desc_str);
-
-		bool isBuildingPage = StrContains(title_str, "Building Upgrades", false) != -1;
-		
-		switch(upgrades[upgrade_choice].display_style)
-		{
-			case 1:
-			{		
-				if(upgrades_efficiency_list[client][isBuildingPage ? 5 : slot][upgrade_choice])
-					Format(desc_str, sizeof(desc_str), "%s (#%i)", desc_str, upgrades_efficiency_list[client][isBuildingPage ? 5 : slot][upgrade_choice]);
-			}
-			case 6:
-			{
-				if(upgrades_efficiency_list[client][isBuildingPage ? 5 : slot][upgrade_choice])
-					Format(desc_str, sizeof(desc_str), "%s (#%i)", desc_str, upgrades_efficiency_list[client][isBuildingPage ? 5 : slot][upgrade_choice]);
-			}
-			case 2:
-			{
-				if(upgrades_efficiency_list[client][slot][upgrade_choice])
-					Format(desc_str, sizeof(desc_str), "%s (#%i)", desc_str, upgrades_efficiency_list[client][slot][upgrade_choice]);
-			}
-			case 3:
-			{
-				if(upgrades_efficiency_list[client][slot][upgrade_choice])
-					Format(desc_str, sizeof(desc_str), "%s (#%i)", desc_str, upgrades_efficiency_list[client][slot][upgrade_choice]);
-			}
-		}
-		return RedrawMenuItem(desc_str);
-		
-	}
-	else if (action == MenuAction_Select)
+	if (action == MenuAction_Select)
 	{
 		client_respawn_handled[client] = 0
 		int slot = current_slot_used[client]
@@ -59,6 +8,10 @@ public MenuHandler_UpgradeChoice(Handle menu, MenuAction:action, client, param2)
 		int cat_id = current_w_c_list_id[client]
 		int subcat_id = current_w_sc_list_id[client]
 		int upgrade_choice = given_upgrd_list[w_id][cat_id][subcat_id][param2]
+
+		if(upgrades[upgrade_choice].is_global)
+			slot = 4;
+
 		int inum = upgrades_ref_to_idx[client][slot][upgrade_choice]
 		int rate = getUpgradeRate(client);
 		if(canBypassRestriction[client] == false && upgrades[upgrade_choice].requirement > (StartMoney + additionalstartmoney))
@@ -86,6 +39,8 @@ public MenuHandler_UpgradeChoice(Handle menu, MenuAction:action, client, param2)
 			PrintToChat(client,"The server has not reached this level yet.")
 			return param2;
 		}
+
+
 		if(rate == 1)
 		{
 			if (is_client_got_req(client, upgrade_choice, slot, inum))
@@ -955,20 +910,6 @@ public MenuHandler_Preferences(Handle menu, MenuAction:action, client, param2)
 					SetClientCookie(client, ArcaneTutorial, "0");
 					SetClientCookie(client, WeaponTutorial, "0");
 					PrintHintText(client, "Reset all tutorial HUD messages.");
-				}
-				case 8:
-				{
-					char ToggleEnabled[64];
-					GetClientCookie(client, disableOptimizer, ToggleEnabled, sizeof(ToggleEnabled));
-					float ToggleValue = StringToFloat(ToggleEnabled);
-					
-					if(ToggleValue == 0.0){
-						SetClientCookie(client, disableOptimizer, "1");
-						PrintHintText(client, "Optimizer is now disabled.");
-					}else{
-						SetClientCookie(client, disableOptimizer, "0");
-						PrintHintText(client, "Optimizer is now enabled.");
-					}
 				}
 				default:
 				{

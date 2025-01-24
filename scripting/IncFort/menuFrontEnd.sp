@@ -71,19 +71,20 @@ Action:Menu_UpgradeChoice(client, subcat_choice, cat_choice, char[] TitleStr, in
 		int tmp_ref_idx
 		int up_cost
 		float tmp_val
-		float val
 		float tmp_ratio
 		int slot
 		current_w_sc_list_id[client] = subcat_choice;
 		current_w_c_list_id[client] = cat_choice;
-		slot = current_slot_used[client]
 		int attributeDisabled[MAX_ATTRIBUTES]
 		float m_val;
-		bool isBuildingPage = StrContains(TitleStr, "Building Upgrades", false) != -1;
 		//PrintToServer("%i | %i", cat_choice, subcat_choice)
 
 		for (i = 0; (tmp_up_idx = given_upgrd_list[w_id][cat_choice][subcat_choice][i]); ++i)
 		{
+			slot = current_slot_used[client]
+			if(upgrades[tmp_up_idx].is_global)
+				slot = 4;
+
 			up_cost = upgrades[tmp_up_idx].cost;
 			if (slot == 1)
 				up_cost = RoundToCeil(up_cost*SecondaryCostReduction);
@@ -92,7 +93,6 @@ Action:Menu_UpgradeChoice(client, subcat_choice, cat_choice, char[] TitleStr, in
 			m_val = upgrades[tmp_up_idx].m_val - upgrades[tmp_up_idx].i_val;
 			if (tmp_ref_idx != 20000)
 			{
-				val = currentupgrades_val[client][slot][tmp_ref_idx];
 				tmp_val = currentupgrades_val[client][slot][tmp_ref_idx] - upgrades[tmp_up_idx].i_val;
 				if(currentupgrades_i[client][slot][tmp_ref_idx] != 0.0){
 					tmp_val = currentupgrades_val[client][slot][tmp_ref_idx] - currentupgrades_i[client][slot][tmp_ref_idx];
@@ -102,7 +102,6 @@ Action:Menu_UpgradeChoice(client, subcat_choice, cat_choice, char[] TitleStr, in
 			else
 			{
 				tmp_val = 0.0;
-				val = upgrades[tmp_up_idx].i_val;
 			}
 			tmp_ratio = upgrades[tmp_up_idx].ratio;
 			float t_up_cost = 0.0;
@@ -197,7 +196,6 @@ Action:Menu_UpgradeChoice(client, subcat_choice, cat_choice, char[] TitleStr, in
 			char TotalDisplayBuffer[64];
 			char MaximumDisplayBuffer[64];
 
-			bool itemDisabled;
             Format(DisplayBuffer, sizeof(DisplayBuffer), upgrades[tmp_up_idx].display, StrContains(upgrades[tmp_up_idx].display, "%%") != -1 ? float(RoundFloat(tmp_ratio*times*100.0)) : tmp_ratio*times);
 
             Format(TotalDisplayBuffer, sizeof(TotalDisplayBuffer), upgrades[tmp_up_idx].display, StrContains(upgrades[tmp_up_idx].display, "%%") != -1 ? float(RoundFloat(tmp_val*100.0)) : tmp_val);
@@ -206,119 +204,9 @@ Action:Menu_UpgradeChoice(client, subcat_choice, cat_choice, char[] TitleStr, in
 
             Format(Buffer, sizeof(Buffer), "%t | $%.0f\n\t%s%s\t[%s%s/%s]", upgrades[tmp_up_idx].name, t_up_cost, tmp_ratio*times > 0 ? "+" : "", DisplayBuffer, tmp_val > 0 ? "+" : "", TotalDisplayBuffer, MaximumDisplayBuffer);
 
-			if(canBypassRestriction[client]){ attributeDisabled[tmp_up_idx] = false; itemDisabled = false;}
-			if(!itemDisabled)
-			{
-				switch(upgrades[tmp_up_idx].display_style)
-				{
-					case 1:
-					{
-						if(val == 0.0)
-							val = upgrades[tmp_up_idx].i_val;
-	
-						upgrades_efficiency[client][isBuildingPage ? 5 : slot][tmp_up_idx] = 50000.0*(((val+upgrades[tmp_up_idx].ratio)/val)-1.0)/up_cost;
-					}
-					case 6:
-					{
-						if(val == 0.0)
-							val = upgrades[tmp_up_idx].i_val;
-						upgrades_efficiency[client][isBuildingPage ? 5 : slot][tmp_up_idx] = 50000.0*(0.05)/up_cost;
-					}
-					case 2:
-					{
-						if(val == 0.0)
-							val = upgrades[tmp_up_idx].i_val;
-						float delta = (GetResistance(client, true, upgrades[tmp_up_idx].ratio)) - (GetResistance(client, true));
-						upgrades_efficiency[client][slot][tmp_up_idx] = 50000.0*(delta)/up_cost;
-					}
-					case 3:
-					{
-						if(val == 0.0)
-							val = upgrades[tmp_up_idx].i_val;
-						float delta = (GetResistance(client, true, 0.0, upgrades[tmp_up_idx].ratio)) - (GetResistance(client, true));
-						upgrades_efficiency[client][slot][tmp_up_idx] = 50000.0*(delta)/up_cost;
-					}
-					case 4:
-					{
-						float arcanePower = 1.0;
-						
-						Address ArcaneActive = TF2Attrib_GetByName(client, "arcane power")
-						if(ArcaneActive != Address_Null)
-						{
-							arcanePower = TF2Attrib_GetValue(ArcaneActive);
-						}
-						
-						float arcaneDamageMult = 1.0;
+			if(canBypassRestriction[client]){ attributeDisabled[tmp_up_idx] = false;}
 
-						Address ArcaneDamageActive = TF2Attrib_GetByName(client, "arcane damage")
-						if(ArcaneDamageActive != Address_Null)
-						{
-							arcaneDamageMult = TF2Attrib_GetValue(ArcaneDamageActive);
-						}
-
-						float delta = Pow((arcaneDamageMult+upgrades[tmp_up_idx].ratio) * Pow(arcanePower, 4.0), 2.45) - Pow(arcaneDamageMult * Pow(arcanePower, 4.0), 2.45);
-						Format(Buffer, sizeof(Buffer), "%s (+%.1f)", Buffer, delta);
-					}
-					case 5:
-					{
-						float arcanePower = 1.0;
-						
-						Address ArcaneActive = TF2Attrib_GetByName(client, "arcane power")
-						if(ArcaneActive != Address_Null)
-						{
-							arcanePower = TF2Attrib_GetValue(ArcaneActive);
-						}
-						
-						float arcaneDamageMult = 1.0;
-
-						Address ArcaneDamageActive = TF2Attrib_GetByName(client, "arcane damage")
-						if(ArcaneDamageActive != Address_Null)
-						{
-							arcaneDamageMult = TF2Attrib_GetValue(ArcaneDamageActive);
-						}
-
-						float delta = Pow(arcaneDamageMult * Pow(arcanePower+upgrades[tmp_up_idx].ratio, 4.0), 2.45) - Pow(arcaneDamageMult * Pow(arcanePower, 4.0), 2.45);
-						Format(Buffer, sizeof(Buffer), "%s (+%.1f)", Buffer, delta);
-					}
-				}
-			}
 			AddMenuItem(menu, "upgrade", Buffer);
-		}
-		if(efficiencyCalculationTimer[client] < currentGameTime)
-		{
-			int numEff = 0;
-			for(int e=0;e<MAX_ATTRIBUTES;++e)
-			{
-				if(upgrades_efficiency[client][isBuildingPage ? 5 : slot][e])
-					++numEff;
-			}
-			float max = 0.0;
-			int highestIndex = 0;
-			bool toBlock[MAX_ATTRIBUTES];
-			for(int k=0;k<numEff;++k) 
-			{
-				for(int t=0;t<MAX_ATTRIBUTES;++t)
-				{
-					if(!toBlock[t] && upgrades_efficiency[client][isBuildingPage ? 5 : slot][t])
-					{
-						if(upgrades_efficiency[client][isBuildingPage ? 5 : slot][t] > max)
-						{
-							max = upgrades_efficiency[client][isBuildingPage ? 5 : slot][t]
-							highestIndex = t;
-						}
-					}
-					if(attributeDisabled[t])
-					{
-						upgrades_efficiency_list[client][isBuildingPage ? 5 : slot][t] = 0;
-						upgrades_efficiency[client][isBuildingPage ? 5 : slot][t] = 0.0;
-					}
-				}
-				max = 0.0;
-				toBlock[highestIndex] = true;
-				//PrintToServer("%i | %.2f | %s", k, upgrades_efficiency[client][slot][highestIndex], toBlock[highestIndex] ? "blocked" : "unblocked")
-				upgrades_efficiency_list[client][isBuildingPage ? 5 : slot][highestIndex] = k+1;
-			}
-			efficiencyCalculationTimer[client] = currentGameTime+0.03;
 		}
 		SetMenuTitle(menu, TitleStr);
 		SetMenuExitBackButton(menu, true);
@@ -353,23 +241,6 @@ public Action:Menu_ChooseCategory(client, char[] TitleStr)
 		{
 			Format(buf, sizeof(buf), "%T", given_upgrd_classnames[w_id][i], client)
 			AddMenuItem(menu, "upgrade", buf);
-		}
-	}
-	int tmp_up_idx;
-	for (int i = 0; i < LISTS_CATEGORIES; ++i){
-		for(int j = 0; j < LISTS_CATEGORIES; ++j){
-			for (int a = 0; (tmp_up_idx = given_upgrd_list[w_id][i][j][a]); ++a){
-				if(upgrades_efficiency[client][slot][tmp_up_idx])
-					continue;	
-
-				if(upgrades[tmp_up_idx].display_style == 1){
-					upgrades_efficiency[client][slot][tmp_up_idx] = 50000.0*
-					(((upgrades[tmp_up_idx].i_val+upgrades[tmp_up_idx].ratio)/upgrades[tmp_up_idx].i_val)-1.0)/upgrades[tmp_up_idx].cost;
-				}
-				else if(upgrades[tmp_up_idx].display_style == 6){
-					upgrades_efficiency[client][slot][tmp_up_idx] = 50000.0*(0.05)/upgrades[tmp_up_idx].cost;
-				}
-			}
 		}
 	}
 	SetMenuTitle(menu, TitleStr);
@@ -617,7 +488,6 @@ public Menu_ChangePreferences(client)
 		AddMenuItem(menu, "particleToggle", "Toggle self-viewable particles.");
 		AddMenuItem(menu, "knockbackToggle", "Change knockback preferences.");
 		AddMenuItem(menu, "resetTutorial", "Reset all tutorial HUD elements.");
-		AddMenuItem(menu, "optimizerToggle", "Toggle optimizer.");
 		DisplayMenu(menu, client, MENU_TIME_FOREVER);
 	}
 }

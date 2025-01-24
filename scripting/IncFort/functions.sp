@@ -749,7 +749,7 @@ public bool GiveNewWeapon(client, slot)
 	}
 	return false
 }
-public GiveNewUpgradedWeapon_(client, slot)
+void GiveNewUpgradedWeapon_(int client, int slot)
 {
 	int iNumAttributes;
 	int iEnt;
@@ -937,8 +937,6 @@ public ResetClientUpgrade_slot(client, slot)
 	{
 		upgrades_ref_to_idx[client][slot][i] = 20000;
 		upgrades_ref_to_idx_mvm_chkp[client][slot][i] = 20000;
-		upgrades_efficiency[client][slot][i] = 0.0;
-		upgrades_efficiency_list[client][slot][i] = 0;
 	}
 	
 	if (slot != 4 && currentitem_idx[client][slot] && !replenishStatus)
@@ -3799,7 +3797,6 @@ ResetVariables(){
 		Kills[client] = 0;
 		Deaths[client] = 0;
 		currentGameTime = 0.0;
-		efficiencyCalculationTimer[client] = 0.0;
 		DamageDealt[client] = 0.0;
 		dps[client] = 0.0;
 		Healed[client] = 0.0;

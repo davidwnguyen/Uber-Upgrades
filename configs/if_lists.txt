@@ -39,10 +39,11 @@
 		{
 			"!Arcane Stats"
 			{
-				"Attr1"		"Max Focus"
-				"Attr2"		"Focus Regeneration"
-				"Attr3"		"Arcane Power"
-				"Attr4"		"Arcane Damage"
+				"Attr1"		"damage bonus"
+				"Attr2"		"Arcane Power"
+				"Attr3"		"Arcane Damage"
+				"Attr4"		"Max Focus"
+				"Attr5"		"Focus Regeneration"
 				"Attr6"		"Arcane Cooldown Reduction"
 				"Attr7"		"Arcane Spell Level"
 			}
@@ -144,10 +145,11 @@
 		{
 			"!Arcane Stats"
 			{
-				"Attr1"		"Max Focus"
-				"Attr2"		"Focus Regeneration"
-				"Attr3"		"Arcane Power"
-				"Attr4"		"Arcane Damage"
+				"Attr1"		"damage bonus"
+				"Attr2"		"Arcane Power"
+				"Attr3"		"Arcane Damage"
+				"Attr4"		"Max Focus"
+				"Attr5"		"Focus Regeneration"
 				"Attr6"		"Arcane Cooldown Reduction"
 				"Attr7"		"Arcane Spell Level"
 			}
@@ -249,10 +251,11 @@
 		{
 			"!Arcane Stats"
 			{
-				"Attr1"		"Max Focus"
-				"Attr2"		"Focus Regeneration"
-				"Attr3"		"Arcane Power"
-				"Attr4"		"Arcane Damage"
+				"Attr1"		"damage bonus"
+				"Attr2"		"Arcane Power"
+				"Attr3"		"Arcane Damage"
+				"Attr4"		"Max Focus"
+				"Attr5"		"Focus Regeneration"
 				"Attr6"		"Arcane Cooldown Reduction"
 				"Attr7"		"Arcane Spell Level"
 			}
@@ -353,10 +356,11 @@
 		{
 			"!Arcane Stats"
 			{
-				"Attr1"		"Max Focus"
-				"Attr2"		"Focus Regeneration"
-				"Attr3"		"Arcane Power"
-				"Attr4"		"Arcane Damage"
+				"Attr1"		"damage bonus"
+				"Attr2"		"Arcane Power"
+				"Attr3"		"Arcane Damage"
+				"Attr4"		"Max Focus"
+				"Attr5"		"Focus Regeneration"
 				"Attr6"		"Arcane Cooldown Reduction"
 				"Attr7"		"Arcane Spell Level"
 			}
@@ -458,10 +462,11 @@
 		{
 			"!Arcane Stats"
 			{
-				"Attr1"		"Max Focus"
-				"Attr2"		"Focus Regeneration"
-				"Attr3"		"Arcane Power"
-				"Attr4"		"Arcane Damage"
+				"Attr1"		"damage bonus"
+				"Attr2"		"Arcane Power"
+				"Attr3"		"Arcane Damage"
+				"Attr4"		"Max Focus"
+				"Attr5"		"Focus Regeneration"
 				"Attr6"		"Arcane Cooldown Reduction"
 				"Attr7"		"Arcane Spell Level"
 			}
@@ -563,10 +568,11 @@
 		{
 			"!Arcane Stats"
 			{
-				"Attr1"		"Max Focus"
-				"Attr2"		"Focus Regeneration"
-				"Attr3"		"Arcane Power"
-				"Attr4"		"Arcane Damage"
+				"Attr1"		"damage bonus"
+				"Attr2"		"Arcane Power"
+				"Attr3"		"Arcane Damage"
+				"Attr4"		"Max Focus"
+				"Attr5"		"Focus Regeneration"
 				"Attr6"		"Arcane Cooldown Reduction"
 				"Attr7"		"Arcane Spell Level"
 			}
@@ -667,10 +673,11 @@
 		{
 			"!Arcane Stats"
 			{
-				"Attr1"		"Max Focus"
-				"Attr2"		"Focus Regeneration"
-				"Attr3"		"Arcane Power"
-				"Attr4"		"Arcane Damage"
+				"Attr1"		"damage bonus"
+				"Attr2"		"Arcane Power"
+				"Attr3"		"Arcane Damage"
+				"Attr4"		"Max Focus"
+				"Attr5"		"Focus Regeneration"
 				"Attr6"		"Arcane Cooldown Reduction"
 				"Attr7"		"Arcane Spell Level"
 			}
@@ -774,10 +781,11 @@
 		{
 			"!Arcane Stats"
 			{
-				"Attr1"		"Max Focus"
-				"Attr2"		"Focus Regeneration"
-				"Attr3"		"Arcane Power"
-				"Attr4"		"Arcane Damage"
+				"Attr1"		"damage bonus"
+				"Attr2"		"Arcane Power"
+				"Attr3"		"Arcane Damage"
+				"Attr4"		"Max Focus"
+				"Attr5"		"Focus Regeneration"
 				"Attr6"		"Arcane Cooldown Reduction"
 				"Attr7"		"Arcane Spell Level"
 			}
@@ -882,10 +890,11 @@
 		{
 			"!Arcane Stats"
 			{
-				"Attr1"		"Max Focus"
-				"Attr2"		"Focus Regeneration"
-				"Attr3"		"Arcane Power"
-				"Attr4"		"Arcane Damage"
+				"Attr1"		"damage bonus"
+				"Attr2"		"Arcane Power"
+				"Attr3"		"Arcane Damage"
+				"Attr4"		"Max Focus"
+				"Attr5"		"Focus Regeneration"
 				"Attr6"		"Arcane Cooldown Reduction"
 				"Attr7"		"Arcane Spell Level"
 			}

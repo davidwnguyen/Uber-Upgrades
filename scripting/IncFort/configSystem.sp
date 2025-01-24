@@ -166,6 +166,11 @@ BrowseAttributesKV(Handle kv)
 						upgrades[_u_id].staged_max[i] = StringToFloat(parts[i-1]);
 					}
 				}
+				else if(StrEqual(Buf, "global"))
+				{
+					KvGetString(kv, "", Buf, 64);
+					upgrades[_u_id].is_global = view_as<bool>(StringToInt(Buf));
+				}
 				else if (StrEqual(Buf,"max"))
 				{
 					KvGetString(kv, "", Buf, 64);
