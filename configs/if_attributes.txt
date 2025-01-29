@@ -2073,13 +2073,14 @@
 		}
 		"123"
 		{
-			"name"		"flame_ignore_player_velocity"
-			"ref"		"Set DamageType Ignite"
+			"name"		"afterburn rating"
+			"ref"		"afterburn rating"
+			"attr_class"	"afterburn_rating"
 			"display"		"%.0f"
 			"cost"		"1600"
 			"value"		"1.00"
 			"init"		"0.00"
-			"max"		"1.00"
+			"max"		"10.00"
 		}
 		"124"
 		{

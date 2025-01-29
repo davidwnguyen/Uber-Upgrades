@@ -1,3 +1,16 @@
+public void insertAfterburn(int client, AfterburnStack newStack){
+	int replacementID = getNextAfterburnStack(client);
+		
+	playerAfterburn[client][replacementID] = newStack;
+}
+public int getNextAfterburnStack(int client){
+	for(int i = 0; i < MAXBUFFS; ++i){
+		if(playerAfterburn[client][i].expireTime < currentGameTime)
+			return i;
+	}
+	return 0;
+}
+
 float GetResistance(int client, bool includeReduction = false, float increaseBase = 0.0, float increaseMult = 0.0, float increaseTotal = 0.0)
 {
 	float TotalResistance = 1.0;

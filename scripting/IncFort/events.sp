@@ -1361,6 +1361,10 @@ public Action:Event_PlayerDeath(Handle event, const char[] name, bool:dontBroadc
 	enragedKills[client] = 0;
 	TeamTacticsBuildup[client] = 0.0;
 	isDeathTick[client] = true;
+	AfterburnStack empty;
+	for(int i = 0;i < MAX_AFTERBURN_STACKS; ++i){
+		playerAfterburn[client][i] = empty;
+	}
 
 	CancelClientMenu(client);
 
@@ -3194,6 +3198,10 @@ public OnClientDisconnect(client)
 	FreezeBuildup[client] = 0.0;
 	fl_HighestFireDamage[client] = 0.0;
 	canBypassRestriction[client] = false;
+	AfterburnStack empty;
+	for(int i = 0;i < MAX_AFTERBURN_STACKS; ++i){
+		playerAfterburn[client][i] = empty;
+	}
 	clearAllBuffs(client);
 	if(snowstormActive[client]){
 		int particleEffect = EntRefToEntIndex(snowstormParticle[client]);

@@ -1283,25 +1283,6 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 			}
 		}
 
-		if(isVictimPlayer)
-		{
-			float burndmgMult = 1.0;
-			burndmgMult *= GetAttribute(weapon, "shot penetrate all players");
-			burndmgMult *= GetAttribute(weapon, "weapon burn dmg increased");
-			burndmgMult *= GetAttribute(attacker, "weapon burn dmg increased");
-
-			if(GetAttribute(attacker, "knockout powerup", 0.0) == 2 && TF2Util_GetWeaponSlot(weapon) == TFWeaponSlot_Melee)
-				burndmgMult *= 3;
-
-			if(damagetype & DMG_ACTUALIGNITE || (GetClientTeam(attacker) != GetClientTeam(victim) && (GetAttribute(weapon, "flame_ignore_player_velocity", 0.0) || GetAttribute(attacker, "supernova powerup", 0.0) == 2) &&
-			TF2_GetDPSModifiers(attacker, weapon)*burndmgMult >= fl_HighestFireDamage[victim] && 
-			!(damagetype & DMG_BURN && damagetype & DMG_PREVENT_PHYSICS_FORCE) && !(damagetype & DMG_ENERGYBEAM))) // int afterburn system.
-			{
-				float afterburnDuration = 2.0 * GetAttribute(weapon, "weapon burn time increased");
-				TF2Util_IgnitePlayer(victim, attacker, afterburnDuration, weapon);
-				fl_HighestFireDamage[victim] = TF2_GetDPSModifiers(attacker, weapon)*burndmgMult;
-			}
-		}
 		float overrideproj = GetAttribute(weapon, "override projectile type");
 		float energyWeapActive = GetAttribute(weapon, "energy weapon penetration", 0.0);
 		if(overrideproj != 1.0 || energyWeapActive != 0.0)
@@ -1590,6 +1571,28 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 					currentDamageType[attacker].second |= DMG_IGNOREHOOK;
 					SDKHooks_TakeDamage(victim,attacker,attacker,inheritanceRatio*strongestDPS/weaponFireRate[weapon],_,_,_,_,false);
 				}
+			}
+		}
+		if(isVictimPlayer)
+		{
+			float burndmgMult = 1.0;
+			burndmgMult *= GetAttribute(weapon, "shot penetrate all players");
+			burndmgMult *= GetAttribute(weapon, "weapon burn dmg increased");
+			burndmgMult *= GetAttribute(attacker, "weapon burn dmg increased");
+
+			if(GetAttribute(attacker, "knockout powerup", 0.0) == 2 && TF2Util_GetWeaponSlot(weapon) == TFWeaponSlot_Melee)
+				burndmgMult *= 3;
+
+			if(damagetype & DMG_ACTUALIGNITE || (GetClientTeam(attacker) != GetClientTeam(victim) && (GetAttribute(weapon, "afterburn rating", 0.0) || GetAttribute(attacker, "supernova powerup", 0.0) == 2) &&
+			TF2_GetDPSModifiers(attacker, weapon)*burndmgMult >= fl_HighestFireDamage[victim] && 
+			!(damagetype & DMG_BURN && damagetype & DMG_PREVENT_PHYSICS_FORCE) && !(damagetype & DMG_IGNITE))) // int afterburn system.
+			{
+				AfterburnStack stack;
+				stack.owner = attacker;
+				stack.damage = damage*burndmgMult*0.1;
+				stack.expireTime = currentGameTime+6.0;
+
+				insertAfterburn(victim, stack);
 			}
 		}
 		if(damagetype & DMG_BURN && damagetype & DMG_PREVENT_PHYSICS_FORCE)

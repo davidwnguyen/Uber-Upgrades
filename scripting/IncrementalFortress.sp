@@ -40,6 +40,7 @@
 #define NB_WEAPONS 50
 #define Max_Attunement_Slots 7
 #define MAX_STAGES 5
+#define MAX_AFTERBURN_STACKS 30
 
 //Change to tickrate of how your server operates
 #define TICKINTERVAL 0.015

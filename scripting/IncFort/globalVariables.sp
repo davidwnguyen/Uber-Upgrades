@@ -200,12 +200,20 @@ bool isBonus[BuffAmt] = {
 	false,
 	false,
 }
+
+enum struct AfterburnStack{
+	int owner;
+	float damage;
+	float expireTime;
+}
+
 Buff playerBuffs[MAXPLAYERS+1][MAXBUFFS+1];
 bool buffChange[MAXPLAYERS+1] = {false,...};
 //oh boy
 extendedDamageTypes currentDamageType[MAXENTITIES];
 Upgrade upgrades[MAX_ATTRIBUTES];
 Tweak tweaks[MAX_TWEAKS]
+AfterburnStack playerAfterburn[MAXPLAYERS+1][MAX_AFTERBURN_STACKS];
 
 //Integers
 int OwnerOffset;

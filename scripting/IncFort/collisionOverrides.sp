@@ -146,7 +146,6 @@ public Action:OnSunlightSpearCollision(entity, client)
 				float ProjectileDamage = 140.0 + scaling[spellLevel]*ArcaneDamage[owner];
 				currentDamageType[owner].second |= DMG_IGNOREHOOK;
 				SDKHooks_TakeDamage(client, owner, owner, ProjectileDamage, DMG_SHOCK,_,_,_,false);
-				RemoveEdict(entity);
 				CreateParticleEx(client, "dragons_fury_effect_parent", 1);
 			}
 		}
@@ -167,6 +166,7 @@ public Action:OnSunlightSpearCollision(entity, client)
 		CreateParticleEx(entity, "drg_cow_explosioncore_charged", -1, -1, origin);
 		RemoveEdict(entity);
 	}
+
 	SDKUnhook(entity, SDKHook_Touch, OnSunlightSpearCollision);
 	return Plugin_Stop;
 }

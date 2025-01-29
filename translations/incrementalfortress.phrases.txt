@@ -1,5 +1,8 @@
 "Phrases"
 {
+	"afterburn rating"{
+		"en"		"Afterburn Rating"
+	}
 	"projectile flare effect"{
 		"en"		"Projectile Flare Effect"
 	}

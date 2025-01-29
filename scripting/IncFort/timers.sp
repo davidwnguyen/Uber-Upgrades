@@ -49,6 +49,23 @@ public Action:Timer_Second(Handle timer)
 			ArcaneDamage[client] = TF2Attrib_HookValueFloat(1.0, "arcane_damage", client) * GetAttribute(client, "damage mult 4", 1.0) * ArcanePower[client]*ArcanePower[client];
 			fl_MaxFocus[client] = (100.0+TF2Attrib_HookValueInt(0, "arcane_focus_max", client)) * ArcanePower[client]*ArcanePower[client];
 			fl_RegenFocus[client] = fl_MaxFocus[client] * TICKINTERVAL * 0.05 * TF2Attrib_HookValueFloat(1.0, "arcane_focus_regeneration", client) * ArcanePower[client]*ArcanePower[client];
+
+			bool isOnFire = false;
+			for(int i=0;i < MAX_AFTERBURN_STACKS; ++i){
+				if(playerAfterburn[client][i].expireTime < currentGameTime)
+					continue;
+
+				int owner = playerAfterburn[client][i].owner;
+				if(!IsValidEntity(owner))
+					continue;
+
+				currentDamageType[owner].second |= DMG_IGNOREHOOK;
+				SDKHooks_TakeDamage(client, owner, owner, playerAfterburn[client][i].damage, DMG_BURN | DMG_PREVENT_PHYSICS_FORCE, _, _, _, false);
+				isOnFire = true;
+			}
+			if(isOnFire)
+				TF2Util_IgnitePlayer(client, client, 1.1);
+
 		}
 	}
 	if(IsMvM())

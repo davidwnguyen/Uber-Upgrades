@@ -393,7 +393,7 @@
 		{
 			"preserve_attributes"	"1"
 			"1"				"explosive bullets;140.0"
-			"2"				"flame_ignore_player_velocity;1.0"
+			"2"				"afterburn rating;1.0"
 		}
 		"220" //Shortstop
 		{
@@ -413,7 +413,7 @@
 		{
 			"1"				"shot penetrate all players;15.0"
 			"2"				"damage mult 13; 0.5"
-			"3"				"flame_ignore_player_velocity;1.0"
+			"3"				"afterburn rating;1.0"
 		}
 		"17,204" //Syringe Gun 
 		{
