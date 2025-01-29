@@ -312,7 +312,6 @@ float MadmilkDuration[MAXPLAYERS+1];
 float fl_MaxFocus[MAXPLAYERS+1];
 float fl_CurrentFocus[MAXPLAYERS+1];
 float fl_RegenFocus[MAXPLAYERS+1];
-float SpellCooldowns[MAXPLAYERS+1][Max_Attunement_Slots];
 float ArcanePower[MAXPLAYERS+1];
 float ArcaneDamage[MAXPLAYERS+1];
 float LightningEnchantment[MAXPLAYERS+1];
@@ -381,6 +380,7 @@ char ArcaneSpellList[][] = {"Zap","Lightning Strike","Projected Healing","A Call
 "Lightning Enchantment","Snap Freeze","Arcane Prison","Darkmoon Blade","Speed Aura","Aerial Strike","Inferno",
 "Mine Field","Shockwave","Auto-Sentry","Soothing Sunlight","Arcane Hunter","Sabotage","Infernal Enchantment",
 "Splitting Thunder", "Antiseptic Blast", "Karmic Justice", "Snowstorm", "Stun Shot", "Fireball Volley", "Dash", "Transient Moonlight", "Corpse Piler", "Homing Flares", "Silent Dash"};
+float SpellCooldowns[MAXPLAYERS+1][sizeof(ArcaneSpellList)+1];
 
 //Bools
 bool inScore[MAXPLAYERS+1];

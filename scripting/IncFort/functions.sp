@@ -1044,16 +1044,6 @@ public DefineAttributesTab(client, itemidx, slot, entity)
 		DisplayItemChange(client,itemidx);
 	}
 }
-applyArcaneCooldownReduction(client, attuneSlot)
-{
-	float cdReduction = 1.0/ArcanePower[client];
-
-	Address cdMult = TF2Attrib_GetByName(client, "arcane cooldown rate");
-	if(cdMult != Address_Null)
-		cdReduction *= TF2Attrib_GetValue(cdMult);
-
-	SpellCooldowns[client][attuneSlot] *= cdReduction
-}
 DisplayItemChange(client,itemidx)
 {
 	char ChangeString[189];
@@ -2588,20 +2578,22 @@ setNoMetal(int client){
 public bool applyArcaneRestrictions(int client, int attuneSlot, float focusCost, float cooldown)
 {
 	focusCost /= ArcanePower[client];
+	cooldown *= TF2Attrib_HookValueFloat(1.0, "arcane_cooldown_rate", client)/ArcanePower[client];
+
 	if(fl_CurrentFocus[client] < focusCost)
 	{
 		PrintHintText(client, "Not enough focus! Requires %.2f focus.",focusCost);
 		EmitSoundToClient(client, SOUND_FAIL);
 		return true;
 	}
-	if(SpellCooldowns[client][attuneSlot] > 0.0)
+	if(SpellCooldowns[client][AttunedSpells[client][attuneSlot]-1] > GetGameTime())
 		return true;
 
 	PrintHintText(client, "Used %s! -%.2f focus.",ArcaneSpellList[AttunedSpells[client][attuneSlot]-1],focusCost);
 	fl_CurrentFocus[client] -= focusCost;
+
 	if(DisableCooldowns != 1)
-		SpellCooldowns[client][attuneSlot] = cooldown;
-	applyArcaneCooldownReduction(client, attuneSlot);
+		SpellCooldowns[client][AttunedSpells[client][attuneSlot]-1] = cooldown+GetGameTime();
 
 	return false;
 }
@@ -2990,8 +2982,18 @@ public SetWeaponOwner(entity){
 public getProjOrigin(entity)
 {
 	entity = EntRefToEntIndex(entity);
-	if(IsValidEdict(entity))
+	if(IsValidEdict(entity)){
 		GetEntPropVector(entity, Prop_Data, "m_vecOrigin", entitySpawnPositions[entity]);
+
+		int owner = getOwner(entity);
+		if(!IsValidClient3(owner))
+			return;
+
+		if(TF2Attrib_HookValueInt(0, "sunburst_projectile", owner)){
+			CreateParticleEx(entity, "raygun_projectile_red_crit", 1);
+			CreateParticleEx(entity, "raygun_projectile_red", 1);
+		}
+	}
 }
 public OnFireballThink(entity)
 {

@@ -1,5 +1,8 @@
 "Phrases"
 {
+	"projectile flare effect"{
+		"en"		"Projectile Flare Effect"
+	}
 	"Arcane Spell Level"{
 		"en"		"Arcane Spell Level"
 	}

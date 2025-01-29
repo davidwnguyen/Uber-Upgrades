@@ -306,7 +306,11 @@ public Action:Timer_FixedVariables(Handle timer)
 					{
 						int spellID = RoundToNearest(AttunedSpells[client][i]-1.0)
 						char spellnum[64]
-						Format(spellnum, sizeof(spellnum),"%i - %s | %.1fs\n", i+1, ArcaneSpellList[spellID], SpellCooldowns[client][i]);
+						float timeLeft = SpellCooldowns[client][spellID]-GetGameTime();
+						if(timeLeft < 0.0)
+							timeLeft = 0.0;
+
+						Format(spellnum, sizeof(spellnum),"%i - %s | %.1fs\n", i+1, ArcaneSpellList[spellID], timeLeft);
 						StrCat(spellHUD,sizeof(spellHUD),spellnum);
 					}
 				}

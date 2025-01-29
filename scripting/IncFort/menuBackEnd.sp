@@ -1,6 +1,9 @@
 public MenuHandler_UpgradeChoice(Handle menu, MenuAction:action, client, param2)
 {
-	if (action == MenuAction_Select)
+	if(action == MenuAction_DisplayItem){
+		playerUpgradeMenuPage[client] = param2;
+	}
+	else if (action == MenuAction_Select)
 	{
 		client_respawn_handled[client] = 0
 		int slot = current_slot_used[client]

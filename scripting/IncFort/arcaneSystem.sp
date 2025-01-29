@@ -1518,11 +1518,11 @@ CastZap(client, attuneSlot)
 	}
 	if(validCount > 0)
 	{
-		fl_CurrentFocus[client] -= focusCost;
-		if(DisableCooldowns != 1)
-			SpellCooldowns[client][attuneSlot] = 0.1;
-		applyArcaneCooldownReduction(client, attuneSlot);
-		PrintHintText(client, "Used %s! -%.2f focus.",ArcaneSpellList[0],focusCost);
+		applyArcaneRestrictions(client, attuneSlot, focusCost, 0.1);
+	}
+	else
+	{
+		PrintHintText(client, "Zap found no valid targets!");
 	}
 }
 DoZap(client,victim,spellLevel)

@@ -2568,20 +2568,6 @@ public OnGameFrame()
 
 			if(fl_CurrentFocus[client] < 0.0)
 				fl_CurrentFocus[client] = 0.0;
-
-			if(CheckForAttunement(client))
-			{
-				for(i = 0; i < Max_Attunement_Slots;++i)
-				{
-					if(SpellCooldowns[client][i] == 0.0)
-						continue;
-
-					if(SpellCooldowns[client][i] > 0.0)
-						SpellCooldowns[client][i] -= TICKINTERVAL;
-					else
-						SpellCooldowns[client][i] = 0.0;
-				}
-			}
 		}
 	}
 }
