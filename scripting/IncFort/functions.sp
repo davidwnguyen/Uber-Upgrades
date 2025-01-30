@@ -1683,7 +1683,7 @@ refreshUpgrades(client, slot)
 			TF2Attrib_RemoveByName(client,"self dmg push force increased");
 			TF2Attrib_RemoveByName(client,"SET BONUS: chance of hunger decrease");
 			TF2Attrib_RemoveByName(client,"has pipboy build interface");
-			TF2Attrib_RemoveByName(client,"mult afterburn delay");
+			TF2Attrib_RemoveByName(client,"weapon burn dmg increased");
 
 			if(current_class[client] == TFClass_DemoMan)
 			{
@@ -1755,7 +1755,7 @@ refreshUpgrades(client, slot)
 			if(supernovaPowerup != Address_Null)
 			{
 				if(TF2Attrib_GetValue(supernovaPowerup) == 2)
-					TF2Attrib_SetByName(client,"mult afterburn delay", 1.55);
+					TF2Attrib_SetByName(client,"weapon burn dmg increased", 2.0);
 			}
 
 		}
@@ -3556,7 +3556,7 @@ GivePowerupDescription(int client, char[] name, int amount){
 	}
 	else if(StrEqual("supernova powerup", name)){
 		if(amount == 2){
-			CPrintToChat(client, "{community}Infernal Powerup {default}| {lightcyan}Fire damage spreads around 100 piercing DPS to nearby enemies. 1.8x fire damage. 1.5x afterburn tick rate. All attacks ignite.");
+			CPrintToChat(client, "{community}Infernal Powerup {default}| {lightcyan}Fire damage spreads around 100 piercing DPS to nearby enemies. 1.8x fire damage. 2.0x afterburn stack damage. All attacks ignite.");
 		}else if(amount == 3){
 			CPrintToChat(client, "{community}Thunderstorm Powerup {default}| {lightcyan}All damage is converted into electric damage (hit enemies recieve splash to other hit enemies). For every enemy tagged: +8%% damage.");
 		}else{

@@ -283,6 +283,7 @@
 		"grenade bounce damage"			"1"
 		"projectile flare effect"		"1"
 		"Converts Firerate to Damage"	"1"
+		"weapon damage mult"	"0.1"
 		"weapon fire rate"		"0.3"
 		"afterburn rating"		"1"
 		"afterburn dmg increased"	"7.0"

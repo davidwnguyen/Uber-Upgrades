@@ -6,20 +6,19 @@
 		{
 			"gamestage"						"1"
 			"restriction"					"1"
-			"flame ammopersec increased (tweak)"	"50.0"
-			"airblast pushback scale"		"3"
-			"airblast radius multiplier"	"2"
+			"flame ammopersec increased (tweak)"	"30.0"
+			"airblast pushback scale"		"5"
+			"airblast radius multiplier"	"3"
 			"slow enemy on hit major"		"1"
-			"Afterburn Tick Rate"			"4.0"
-			"mult crit dmg"					"3.0"
+			"afterburn time increased(N)"	"4.0"
 		}
 		"Temperature rise"
 		{
 			"gamestage"						"1"
 			"restriction"					"1"
-			"flame ammopersec increased (tweak)"	"30.0"
+			"flame ammopersec increased (tweak)"	"15.0"
 			"minicrit vs burning player"			"1.0"
-			"Afterburn Damage Multiplier"		"30.0"
+			"Afterburn Damage Multiplier"		"6.0"
 			"mult crit dmg"				"10.0"
 		}
 		"Honor!"
@@ -28,15 +27,15 @@
 			"restriction"					"1"
 			"honorbound"					"1.0"
 			"percent of hp healed on kill"	"5.0"
-			"weapon fire rate"				"0.8"
+			"weapon fire rate"				"0.65"
 		}
 		"Infernal Impulse"
 		{
 			"gamestage"						"1"
 			"restriction"					"1"
 			"Dragon Bullets Radius"			"600.0"
-			"Afterburn Tick Rate"			"4.0"
-			"damage bonus HIDDEN(b)"		"6.0"
+			"afterburn time increased(N)"	"1.5"
+			"damage bonus HIDDEN(b)"		"4.0"
 			"weapon fire rate(tweak)"		"2.0"
 			"Afterburn Damage Multiplier"	"10.0"
 		}
@@ -133,7 +132,7 @@
 		{
 			"gamestage"						"1"
 			"restriction"					"1"
-			"Afterburn Tick Rate"			"8.0"
+			"afterburn time increased(N)"	"3.0"
 			"minicrits become crits"		"1.0"
 			"mult crit dmg"				"3.0"
 		}
@@ -158,7 +157,7 @@
 			"restriction"					"1"
 			"Charge Rate Multiplier"		"0.6"
 			"Ability : Fireball Volley"		"1"
-			"Afterburn Tick Rate"			"5.0"
+			"afterburn time increased(N)"	"1.0"
 		}
 		"Fire Infusion"
 		{
@@ -167,7 +166,7 @@
 			"Arrow Ignition Chance"			"20.0"
 			"Ignited Arrows Explode"		"6.0"
 			"Ignited Arrows Explosion Radius"	"2.0"
-			"Afterburn Tick Rate"			"3.0"
+			"afterburn time increased(N)"	"2.0"
 		}
 		"Frost Infusion"
 		{
@@ -198,7 +197,7 @@
 			"gamestage"						"1"
 			"restriction"					"1"
 			"afterburn rating"				"1"
-			"Afterburn Tick Rate"			"5.0"
+			"afterburn time increased(N)"	"1.0"
 			"minicrit vs burning player"	"1.0"
 			"sticky recursive explosion chance"		"2.5"
 			"additive piercing damage"		"12.0"
@@ -336,7 +335,7 @@
 			"restriction"					"1"
 			"Ability : Immolation"			"1"
 			"immolation ratio"				"1.0"
-			"Afterburn Tick Rate"			"4"
+			"afterburn time increased(N)"	"2.0"
 			"dmg per pct hp missing"		"0.1"
 			"additive piercing damage"		"5"
 		}
@@ -416,7 +415,7 @@
 			"Ability : Sunstar"				"1"
 			"maxammo metal increased"		"2"
 			"afterburn dmg increased"		"5"
-			"Afterburn Tick Rate"			"4.0"
+			"afterburn time increased(N)"	"2.0"
 		}
 		"Starstorm"
 		{

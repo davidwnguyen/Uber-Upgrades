@@ -502,7 +502,7 @@
 		"en"		"Afterburn Tick Rate"
 	}
 	"flame ammopersec increased (tweak)"{
-		"en"		"Ammo Per Shot"
+		"en"		"Ammo Per Second Consumed"
 	}
 	"Needlestorm"{
 		"en"		"Needlestorm"

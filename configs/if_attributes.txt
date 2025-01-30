@@ -1331,8 +1331,8 @@
 			"name"		"weapon burn time increased"
 			"ref"		"afterburn time increased(N)"
 			"display"		"%.0f%%"
-			"cost"		"225"
-			"value"		".25"
+			"cost"		"0"
+			"value"		"1"
 			"init"		"1.00"
 			"max"		"5.00"
 		}
