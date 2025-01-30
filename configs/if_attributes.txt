@@ -5982,8 +5982,9 @@
 		}
 		"1614.5"
 		{
-			"name"		"weapon fire rate"
+			"name"		"weapon fire rate(tweak)"
 			"ref"		"weapon fire rate(tweak)"
+			"attr_class"	"mult_postfiredelay"
 			"display"		"%.0f%%"
 			"cost"		"0"
 			"value"		"1"
@@ -7070,6 +7071,26 @@
 			"ref"		"projectile flare effect"
 			"display"	"%.0f"
 			"attr_class"	"sunburst_projectile"
+			"cost"		"0"
+			"value"		"1.0"
+			"init"		"0.00"
+			"max"		"1.00"
+		}
+		"1710"
+		{
+			"name"		"grenade bounce speed"
+			"ref"		"grenade bounce speed"
+			"display"	"%.0f%%"
+			"cost"		"0"
+			"value"		"1.0"
+			"init"		"0.00"
+			"max"		"1.00"
+		}
+		"1711"
+		{
+			"name"		"grenade bounce damage"
+			"ref"		"grenade bounce damage"
+			"display"	"%.0f%%"
 			"cost"		"0"
 			"value"		"1.0"
 			"init"		"0.00"

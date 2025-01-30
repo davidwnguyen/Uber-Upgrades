@@ -229,16 +229,16 @@ void CreateParticleEx(iEntity, char[] strParticle, m_iAttachType = 0, m_iAttachm
 		if(time > 0.0){
 			CreateTimer(time, Timer_KillTEParticle, EntIndexToEntRef(iEntity))
 		}
-		if(IsNullVector(fOffset)){
+		if(m_iAttachType < 1 && IsNullVector(fOffset)){
 			GetEntPropVector(iEntity, Prop_Data, "m_vecOrigin", fOffset);
 		}
 	}
-
+	
 	TE_WriteFloat("m_vecOrigin[0]", fOffset[0]);
 	TE_WriteFloat("m_vecOrigin[1]", fOffset[1]);
 	TE_WriteFloat("m_vecOrigin[2]", fOffset[2]);
 	
-	TE_SendToAllInRange(fOffset, RangeType_Visibility);
+	TE_SendToAll();
 }
 //Replaces any old buff with same details, else inserts a new one.
 public void insertBuff(int client, Buff newBuff){
@@ -576,6 +576,9 @@ stock EntityExplosion(owner, float damage, float radius, float pos[3], soundType
 	if(entity == -1 || !IsValidEdict(entity))
 		entity = owner;
 	int i = -1;
+
+	if(ignition)
+		damagetype |= DMG_IGNITE;
 	while ((i = FindEntityByClassname(i, "*")) != -1)
 	{
 		if(IsValidForDamage(i) && !ShouldNotHit[entity][i] && IsOnDifferentTeams(owner,i) && i != entity)
@@ -613,8 +616,6 @@ stock EntityExplosion(owner, float damage, float radius, float pos[3], soundType
 						SDKHooks_TakeDamage(i,owner,owner,damage, damagetype,weapon,_,_,false)
 						if(knockback > 0.0)
 							PushEntity(i, owner, knockback, 200.0);
-						if(ignition)
-							TF2Util_IgnitePlayer(i, owner, 7.0, weapon);
 					}
 					else
 					{
@@ -1265,7 +1266,7 @@ DisplayItemChange(client,itemidx)
 		//Engineer Secondary
 		case 528:
 		{
-			ChangeString = "The Short Circuit | Shoots explosive bullets instead. Applies burn.";
+			ChangeString = "The Short Circuit | Shoots explosive bullets instead. Applies afterburn.";
 		}
 		//Engineer Melee
 		case 329:
@@ -1302,7 +1303,7 @@ DisplayItemChange(client,itemidx)
 		}
 		case 526,30665:
 		{
-			ChangeString = "The Machina | Fully charged shots bounce to 3 other targets at max within a 350HU radius. ";
+			ChangeString = "The Machina | Fully charged shots bounce to 3 other targets at max within a 350HU radius.";
 		}
 		case 1098:
 		{
@@ -1314,7 +1315,7 @@ DisplayItemChange(client,itemidx)
 		}
 		case 56,1005:
 		{
-			ChangeString = "The Huntsman | Has no drawspeed, 2 clip size. Arrows fly straight. Slows enemy by -40% for 1s on hit.";
+			ChangeString = "The Huntsman | Has no drawspeed, Arrows fly straight. Slows enemy by -40% for 1s on hit.";
 		}
 		case 1092:
 		{
@@ -1341,7 +1342,7 @@ DisplayItemChange(client,itemidx)
 		}
 		case 460:
 		{
-			ChangeString = "The Enforcer | Takes 2 ammo per shot. 2x fire rate. 7x slower reload speed. Pierces resistance status effects (ie : vaccinator)";
+			ChangeString = "The Enforcer | Takes 2 ammo per shot. 2x fire rate. 7x slower reload speed. +20% conditional status pierce.";
 		}
 		case 525:
 		{

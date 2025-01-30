@@ -18,9 +18,9 @@ public Action Menu_BuyUpgrade(client, args)
 			AddMenuItem(menuBuy, "upgrade_buildings", "Upgrade Buildings");
 
 		if (currentitem_level[client][3] != 242)
-			AddMenuItem(menuBuy, "upgrade_buyoneweap", "Buy a Custom Weapon");
+			AddMenuItem(menuBuy, "upgrade_buyoneweap", "Buy a Unique Weapon");
 		else
-			AddMenuItem(menuBuy, "upgrade_upgradeoneweap", "Upgrade Bought Weapon");
+			AddMenuItem(menuBuy, "upgrade_upgradeoneweap", "Upgrade Unique Weapon");
 
 		AddMenuItem(menuBuy, "upgrade_dispcurrups", "Upgrade Manager");
 		AddMenuItem(menuBuy, "use_arcane", "Use Arcane Spells");
@@ -912,7 +912,7 @@ public CreateBuyNewWeaponMenu(client)
 {
 	Handle BuyNWmenu = CreateMenu(MenuHandler_ConfirmNewWeapon);
 	
-	SetMenuTitle(BuyNWmenu, "Buy A Custom Weapon:");
+	SetMenuTitle(BuyNWmenu, "Buy A Unique Weapon:");
 	SetMenuExitBackButton(BuyNWmenu, true);
 	int i = 0;
 	int it = 0;
@@ -968,7 +968,7 @@ public CreateBuyNewWeaponMenu(client)
 		}
 	}
 	if(it == 0)
-		PrintToChat(client,"There aren't any custom weapons for this class yet.")
+		PrintToChat(client,"There aren't any unique weapons for this class yet.")
 	else if (IsValidClient(client) && IsPlayerAlive(client))
 		DisplayMenu(BuyNWmenu, client, 20);
 	

@@ -280,6 +280,8 @@
 			"1"				"mod ammo per shot;2.0"
 			"2"				"fire rate penalty HIDDEN;0.5"
 			"3"				"reload time increased hidden;7.0"
+			"4"				"damage penetrates reductions;0.2"
+			"5"				"provide on active;1.0"
 		}
 		"45,1078" //Force a Nature
 		{
