@@ -4,11 +4,15 @@ public void insertAfterburn(int client, AfterburnStack newStack){
 	playerAfterburn[client][replacementID] = newStack;
 }
 public int getNextAfterburnStack(int client){
-	for(int i = 0; i < MAXBUFFS; ++i){
-		if(playerAfterburn[client][i].expireTime < currentGameTime)
-			return i;
+	float lowest = 99999999.0;
+	int id = 0;
+	for(int i = 0; i < MAX_AFTERBURN_STACKS; ++i){
+		if(playerAfterburn[client][i].expireTime < lowest){
+			lowest = playerAfterburn[client][i].expireTime;
+			id = i;
+		}
 	}
-	return 0;
+	return id;
 }
 
 float GetResistance(int client, bool includeReduction = false, float increaseBase = 0.0, float increaseMult = 0.0, float increaseTotal = 0.0)

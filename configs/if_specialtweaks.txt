@@ -197,7 +197,7 @@
 		{
 			"gamestage"						"1"
 			"restriction"					"1"
-			"Set DamageType Ignite"			"1"
+			"afterburn rating"				"1"
 			"Afterburn Tick Rate"			"5.0"
 			"minicrit vs burning player"	"1.0"
 			"sticky recursive explosion chance"		"2.5"
@@ -370,7 +370,7 @@
 			"restriction"					"1"
 			"sticky recursive explosion chance"		"3.5"
 			"slow enemy on hit major"		"1"
-			"Set DamageType Ignite"			"1"
+			"afterburn rating"				"1"
 		}
 		"Pain Train"
 		{

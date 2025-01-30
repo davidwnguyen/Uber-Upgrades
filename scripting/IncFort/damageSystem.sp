@@ -1575,41 +1575,32 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 		}
 		if(isVictimPlayer)
 		{
-			float burndmgMult = 1.0;
-			burndmgMult *= GetAttribute(weapon, "shot penetrate all players");
-			burndmgMult *= GetAttribute(weapon, "weapon burn dmg increased");
-			burndmgMult *= GetAttribute(attacker, "weapon burn dmg increased");
+			float burndmgMult = 0.1, burnTime = 6.0;
+			burndmgMult *= GetAttribute(weapon, "shot penetrate all players")*TF2Attrib_HookValueFloat(1.0, "mult_wpn_burndmg", weapon);
+			burnTime *= 1.0+0.05*GetAttribute(weapon, "afterburn rating", 0.0);
 
 			if(GetAttribute(attacker, "knockout powerup", 0.0) == 2 && TF2Util_GetWeaponSlot(weapon) == TFWeaponSlot_Melee)
 				burndmgMult *= 3;
 
-			if(damagetype & DMG_ACTUALIGNITE || (GetClientTeam(attacker) != GetClientTeam(victim) && (GetAttribute(weapon, "afterburn rating", 0.0) || GetAttribute(attacker, "supernova powerup", 0.0) == 2) &&
-			TF2_GetDPSModifiers(attacker, weapon)*burndmgMult >= fl_HighestFireDamage[victim] && 
-			!(damagetype & DMG_BURN && damagetype & DMG_PREVENT_PHYSICS_FORCE) && !(damagetype & DMG_IGNITE))) // int afterburn system.
+			if(damagetype & DMG_IGNITE || 
+			(GetClientTeam(attacker) != GetClientTeam(victim) &&
+			(GetAttribute(weapon, "afterburn rating", 0.0) ||
+			GetAttribute(attacker, "supernova powerup", 0.0) == 2) &&
+			!(damagetype & DMG_BURN && damagetype & DMG_PREVENT_PHYSICS_FORCE) &&
+			!(damagetype & DMG_SLASH))) // int afterburn system.
 			{
 				AfterburnStack stack;
 				stack.owner = attacker;
-				stack.damage = damage*burndmgMult*0.1;
-				stack.expireTime = currentGameTime+6.0;
+				stack.damage = damage*burndmgMult;
+				stack.expireTime = currentGameTime+burnTime;
 
 				insertAfterburn(victim, stack);
+				TF2Util_IgnitePlayer(victim, victim, 10.0);
 			}
 		}
 		if(damagetype & DMG_BURN && damagetype & DMG_PREVENT_PHYSICS_FORCE)
 		{
-			if(GetAttribute(victim, "inverter powerup", 0.0) == 1.0)
-				damage *= 0.0;
-			else{
-				float burndmgMult = 1.0;
-				burndmgMult *= GetAttribute(weapon, "shot penetrate all players");
-				burndmgMult *= GetAttribute(weapon, "weapon burn dmg increased");
-				burndmgMult *= GetAttribute(weapon, "weapon burn dmg reduced");
-				burndmgMult *= GetAttribute(attacker, "weapon burn dmg increased");
-				burndmgMult /= GetAttribute(weapon, "dmg penalty vs players");
-				if(GetAttribute(attacker, "knockout powerup", 0.0) == 2 && TF2Util_GetWeaponSlot(weapon) == TFWeaponSlot_Melee)
-					burndmgMult *= 5;
-				damage = (0.33*TF2_GetDPSModifiers(attacker, weapon, false, false)*burndmgMult);
-			}
+			damage *= 0.0;
 		}
 	}
 	return damage;

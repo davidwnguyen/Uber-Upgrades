@@ -63,9 +63,8 @@ public Action:Timer_Second(Handle timer)
 				SDKHooks_TakeDamage(client, owner, owner, playerAfterburn[client][i].damage, DMG_BURN | DMG_PREVENT_PHYSICS_FORCE, _, _, _, false);
 				isOnFire = true;
 			}
-			if(isOnFire)
-				TF2Util_IgnitePlayer(client, client, 1.1);
-
+			if(!isOnFire)
+				TF2_RemoveCondition(client, TFCond_OnFire);
 		}
 	}
 	if(IsMvM())

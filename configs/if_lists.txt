@@ -1030,8 +1030,6 @@
 			"Attr17"		"ap (slowswing)"
 			"Attr16"		"Extra Damage Bonus"
 			"Attr13"		"lifesteal ability"
-			"Attr23"		"afterburn rating"
-			"Attr21"		"afterburn time increased(N)"
 			"Attr12"		"reveal cloaked victim on hit"
 			"Attr13"		"reveal disguised victim on hit"
 		}
@@ -1085,8 +1083,6 @@
 			"Attr22"	"ap (biggercali)"
 			"Attr1"		"Accuracy Scales DMG Replacement"
 			"Attr13"	"lifesteal ability"
-			"Attr23"	"afterburn rating"
-			"Attr21"	"afterburn time increased(N)"
 			"Attr7"		"reveal cloaked victim on hit"
 			"Attr8"		"reveal disguised victim on hit"
 		}
@@ -1115,8 +1111,6 @@
 			"Attr22"	"ap (biggercali)"
 			"Attr1"		"Accuracy Scales DMG Replacement"
 			"Attr13"	"lifesteal ability"
-			"Attr23"	"afterburn rating"
-			"Attr21"	"afterburn time increased(N)"
 			"Attr7"		"reveal cloaked victim on hit"
 			"Attr8"		"reveal disguised victim on hit"
 		}
@@ -1145,8 +1139,6 @@
 			"Attr24"	"ap (condensedlaser)"
 			"Attr1"		"Accuracy Scales DMG Replacement"
 			"Attr13"	"lifesteal ability"
-			"Attr23"	"afterburn rating"
-			"Attr21"	"afterburn time increased(N)"
 			"Attr9"		"reveal cloaked victim on hit"
 			"Attr10"	"reveal disguised victim on hit"	
 		}
@@ -1173,7 +1165,6 @@
 			"Attr7"		"ap (highervoltage)"
 			"Attr6"		"Accuracy Scales DMG Replacement"
 			"Attr13"	"lifesteal ability"
-			"Attr21"	"afterburn time increased(N)"
 			"Attr10"	"reveal cloaked victim on hit"
 			"Attr11"	"reveal disguised victim on hit"
 		}
@@ -1256,7 +1247,6 @@
 			"Attr11"	"ap (electricmotor)"
 			"Attr1"		"Accuracy Scales DMG Replacement"
 			"Attr13"	"lifesteal ability"
-			"Attr21"	"afterburn time increased(N)"
 			"Attr9"		"reveal cloaked victim on hit"
 			"Attr10"	"reveal disguised victim on hit"
 		}
@@ -1289,7 +1279,6 @@
 			"Attr11"	"ap (electricmotor)"
 			"Attr1"		"Accuracy Scales DMG Replacement"
 			"Attr13"	"lifesteal ability"
-			"Attr21"	"afterburn time increased(N)"
 			"Attr9"		"reveal cloaked victim on hit"
 			"Attr10"	"reveal disguised victim on hit"
 		}
@@ -1347,8 +1336,6 @@
 			"Attr11"	"Extra Damage Bonus"
 			"Attr14"	"Increased Overall Damage(F)"
 			"Attr13"	"lifesteal ability"
-			"Attr23"	"afterburn rating"
-			"Attr21"	"afterburn time increased(N)"
 			"Attr8"		"reveal cloaked victim on hit"
 			"Attr9"		"reveal disguised victim on hit"
 		}
@@ -1376,8 +1363,6 @@
 			"Attr11"	"Extra Damage Bonus"
 			"Attr14"	"Increased Overall Damage(F)"
 			"Attr13"	"lifesteal ability"
-			"Attr23"	"afterburn rating"
-			"Attr21"	"afterburn time increased(N)"
 			"Attr8"		"reveal cloaked victim on hit"
 			"Attr9"		"reveal disguised victim on hit"
 		}
@@ -1406,7 +1391,6 @@
 			"Attr15"	"afterburn dmg increased"
 			"Attr13"	"lifesteal ability"
 			"Attr21"	"Shoots extra projectile"
-			"Attr10"	"afterburn time increased"
 			"Attr6"		"reveal cloaked victim on hit"
 			"Attr7"		"reveal disguised victim on hit"
 		}
@@ -1434,7 +1418,6 @@
 			"Attr15"	"afterburn dmg increased"
 			"Attr13"	"lifesteal ability"
 			"Attr21"	"Shoots extra projectile"
-			"Attr10"	"afterburn time increased"
 			"Attr6"		"reveal cloaked victim on hit"
 			"Attr7"		"reveal disguised victim on hit"
 		}
@@ -1460,7 +1443,6 @@
 			"Attr16"	"ap (slowswing)"
 			"Attr13"	"Extra Damage Bonus"
 			"Attr13"	"lifesteal ability"
-			"Attr14"	"afterburn time increased"
 			"Attr10"	"reveal cloaked victim on hit"
 			"Attr11"	"reveal disguised victim on hit"
 		}
@@ -1485,7 +1467,6 @@
 			"Attr16"	"ap (slowswing)"
 			"Attr13"	"Extra Damage Bonus"
 			"Attr13"	"lifesteal ability"
-			"Attr14"	"afterburn time increased"
 			"Attr10"	"reveal cloaked victim on hit"
 			"Attr11"	"reveal disguised victim on hit"
 		}
@@ -1511,7 +1492,6 @@
 			"Attr15"	"ap (temprise)"
 			"Attr2"		"Extra Damage Bonus"
 			"Attr13"	"lifesteal ability"
-			"Attr21"	"afterburn time increased(N)"
 			"Attr6"		"reveal cloaked victim on hit"
 			"Attr7"		"reveal disguised victim on hit"
 		}
@@ -1536,7 +1516,6 @@
 			"Attr16"	"ap (temprise)"
 			"Attr13"	"Extra Damage Bonus"
 			"Attr13"	"lifesteal ability"
-			"Attr14"	"afterburn time increased"
 			"Attr10"	"reveal cloaked victim on hit"
 			"Attr11"	"reveal disguised victim on hit"
 		}
@@ -1556,8 +1535,6 @@
 			"Attr24"	"ap (biggercali)"
 			"Attr11"	"Accuracy Scales DMG Replacement"
 			"Attr13"	"lifesteal ability"
-			"Attr23"	"afterburn rating"
-			"Attr21"	"afterburn time increased(N)"
 			"Attr6"		"reveal cloaked victim on hit"
 			"Attr7"		"reveal disguised victim on hit"
 		}
@@ -1586,8 +1563,6 @@
 			"Attr24"	"ap (biggercali)"
 			"Attr11"	"Accuracy Scales DMG Replacement"
 			"Attr13"	"lifesteal ability"
-			"Attr23"	"afterburn rating"
-			"Attr21"	"afterburn time increased(N)"
 			"Attr6"		"reveal cloaked victim on hit"
 			"Attr7"		"reveal disguised victim on hit"	
 		}
@@ -1646,8 +1621,6 @@
 			"Attr2"		"sniper full charge damage bonus"
 			"Attr4"		"Increased Overall Damage"
 			"Attr13"	"lifesteal ability"
-			"Attr23"	"afterburn rating"
-			"Attr21"	"afterburn time increased(N)"
 			"Attr5"		"projectile penetration heavy"
 			"Attr12"	"reveal cloaked victim on hit"
 			"Attr13"	"reveal disguised victim on hit"
@@ -1725,8 +1698,6 @@
 			"Attr2"		"ap (armyofnotmany)"
 			"Attr2"		"Extra Damage Bonus"
 			"Attr3"		"lifesteal ability"
-			"Attr4"		"afterburn rating"
-			"Attr5"		"afterburn time increased(N)"
 			"Attr6"		"reveal cloaked victim on hit"
 			"Attr7"		"reveal disguised victim on hit"
 		}
@@ -1929,8 +1900,6 @@
 			"Attr17"	"ap (slowswing)"
 			"Attr16"	"Extra Damage Bonus"
 			"Attr13"	"lifesteal ability"
-			"Attr23"	"afterburn rating"
-			"Attr21"	"afterburn time increased(N)"
 			"Attr6"		"reveal cloaked victim on hit"
 			"Attr7"		"reveal disguised victim on hit"
 		}
@@ -1956,8 +1925,6 @@
 			"Attr17"	"ap (slowswing)"
 			"Attr16"	"Extra Damage Bonus"
 			"Attr13"	"lifesteal ability"
-			"Attr23"	"afterburn rating"
-			"Attr21"	"afterburn time increased(N)"
 			"Attr6"		"reveal cloaked victim on hit"
 			"Attr7"		"reveal disguised victim on hit"
 		}
@@ -2127,8 +2094,6 @@
 			"Attr17"	"ap (slowswing)"
 			"Attr16"	"Extra Damage Bonus"
 			"Attr13"	"lifesteal ability"
-			"Attr23"	"afterburn rating"
-			"Attr21"	"afterburn time increased(N)"
 			"Attr11"	"reveal cloaked victim on hit"
 			"Attr12"	"reveal disguised victim on hit"
 		}
@@ -2169,8 +2134,6 @@
 			"Attr1"			"blast radius increased"
 			"Attr9"			"dmg falloff decreased"
 			"Attr13"		"lifesteal ability"
-			"Attr23"		"afterburn rating"
-			"Attr21"		"afterburn time increased(N)"
 			"Attr13"		"reveal cloaked victim on hit"
 			"Attr14"		"reveal disguised victim on hit"
 		}
@@ -2204,8 +2167,6 @@
 			"Attr16"		"Extra Damage Bonus"
 			"Attr13"		"lifesteal ability"
 			"Attr1"			"blast radius increased"
-			"Attr23"		"afterburn rating"
-			"Attr21"		"afterburn time increased(N)"
 			"Attr13"		"reveal cloaked victim on hit"
 			"Attr14"		"reveal disguised victim on hit"
 		}
@@ -2238,8 +2199,6 @@
 			"Attr1"			"blast radius increased"
 			"Attr9"			"dmg falloff decreased"
 			"Attr13"		"lifesteal ability"
-			"Attr23"		"afterburn rating"
-			"Attr21"		"afterburn time increased(N)"
 			"Attr13"		"reveal cloaked victim on hit"
 			"Attr14"		"reveal disguised victim on hit"
 		}
@@ -2301,8 +2260,6 @@
 			"Attr17"	"ap (slowswing)"
 			"Attr16"	"Extra Damage Bonus"
 			"Attr13"	"lifesteal ability"
-			"Attr23"	"afterburn rating"
-			"Attr21"	"afterburn time increased(N)"
 			"Attr6"		"reveal cloaked victim on hit"
 			"Attr7"		"reveal disguised victim on hit"
 		}
@@ -2354,7 +2311,6 @@
 			"Attr9"		"ap (compressedfire)"
 			"Attr1"		"Extra Damage Bonus(fireball)"
 			"Attr13"	"lifesteal ability"
-			"Attr6"		"afterburn time increased"
 		}
 		"Weapon Specific upgrades"
 		{
@@ -2394,8 +2350,6 @@
 			"Attr24"	"ap (biggercali)"
 			"Attr1"		"Accuracy Scales DMG Replacement"
 			"Attr13"	"lifesteal ability"
-			"Attr23"	"afterburn rating"
-			"Attr21"	"afterburn time increased(N)"
 			"Attr7"		"reveal cloaked victim on hit"
 			"Attr8"		"reveal disguised victim on hit"
 		}
@@ -2422,8 +2376,6 @@
 			"Attr17"	"ap (slowswing)"
 			"Attr16"	"Extra Damage Bonus"
 			"Attr13"	"lifesteal ability"
-			"Attr23"		"afterburn rating"
-			"Attr21"		"afterburn time increased(N)"
 			"Attr12"		"reveal cloaked victim on hit"
 			"Attr13"		"reveal disguised victim on hit"
 		}
@@ -2517,7 +2469,6 @@
 			"Attr2"		"ap (compressedfire)"
 			"Attr6"		"Overall Damage"
 			"Attr13"	"lifesteal ability"
-			"Attr5"		"afterburn time increased"
 		}
 		"Weapon Specific upgrades"
 		{
@@ -2541,8 +2492,6 @@
 			"Attr13"		"Extra Damage Bonus"
 			"Attr9"			"dmg falloff decreased"
 			"Attr13"		"lifesteal ability"
-			"Attr23"		"afterburn rating"
-			"Attr21"		"afterburn time increased(N)"
 			"Attr13"		"reveal cloaked victim on hit"
 			"Attr14"		"reveal disguised victim on hit"
 		}
