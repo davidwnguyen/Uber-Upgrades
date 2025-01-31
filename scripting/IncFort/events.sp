@@ -3779,3 +3779,12 @@ public Action TF2_SentryFireBullet(int sentry, int builder, int &shots, float sr
 
 	return Plugin_Changed;
 }
+
+void OnStatusEffectApplied(int victim, Buff newBuff){
+	if(IsValidClient3(newBuff.inflictor)){
+		if(isBonus[newBuff.id])
+			newBuff.severity *= TF2Attrib_HookValueFloat(1.0, "buff_magnitude_mult", newBuff.inflictor);
+		else
+			newBuff.severity *= TF2Attrib_HookValueFloat(1.0, "debuff_magnitude_mult", newBuff.inflictor);
+	}
+}

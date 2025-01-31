@@ -609,7 +609,7 @@ public Action:Timer_Every100MS(Handle timer)
 				if(client != decay.inflictor && IsValidClient3(decay.inflictor) && IsOnDifferentTeams(client,decay.inflictor)){
 					currentDamageType[decay.inflictor].second |= DMG_IGNOREHOOK;
 					currentDamageType[decay.inflictor].second |= DMG_PIERCING;
-					SDKHooks_TakeDamage(client, decay.inflictor, decay.inflictor, 10.0 + GetClientHealth(client)*0.008, DMG_PREVENT_PHYSICS_FORCE);
+					SDKHooks_TakeDamage(client, decay.inflictor, decay.inflictor, 10.0 + GetClientHealth(client)*0.008 * decay.severity, DMG_PREVENT_PHYSICS_FORCE);
 					currentDamageType[decay.inflictor].second |= DMG_IGNOREHOOK;
 					SDKHooks_TakeDamage(client, decay.inflictor, decay.inflictor, 9.0,DMG_RADIATION|DMG_DISSOLVE,_,_,_,false);
 				}
@@ -618,7 +618,7 @@ public Action:Timer_Every100MS(Handle timer)
 				Buff infernalDOT; infernalDOT = playerBuffs[client][getBuffInArray(client, Buff_InfernalDOT)];
 				if(client != infernalDOT.inflictor && IsValidClient3(infernalDOT.inflictor)){
 					currentDamageType[infernalDOT.inflictor].second |= DMG_IGNOREHOOK;
-					SDKHooks_TakeDamage(client, infernalDOT.inflictor, infernalDOT.inflictor, InfernalEnchantment[infernalDOT.inflictor]*0.1,_,_,_,_,false);
+					SDKHooks_TakeDamage(client, infernalDOT.inflictor, infernalDOT.inflictor, InfernalEnchantment[infernalDOT.inflictor]*0.1 * infernalDOT.severity,_,_,_,_,false);
 					if(hitParticle[client]+0.4 <= currentGameTime){
 						CreateParticleEx(client, "halloween_burningplayer_flyingbits", 1);
 						hitParticle[client] = currentGameTime
@@ -630,7 +630,7 @@ public Action:Timer_Every100MS(Handle timer)
 				if(IsValidClient3(lifelink.inflictor)){
 					currentDamageType[lifelink.inflictor].second |= DMG_PIERCING;
 					currentDamageType[lifelink.inflictor].second |= DMG_IGNOREHOOK;
-					SDKHooks_TakeDamage(client, lifelink.inflictor, lifelink.inflictor, GetClientHealth(client)*0.0035, DMG_PREVENT_PHYSICS_FORCE);
+					SDKHooks_TakeDamage(client, lifelink.inflictor, lifelink.inflictor, GetClientHealth(client)*0.0035 * lifelink.severity, DMG_PREVENT_PHYSICS_FORCE);
 				}
 			}
 			if(hasBuffIndex(client, Buff_PowerupBurning)){
@@ -638,7 +638,7 @@ public Action:Timer_Every100MS(Handle timer)
 				if(client != infernalDOT.inflictor && IsValidClient3(infernalDOT.inflictor)){
 					currentDamageType[infernalDOT.inflictor].second |= DMG_PIERCING;
 					currentDamageType[infernalDOT.inflictor].second |= DMG_IGNOREHOOK;
-					SDKHooks_TakeDamage(client, infernalDOT.inflictor, infernalDOT.inflictor, 10.0, DMG_PREVENT_PHYSICS_FORCE);
+					SDKHooks_TakeDamage(client, infernalDOT.inflictor, infernalDOT.inflictor, 10.0 * infernalDOT.severity, DMG_PREVENT_PHYSICS_FORCE);
 					if(hitParticle[client]+0.4 <= currentGameTime){
 						CreateParticleEx(client, "halloween_burningplayer_flyingbits", 1);
 						hitParticle[client] = currentGameTime

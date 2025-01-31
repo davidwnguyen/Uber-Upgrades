@@ -1,5 +1,11 @@
 "Phrases"
 {
+	"buff magnitude bonus"{
+		"en"		"Buff Magnitude Bonus"
+	}
+	"debuff magnitude bonus"{
+		"en"		"Debuff Magnitude Bonus"
+	}
 	"projectile spread angle penalty (tweak)"{
 		"en"		"Projectile Spread Penalty"
 	}
@@ -1672,7 +1678,7 @@
 		"en"		"Protection Upgrades"
 	}
 	"Physical upgrades"{
-		"en"		"Physical Upgrades"
+		"en"		"Mobility Upgrades"
 	}
 	"Ammo upgrades"{
 		"en"		"Ammo Upgrades"

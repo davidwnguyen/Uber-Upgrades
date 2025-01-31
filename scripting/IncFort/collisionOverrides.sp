@@ -824,6 +824,7 @@ public Action:OnTouchExplodeJar(entity, other)
 										miniCritStatusVictim[i] = currentGameTime+8.0;
 										Buff jarateDebuff;
 										jarateDebuff.init("Jarated", "", Buff_Jarated, RoundToNearest(damageBoost), owner, 8.0);
+										jarateDebuff.severity = damageBoost;
 										insertBuff(i, jarateDebuff);
 									}
 								}
@@ -843,6 +844,7 @@ public Action:OnTouchExplodeJar(entity, other)
 								{
 									Buff pierceBuff;
 									pierceBuff.init("Broken Armor", "", Buff_BrokenArmor, RoundFloat(TF2Attrib_GetValue(jarArmorBrokenBuff)), owner, 6.0);
+									pierceBuff.severity = TF2Attrib_GetValue(jarArmorBrokenBuff);
 									insertBuff(i, pierceBuff);
 								}
 								Address jarCorrosive = TF2Attrib_GetByName(CWeapon, "building cost reduction");

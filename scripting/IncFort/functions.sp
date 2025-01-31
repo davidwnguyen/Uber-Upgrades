@@ -248,6 +248,7 @@ public void insertBuff(int client, Buff newBuff){
 		if(playerBuffs[client][i].id == newBuff.id && playerBuffs[client][i].priority <= newBuff.priority)
 			{replacementID = i;break;}
 	}
+	OnStatusEffectApplied(client, newBuff);
 	buffChange[client] = true;
 	playerBuffs[client][replacementID] = newBuff;
 	//PrintToServer("added %s to %N for %.2fs. ID = %i, index = %i", newBuff.name, client, newBuff.duration -GetGameTime(), newBuff.id, replacementID);
@@ -352,15 +353,15 @@ public void ManagePlayerBuffs(int i){
 		if(flag)
 			continue;
 
-		additiveDamageRawBuff += playerBuffs[i][buff].additiveDamageRaw;
-		additiveDamageMultBuff += playerBuffs[i][buff].additiveDamageMult;
-		multiplicativeDamageBuff *= playerBuffs[i][buff].multiplicativeDamage;
-		additiveAttackSpeedMultBuff += playerBuffs[i][buff].additiveAttackSpeedMult;
+		additiveDamageRawBuff += playerBuffs[i][buff].additiveDamageRaw * playerBuffs[i][buff].severity;
+		additiveDamageMultBuff += playerBuffs[i][buff].additiveDamageMult * playerBuffs[i][buff].severity;
+		multiplicativeDamageBuff *= playerBuffs[i][buff].multiplicativeDamage * playerBuffs[i][buff].severity;
+		additiveAttackSpeedMultBuff += playerBuffs[i][buff].additiveAttackSpeedMult * playerBuffs[i][buff].severity;
 		multiplicativeAttackSpeedMultBuff *= playerBuffs[i][buff].multiplicativeAttackSpeedMult;
-		additiveMoveSpeedMultBuff += playerBuffs[i][buff].additiveMoveSpeedMult;
-		additiveDamageTakenBuff += playerBuffs[i][buff].additiveDamageTaken;
-		multiplicativeDamageTakenBuff *= playerBuffs[i][buff].multiplicativeDamageTaken;
-		additiveArmorPenetration += playerBuffs[i][buff].additiveArmorPenetration;
+		additiveMoveSpeedMultBuff += playerBuffs[i][buff].additiveMoveSpeedMult * playerBuffs[i][buff].severity;
+		additiveDamageTakenBuff += playerBuffs[i][buff].additiveDamageTaken * playerBuffs[i][buff].severity;
+		multiplicativeDamageTakenBuff *= playerBuffs[i][buff].multiplicativeDamageTaken * playerBuffs[i][buff].severity;
+		additiveArmorPenetration += playerBuffs[i][buff].additiveArmorPenetration * playerBuffs[i][buff].severity;
 
 		if(playerBuffs[i][buff].description[0] != '\0')
 			Format(details, sizeof(details), "%s\n%s: - %.1fs\n  %s", details, playerBuffs[i][buff].name, playerBuffs[i][buff].duration - currentGameTime, playerBuffs[i][buff].description);

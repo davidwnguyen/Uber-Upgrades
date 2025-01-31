@@ -30,6 +30,8 @@
 		}
 		"Status Effect Upgrades"
 		{
+			"Attr1"		"buff magnitude bonus"
+			"Attr2"		"debuff magnitude bonus"
 			"Attr16"	"Remove fire chance"
 			"Attr17"	"Remove bleed chance"
 			"Attr18"	"Bleed Resistance"
@@ -82,27 +84,21 @@
 				"Attr3"		"Precision Powerup"
 				"Attr4"		"Knockout Powerup"
 				"Attr5"		"Supernova Powerup"
-				"Attr6"		"Glass Powerup"
 			}
 			"!Defensive Powerups"
 			{
 				"Attr0"		"Resistance Powerup"
 				"Attr1"		"Regeneration Powerup"
 				"Attr2"		"Inverter Powerup"
-				"Attr3"		"Diffusion Powerup"
 			}
 			"!Support Powerups"
 			{
 				"Attr0"		"King Powerup"
 				"Attr1"		"Plague Powerup"
-				"Attr2"		"Catalyst Powerup"
-				"Attr3"		"Sanctuary Powerup"
 			}
 			"!Misc. Powerups"
 			{
 				"Attr0"		"Agility Powerup"
-				"Attr1"		"Balance Powerup"
-				"Attr2"		"Warlock Powerup"
 			}
 		}
 	}
@@ -136,6 +132,8 @@
 		}
 		"Status Effect Upgrades"
 		{
+			"Attr1"		"buff magnitude bonus"
+			"Attr2"		"debuff magnitude bonus"
 			"Attr16"	"Remove fire chance"
 			"Attr17"	"Remove bleed chance"
 			"Attr18"	"Bleed Resistance"
@@ -188,27 +186,21 @@
 				"Attr3"		"Precision Powerup"
 				"Attr4"		"Knockout Powerup"
 				"Attr5"		"Supernova Powerup"
-				"Attr6"		"Glass Powerup"
 			}
 			"!Defensive Powerups"
 			{
 				"Attr0"		"Resistance Powerup"
 				"Attr1"		"Regeneration Powerup"
 				"Attr2"		"Inverter Powerup"
-				"Attr3"		"Diffusion Powerup"
 			}
 			"!Support Powerups"
 			{
 				"Attr0"		"King Powerup"
 				"Attr1"		"Plague Powerup"
-				"Attr2"		"Catalyst Powerup"
-				"Attr3"		"Sanctuary Powerup"
 			}
 			"!Misc. Powerups"
 			{
 				"Attr0"		"Agility Powerup"
-				"Attr1"		"Balance Powerup"
-				"Attr2"		"Warlock Powerup"
 			}
 		}
 	}
@@ -242,6 +234,8 @@
 		}
 		"Status Effect Upgrades"
 		{
+			"Attr1"		"buff magnitude bonus"
+			"Attr2"		"debuff magnitude bonus"
 			"Attr16"	"Remove fire chance"
 			"Attr17"	"Remove bleed chance"
 			"Attr18"	"Bleed Resistance"
@@ -294,27 +288,21 @@
 				"Attr3"		"Precision Powerup"
 				"Attr4"		"Knockout Powerup"
 				"Attr5"		"Supernova Powerup"
-				"Attr6"		"Glass Powerup"
 			}
 			"!Defensive Powerups"
 			{
 				"Attr0"		"Resistance Powerup"
 				"Attr1"		"Regeneration Powerup"
 				"Attr2"		"Inverter Powerup"
-				"Attr3"		"Diffusion Powerup"
 			}
 			"!Support Powerups"
 			{
 				"Attr0"		"King Powerup"
 				"Attr1"		"Plague Powerup"
-				"Attr2"		"Catalyst Powerup"
-				"Attr3"		"Sanctuary Powerup"
 			}
 			"!Misc. Powerups"
 			{
 				"Attr0"		"Agility Powerup"
-				"Attr1"		"Balance Powerup"
-				"Attr2"		"Warlock Powerup"
 			}
 		}
 	}
@@ -348,6 +336,8 @@
 		}
 		"Status Effect Upgrades"
 		{
+			"Attr1"		"buff magnitude bonus"
+			"Attr2"		"debuff magnitude bonus"
 			"Attr17"	"Remove bleed chance"
 			"Attr18"	"Bleed Resistance"
 			"Attr19"	"Slow Resistance"
@@ -399,27 +389,21 @@
 				"Attr3"		"Precision Powerup"
 				"Attr4"		"Knockout Powerup"
 				"Attr5"		"Supernova Powerup"
-				"Attr6"		"Glass Powerup"
 			}
 			"!Defensive Powerups"
 			{
 				"Attr0"		"Resistance Powerup"
 				"Attr1"		"Regeneration Powerup"
 				"Attr2"		"Inverter Powerup"
-				"Attr3"		"Diffusion Powerup"
 			}
 			"!Support Powerups"
 			{
 				"Attr0"		"King Powerup"
 				"Attr1"		"Plague Powerup"
-				"Attr2"		"Catalyst Powerup"
-				"Attr3"		"Sanctuary Powerup"
 			}
 			"!Misc. Powerups"
 			{
 				"Attr0"		"Agility Powerup"
-				"Attr1"		"Balance Powerup"
-				"Attr2"		"Warlock Powerup"
 			}
 		}
 	}
@@ -453,6 +437,8 @@
 		}
 		"Status Effect Upgrades"
 		{
+			"Attr1"		"buff magnitude bonus"
+			"Attr2"		"debuff magnitude bonus"
 			"Attr16"	"Remove fire chance"
 			"Attr17"	"Remove bleed chance"
 			"Attr18"	"Bleed Resistance"
@@ -505,27 +491,21 @@
 				"Attr3"		"Precision Powerup"
 				"Attr4"		"Knockout Powerup"
 				"Attr5"		"Supernova Powerup"
-				"Attr6"		"Glass Powerup"
 			}
 			"!Defensive Powerups"
 			{
 				"Attr0"		"Resistance Powerup"
 				"Attr1"		"Regeneration Powerup"
 				"Attr2"		"Inverter Powerup"
-				"Attr3"		"Diffusion Powerup"
 			}
 			"!Support Powerups"
 			{
 				"Attr0"		"King Powerup"
 				"Attr1"		"Plague Powerup"
-				"Attr2"		"Catalyst Powerup"
-				"Attr3"		"Sanctuary Powerup"
 			}
 			"!Misc. Powerups"
 			{
 				"Attr0"		"Agility Powerup"
-				"Attr1"		"Balance Powerup"
-				"Attr2"		"Warlock Powerup"
 			}
 		}
 	}
@@ -559,6 +539,8 @@
 		}
 		"Status Effect Upgrades"
 		{
+			"Attr1"		"buff magnitude bonus"
+			"Attr2"		"debuff magnitude bonus"
 			"Attr16"	"Remove fire chance"
 			"Attr17"	"Remove bleed chance"
 			"Attr18"	"Bleed Resistance"
@@ -611,27 +593,21 @@
 				"Attr3"		"Precision Powerup"
 				"Attr4"		"Knockout Powerup"
 				"Attr5"		"Supernova Powerup"
-				"Attr6"		"Glass Powerup"
 			}
 			"!Defensive Powerups"
 			{
 				"Attr0"		"Resistance Powerup"
 				"Attr1"		"Regeneration Powerup"
 				"Attr2"		"Inverter Powerup"
-				"Attr3"		"Diffusion Powerup"
 			}
 			"!Support Powerups"
 			{
 				"Attr0"		"King Powerup"
 				"Attr1"		"Plague Powerup"
-				"Attr2"		"Catalyst Powerup"
-				"Attr3"		"Sanctuary Powerup"
 			}
 			"!Misc. Powerups"
 			{
 				"Attr0"		"Agility Powerup"
-				"Attr1"		"Balance Powerup"
-				"Attr2"		"Warlock Powerup"
 			}
 		}
 	}
@@ -664,6 +640,8 @@
 		}
 		"Status Effect Upgrades"
 		{
+			"Attr1"		"buff magnitude bonus"
+			"Attr2"		"debuff magnitude bonus"
 			"Attr16"	"Remove fire chance"
 			"Attr17"	"Remove bleed chance"
 			"Attr18"	"Bleed Resistance"
@@ -716,27 +694,21 @@
 				"Attr3"		"Precision Powerup"
 				"Attr4"		"Knockout Powerup"
 				"Attr5"		"Supernova Powerup"
-				"Attr6"		"Glass Powerup"
 			}
 			"!Defensive Powerups"
 			{
 				"Attr0"		"Resistance Powerup"
 				"Attr1"		"Regeneration Powerup"
 				"Attr2"		"Inverter Powerup"
-				"Attr3"		"Diffusion Powerup"
 			}
 			"!Support Powerups"
 			{
 				"Attr0"		"King Powerup"
 				"Attr1"		"Plague Powerup"
-				"Attr2"		"Catalyst Powerup"
-				"Attr3"		"Sanctuary Powerup"
 			}
 			"!Misc. Powerups"
 			{
 				"Attr0"		"Agility Powerup"
-				"Attr1"		"Balance Powerup"
-				"Attr2"		"Warlock Powerup"
 			}
 		}
 	}
@@ -772,6 +744,8 @@
 		}
 		"Status Effect Upgrades"
 		{
+			"Attr1"		"buff magnitude bonus"
+			"Attr2"		"debuff magnitude bonus"
 			"Attr16"	"Remove fire chance"
 			"Attr17"	"Remove bleed chance"
 			"Attr18"	"Bleed Resistance"
@@ -824,27 +798,21 @@
 				"Attr3"		"Precision Powerup"
 				"Attr4"		"Knockout Powerup"
 				"Attr5"		"Supernova Powerup"
-				"Attr6"		"Glass Powerup"
 			}
 			"!Defensive Powerups"
 			{
 				"Attr0"		"Resistance Powerup"
 				"Attr1"		"Regeneration Powerup"
 				"Attr2"		"Inverter Powerup"
-				"Attr3"		"Diffusion Powerup"
 			}
 			"!Support Powerups"
 			{
 				"Attr0"		"King Powerup"
 				"Attr1"		"Plague Powerup"
-				"Attr2"		"Catalyst Powerup"
-				"Attr3"		"Sanctuary Powerup"
 			}
 			"!Misc. Powerups"
 			{
 				"Attr0"		"Agility Powerup"
-				"Attr1"		"Balance Powerup"
-				"Attr2"		"Warlock Powerup"
 			}
 		}
 	}
@@ -881,6 +849,8 @@
 		}
 		"Status Effect Upgrades"
 		{
+			"Attr1"		"buff magnitude bonus"
+			"Attr2"		"debuff magnitude bonus"
 			"Attr16"	"Remove fire chance"
 			"Attr17"	"Remove bleed chance"
 			"Attr18"	"Bleed Resistance"
@@ -933,27 +903,21 @@
 				"Attr3"		"Precision Powerup"
 				"Attr4"		"Knockout Powerup"
 				"Attr5"		"Supernova Powerup"
-				"Attr6"		"Glass Powerup"
 			}
 			"!Defensive Powerups"
 			{
 				"Attr0"		"Resistance Powerup"
 				"Attr1"		"Regeneration Powerup"
 				"Attr2"		"Inverter Powerup"
-				"Attr3"		"Diffusion Powerup"
 			}
 			"!Support Powerups"
 			{
 				"Attr0"		"King Powerup"
 				"Attr1"		"Plague Powerup"
-				"Attr2"		"Catalyst Powerup"
-				"Attr3"		"Sanctuary Powerup"
 			}
 			"!Misc. Powerups"
 			{
 				"Attr0"		"Agility Powerup"
-				"Attr1"		"Balance Powerup"
-				"Attr2"		"Warlock Powerup"
 			}
 		}
 	}
