@@ -1,5 +1,8 @@
 "Phrases"
 {
+	"projectile spread angle penalty (tweak)"{
+		"en"		"Projectile Spread Penalty"
+	}
 	"afterburn rating"{
 		"en"		"Afterburn Rating"
 	}

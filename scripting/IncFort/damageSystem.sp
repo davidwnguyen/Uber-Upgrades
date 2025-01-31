@@ -1476,7 +1476,7 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 				float victimPosition[3];
 				GetEntPropVector(victim, Prop_Data, "m_vecAbsOrigin", victimPosition); 
 				
-				EntityExplosion(attacker, damage, 300.0,victimPosition,_,weaponArtParticle[attacker] <= currentGameTime ? true : false, victim,_,_,weapon, 0.5, 70);
+				EntityExplosion(attacker, damage, 300.0,victimPosition,_,weaponArtParticle[attacker] <= currentGameTime ? true : false, victim, 0.4,_,weapon, 0.5);
 				//PARTICLES
 				if(weaponArtParticle[attacker] <= currentGameTime)
 				{

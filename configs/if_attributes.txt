@@ -2776,6 +2776,16 @@
 			"init"		"0.00"
 			"max"		"15.00"
 		}
+		"203.5 "
+		{
+			"name"		"projectile spread angle penalty"
+			"ref"		"projectile spread angle penalty (tweak)"
+			"display"		"%.1f"
+			"cost"		"0"
+			"value"		"1.50"
+			"init"		"0.00"
+			"max"		"15.00"
+		}
 		"204"
 		{
 			"name"		"auto fires full clip"
