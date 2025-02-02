@@ -7068,7 +7068,7 @@
 		{
 			"name"		"damage penetrates reductions"
 			"ref"		"damage penetrates reductions"
-			"display"		"%.0f%%"
+			"display"		"%.2f"
 			"attr_class"	"dmg_dr_penetration"
 			"cost"		"0"
 			"value"		"1.0"
@@ -7127,6 +7127,17 @@
 			"value"		"0.1"
 			"init"		"1.00"
 			"max"		"2.0"
+		}
+		"1714"
+		{
+			"name"		"detonate afterburn stacks on hit"
+			"ref"		"detonate afterburn stacks on hit"
+			"display"	"%.0f"
+			"attr_class"	"detonate_afterburn_stacks_on_hit"
+			"cost"		"1600"
+			"value"		"1"
+			"init"		"1.00"
+			"max"		"100.0"
 		}
 		//Filler
 		"1900.0"

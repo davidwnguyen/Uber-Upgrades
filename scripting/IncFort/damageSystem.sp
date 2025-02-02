@@ -425,7 +425,7 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 
 		float pierce = 0.0;
 		if(IsValidWeapon(weapon))
-			pierce = GetAttribute(weapon, "damage penetrates reductions", 0.0);
+			pierce = TF2Attrib_HookValueFloat(0.0, "damage penetrates reductions", weapon);
 
 		if(TF2_IsPlayerInCondition(victim, TFCond_DefenseBuffed) && TF2_IsPlayerInCondition(victim, TFCond_DefenseBuffNoCritBlock))
 			damage *= ConsumePierce(0.65, pierce);
@@ -850,6 +850,10 @@ public Action OnTakeDamage(victim, &attacker, &inflictor, float &damage, &damage
 					if(TF2Attrib_GetValue(DodgeBody) >= GetRandomFloat(0.0, 1.0))
 						return Plugin_Stop;
 				}
+				if(damagetype & DMG_BURN && damagetype & DMG_PREVENT_PHYSICS_FORCE)
+				{
+					return Plugin_Stop;
+				}
 
 				damage = genericPlayerDamageModification(victim, attacker, inflictor, damage, weapon, damagetype, damagecustom);
 			}
@@ -1104,12 +1108,14 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 				buffChange[victim]=true;
 			}
 		}
-		if(damagetype == 4 && damagecustom == 3 && TF2_GetPlayerClass(attacker) == TFClass_Pyro){
+
+		if(damagetype == 2052 && damagecustom == 3 && TF2_GetPlayerClass(attacker) == TFClass_Pyro){
 			int secondary = GetWeapon(attacker,1);
 			if(IsValidEdict(secondary) && weapon == secondary){
 				float gasExplosionDamage = GetAttribute(weapon, "ignition explosion damage bonus");
 				if(gasExplosionDamage != 1.0)
 					damage *= gasExplosionDamage;
+				damagetype |= DMG_IGNITE;
 			}
 		}
 		if(TF2_GetPlayerClass(victim) == TFClass_Spy && (TF2_IsPlayerInCondition(victim, TFCond_Cloaked) || TF2_IsPlayerInCondition(victim, TFCond_Stealthed))){
@@ -1573,15 +1579,29 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 				}
 			}
 		}
-		if(isVictimPlayer)
-		{
-			float burndmgMult = 0.1, burnTime = 6.0;
-			burndmgMult *= GetAttribute(weapon, "shot penetrate all players")*TF2Attrib_HookValueFloat(1.0, "mult_wpn_burndmg", weapon);
-			burnTime *= 1.0+0.05*GetAttribute(weapon, "afterburn rating", 0.0);
 
-			if(GetAttribute(attacker, "knockout powerup", 0.0) == 2 && TF2Util_GetWeaponSlot(weapon) == TFWeaponSlot_Melee)
-				burndmgMult *= 3;
+		int detonateStacks = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "detonate_afterburn_stacks_on_hit", weapon));
+		float detonateAccumulation = 0.0;
+		for(int i = 0;i<MAX_AFTERBURN_STACKS;++i){
+			if(detonateStacks <= 0)
+				break;
 
+			if(playerAfterburn[victim][i].expireTime < currentGameTime)
+				continue;
+
+			if(playerAfterburn[victim][i].owner != attacker)
+				continue;
+
+			detonateAccumulation += playerAfterburn[victim][i].damage * (playerAfterburn[victim][i].expireTime - currentGameTime);
+			playerAfterburn[victim][i].expireTime = 0.0;
+			detonateStacks--;
+		}
+		if(detonateAccumulation > 0){
+			currentDamageType[attacker].second |= DMG_IGNOREHOOK;
+			SDKHooks_TakeDamage(victim, attacker, attacker, detonateAccumulation, DMG_BURN | DMG_PREVENT_PHYSICS_FORCE, _, _, _, false);
+			CreateParticleEx(victim, "bombinomicon_burningdebris");
+		}else{
+			//afterburn slop
 			if(damagetype & DMG_IGNITE || 
 			(GetClientTeam(attacker) != GetClientTeam(victim) &&
 			(GetAttribute(weapon, "afterburn rating", 0.0) ||
@@ -1589,18 +1609,8 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 			!(damagetype & DMG_BURN && damagetype & DMG_PREVENT_PHYSICS_FORCE) &&
 			!(damagetype & DMG_SLASH))) // int afterburn system.
 			{
-				AfterburnStack stack;
-				stack.owner = attacker;
-				stack.damage = damage*burndmgMult;
-				stack.expireTime = currentGameTime+burnTime;
-
-				insertAfterburn(victim, stack);
-				TF2Util_IgnitePlayer(victim, victim, 10.0);
+				applyAfterburn(victim, attacker, weapon, damage);
 			}
-		}
-		if(damagetype & DMG_BURN && damagetype & DMG_PREVENT_PHYSICS_FORCE)
-		{
-			damage *= 0.0;
 		}
 	}
 	return damage;

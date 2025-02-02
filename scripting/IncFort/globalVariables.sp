@@ -123,7 +123,7 @@ enum struct Buff{
 		this.additiveMoveSpeedMult = 0.0;
 		this.additiveDamageTaken = 0.0;
 		this.multiplicativeDamageTaken = 1.0;
-		this.severity = 0.0;
+		this.severity = 1.0;
 		this.additiveArmorPenetration = 0.0;
 	}
 	void init(const char sName[32], const char sDescription[64], int iID, int iPriority, int iInflictor, float fDuration)

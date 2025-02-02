@@ -1,5 +1,8 @@
 "Phrases"
 {
+	"detonate afterburn stacks on hit"{
+		"en"		"Detonate Afterburn Stacks on Hit"
+	}
 	"buff magnitude bonus"{
 		"en"		"Buff Magnitude Bonus"
 	}

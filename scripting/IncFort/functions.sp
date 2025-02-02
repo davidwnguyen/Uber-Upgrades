@@ -578,8 +578,6 @@ stock EntityExplosion(owner, float damage, float radius, float pos[3], soundType
 		entity = owner;
 	int i = -1;
 
-	if(ignition)
-		damagetype |= DMG_IGNITE;
 	while ((i = FindEntityByClassname(i, "*")) != -1)
 	{
 		if(IsValidForDamage(i) && !ShouldNotHit[entity][i] && IsOnDifferentTeams(owner,i) && i != entity)
@@ -617,6 +615,9 @@ stock EntityExplosion(owner, float damage, float radius, float pos[3], soundType
 						SDKHooks_TakeDamage(i,owner,owner,damage, damagetype,weapon,_,_,false)
 						if(knockback > 0.0)
 							PushEntity(i, owner, knockback, 200.0);
+						
+						if(ignition)
+							applyAfterburn(i, owner, weapon, damage);
 					}
 					else
 					{
@@ -1180,6 +1181,10 @@ DisplayItemChange(client,itemidx)
 		case 348:
 		{
 			ChangeString = "Sharpened Volcano Fragment | Deals 7.5x afterburn, but initial melee hit deals half. Converts fire rate to damage."
+		}
+		case 1181:
+		{
+			ChangeString = "Hot Hand | Detonates 15 stacks of afterburn on hit. Converts fire rate to damage. Acts as a normal fire axe."
 		}
 		//Demo Primary
 		case 308:
@@ -4511,6 +4516,23 @@ void UpdatePlayerMaxHealth(int client){
 	}
 
 	SetEntityHealth(client, RoundFloat(percentageHealth*TF2Util_GetEntityMaxHealth(client)));
+}
+
+void applyAfterburn(int victim, int attacker, int weapon, float damage){
+	float burndmgMult = 0.1, burnTime = 6.0;
+	burndmgMult *= GetAttribute(weapon, "shot penetrate all players")*TF2Attrib_HookValueFloat(1.0, "mult_wpn_burndmg", weapon)*TF2Attrib_HookValueFloat(1.0, "debuff_magnitude_mult", weapon);
+	burnTime *= 1.0+0.05*GetAttribute(weapon, "afterburn rating", 0.0);
+
+	if(GetAttribute(attacker, "knockout powerup", 0.0) == 2 && TF2Util_GetWeaponSlot(weapon) == TFWeaponSlot_Melee)
+		burndmgMult *= 3;
+
+	AfterburnStack stack;
+	stack.owner = attacker;
+	stack.damage = damage*burndmgMult;
+	stack.expireTime = currentGameTime+burnTime;
+
+	insertAfterburn(victim, stack);
+	TF2Util_IgnitePlayer(victim, victim, 10.0);
 }
 
 /*public void theBoxness(int client, int melee, const float pos[3], const float angle[3]){
