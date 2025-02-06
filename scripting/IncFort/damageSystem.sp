@@ -1138,6 +1138,10 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 				}
 			}
 		}
+		float multPerStatusEffect = TF2Attrib_HookValueFloat(0.0, "damage_bonus_per_status_effect_on_self", weapon);
+		if(multPerStatusEffect != 0.0){
+			damage *= 1+multPerStatusEffect*GetAmountOfBuffs(attacker)*GetAmountOfDebuffs(attacker);
+		}
 		if(isVictimPlayer && attacker != victim)
 		{
 			float minicritVictimOnHit = GetAttribute(weapon, "recipe component defined item 1", 0.0);

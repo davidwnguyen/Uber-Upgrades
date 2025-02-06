@@ -293,9 +293,6 @@ public void giveDefenseBuff(int client, float duration){
 	insertBuff(client, defenseBuff);
 }
 public int GetAmountOfDebuffs(int i){
-	if(!IsValidClient3(i))
-		return 0;
-	
 	int amount = 0;
 	if(TF2_IsPlayerInCondition(i, TFCond_Slowed))
 		++amount;
@@ -317,9 +314,47 @@ public int GetAmountOfDebuffs(int i){
 		++amount;
 	if(TF2_IsPlayerInCondition(i, TFCond_Gas))
 		++amount;
+
+	for(int buff = 0;buff < MAXBUFFS; buff++)
+	{
+		if(playerBuffs[i][buff].id == 0)
+			continue;
+		if(!isBonus[playerBuffs[i][buff].id])
+			amount++;
+	}
 		
 	return amount;
 }
+public int GetAmountOfBuffs(int i){
+	int amount = 0;
+	if(TF2_IsPlayerInCondition(i, TFCond_Ubercharged))
+		++amount;
+	if(TF2_IsPlayerCritBuffed(i))
+		++amount;
+	if(miniCritStatusAttacker[i]-currentGameTime > 0.0)
+		++amount;
+	if(TF2_IsPlayerInCondition(i, TFCond_MegaHeal))
+		++amount;
+	if(TF2_IsPlayerInCondition(i, TFCond_SpeedBuffAlly))
+		++amount;
+	for(int buff = 58; buff <= 63; ++buff)
+	{
+		if(TF2_IsPlayerInCondition(i, view_as<TFCond>(buff)))
+			amount++;
+	}
+
+	for(int buff = 0;buff < MAXBUFFS; buff++)
+	{
+		if(playerBuffs[i][buff].id == 0)
+			continue;
+		if(isBonus[playerBuffs[i][buff].id])
+			amount++;
+	}
+		
+	return amount;
+}
+
+
 public void ManagePlayerBuffs(int i){
 	float additiveDamageRawBuff,additiveDamageMultBuff = 1.0,multiplicativeDamageBuff = 1.0,additiveAttackSpeedMultBuff = 1.0,multiplicativeAttackSpeedMultBuff = 1.0,additiveMoveSpeedMultBuff = 1.0,additiveDamageTakenBuff = 1.0,multiplicativeDamageTakenBuff = 1.0, additiveArmorPenetration = 0.0;
 
@@ -792,12 +827,21 @@ void GiveNewUpgradedWeapon_(int client, int slot)
 		TF2Attrib_RemoveByName(iEnt, "bullets per shot bonus");
 		if( iNumAttributes > 0 )
 		{
+			float multiplier = GetAttribute(iEnt, "upgrade effectiveness", 1.0);
 			for(int a = 0; a < iNumAttributes ; a++ )
 			{
 				if (upgrades[currentupgrades_idx[client][slot][a]].attr_name[0] == '\0')
 					continue;
 					
-				TF2Attrib_SetByName(iEnt, upgrades[currentupgrades_idx[client][slot][a]].attr_name,currentupgrades_val[client][slot][a]);
+				float value = currentupgrades_val[client][slot][a];
+				if(multiplier != 1.0)
+					if(currentupgrades_i[client][slot][a] == 0.0)
+						if(value < upgrades[currentupgrades_idx[client][slot][a]].i_val)
+							value = 1+(Pow(value,multiplier)-upgrades[currentupgrades_idx[client][slot][a]].i_val);
+						else
+							value = 1+multiplier*(value-upgrades[currentupgrades_idx[client][slot][a]].i_val);
+
+				TF2Attrib_SetByName(iEnt, upgrades[currentupgrades_idx[client][slot][a]].attr_name, value);
 			}
 		}
 

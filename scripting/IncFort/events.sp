@@ -926,8 +926,7 @@ public void TF2_OnConditionRemoved(client, TFCond:cond)
 			fl_HighestFireDamage[client] = 0.0;
 		}
 		case TFCond_Charging:{
-			float grenadevec[3], distance;
-			distance = 500.0;
+			float grenadevec[3];
 			GetClientEyePosition(client, grenadevec);
 			int CWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
 			if(IsValidEdict(CWeapon))
@@ -942,7 +941,24 @@ public void TF2_OnConditionRemoved(client, TFCond:cond)
 						damage *= TF2Attrib_GetValue(bashBonusActive);
 					}
 				}
-				EntityExplosion(client, damage, distance, grenadevec, 1, _, _, _, DMG_ALWAYSGIB + DMG_DISSOLVE, secondary);
+				if(GetAttribute(CWeapon, "charge explosion ignites instead", 0.0)){
+					float targetVec[3];
+					for(int i = 1; i <= MaxClients; ++i){
+						if(!IsValidClient3(i))
+							continue;
+
+						if(!IsOnDifferentTeams(client, i))
+							continue;
+						
+						GetClientAbsOrigin(i, targetVec);
+						if(GetVectorDistance(grenadevec, targetVec, true) > 250000.0)
+							continue;
+
+						applyAfterburn(i, client, CWeapon, damage);
+					}
+				}else{
+					EntityExplosion(client, damage, 500.0, grenadevec, 1, _, _, _, DMG_ALWAYSGIB + DMG_DISSOLVE, secondary);
+				}
 			}
 		}
 		case TFCond_Sapped:{

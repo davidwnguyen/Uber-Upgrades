@@ -7139,6 +7139,28 @@
 			"init"		"1.00"
 			"max"		"100.0"
 		}
+		"1715"
+		{
+			"name"		"damage bonus per status effect on self"
+			"ref"		"damage bonus per status effect on self"
+			"display"	"%.0f"
+			"attr_class"	"damage_bonus_per_status_effect_on_self"
+			"cost"		"0"
+			"value"		"1"
+			"init"		"0.00"
+			"max"		"1.0"
+		}
+		"1716"
+		{
+			"name"		"charge explosion ignites instead"
+			"ref"		"charge explosion ignites instead"
+			"display"	"%.0f"
+			"attr_class"	"charge_explosion_ignites_instead"
+			"cost"		"0"
+			"value"		"1"
+			"init"		"0.00"
+			"max"		"1.0"
+		}
 		//Filler
 		"1900.0"
 		{

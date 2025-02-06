@@ -1,5 +1,14 @@
 "Phrases"
 {
+	"upgrade effectiveness"{
+		"en"		"upgrade effectiveness"
+	}
+	"damage bonus per status effect on self"{
+		"en"		"damage bonus per status effect on self"
+	}
+	"charge explosion ignites instead"{
+		"en"		"charge explosion ignites instead"
+	}
 	"detonate afterburn stacks on hit"{
 		"en"		"Detonate Afterburn Stacks on Hit"
 	}

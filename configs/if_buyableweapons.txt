@@ -270,6 +270,7 @@
 		"burst fire rate mult"		"20"
 		"weapon fire rate"		"0.1"
 		"weapon damage mult"	"5"
+		"reload clip all at once"	"1"
 		"paintkit_proto_def_index"	"430"
 		"set_item_texture_wear"		"0.0"
 	}
@@ -325,5 +326,49 @@
 		"detonate afterburn stacks on hit"	"50"
 		"weapon damage mult"	"1.5"
 		"weapon fire rate"		"2.0"
+	}
+	"Hand of Wisdom and Action"
+	{
+		"index"			"198"
+		"weapon_class"	"tf_weapon_bonesaw"
+		"weapon_menu"	"tf_weapon_bonesaw"
+		"class"			"medic"
+		"description"	"+100% Upgrade Effectiveness on Item. 0.05x damage dealt."
+		"cost"			"5000.0"
+		"upgrade effectiveness"	"2"
+		"weapon damage mult"	"0.05"
+	}
+	"Highland Crusader"
+	{
+		"index"			"132"
+		"weapon_class"	"tf_weapon_sword"
+		"weapon_menu"	"tf_weapon_sword"
+		"class"			"demo"
+		"description"	"+5% damage dealt per unique debuff or buff on yourself.\nShield bash deals no damage, but ignites for same damage."
+		"cost"			"5000.0"
+		"damage bonus per status effect on self"	"0.05"
+		"charge explosion ignites instead"			"1"
+	}
+	"Scaling Cracklers"
+	{
+		"index"			"200"
+		"weapon_class"	"tf_weapon_scattergun"
+		"weapon_menu"	"tf_weapon_scattergun"
+		"class"			"scout"
+		"description"	"-40% bullets per shot. -34% damage dealt.\nShoots three round bursts of burning tracer rounds.\nConverts fire rate into damage."
+		"cost"			"5000.0"
+		"paintkit_proto_def_index"	"390"
+		"set_item_texture_wear"		"0.0"
+		"override projectile type (AR)"	"8"
+		"Converts Firerate to Damage"	"1"
+		"weapon damage mult"	"0.66"
+		"weapon fire rate"		"0.05"
+		"burst fire count"		"-3"
+		"burst fire rate mult"		"50"
+		"projectile spread angle penalty (tweak)"	"3"
+		"Increased Projectile Count"	"6"
+		"afterburn rating"		"1"
+		"reload clip all at once"	"1"
+		"Projectile speed increased(SHRTCRT)" "50"
 	}
 }
