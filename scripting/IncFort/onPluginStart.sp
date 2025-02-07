@@ -199,6 +199,7 @@ public OnMapStart()
 	PrecacheModel("models/weapons/c_models/c_croc_knife/c_croc_knife.mdl");
 	PrecacheModel("models/weapons/w_models/w_rocket_airstrike/w_rocket_airstrike.mdl");
 	PrecacheModel("models/weapons/c_models/c_caber/c_caber.mdl");
+	PrecacheModel("models/weapons/w_models/w_sd_sapper.mdl");
 	g_SmokeSprite = PrecacheModel("sprites/steam1.vmt");
 	g_LightningSprite = PrecacheModel("sprites/lgtning.vmt");
 	spriteIndex = PrecacheModel("materials/sprites/halo01.vmt");

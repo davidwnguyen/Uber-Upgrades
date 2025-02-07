@@ -1192,3 +1192,11 @@ public Action:OnTouch(entity, other)
 	SDKUnhook(entity, SDKHook_Touch, OnTouch);
 	return Plugin_Handled;
 }
+public Action OnSmokeStartTouch(entity, other){
+	float position[3];
+	GetEntPropVector(entity, Prop_Data, "m_vecOrigin", position);
+
+	CreateSmokeBombEffect(position, 8.0, GetEntProp(entity, Prop_Send, "m_iTeamNum"));
+	RemoveEntity(entity);
+	return Plugin_Continue;
+}

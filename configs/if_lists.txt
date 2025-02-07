@@ -1717,6 +1717,14 @@
 			"Attr5"		"sapper pulls enemies"
 		}
 	}
+	"smoke_bomb"
+	{
+		"special_tweaks_listid"		"-1"
+		"Weapon Specific upgrades"
+		{
+			"Attr1"		"effect bar recharge rate increased(sapper)"
+		}
+	}
 	"spymel"
 	{
 		"special_tweaks_listid"		"2"

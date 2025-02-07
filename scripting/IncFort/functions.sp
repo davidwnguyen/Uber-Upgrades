@@ -4579,6 +4579,19 @@ void applyAfterburn(int victim, int attacker, int weapon, float damage){
 	TF2Util_IgnitePlayer(victim, victim, 10.0);
 }
 
+void CreateSmokeBombEffect(float position[3], float duration, int team){
+	CreateSmoke(position, 8.0, 255, 255, 255, "300", "20");
+	DataPack pack = new DataPack();
+	pack.Reset();
+	pack.WriteFloat(position[0]);
+	pack.WriteFloat(position[1]);
+	pack.WriteFloat(position[2]);
+	pack.WriteFloat(duration+currentGameTime);
+	pack.WriteCell(team);
+
+	CreateTimer(0.1, Timer_SmokeBomb, pack, TIMER_REPEAT);
+}
+
 /*public void theBoxness(int client, int melee, const float pos[3], const float angle[3]){
 	float fwd[3], endVec[3], mins[3], maxs[3];
 	GetAngleVectors(angle, fwd, NULL_VECTOR, NULL_VECTOR);

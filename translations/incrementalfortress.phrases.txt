@@ -1,5 +1,8 @@
 "Phrases"
 {
+	"Ability : Smoke Bomb"{
+		"en"		"Ability : Smoke Bomb"
+	}
 	"upgrade effectiveness"{
 		"en"		"upgrade effectiveness"
 	}

@@ -5171,6 +5171,17 @@
 			"init"		"0"
 			"max"		"16"
 		}
+		"1530.3"
+		{
+			"name"		"weapon ability id"
+			"ref"		"Ability : Smoke Bomb"
+			"display"		"%.0f"
+			"cost"		"0"
+			"increase_ratio"	"0"
+			"value"		"18"
+			"init"		"0"
+			"max"		"18"
+		}
 		"1531"
 		{
 			"name"		"weapon ability id"

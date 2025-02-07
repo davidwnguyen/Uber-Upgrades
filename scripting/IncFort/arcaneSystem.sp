@@ -1664,11 +1664,7 @@ CastHealing(client, attuneSlot)//Projected Healing
 	int iTeam = GetClientTeam(client);
 	EmitSoundToAll(SOUND_HEAL, 0, client, SNDLEVEL_RAIDSIREN, _, 1.0, _,_,clientpos);
 
-	float fAngles[3]
-	float fOrigin[3]
-	float vBuffer[3]
-	float fVelocity[3]
-	float fwd[3]
+	float fAngles[3],fOrigin[3],vBuffer[3],fVelocity[3], fwd[3];
 	
 	int projCount[] = {0,1,3,5};
 	for(int i = 0;i<projCount[spellLevel];++i){

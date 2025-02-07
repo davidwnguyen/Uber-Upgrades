@@ -2304,3 +2304,33 @@ public Action:Timer_KillPlayer(Handle timer,Handle datapack)
 	}
 	CloseHandle(datapack);
 }
+
+public Action Timer_SmokeBomb(Handle timer, DataPack pack){
+	pack.Reset();
+	float position[3];
+	position[0] = pack.ReadFloat();
+	position[1] = pack.ReadFloat();
+	position[2] = pack.ReadFloat();
+	float expirationTime = pack.ReadFloat();
+	int team = pack.ReadCell();
+
+	if(expirationTime > currentGameTime){
+		float targetPosition[3];
+		for(int i = 1;i <= MaxClients; ++i){
+			if(!IsValidClient3(i))
+				continue;
+
+			GetClientAbsOrigin(i, targetPosition);
+			if(GetVectorDistance(position, targetPosition, true) > 100000.0)
+				continue;
+
+			if(GetClientTeam(i) == team){
+				TF2_AddCondition(i, TFCond_Stealthed, 0.2);
+			}
+		}
+
+		return Plugin_Continue;
+	}
+	delete pack;
+	return Plugin_Stop;
+}

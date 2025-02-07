@@ -2121,7 +2121,7 @@ public Action OnPlayerRunCmd(int client, int& buttons, int& impulse, float vel[3
 						else
 						{
 							char CooldownTime[32]
-							Format(CooldownTime, sizeof(CooldownTime), "Detonate Flares: READY (MOUSE3)"); 
+							Format(CooldownTime, sizeof(CooldownTime), "Detonate Flares: READY (M3)"); 
 							SetHudTextParams(0.8,0.9, TICKINTERVAL*10, 0, 220, 15, 255, 0, 0.0, 0.0, 0.0);
 							ShowSyncHudText(client, hudAbility, CooldownTime);
 							if(buttons & IN_ATTACK3)
@@ -2169,7 +2169,7 @@ public Action OnPlayerRunCmd(int client, int& buttons, int& impulse, float vel[3
 						else
 						{
 							char CooldownTime[32]
-							Format(CooldownTime, sizeof(CooldownTime), "Silent Dash: READY (MOUSE3)"); 
+							Format(CooldownTime, sizeof(CooldownTime), "Silent Dash: READY (M3)"); 
 							SetHudTextParams(0.8,0.9, TICKINTERVAL*10, 0, 220, 15, 255, 0, 0.0, 0.0, 0.0);
 							ShowSyncHudText(client, hudAbility, CooldownTime);
 							if(buttons & IN_ATTACK3)
@@ -2211,14 +2211,14 @@ public Action OnPlayerRunCmd(int client, int& buttons, int& impulse, float vel[3
 						if(!immolationActive[client])
 						{
 							char CooldownTime[32]
-							Format(CooldownTime, sizeof(CooldownTime), "Immolation: INACTIVE"); 
+							Format(CooldownTime, sizeof(CooldownTime), "Immolation: INACTIVE (M3)"); 
 							SetHudTextParams(0.8,0.9, TICKINTERVAL*10, 0, 101, 189, 255, 0, 0.0, 0.0, 0.0);
 							ShowSyncHudText(client, hudAbility, CooldownTime);
 						}
 						else
 						{
 							char CooldownTime[32]
-							Format(CooldownTime, sizeof(CooldownTime), "Immolation: ACTIVE"); 
+							Format(CooldownTime, sizeof(CooldownTime), "Immolation: ACTIVE (M3)"); 
 							SetHudTextParams(0.8,0.9, TICKINTERVAL*10, 0, 220, 15, 255, 0, 0.0, 0.0, 0.0);
 							ShowSyncHudText(client, hudAbility, CooldownTime);
 						}
@@ -2235,7 +2235,7 @@ public Action OnPlayerRunCmd(int client, int& buttons, int& impulse, float vel[3
 						if(sunstarDuration[client] < currentGameTime)
 						{
 							char CooldownTime[32]
-							Format(CooldownTime, sizeof(CooldownTime), "Sunstar: INACTIVE"); 
+							Format(CooldownTime, sizeof(CooldownTime), "Sunstar: INACTIVE (M3)"); 
 							SetHudTextParams(0.8,0.9, TICKINTERVAL*10, 0, 101, 189, 255, 0, 0.0, 0.0, 0.0);
 							ShowSyncHudText(client, hudAbility, CooldownTime);
 
@@ -2276,7 +2276,7 @@ public Action OnPlayerRunCmd(int client, int& buttons, int& impulse, float vel[3
 						else
 						{
 							char CooldownTime[32]
-							Format(CooldownTime, sizeof(CooldownTime), "Airstrike: READY", sunstarDuration[client]-currentGameTime); 
+							Format(CooldownTime, sizeof(CooldownTime), "Airstrike: READY (M3)", sunstarDuration[client]-currentGameTime); 
 							SetHudTextParams(0.8,0.9, TICKINTERVAL*10, 0, 220, 15, 255, 0, 0.0, 0.0, 0.0);
 							ShowSyncHudText(client, hudAbility, CooldownTime);
 							if(buttons & IN_ATTACK3)
@@ -2327,6 +2327,78 @@ public Action OnPlayerRunCmd(int client, int& buttons, int& impulse, float vel[3
 						}
 						else if(buttons & IN_ATTACK3){
 							FakeClientCommand(client, "destroy 2");
+						}
+					}
+					case 18.0:{
+						if(weaponArtCooldown[client] > currentGameTime)
+						{
+							char CooldownTime[32]
+							Format(CooldownTime, sizeof(CooldownTime), "Smoke Bomb: %.1fs", weaponArtCooldown[client]-currentGameTime); 
+							SetHudTextParams(0.8,0.9, TICKINTERVAL*10, 0, 101, 189, 255, 0, 0.0, 0.0, 0.0);
+							ShowSyncHudText(client, hudAbility, CooldownTime);
+						}
+						else
+						{
+							char CooldownTime[32]
+							Format(CooldownTime, sizeof(CooldownTime), "Smoke Bomb: READY (M1)", sunstarDuration[client]-currentGameTime); 
+							SetHudTextParams(0.8,0.9, TICKINTERVAL*10, 0, 220, 15, 255, 0, 0.0, 0.0, 0.0);
+							ShowSyncHudText(client, hudAbility, CooldownTime);
+							if(buttons & IN_ATTACK)
+							{
+								if(fl_GlobalCoolDown[client] <= currentGameTime)
+								{
+									fl_GlobalCoolDown[client] = currentGameTime+0.5;
+									weaponArtCooldown[client] = currentGameTime+25.0*GetAttribute(CWeapon, "effect bar recharge rate increased");
+									
+									float fAngles[3],fOrigin[3],vBuffer[3],fVelocity[3], fwd[3];
+									for(int i = 0;i<3;++i){
+										int iEntity = CreateEntityByName("tf_projectile_flare");
+										if (!IsValidEdict(iEntity)) 
+											continue;
+
+										SetEntPropEnt(iEntity, Prop_Send, "m_hOwnerEntity", client);
+										SetEntProp(iEntity, Prop_Send, "m_iTeamNum", GetClientTeam(client), 1);
+										SetEntProp(iEntity, Prop_Send, "m_nSkin", (GetClientTeam(client)-2));
+										SetEntPropEnt(iEntity, Prop_Send, "m_hLauncher", client);
+										SetEntityModel(iEntity, "models/weapons/w_models/w_sd_sapper.mdl");
+
+										SetEntityRenderMode(iEntity, RENDER_NONE);
+										GetClientEyePosition(client, fOrigin);
+										GetClientEyeAngles(client,fAngles);
+
+										fAngles[1] -= 2*4.0;
+										fAngles[1] += i*8.0;
+										GetAngleVectors(fAngles, vBuffer, NULL_VECTOR, NULL_VECTOR);
+										GetAngleVectors(fAngles,fwd, NULL_VECTOR, NULL_VECTOR);
+										ScaleVector(fwd, 60.0);
+
+										AddVectors(fOrigin, fwd, fOrigin);
+
+										float Speed = 1800.0;
+										fVelocity[0] = vBuffer[0]*Speed;
+										fVelocity[1] = vBuffer[1]*Speed;
+										fVelocity[2] = vBuffer[2]*Speed;
+										SetEntPropVector(iEntity, Prop_Send, "m_vInitialVelocity", fVelocity );
+										TeleportEntity(iEntity, fOrigin, fAngles, fVelocity);
+										DispatchSpawn(iEntity);
+
+										TE_SetupKillPlayerAttachments(iEntity);
+										TE_SendToAll();
+
+										int color[4] = {255, 255, 255, 100};
+
+										TE_SetupBeamFollow(iEntity,Laser,0,0.5,4.0,8.0,3,color);
+										TE_SendToAll();
+
+										SDKHook(iEntity, SDKHook_StartTouch, OnSmokeStartTouch);
+										SetEntityGravity(iEntity, 3.0);
+									}
+
+									int melee = GetPlayerWeaponSlot(client, TFWeaponSlot_Melee);
+									if(IsValidWeapon(melee))
+										TF2Util_SetPlayerActiveWeapon(client, melee);
+								}
+							}
 						}
 					}
 				}
