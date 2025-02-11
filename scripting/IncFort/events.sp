@@ -775,8 +775,7 @@ public MRESReturn OnThermalThrusterLaunch(int weapon){
 			CreateParticle(owner, "utaunt_auroraglow_orange_parent", true, _, 3.5);
 
 			Buff infernalLunge;
-			infernalLunge.init("Infernal Lunge", "Deals Contact Damage", Buff_InfernalLunge, 1, owner, 4.0);
-			infernalLunge.severity = jetpackLunge;
+			infernalLunge.init("Infernal Lunge", "Deals Contact Damage", Buff_InfernalLunge, 1, owner, 4.0, jetpackLunge);
 			insertBuff(owner, infernalLunge);
 		}
 	}
@@ -3868,11 +3867,17 @@ public Action TF2_SentryFireBullet(int sentry, int builder, int &shots, float sr
 	return Plugin_Changed;
 }
 
-void OnStatusEffectApplied(int victim, Buff newBuff){
-	if(IsValidClient3(newBuff.inflictor)){
-		if(isBonus[newBuff.id])
-			newBuff.severity *= TF2Attrib_HookValueFloat(1.0, "buff_magnitude_mult", newBuff.inflictor);
-		else
-			newBuff.severity *= TF2Attrib_HookValueFloat(1.0, "debuff_magnitude_mult", newBuff.inflictor);
+Buff OnStatusEffectApplied(int victim, Buff newBuff){
+	Buff inserted;
+	inserted = newBuff;
+
+	if(IsValidClient3(victim)){
+		if(!isBonus[inserted.id]){
+			int block_rating = TF2Attrib_HookValueInt(0, "debuff_block_rating", victim);
+			inserted.severity /= 1 + 0.05*block_rating;
+			inserted.duration = currentGameTime + ((inserted.duration-currentGameTime) / (1 + 0.05*block_rating));
+		}
 	}
+	
+	return inserted;
 }

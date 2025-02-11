@@ -73,70 +73,7 @@ enum struct extendedDamageTypes{
         this.third = 0;
     }
 }
-//Temp buffs for players
-enum struct Buff{
-	//All values start at 0
-	char name[32];
-	char description[64];
-	int id; //For any custom effects, use a switch statement on logic.
-	int priority;
-	int inflictor; //UserID 
-	float duration; //Measured in engine time (GetGameTime())
-	float additiveDamageRaw;
-	float additiveDamageMult;
-	float multiplicativeDamage;
-	float additiveAttackSpeedMult;
-	float multiplicativeAttackSpeedMult;
-	float additiveMoveSpeedMult;
-	float additiveDamageTaken;
-	float multiplicativeDamageTaken;
-	float severity;
-	float additiveArmorPenetration;
 
-	void clear(){
-		switch(this.id){
-			case Buff_LifeLink:{
-				for(int i=1;i<=MaxClients;++i){
-					if(!IsValidClient3(i)) continue;
-					if(!IsPlayerAlive(i)) continue;
-					if(!IsOnDifferentTeams(this.inflictor,i))
-						AddPlayerHealth(i, this.priority, 2.0, true, this.inflictor);
-				}
-			}
-			case Buff_Frozen:{
-				SetEntityRenderColor(this.priority, 255, 255, 255, 255);
-				SetEntityMoveType(this.priority, MOVETYPE_WALK);
-			}
-		}
-
-		this.name = "";
-		this.description = "";
-		this.id = 0;
-		this.priority = 0;
-		this.inflictor = 0;
-		this.duration = 0.0;
-		this.additiveDamageRaw = 0.0;
-		this.additiveDamageMult = 0.0;
-		this.multiplicativeDamage = 1.0;
-		this.additiveAttackSpeedMult = 0.0;
-		this.multiplicativeAttackSpeedMult = 1.0;
-		this.additiveMoveSpeedMult = 0.0;
-		this.additiveDamageTaken = 0.0;
-		this.multiplicativeDamageTaken = 1.0;
-		this.severity = 1.0;
-		this.additiveArmorPenetration = 0.0;
-	}
-	void init(const char sName[32], const char sDescription[64], int iID, int iPriority, int iInflictor, float fDuration)
-	{
-		this.clear();
-		this.name = sName;
-		this.description = sDescription;
-		this.id = iID;
-		this.priority = iPriority;
-		this.inflictor = iInflictor;
-		this.duration = fDuration+GetGameTime();
-	}
-}
 enum {
 	Buff_Empty=0,
 	Buff_Minicrits=1,
@@ -201,10 +138,83 @@ bool isBonus[BuffAmt] = {
 	false,
 }
 
+//Temp buffs for players
+enum struct Buff{
+	//All values start at 0
+	char name[32];
+	char description[64];
+	int id; //For any custom effects, use a switch statement on logic.
+	int priority;
+	int inflictor; //UserID 
+	float duration; //Measured in engine time (GetGameTime())
+	float additiveDamageRaw;
+	float additiveDamageMult;
+	float multiplicativeDamage;
+	float additiveAttackSpeedMult;
+	float multiplicativeAttackSpeedMult;
+	float additiveMoveSpeedMult;
+	float additiveDamageTaken;
+	float multiplicativeDamageTaken;
+	float severity;
+	float additiveArmorPenetration;
+
+	void clear(){
+		switch(this.id){
+			case Buff_LifeLink:{
+				for(int i=1;i<=MaxClients;++i){
+					if(!IsValidClient3(i)) continue;
+					if(!IsPlayerAlive(i)) continue;
+					if(!IsOnDifferentTeams(this.inflictor,i))
+						AddPlayerHealth(i, this.priority, 2.0, true, this.inflictor);
+				}
+			}
+			case Buff_Frozen:{
+				SetEntityRenderColor(this.priority, 255, 255, 255, 255);
+				SetEntityMoveType(this.priority, MOVETYPE_WALK);
+			}
+		}
+
+		this.name = "";
+		this.description = "";
+		this.id = 0;
+		this.priority = 0;
+		this.inflictor = 0;
+		this.duration = 0.0;
+		this.additiveDamageRaw = 0.0;
+		this.additiveDamageMult = 0.0;
+		this.multiplicativeDamage = 1.0;
+		this.additiveAttackSpeedMult = 0.0;
+		this.multiplicativeAttackSpeedMult = 1.0;
+		this.additiveMoveSpeedMult = 0.0;
+		this.additiveDamageTaken = 0.0;
+		this.multiplicativeDamageTaken = 1.0;
+		this.severity = 1.0;
+		this.additiveArmorPenetration = 0.0;
+	}
+	void init(const char sName[32], const char sDescription[64], int iID, int iPriority, int iInflictor, float fDuration, float fSeverity = 1.0)
+	{
+		this.clear();
+		this.name = sName;
+		this.description = sDescription;
+		this.id = iID;
+		this.priority = iPriority;
+		this.inflictor = iInflictor;
+		this.severity = fSeverity;
+		this.duration = fDuration+GetGameTime();
+
+		if(IsValidClient3(this.inflictor)){
+			if(isBonus[this.id])
+				this.severity *= TF2Attrib_HookValueFloat(1.0, "buff_magnitude_mult", this.inflictor);
+			else
+				this.severity *= TF2Attrib_HookValueFloat(1.0, "debuff_magnitude_mult", this.inflictor);
+		}
+	}
+}
+
 enum struct AfterburnStack{
 	int owner;
+	int remainingTicks;
 	float damage;
-	float expireTime;
 }
 
 Buff playerBuffs[MAXPLAYERS+1][MAXBUFFS+1];

@@ -32,8 +32,7 @@
 		{
 			"Attr1"		"buff magnitude bonus"
 			"Attr2"		"debuff magnitude bonus"
-			"Attr16"	"Remove fire chance"
-			"Attr17"	"Remove bleed chance"
+			"Attr16"	"debuff block rating"
 			"Attr18"	"Bleed Resistance"
 			"Attr19"	"Slow immunity"
 		}
@@ -134,8 +133,7 @@
 		{
 			"Attr1"		"buff magnitude bonus"
 			"Attr2"		"debuff magnitude bonus"
-			"Attr16"	"Remove fire chance"
-			"Attr17"	"Remove bleed chance"
+			"Attr16"	"debuff block rating"
 			"Attr18"	"Bleed Resistance"
 			"Attr19"	"Slow Resistance"
 		}
@@ -236,8 +234,7 @@
 		{
 			"Attr1"		"buff magnitude bonus"
 			"Attr2"		"debuff magnitude bonus"
-			"Attr16"	"Remove fire chance"
-			"Attr17"	"Remove bleed chance"
+			"Attr16"	"debuff block rating"
 			"Attr18"	"Bleed Resistance"
 			"Attr19"	"Slow Resistance"
 		}
@@ -338,7 +335,7 @@
 		{
 			"Attr1"		"buff magnitude bonus"
 			"Attr2"		"debuff magnitude bonus"
-			"Attr17"	"Remove bleed chance"
+			"Attr16"	"debuff block rating"
 			"Attr18"	"Bleed Resistance"
 			"Attr19"	"Slow Resistance"
 		}
@@ -439,8 +436,7 @@
 		{
 			"Attr1"		"buff magnitude bonus"
 			"Attr2"		"debuff magnitude bonus"
-			"Attr16"	"Remove fire chance"
-			"Attr17"	"Remove bleed chance"
+			"Attr16"	"debuff block rating"
 			"Attr18"	"Bleed Resistance"
 			"Attr19"	"Slow Resistance"
 		}
@@ -541,8 +537,7 @@
 		{
 			"Attr1"		"buff magnitude bonus"
 			"Attr2"		"debuff magnitude bonus"
-			"Attr16"	"Remove fire chance"
-			"Attr17"	"Remove bleed chance"
+			"Attr16"	"debuff block rating"
 			"Attr18"	"Bleed Resistance"
 			"Attr19"	"Slow Resistance"
 		}
@@ -642,8 +637,7 @@
 		{
 			"Attr1"		"buff magnitude bonus"
 			"Attr2"		"debuff magnitude bonus"
-			"Attr16"	"Remove fire chance"
-			"Attr17"	"Remove bleed chance"
+			"Attr16"	"debuff block rating"
 			"Attr18"	"Bleed Resistance"
 			"Attr19"	"Slow Resistance"
 		}
@@ -746,8 +740,7 @@
 		{
 			"Attr1"		"buff magnitude bonus"
 			"Attr2"		"debuff magnitude bonus"
-			"Attr16"	"Remove fire chance"
-			"Attr17"	"Remove bleed chance"
+			"Attr16"	"debuff block rating"
 			"Attr18"	"Bleed Resistance"
 			"Attr19"	"Slow Resistance"
 		}
@@ -851,8 +844,7 @@
 		{
 			"Attr1"		"buff magnitude bonus"
 			"Attr2"		"debuff magnitude bonus"
-			"Attr16"	"Remove fire chance"
-			"Attr17"	"Remove bleed chance"
+			"Attr16"	"debuff block rating"
 			"Attr18"	"Bleed Resistance"
 			"Attr19"	"Slow Resistance"
 		}

@@ -823,8 +823,7 @@ public Action:OnTouchExplodeJar(entity, other)
 									if(isPlayer){
 										miniCritStatusVictim[i] = currentGameTime+8.0;
 										Buff jarateDebuff;
-										jarateDebuff.init("Jarated", "", Buff_Jarated, RoundToNearest(damageBoost), owner, 8.0);
-										jarateDebuff.severity = damageBoost;
+										jarateDebuff.init("Jarated", "", Buff_Jarated, RoundToNearest(damageBoost), owner, 8.0, damageBoost);
 										insertBuff(i, jarateDebuff);
 									}
 								}
@@ -843,8 +842,7 @@ public Action:OnTouchExplodeJar(entity, other)
 								if(jarArmorBrokenBuff != Address_Null)
 								{
 									Buff pierceBuff;
-									pierceBuff.init("Broken Armor", "", Buff_BrokenArmor, RoundFloat(TF2Attrib_GetValue(jarArmorBrokenBuff)), owner, 6.0);
-									pierceBuff.severity = TF2Attrib_GetValue(jarArmorBrokenBuff);
+									pierceBuff.init("Broken Armor", "", Buff_BrokenArmor, RoundFloat(TF2Attrib_GetValue(jarArmorBrokenBuff)), owner, 6.0, TF2Attrib_GetValue(jarArmorBrokenBuff));
 									insertBuff(i, pierceBuff);
 								}
 								Address jarCorrosive = TF2Attrib_GetByName(CWeapon, "building cost reduction");
@@ -881,8 +879,7 @@ public Action:OnTouchExplodeJar(entity, other)
 							if(jarArmorPierceBuff != Address_Null)
 							{
 								Buff pierceBuff;
-								pierceBuff.init("Armor Piercing Boost", "", Buff_PiercingBuff, 1, owner, 6.0);
-								pierceBuff.severity = TF2Attrib_GetValue(jarArmorPierceBuff);
+								pierceBuff.init("Armor Piercing Boost", "", Buff_PiercingBuff, 1, owner, 6.0, TF2Attrib_GetValue(jarArmorPierceBuff));
 								insertBuff(i, pierceBuff);
 							}
 							

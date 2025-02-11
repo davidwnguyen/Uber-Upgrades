@@ -53,7 +53,7 @@ public Action:Timer_Second(Handle timer)
 			bool isOnFire = false;
 			float damageAccumulation[MAXPLAYERS];
 			for(int i=0;i < MAX_AFTERBURN_STACKS; ++i){
-				if(playerAfterburn[client][i].expireTime < currentGameTime)
+				if(playerAfterburn[client][i].remainingTicks <= 0)
 					continue;
 
 				int owner = playerAfterburn[client][i].owner;
@@ -61,6 +61,7 @@ public Action:Timer_Second(Handle timer)
 					continue;
 
 				damageAccumulation[owner] += playerAfterburn[client][i].damage;
+				playerAfterburn[client][i].remainingTicks--;
 			}
 
 			for(int owner=0;owner<=MaxClients;++owner){
@@ -765,8 +766,7 @@ public Action:Timer_Every100MS(Handle timer)
 						float plunderBonus = GetAttribute(secondary, "buff plunder multiplier", 1.0)
 						if(plunderBonus > 1.0){
 							Buff plunderBuff;
-							plunderBuff.init("Plunder Bonus", "Increased Hit&Kill Effects", Buff_Plunder, RoundFloat(plunderBonus*100), client, 0.5);
-							plunderBuff.severity = plunderBonus;
+							plunderBuff.init("Plunder Bonus", "Increased Hit&Kill Effects", Buff_Plunder, RoundFloat(plunderBonus*100), client, 0.5, plunderBonus);
 
 							float VictimPos[3];
 							for(int i=1;i<=MaxClients;++i)

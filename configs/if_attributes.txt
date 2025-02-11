@@ -7172,6 +7172,18 @@
 			"init"		"0.00"
 			"max"		"1.0"
 		}
+		"1717"
+		{
+			"name"		"debuff block rating"
+			"ref"		"debuff block rating"
+			"display"	"%.0f"
+			"attr_class"	"debuff_block_rating"
+			"description"	"Reduces incoming debuffs severity and duration by 5% per rating."
+			"cost"		"800"
+			"value"		"1"
+			"init"		"0"
+			"max"		"20"
+		}
 		//Filler
 		"1900.0"
 		{

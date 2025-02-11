@@ -4,11 +4,11 @@ public void insertAfterburn(int client, AfterburnStack newStack){
 	playerAfterburn[client][replacementID] = newStack;
 }
 public int getNextAfterburnStack(int client){
-	float lowest = 99999999.0;
+	int lowest = 99999999;
 	int id = 0;
 	for(int i = 0; i < MAX_AFTERBURN_STACKS; ++i){
-		if(playerAfterburn[client][i].expireTime < lowest){
-			lowest = playerAfterburn[client][i].expireTime;
+		if(playerAfterburn[client][i].remainingTicks < lowest){
+			lowest = playerAfterburn[client][i].remainingTicks;
 			id = i;
 		}
 	}
@@ -248,9 +248,8 @@ public void insertBuff(int client, Buff newBuff){
 		if(playerBuffs[client][i].id == newBuff.id && playerBuffs[client][i].priority <= newBuff.priority)
 			{replacementID = i;break;}
 	}
-	OnStatusEffectApplied(client, newBuff);
 	buffChange[client] = true;
-	playerBuffs[client][replacementID] = newBuff;
+	playerBuffs[client][replacementID] = OnStatusEffectApplied(client, newBuff);
 	//PrintToServer("added %s to %N for %.2fs. ID = %i, index = %i", newBuff.name, client, newBuff.duration -GetGameTime(), newBuff.id, replacementID);
 }
 public bool hasBuffIndex(int client, int index){
@@ -4563,9 +4562,10 @@ void UpdatePlayerMaxHealth(int client){
 }
 
 void applyAfterburn(int victim, int attacker, int weapon, float damage){
-	float burndmgMult = 0.1, burnTime = 6.0;
+	float burndmgMult = 0.1
+	int burnTime = 6;
 	burndmgMult *= GetAttribute(weapon, "shot penetrate all players")*TF2Attrib_HookValueFloat(1.0, "mult_wpn_burndmg", weapon)*TF2Attrib_HookValueFloat(1.0, "debuff_magnitude_mult", weapon);
-	burnTime *= 1.0+0.05*GetAttribute(weapon, "afterburn rating", 0.0);
+	burnTime += GetAttribute(weapon, "afterburn rating", 0.0);
 
 	if(GetAttribute(attacker, "knockout powerup", 0.0) == 2 && TF2Util_GetWeaponSlot(weapon) == TFWeaponSlot_Melee)
 		burndmgMult *= 3;
@@ -4573,7 +4573,7 @@ void applyAfterburn(int victim, int attacker, int weapon, float damage){
 	AfterburnStack stack;
 	stack.owner = attacker;
 	stack.damage = damage*burndmgMult;
-	stack.expireTime = currentGameTime+burnTime;
+	stack.remainingTicks = burnTime;
 
 	insertAfterburn(victim, stack);
 	TF2Util_IgnitePlayer(victim, victim, 10.0);

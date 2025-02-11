@@ -1341,8 +1341,7 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 				float immolationRatio = GetAttribute(weapon, "immolation ratio", 0.0);
 				if(immolationRatio > 0.0){
 					Buff immolationStatus;
-					immolationStatus.init("Immolation Burn", "Rapidly losing health", Buff_ImmolationBurn, TF2Util_GetEntityMaxHealth(attacker)*RoundFloat(immolationRatio*100), attacker, 5.0);
-					immolationStatus.severity = immolationRatio;
+					immolationStatus.init("Immolation Burn", "Rapidly losing health", Buff_ImmolationBurn, TF2Util_GetEntityMaxHealth(attacker)*RoundFloat(immolationRatio*100), attacker, 5.0, immolationRatio);
 					insertBuff(victim, immolationStatus);
 				}
 			}
@@ -1590,14 +1589,14 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 			if(detonateStacks <= 0)
 				break;
 
-			if(playerAfterburn[victim][i].expireTime < currentGameTime)
+			if(playerAfterburn[victim][i].remainingTicks <= 0)
 				continue;
 
 			if(playerAfterburn[victim][i].owner != attacker)
 				continue;
 
-			detonateAccumulation += playerAfterburn[victim][i].damage * (playerAfterburn[victim][i].expireTime - currentGameTime);
-			playerAfterburn[victim][i].expireTime = 0.0;
+			detonateAccumulation += playerAfterburn[victim][i].damage * playerAfterburn[victim][i].remainingTicks;
+			playerAfterburn[victim][i].remainingTicks = 0;
 			detonateStacks--;
 		}
 		if(detonateAccumulation > 0){
