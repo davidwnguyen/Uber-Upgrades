@@ -11,6 +11,7 @@
 			"Attr3"		"Defense"
 			"Attr5"		"patient overheal bonus"
 			"Attr6"		"health from healers increased"
+			"Attr7"		"critical block rating"
 		}
 		"Physical upgrades"
 		{
@@ -20,7 +21,6 @@
 			"Attr3"		"knockback resistance"
 			"Attr6"		"cancel falling damage"
 			"Attr8"		"Weighdown Ability"
-			
 		}
 		"Ammo upgrades"
 		{
@@ -112,6 +112,7 @@
 			"Attr19"	"Defense"
 			"Attr16"	"patient overheal bonus"
 			"Attr10"	"health from healers increased"
+			"Attr7"		"critical block rating"
 		}
 		"Physical upgrades"
 		{
@@ -213,6 +214,7 @@
 			"Attr19"	"Defense"
 			"Attr16"	"patient overheal bonus"
 			"Attr10"	"health from healers increased"
+			"Attr7"		"critical block rating"
 		}
 		"Physical upgrades"
 		{
@@ -314,6 +316,7 @@
 			"Attr19"	"Defense"
 			"Attr16"	"patient overheal bonus"
 			"Attr10"	"health from healers increased"
+			"Attr7"		"critical block rating"
 		}
 		"Physical upgrades"
 		{
@@ -415,6 +418,7 @@
 			"Attr19"	"Defense"
 			"Attr16"	"patient overheal bonus"
 			"Attr10"	"health from healers increased"
+			"Attr7"		"critical block rating"
 		}
 		"Physical upgrades"
 		{
@@ -516,6 +520,7 @@
 			"Attr19"	"Defense"
 			"Attr16"	"patient overheal bonus"
 			"Attr10"	"health from healers increased"
+			"Attr7"		"critical block rating"
 		}
 		"Physical upgrades"
 		{
@@ -617,6 +622,7 @@
 			"Attr19"	"Defense"
 			"Attr16"	"patient overheal bonus"
 			"Attr10"	"health from healers increased"
+			"Attr7"		"critical block rating"
 		}
 		"Physical upgrades"
 		{
@@ -717,6 +723,7 @@
 			"Attr19"	"Defense"
 			"Attr16"	"patient overheal bonus"
 			"Attr10"	"health from healers increased"
+			"Attr7"		"critical block rating"
 		}
 		"Physical upgrades"
 		{
@@ -820,6 +827,7 @@
 			"Attr19"	"Defense"
 			"Attr16"	"patient overheal bonus"
 			"Attr10"	"health from healers increased"
+			"Attr7"		"critical block rating"
 		}
 		"Physical upgrades"
 		{
@@ -924,6 +932,7 @@
 			"Attr1"		"blast radius increased"
 			"Attr9"		"dmg falloff decreased"
 			"Attr13"	"lifesteal ability"
+			"Attr20"	"critical rating"
 			"Attr13"	"reveal cloaked victim on hit"
 			"Attr14"	"reveal disguised victim on hit"
 		}
@@ -956,6 +965,7 @@
 			"Attr1"			"blast radius increased"
 			"Attr9"			"dmg falloff decreased"
 			"Attr13"		"lifesteal ability"
+			"Attr20"	"critical rating"
 			"Attr13"		"reveal cloaked victim on hit"
 			"Attr14"		"reveal disguised victim on hit"
 		}
@@ -986,6 +996,7 @@
 			"Attr17"		"ap (slowswing)"
 			"Attr16"		"Extra Damage Bonus"
 			"Attr13"		"lifesteal ability"
+			"Attr20"	"critical rating"
 			"Attr12"		"reveal cloaked victim on hit"
 			"Attr13"		"reveal disguised victim on hit"
 		}
@@ -1011,6 +1022,7 @@
 			"Attr24"	"ap (biggercali)"
 			"Attr1"		"Accuracy Scales DMG Replacement"
 			"Attr13"	"lifesteal ability"
+			"Attr20"	"critical rating"
 			"Attr7"		"reveal cloaked victim on hit"
 			"Attr8"		"reveal disguised victim on hit"
 		}
@@ -1039,6 +1051,7 @@
 			"Attr22"	"ap (biggercali)"
 			"Attr1"		"Accuracy Scales DMG Replacement"
 			"Attr13"	"lifesteal ability"
+			"Attr20"	"critical rating"
 			"Attr7"		"reveal cloaked victim on hit"
 			"Attr8"		"reveal disguised victim on hit"
 		}
@@ -1067,6 +1080,7 @@
 			"Attr22"	"ap (biggercali)"
 			"Attr1"		"Accuracy Scales DMG Replacement"
 			"Attr13"	"lifesteal ability"
+			"Attr20"	"critical rating"
 			"Attr7"		"reveal cloaked victim on hit"
 			"Attr8"		"reveal disguised victim on hit"
 		}
@@ -1095,6 +1109,7 @@
 			"Attr24"	"ap (condensedlaser)"
 			"Attr1"		"Accuracy Scales DMG Replacement"
 			"Attr13"	"lifesteal ability"
+			"Attr20"	"critical rating"
 			"Attr9"		"reveal cloaked victim on hit"
 			"Attr10"	"reveal disguised victim on hit"	
 		}
@@ -1121,6 +1136,7 @@
 			"Attr7"		"ap (highervoltage)"
 			"Attr6"		"Accuracy Scales DMG Replacement"
 			"Attr13"	"lifesteal ability"
+			"Attr20"	"critical rating"
 			"Attr10"	"reveal cloaked victim on hit"
 			"Attr11"	"reveal disguised victim on hit"
 		}
@@ -1145,6 +1161,7 @@
 			"Attr17"	"ap (slowswing)"
 			"Attr16"	"Extra Damage Bonus"
 			"Attr13"	"lifesteal ability"
+			"Attr20"	"critical rating"
 			"Attr6"		"reveal cloaked victim on hit"
 			"Attr7"		"reveal disguised victim on hit"
 		}
@@ -1169,7 +1186,7 @@
 		"Sentry Upgrades"
 		{
 			"Attr16"	"engy sentry fire rate increased"
-			"Attr3"		"engy sentry damage bonus"
+			"Attr3"		"damage bonus"
 			"Attr15"	"Sentry Armor Piercing Damage"
 			"Attr16"	"ap (sentrycal)"
 			"Attr16"	"Sentry Maximum Ammo"
@@ -1187,11 +1204,11 @@
 		}
 		"Sentry Specializations"
 		{
-			"Attr0"		"Firestorm Rounds"
+			"Attr0"		"Sentry Rocket Fire Rate"
 			"Attr1"		"Double Sentry Rocket Shot"
-			"Attr2"		"Sentry Rocket Fire Rate"
-			"Attr3"		"sentry bullets per shot"
-			"Attr4"		"Bolt Ballista Sentry"
+			"Attr2"		"sentry bullets per shot"
+			"Attr4"		"Firestorm Rounds"
+			"Attr3"		"Bolt Ballista Sentry"
 		}
 	}
 	"minigunweap"
@@ -1203,6 +1220,7 @@
 			"Attr11"	"ap (electricmotor)"
 			"Attr1"		"Accuracy Scales DMG Replacement"
 			"Attr13"	"lifesteal ability"
+			"Attr20"	"critical rating"
 			"Attr9"		"reveal cloaked victim on hit"
 			"Attr10"	"reveal disguised victim on hit"
 		}
@@ -1235,6 +1253,7 @@
 			"Attr11"	"ap (electricmotor)"
 			"Attr1"		"Accuracy Scales DMG Replacement"
 			"Attr13"	"lifesteal ability"
+			"Attr20"	"critical rating"
 			"Attr9"		"reveal cloaked victim on hit"
 			"Attr10"	"reveal disguised victim on hit"
 		}
@@ -1264,6 +1283,7 @@
 			"Attr24"	"ap (biggercali)"
 			"Attr11"	"Extra Damage Bonus"
 			"Attr13"	"lifesteal ability"
+			"Attr20"	"critical rating"
 			"Attr5"		"projectile penetration"
 			"Attr8"		"reveal cloaked victim on hit"
 			"Attr9"		"reveal disguised victim on hit"
@@ -1292,6 +1312,7 @@
 			"Attr11"	"Extra Damage Bonus"
 			"Attr14"	"Increased Overall Damage(F)"
 			"Attr13"	"lifesteal ability"
+			"Attr20"	"critical rating"
 			"Attr8"		"reveal cloaked victim on hit"
 			"Attr9"		"reveal disguised victim on hit"
 		}
@@ -1319,6 +1340,7 @@
 			"Attr11"	"Extra Damage Bonus"
 			"Attr14"	"Increased Overall Damage(F)"
 			"Attr13"	"lifesteal ability"
+			"Attr20"	"critical rating"
 			"Attr8"		"reveal cloaked victim on hit"
 			"Attr9"		"reveal disguised victim on hit"
 		}
@@ -1345,6 +1367,7 @@
 			"Attr13"	"Direct Flame Damage Multiplier"
 			"Attr14"	"Increased Overall Damage(T)"
 			"Attr13"	"lifesteal ability"
+			"Attr20"	"critical rating"
 			"Attr21"	"Shoots extra projectile"
 			"Attr6"		"reveal cloaked victim on hit"
 			"Attr7"		"reveal disguised victim on hit"
@@ -1371,6 +1394,7 @@
 			"Attr12"	"Direct Flame Damage Multiplier"
 			"Attr15"	"Increased Overall Damage(T)"
 			"Attr13"	"lifesteal ability"
+			"Attr20"	"critical rating"
 			"Attr21"	"Shoots extra projectile"
 			"Attr6"		"reveal cloaked victim on hit"
 			"Attr7"		"reveal disguised victim on hit"
@@ -1397,6 +1421,7 @@
 			"Attr16"	"ap (slowswing)"
 			"Attr13"	"Extra Damage Bonus"
 			"Attr13"	"lifesteal ability"
+			"Attr20"	"critical rating"
 			"Attr10"	"reveal cloaked victim on hit"
 			"Attr11"	"reveal disguised victim on hit"
 		}
@@ -1421,6 +1446,7 @@
 			"Attr16"	"ap (slowswing)"
 			"Attr13"	"Extra Damage Bonus"
 			"Attr13"	"lifesteal ability"
+			"Attr20"	"critical rating"
 			"Attr10"	"reveal cloaked victim on hit"
 			"Attr11"	"reveal disguised victim on hit"
 		}
@@ -1446,6 +1472,7 @@
 			"Attr15"	"ap (temprise)"
 			"Attr2"		"Extra Damage Bonus"
 			"Attr13"	"lifesteal ability"
+			"Attr20"	"critical rating"
 			"Attr6"		"reveal cloaked victim on hit"
 			"Attr7"		"reveal disguised victim on hit"
 		}
@@ -1470,6 +1497,7 @@
 			"Attr16"	"ap (temprise)"
 			"Attr13"	"Extra Damage Bonus"
 			"Attr13"	"lifesteal ability"
+			"Attr20"	"critical rating"
 			"Attr10"	"reveal cloaked victim on hit"
 			"Attr11"	"reveal disguised victim on hit"
 		}
@@ -1489,6 +1517,7 @@
 			"Attr24"	"ap (biggercali)"
 			"Attr11"	"Accuracy Scales DMG Replacement"
 			"Attr13"	"lifesteal ability"
+			"Attr20"	"critical rating"
 			"Attr6"		"reveal cloaked victim on hit"
 			"Attr7"		"reveal disguised victim on hit"
 		}
@@ -1517,6 +1546,7 @@
 			"Attr24"	"ap (biggercali)"
 			"Attr11"	"Accuracy Scales DMG Replacement"
 			"Attr13"	"lifesteal ability"
+			"Attr20"	"critical rating"
 			"Attr6"		"reveal cloaked victim on hit"
 			"Attr7"		"reveal disguised victim on hit"	
 		}
@@ -1546,6 +1576,7 @@
 			"Attr2"		"sniper full charge damage bonus"
 			"Attr4"		"Increased Overall Damage"
 			"Attr13"	"lifesteal ability"
+			"Attr20"	"critical rating"
 			"Attr5"		"projectile penetration heavy"
 			"Attr12"	"reveal cloaked victim on hit"
 			"Attr13"	"reveal disguised victim on hit"
@@ -1575,6 +1606,7 @@
 			"Attr2"		"sniper full charge damage bonus"
 			"Attr4"		"Increased Overall Damage"
 			"Attr13"	"lifesteal ability"
+			"Attr20"	"critical rating"
 			"Attr5"		"projectile penetration heavy"
 			"Attr12"	"reveal cloaked victim on hit"
 			"Attr13"	"reveal disguised victim on hit"
@@ -1598,6 +1630,7 @@
 			"Attr2"		"sniper full charge damage bonus"
 			"Attr4"		"Increased Overall Damage"
 			"Attr13"	"lifesteal ability"
+			"Attr20"	"critical rating"
 			"Attr5"		"projectile penetration heavy"
 			"Attr12"	"reveal cloaked victim on hit"
 			"Attr13"	"reveal disguised victim on hit"
@@ -1626,6 +1659,7 @@
 			"Attr24"	"ap (biggercali)"
 			"Attr4"		"Increased Overall Damage"
 			"Attr13"	"lifesteal ability"
+			"Attr20"	"critical rating"
 			"Attr5"		"projectile penetration heavy"
 			"Attr12"	"reveal cloaked victim on hit"
 			"Attr13"	"reveal disguised victim on hit"
@@ -1652,6 +1686,7 @@
 			"Attr2"		"ap (armyofnotmany)"
 			"Attr2"		"Extra Damage Bonus"
 			"Attr3"		"lifesteal ability"
+			"Attr20"	"critical rating"
 			"Attr6"		"reveal cloaked victim on hit"
 			"Attr7"		"reveal disguised victim on hit"
 		}
@@ -1676,6 +1711,7 @@
 			"Attr22"	"ap (biggercali)"
 			"Attr10"	"Accuracy Scales DMG Replacement"
 			"Attr13"	"lifesteal ability"
+			"Attr20"	"critical rating"
 			"Attr2"		"add cloak on hit"
 			"Attr4"		"sapper kills collect crits"
 			"Attr7"		"reveal cloaked victim on hit"
@@ -1726,6 +1762,7 @@
 			"Attr17"	"ap (slowswing)"
 			"Attr16"	"Extra Damage Bonus"
 			"Attr13"	"lifesteal ability"
+			"Attr20"	"critical rating"
 			"Attr6"		"reveal cloaked victim on hit"
 			"Attr7"		"reveal disguised victim on hit"
 		}
@@ -1797,6 +1834,7 @@
 			"Attr20"	"ap (armyofnotmany)"
 			"Attr18"	"Increased Overall Damage"
 			"Attr13"	"lifesteal ability"
+			"Attr20"	"critical rating"
 			"Attr5"		"blast radius increased"
 			"Attr12"	"reveal cloaked victim on hit"
 			"Attr13"	"reveal disguised victim on hit"
@@ -1830,6 +1868,7 @@
 			"Attr20"	"ap (armyofnotmany)"
 			"Attr18"	"Increased Overall Damage"
 			"Attr13"	"lifesteal ability"
+			"Attr20"	"critical rating"
 			"Attr5"		"blast radius increased"
 			"Attr12"	"reveal cloaked victim on hit"
 			"Attr13"	"reveal disguised victim on hit"
@@ -1862,6 +1901,7 @@
 			"Attr17"	"ap (slowswing)"
 			"Attr16"	"Extra Damage Bonus"
 			"Attr13"	"lifesteal ability"
+			"Attr20"	"critical rating"
 			"Attr6"		"reveal cloaked victim on hit"
 			"Attr7"		"reveal disguised victim on hit"
 		}
@@ -1887,6 +1927,7 @@
 			"Attr17"	"ap (slowswing)"
 			"Attr16"	"Extra Damage Bonus"
 			"Attr13"	"lifesteal ability"
+			"Attr20"	"critical rating"
 			"Attr6"		"reveal cloaked victim on hit"
 			"Attr7"		"reveal disguised victim on hit"
 		}
@@ -1914,6 +1955,7 @@
 			"Attr13"	"bleeding duration"
 			"Attr12"	"Bleed Per Hit"
 			"Attr13"	"lifesteal ability"
+			"Attr20"	"critical rating"
 			"Attr8"		"reveal cloaked victim on hit"
 			"Attr9"		"reveal disguised victim on hit"
 		}
@@ -1938,6 +1980,7 @@
 		{
 			"Attr8"		"Weapons Deals No Knockback"
 			"Attr13"	"lifesteal ability"
+			"Attr20"	"critical rating"
 			"Attr8"		"reveal cloaked victim on hit"
 			"Attr9"		"reveal disguised victim on hit"
 		}
@@ -1980,6 +2023,7 @@
 			"Attr17"	"ap (slowswing)"
 			"Attr16"	"Extra Damage Bonus"
 			"Attr13"	"lifesteal ability"
+			"Attr20"	"critical rating"
 			"Attr11"	"reveal cloaked victim on hit"
 			"Attr12"	"reveal disguised victim on hit"
 		}
@@ -2017,6 +2061,7 @@
 			"Attr17"	"ap (slowswing)"
 			"Attr16"	"Extra Damage Bonus"
 			"Attr13"	"lifesteal ability"
+			"Attr20"	"critical rating"
 			"Attr11"	"reveal cloaked victim on hit"
 			"Attr12"	"reveal disguised victim on hit"
 		}
@@ -2056,6 +2101,7 @@
 			"Attr17"	"ap (slowswing)"
 			"Attr16"	"Extra Damage Bonus"
 			"Attr13"	"lifesteal ability"
+			"Attr20"	"critical rating"
 			"Attr11"	"reveal cloaked victim on hit"
 			"Attr12"	"reveal disguised victim on hit"
 		}
@@ -2096,6 +2142,7 @@
 			"Attr1"			"blast radius increased"
 			"Attr9"			"dmg falloff decreased"
 			"Attr13"		"lifesteal ability"
+			"Attr20"	"critical rating"
 			"Attr13"		"reveal cloaked victim on hit"
 			"Attr14"		"reveal disguised victim on hit"
 		}
@@ -2128,6 +2175,7 @@
 			"Attr20"		"ap (armyofnotmany)"
 			"Attr16"		"Extra Damage Bonus"
 			"Attr13"		"lifesteal ability"
+			"Attr20"	"critical rating"
 			"Attr1"			"blast radius increased"
 			"Attr13"		"reveal cloaked victim on hit"
 			"Attr14"		"reveal disguised victim on hit"
@@ -2161,6 +2209,7 @@
 			"Attr1"			"blast radius increased"
 			"Attr9"			"dmg falloff decreased"
 			"Attr13"		"lifesteal ability"
+			"Attr20"	"critical rating"
 			"Attr13"		"reveal cloaked victim on hit"
 			"Attr14"		"reveal disguised victim on hit"
 		}
@@ -2222,6 +2271,7 @@
 			"Attr17"	"ap (slowswing)"
 			"Attr16"	"Extra Damage Bonus"
 			"Attr13"	"lifesteal ability"
+			"Attr20"	"critical rating"
 			"Attr6"		"reveal cloaked victim on hit"
 			"Attr7"		"reveal disguised victim on hit"
 		}
@@ -2247,6 +2297,7 @@
 			"Attr24"	"ap (biggercali)"
 			"Attr1"		"Accuracy Scales DMG Replacement"
 			"Attr13"	"lifesteal ability"
+			"Attr20"	"critical rating"
 			"Attr7"		"reveal cloaked victim on hit"
 			"Attr8"		"reveal disguised victim on hit"
 		}
@@ -2273,6 +2324,7 @@
 			"Attr9"		"ap (compressedfire)"
 			"Attr1"		"Extra Damage Bonus(fireball)"
 			"Attr13"	"lifesteal ability"
+			"Attr20"	"critical rating"
 		}
 		"Weapon Specific upgrades"
 		{
@@ -2312,6 +2364,7 @@
 			"Attr24"	"ap (biggercali)"
 			"Attr1"		"Accuracy Scales DMG Replacement"
 			"Attr13"	"lifesteal ability"
+			"Attr20"	"critical rating"
 			"Attr7"		"reveal cloaked victim on hit"
 			"Attr8"		"reveal disguised victim on hit"
 		}
@@ -2338,6 +2391,7 @@
 			"Attr17"	"ap (slowswing)"
 			"Attr16"	"Extra Damage Bonus"
 			"Attr13"	"lifesteal ability"
+			"Attr20"	"critical rating"
 			"Attr12"		"reveal cloaked victim on hit"
 			"Attr13"		"reveal disguised victim on hit"
 		}
@@ -2431,6 +2485,7 @@
 			"Attr2"		"ap (compressedfire)"
 			"Attr6"		"Overall Damage"
 			"Attr13"	"lifesteal ability"
+			"Attr20"	"critical rating"
 		}
 		"Weapon Specific upgrades"
 		{
@@ -2454,6 +2509,7 @@
 			"Attr13"		"Extra Damage Bonus"
 			"Attr9"			"dmg falloff decreased"
 			"Attr13"		"lifesteal ability"
+			"Attr20"	"critical rating"
 			"Attr13"		"reveal cloaked victim on hit"
 			"Attr14"		"reveal disguised victim on hit"
 		}
@@ -2486,6 +2542,7 @@
 			"Attr1"			"blast radius increased"
 			"Attr9"			"dmg falloff decreased"
 			"Attr13"		"lifesteal ability"
+			"Attr20"	"critical rating"
 			"Attr13"		"reveal cloaked victim on hit"
 			"Attr14"		"reveal disguised victim on hit"
 		}
@@ -2518,6 +2575,7 @@
 			"Attr1"			"blast radius increased"
 			"Attr9"			"dmg falloff decreased"
 			"Attr13"		"lifesteal ability"
+			"Attr20"	"critical rating"
 			"Attr13"		"reveal cloaked victim on hit"
 			"Attr14"		"reveal disguised victim on hit"
 		}
@@ -2542,6 +2600,7 @@
 			"Attr15"	"ap (slowswing)"
 			"Attr16"	"Extra Damage Bonus"
 			"Attr13"	"lifesteal ability"
+			"Attr20"	"critical rating"
 			"Attr8"		"reveal cloaked victim on hit"
 			"Attr9"		"reveal disguised victim on hit"
 		}

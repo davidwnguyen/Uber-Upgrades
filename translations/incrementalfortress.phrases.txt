@@ -1,5 +1,11 @@
 "Phrases"
 {
+	"critical block rating"{
+		"en"		"Critical Block Rating"
+	}
+	"critical rating"{
+		"en"		"Critical Rating"
+	}
 	"debuff block rating"{
 		"en"		"Debuff Block Rating"
 	}

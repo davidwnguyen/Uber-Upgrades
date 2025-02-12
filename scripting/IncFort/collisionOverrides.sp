@@ -397,20 +397,22 @@ public Action:OnCollisionSentryBolt(entity, client)
 	char strName1[32];
 	GetEntityClassname(entity, strName1, 32)
 
-	if(IsValidForDamage(client) && IsOnDifferentTeams(owner,client))
+	if(IsValidForDamage(client))
 	{
-		if(!StrEqual(strName, strName1))
-		{
-			int CWeapon = GetEntPropEnt(owner, Prop_Send, "m_hActiveWeapon");
-			if(IsValidEdict(CWeapon))
+		if(IsOnDifferentTeams(owner,client)){
+			if(!StrEqual(strName, strName1))
 			{
-				currentDamageType[owner].second |= DMG_IGNOREHOOK;
-				SDKHooks_TakeDamage(client, owner, owner, projectileDamage[entity], DMG_BULLET, _, _,_,false);
-			}
-			if(IsValidClient3(client)){
-				ShouldNotHome[entity][client] = true;
-				BleedBuildup[client] += 4.0;
-				checkBleed(client, owner, _, projectileDamage[entity]*3.0);
+				int CWeapon = GetEntPropEnt(owner, Prop_Send, "m_hActiveWeapon");
+				if(IsValidEdict(CWeapon))
+				{
+					currentDamageType[owner].second |= DMG_IGNOREHOOK;
+					SDKHooks_TakeDamage(client, owner, owner, projectileDamage[entity], DMG_BULLET, _, _,_,false);
+				}
+				if(IsValidClient3(client)){
+					ShouldNotHome[entity][client] = true;
+					BleedBuildup[client] += 4.0;
+					checkBleed(client, owner, _, projectileDamage[entity]*3.0);
+				}
 			}
 		}
 

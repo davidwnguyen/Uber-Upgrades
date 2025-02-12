@@ -819,19 +819,24 @@ public Action TF2_OnTakeDamage(int victim, int &attacker, int &inflictor, float 
 	}
 	return changed;
 }
-/*
-public Action:TF2_OnTakeDamageModifyRules(int victim, int &attacker, int &inflictor, float &damage,
-int &damagetype, int &weapon, float damageForce[3], float damagePosition[3],
-int damagecustom, CritType &critType)
-{
-	if(!IsValidClient3(victim))
-		return Plugin_Continue;
 
-	attacker = EntRefToEntIndex(attacker);
+public Action TF2_OnTakeDamageModifyRules(int victim, int &attacker, int &inflictor, float &damage, int &damagetype, int &weapon, float damageForce[3], float damagePosition[3], int damagecustom, CritType &critType){
+	if(0 < victim <= MaxClients && 0 < attacker <= MaxClients){
+		if(critType == CritType_Crit){
+			damage /= 3.0;
 
-	return Plugin_Continue;
+			float critNullify = TF2Attrib_HookValueFloat(0.0, "critical_block_rating", victim);
+			float critRating = TF2Attrib_HookValueFloat(0.0, "critical_rating", attacker);
+			if(critNullify/(critNullify+800) >= GetRandomFloat()){
+				critType = CritType_None;
+			}else{
+				damage += damage*((1+critRating/200.0)/(1+critNullify/200));
+			}
+		}
+	}
+	return Plugin_Changed;
 }
-*/
+
 public Action OnTakeDamage(victim, &attacker, &inflictor, float &damage, &damagetype, &weapon, float damageForce[3], float damagePosition[3], damagecustom)
 {
 	if(0 < attacker <= MaxClients){
@@ -1674,12 +1679,8 @@ public float genericSentryDamageModification(victim, attacker, inflictor, float 
 				{
 					damage *= TF2Attrib_GetValue(SentryDmgActive2);
 				}
-				Address damageActive = TF2Attrib_GetByName(melee, "ubercharge");
-				if(damageActive != Address_Null)
-				{
-					damage *= Pow(1.05,TF2Attrib_GetValue(damageActive));
-				}
 			}
+
 			int secondary = GetWeapon(owner, 1);
 			if(IsValidWeapon(secondary)){
 				damage *= 1+GetEntProp(inflictor, Prop_Send, "m_iKills")*GetAttribute(secondary, "sentry dmg bonus per kill", 0.0);

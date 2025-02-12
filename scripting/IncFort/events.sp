@@ -2760,6 +2760,14 @@ public Action TF2_CalcIsAttackCritical(int client, int weapon, char[] weaponname
 	int CWeapon = weapon;
 	if(IsValidWeapon(CWeapon))
 	{
+		int critRating = TF2Attrib_HookValueInt(0, "critical_rating", client);
+		if(critRating > 0){
+			float critRate = critRating/(critRating+200.0);
+			if(critRate >= GetRandomFloat()){
+				result = true;
+			}
+		}
+
 		float fAngles[3], fVelocity[3], fOrigin[3], vBuffer[3];
 		meleeLimiter[client]++;
 		if(getWeaponSlot(client,CWeapon) == 2)
@@ -3261,7 +3269,7 @@ public Action TF2_CalcIsAttackCritical(int client, int weapon, char[] weaponname
 			}
 		}
 	}
-	return Plugin_Continue;
+	return Plugin_Changed;
 }
 public OnClientDisconnect(client)
 {
@@ -3785,9 +3793,9 @@ public Action TF2_SentryFireBullet(int sentry, int builder, int &shots, float sr
 	lastSentryFiring[sentry] = currentGameTime;
 
 	if(IsValidClient3(builder)){
-		int melee = GetWeapon(builder, 2);
-		if(IsValidWeapon(melee)){
-			float override = GetAttribute(melee, "override projectile type", 0.0);
+		int pda = GetWeapon(builder, 5);
+		if(IsValidWeapon(pda)){
+			float override = GetAttribute(pda, "override projectile type", 0.0);
 			switch (override){
 				case 33.0:{
 					if(firestormCounter[builder] == 4)
@@ -3809,7 +3817,7 @@ public Action TF2_SentryFireBullet(int sentry, int builder, int &shots, float sr
 							TeleportEntity(iEntity, src, fAngles, fVelocity);
 							DispatchSpawn(iEntity);
 							//why does it hit twice??? also, minisentries deal 25% dmg.
-							projectileDamage[iEntity] = 60.0*TF2_GetSentryDamageModifiers(attacker, melee);
+							projectileDamage[iEntity] = 50.0*TF2_GetSentryDamageModifiers(attacker, pda);
 							if(GetEntProp(sentry, Prop_Send, "m_bMiniBuilding"))
 								projectileDamage[iEntity] *= 0.25;
 						}
@@ -3823,7 +3831,7 @@ public Action TF2_SentryFireBullet(int sentry, int builder, int &shots, float sr
 					int iEntity = CreateEntityByName(projName);
 					if (IsValidEdict(iEntity)) 
 					{
-						projectileDamage[iEntity] = 35.0 * TF2_GetSentryDamageModifiers(builder, melee);
+						projectileDamage[iEntity] = 20.0 * TF2_GetSentryDamageModifiers(builder, pda);
 						if(GetEntProp(sentry, Prop_Send, "m_bMiniBuilding"))
 							projectileDamage[iEntity] *= 0.25;
 
@@ -3853,7 +3861,7 @@ public Action TF2_SentryFireBullet(int sentry, int builder, int &shots, float sr
 				}
 			}
 			
-			shots = RoundToCeil(GetAttribute(melee, "sentry bullets per shot", 1.0) * shots);
+			shots = RoundToCeil(GetAttribute(pda, "sentry bullets per shot", 1.0) * shots);
 			if(shots > 1){//Each bullets per shot increases spread by +50%.
 				ScaleVector(spread, 1+float(shots-1)/2.0);
 			}

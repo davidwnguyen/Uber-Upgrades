@@ -75,7 +75,6 @@ Action:Menu_UpgradeChoice(client, subcat_choice, cat_choice, char[] TitleStr, in
 		int slot
 		current_w_sc_list_id[client] = subcat_choice;
 		current_w_c_list_id[client] = cat_choice;
-		int attributeDisabled[MAX_ATTRIBUTES]
 		float m_val;
 		//PrintToServer("%i | %i", cat_choice, subcat_choice)
 
@@ -204,9 +203,20 @@ Action:Menu_UpgradeChoice(client, subcat_choice, cat_choice, char[] TitleStr, in
 
             Format(Buffer, sizeof(Buffer), "%t | $%.0f\n\t%s%s\t[%s%s/%s]", upgrades[tmp_up_idx].name, t_up_cost, tmp_ratio*times > 0 ? "+" : "", DisplayBuffer, tmp_val > 0 ? "+" : "", TotalDisplayBuffer, MaximumDisplayBuffer);
 
-			if(canBypassRestriction[client]){ attributeDisabled[tmp_up_idx] = false;}
+			bool isEnabled = true;
+			if(upgrades[tmp_up_idx].requirement > (StartMoney + additionalstartmoney))
+				isEnabled = false;
 
-			AddMenuItem(menu, "upgrade", Buffer);
+			if(canBypassRestriction[client] == false && (tmp_ref_idx == 20000 || upgrades[tmp_up_idx].i_val == currentupgrades_val[client][slot][tmp_ref_idx]) && upgrades[tmp_up_idx].restriction_category != 0){
+				for(int req = 1;req<5;++req){
+					if(currentupgrades_restriction[client][slot][req] == upgrades[tmp_up_idx].restriction_category){
+						isEnabled = false;
+						break;
+					}
+				}
+			}
+
+			AddMenuItem(menu, "upgrade", Buffer, isEnabled ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
 		}
 		SetMenuTitle(menu, TitleStr);
 		SetMenuExitBackButton(menu, true);

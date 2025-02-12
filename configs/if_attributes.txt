@@ -5273,7 +5273,7 @@
 			"value"		"33"
 			"init"		"0"
 			"restriction_category"	"2"
-			"description"	"Replaces sentry bullets with extreme speed fireballs.\nShoots 4x slower, but fireballs deal 120 base damage and splash."
+			"description"	"Replaces sentry bullets with extreme speed fireballs.\nShoots 4x slower, but fireballs deal 100 base damage and splash."
 			"max"		"33"
 		}
 		"1538.1"
@@ -7026,21 +7026,11 @@
 			"ref"		"critical rating"
 			"display"		"%.0f"
 			"attr_class"	"critical_rating"
-			"cost"		"0"
-			"value"		"1.0"
+			"global"		"1"
+			"cost"		"2000"
+			"value"		"20.0"
 			"init"		"0.00"
-			"max"		"1.00"
-		}
-		"1704"
-		{
-			"name"		"critical rating"
-			"ref"		"critical rating"
-			"display"		"%.0f"
-			"attr_class"	"critical_rating"
-			"cost"		"0"
-			"value"		"1.0"
-			"init"		"0.00"
-			"max"		"1.00"
+			"max"		"200.00"
 		}
 		"1705"
 		{
@@ -7048,21 +7038,11 @@
 			"ref"		"critical block rating"
 			"display"		"%.0f"
 			"attr_class"	"critical_block_rating"
-			"cost"		"0"
-			"value"		"1.0"
+			"global"		"1"
+			"cost"		"2000"
+			"value"		"20.0"
 			"init"		"0.00"
-			"max"		"1.00"
-		}
-		"1706"
-		{
-			"name"		"critical block rating"
-			"ref"		"critical block rating"
-			"display"		"%.0f"
-			"attr_class"	"critical_block_rating"
-			"cost"		"0"
-			"value"		"1.0"
-			"init"		"0.00"
-			"max"		"1.00"
+			"max"		"200.00"
 		}
 		"1707"
 		{
