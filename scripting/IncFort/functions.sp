@@ -2945,33 +2945,28 @@ public void OnHomingThink(entity)
 	
 	if( distance <= projectileHomingDegree[entity]*projectileHomingDegree[entity] && currentGameTime - entitySpawnTime[entity] < 3.0 )
 	{
-		float ProjVector[3],BaseSpeed,NewSpeed,ProjAngle[3],AimVector[3],InitialSpeed[3]; 
-		
-		GetEntPropVector( entity, Prop_Send, "m_vInitialVelocity", InitialSpeed ); 
-		if ( GetVectorLength( InitialSpeed ) < 10.0 ) GetEntPropVector( entity, Prop_Data, "m_vecAbsVelocity", InitialSpeed ); 
-		BaseSpeed = GetVectorLength( InitialSpeed ) * 0.3; 
+		float ProjVector[3],ProjAngle[3],AimVector[3],InitialSpeed[3]; 
+
+		GetEntPropVector( entity, Prop_Data, "m_vecAbsVelocity", InitialSpeed ); 
+		if ( GetVectorLength( InitialSpeed ) < 50.0 ) GetEntPropVector( entity, Prop_Send, "m_vInitialVelocity", InitialSpeed );
 		
 		GetEntPropVector( entity, Prop_Data, "m_vecAbsOrigin", flRocketPos ); 
 		GetClientAbsOrigin( Target, TargetPos ); 
-		TargetPos[2] += 45.0;
-		MakeVectorFromPoints( flRocketPos, TargetPos, AimVector ); 
-		
-		if(distance <= projectileHomingDegree[entity]*projectileHomingDegree[entity]*2.0 + 20.0)
-		{
-			SubtractVectors( TargetPos, flRocketPos, ProjVector ); //100% HOME
-		}
-		else
-		{
-			GetEntPropVector( entity, Prop_Data, "m_vecAbsVelocity", ProjVector ); //50% HOME
-		}
+		TargetPos[2] += 30.0;
+		MakeVectorFromPoints( flRocketPos, TargetPos, AimVector );
+
+		//if(distance <= 1000.0)
+			SubtractVectors( TargetPos, flRocketPos, ProjVector );
+		//else
+		//	GetEntPropVector( entity, Prop_Data, "m_vecAbsVelocity", ProjVector );
+
 		AddVectors( ProjVector, AimVector, ProjVector ); 
 		NormalizeVector( ProjVector, ProjVector );
 		
 		GetEntPropVector( entity, Prop_Data, "m_angRotation", ProjAngle ); 
 		GetVectorAngles( ProjVector, ProjAngle ); 
 		
-		NewSpeed = ( BaseSpeed * 2.0 ) + 1.0 * BaseSpeed; 
-		ScaleVector( ProjVector, NewSpeed ); 
+		ScaleVector( ProjVector, GetVectorLength( InitialSpeed )); 
 		
 		TeleportEntity( entity, NULL_VECTOR, ProjAngle, ProjVector ); 
 	}
