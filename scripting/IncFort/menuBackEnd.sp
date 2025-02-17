@@ -60,13 +60,7 @@ public MenuHandler_UpgradeChoice(Handle menu, MenuAction:action, client, param2)
 				}
 				if(upgrades[upgrade_choice].description[0])
 				{
-					disableIFMiniHud[client] = currentGameTime+8.0;
-					char upgradeDescription[512]
-					Format(upgradeDescription, sizeof(upgradeDescription), "%t:\n%s\n", 
-					upgrades[upgrade_choice].name,upgrades[upgrade_choice].description);
-					ReplaceString(upgradeDescription, sizeof(upgradeDescription), "\\n", "\n");
-					ReplaceString(upgradeDescription, sizeof(upgradeDescription), "%", "％");
-					SendItemInfo(client, upgradeDescription);
+					SendUpgradeDescription(client, upgrade_choice, currentupgrades_val[client][slot][inum]);
 				}
 				if(upgrades[upgrade_choice].display_style == 8){
 					int amount
@@ -175,13 +169,7 @@ public MenuHandler_UpgradeChoice(Handle menu, MenuAction:action, client, param2)
 
 					if(upgrades[upgrade_choice].description[0])
 					{
-						disableIFMiniHud[client] = currentGameTime+8.0;
-						char upgradeDescription[512]
-						Format(upgradeDescription, sizeof(upgradeDescription), "%t:\n%s\n", 
-						upgrades[upgrade_choice].name,upgrades[upgrade_choice].description);
-						ReplaceString(upgradeDescription, sizeof(upgradeDescription), "\\n", "\n");
-						ReplaceString(upgradeDescription, sizeof(upgradeDescription), "%", "％");
-						SendItemInfo(client, upgradeDescription);
+						SendUpgradeDescription(client, upgrade_choice, upgrades_val);
 					}
 				}
 			}

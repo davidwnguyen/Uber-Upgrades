@@ -24,6 +24,7 @@
 #include <classdefs/CTakeDamageInfo.sp>
 #include <tf2_sentryfirebullet>
 #include <tf_econ_dynamic>
+#include <vscript>
 
 #pragma tabsize 0
 

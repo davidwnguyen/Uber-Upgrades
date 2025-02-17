@@ -4587,6 +4587,33 @@ void CreateSmokeBombEffect(float position[3], float duration, int team){
 	CreateTimer(0.1, Timer_SmokeBomb, pack, TIMER_REPEAT);
 }
 
+void SendUpgradeDescription(int client, int upgrade_choice, float value){
+	disableIFMiniHud[client] = currentGameTime+8.0;
+
+	char formula[64];
+	char result[64];
+	char ValueAsString[32];
+	char textCopy[256];
+	strcopy(textCopy, sizeof(textCopy), upgrades[upgrade_choice].description);
+	FloatToString(value, ValueAsString, sizeof(ValueAsString));
+	int FormulaStartLocation = FindCharInString(textCopy, '[');
+	while(FormulaStartLocation != -1){
+		strcopy(formula, FindCharInString(textCopy[FormulaStartLocation+1], ']')+1, textCopy[FormulaStartLocation+1]); 
+		strcopy(result, sizeof(result), formula);
+		ReplaceString(result, sizeof(result), "{VALUE}", ValueAsString);
+		Format(result, sizeof(result), "return %s;", result);
+		HSCRIPT script = VScript_CompileScript(result);
+		
+		VScriptExecute execute = new VScriptExecute(script);
+		execute.Execute();
+		Format(result, sizeof(result), "%.1f",execute.ReturnValue);
+		ReplaceStringEx(textCopy, 256, "[", "");
+		ReplaceStringEx(textCopy, 256, "]", "");
+		ReplaceStringEx(textCopy, 256, formula, result);
+		FormulaStartLocation = FindCharInString(textCopy, '[');
+	}
+	SendItemInfo(client, textCopy);
+}
 /*public void theBoxness(int client, int melee, const float pos[3], const float angle[3]){
 	float fwd[3], endVec[3], mins[3], maxs[3];
 	GetAngleVectors(angle, fwd, NULL_VECTOR, NULL_VECTOR);

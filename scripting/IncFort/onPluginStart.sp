@@ -106,8 +106,8 @@ public UberShopinitMenusHandlers()
 	RegAdminCmd("sm_resetallplayers", ResetPlayers, ADMFLAG_ROOT, "Remove Everyones Upgrades");
 	RegAdminCmd("sm_setcurrency", GiveAllMoney, ADMFLAG_ROOT, "Sets Uberuprgades Cash");
 	RegAdminCmd("sm_test", TestCommand, ADMFLAG_ROOT, "Filler Test");
-	RegAdminCmd("sm_damage", Command_DealDamage, ADMFLAG_ROOT, "Deals damage to a player.")
-	RegAdminCmd("sm_giveKills", Command_GiveKills, ADMFLAG_ROOT, "Feeds kills to a strange weapon.")
+	RegAdminCmd("sm_damage", Command_DealDamage, ADMFLAG_ROOT, "Deals damage to a player.");
+	RegAdminCmd("sm_giveKills", Command_GiveKills, ADMFLAG_ROOT, "Feeds kills to a strange weapon.");
 	
 	RegConsoleCmd("sm_scoreboard", ShowStats, "Shows everyones statisics");
 	RegConsoleCmd("scoreboard", ShowStats, "Shows everyones statisics");

@@ -106,7 +106,7 @@ public Action OnStartTouchSplittingThunder(entity, other){
 }
 public Action:OnSplittingThunderCollision(entity, client)
 {
-	int owner = GetEntPropEnt(entity, Prop_Send, "m_hOwnerEntity")
+	int owner = GetEntPropEnt(entity, Prop_Send, "m_hOwnerEntity");
 	if(!IsValidClient3(owner) || client == owner)
 		return Plugin_Continue;
 	
