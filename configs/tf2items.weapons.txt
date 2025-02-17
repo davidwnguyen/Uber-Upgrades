@@ -379,9 +379,10 @@
 		"416" //Market Gardener
 		{
 			"preserve_attributes"	"1"
-			"1"				"crits_become_minicrits;1.0"
-			"2"				"dmg falloff increased;1.0"
-			"3"				"provide on active;1.0"
+			"1"				"weapon fire rate;3.0"
+			"2"				"falling velocity to damage bonus;0.5"
+			"3"				"Converts Firerate to Damage;1"
+			"4"				"provide on active;1.0"
 		}
 		"36" //Overdose
 		{

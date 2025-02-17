@@ -1,5 +1,8 @@
 "Phrases"
 {
+	"falling velocity to damage bonus"{
+		"en"		"Falling Velocity to Damage Bonus"
+	}
 	"critical block rating"{
 		"en"		"Critical Block Rating"
 	}

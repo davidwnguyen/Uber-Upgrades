@@ -7164,6 +7164,17 @@
 			"init"		"0"
 			"max"		"20"
 		}
+		"1718"
+		{
+			"name"		"falling velocity to damage bonus"
+			"ref"		"falling velocity to damage bonus"
+			"display"	"%.0f"
+			"attr_class"	"falling_velocity_to_damage_mult"
+			"cost"		"0"
+			"value"		"1"
+			"init"		"0"
+			"max"		"0"
+		}
 		//Filler
 		"1900.0"
 		{

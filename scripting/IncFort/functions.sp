@@ -1196,7 +1196,7 @@ DisplayItemChange(client,itemidx)
 		//Soldier Melee
 		case 416:
 		{
-			ChangeString = "The Market Gardener | Gives minicrits while airborne & has damage fall-off.";
+			ChangeString = "The Market Gardener | 3x slower fire rate, but gains +0.05% damage bonus per downward velocity in hammer units/s. Converts fire rate to damage bonus.";
 		}
 		//Pyro Primary
 		case 215:
