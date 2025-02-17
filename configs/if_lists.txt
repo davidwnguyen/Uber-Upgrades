@@ -10,7 +10,6 @@
 			"Attr2"		"Armor Capability"
 			"Attr3"		"Defense"
 			"Attr5"		"patient overheal bonus"
-			"Attr6"		"health from healers increased"
 			"Attr7"		"critical block rating"
 		}
 		"Physical upgrades"
@@ -111,7 +110,6 @@
 			"Attr3"		"Armor Capability"
 			"Attr19"	"Defense"
 			"Attr16"	"patient overheal bonus"
-			"Attr10"	"health from healers increased"
 			"Attr7"		"critical block rating"
 		}
 		"Physical upgrades"
@@ -213,7 +211,6 @@
 			"Attr3"		"Armor Capability"
 			"Attr19"	"Defense"
 			"Attr16"	"patient overheal bonus"
-			"Attr10"	"health from healers increased"
 			"Attr7"		"critical block rating"
 		}
 		"Physical upgrades"
@@ -315,7 +312,6 @@
 			"Attr3"		"Armor Capability"
 			"Attr19"	"Defense"
 			"Attr16"	"patient overheal bonus"
-			"Attr10"	"health from healers increased"
 			"Attr7"		"critical block rating"
 		}
 		"Physical upgrades"
@@ -417,7 +413,6 @@
 			"Attr3"		"Armor Capability"
 			"Attr19"	"Defense"
 			"Attr16"	"patient overheal bonus"
-			"Attr10"	"health from healers increased"
 			"Attr7"		"critical block rating"
 		}
 		"Physical upgrades"
@@ -519,7 +514,6 @@
 			"Attr3"		"Armor Capability"
 			"Attr19"	"Defense"
 			"Attr16"	"patient overheal bonus"
-			"Attr10"	"health from healers increased"
 			"Attr7"		"critical block rating"
 		}
 		"Physical upgrades"
@@ -621,7 +615,6 @@
 			"Attr3"		"Armor Capability"
 			"Attr19"	"Defense"
 			"Attr16"	"patient overheal bonus"
-			"Attr10"	"health from healers increased"
 			"Attr7"		"critical block rating"
 		}
 		"Physical upgrades"
@@ -722,7 +715,6 @@
 			"Attr3"		"Armor Capability"
 			"Attr19"	"Defense"
 			"Attr16"	"patient overheal bonus"
-			"Attr10"	"health from healers increased"
 			"Attr7"		"critical block rating"
 		}
 		"Physical upgrades"
@@ -826,7 +818,6 @@
 			"Attr3"		"Armor Capability"
 			"Attr19"	"Defense"
 			"Attr16"	"patient overheal bonus"
-			"Attr10"	"health from healers increased"
 			"Attr7"		"critical block rating"
 		}
 		"Physical upgrades"

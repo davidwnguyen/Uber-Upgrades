@@ -237,18 +237,12 @@ public Event_Playerhurt(Handle event, const char[] name, bool:dontBroadcast)
 
 				//Lifesteal
 				float lifestealFactor = 1.0;
-				float maximumOverheal = 1.5;
 				int healthHealed;
 				if(IsFakeClient(client))
 					lifestealFactor = 0.3;
 
 				lifestealFactor *= GetAttribute(CWeapon, "lifesteal effectiveness", 1.0);
 				
-				Address maximumOverhealModifier = TF2Attrib_GetByName(attacker, "patient overheal penalty");
-				if(maximumOverhealModifier != Address_Null)
-				{
-					maximumOverheal *= TF2Attrib_GetValue(maximumOverhealModifier);
-				}
 
 				if(hasBuffIndex(attacker, Buff_Plunder)){
 					Buff plunderBuff;
@@ -280,7 +274,7 @@ public Event_Playerhurt(Handle event, const char[] name, bool:dontBroadcast)
 					healthHealed += RoundToCeil(lifestealFactor * damage * (MadmilkDuration[client]-currentGameTime) * 1.66 / 100.0);
 				
 				if(healthHealed > 0){
-					AddPlayerHealth(attacker, healthHealed, maximumOverheal, true, attacker);
+					AddPlayerHealth(attacker, healthHealed, 1.5, true, attacker);
 					float spreadRatio = GetAttribute(CWeapon, "lifesteal to team", 0.0);
 					if(spreadRatio > 0){
 						for(int i = 1; i<= MaxClients; ++i){
@@ -293,7 +287,7 @@ public Event_Playerhurt(Handle event, const char[] name, bool:dontBroadcast)
 							if(i == attacker)
 								continue;
 
-							AddPlayerHealth(i, RoundToFloor(healthHealed*spreadRatio), maximumOverheal, true, attacker);
+							AddPlayerHealth(i, RoundToFloor(healthHealed*spreadRatio), 1.5, true, attacker);
 						}
 					}
 				}

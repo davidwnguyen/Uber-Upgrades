@@ -4041,7 +4041,7 @@
 			"ref"		"patient overheal bonus"
 			"display"		"%.0f%%"
 			"cost"		"2000"
-			"value"		"0.25"
+			"value"		"0.1"
 			"init"		"1"
 			"max"		"2.0"
 		}
@@ -6001,7 +6001,7 @@
 			"init"		"1"
 			"max"		"0"
 		}
-		"1614.5"
+		"1614.1"
 		{
 			"name"		"weapon fire rate(tweak)"
 			"ref"		"weapon fire rate(tweak)"
@@ -6011,6 +6011,17 @@
 			"value"		"1"
 			"init"		"1"
 			"max"		"10"
+		}
+		"1614.1"
+		{
+			"name"		"weapon fire rate(tweak)"
+			"ref"		"weapon fire rate(tweakbonus)"
+			"attr_class"	"mult_postfiredelay"
+			"display"		"%.0f%%"
+			"cost"		"0"
+			"value"		"-1"
+			"init"		"1"
+			"max"		"0"
 		}
 		"1615"
 		{

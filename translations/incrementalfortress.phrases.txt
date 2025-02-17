@@ -510,6 +510,9 @@
 	"weapon fire rate(tweak)"{
 		"en"		"Weapon Fire Rate Penalty"
 	}
+	"weapon fire rate(tweakbonus)"{
+		"en"		"Weapon Fire Rate Bonus"
+	}
 	"Arcane - Infernal Enchantment"{
 		"en"		"Arcane - Infernal Enchantment"
 	}
@@ -1573,7 +1576,7 @@
 		"en"		"Advanced Body Upgrades"
 	}
 	"patient overheal bonus(S)"{
-		"en"		"Patient Overheal Bonus"
+		"en"		"Incoming Overheal Max Bonus"
 	}
 	"speed"{
 		"en"		"Speed"
@@ -2140,7 +2143,7 @@
 		"en"		"Fuse Time Bonus"
 	}
 	"patient overheal bonus"{
-		"en"		"Patient Overheal Bonus"
+		"en"		"Incoming Overheal Max Bonus"
 	}
 	"full charge turn control"{
 		"en"		"Full Charge Control"

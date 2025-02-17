@@ -3514,7 +3514,7 @@ GivePowerupDescription(int client, char[] name, int amount){
 		}else if(amount == 3){
 			CPrintToChat(client, "{community}Bruised Powerup {default}| {lightcyan}Tagged enemies will be hit with a finisher that is a crit + deals 25%% maxHP. Hits above 40%% maxHP instantly kill for -5%% of your health.");
 		}else{
-			CPrintToChat(client, "{community}Strength Powerup {default}| {lightcyan}2x damage & consistent damage.");
+			CPrintToChat(client, "{community}Strength Powerup {default}| {lightcyan}2x damage dealt.");
 		}
 	}
 	else if(StrEqual("resistance powerup", name)){

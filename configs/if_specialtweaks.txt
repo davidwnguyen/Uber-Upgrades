@@ -27,7 +27,7 @@
 			"restriction"					"1"
 			"honorbound"					"1.0"
 			"percent of hp healed on kill"	"5.0"
-			"weapon fire rate"				"0.65"
+			"weapon fire rate(tweakbonus)"		"0.65"
 		}
 		"Infernal Impulse"
 		{
