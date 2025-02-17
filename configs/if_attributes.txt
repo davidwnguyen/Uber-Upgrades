@@ -456,7 +456,7 @@
 			"init"			"1.00"
 			"optimizer_style" "1"
 			"global"		"1"
-			"description"	"1:1 pure damage multiplier.\nIncreases in cost by +$28 per purchase."
+			"description"	"1:1 pure damage multiplier.\nIncreases in cost by +$28 per purchase.\nAffects all weapons & attacks."
 			"max"		"1001.0"
 		}
 		"751"

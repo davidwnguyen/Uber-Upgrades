@@ -97,46 +97,46 @@
 		"en"		"Fire Rate Bonus"
 	}
 	"damage mult 2"{
-		"en"		"★ Damage Multiplier ★"
+		"en"		"Damage Multiplier"
 	}
 	"damage mult 3"{
-		"en"		"★ Damage Multiplier ★"
+		"en"		"Damage Multiplier"
 	}
 	"damage mult 4"{
-		"en"		"★ Damage Multiplier ★"
+		"en"		"Damage Multiplier"
 	}
 	"damage mult 5"{
-		"en"		"★ Damage Multiplier ★"
+		"en"		"Damage Multiplier"
 	}
 	"damage mult 6"{
-		"en"		"★ Damage Multiplier ★"
+		"en"		"Damage Multiplier"
 	}
 	"damage mult 7"{
-		"en"		"★ Damage Multiplier ★"
+		"en"		"Damage Multiplier"
 	}
 	"damage mult 8"{
-		"en"		"★ Damage Multiplier ★"
+		"en"		"Damage Multiplier"
 	}
 	"damage mult 9"{
-		"en"		"★ Damage Multiplier ★"
+		"en"		"Damage Multiplier"
 	}
 	"damage mult 10"{
-		"en"		"★ Damage Multiplier ★"
+		"en"		"Damage Multiplier"
 	}
 	"damage mult 11"{
-		"en"		"★ Damage Multiplier ★"
+		"en"		"Damage Multiplier"
 	}
 	"damage mult 12"{
-		"en"		"★ Damage Multiplier ★"
+		"en"		"Damage Multiplier"
 	}
 	"damage mult 13"{
-		"en"		"★ Damage Multiplier ★"
+		"en"		"Damage Multiplier"
 	}
 	"damage mult 14"{
-		"en"		"★ Damage Multiplier ★"
+		"en"		"Damage Multiplier"
 	}
 	"damage mult 15"{
-		"en"		"★ Damage Multiplier ★"
+		"en"		"Damage Multiplier"
 	}
 	"damage taken mult 1"{
 		"en"		"Damage Resistance"
@@ -901,34 +901,34 @@
 		"en"		"Clip Size Multiplier"
 	}
 	"ap (armyofnotmany)"{
-		"en"		"★ Damage Multiplier ★"
+		"en"		"Damage Multiplier"
 	}
 	"ap (electricmotor)"{
-		"en"		"★ Damage Multiplier ★"
+		"en"		"Damage Multiplier"
 	}
 	"ap (assault)"{
-		"en"		"★ Damage Multiplier ★"
+		"en"		"Damage Multiplier"
 	}
 	"ap (biggercali)"{
-		"en"		"★ Damage Multiplier ★"
+		"en"		"Damage Multiplier"
 	}
 	"ap (sentrycal)"{
 		"en"		"★ Sentry Damage Multiplier ★"
 	}
 	"ap (concentrated)"{
-		"en"		"★ Damage Multiplier ★"
+		"en"		"Damage Multiplier"
 	}
 	"ap (temprise)"{
-		"en"		"★ Damage Multiplier ★"
+		"en"		"Damage Multiplier"
 	}
 	"ap (slowswing)"{
-		"en"		"★ Damage Multiplier ★"
+		"en"		"Damage Multiplier"
 	}
 	"ap (compressedfire)"{
-		"en"		"★ Damage Multiplier ★"
+		"en"		"Damage Multiplier"
 	}
 	"ap (condensedlaser)"{
-		"en"		"★ Damage Multiplier ★"
+		"en"		"Damage Multiplier"
 	}
 	"Homing Projectiles (crossbow)"{
 		"en"		"Homing Projectiles"
@@ -937,10 +937,10 @@
 		"en"		"Damage Bonus Hidden"
 	}
 	"ap (heavycleaver)"{
-		"en"		"★ Damage Multiplier ★"
+		"en"		"Damage Multiplier"
 	}
 	"ap (highervoltage)"{
-		"en"		"★ Damage Multiplier ★"
+		"en"		"Damage Multiplier"
 	}
 	"Vulnerability When Sapped"{
 		"en"		"Vulnerability When Sapped"
@@ -2353,7 +2353,7 @@
 		"en"		"Projectiles Bounce Count"
 	}
 	"damage mult 1"{
-		"en"		"★ Damage Multiplier ★"
+		"en"		"Damage Multiplier"
 	}
 	"dmg from melee reduced(E)"{
 		"en"		"Melee Damage Taken Reduced"
@@ -2386,7 +2386,7 @@
 		"en"		"Damage Bonus ★★"
 	}
 	"damage bonus"{
-		"en"		"Damage Bonus ★★"
+		"en"		"Global Damage Bonus"
 	}
 	"clip size penalty"{
 		"en"		"Clip Size Penalty"
