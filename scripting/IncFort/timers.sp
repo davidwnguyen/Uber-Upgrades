@@ -1233,8 +1233,8 @@ public Action:BuildingRegeneration(Handle timer, any:entity)
 		int mode = 2;
 		if(mode == 1)
 		{
-			int melee = (GetWeapon(owner,2));
-			Address BuildingRegen = TF2Attrib_GetByName(melee, "Projectile speed decreased");
+			int pda = GetWeapon(owner,5);
+			Address BuildingRegen = TF2Attrib_GetByName(pda, "Projectile speed decreased");
 			if(BuildingRegen != Address_Null)
 			{
 				float buildingHPRegen = TF2Attrib_GetValue(BuildingRegen);
@@ -1277,13 +1277,13 @@ public Action:BuildingRegeneration(Handle timer, any:entity)
 	GetEdictClassname(sentrynumber, SentryObject, sizeof(SentryObject));
 	if (StrEqual(SentryObject, "obj_sentrygun"))
 	{
-		int melee = (GetWeapon(owner,2));
+		int pda = GetWeapon(owner,5);
 		int sentryLevel = GetEntLevel(entity);
 		int shells = GetEntProp(entity, Prop_Send, "m_iAmmoShells");
 		int rockets = GetEntProp(entity, Prop_Send, "m_iAmmoRockets");
-		Address AmmoRegen = TF2Attrib_GetByName(melee, "disguise on backstab");
+		Address AmmoRegen = TF2Attrib_GetByName(pda, "disguise on backstab");
 		float maxAmmoMultiplier = 1.0;
-		Address ammoMult = TF2Attrib_GetByName(melee, "mvm sentry ammo");
+		Address ammoMult = TF2Attrib_GetByName(pda, "mvm sentry ammo");
 		if(ammoMult != Address_Null)
 			maxAmmoMultiplier = TF2Attrib_GetValue(ammoMult);
 
@@ -2083,10 +2083,10 @@ public Action:ShootTwice(Handle timer, any:data)
 	{
 		if(IsValidClient3(client))
 		{
-			int melee = (GetPlayerWeaponSlot(client,2));
-			if(IsValidEdict(melee))
+			int pda = GetWeapon(client,5);
+			if(IsValidEdict(pda))
 			{
-				Address doubleShotActive = TF2Attrib_GetByName(melee, "dmg penalty vs nonstunned");
+				Address doubleShotActive = TF2Attrib_GetByName(pda, "dmg penalty vs nonstunned");
 				if(doubleShotActive != Address_Null && TF2Attrib_GetValue(doubleShotActive) > 0.0)
 				{
 					int iEntity = CreateEntityByName("tf_projectile_sentryrocket");
@@ -2117,8 +2117,8 @@ public Action:ShootTwice(Handle timer, any:data)
 						AddVectors(fOrigin, fwd, fOrigin);
 						
 						float Speed = 1100.0;
-						Address projspeed = TF2Attrib_GetByName(melee, "Projectile speed increased");
-						Address projspeed1 = TF2Attrib_GetByName(melee, "Projectile speed decreased");
+						Address projspeed = TF2Attrib_GetByName(pda, "Projectile speed increased");
+						Address projspeed1 = TF2Attrib_GetByName(pda, "Projectile speed decreased");
 						if(projspeed != Address_Null){
 							Speed *= TF2Attrib_GetValue(projspeed)
 						}
@@ -2131,7 +2131,7 @@ public Action:ShootTwice(Handle timer, any:data)
 						
 						float ProjectileDamage = 100.0;
 						
-						Address SentryDmgActive = TF2Attrib_GetByName(melee, "engy sentry damage bonus");
+						Address SentryDmgActive = TF2Attrib_GetByName(pda, "engy sentry damage bonus");
 						if(SentryDmgActive != Address_Null)
 						{
 							ProjectileDamage *= TF2Attrib_GetValue(SentryDmgActive);

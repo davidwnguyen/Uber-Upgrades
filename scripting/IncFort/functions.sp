@@ -3766,10 +3766,10 @@ stock SentryMultishot(entity)
 			client = GetEntPropEnt(inflictor, Prop_Send, "m_hBuilder");
 			if(IsValidClient3(client))
 			{
-				int melee = (GetPlayerWeaponSlot(client,2));
-				if(IsValidEdict(melee))
+				int pda = GetWeapon(client,5);
+				if(IsValidEdict(pda))
 				{
-					Address doubleShotActive = TF2Attrib_GetByName(melee, "dmg penalty vs nonstunned");		
+					Address doubleShotActive = TF2Attrib_GetByName(pda, "dmg penalty vs nonstunned");		
 					if(doubleShotActive != Address_Null && TF2Attrib_GetValue(doubleShotActive) > 0.0)
 					{
 						Handle hPack = CreateDataPack();
