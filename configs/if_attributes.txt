@@ -7188,6 +7188,17 @@
 			"init"		"0"
 			"max"		"0"
 		}
+		"1719"
+		{
+			"name"		"constant time projectile"
+			"ref"		"constant time projectile"
+			"display"	"%.2fs"
+			"attr_class"	"constant_time_projectile"
+			"cost"		"0"
+			"value"		"0.1"
+			"init"		"0"
+			"max"		"5"
+		}
 		//Filler
 		"1900.0"
 		{

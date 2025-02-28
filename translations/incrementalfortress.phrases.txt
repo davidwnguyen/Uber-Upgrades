@@ -1,5 +1,8 @@
 "Phrases"
 {
+	"constant time projectile"{
+		"en"		"Constant Time Projectile Travel"
+	}
 	"falling velocity to damage bonus"{
 		"en"		"Falling Velocity to Damage Bonus"
 	}

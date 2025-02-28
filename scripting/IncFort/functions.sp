@@ -3051,9 +3051,36 @@ public getProjOrigin(entity)
 		if(!IsValidClient3(owner))
 			return;
 
-		if(TF2Attrib_HookValueInt(0, "sunburst_projectile", owner)){
+		int CWeapon = GetEntPropEnt(owner, Prop_Send, "m_hActiveWeapon");
+		if(!IsValidWeapon(CWeapon))
+			return;
+
+		if(TF2Attrib_HookValueInt(0, "sunburst_projectile", CWeapon)){
 			CreateParticleEx(entity, "raygun_projectile_red_crit", 1);
 			CreateParticleEx(entity, "raygun_projectile_red", 1);
+		}
+
+		float constantTime = TF2Attrib_HookValueFloat(0.0, "constant_time_projectile", CWeapon);
+		if(constantTime){
+			float vAngles[3],vPosition[3],vBuffer[3],vDest[3];
+			GetEntPropVector(entity, Prop_Data, "m_vecOrigin", vPosition);
+			GetEntPropVector(entity, Prop_Data, "m_angRotation", vAngles);
+
+			Handle trace = TR_TraceRayFilterEx(vPosition, vAngles, MASK_SHOT, RayType_Infinite, TraceWorldOnly, entity);
+
+			if(!TR_DidHit(trace)){
+				delete trace;
+				return;
+			}
+
+			TR_GetEndPosition(vDest, trace);
+
+			GetAngleVectors(vAngles, vBuffer, NULL_VECTOR, NULL_VECTOR);
+			float ratio = 1.0/constantTime*GetVectorDistance(vPosition,vDest);
+			ScaleVector(vBuffer, ratio);
+
+			TeleportEntity(entity, NULL_VECTOR, NULL_VECTOR, vBuffer);
+			delete trace;
 		}
 	}
 }
