@@ -4546,6 +4546,9 @@ float ConsumePierce(float res, float& pierce){
 }
 
 void UpdatePlayerSpellSlots(int client){
+	if(!IsValidClient3(client))
+		return;
+
 	int arcaneBitwise = TF2Attrib_HookValueInt(0, "arcane_spells_1", client) | TF2Attrib_HookValueInt(0, "weapon_spell_id", client);
 	int arcaneSlot = 0;
 
@@ -4569,6 +4572,9 @@ void UpdatePlayerSpellSlots(int client){
 }
 
 void UpdatePlayerMaxHealth(int client){
+	if(!IsValidClient3(client))
+		return;
+		
 	//thanks sourcepawn :3
 	float percentageHealth = float(GetClientHealth(client))/float(TF2Util_GetEntityMaxHealth(client));
 
