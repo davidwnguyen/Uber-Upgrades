@@ -556,9 +556,11 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 			if(GetAttribute(attacker, "agility powerup", 0.0) == 2){
 				damage *= 1.0 + (-velocity[2]-400.0)*0.001;
 			}
-			float fallingBonus = TF2Attrib_HookValueFloat(0.0, "falling_velocity_to_damage_mult", weapon);
-			if(fallingBonus != 0.0){
-				damage *= 1.0 + (-velocity[2]-400.0)*0.001*fallingBonus;
+			if(IsValidWeapon(weapon)){
+				float fallingBonus = TF2Attrib_HookValueFloat(0.0, "falling_velocity_to_damage_mult", weapon);
+				if(fallingBonus != 0.0){
+					damage *= 1.0 + (-velocity[2]-400.0)*0.001*fallingBonus;
+				}
 			}
 		}
 
