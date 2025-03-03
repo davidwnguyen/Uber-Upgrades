@@ -1726,7 +1726,7 @@ public void applyDamageAffinities(&victim, &attacker, &inflictor, float &damage,
 	else if(StrContains(damageCategory, "fire") != -1)
 	{
 		if(GetAttribute(attacker, "supernova powerup", 0.0) == 2){
-			damage *= 1.7;
+			damage *= 1.5;
 
 			int team = GetClientTeam(attacker);
 
