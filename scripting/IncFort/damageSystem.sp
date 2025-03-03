@@ -1597,36 +1597,38 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 			}
 		}
 
-		int detonateStacks = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "detonate_afterburn_stacks_on_hit", weapon));
-		float detonateAccumulation = 0.0;
-		for(int i = 0;i<MAX_AFTERBURN_STACKS;++i){
-			if(detonateStacks <= 0)
-				break;
+		if(isVictimPlayer){
+			int detonateStacks = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "detonate_afterburn_stacks_on_hit", weapon));
+			float detonateAccumulation = 0.0;
+			for(int i = 0;i<MAX_AFTERBURN_STACKS;++i){
+				if(detonateStacks <= 0)
+					break;
 
-			if(playerAfterburn[victim][i].remainingTicks <= 0)
-				continue;
+				if(playerAfterburn[victim][i].remainingTicks <= 0)
+					continue;
 
-			if(playerAfterburn[victim][i].owner != attacker)
-				continue;
+				if(playerAfterburn[victim][i].owner != attacker)
+					continue;
 
-			detonateAccumulation += playerAfterburn[victim][i].damage * playerAfterburn[victim][i].remainingTicks;
-			playerAfterburn[victim][i].remainingTicks = 0;
-			detonateStacks--;
-		}
-		if(detonateAccumulation > 0){
-			currentDamageType[attacker].second |= DMG_IGNOREHOOK;
-			SDKHooks_TakeDamage(victim, attacker, attacker, detonateAccumulation, DMG_BURN | DMG_PREVENT_PHYSICS_FORCE, _, _, _, false);
-			CreateParticleEx(victim, "bombinomicon_burningdebris");
-		}else{
-			//afterburn slop
-			if(damagetype & DMG_IGNITE || 
-			(GetClientTeam(attacker) != GetClientTeam(victim) &&
-			(GetAttribute(weapon, "afterburn rating", 0.0) ||
-			GetAttribute(attacker, "supernova powerup", 0.0) == 2) &&
-			!(damagetype & DMG_BURN && damagetype & DMG_PREVENT_PHYSICS_FORCE) &&
-			!(damagetype & DMG_SLASH))) // int afterburn system.
-			{
-				applyAfterburn(victim, attacker, weapon, damage);
+				detonateAccumulation += playerAfterburn[victim][i].damage * playerAfterburn[victim][i].remainingTicks;
+				playerAfterburn[victim][i].remainingTicks = 0;
+				detonateStacks--;
+			}
+			if(detonateAccumulation > 0){
+				currentDamageType[attacker].second |= DMG_IGNOREHOOK;
+				SDKHooks_TakeDamage(victim, attacker, attacker, detonateAccumulation, DMG_BURN | DMG_PREVENT_PHYSICS_FORCE, _, _, _, false);
+				CreateParticleEx(victim, "bombinomicon_burningdebris");
+			}else{
+				//afterburn slop
+				if(damagetype & DMG_IGNITE || 
+				(GetClientTeam(attacker) != GetClientTeam(victim) &&
+				(GetAttribute(weapon, "afterburn rating", 0.0) ||
+				GetAttribute(attacker, "supernova powerup", 0.0) == 2) &&
+				!(damagetype & DMG_BURN && damagetype & DMG_PREVENT_PHYSICS_FORCE) &&
+				!(damagetype & DMG_SLASH))) // int afterburn system.
+				{
+					applyAfterburn(victim, attacker, weapon, damage);
+				}
 			}
 		}
 	}
