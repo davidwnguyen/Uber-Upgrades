@@ -3789,9 +3789,9 @@ public Action TF2_SentryFireBullet(int sentry, int builder, int &shots, float sr
 	if(IsValidClient3(builder)){
 		int pda = GetWeapon(builder, 5);
 		if(IsValidWeapon(pda)){
-			float override = GetAttribute(pda, "override projectile type", 0.0);
+			float override = TF2Attrib_HookValueFloat(0.0, "sentry_override_projectile_type", pda);
 			switch (override){
-				case 33.0:{
+				case 1.0:{
 					if(firestormCounter[builder] == 4)
 					{
 						int iEntity = CreateEntityByName("tf_projectile_spellfireball");
@@ -3820,7 +3820,7 @@ public Action TF2_SentryFireBullet(int sentry, int builder, int &shots, float sr
 					firestormCounter[builder]++
 					return Plugin_Stop;
 				}
-				case 34.0:{
+				case 2.0:{
 					char projName[32] = "tf_projectile_arrow";
 					int iEntity = CreateEntityByName(projName);
 					if (IsValidEdict(iEntity)) 

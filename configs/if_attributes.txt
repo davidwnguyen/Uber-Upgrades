@@ -5265,16 +5265,17 @@
 		}
 		"1538"
 		{
-			"name"		"override projectile type"
+			"name"		"sentry firestorm rounds"
 			"ref"		"Firestorm Rounds"
+			"attr_class"	"sentry_override_projectile_type"
 			"display"		"%.0f"
 			"cost"		"10000"
 			"increase_ratio"	"0"
-			"value"		"33"
+			"value"		"1"
 			"init"		"0"
 			"restriction_category"	"2"
 			"description"	"Replaces sentry bullets with extreme speed fireballs.\nShoots 4x slower, but fireballs deal 100 base damage and splash."
-			"max"		"33"
+			"max"		"1"
 		}
 		"1538.1"
 		{
@@ -5305,16 +5306,17 @@
 		}
 		"1538.3"
 		{
-			"name"		"override projectile type"
+			"name"		"sentry bolt rounds"
 			"ref"		"Bolt Ballista Sentry"
+			"attr_class"	"sentry_override_projectile_type"
 			"display"		"%.0f"
 			"cost"		"4000"
 			"increase_ratio"	"0"
-			"value"		"34"
+			"value"		"2"
 			"init"		"0"
 			"restriction_category"	"2"
-			"description"	"Sentry shoots out projectile bolts that deal 35 base damage.\nApplies +4 bleed buildup on hit and penetrates victims."
-			"max"		"34"
+			"description"	"Sentry shoots out projectile bolts that deal 20 base damage.\nApplies +4 bleed buildup on hit and penetrates victims."
+			"max"		"2"
 		}
 		"1538.4"
 		{
