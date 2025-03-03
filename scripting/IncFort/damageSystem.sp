@@ -4,6 +4,10 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 	if(currentDamageType[attacker].first == 0)
 		currentDamageType[attacker].first = damagetype;
 	
+	float pierce = 0.0;
+	if(IsValidWeapon(weapon))
+		pierce = TF2Attrib_HookValueFloat(0.0, "damage penetrates reductions", weapon);
+
 	if(IsValidClient3(victim))
 	{
 		lastKBSource[victim] = attacker;
@@ -54,7 +58,9 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 		}
 		if(attacker == victim){
 			float dmgReduction = TF2Attrib_HookValueFloat(1.0, "dmg_incoming_mult", victim);
-			if(dmgReduction != 1.0)
+			if(dmgReduction < 1.0)
+				damage *= ConsumePierce(dmgReduction, pierce);
+			else
 				damage *= dmgReduction
 
 			float linearReduction = GetAttribute(victim, "dmg taken divided");
@@ -422,10 +428,6 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 			TF2_RemoveCondition(victim, TFCond_CritCanteen);
 			miniCritStatusAttacker[victim] = 0.0;
 		}
-
-		float pierce = 0.0;
-		if(IsValidWeapon(weapon))
-			pierce = TF2Attrib_HookValueFloat(0.0, "damage penetrates reductions", weapon);
 
 		if(TF2_IsPlayerInCondition(victim, TFCond_DefenseBuffed) && TF2_IsPlayerInCondition(victim, TFCond_DefenseBuffNoCritBlock))
 			damage *= ConsumePierce(0.65, pierce);

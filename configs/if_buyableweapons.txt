@@ -311,7 +311,7 @@
 		"Increased Projectile Count"	"4"
 		"afterburn rating"		"3"
 		"afterburn dmg increased"	"1.5"
-		"Projectile speed increased(SHRTCRT)" "100"
+		"Projectile speed increased(SHRTCRT)" "3"
 	}
 	"Improvised Explosive Gauntlets"
 	{
@@ -369,7 +369,7 @@
 		"Increased Projectile Count"	"6"
 		"afterburn rating"		"1"
 		"reload clip all at once"	"1"
-		"Projectile speed increased(SHRTCRT)" "50"
+		"Projectile speed increased(SHRTCRT)" "3"
 	}
 	"Smoke Bomb"
 	{

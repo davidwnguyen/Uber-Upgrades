@@ -1,5 +1,8 @@
 "Phrases"
 {
+	"critical rating mult"{
+		"en"		"Critical Rating Multiplier"
+	}
 	"constant time projectile"{
 		"en"		"Constant Time Projectile Travel"
 	}
@@ -19,10 +22,10 @@
 		"en"		"Ability : Smoke Bomb"
 	}
 	"upgrade effectiveness"{
-		"en"		"upgrade effectiveness"
+		"en"		"Upgrade Effectiveness"
 	}
 	"damage bonus per status effect on self"{
-		"en"		"damage bonus per status effect on self"
+		"en"		"Damage Bonus per Status Effect on Self"
 	}
 	"charge explosion ignites instead"{
 		"en"		"charge explosion ignites instead"
