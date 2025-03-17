@@ -1,5 +1,8 @@
 "Phrases"
 {
+	"damage penetrates reductions"{
+		"en"		"Damage Pierces Reductions"
+	}
 	"critical rating mult"{
 		"en"		"Critical Rating Multiplier"
 	}

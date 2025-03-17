@@ -124,11 +124,11 @@ public Action:Timer_FixedVariables(Handle timer)
 		}
 
 		if(snowstormActive[client]){
-			int spellLevel = RoundToNearest(GetAttribute(client, "arcane snowstorm", 0.0));
-			if(spellLevel >= 1){
+			if(GetAttribute(client, "arcane snowstorm", 0.0)){
+				int spellLevel = RoundToNearest(GetAttribute(client, "arcane spell level", 1.0));
 				float ratio = fl_CurrentFocus[client]/fl_MaxFocus[client];
 				if(ratio >= 0.005){
-					float damageDealt = (70.0 + (Pow(ArcaneDamage[client] * Pow(ArcanePower[client], 4.0), spellScaling[spellLevel]) * 90.0))*0.1 * ArcanePower[client];
+					float damageDealt = (25.0 + ArcaneDamage[client] * 90.0) * 0.1;
 					float explosionRadius[] = {0.0, 300.0, 600.0, 1500.0};
 					float pos[3];
 					GetEntPropVector(client, Prop_Data, "m_vecOrigin", pos);
@@ -1910,9 +1910,10 @@ public Action Timer_SplittingThunderThink(Handle timer, int entityRef){
 	if(!IsValidClient3(owner))
 		return Plugin_Continue;
 	
-	int spellLevel = RoundToNearest(GetAttribute(owner, "arcane splitting thunder", 0.0));
-	if(spellLevel < 1)
+	if(GetAttribute(owner, "arcane splitting thunder", 0.0) < 1)
 		return Plugin_Continue;
+
+	int spellLevel = RoundToNearest(GetAttribute(owner, "arcane spell level", 1.0));
 
 	float startpos[3], endpos[3];
 	GetEntPropVector(entity, Prop_Data, "m_vecOrigin", endpos);
@@ -1940,7 +1941,7 @@ public Action Timer_SplittingThunderThink(Handle timer, int entityRef){
 	TE_SendToAll();
 	
 	float scaling[] = {0.0, 100.0, 200.0, 300.0};
-	float ProjectileDamage = 2000.0 + (Pow(ArcaneDamage[owner]*Pow(ArcanePower[owner], 4.0),spellScaling[spellLevel]) * scaling[spellLevel]);
+	float ProjectileDamage = 2000.0 + (ArcaneDamage[owner] * scaling[spellLevel]);
 
 	EntityExplosion(owner, ProjectileDamage, 300.0, endpos, -1, false, entity);
 	EmitSoundToAll(SOUND_THUNDER, entity, _, SNDLEVEL_RAIDSIREN, _, 1.0, _,_,endpos);
