@@ -6,8 +6,8 @@
 		{
 			"CTFWeaponBaseGrenadeProj::InitGrenade(int float)"
 			{
-				"linux"		"245"
-				"windows"	"243"
+				"linux"		"246"
+				"windows"	"244"
 			}
 			"CTFPlayerShared::m_pOuter"
 			{

@@ -4853,7 +4853,7 @@
 			"increase_ratio"	"1.0"
 			"value"		"1"
 			"init"		"1"
-			"description"	"Divides total damage taken.\nFormula is damage/(DR*DRMult)^2\nCheck stats page to see effectiveness."
+			"description"	"Divides damage taken by squared value.\nYou currently take 'DR'x less damage."
 			"optimizer_style"	"2"
 			"max"		"1001"
 		}
@@ -5259,7 +5259,7 @@
 			"increase_ratio"	"0.9"
 			"value"		"0.15"
 			"init"		"1"
-			"description"	"Multiplies input Damage Reduction for formula.\nCheck stats page to see effectiveness."
+			"description"	"Multiplies input Damage Reduction for formula.\nYou currently take 'DR'x less damage."
 			"optimizer_style"	"3"
 			"max"		"101"
 		}
@@ -7039,7 +7039,6 @@
 			"ref"		"critical rating"
 			"display"		"%.0f"
 			"attr_class"	"critical_rating"
-			"global"		"1"
 			"description"	"Gives [100*{VALUE}/({VALUE}+200)]% chance of crits.\nIncreases crit damage dealt by +[100*({VALUE}/200)]%."
 			"cost"		"2000"
 			"value"		"20.0"

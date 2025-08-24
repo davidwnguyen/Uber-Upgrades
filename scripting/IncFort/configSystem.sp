@@ -148,7 +148,7 @@ BrowseAttributesKV(Handle kv)
 				{
 					KvGetString(kv, "", Buf, 256);
                     ReplaceString(Buf, sizeof(Buf), "\\n", "\n");
-                    ReplaceString(Buf, sizeof(Buf), "%", "％");
+                    ReplaceString(Buf, sizeof(Buf), "%", "٪");
                     Format(upgrades[_u_id].description, 256, "%s", Buf);
 				}
 				else if(StrEqual(Buf,"requirement"))

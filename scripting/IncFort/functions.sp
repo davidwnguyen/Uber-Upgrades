@@ -498,26 +498,26 @@ public void ManagePlayerBuffs(int i){
 		Format(details, sizeof(details), "%s\n+%i Damage", details, RoundToNearest(additiveDamageRawBuff));
 	
 	if(additiveDamageMultBuff*multiplicativeDamageBuff != 1.0)
-		Format(details, sizeof(details), "%s\n+%ipct Damage", details, RoundToNearest(((additiveDamageMultBuff*multiplicativeDamageBuff)-1.0)*100.0) );
+		Format(details, sizeof(details), "%s\n+%i٪ Damage", details, RoundToNearest(((additiveDamageMultBuff*multiplicativeDamageBuff)-1.0)*100.0) );
 
 	if(additiveAttackSpeedMultBuff*multiplicativeAttackSpeedMultBuff != 1.0)
-		Format(details, sizeof(details), "%s\n+%ipct Fire Rate", details, RoundToNearest(((additiveAttackSpeedMultBuff*multiplicativeAttackSpeedMultBuff)-1.0)*100.0) );
+		Format(details, sizeof(details), "%s\n+%i٪ Fire Rate", details, RoundToNearest(((additiveAttackSpeedMultBuff*multiplicativeAttackSpeedMultBuff)-1.0)*100.0) );
 
 	if(additiveMoveSpeedMultBuff > 1.0)
-		Format(details, sizeof(details), "%s\n+%ipct Move Speed", details, RoundToNearest((additiveMoveSpeedMultBuff-1.0)*100.0) );
+		Format(details, sizeof(details), "%s\n+%i٪ Move Speed", details, RoundToNearest((additiveMoveSpeedMultBuff-1.0)*100.0) );
 	else if(additiveMoveSpeedMultBuff < 1.0)
-		Format(details, sizeof(details), "%s\n%ipct Move Speed", details, RoundToNearest((additiveMoveSpeedMultBuff-1.0)*100.0) );
+		Format(details, sizeof(details), "%s\n%i٪ Move Speed", details, RoundToNearest((additiveMoveSpeedMultBuff-1.0)*100.0) );
 
 	if(additiveDamageTakenBuff*multiplicativeDamageTakenBuff > 1.0)
-		Format(details, sizeof(details), "%s\n+%ipct Damage Vulnerability", details, RoundToNearest(((additiveDamageTakenBuff*multiplicativeDamageTakenBuff)-1.0)*100.0) );
+		Format(details, sizeof(details), "%s\n+%i٪ Damage Vulnerability", details, RoundToNearest(((additiveDamageTakenBuff*multiplicativeDamageTakenBuff)-1.0)*100.0) );
 	else if (additiveDamageTakenBuff*multiplicativeDamageTakenBuff < 1.0)
-		Format(details, sizeof(details), "%s\n-%ipct Damage Taken", details, RoundToNearest( (1.0-(additiveDamageTakenBuff*multiplicativeDamageTakenBuff)) *100.0) );
+		Format(details, sizeof(details), "%s\n-%i٪ Damage Taken", details, RoundToNearest( (1.0-(additiveDamageTakenBuff*multiplicativeDamageTakenBuff)) *100.0) );
 
 	float healingMult = GetPlayerHealingMultiplier(i);
 	if(healingMult > 1.0)
-		Format(details, sizeof(details), "%s\n+%ipct Healing Received", details, RoundToNearest( (healingMult - 1.0) * 100.0) );
+		Format(details, sizeof(details), "%s\n+%i٪ Healing Received", details, RoundToNearest( (healingMult - 1.0) * 100.0) );
 	else if (healingMult < 1.0)
-		Format(details, sizeof(details), "%s\n-%ipct Healing Received", details, RoundToNearest( (1.0-healingMult) * 100.0) );
+		Format(details, sizeof(details), "%s\n-%i٪ Healing Received", details, RoundToNearest( (1.0-healingMult) * 100.0) );
 
 	SendItemInfo(i, details);
 }
@@ -4638,6 +4638,11 @@ void SendUpgradeDescription(int client, int upgrade_choice, float value){
 	char ValueAsString[32];
 	char textCopy[256];
 	strcopy(textCopy, sizeof(textCopy), upgrades[upgrade_choice].description);
+	// Specific values that are not covered by {VALUE} scripts and such
+	float resistance = GetResistance(client);
+	ReplaceString(textCopy, sizeof(textCopy), "'DR'", GetAlphabetForm(resistance));
+
+	// Iterate through the description and do expression parsing.
 	FloatToString(value, ValueAsString, sizeof(ValueAsString));
 	int FormulaStartLocation = FindCharInString(textCopy, '[');
 	while(FormulaStartLocation != -1){

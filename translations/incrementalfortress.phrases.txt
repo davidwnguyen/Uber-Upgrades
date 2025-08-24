@@ -922,7 +922,7 @@
 		"en"		"Damage Multiplier"
 	}
 	"ap (sentrycal)"{
-		"en"		"★ Sentry Damage Multiplier ★"
+		"en"		"Sentry Damage Multiplier"
 	}
 	"ap (concentrated)"{
 		"en"		"Damage Multiplier"
@@ -1117,7 +1117,7 @@
 		"en"		"Focus Regeneration"
 	}
 	"Arcane Power"{
-		"en"		"★ Arcane Power ★"
+		"en"		"Arcane Power"
 	}
 	"Firestorm Rounds"{
 		"en"		"Firestorm Rounds"
@@ -1147,7 +1147,7 @@
 		"en"		"Taunt Speed Increased"
 	}
 	"Defense"{
-		"en"		"★ Damage Reduction Multiplier ★"
+		"en"		"Damage Reduction Multiplier"
 	}
 	"Ammo & Cloak upgrades"{
 		"en"		"Ammo & Cloak Upgrades"
@@ -1312,7 +1312,7 @@
 		"en"		"Max Armor Supply"
 	}
 	"Armor Capability"{
-		"en"		"★ Damage Reduction ★"
+		"en"		"Damage Reduction"
 	}
 	"Armor Resistance"{
 		"en"		"Armor Damage Reduction"
@@ -2227,13 +2227,13 @@
 		"en"		"switch buff banner"
 	}
 	"damage bonus(L)"{
-		"en"		"Damage Bonus ★"
+		"en"		"Damage Bonus"
 	}
 	"damage bonus(H)"{
-		"en"		"Damage Bonus ★★★"
+		"en"		"Damage Bonus★★"
 	}
 	"damage bonus(IS)"{
-		"en"		"Damage Bonus ★★★★"
+		"en"		"Damage Bonus★★★"
 	}
 	"item style override"{
 		"en"		"item style override"
@@ -2344,10 +2344,10 @@
 		"en"		"Clip Size Penalty"
 	}
 	"Damage bonus vs player"{
-		"en"		"Damage VS Players Increased ★★"
+		"en"		"Damage VS Players Increased★"
 	}
 	"Damage bonus vs player (C)"{
-		"en"		"Damage VS Players Increased ★★★"
+		"en"		"Damage VS Players Increased★★"
 	}
 	"allowed in medieval mode"{
 		"en"		"Allowed In Medieval Mode"
@@ -2392,7 +2392,7 @@
 		"en"		"All Damage Taken Reduced"
 	}
 	"damage bonus SPECIAL"{
-		"en"		"Damage Bonus ★★"
+		"en"		"Damage Bonus★"
 	}
 	"damage bonus"{
 		"en"		"Global Damage Bonus"
@@ -2440,7 +2440,7 @@
 		"en"		"Ubercharge Rate Penalty"
 	}
 	"Damage bonus vs player x"{
-		"en"		"Damage VS Players Bonus ★★★"
+		"en"		"Damage VS Players Bonus★★"
 	}
 	"Uber -> Heal Rate"{
 		"en"		"Ubercharge Rate -> Heal Rate"
@@ -2698,10 +2698,10 @@
 		"en"		"Buy Action Slot for 1000$:"
 	}
 	"armor piercing damage(SB)"{
-		"en"		"Damage Multiplier ★★★★★"
+		"en"		"Damage Multiplier★★★★"
 	}
 	"deploy time decreased(SB)"{
-		"en"		"Deploy Time Multiplier ★★★★★"
+		"en"		"Deploy Time Multiplier★★★★"
 	}
 	"Upgrade Action Slot"{
 		"en"		"Upgrade Action Slot"
