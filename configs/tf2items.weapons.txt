@@ -286,8 +286,10 @@
 		"45,1078" //Force a Nature
 		{
 			"preserve_attributes"	"1"
-			"1"				"fire rate penalty HIDDEN;0.5"
-			"3"				"fire rate bonus;1.0"
+			"1"				"weapon fire rate;3.0"
+			"2"				"fire rate bonus;1.0"
+			"3"				"bullets per shot mult 2;3.0"
+			"4"				"Converts Firerate to Damage; 1.0"
 		}
 		"1180" //Gas Passer
 		{

@@ -1113,6 +1113,10 @@ DisplayItemChange(client,itemidx)
 	switch(itemidx)
 	{
 		//scout primaries
+		case 45, 1078:
+		{
+			ChangeString = "Force-A-Nature | Has 3x slower fire rate, but 3x bullets per shot. Converts fire rate into damage.";
+		}
 		case 220:
 		{
 			ChangeString = "Shortstop | You deal and take 15% more damage. Take no damage from self-inflicted ways.";
