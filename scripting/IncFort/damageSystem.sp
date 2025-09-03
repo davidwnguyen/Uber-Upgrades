@@ -12,9 +12,9 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 	{
 		lastKBSource[victim] = attacker;
 		if(GetAttribute(victim, "resistance powerup", 0.0) == 2.0){
-			if(frayNextTime[victim] <= currentGameTime){
+			if(frayNextTime[victim] <= GetGameTime()){
 				damage = 0.0;
-				frayNextTime[victim] = currentGameTime+1.0
+				frayNextTime[victim] = GetGameTime()+1.0
 				float position[3], patientPosition[3];
 				GetClientAbsOrigin(victim, position);
 
@@ -87,7 +87,7 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 
 			if(IsValidWeapon(weapon) && !isSentry)
 			{
-				if(InfernalEnchantmentDuration[attacker] >= currentGameTime){
+				if(InfernalEnchantmentDuration[attacker] >= GetGameTime()){
 					Buff infernalDOT; infernalDOT.init("Infernal Flames", "", Buff_InfernalDOT, 1, attacker, 8.0);
 					insertBuff(victim, infernalDOT);
 				}
@@ -304,16 +304,16 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 					if(StrEqual(weaponClassName,"tf_weapon_jar_milk",false))
 					{
 						if(GetAttribute(victim, "inverter powerup", 0.0) == 1.0){
-							MadmilkDuration[attacker] = currentGameTime+6.0;
+							MadmilkDuration[attacker] = GetGameTime()+6.0;
 							MadmilkInflictor[attacker] = victim;
 						}
 						else if(GetAttribute(victim, "inverter powerup", 0.0) == 2.0){
-							MadmilkDuration[victim] = currentGameTime+12.0;
+							MadmilkDuration[victim] = GetGameTime()+12.0;
 							MadmilkInflictor[victim] = victim;
 						}
-						else if(MadmilkDuration[victim] < currentGameTime+6.0)
+						else if(MadmilkDuration[victim] < GetGameTime()+6.0)
 						{
-							MadmilkDuration[victim] = currentGameTime+6.0;
+							MadmilkDuration[victim] = GetGameTime()+6.0;
 							MadmilkInflictor[victim] = attacker;
 						}
 					}
@@ -324,16 +324,16 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 					float value = TF2Attrib_GetValue(MadMilkOnhit);
 
 					if(GetAttribute(victim, "inverter powerup", 0.0) == 1){
-						MadmilkDuration[attacker] = currentGameTime+value;
+						MadmilkDuration[attacker] = GetGameTime()+value;
 						MadmilkInflictor[attacker] = victim;
 					}
 					else if(GetAttribute(victim, "inverter powerup", 0.0) == 2.0){
-						MadmilkDuration[victim] = currentGameTime+2*value;
+						MadmilkDuration[victim] = GetGameTime()+2*value;
 						MadmilkInflictor[victim] = victim;
 					}
-					else if(MadmilkDuration[victim] < currentGameTime+value)
+					else if(MadmilkDuration[victim] < GetGameTime()+value)
 					{
-						MadmilkDuration[victim] = currentGameTime+value
+						MadmilkDuration[victim] = GetGameTime()+value
 						MadmilkInflictor[victim] = attacker;
 					}
 				}
@@ -345,7 +345,7 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 					critligma.init("Marked for Crits", "All hits taken are critical", Buff_CritMarkedForDeath, 1, victim, 8.0);
 					insertBuff(victim, critligma);
 				}
-				if(MadmilkDuration[attacker] > currentGameTime){
+				if(MadmilkDuration[attacker] > GetGameTime()){
 					if(MadmilkDuration[victim] > MadmilkDuration[attacker]){
 						MadmilkDuration[victim] = MadmilkDuration[attacker];
 					}
@@ -518,10 +518,10 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 		if(RageActive[attacker] == true && GetAttribute(attacker, "revenge powerup", 0.0) == 1)
 		{
 			damage *= 1.5;
-			if(powerupParticle[attacker] <= currentGameTime)
+			if(powerupParticle[attacker] <= GetGameTime())
 			{
 				CreateParticleEx(victim, "critgun_weaponmodel_red", 1, 0, damagePosition, 0.5);
-				powerupParticle[attacker] = currentGameTime+0.6;
+				powerupParticle[attacker] = GetGameTime()+0.6;
 			}
 		}
 		if(GetAttribute(attacker, "revenge powerup", 0.0) == 2)
@@ -636,7 +636,7 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 			}
 		}
 		if(IsValidWeapon(VictimCWeapon)){
-			if(HasEntProp(VictimCWeapon, Prop_Send, "m_hHealingTarget") && miniCritStatusVictim[victim] < currentGameTime){
+			if(HasEntProp(VictimCWeapon, Prop_Send, "m_hHealingTarget") && miniCritStatusVictim[victim] < GetGameTime()){
 				if(GetAttribute(VictimCWeapon, "escape plan healing", 0.0)){
 					int healingTarget = GetEntPropEnt(VictimCWeapon, Prop_Send, "m_hHealingTarget");
 					if(IsValidClient3(healingTarget)){
@@ -645,7 +645,7 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 						if(patientHealth > medicHealth && medicHealth - damage <= 10.0){
 							SetEntityHealth(victim, patientHealth);
 							SetEntityHealth(healingTarget, medicHealth);
-							miniCritStatusVictim[victim] = currentGameTime + 10.0;
+							miniCritStatusVictim[victim] = GetGameTime() + 10.0;
 							damage *= 0.25;
 						}
 					}
@@ -1499,9 +1499,9 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 				float victimPosition[3];
 				GetEntPropVector(victim, Prop_Data, "m_vecAbsOrigin", victimPosition); 
 				
-				EntityExplosion(attacker, damage, 300.0,victimPosition,_,weaponArtParticle[attacker] <= currentGameTime ? true : false, victim, 0.4,_,weapon, 0.5);
+				EntityExplosion(attacker, damage, 300.0,victimPosition,_,weaponArtParticle[attacker] <= GetGameTime() ? true : false, victim, 0.4,_,weapon, 0.5);
 				//PARTICLES
-				if(weaponArtParticle[attacker] <= currentGameTime)
+				if(weaponArtParticle[attacker] <= GetGameTime())
 				{
 					int iPart1 = CreateEntityByName("info_particle_system");
 					int iPart2 = CreateEntityByName("info_particle_system");
@@ -1529,7 +1529,7 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 						CreateTimer(1.0, Timer_KillParticle, EntIndexToEntRef(iPart1));
 						CreateTimer(1.0, Timer_KillParticle, EntIndexToEntRef(iPart2));
 					}
-					weaponArtParticle[attacker] = currentGameTime+1.0;
+					weaponArtParticle[attacker] = GetGameTime()+1.0;
 				}
 			}
 		}
@@ -1553,11 +1553,11 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 			}
 		}
 
-		if(LightningEnchantmentDuration[attacker] > currentGameTime && !(damagetype & DMG_VEHICLE)){
+		if(LightningEnchantmentDuration[attacker] > GetGameTime() && !(damagetype & DMG_VEHICLE)){
 			currentDamageType[attacker].second |= DMG_IGNOREHOOK;
 			SDKHooks_TakeDamage(victim,attacker,attacker,LightningEnchantment[attacker] / TF2_GetFireRate(attacker,weapon,0.6) * 20.0,_,_,_,_,false);
 		}
-		else if(DarkmoonBladeDuration[attacker] > currentGameTime){
+		else if(DarkmoonBladeDuration[attacker] > GetGameTime()){
 			int melee = GetWeapon(attacker,2);
 			if(melee == weapon){
 				currentDamageType[attacker].second |= DMG_IGNOREHOOK;

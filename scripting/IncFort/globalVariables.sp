@@ -306,7 +306,6 @@ int stickiesDetonated[MAXPLAYERS+1];
 int AttunedSpells[MAXPLAYERS+1][Max_Attunement_Slots];
 
 //Floats
-float currentGameTime
 float MoneyBonusKill
 float StartMoney
 float currentupgrades_i[MAXPLAYERS+1][NB_SLOTS_UED+1][MAX_ATTRIBUTES_ITEM]

@@ -338,7 +338,7 @@ CastLightningEnchantment(client, attuneSlot)
 		
 	LightningEnchantment[client] = 10.0 + ArcaneDamage[client] * 4.0;
 	LightningEnchantmentLevel[client] = spellLevel;
-	LightningEnchantmentDuration[client] = currentGameTime + 20.0*ArcanePower[client];	
+	LightningEnchantmentDuration[client] = GetGameTime() + 20.0*ArcanePower[client];	
 }
 CastDarkmoonBlade(client, attuneSlot)
 {
@@ -350,7 +350,7 @@ CastDarkmoonBlade(client, attuneSlot)
 	
 	DarkmoonBlade[client] = 10.0 + ArcaneDamage[client] * 4.5;
 	DarkmoonBladeLevel[client] = spellLevel;
-	DarkmoonBladeDuration[client] = currentGameTime + 20.0*ArcanePower[client];
+	DarkmoonBladeDuration[client] = GetGameTime() + 20.0*ArcanePower[client];
 }
 CastAntisepticBlast(client, attuneSlot)
 {
@@ -497,7 +497,7 @@ FinishCastInfernalEnchantment(int client, int spellLevel)
 	if(IsValidClient3(client) && IsPlayerAlive(client)){
 		InfernalEnchantment[client] = 300.0 + 100 * ArcaneDamage[client];
 		InfernalEnchantmentLevel[client] = spellLevel;
-		InfernalEnchantmentDuration[client] = currentGameTime + 30.0*ArcanePower[client];
+		InfernalEnchantmentDuration[client] = GetGameTime() + 30.0*ArcanePower[client];
 		CreateParticle(client, "utaunt_auroraglow_orange_parent", true, "", 30.0*ArcanePower[client],_,_,1);
 		int clients[MAXPLAYERS+1], numClients = getClientParticleStatus(clients, client);
 		TE_Send(clients,numClients)
@@ -971,7 +971,7 @@ public void CheckMines(ref)
 	CreateTimer(0.1,Timer_GrenadeMines,  EntIndexToEntRef(entity), TIMER_REPEAT);
 	CreateTimer(20.0,SelfDestruct,  EntIndexToEntRef(entity));
 	SetEntProp(entity, Prop_Data, "m_nNextThinkTick", -1);
-	lastMinesTime[client] = currentGameTime;
+	lastMinesTime[client] = GetGameTime();
 }
 public Action:Timer_GrenadeMines(Handle timer, any:ref) 
 { 
@@ -989,7 +989,7 @@ public Action:Timer_GrenadeMines(Handle timer, any:ref)
 
 	float distance = GetEntPropFloat(entity, Prop_Send, "m_DmgRadius")
 	float damage = GetEntPropFloat(entity, Prop_Send, "m_flDamage")
-	float timeMod = 1.0+((currentGameTime-lastMinesTime[client])*damageRate[spellLevel]);
+	float timeMod = 1.0+((GetGameTime()-lastMinesTime[client])*damageRate[spellLevel]);
 	float grenadevec[3], targetvec[3];
 
 	if(timeMod > maxDamageBonus[spellLevel]){timeMod=maxDamageBonus[spellLevel];}
@@ -1713,7 +1713,7 @@ CastHealing(client, attuneSlot)//Projected Healing
 }
 
 CastWarp(client){
-	warpCooldown[client] = currentGameTime+(0.5/ArcanePower[client]);
+	warpCooldown[client] = GetGameTime()+(0.5/ArcanePower[client]);
 	float focusCost = fl_MaxFocus[client]*0.1/ArcanePower[client];
 	if(fl_CurrentFocus[client] < focusCost)
 	{
@@ -1794,7 +1794,7 @@ CastStunShot(int client, int attuneSlot){
 
 	TF2Attrib_SetByName(client, "bullets per shot bonus", 5.0);
 	refreshAllWeapons(client);
-	SetEntPropFloat(CWeapon, Prop_Send, "m_flNextPrimaryAttack", currentGameTime);
+	SetEntPropFloat(CWeapon, Prop_Send, "m_flNextPrimaryAttack", GetGameTime());
 	shouldAttack[client] = true;
 	StunShotBPS[client] = true;
 	StunShotStun[client] = true;
@@ -1950,7 +1950,7 @@ CastCorpsePiler(int client, int attuneSlot){
 		return;
 
 	shouldAttack[client] = true;
-	SetEntPropFloat(CWeapon, Prop_Send, "m_flNextPrimaryAttack", currentGameTime+1.5);
+	SetEntPropFloat(CWeapon, Prop_Send, "m_flNextPrimaryAttack", GetGameTime()+1.5);
 
 	for(int i=0;i<20;++i)
 	{

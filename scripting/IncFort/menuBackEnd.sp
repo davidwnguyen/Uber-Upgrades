@@ -958,9 +958,9 @@ public MenuHandler_Wiki(Handle menu, MenuAction:action, client, param2)
 {
 	if (action == MenuAction_Select && IsValidClient(client) && IsPlayerAlive(client))
 	{
-		if(param2 >= 0 && MenuTimer[client] < currentGameTime)
+		if(param2 >= 0 && MenuTimer[client] < GetGameTime())
 		{
-			MenuTimer[client] = 1.0+currentGameTime
+			MenuTimer[client] = 1.0+GetGameTime()
 			switch(param2)
 			{
 				case 0:

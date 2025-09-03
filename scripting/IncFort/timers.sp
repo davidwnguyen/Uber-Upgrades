@@ -152,7 +152,7 @@ public Action:Timer_FixedVariables(Handle timer)
 					SDKHooks_TakeDamage(client, client, client, TF2Util_GetEntityMaxHealth(client)*immolationRatio*0.1, DMG_PREVENT_PHYSICS_FORCE);
 				}
 			}
-			if(sunstarDuration[client] >= currentGameTime){
+			if(sunstarDuration[client] >= GetGameTime()){
 				float sunstarActive = GetAttribute(CWeapon, "weapon ability id", 0.0);
 				if(sunstarActive == 15.0){
 					float clientpos[3], soundPos[3], clientAng[3], fwd[3];
@@ -422,7 +422,7 @@ public Action:Timer_Every100MS(Handle timer)
 			{
 				Format(StatusEffectText, sizeof(StatusEffectText),"Berserk: %.0f%", RageBuildup[client]*100.0);
 				
-				miniCritStatusAttacker[client] = currentGameTime + 1.0;
+				miniCritStatusAttacker[client] = GetGameTime() + 1.0;
 				TF2_AddCondition(client, TFCond_SpeedBuffAlly, 1.0);
 				if(RageBuildup[client] > 0.3){
 					TF2_AddCondition(client, TFCond_DefenseBuffMmmph, 1.0);
@@ -456,22 +456,22 @@ public Action:Timer_Every100MS(Handle timer)
 			}
 			else if(GetAttribute(client, "regeneration powerup", 0.0) == 2.0)
 			{
-				if(duplicationCooldown[client] > currentGameTime)
-					Format(StatusEffectText, sizeof(StatusEffectText),"Duplication: %.2fs", duplicationCooldown[client] - currentGameTime);
+				if(duplicationCooldown[client] > GetGameTime())
+					Format(StatusEffectText, sizeof(StatusEffectText),"Duplication: %.2fs", duplicationCooldown[client] - GetGameTime());
 				else
 					Format(StatusEffectText, sizeof(StatusEffectText),"Duplication: READY (Crouch + Mouse3)");
 			}
 			else if(GetAttribute(client, "agility powerup", 0.0) == 3.0)
 			{
-				if(warpCooldown[client] > currentGameTime)
-					Format(StatusEffectText, sizeof(StatusEffectText),"Warp: %.2fs", warpCooldown[client] - currentGameTime);
+				if(warpCooldown[client] > GetGameTime())
+					Format(StatusEffectText, sizeof(StatusEffectText),"Warp: %.2fs", warpCooldown[client] - GetGameTime());
 				else
 					Format(StatusEffectText, sizeof(StatusEffectText),"Warp: READY (Crouch + Mouse3)");
 			}
 			else if(GetAttribute(client, "resistance powerup", 0.0) == 2.0)
 			{
-				if(frayNextTime[client] > currentGameTime)
-					Format(StatusEffectText, sizeof(StatusEffectText),"Fray: %.2fs", frayNextTime[client] - currentGameTime);
+				if(frayNextTime[client] > GetGameTime())
+					Format(StatusEffectText, sizeof(StatusEffectText),"Fray: %.2fs", frayNextTime[client] - GetGameTime());
 				else
 					Format(StatusEffectText, sizeof(StatusEffectText),"Fray: READY");
 			}
@@ -620,9 +620,9 @@ public Action:Timer_Every100MS(Handle timer)
 				if(client != infernalDOT.inflictor && IsValidClient3(infernalDOT.inflictor)){
 					currentDamageType[infernalDOT.inflictor].second |= DMG_IGNOREHOOK;
 					SDKHooks_TakeDamage(client, infernalDOT.inflictor, infernalDOT.inflictor, InfernalEnchantment[infernalDOT.inflictor]*0.1 * infernalDOT.severity,_,_,_,_,false);
-					if(hitParticle[client]+0.4 <= currentGameTime){
+					if(hitParticle[client]+0.4 <= GetGameTime()){
 						CreateParticleEx(client, "halloween_burningplayer_flyingbits", 1);
-						hitParticle[client] = currentGameTime
+						hitParticle[client] = GetGameTime()
 					}
 				}
 			}
@@ -640,9 +640,9 @@ public Action:Timer_Every100MS(Handle timer)
 					currentDamageType[infernalDOT.inflictor].second |= DMG_PIERCING;
 					currentDamageType[infernalDOT.inflictor].second |= DMG_IGNOREHOOK;
 					SDKHooks_TakeDamage(client, infernalDOT.inflictor, infernalDOT.inflictor, 10.0 * infernalDOT.severity, DMG_PREVENT_PHYSICS_FORCE);
-					if(hitParticle[client]+0.4 <= currentGameTime){
+					if(hitParticle[client]+0.4 <= GetGameTime()){
 						CreateParticleEx(client, "halloween_burningplayer_flyingbits", 1);
-						hitParticle[client] = currentGameTime
+						hitParticle[client] = GetGameTime()
 					}
 				}
 			}
@@ -692,12 +692,12 @@ public Action:Timer_Every100MS(Handle timer)
 					{
 						case 752:
 						{
-							miniCritStatusAttacker[client] = currentGameTime+0.3
+							miniCritStatusAttacker[client] = GetGameTime()+0.3
 							TF2_AddCondition(client, TFCond_RuneHaste, 0.3);
 						}
 						case 594:
 						{
-							miniCritStatusAttacker[client] = currentGameTime+0.3
+							miniCritStatusAttacker[client] = GetGameTime()+0.3
 							TF2_AddCondition(client, TFCond_RuneAgility, 0.3);
 						}
 					}
@@ -729,8 +729,8 @@ public Action:Timer_Every100MS(Handle timer)
 									GetClientAbsOrigin(i, VictimPos);
 									if(GetVectorDistance(ClientPos,VictimPos,true ) <= range*range)
 									{
-										if(miniCritStatusAttacker[i] < currentGameTime+0.3)
-											miniCritStatusAttacker[i] = currentGameTime+0.3
+										if(miniCritStatusAttacker[i] < GetGameTime()+0.3)
+											miniCritStatusAttacker[i] = GetGameTime()+0.3
 									}
 								}
 							}
@@ -1022,7 +1022,7 @@ public Action:Timer_EveryTenSeconds(Handle timer)
 						{
 							BleedBuildup[client] = 0.0;
 							RadiationBuildup[client] = 0.0;
-							miniCritStatusAttacker[client] = currentGameTime+10.0
+							miniCritStatusAttacker[client] = GetGameTime()+10.0
 							TF2_AddCondition(client, TFCond_DodgeChance, 2.5);
 							TF2_AddCondition(client, TFCond_AfterburnImmune, 2.5);
 							TF2_AddCondition(client, TFCond_UberchargedHidden, 0.01);
@@ -1958,7 +1958,7 @@ public Action:AttackTwice(Handle timer, any:data)
 	{
 		timesLeft--;
 		shouldAttack[client] = true;
-		SetEntPropFloat(CWeapon, Prop_Send, "m_flNextPrimaryAttack", currentGameTime);
+		SetEntPropFloat(CWeapon, Prop_Send, "m_flNextPrimaryAttack", GetGameTime());
 		
 		if(timesLeft > 0)
 		{
@@ -2315,7 +2315,7 @@ public Action Timer_SmokeBomb(Handle timer, DataPack pack){
 	float expirationTime = pack.ReadFloat();
 	int team = pack.ReadCell();
 
-	if(expirationTime > currentGameTime){
+	if(expirationTime > GetGameTime()){
 		float targetPosition[3];
 		for(int i = 1;i <= MaxClients; ++i){
 			if(!IsValidClient3(i))

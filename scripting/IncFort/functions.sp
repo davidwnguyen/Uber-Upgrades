@@ -299,11 +299,11 @@ public int GetAmountOfDebuffs(int i){
 		++amount;
 	if(TF2_IsPlayerInCondition(i, TFCond_OnFire))
 		++amount;
-	if(miniCritStatusVictim[i]-currentGameTime > 0.0)
+	if(miniCritStatusVictim[i]-GetGameTime() > 0.0)
 		++amount;
 	if(TF2_IsPlayerInCondition(i, TFCond_Bleeding))
 		++amount;
-	if(MadmilkDuration[i] > currentGameTime)
+	if(MadmilkDuration[i] > GetGameTime())
 		++amount;
 	if(TF2_IsPlayerInCondition(i, TFCond_Sapped))
 		++amount;
@@ -330,7 +330,7 @@ public int GetAmountOfBuffs(int i){
 		++amount;
 	if(TF2_IsPlayerCritBuffed(i))
 		++amount;
-	if(miniCritStatusAttacker[i]-currentGameTime > 0.0)
+	if(miniCritStatusAttacker[i]-GetGameTime() > 0.0)
 		++amount;
 	if(TF2_IsPlayerInCondition(i, TFCond_MegaHeal))
 		++amount;
@@ -365,7 +365,7 @@ public void ManagePlayerBuffs(int i){
 			continue;
 
 		//Clear out any non-active buffs.
-		if(playerBuffs[i][buff].duration != 0.0 && playerBuffs[i][buff].duration < currentGameTime){
+		if(playerBuffs[i][buff].duration != 0.0 && playerBuffs[i][buff].duration < GetGameTime()){
 			playerBuffs[i][buff].clear();
 			buffChange[i]=true;
 			continue;
@@ -398,9 +398,9 @@ public void ManagePlayerBuffs(int i){
 		additiveArmorPenetration += playerBuffs[i][buff].additiveArmorPenetration * playerBuffs[i][buff].severity;
 
 		if(playerBuffs[i][buff].description[0] != '\0')
-			Format(details, sizeof(details), "%s\n%s: - %.1fs\n  %s", details, playerBuffs[i][buff].name, playerBuffs[i][buff].duration - currentGameTime, playerBuffs[i][buff].description);
+			Format(details, sizeof(details), "%s\n%s: - %.1fs\n  %s", details, playerBuffs[i][buff].name, playerBuffs[i][buff].duration - GetGameTime(), playerBuffs[i][buff].description);
 		else
-			Format(details, sizeof(details), "%s\n%s - %.1fs", details, playerBuffs[i][buff].name, playerBuffs[i][buff].duration - currentGameTime);
+			Format(details, sizeof(details), "%s\n%s - %.1fs", details, playerBuffs[i][buff].name, playerBuffs[i][buff].duration - GetGameTime());
 	}
 
 	Address relentlessPowerup = TF2Attrib_GetByName(i, "relentless powerup");
@@ -462,33 +462,33 @@ public void ManagePlayerBuffs(int i){
 		TF2Attrib_ClearCache(CWeapon);
 	}
 
-	if(miniCritStatusVictim[i]-currentGameTime > 0.0){
-		Format(details, sizeof(details), "%s\n%s - %.1fs", details, "Marked-For-Death", miniCritStatusVictim[i]-currentGameTime);
+	if(miniCritStatusVictim[i]-GetGameTime() > 0.0){
+		Format(details, sizeof(details), "%s\n%s - %.1fs", details, "Marked-For-Death", miniCritStatusVictim[i]-GetGameTime());
 		TF2_AddCondition(i, TFCond_MarkedForDeath, 0.2);
 	}
-	if(miniCritStatusAttacker[i]-currentGameTime > 0.0){
-		Format(details, sizeof(details), "%s\n%s - %.1fs", details, "Minicrits", miniCritStatusAttacker[i]-currentGameTime);
+	if(miniCritStatusAttacker[i]-GetGameTime() > 0.0){
+		Format(details, sizeof(details), "%s\n%s - %.1fs", details, "Minicrits", miniCritStatusAttacker[i]-GetGameTime());
 		TF2_AddCondition(i, TFCond_Buffed, 0.2);
 	}
 
-	if(IsFakeClient(i) || disableIFMiniHud[i] > currentGameTime)
+	if(IsFakeClient(i) || disableIFMiniHud[i] > GetGameTime())
 		return;
 
-	if(LightningEnchantmentDuration[i] > currentGameTime){
-		Format(details, sizeof(details), "%s\nLightning Enchantment | %.2fs | +%s DPS", details, LightningEnchantmentDuration[i] - currentGameTime,  GetAlphabetForm(LightningEnchantment[i]*20.0));
+	if(LightningEnchantmentDuration[i] > GetGameTime()){
+		Format(details, sizeof(details), "%s\nLightning Enchantment | %.2fs | +%s DPS", details, LightningEnchantmentDuration[i] - GetGameTime(),  GetAlphabetForm(LightningEnchantment[i]*20.0));
 	}
-	if(DarkmoonBladeDuration[i] > currentGameTime){
-		Format(details, sizeof(details), "%s\nDarkmoon Blade | %.2fs | +%s Melee Damage", details, DarkmoonBladeDuration[i] - currentGameTime, GetAlphabetForm(DarkmoonBlade[i]));
+	if(DarkmoonBladeDuration[i] > GetGameTime()){
+		Format(details, sizeof(details), "%s\nDarkmoon Blade | %.2fs | +%s Melee Damage", details, DarkmoonBladeDuration[i] - GetGameTime(), GetAlphabetForm(DarkmoonBlade[i]));
 	}
-	if(InfernalEnchantmentDuration[i] > currentGameTime){
-		Format(details, sizeof(details), "%s\nInfernal Enchantment | %.2fs | +%s Infernal DPS", details, InfernalEnchantmentDuration[i] - currentGameTime, GetAlphabetForm(InfernalEnchantment[i]));
+	if(InfernalEnchantmentDuration[i] > GetGameTime()){
+		Format(details, sizeof(details), "%s\nInfernal Enchantment | %.2fs | +%s Infernal DPS", details, InfernalEnchantmentDuration[i] - GetGameTime(), GetAlphabetForm(InfernalEnchantment[i]));
 	}
 	if(karmicJusticeScaling[i]){
 		Format(details, sizeof(details), "%s\nKarmic Justice | %.2f Scaling", details, karmicJusticeScaling[i]);
 	}
 
-	if(MadmilkDuration[i]-currentGameTime > 0.0){
-		Format(details, sizeof(details), "%s\n%s - %.1fs", details, "Milked", MadmilkDuration[i]-currentGameTime);
+	if(MadmilkDuration[i]-GetGameTime() > 0.0){
+		Format(details, sizeof(details), "%s\n%s - %.1fs", details, "Milked", MadmilkDuration[i]-GetGameTime());
 	}
 
 	if(TF2_IsPlayerInCondition(i, TFCond_AfterburnImmune))
@@ -2437,7 +2437,7 @@ ExplosiveArrow(entity)
 StunShotFunc(client)
 {
 	int CWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
-	SetEntPropFloat(CWeapon, Prop_Send, "m_flNextPrimaryAttack", currentGameTime + 0.6);
+	SetEntPropFloat(CWeapon, Prop_Send, "m_flNextPrimaryAttack", GetGameTime() + 0.6);
 	CreateTimer(0.5, removeBulletsPerShot, client);
 }
 meteorCollisionCheck(int entity){
@@ -2466,7 +2466,7 @@ meteorCollisionCheck(int entity){
 }
 public BoomerangThink(entity) 
 { 
-	if(IsValidEntity(entity) && currentGameTime - entitySpawnTime[entity] > 0.4)
+	if(IsValidEntity(entity) && GetGameTime() - entitySpawnTime[entity] > 0.4)
 	{
 		float ProjAngle[3],ProjVelocity[3],vBuffer[3],impulse[3],speed;
 		GetEntPropVector(entity, Prop_Send, "m_vInitialVelocity", ProjVelocity);
@@ -2957,7 +2957,7 @@ public void OnHomingThink(entity)
 	GetEntPropVector(entity, Prop_Send, "m_vecOrigin", flRocketPos);
 	float distance = GetVectorDistance(flRocketPos, TargetPos, true); 
 	
-	if( distance <= projectileHomingDegree[entity]*projectileHomingDegree[entity] && currentGameTime - entitySpawnTime[entity] < 3.0 )
+	if( distance <= projectileHomingDegree[entity]*projectileHomingDegree[entity] && GetGameTime() - entitySpawnTime[entity] < 3.0 )
 	{
 		float ProjVector[3],ProjAngle[3],AimVector[3],InitialSpeed[3]; 
 
@@ -3901,7 +3901,6 @@ ResetVariables(){
 		relentlessTicks[client] = 0;
 		Kills[client] = 0;
 		Deaths[client] = 0;
-		currentGameTime = 0.0;
 		DamageDealt[client] = 0.0;
 		dps[client] = 0.0;
 		Healed[client] = 0.0;
@@ -4628,14 +4627,14 @@ void CreateSmokeBombEffect(float position[3], float duration, int team){
 	pack.WriteFloat(position[0]);
 	pack.WriteFloat(position[1]);
 	pack.WriteFloat(position[2]);
-	pack.WriteFloat(duration+currentGameTime);
+	pack.WriteFloat(duration+GetGameTime());
 	pack.WriteCell(team);
 
 	CreateTimer(0.1, Timer_SmokeBomb, pack, TIMER_REPEAT);
 }
 
 void SendUpgradeDescription(int client, int upgrade_choice, float value){
-	disableIFMiniHud[client] = currentGameTime+8.0;
+	disableIFMiniHud[client] = GetGameTime()+8.0;
 
 	char formula[64];
 	char result[64];
