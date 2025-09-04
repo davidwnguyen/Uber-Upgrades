@@ -917,31 +917,31 @@
 		"special_tweaks_listid"		"2"
 		"Damage upgrades"
 		{
-			"Attr1"		"damage bonus"
-			"Attr15"	"ap (armyofnotmany)"
-			"Attr13"	"Extra Damage Bonus"
-			"Attr1"		"blast radius increased"
-			"Attr9"		"dmg falloff decreased"
-			"Attr13"	"lifesteal ability"
-			"Attr13"	"reveal cloaked victim on hit"
-			"Attr14"	"reveal disguised victim on hit"
+			"0"		"damage bonus"
+			"1"		"ap (global)"
+			"2"		"Extra Damage Bonus"
+			"3"		"blast radius increased"
+			"4"		"dmg falloff decreased"
+			"5"		"lifesteal ability"
+			"6"		"reveal cloaked victim on hit"
+			"7"		"reveal disguised victim on hit"
 		}
 		"Mangler specific upgrades"
 		{
-			"Attr1"		"fire rate bonus(multshit)"
-			"Attr2"		"clip size bonus (E)"
-			"Attr0"		"faster reload rate"
-			"Attr6"		"Projectile speed increased"
-			"Attr10"	"self dmg push force increased"
-			"Attr3"		"rocket jump damage reduction"
-			"Attr6"		"air control when blast jumping"
-			"Attr5"		"charge movespeed increased"
-			"Attr8"		"Weapons Deals No Knockback"
+			"0"		"fire rate bonus(multshit)"
+			"1"		"clip size bonus (E)"
+			"2"		"faster reload rate"
+			"3"		"Projectile speed increased"
+			"4"		"self dmg push force increased"
+			"5"		"rocket jump damage reduction"
+			"6"		"air control when blast jumping"
+			"7"		"charge movespeed increased"
+			"8"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
-			"Sp0"		"Focused Lens"
-			"Sp1"		"Wave Dispersement"
+			"0"		"Focused Lens"
+			"1"		"Wave Dispersement"
 		}
 	}
 	"airstrike"
@@ -949,31 +949,31 @@
 		"special_tweaks_listid"		"2"
 		"Damage upgrades"
 		{
-			"Attr1"			"damage bonus"
-			"Attr20"		"ap (armyofnotmany)"
-			"Attr13"		"Extra Damage Bonus"
-			"Attr1"			"blast radius increased"
-			"Attr9"			"dmg falloff decreased"
-			"Attr13"		"lifesteal ability"
-			"Attr13"		"reveal cloaked victim on hit"
-			"Attr14"		"reveal disguised victim on hit"
+			"0"		"damage bonus"
+			"1"		"ap (global)"
+			"2"		"Extra Damage Bonus"
+			"3"		"blast radius increased"
+			"4"		"dmg falloff decreased"
+			"5"		"lifesteal ability"
+			"6"		"reveal cloaked victim on hit"
+			"7"		"reveal disguised victim on hit"
 		}
 		"Launcher specific upgrades"
 		{
-			"Attr0"		"fire rate bonus(multshit)"
-			"Attr1"		"clip size bonus"
-			"Attr2"		"faster reload rate"
-			"Attr7"		"reload clip all at once"
-			"Attr3"		"Projectile speed increased"
-			"Attr4"		"self dmg push force increased"
-			"Attr5"		"rocket jump damage reduction"
-			"Attr6"		"air control when blast jumping"
-			"Attr8"		"Weapons Deals No Knockback"
+			"0"		"fire rate bonus(multshit)"
+			"1"		"clip size bonus"
+			"2"		"faster reload rate"
+			"3"		"reload clip all at once"
+			"4"		"Projectile speed increased"
+			"5"		"self dmg push force increased"
+			"6"		"rocket jump damage reduction"
+			"7"		"air control when blast jumping"
+			"8"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
-			"Sp0"		"Scorching Napalm"
-			"Sp1"		"Rockets' Red Glare"
+			"0"		"Scorching Napalm"
+			"1"		"Rockets' Red Glare"
 		}
 	}
 	"scomelweap"
@@ -981,24 +981,24 @@
 		"special_tweaks_listid"		"2"
 		"Damage upgrades"
 		{
-			"Attr0"			"damage bonus"
-			"Attr17"		"ap (slowswing)"
-			"Attr16"		"Extra Damage Bonus"
-			"Attr13"		"lifesteal ability"
-			"Attr12"		"reveal cloaked victim on hit"
-			"Attr13"		"reveal disguised victim on hit"
+			"0"		"damage bonus"
+			"1"		"ap (global)"
+			"2"		"Extra Damage Bonus"
+			"3"		"lifesteal ability"
+			"4"		"reveal cloaked victim on hit"
+			"5"		"reveal disguised victim on hit"
 		}
 		"Melee specific upgrades"
 		{
-			"Attr0"		"melee attack rate bonus"
-			"Attr3"		"melee range multiplier"
-			"Attr13"	"increase player capture value"
-			"Attr8"		"Weapons Deals No Knockback"
+			"0"		"melee attack rate bonus"
+			"1"		"melee range multiplier"
+			"2"	"increase player capture value"
+			"3"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
-			"Sp0"		"Honor!"
-			"Sp1"		"Infernal Impulse"
+			"0"		"Honor!"
+			"1"		"Infernal Impulse"
 		}
 	}
 	"engweap"
@@ -1006,27 +1006,27 @@
 		"special_tweaks_listid"		"2"
 		"Damage upgrades"
 		{
-			"Attr0"		"damage bonus"
-			"Attr24"	"ap (biggercali)"
-			"Attr1"		"Accuracy Scales DMG Replacement"
-			"Attr13"	"lifesteal ability"
-			"Attr7"		"reveal cloaked victim on hit"
-			"Attr8"		"reveal disguised victim on hit"
+			"0"		"damage bonus"
+			"1"		"ap (global)"
+			"2"		"Accuracy Scales DMG Replacement"
+			"3"		"lifesteal ability"
+			"4"		"reveal cloaked victim on hit"
+			"5"		"reveal disguised victim on hit"
 		}
 		"Weapon Specific upgrades"
 		{
-			"Attr0"		"fire rate bonus(old)"
-			"Attr1"		"clip size bonus"
-			"Attr2"		"faster reload rate"
-			"Attr3"		"bullets per shot bonus"
-			"Attr4"		"weapon spread bonus(H)"
-			"Attr5"		"projectile penetration heavy"
-			"Attr8"		"Weapons Deals No Knockback"
+			"0"		"fire rate bonus(old)"
+			"1"		"clip size bonus"
+			"2"		"faster reload rate"
+			"3"		"bullets per shot bonus"
+			"4"		"weapon spread bonus(H)"
+			"5"		"projectile penetration heavy"
+			"6"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
-			"Sp5"		"Explosive Bullets(P)"
-			"Sp6"		"Lacerating Rounds"
+			"0"		"Explosive Bullets(P)"
+			"1"		"Lacerating Rounds"
 		}
 	}
 	"sprweap2"
@@ -1034,27 +1034,27 @@
 		"special_tweaks_listid"		"2"
 		"Damage upgrades"
 		{
-			"Attr0"		"damage bonus"
-			"Attr22"	"ap (biggercali)"
-			"Attr1"		"Accuracy Scales DMG Replacement"
-			"Attr13"	"lifesteal ability"
-			"Attr7"		"reveal cloaked victim on hit"
-			"Attr8"		"reveal disguised victim on hit"
+			"0"		"damage bonus"
+			"1"		"ap (global)"
+			"2"		"Accuracy Scales DMG Replacement"
+			"3"		"lifesteal ability"
+			"4"		"reveal cloaked victim on hit"
+			"5"		"reveal disguised victim on hit"
 		}
 		"Gun specific upgrades"
 		{
-			"Attr0"		"fire rate bonus(old)"
-			"Attr1"		"clip size bonus"
-			"Attr2"		"faster reload rate"
-			"Attr3"		"bullets per shot bonus"
-			"Attr4"		"weapon spread bonus(H)"
-			"Attr5"		"projectile penetration heavy"
-			"Attr8"		"Weapons Deals No Knockback"
+			"0"		"fire rate bonus(old)"
+			"1"		"clip size bonus"
+			"2"		"faster reload rate"
+			"3"		"bullets per shot bonus"
+			"4"		"weapon spread bonus(H)"
+			"5"		"projectile penetration heavy"
+			"6"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
-			"Sp5"		"Explosive Bullets(P)"
-			"Sp6"		"Lacerating Rounds"
+			"0"		"Explosive Bullets(P)"
+			"1"		"Lacerating Rounds"
 		}
 	}
 	"sprweap1"
@@ -1062,27 +1062,27 @@
 		"special_tweaks_listid"		"2"
 		"Damage upgrades"
 		{
-			"Attr0"		"damage bonus"
-			"Attr22"	"ap (biggercali)"
-			"Attr1"		"Accuracy Scales DMG Replacement"
-			"Attr13"	"lifesteal ability"
-			"Attr7"		"reveal cloaked victim on hit"
-			"Attr8"		"reveal disguised victim on hit"
+			"0"		"damage bonus"
+			"1"		"ap (global)"
+			"2"		"Accuracy Scales DMG Replacement"
+			"3"		"lifesteal ability"
+			"4"		"reveal cloaked victim on hit"
+			"5"		"reveal disguised victim on hit"
 		}
 		"Gun specific upgrades"
 		{
-			"Attr0"		"fire rate bonus(multshit)"
-			"Attr1"		"clip size bonus"
-			"Attr2"		"faster reload rate"
-			"Attr3"		"bullets per shot bonus (single)"
-			"Attr4"		"weapon spread bonus"
-			"Attr5"		"projectile penetration heavy"
-			"Attr8"		"Weapons Deals No Knockback"
+			"0"		"fire rate bonus(multshit)"
+			"1"		"clip size bonus"
+			"2"		"faster reload rate"
+			"3"		"bullets per shot bonus (single)"
+			"4"		"weapon spread bonus"
+			"5"		"projectile penetration heavy"
+			"6"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
-			"Sp0"		"Explosive Bullets(S)"
-			"Sp1"		"Lacerating Rounds"
+			"0"		"Explosive Bullets(S)"
+			"1"		"Lacerating Rounds"
 		}
 	}
 	"rayweap"
@@ -1090,24 +1090,24 @@
 		"special_tweaks_listid"		"2"
 		"Damage upgrades"
 		{
-			"Attr0"		"damage bonus"
-			"Attr24"	"ap (condensedlaser)"
-			"Attr1"		"Accuracy Scales DMG Replacement"
-			"Attr13"	"lifesteal ability"
-			"Attr9"		"reveal cloaked victim on hit"
-			"Attr10"	"reveal disguised victim on hit"	
+			"0"		"damage bonus"
+			"1"		"ap (global)"
+			"2"		"Accuracy Scales DMG Replacement"
+			"3"		"lifesteal ability"
+			"4"		"reveal cloaked victim on hit"
+			"5"		"reveal disguised victim on hit"	
 		}
 		"Laser specific upgrades"
 		{
-			"Attr0"		"fire rate bonus(multshit)"
-			"Attr1"		"faster reload rate"
-			"Attr2"		"clip size bonus (E)"
-			"Attr8"		"Weapons Deals No Knockback"
+			"0"		"fire rate bonus(multshit)"
+			"1"		"faster reload rate"
+			"2"		"clip size bonus (E)"
+			"3"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
-			"Sp0"		"Focal Point"
-			"Sp1"		"Siphon"
+			"0"		"Focal Point"
+			"1"		"Siphon"
 		}
 	}
 	
@@ -1116,23 +1116,23 @@
 		"special_tweaks_listid"		"2"
 		"Damage upgrades"
 		{
-			"Attr0"		"damage bonus"
-			"Attr7"		"ap (highervoltage)"
-			"Attr6"		"Accuracy Scales DMG Replacement"
-			"Attr13"	"lifesteal ability"
-			"Attr10"	"reveal cloaked victim on hit"
-			"Attr11"	"reveal disguised victim on hit"
+			"0"		"damage bonus"
+			"1"		"ap (global)"
+			"2"		"Accuracy Scales DMG Replacement"
+			"3"		"lifesteal ability"
+			"4"		"reveal cloaked victim on hit"
+			"5"		"reveal disguised victim on hit"
 		}
 		"Short circuit specific upgrades"
 		{
-			"Attr0"		"fire rate bonus(multshit)"
-			"Attr1"		"Increased Shock Range"
-			"Attr8"		"Weapons Deals No Knockback"
+			"0"		"fire rate bonus(multshit)"
+			"1"		"Increased Shock Range"
+			"2"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
-			"Sp0"		"Lightning Affinity"
-			"Sp1"		"Sunstar"
+			"0"		"Lightning Affinity"
+			"1"		"Sunstar"
 		}
 	}
 	"engmelweap"
@@ -1140,26 +1140,26 @@
 		"special_tweaks_listid"		"2"
 		"Damage upgrades"
 		{
-			"Attr0"		"damage bonus"
-			"Attr17"	"ap (slowswing)"
-			"Attr16"	"Extra Damage Bonus"
-			"Attr13"	"lifesteal ability"
-			"Attr6"		"reveal cloaked victim on hit"
-			"Attr7"		"reveal disguised victim on hit"
+			"0"		"damage bonus"
+			"1"		"ap (global)"
+			"2"		"Extra Damage Bonus"
+			"3"		"lifesteal ability"
+			"4"		"reveal cloaked victim on hit"
+			"5"		"reveal disguised victim on hit"
 		}
 		"Melee specific upgrades"
 		{
-			"Attr0"		"melee attack rate bonus"
-			"Attr3"		"melee range multiplier"
-			"Attr11"	"increase player capture value"
-			"Attr8"		"Weapons Deals No Knockback"
-			"Attr14"	"upgrade rate increase"
-			"Attr10"	"Construction rate increased"
+			"0"		"melee attack rate bonus"
+			"1"		"melee range multiplier"
+			"2"		"increase player capture value"
+			"3"		"Weapons Deals No Knockback"
+			"4"		"upgrade rate increase"
+			"5"		"Construction rate increased"
 		}
 		"Special Tweaks"
-		{//Revamp later to some building bullshit or something idk
-			"Sp0"		"Honor!"
-			"Sp1"		"Infernal Impulse"
+		{
+			"0"		"Honor!"
+			"1"		"Infernal Impulse"
 		}
 	}
 	"pda"
@@ -1167,30 +1167,30 @@
 		"special_tweaks_listid"		"-1"
 		"Sentry Upgrades"
 		{
-			"Attr16"	"engy sentry fire rate increased"
-			"Attr3"		"damage bonus"
-			"Attr15"	"Sentry Armor Piercing Damage"
-			"Attr16"	"ap (sentrycal)"
-			"Attr16"	"Sentry Maximum Ammo"
-			"Attr4"		"Sentry Ammo Regeneration"
-			"Attr7"		"engy sentry radius increased"
+			"0"		"engy sentry fire rate increased"
+			"1"		"damage bonus"
+			"2"		"ap (global)"
+			"3"		"Sentry Armor Piercing Damage"
+			"4"		"Sentry Maximum Ammo"
+			"5"		"Sentry Ammo Regeneration"
+			"6"		"engy sentry radius increased"
 		}
 		"Building Upgrades"
 		{
-			"Attr13"	"Build rate bonus"
-			"Attr11"	"bidirectional teleport"
-			"Attr6"		"Dispenser Regeneration Rate"
-			"Attr7"		"engy dispenser radius increased"
-			"Attr2"		"Teleporter Gives Buffs"
-			"Attr4"		"Teleporter Recharge Rate"
+			"0"		"Build rate bonus"
+			"1"		"bidirectional teleport"
+			"2"		"Dispenser Regeneration Rate"
+			"3"		"engy dispenser radius increased"
+			"4"		"Teleporter Gives Buffs"
+			"5"		"Teleporter Recharge Rate"
 		}
 		"Sentry Specializations"
 		{
-			"Attr0"		"Sentry Rocket Fire Rate"
-			"Attr1"		"Double Sentry Rocket Shot"
-			"Attr2"		"sentry bullets per shot"
-			"Attr4"		"Firestorm Rounds"
-			"Attr3"		"Bolt Ballista Sentry"
+			"0"		"Sentry Rocket Fire Rate"
+			"1"		"Double Sentry Rocket Shot"
+			"2"		"sentry bullets per shot"
+			"3"		"Firestorm Rounds"
+			"4"		"Bolt Ballista Sentry"
 		}
 	}
 	"minigunweap"
@@ -1198,31 +1198,31 @@
 		"special_tweaks_listid"		"2"
 		"Damage upgrades"
 		{
-			"Attr0"		"damage bonus"
-			"Attr11"	"ap (electricmotor)"
-			"Attr1"		"Accuracy Scales DMG Replacement"
-			"Attr13"	"lifesteal ability"
-			"Attr9"		"reveal cloaked victim on hit"
-			"Attr10"	"reveal disguised victim on hit"
+			"0"		"damage bonus"
+			"1"		"ap (global)"
+			"2"		"Accuracy Scales DMG Replacement"
+			"3"		"lifesteal ability"
+			"4"		"reveal cloaked victim on hit"
+			"5"		"reveal disguised victim on hit"
 		}
 		"Minigun specific upgrades"
 		{
-			"Attr1"		"fire rate bonus(old)"
-			"Attr2"		"bullets per shot bonus (heavy)"	
-			"Attr14"	"Shoots extra projectile"
-			"Attr3"		"weapon spread bonus(H)"
-			"Attr4"		"projectile penetration heavy"
-			"Attr6"		"minigun spinup time decreased"
-			"Attr7"		"aiming movespeed increased"
-			"Attr15"	"spunup_damage_resistance"
-			"Attr16"	"spunup_push_force_immunity"
-			"Attr13"	"generate rage on damage"
-			"Attr8"		"Weapons Deals No Knockback"
+			"0"		"fire rate bonus(old)"
+			"1"		"bullets per shot bonus (heavy)"	
+			"2"		"Shoots extra projectile"
+			"3"		"weapon spread bonus(H)"
+			"4"		"projectile penetration heavy"
+			"5"		"minigun spinup time decreased"
+			"6"		"aiming movespeed increased"
+			"7"		"spunup_damage_resistance"
+			"8"		"spunup_push_force_immunity"
+			"9"		"generate rage on damage"
+			"10"	"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
-			"Sp0"		"Team Tactics"
-			"Sp1"		"Divine Bloodline"
+			"0"		"Team Tactics"
+			"1"		"Divine Bloodline"
 		}
 	}
 	"brassBeast"
@@ -1230,28 +1230,28 @@
 		"special_tweaks_listid"		"2"
 		"Damage upgrades"
 		{
-			"Attr0"		"damage bonus"
-			"Attr11"	"ap (electricmotor)"
-			"Attr1"		"Accuracy Scales DMG Replacement"
-			"Attr13"	"lifesteal ability"
-			"Attr9"		"reveal cloaked victim on hit"
-			"Attr10"	"reveal disguised victim on hit"
+			"0"		"damage bonus"
+			"1"		"ap (global)"
+			"2"		"Accuracy Scales DMG Replacement"
+			"3"		"lifesteal ability"
+			"4"		"reveal cloaked victim on hit"
+			"5"		"reveal disguised victim on hit"
 		}
 		"Minigun specific upgrades"
 		{
-			"Attr1"		"fire rate bonus(old)"
-			"Attr2"		"bullets per shot bonus (heavy)"
-			"Attr6"		"minigun spinup time decreased"
-			"Attr7"		"aiming movespeed increased"
-			"Attr15"	"spunup_damage_resistance"
-			"Attr16"	"spunup_push_force_immunity"
-			"Attr13"	"generate rage on damage"
-			"Attr8"		"Weapons Deals No Knockback"
+			"0"		"fire rate bonus(old)"
+			"1"		"bullets per shot bonus (heavy)"
+			"2"		"minigun spinup time decreased"
+			"3"		"aiming movespeed increased"
+			"4"		"spunup_damage_resistance"
+			"5"		"spunup_push_force_immunity"
+			"6"		"generate rage on damage"
+			"7"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
-			"Sp0"		"Team Tactics"
-			"Sp1"		"Divine Bloodline"
+			"0"		"Team Tactics"
+			"1"		"Divine Bloodline"
 		}
 	}
 	"medweap"
@@ -1259,26 +1259,26 @@
 		"special_tweaks_listid"		"2"
 		"Damage upgrades"
 		{
-			"Attr0"		"damage bonus"
-			"Attr24"	"ap (biggercali)"
-			"Attr11"	"Extra Damage Bonus"
-			"Attr13"	"lifesteal ability"
-			"Attr5"		"projectile penetration"
-			"Attr8"		"reveal cloaked victim on hit"
-			"Attr9"		"reveal disguised victim on hit"
+			"0"		"damage bonus"
+			"1"		"ap (global)"
+			"2"		"Extra Damage Bonus"
+			"3"		"lifesteal ability"
+			"4"		"projectile penetration"
+			"5"		"reveal cloaked victim on hit"
+			"6"		"reveal disguised victim on hit"
 		}
 		"Syringegun specific upgrades"
 		{
-			"Attr1"		"fire rate bonus(multshit)"
-			"Attr5"		"clip size bonus"
-			"Attr7"		"faster reload rate"
-			"Attr8"		"Mad Milk On Hit Duration"
-			"Attr8"		"Weapons Deals No Knockback"
+			"0"		"fire rate bonus(multshit)"
+			"1"		"clip size bonus"
+			"2"		"faster reload rate"
+			"3"		"Mad Milk On Hit Duration"
+			"4"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
-			"Sp1"		"High-Velocity Bullets"
-			"Sp2"		"Needlestorm"
+			"0"		"High-Velocity Bullets"
+			"1"		"Needlestorm"
 		}
 	}
 	"medweap_c"
@@ -1286,26 +1286,26 @@
 		"special_tweaks_listid"		"2"
 		"Damage upgrades"
 		{
-			"Attr0"		"damage bonus"
-			"Attr15"	"ap (biggercali)"
-			"Attr11"	"Extra Damage Bonus"
-			"Attr14"	"Increased Overall Damage(F)"
-			"Attr13"	"lifesteal ability"
-			"Attr8"		"reveal cloaked victim on hit"
-			"Attr9"		"reveal disguised victim on hit"
+			"0"		"damage bonus"
+			"1"		"ap (global)"
+			"2"		"Extra Damage Bonus"
+			"3"		"Increased Overall Damage(F)"
+			"4"		"lifesteal ability"
+			"5"		"reveal cloaked victim on hit"
+			"6"		"reveal disguised victim on hit"
 		}
 		"Syringegun specific upgrades"
 		{
-			"Attr2"		"fire rate bonus(old)"
-			"Attr3"		"clip size bonus (B)"
-			"Attr4"		"faster reload rate (U)"
-			"Attr6"		"Homing Projectiles (crossbow)"
-			"Attr8"		"Weapons Deals No Knockback"
+			"0"		"fire rate bonus(old)"
+			"1"		"clip size bonus (B)"
+			"2"		"faster reload rate (U)"
+			"3"		"Homing Projectiles (crossbow)"
+			"4"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
-			"Sp0"		"Frost Infusion"
-			"Sp1"		"Blood Siphon"
+			"0"		"Frost Infusion"
+			"1"		"Blood Siphon"
 		}
 	}
 	"menuCrossbow"
@@ -1313,25 +1313,25 @@
 		"special_tweaks_listid"		"2"
 		"Damage upgrades"
 		{
-			"Attr0"		"damage bonus"
-			"Attr15"	"ap (biggercali)"
-			"Attr11"	"Extra Damage Bonus"
-			"Attr14"	"Increased Overall Damage(F)"
-			"Attr13"	"lifesteal ability"
-			"Attr8"		"reveal cloaked victim on hit"
-			"Attr9"		"reveal disguised victim on hit"
+			"0"		"damage bonus"
+			"1"		"ap (global)"
+			"2"		"Extra Damage Bonus"
+			"3"		"Increased Overall Damage(F)"
+			"4"		"lifesteal ability"
+			"5"		"reveal cloaked victim on hit"
+			"6"		"reveal disguised victim on hit"
 		}
 		"Syringegun specific upgrades"
 		{
-			"Attr2"		"fire rate bonus(old)"
-			"Attr3"		"clip size bonus (B)"
-			"Attr6"		"Homing Projectiles (crossbow)"
-			"Attr8"		"Weapons Deals No Knockback"
+			"0"		"fire rate bonus(old)"
+			"1"		"clip size bonus (B)"
+			"2"		"Homing Projectiles (crossbow)"
+			"3"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
-			"Sp0"		"Frost Infusion"
-			"Sp1"		"Blood Siphon"
+			"0"		"Frost Infusion"
+			"1"		"Blood Siphon"
 		}
 	}
 	"pyroweap"
@@ -1339,25 +1339,25 @@
 		"special_tweaks_listid"		"2"
 		"Damage upgrades"
 		{
-			"Attr0"		"damage bonus"
-			"Attr16"	"ap (temprise)"
-			"Attr13"	"Direct Flame Damage Multiplier"
-			"Attr14"	"Increased Overall Damage(T)"
-			"Attr13"	"lifesteal ability"
-			"Attr21"	"Shoots extra projectile"
-			"Attr6"		"reveal cloaked victim on hit"
-			"Attr7"		"reveal disguised victim on hit"
+			"0"		"damage bonus"
+			"1"		"ap (global)"
+			"2"		"Direct Flame Damage Multiplier"
+			"3"		"Increased Overall Damage(T)"
+			"4"		"lifesteal ability"
+			"5"		"Shoots extra projectile"
+			"6"		"reveal cloaked victim on hit"
+			"7"		"reveal disguised victim on hit"
 		}
 		"Flamethrower specific upgrades"
 		{
-			"Attr17"	"flame_speed"
-			"Attr14"	"Flame Size"
-			"Attr2"		"flame_reflect_on_collision"
+			"0"		"flame_speed"
+			"1"		"Flame Size"
+			"2"		"flame_reflect_on_collision"
 		}
 		"Special Tweaks"
 		{
-			"Sp1"		"Pressure Increase"
-			"Sp2"		"Temperature rise"
+			"0"		"Pressure Increase"
+			"1"		"Temperature rise"
 		}
 	}
 	"pyroweapp"//phlog
@@ -1365,26 +1365,26 @@
 		"special_tweaks_listid"		"2"
 		"Damage upgrades"
 		{
-			"Attr0"		"damage bonus"
-			"Attr16"	"ap (temprise)"
-			"Attr12"	"Direct Flame Damage Multiplier"
-			"Attr15"	"Increased Overall Damage(T)"
-			"Attr13"	"lifesteal ability"
-			"Attr21"	"Shoots extra projectile"
-			"Attr6"		"reveal cloaked victim on hit"
-			"Attr7"		"reveal disguised victim on hit"
+			"0"		"damage bonus"
+			"1"		"ap (global)"
+			"2"		"Direct Flame Damage Multiplier"
+			"3"		"Increased Overall Damage(T)"
+			"4"		"lifesteal ability"
+			"5"		"Shoots extra projectile"
+			"6"		"reveal cloaked victim on hit"
+			"7"		"reveal disguised victim on hit"
 		}
 		"Flamethrower specific upgrades"
 		{
-			"Attr3"		"increase buff duration"
-			"Attr17"	"flame_speed"
-			"Attr14"	"Flame Size"
-			"Attr2"		"flame_reflect_on_collision"
+			"0"		"increase buff duration"
+			"1"		"flame_speed"
+			"2"		"Flame Size"
+			"3"		"flame_reflect_on_collision"
 		}
 		"Special Tweaks"
 		{
-			"Sp1"		"Pressure Increase"
-			"Sp2"		"Temperature rise"
+			"0"		"Pressure Increase"
+			"1"		"Temperature rise"
 		}
 	}
 	"pyroflareg"// flare gun
@@ -1392,23 +1392,23 @@
 		"special_tweaks_listid"		"2"
 		"Damage upgrades"
 		{
-			"Attr0"		"damage bonus"
-			"Attr16"	"ap (slowswing)"
-			"Attr13"	"Extra Damage Bonus"
-			"Attr13"	"lifesteal ability"
-			"Attr10"	"reveal cloaked victim on hit"
-			"Attr11"	"reveal disguised victim on hit"
+			"0"		"damage bonus"
+			"1"		"ap (global)"
+			"2"		"Extra Damage Bonus"
+			"3"		"lifesteal ability"
+			"4"		"reveal cloaked victim on hit"
+			"5"		"reveal disguised victim on hit"
 		}
 		"Flaregun specific upgrades"
 		{
-			"Attr1"		"fire rate bonus(fortified)"
-			"Attr2"		"Projectile speed increased"
-			"Attr8"		"Weapons Deals No Knockback"
+			"0"		"fire rate bonus(fortified)"
+			"1"		"Projectile speed increased"
+			"2"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
-			"Sp1"		"Multishot Flares"
-			"Sp2"		"Homing Flares"
+			"0"		"Multishot Flares"
+			"1"		"Homing Flares"
 		}
 	}
 	"pyroflaregd"//Detonator & Scorch Shot
@@ -1416,24 +1416,24 @@
 		"special_tweaks_listid"		"2"
 		"Damage upgrades"
 		{
-			"Attr0"		"damage bonus"
-			"Attr16"	"ap (slowswing)"
-			"Attr13"	"Extra Damage Bonus"
-			"Attr13"	"lifesteal ability"
-			"Attr10"	"reveal cloaked victim on hit"
-			"Attr11"	"reveal disguised victim on hit"
+			"0"		"damage bonus"
+			"1"		"ap (global)"
+			"2"		"Extra Damage Bonus"
+			"3"		"lifesteal ability"
+			"4"		"reveal cloaked victim on hit"
+			"5"		"reveal disguised victim on hit"
 		}
 		"Flaregun specific upgrades"
 		{
-			"Attr1"		"fire rate bonus(fortified)"
-			"Attr2"		"blast radius increased"
-			"Attr3"		"dmg falloff decreased"
-			"Attr8"		"Weapons Deals No Knockback"
+			"0"		"fire rate bonus(fortified)"
+			"1"		"blast radius increased"
+			"2"		"dmg falloff decreased"
+			"3"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
-			"Sp1"		"Multishot Flares"
-			"Sp2"		"Scorchiest Shot"
+			"0"		"Multishot Flares"
+			"1"		"Scorchiest Shot"
 		}
 	}
 	"pyroflareg2"//manmelter
@@ -1441,23 +1441,23 @@
 		"special_tweaks_listid"		"2"
 		"Damage upgrades"
 		{
-			"Attr0"		"damage bonus"
-			"Attr15"	"ap (temprise)"
-			"Attr2"		"Extra Damage Bonus"
-			"Attr13"	"lifesteal ability"
-			"Attr6"		"reveal cloaked victim on hit"
-			"Attr7"		"reveal disguised victim on hit"
+			"0"		"damage bonus"
+			"1"		"ap (global)"
+			"2"		"Extra Damage Bonus"
+			"3"		"lifesteal ability"
+			"4"		"reveal cloaked victim on hit"
+			"5"		"reveal disguised victim on hit"
 		}
 		"Flaregun specific upgrades"
 		{
-			"Attr1"		"fire rate bonus(fortified)"
-			"Attr2"		"Projectile speed increased(DH)"
-			"Attr8"		"Weapons Deals No Knockback"
+			"0"		"fire rate bonus(fortified)"
+			"1"		"Projectile speed increased(DH)"
+			"2"		"Weapons Deals No Knockback"
 		}		
 		"Special Tweaks"
 		{
-			"Sp1"		"Multishot Flares"
-			"Sp2"		"Scorchiest Shot"
+			"0"		"Multishot Flares"
+			"1"		"Scorchiest Shot"
 		}
 	}
 	"sacred_slayer"
@@ -1465,18 +1465,18 @@
 		"special_tweaks_listid"		"-1"
 		"Damage upgrades"
 		{
-			"Attr0"		"damage bonus"
-			"Attr16"	"ap (temprise)"
-			"Attr13"	"Extra Damage Bonus"
-			"Attr13"	"lifesteal ability"
-			"Attr10"	"reveal cloaked victim on hit"
-			"Attr11"	"reveal disguised victim on hit"
+			"0"		"damage bonus"
+			"1"		"ap (global)"
+			"2"		"Extra Damage Bonus"
+			"3"		"lifesteal ability"
+			"4"		"reveal cloaked victim on hit"
+			"5"		"reveal disguised victim on hit"
 		}
 		"Flaregun specific upgrades"
 		{
-			"Attr1"		"fire rate bonus(fortified)"
-			"Attr2"		"Projectile speed increased"
-			"Attr8"		"Weapons Deals No Knockback"
+			"0"		"fire rate bonus(fortified)"
+			"1"		"Projectile speed increased"
+			"2"		"Weapons Deals No Knockback"
 		}
 	}
 	"scoweap"
@@ -1484,27 +1484,27 @@
 		"special_tweaks_listid"		"2"
 		"Damage upgrades"
 		{
-			"Attr0"		"damage bonus"
-			"Attr24"	"ap (biggercali)"
-			"Attr11"	"Accuracy Scales DMG Replacement"
-			"Attr13"	"lifesteal ability"
-			"Attr6"		"reveal cloaked victim on hit"
-			"Attr7"		"reveal disguised victim on hit"
+			"0"		"damage bonus"
+			"1"		"ap (global)"
+			"2"		"Accuracy Scales DMG Replacement"
+			"3"		"lifesteal ability"
+			"4"		"reveal cloaked victim on hit"
+			"5"		"reveal disguised victim on hit"
 		}
 		"Scattergun specific upgrades"
 		{
-			"Attr7"		"fire rate bonus(old)"
-			"Attr12"	"clip size bonus"
-			"Attr14"	"faster reload rate"
-			"Attr8"		"bullets per shot bonus"
-			"Attr9"		"weapon spread bonus(H)"
-			"Attr10"		"projectile penetration heavy"
-			"Attr8"		"Weapons Deals No Knockback"
+			"0"		"fire rate bonus(old)"
+			"1"		"clip size bonus"
+			"2"		"faster reload rate"
+			"3"		"bullets per shot bonus"
+			"4"		"weapon spread bonus(H)"
+			"5"		"projectile penetration heavy"
+			"6"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
-			"Sp5"		"Explosive Bullets(P)"
-			"Sp6"		"Lacerating Rounds"
+			"0"		"Explosive Bullets(P)"
+			"1"		"Lacerating Rounds"
 		}
 	}
 	"scoweap2"
@@ -1512,27 +1512,27 @@
 		"special_tweaks_listid"		"2"
 		"Damage upgrades"
 		{
-			"Attr0"		"damage bonus"
-			"Attr24"	"ap (biggercali)"
-			"Attr11"	"Accuracy Scales DMG Replacement"
-			"Attr13"	"lifesteal ability"
-			"Attr6"		"reveal cloaked victim on hit"
-			"Attr7"		"reveal disguised victim on hit"	
+			"0"		"damage bonus"
+			"1"		"ap (global)"
+			"2"		"Accuracy Scales DMG Replacement"
+			"3"		"lifesteal ability"
+			"4"		"reveal cloaked victim on hit"
+			"5"		"reveal disguised victim on hit"	
 		}
 		"Scattergun specific upgrades"
 		{
-			"Attr7"		"fire rate bonus(old)"
-			"Attr12"	"clip size bonus"
-			"Attr14"	"faster reload rate"
-			"Attr8"		"bullets per shot bonus"
-			"Attr9"		"weapon spread bonus(H)"
-			"Attr10"		"projectile penetration heavy"
-			"Attr8"		"Weapons Deals No Knockback"
+			"0"		"fire rate bonus(old)"
+			"1"		"clip size bonus"
+			"2"		"faster reload rate"
+			"3"		"bullets per shot bonus"
+			"4"		"weapon spread bonus(H)"
+			"5"		"projectile penetration heavy"
+			"6"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
-			"Sp5"		"Explosive Bullets(Shortstop)"
-			"Sp6"		"Lacerating Rounds"
+			"0"		"Explosive Bullets(Shortstop)"
+			"1"		"Lacerating Rounds"
 		}
 	}
 	"classic"
@@ -1540,28 +1540,28 @@
 		"special_tweaks_listid"		"2"
 		"Damage upgrades"
 		{
-			"Attr1"		"damage bonus"
-			"Attr24"	"ap (biggercali)"
-			"Attr2"		"sniper full charge damage bonus"
-			"Attr4"		"Increased Overall Damage"
-			"Attr13"	"lifesteal ability"
-			"Attr5"		"projectile penetration heavy"
-			"Attr12"	"reveal cloaked victim on hit"
-			"Attr13"	"reveal disguised victim on hit"
+			"0"		"damage bonus"
+			"1"		"ap (global)"
+			"2"		"sniper full charge damage bonus"
+			"3"		"Increased Overall Damage"
+			"4"		"lifesteal ability"
+			"5"		"projectile penetration heavy"
+			"6"		"reveal cloaked victim on hit"
+			"7"		"reveal disguised victim on hit"
 		}
 		"Sniper specific upgrades"
 		{
-			"Attr0"		"fire rate bonus(old)"
-			"Attr1"		"faster reload rate"
-			"Attr2"		"bullets per shot bonus (single)"
-			"Attr8"		"Increased Charge percent"
-			"Attr5"		"aiming movespeed increased"
-			"Attr8"		"Weapons Deals No Knockback"
+			"0"		"fire rate bonus(old)"
+			"1"		"faster reload rate"
+			"2"		"bullets per shot bonus (single)"
+			"3"		"Increased Charge percent"
+			"4"		"aiming movespeed increased"
+			"5"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
-			"Sp0"		"Explosive Rounds"
-			"Sp1"		"Sniper Mastery"
+			"0"		"Explosive Rounds"
+			"1"		"Sniper Mastery"
 		}
 	}
 	"hitmans"
@@ -1569,22 +1569,22 @@
 		"special_tweaks_listid"		"-1"
 		"Damage upgrades"
 		{
-			"Attr1"		"damage bonus"
-			"Attr24"	"ap (biggercali)"
-			"Attr2"		"sniper full charge damage bonus"
-			"Attr4"		"Increased Overall Damage"
-			"Attr13"	"lifesteal ability"
-			"Attr5"		"projectile penetration heavy"
-			"Attr12"	"reveal cloaked victim on hit"
-			"Attr13"	"reveal disguised victim on hit"
+			"0"		"damage bonus"
+			"1"		"ap (global)"
+			"2"		"sniper full charge damage bonus"
+			"3"		"Increased Overall Damage"
+			"4"		"lifesteal ability"
+			"5"		"projectile penetration heavy"
+			"6"		"reveal cloaked victim on hit"
+			"7"		"reveal disguised victim on hit"
 		}
 		"Sniper specific upgrades"
 		{
-			"Attr0"		"fire rate bonus(old)"
-			"Attr1"		"faster reload rate"
-			"Attr7"		"Increased Charge percent"
-			"Attr5"		"aiming movespeed increased"
-			"Attr8"		"Weapons Deals No Knockback"
+			"0"		"fire rate bonus(old)"
+			"1"		"faster reload rate"
+			"2"		"Increased Charge percent"
+			"3"		"aiming movespeed increased"
+			"4"		"Weapons Deals No Knockback"
 		}
 	}
 	"snipe"
@@ -1592,28 +1592,28 @@
 		"special_tweaks_listid"		"2"
 		"Damage upgrades"
 		{
-			"Attr1"		"damage bonus"
-			"Attr24"	"ap (biggercali)"
-			"Attr2"		"sniper full charge damage bonus"
-			"Attr4"		"Increased Overall Damage"
-			"Attr13"	"lifesteal ability"
-			"Attr5"		"projectile penetration heavy"
-			"Attr12"	"reveal cloaked victim on hit"
-			"Attr13"	"reveal disguised victim on hit"
+			"0"		"damage bonus"
+			"1"		"ap (global)"
+			"2"		"sniper full charge damage bonus"
+			"3"		"Increased Overall Damage"
+			"4"		"lifesteal ability"
+			"5"		"projectile penetration heavy"
+			"6"		"reveal cloaked victim on hit"
+			"7"		"reveal disguised victim on hit"
 		}
 		"Sniper specific upgrades"
 		{
-			"Attr0"		"fire rate bonus(old)"
-			"Attr1"		"faster reload rate"
-			"Attr2"		"bullets per shot bonus (single)"
-			"Attr7"		"Increased Charge percent"
-			"Attr5"		"aiming movespeed increased"
-			"Attr8"		"Weapons Deals No Knockback"
+			"0"		"fire rate bonus(old)"
+			"1"		"faster reload rate"
+			"2"		"bullets per shot bonus (single)"
+			"3"		"Increased Charge percent"
+			"4"		"aiming movespeed increased"
+			"5"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
-			"Sp0"		"Explosive Rounds"
-			"Sp1"		"Sniper Mastery"
+			"0"		"Explosive Rounds"
+			"1"		"Sniper Mastery"
 		}
 	}
 	"chargelessRifle"
@@ -1621,25 +1621,25 @@
 		"special_tweaks_listid"		"2"
 		"Damage upgrades"
 		{
-			"Attr1"		"damage bonus"
-			"Attr24"	"ap (biggercali)"
-			"Attr4"		"Increased Overall Damage"
-			"Attr13"	"lifesteal ability"
-			"Attr5"		"projectile penetration heavy"
-			"Attr12"	"reveal cloaked victim on hit"
-			"Attr13"	"reveal disguised victim on hit"
+			"0"		"damage bonus"
+			"1"		"ap (global)"
+			"2"		"Increased Overall Damage"
+			"3"		"lifesteal ability"
+			"4"		"projectile penetration heavy"
+			"5"		"reveal cloaked victim on hit"
+			"6"		"reveal disguised victim on hit"
 		}
 		"Sniper specific upgrades"
 		{
-			"Attr0"		"fire rate bonus(old)"
-			"Attr1"		"faster reload rate"
-			"Attr5"		"aiming movespeed increased"
-			"Attr8"		"Weapons Deals No Knockback"
+			"0"		"fire rate bonus(old)"
+			"1"		"faster reload rate"
+			"2"		"aiming movespeed increased"
+			"3"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
-			"Sp0"		"Explosive Rounds"
-			"Sp1"		"Sniper Mastery"
+			"0"		"Explosive Rounds"
+			"1"		"Sniper Mastery"
 		}
 	}
 	"c_bow"
@@ -1647,23 +1647,23 @@
 		"special_tweaks_listid"		"2"
 		"Damage upgrades"
 		{
-			"Attr1"		"damage bonus"
-			"Attr2"		"ap (armyofnotmany)"
-			"Attr2"		"Extra Damage Bonus"
-			"Attr3"		"lifesteal ability"
-			"Attr6"		"reveal cloaked victim on hit"
-			"Attr7"		"reveal disguised victim on hit"
+			"0"		"damage bonus"
+			"1"		"ap (global)"
+			"2"		"Extra Damage Bonus"
+			"3"		"lifesteal ability"
+			"4"		"reveal cloaked victim on hit"
+			"5"		"reveal disguised victim on hit"
 		}
 		"Weapon Specific upgrades"
 		{
-			"Attr0"		"fire rate bonus(fortified)"
-			"Attr6"		"Projectile speed increased(ARROW)"
-			"Attr8"		"Weapons Deals No Knockback"
+			"0"		"fire rate bonus(fortified)"
+			"1"		"Projectile speed increased(ARROW)"
+			"2"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
-			"Sp0"		"Toxic Infusion"
-			"Sp1"		"Explosive Arrows"
+			"0"		"Toxic Infusion"
+			"1"		"Explosive Arrows"
 		}
 	}
 	"spyweap"
@@ -1671,29 +1671,29 @@
 		"special_tweaks_listid"		"2"
 		"Damage upgrades"
 		{
-			"Attr0"		"damage bonus"
-			"Attr22"	"ap (biggercali)"
-			"Attr10"	"Accuracy Scales DMG Replacement"
-			"Attr13"	"lifesteal ability"
-			"Attr2"		"add cloak on hit"
-			"Attr4"		"sapper kills collect crits"
-			"Attr7"		"reveal cloaked victim on hit"
-			"Attr8"		"reveal disguised victim on hit"
+			"0"		"damage bonus"
+			"1"		"ap (global)"
+			"2"		"Accuracy Scales DMG Replacement"
+			"3"		"lifesteal ability"
+			"4"		"add cloak on hit"
+			"5"		"sapper kills collect crits"
+			"6"		"reveal cloaked victim on hit"
+			"7"		"reveal disguised victim on hit"
 		}
 		"Weapon Specific upgrades"
 		{
-			"Attr2"		"fire rate bonus(multshit)"
-			"Attr0"		"clip size bonus"
-			"Attr1"		"faster reload rate"
-			"Attr3"		"bullets per shot bonus (single)"
-			"Attr4"		"weapon spread bonus"
-			"Attr5"		"projectile penetration heavy"
-			"Attr8"		"Weapons Deals No Knockback"
+			"0"		"fire rate bonus(multshit)"
+			"1"		"clip size bonus"
+			"2"		"faster reload rate"
+			"3"		"bullets per shot bonus (single)"
+			"4"		"weapon spread bonus"
+			"5"		"projectile penetration heavy"
+			"6"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
-			"Sp0"		"Explosive Bullets(S)"
-			"Sp1"		"Lacerating Rounds"
+			"0"		"Explosive Bullets(S)"
+			"1"		"Lacerating Rounds"
 		}
 	}
 	"spysap"
@@ -1701,11 +1701,11 @@
 		"special_tweaks_listid"		"-1"
 		"Sapper upgrades"
 		{
-			"Attr1"		"robo sapper"
-			"Attr2"		"effect bar recharge rate increased(sapper)"
-			"Attr3"		"sapper damage leaches health"
-			"Attr4"		"Vulnerability When Sapped"
-			"Attr5"		"sapper pulls enemies"
+			"0"		"robo sapper"
+			"1"		"effect bar recharge rate increased(sapper)"
+			"2"		"sapper damage leaches health"
+			"3"		"Vulnerability When Sapped"
+			"4"		"sapper pulls enemies"
 		}
 	}
 	"smoke_bomb"
@@ -1713,7 +1713,7 @@
 		"special_tweaks_listid"		"-1"
 		"Weapon Specific upgrades"
 		{
-			"Attr1"		"effect bar recharge rate increased(sapper)"
+			"0"		"effect bar recharge rate increased(sapper)"
 		}
 	}
 	"spymel"
@@ -1721,32 +1721,32 @@
 		"special_tweaks_listid"		"2"
 		"Damage upgrades"
 		{
-			"Attr0"		"damage bonus"
-			"Attr17"	"ap (slowswing)"
-			"Attr16"	"Extra Damage Bonus"
-			"Attr13"	"lifesteal ability"
-			"Attr6"		"reveal cloaked victim on hit"
-			"Attr7"		"reveal disguised victim on hit"
+			"0"		"damage bonus"
+			"1"		"ap (global)"
+			"2"		"Extra Damage Bonus"
+			"3"		"lifesteal ability"
+			"4"		"reveal cloaked victim on hit"
+			"5"		"reveal disguised victim on hit"
 		}
 		"Melee specific upgrades"
 		{
-			"Attr0"		"melee attack rate bonus(spy)"
-			"Attr3"		"melee range multiplier"
-			"Attr12"	"increase player capture value"
-			"Attr8"		"Weapons Deals No Knockback"
+			"0"		"melee attack rate bonus(spy)"
+			"1"		"melee range multiplier"
+			"2"		"increase player capture value"
+			"3"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
-			"Sp0"		"Honor!"
-			"Sp1"		"Infernal Impulse"
+			"0"		"Honor!"
+			"1"		"Infernal Impulse"
 		}
 		"Spy upgrades"
 		{
-			"Attr4"		"silent killer"
-			"Attr6"		"quiet unstealth"
-			"Attr7"		"add cloak on hit"
-			"Attr8"		"add cloak on kill"
-			"Attr11"	"disguise on backstab"
+			"0"		"silent killer"
+			"1"		"quiet unstealth"
+			"2"		"add cloak on hit"
+			"3"		"add cloak on kill"
+			"4"		"disguise on backstab"
 		}
 	}
 	"democharge"
@@ -1754,19 +1754,19 @@
 		"special_tweaks_listid"		"2"
 		"Protection upgrades"
 		{
-			"Attr0"		"blast dmg to self decreased"
-			"Attr1"		"dmg from all reduced(wearable)"
+			"0"		"blast dmg to self decreased"
+			"1"		"dmg from all reduced(wearable)"
 		}
 		"Charge upgrades"
 		{
-			"Attr0"		"charge time increased"
-			"Attr2"		"no charge impact range"
-			"Attr4"		"charge recharge rate increased"
+			"0"		"charge time increased"
+			"1"		"no charge impact range"
+			"2"		"charge recharge rate increased"
 		}
 		"Special Tweaks"
 		{
-			"Sp0"		"Pain Train"
-			"Sp1"		"Weapon Inheritance"
+			"0"		"Pain Train"
+			"1"		"Weapon Inheritance"
 		}
 	}
 	"ali_shoes"
@@ -1774,16 +1774,16 @@
 		"special_tweaks_listid"		"2"
 		"Protection upgrades"
 		{
-			"Attr1"		"dmg from all reduced(wearable)"
+			"0"		"dmg from all reduced(wearable)"
 		}
 		"Charge upgrades"
 		{
-			"Attr0"		"charge time increased"
-			"Attr4"		"charge recharge rate increased"
+			"0"		"charge time increased"
+			"1"		"charge recharge rate increased"
 		}
 		"Special Tweaks"
 		{
-			"Sp0"		"Agile Latticing"
+			"0"		"Agile Latticing"
 		}
 	}
 	
@@ -1792,32 +1792,32 @@
 		"special_tweaks_listid"		"2"
 		"Damage upgrades"
 		{
-			"Attr0"		"damage bonus"
-			"Attr20"	"ap (armyofnotmany)"
-			"Attr18"	"Increased Overall Damage"
-			"Attr13"	"lifesteal ability"
-			"Attr5"		"blast radius increased"
-			"Attr12"	"reveal cloaked victim on hit"
-			"Attr13"	"reveal disguised victim on hit"
+			"0"		"damage bonus"
+			"1"		"ap (global)"
+			"2"		"Increased Overall Damage"
+			"3"		"lifesteal ability"
+			"4"		"blast radius increased"
+			"5"		"reveal cloaked victim on hit"
+			"6"		"reveal disguised victim on hit"
 		}
 		"Pipebomb launcher specific upgrades"
 		{
-			"Attr1"		"fire rate bonus(multshit)"
-			"Attr2"		"clip size bonus"
-			"Attr4"		"faster reload rate"
-			"Attr17"	"stickybomb charge rate"
-			"Attr6"		"reload clip all at once"
-			"Attr3"		"max pipebombs increased"
-			"Attr9"		"sticky arm time bonus"
-			"Attr6"		"rocket jump damage reduction"
-			"Attr11"	"self dmg push force increased"
-			"Attr13"	"air control when blast jumping"
-			"Attr8"		"Weapons Deals No Knockback"
+			"0"		"fire rate bonus(multshit)"
+			"1"		"clip size bonus"
+			"2"		"faster reload rate"
+			"3"		"stickybomb charge rate"
+			"4"		"reload clip all at once"
+			"5"		"max pipebombs increased"
+			"6"		"sticky arm time bonus"
+			"7"		"rocket jump damage reduction"
+			"8"		"self dmg push force increased"
+			"9"		"air control when blast jumping"
+			"10"	"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
-			"Sp0"		"Cluster Bomb"
-			"Sp1"		"Chain Reaction"
+			"0"		"Cluster Bomb"
+			"1"		"Chain Reaction"
 		}
 	}
 	"quickiebomb"
@@ -1825,31 +1825,31 @@
 		"special_tweaks_listid"		"2"
 		"Damage upgrades"
 		{
-			"Attr0"		"damage bonus"
-			"Attr20"	"ap (armyofnotmany)"
-			"Attr18"	"Increased Overall Damage"
-			"Attr13"	"lifesteal ability"
-			"Attr5"		"blast radius increased"
-			"Attr12"	"reveal cloaked victim on hit"
-			"Attr13"	"reveal disguised victim on hit"
+			"0"		"damage bonus"
+			"1"		"ap (global)"
+			"2"		"Increased Overall Damage"
+			"3"		"lifesteal ability"
+			"4"		"blast radius increased"
+			"5"		"reveal cloaked victim on hit"
+			"6"		"reveal disguised victim on hit"
 		}
 		"Pipebomb launcher specific upgrades"
 		{
-			"Attr1"		"fire rate bonus(multshit)"
-			"Attr2"		"clip size bonus"
-			"Attr4"		"faster reload rate"
-			"Attr5"		"stickybomb charge rate"
-			"Attr6"		"reload clip all at once"
-			"Attr9"		"sticky arm time bonus"
-			"Attr6"		"rocket jump damage reduction"
-			"Attr11"	"self dmg push force increased"
-			"Attr13"	"air control when blast jumping"
-			"Attr8"		"Weapons Deals No Knockback"
+			"0"		"fire rate bonus(multshit)"
+			"1"		"clip size bonus"
+			"2"		"faster reload rate"
+			"3"		"stickybomb charge rate"
+			"4"		"reload clip all at once"
+			"5"		"sticky arm time bonus"
+			"6"		"rocket jump damage reduction"
+			"7"		"self dmg push force increased"
+			"8"		"air control when blast jumping"
+			"9"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
-			"Sp0"		"Cluster Bomb"
-			"Sp1"		"Chain Reaction"
+			"0"		"Cluster Bomb"
+			"1"		"Chain Reaction"
 		}
 	}
 	"demomel"
@@ -1857,24 +1857,24 @@
 		"special_tweaks_listid"		"2"
 		"Damage upgrades"
 		{
-			"Attr0"		"damage bonus"
-			"Attr17"	"ap (slowswing)"
-			"Attr16"	"Extra Damage Bonus"
-			"Attr13"	"lifesteal ability"
-			"Attr6"		"reveal cloaked victim on hit"
-			"Attr7"		"reveal disguised victim on hit"
+			"0"		"damage bonus"
+			"1"		"ap (global)"
+			"2"		"Extra Damage Bonus"
+			"3"		"lifesteal ability"
+			"4"		"reveal cloaked victim on hit"
+			"5"		"reveal disguised victim on hit"
 		}
 		"Melee specific upgrades"
 		{
-			"Attr0"		"melee attack rate bonus"
-			"Attr3"		"melee range multiplier"
-			"Attr13"	"increase player capture value"
-			"Attr8"		"Weapons Deals No Knockback"
+			"0"		"melee attack rate bonus"
+			"1"		"melee range multiplier"
+			"2"		"increase player capture value"
+			"3"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
-			"Sp0"		"Honor!"
-			"Sp1"		"Infernal Impulse"
+			"0"		"Honor!"
+			"1"		"Infernal Impulse"
 		}
 	}
 	"menuKatana"
@@ -1882,24 +1882,24 @@
 		"special_tweaks_listid"		"2"
 		"Damage upgrades"
 		{
-			"Attr0"		"damage bonus"
-			"Attr17"	"ap (slowswing)"
-			"Attr16"	"Extra Damage Bonus"
-			"Attr13"	"lifesteal ability"
-			"Attr6"		"reveal cloaked victim on hit"
-			"Attr7"		"reveal disguised victim on hit"
+			"0"		"damage bonus"
+			"1"		"ap (global)"
+			"2"		"Extra Damage Bonus"
+			"3"		"lifesteal ability"
+			"4"		"reveal cloaked victim on hit"
+			"5"		"reveal disguised victim on hit"
 		}
 		"Melee specific upgrades"
 		{
-			"Attr0"		"melee attack rate bonus"
-			"Attr3"		"melee range multiplier"
-			"Attr13"	"increase player capture value"
-			"Attr8"		"Weapons Deals No Knockback"
+			"0"		"melee attack rate bonus"
+			"1"		"melee range multiplier"
+			"2"		"increase player capture value"
+			"3"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
-			"Sp0"		"Honor!"
-			"Sp1"		"Infernal Impulse"
+			"0"		"Honor!"
+			"1"		"Infernal Impulse"
 		}
 	}
 	"scoclea"
@@ -1907,27 +1907,27 @@
 		"special_tweaks_listid"		"2"
 		"Damage upgrades"
 		{
-			"Attr10"	"damage bonus"
-			"Attr13"	"ap (heavycleaver)"
-			"Attr11"	"Overall Damage"
-			"Attr13"	"bleeding duration"
-			"Attr12"	"Bleed Per Hit"
-			"Attr13"	"lifesteal ability"
-			"Attr8"		"reveal cloaked victim on hit"
-			"Attr9"		"reveal disguised victim on hit"
+			"0"		"damage bonus"
+			"1"		"ap (global)"
+			"2"		"Overall Damage"
+			"3"		"bleeding duration"
+			"4"		"Bleed Per Hit"
+			"5"		"lifesteal ability"
+			"6"		"reveal cloaked victim on hit"
+			"7"		"reveal disguised victim on hit"
 		}
 		"Cleaver specific upgrades"
 		{
-			"Attr1"		"fire rate bonus(multshit)"
-			"Attr5"		"effect bar recharge rate increased"
-			"Attr2"		"Homing Projectiles (cleaver)"
-			"Attr4"		"No gravity projectile"
-			"Attr8"		"Weapons Deals No Knockback"
+			"0"		"fire rate bonus(multshit)"
+			"1"		"effect bar recharge rate increased"
+			"2"		"Homing Projectiles (cleaver)"
+			"3"		"No gravity projectile"
+			"4"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
-			"Sp1"		"Blade Stream"
-			"Sp2"		"Fan of Knives"
+			"0"		"Blade Stream"
+			"1"		"Fan of Knives"
 		}
 	}
 	"menuFireball"
@@ -1935,10 +1935,10 @@
 		"special_tweaks_listid"		"-1"
 		"Damage upgrades"
 		{
-			"Attr8"		"Weapons Deals No Knockback"
-			"Attr13"	"lifesteal ability"
-			"Attr8"		"reveal cloaked victim on hit"
-			"Attr9"		"reveal disguised victim on hit"
+			"0"		"Weapons Deals No Knockback"
+			"1"		"lifesteal ability"
+			"2"		"reveal cloaked victim on hit"
+			"3"		"reveal disguised victim on hit"
 		}
 	}
 	"buffban"
@@ -1946,14 +1946,14 @@
 		"special_tweaks_listid"		"1"
 		"Buff banner specific upgrades"
 		{
-			"Attr0"		"increase buff duration"
-			"Attr1"		"increase buff radius"
-			"Attr2"		"blast dmg to self decreased"
+			"0"		"increase buff duration"
+			"1"		"increase buff radius"
+			"2"		"blast dmg to self decreased"
 		}
 		"Special Tweaks"
 		{
-			"Sp0"		"Plunder"
-			"Sp1"		"Barrage"
+			"0"		"Plunder"
+			"1"		"Barrage"
 		}
 	}
 	"lunchbox"
@@ -1961,13 +1961,13 @@
 		"special_tweaks_listid"		"1"
 		"Lunchbox specific upgrades"
 		{
-			"Attr0"		"mult_item_meter_charge_rate"
-			"Attr4"		"lunchbox healing decreased"
+			"0"		"mult_item_meter_charge_rate"
+			"1"		"lunchbox healing decreased"
 		}
 		"Special Tweaks"
 		{
-			"Sp0"		"Berserker's Fury"
-			"Sp1"		"Weapon Inheritance"
+			"0"		"Berserker's Fury"
+			"1"		"Weapon Inheritance"
 		}
 	}
 	"jarat"
@@ -1975,75 +1975,72 @@
 		"special_tweaks_listid"		"4"
 		"Damage upgrades"
 		{
-			"Attr0"		"damage bonus"
-			"Attr17"	"ap (slowswing)"
-			"Attr16"	"Extra Damage Bonus"
-			"Attr13"	"lifesteal ability"
-			"Attr11"	"reveal cloaked victim on hit"
-			"Attr12"	"reveal disguised victim on hit"
+			"0"		"damage bonus"
+			"1"		"ap (global)"
+			"2"		"Extra Damage Bonus"
+			"3"		"lifesteal ability"
+			"4"		"reveal cloaked victim on hit"
+			"5"		"reveal disguised victim on hit"
 		}
 		"Jarate specific upgrades"
 		{
-			"Attr1"		"fire rate bonus(old)"
-			"Attr5"		"effect bar recharge rate increased"
-			"Attr2"		"Blast radius increased (Throwable)"
-			"Attr3"		"Projectile speed increased"
-			"Attr4"		"dmg from all reduced(wearable)"
+			"0"		"fire rate bonus(old)"
+			"1"		"effect bar recharge rate increased"
+			"2"		"Blast radius increased (Throwable)"
+			"3"		"Projectile speed increased"
+			"4"		"dmg from all reduced(wearable)"
 		}
 		"Debuff Upgrades"
 		{
-			"Attr1"		"Bleed Per Hit(E)"
-			"Attr2"		"Corrosive Damage Over Time"
+			"0"		"Bleed Per Hit(E)"
+			"1"		"Corrosive Damage Over Time"
 		}
 		"Support Upgrades"
 		{
-			"Attr1"		"Afterburn Immunity Duration"
-			"Attr2"		"Increases Haste Buff Duration"
-			"Attr4"		"Batallion's Buff Duration"
+			"0"		"Afterburn Immunity Duration"
+			"1"		"Increases Haste Buff Duration"
+			"2"		"Batallion's Buff Duration"
 		}
 		"Special Tweaks"
 		{
-			"Sp0"		"Maelstrom Charge"
-			"Sp1"		"Alchemist's Concoction"
+			"0"		"Maelstrom Charge"
+			"1"		"Alchemist's Concoction"
 		}
 	}
 	"jarmilk"
 	{
-		"special_tweaks_listid"		"4"
+		"special_tweaks_listid"		"3"
 		"Damage upgrades"
 		{
-			"Attr0"		"damage bonus"
-			"Attr17"	"ap (slowswing)"
-			"Attr16"	"Extra Damage Bonus"
-			"Attr13"	"lifesteal ability"
-			"Attr11"	"reveal cloaked victim on hit"
-			"Attr12"	"reveal disguised victim on hit"
+			"0"		"damage bonus"
+			"1"		"ap (global)"
+			"2"		"Extra Damage Bonus"
+			"3"		"lifesteal ability"
+			"4"		"reveal cloaked victim on hit"
+			"5"		"reveal disguised victim on hit"
 		}
 		"Jarate specific upgrades"
 		{
-			"Attr1"		"fire rate bonus(old)"
-			"Attr5"		"effect bar recharge rate increased"
-			"Attr3"		"Blast radius increased (Throwable)"
-			"Attr4"		"Projectile speed increased"
-			"Attr5"		"dmg from all reduced(wearable)"
+			"0"		"fire rate bonus(old)"
+			"1"		"effect bar recharge rate increased"
+			"2"		"Blast radius increased (Throwable)"
+			"3"		"Projectile speed increased"
+			"4"		"dmg from all reduced(wearable)"
 		}
 		"Specialty Upgrades"
 		{
-			"Attr1"		"Jar Fragment Count"
-			"Attr2"		"Fragment Explosion Base Damage"
-			"Attr1"		"Bleed Per Hit(E)"
-			"Attr3"		"Mad Milk On Hit Duration (MadMilk)"
-		}
-		"Support Upgrades"
-		{
-			"Attr1"		"Afterburn Immunity Duration"
-			"Attr2"		"Increases Haste Buff Duration"
-			"Attr4"		"Batallion's Buff Duration"
+			"0"		"Jar Fragment Count"
+			"1"		"Fragment Explosion Base Damage"
+			"2"		"Bleed Per Hit(E)"
+			"3"		"Mad Milk On Hit Duration (MadMilk)"
+			"4"		"Afterburn Immunity Duration"
+			"5"		"Increases Haste Buff Duration"
+			"6"		"Batallion's Buff Duration"
 		}
 		"Special Tweaks"
 		{
-			"Sp0"		"Maelstrom Charge"
-			"Sp1"		"Alchemist's Concoction"
+			"0"		"Maelstrom Charge"
+			"1"		"Alchemist's Concoction"
 		}
 	}
 	"explmel"
@@ -2051,24 +2048,24 @@
 		"special_tweaks_listid"		"2"
 		"Damage upgrades"
 		{
-			"Attr0"		"damage bonus"
-			"Attr17"	"ap (slowswing)"
-			"Attr16"	"Extra Damage Bonus"
-			"Attr13"	"lifesteal ability"
-			"Attr11"	"reveal cloaked victim on hit"
-			"Attr12"	"reveal disguised victim on hit"
+			"0"		"damage bonus"
+			"1"		"ap (global)"
+			"2"		"Extra Damage Bonus"
+			"3"		"lifesteal ability"
+			"4"		"reveal cloaked victim on hit"
+			"5"		"reveal disguised victim on hit"
 		}
 		"Weapon Specific upgrades"
 		{
-			"Attr5"		"melee attack rate bonus"
-			"Attr1"		"melee range multiplier"
-			"Attr2"		"self dmg push force increased"
-			"Attr8"		"Weapons Deals No Knockback"
+			"0"		"melee attack rate bonus"
+			"1"		"melee range multiplier"
+			"2"		"self dmg push force increased"
+			"3"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
-			"Sp0"		"Honor!"
-			"Sp1"		"Infernal Impulse"
+			"0"		"Honor!"
+			"1"		"Infernal Impulse"
 		}
 	}
 	"pointer"
@@ -2076,12 +2073,12 @@
 		"special_tweaks_listid"		"1"
 		"Weapon Specific upgrades"
 		{
-			"Attr1"		"Sentry Damage While Active"
-			"Attr2"		"air control when blast jumping"
+			"0"		"Sentry Damage While Active"
+			"1"		"air control when blast jumping"
 		}
 		"Special Tweaks"
 		{
-			"Sp0"		"Starstorm"
+			"0"		"Starstorm"
 		}
 	}
 	"grenade"
@@ -2089,33 +2086,33 @@
 		"special_tweaks_listid"		"2"
 		"Damage upgrades"
 		{
-			"Attr0"			"damage bonus"
-			"Attr20"		"ap (armyofnotmany)"
-			"Attr13"		"Extra Damage Bonus"
-			"Attr1"			"blast radius increased"
-			"Attr9"			"dmg falloff decreased"
-			"Attr13"		"lifesteal ability"
-			"Attr13"		"reveal cloaked victim on hit"
-			"Attr14"		"reveal disguised victim on hit"
+			"0"		"damage bonus"
+			"1"		"ap (global)"
+			"2"		"Extra Damage Bonus"
+			"3"		"blast radius increased"
+			"4"		"dmg falloff decreased"
+			"5"		"lifesteal ability"
+			"6"		"reveal cloaked victim on hit"
+			"7"		"reveal disguised victim on hit"
 		}
 		"Grenade Launcher specific upgrades"
 		{
-			"Attr0"		"fire rate bonus(multshit)"
-			"Attr1"		"clip size bonus"
-			"Attr2"		"faster reload rate"
-			"Attr11"	"reload clip all at once"
-			"Attr3"		"Projectile speed increased"
-			"Attr4"		"self dmg push force increased"
-			"Attr5"		"rocket jump damage reduction"
-			"Attr8"		"fuse bonus"
-			"Attr10"	"Iron Bomber Attribute"
-			"Attr9"		"air control when blast jumping"
-			"Attr8"		"Weapons Deals No Knockback"
+			"0"		"fire rate bonus(multshit)"
+			"1"		"clip size bonus"
+			"2"		"faster reload rate"
+			"3"		"reload clip all at once"
+			"4"		"Projectile speed increased"
+			"5"		"self dmg push force increased"
+			"6"		"rocket jump damage reduction"
+			"7"		"fuse bonus"
+			"8"		"Iron Bomber Attribute"
+			"9"		"air control when blast jumping"
+			"10"	"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
-			"Sp0"		"Scorching Napalm"
-			"Sp1"		"Splintering Wasps"
+			"0"		"Scorching Napalm"
+			"1"		"Splintering Wasps"
 		}
 	}
 	"ironbomber"
@@ -2123,30 +2120,30 @@
 		"special_tweaks_listid"		"2"
 		"Damage upgrades"
 		{
-			"Attr0"			"damage bonus"
-			"Attr20"		"ap (armyofnotmany)"
-			"Attr16"		"Extra Damage Bonus"
-			"Attr13"		"lifesteal ability"
-			"Attr1"			"blast radius increased"
-			"Attr13"		"reveal cloaked victim on hit"
-			"Attr14"		"reveal disguised victim on hit"
+			"0"		"damage bonus"
+			"1"		"ap (global)"
+			"2"		"Extra Damage Bonus"
+			"3"		"lifesteal ability"
+			"4"		"blast radius increased"
+			"5"		"reveal cloaked victim on hit"
+			"6"		"reveal disguised victim on hit"
 		}
 		"Grenade Launcher specific upgrades"
 		{
-			"Attr0"		"fire rate bonus(multshit)"
-			"Attr1"		"clip size bonus"
-			"Attr2"		"faster reload rate"
-			"Attr7"		"reload clip all at once"
-			"Attr3"		"Projectile speed increased"
-			"Attr4"		"self dmg push force increased"
-			"Attr5"		"rocket jump damage reduction"
-			"Attr9"		"air control when blast jumping"
-			"Attr8"		"Weapons Deals No Knockback"
+			"0"		"fire rate bonus(multshit)"
+			"1"		"clip size bonus"
+			"2"		"faster reload rate"
+			"3"		"reload clip all at once"
+			"4"		"Projectile speed increased"
+			"5"		"self dmg push force increased"
+			"6"		"rocket jump damage reduction"
+			"7"		"air control when blast jumping"
+			"8"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
-			"Sp0"		"Scorching Napalm"
-			"Sp1"		"Splintering Wasps"
+			"0"		"Scorching Napalm"
+			"1"		"Splintering Wasps"
 		}
 	}
 	"cannon"
@@ -2154,31 +2151,31 @@
 		"special_tweaks_listid"		"2"
 		"Damage upgrades"
 		{
-			"Attr0"			"damage bonus"
-			"Attr20"		"ap (armyofnotmany)"
-			"Attr13"		"Extra Damage Bonus"
-			"Attr1"			"blast radius increased"
-			"Attr9"			"dmg falloff decreased"
-			"Attr13"		"lifesteal ability"
-			"Attr13"		"reveal cloaked victim on hit"
-			"Attr14"		"reveal disguised victim on hit"
+			"0"		"damage bonus"
+			"1"		"ap (global)"
+			"2"		"Extra Damage Bonus"
+			"3"		"blast radius increased"
+			"4"		"dmg falloff decreased"
+			"5"		"lifesteal ability"
+			"6"		"reveal cloaked victim on hit"
+			"7"		"reveal disguised victim on hit"
 		}
 		"Grenade Launcher specific upgrades"
 		{
-			"Attr0"		"fire rate bonus(multshit)"
-			"Attr1"		"clip size bonus"
-			"Attr2"		"faster reload rate"
-			"Attr7"		"reload clip all at once"
-			"Attr3"		"Projectile speed increased"
-			"Attr4"		"self dmg push force increased"
-			"Attr5"		"rocket jump damage reduction"
-			"Attr9"		"air control when blast jumping"
-			"Attr8"		"Weapons Deals No Knockback"
+			"0"		"fire rate bonus(multshit)"
+			"1"		"clip size bonus"
+			"2"		"faster reload rate"
+			"3"		"reload clip all at once"
+			"4"		"Projectile speed increased"
+			"5"		"self dmg push force increased"
+			"6"		"rocket jump damage reduction"
+			"7"		"air control when blast jumping"
+			"8"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
-			"Sp0"		"Scorching Napalm"
-			"Sp1"		"Splintering Wasps"
+			"0"		"Scorching Napalm"
+			"1"		"Splintering Wasps"
 		}
 	}
 	"chute"
@@ -2186,15 +2183,15 @@
 		"special_tweaks_listid"		"1"
 		"Protection upgrades"
 		{
-			"Attr0"		"self dmg push force increased"
-			"Attr1"		"dmg from all reduced(wearable)"
-			"Attr2"		"increased air control"
-			"Attr3"		"Is Parachute Re-Openable"
+			"0"		"self dmg push force increased"
+			"1"		"dmg from all reduced(wearable)"
+			"2"		"increased air control"
+			"3"		"Is Parachute Re-Openable"
 		}
 		"Special Tweaks"
 		{
-			"Sp0"		"Weapon Inheritance"
-			"Sp1"		"Agile Latticing"
+			"0"		"Weapon Inheritance"
+			"1"		"Agile Latticing"
 		}
 	}
 	"wearable"
@@ -2202,14 +2199,14 @@
 		"special_tweaks_listid"		"1"
 		"Protection upgrades"
 		{
-			"Attr0"		"blast dmg to self decreased"
-			"Attr1"		"dmg from all reduced(wearable)"
-			"Attr15"	"jarate backstabber"
+			"0"		"blast dmg to self decreased"
+			"1"		"dmg from all reduced(wearable)"
+			"2"		"jarate backstabber"
 		}
 		"Special Tweaks"
 		{
-			"Sp0"		"Weapon Inheritance"
-			"Sp1"		"Agile Latticing"
+			"0"		"Weapon Inheritance"
+			"1"		"Agile Latticing"
 		}
 	}
 	"medmel"
@@ -2217,24 +2214,24 @@
 		"special_tweaks_listid"		"2"
 		"Damage upgrades"
 		{
-			"Attr0"		"damage bonus"
-			"Attr17"	"ap (slowswing)"
-			"Attr16"	"Extra Damage Bonus"
-			"Attr13"	"lifesteal ability"
-			"Attr6"		"reveal cloaked victim on hit"
-			"Attr7"		"reveal disguised victim on hit"
+			"0"		"damage bonus"
+			"1"		"ap (global)"
+			"2"		"Extra Damage Bonus"
+			"3"		"lifesteal ability"
+			"4"		"reveal cloaked victim on hit"
+			"5"		"reveal disguised victim on hit"
 		}
 		"Melee specific upgrades"
 		{
-			"Attr0"		"melee attack rate bonus"
-			"Attr3"		"melee range multiplier"
-			"Attr13"	"increase player capture value"
-			"Attr8"		"Weapons Deals No Knockback"
+			"0"		"melee attack rate bonus"
+			"1"		"melee range multiplier"
+			"2"		"increase player capture value"
+			"3"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
-			"Sp0"		"Honor!"
-			"Sp1"		"Infernal Impulse"
+			"0"		"Honor!"
+			"1"		"Infernal Impulse"
 		}
 	}
 	"engweap_c"
@@ -2242,25 +2239,25 @@
 		"special_tweaks_listid"		"2"
 		"Damage upgrades"
 		{
-			"Attr0"		"damage bonus"
-			"Attr24"	"ap (biggercali)"
-			"Attr1"		"Accuracy Scales DMG Replacement"
-			"Attr13"	"lifesteal ability"
-			"Attr7"		"reveal cloaked victim on hit"
-			"Attr8"		"reveal disguised victim on hit"
+			"0"		"damage bonus"
+			"1"		"ap (global)"
+			"2"		"Accuracy Scales DMG Replacement"
+			"3"		"lifesteal ability"
+			"4"		"reveal cloaked victim on hit"
+			"5"		"reveal disguised victim on hit"
 		}
 		"Gun specific upgrades"
 		{
-			"Attr0"		"fire rate bonus(multshit)"
-			"Attr1"		"clip size bonus"
-			"Attr2"		"faster reload rate"
-			"Attr5"		"projectile penetration"
-			"Attr0"		"Projectile speed increased"
-			"Attr8"		"Weapons Deals No Knockback"
+			"0"		"fire rate bonus(multshit)"
+			"1"		"clip size bonus"
+			"2"		"faster reload rate"
+			"3"		"projectile penetration"
+			"4"		"Projectile speed increased"
+			"5"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
-			"Sp6"		"Lacerating Rounds"
+			"0"		"Lacerating Rounds"
 		}
 	}
 	"fireball"
@@ -2268,20 +2265,20 @@
 		"special_tweaks_listid"		"2"
 		"Damage upgrades"
 		{
-			"Attr0"		"damage bonus"
-			"Attr9"		"ap (compressedfire)"
-			"Attr1"		"Extra Damage Bonus(fireball)"
-			"Attr13"	"lifesteal ability"
+			"0"		"damage bonus"
+			"1"		"ap (global)"
+			"2"		"Extra Damage Bonus(fireball)"
+			"3"	"lifesteal ability"
 		}
 		"Weapon Specific upgrades"
 		{
-			"Attr0"		"Fireball Recharge Rate"
-			"Attr1"		"Projectile Distance Increased"
-			"Attr8"		"Weapons Deals No Knockback"
+			"0"		"Fireball Recharge Rate"
+			"1"		"Projectile Distance Increased"
+			"2"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
-			"Sp0"		"Fireball Volley"
+			"0"		"Fireball Volley"
 		}
 	}
 	"rocketpack"
@@ -2289,17 +2286,17 @@
 		"special_tweaks_listid"		"1"
 		"Weapon Specific upgrades"
 		{
-			"Attr0"		"Thermal Thruster recharge"
-			"Attr3"		"thermal_thruster_air_launch"
-			"Attr6"		"weapon self dmg push force increased"
-			"Attr5"		"increased air control(S)"
-			"Attr7"		"dmg from all reduced(wearable)"
-			"Attr8"		"Switch Speed Increased"
+			"0"		"Thermal Thruster recharge"
+			"1"		"thermal_thruster_air_launch"
+			"2"		"weapon self dmg push force increased"
+			"3"		"increased air control(S)"
+			"4"		"dmg from all reduced(wearable)"
+			"5"		"Switch Speed Increased"
 		}
 		"Special Tweaks"
 		{
-			"Sp0"		"Infernal Lunge"
-			"Sp1"		"Weapon Inheritance"
+			"0"		"Infernal Lunge"
+			"1"		"Weapon Inheritance"
 		}
 	}
 	"shotgun_primary_"
@@ -2307,25 +2304,25 @@
 		"special_tweaks_listid"		"2"
 		"Damage upgrades"
 		{
-			"Attr0"		"damage bonus"
-			"Attr24"	"ap (biggercali)"
-			"Attr1"		"Accuracy Scales DMG Replacement"
-			"Attr13"	"lifesteal ability"
-			"Attr7"		"reveal cloaked victim on hit"
-			"Attr8"		"reveal disguised victim on hit"
+			"0"		"damage bonus"
+			"1"		"ap (global)"
+			"2"		"Accuracy Scales DMG Replacement"
+			"3"		"lifesteal ability"
+			"4"		"reveal cloaked victim on hit"
+			"5"		"reveal disguised victim on hit"
 		}
 		"Weapon Specific upgrades"
 		{
-			"Attr0"		"fire rate bonus(old)"
-			"Attr3"		"bullets per shot bonus"
-			"Attr4"		"weapon spread bonus(H)"
-			"Attr5"		"projectile penetration heavy"
-			"Attr8"		"Weapons Deals No Knockback"
+			"0"		"fire rate bonus(old)"
+			"1"		"bullets per shot bonus"
+			"2"		"weapon spread bonus(H)"
+			"3"		"projectile penetration heavy"
+			"4"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
-			"Sp4"		"Explosive Bullets(P)"
-			"Sp5"		"Lacerating Rounds"
+			"0"		"Explosive Bullets(P)"
+			"1"		"Lacerating Rounds"
 		}
 	}
 	"ball"
@@ -2333,30 +2330,30 @@
 		"special_tweaks_listid"		"3"
 		"Damage upgrades"
 		{
-			"Attr0"		"damage bonus"
-			"Attr17"	"ap (slowswing)"
-			"Attr16"	"Extra Damage Bonus"
-			"Attr13"	"lifesteal ability"
-			"Attr12"		"reveal cloaked victim on hit"
-			"Attr13"		"reveal disguised victim on hit"
+			"0"		"damage bonus"
+			"1"		"ap (global)"
+			"2"		"Extra Damage Bonus"
+			"3"		"lifesteal ability"
+			"4"		"reveal cloaked victim on hit"
+			"5"		"reveal disguised victim on hit"
 		}
 		"Melee specific upgrades"
 		{
-			"Attr0"		"fire rate bonus(multshit)"
-			"Attr3"		"melee range multiplier"
-			"Attr13"	"increase player capture value"
-			"Attr8"		"Weapons Deals No Knockback"
+			"0"		"fire rate bonus(multshit)"
+			"1"		"melee range multiplier"
+			"2"		"increase player capture value"
+			"3"		"Weapons Deals No Knockback"
 		}
 		"Ball Upgrades"
 		{
-			"Attr5"			"effect bar recharge rate increased(L)"
-			"Attr6"			"max ammo"
-			"Attr7"			"Ball Additive Damage Bonus"
+			"0"		"effect bar recharge rate increased(L)"
+			"1"		"max ammo"
+			"2"		"Ball Additive Damage Bonus"
 		}
 		"Special Tweaks"
 		{
-			"Sp0"		"Honor!"
-			"Sp1"		"Infernal Impulse"
+			"0"		"Honor!"
+			"1"		"Infernal Impulse"
 		}
 	}
 	"medi"
@@ -2364,21 +2361,21 @@
 		"special_tweaks_listid"		"2"
 		"Healing Upgrades"
 		{
-			"Attr0"		"heal rate bonus"
-			"Attr1"		"heal rate bonus(A)"
-			"Attr2"		"overheal bonus"
-			"Attr3"		"Healing for Buildings"
+			"0"		"heal rate bonus"
+			"1"		"heal rate bonus(A)"
+			"2"		"overheal bonus"
+			"3"		"Healing for Buildings"
 		}
 		"Medigun Specific upgrades"
 		{
-			"Attr0"		"Medigun Heal Range Bonus"
-			"Attr1"		"ubercharge rate bonus"
-			"Attr2"		"Damage Multiplier for healed player"
+			"0"		"Medigun Heal Range Bonus"
+			"1"		"ubercharge rate bonus"
+			"2"		"Damage Multiplier for healed player"
 		}
 		"Special Tweaks"
 		{
-			"Sp0"		"Magnification Pylon"
-			"Sp1"		"Blossom of Life"
+			"0"		"Magnification Pylon"
+			"1"		"Blossom of Life"
 		}
 	}
 	"medigun"
@@ -2386,19 +2383,18 @@
 		"special_tweaks_listid"		"1"
 		"Medigun Specific upgrades"
 		{
-			"Attr7"		"Medigun Heal Range Bonus"
-			"Attr2"		"heal rate bonus"
-			"Attr8"		"heal rate bonus(A)"
-			"Attr9"		"overheal fill rate bonus"
-			"Attr4"		"overheal bonus"
-			//"Attr5"		"overheal decay bonus"
-			"Attr3"		"ubercharge rate bonus"
-			"Attr8"		"Damage Multiplier for healed player"
-			"Attr9"		"Healing for Buildings"
+			"0"		"Medigun Heal Range Bonus"
+			"1"		"heal rate bonus"
+			"2"		"heal rate bonus(A)"
+			"3"		"overheal fill rate bonus"
+			"4"		"overheal bonus"
+			"5"		"ubercharge rate bonus"
+			"6"		"Damage Multiplier for healed player"
+			"7"		"Healing for Buildings"
 		}
 		"Special Tweaks"
 		{
-			"Sp0"		"Stat Boost Ubercharge"
+			"0"		"Stat Boost Ubercharge"
 		}
 	}
 	"vacc"
@@ -2406,19 +2402,18 @@
 		"special_tweaks_listid"		"1"
 		"Medigun Specific upgrades"
 		{
-			"Attr7"		"Medigun Heal Range Bonus"
-			"Attr2"		"heal rate bonus"
-			"Attr8"		"heal rate bonus(A)"
-			"Attr4"		"overheal bonus"
-			//"Attr5"		"overheal decay bonus"
-			"Attr3"		"ubercharge rate bonus"
-			"Attr6"		"ubercharge rate multiplier"
-			"Attr8"		"Damage Multiplier for healed player"
-			"Attr9"		"Healing for Buildings"
+			"0"		"Medigun Heal Range Bonus"
+			"1"		"heal rate bonus"
+			"2"		"heal rate bonus(A)"
+			"3"		"overheal bonus"
+			"4"		"ubercharge rate bonus"
+			"5"		"ubercharge rate multiplier"
+			"6"		"Damage Multiplier for healed player"
+			"7"		"Healing for Buildings"
 		}
 		"Special Tweaks"
 		{
-			"Sp0"		"Exhaust"
+			"0"		"Exhaust"
 		}
 	}
 	"gas"
@@ -2426,52 +2421,52 @@
 		"special_tweaks_listid"		"2"
 		"Damage upgrades"
 		{
-			"Attr14"	"Gas Damage Bonus"
-			"Attr2"		"ap (compressedfire)"
-			"Attr6"		"Overall Damage"
-			"Attr13"	"lifesteal ability"
+			"0"		"Gas Damage Bonus"
+			"1"		"ap (global)"
+			"2"		"Overall Damage"
+			"3"		"lifesteal ability"
 		}
 		"Weapon Specific upgrades"
 		{
-			"Attr0"		"explode_on_ignite"
-			"Attr1"		"gas passer recharge"
-			"Attr7"		"blast radius increased(G)"
+			"0"		"explode_on_ignite"
+			"1"		"gas passer recharge"
+			"2"		"blast radius increased(G)"
 		}
 		"Special Tweaks"
 		{
-			"Sp0"		"Immolation"
-			"Sp1"		"Fireworks"
+			"0"		"Immolation"
+			"1"		"Fireworks"
 		}
-	}//direct hit
+	}
 	"directhit"
 	{
 		"special_tweaks_listid"		"2"
 		"Damage upgrades"
 		{
-			"Attr0"			"damage bonus"
-			"Attr20"		"ap (armyofnotmany)"
-			"Attr13"		"Extra Damage Bonus"
-			"Attr9"			"dmg falloff decreased"
-			"Attr13"		"lifesteal ability"
-			"Attr13"		"reveal cloaked victim on hit"
-			"Attr14"		"reveal disguised victim on hit"
+			"0"		"damage bonus"
+			"1"		"ap (global)"
+			"2"		"Extra Damage Bonus"
+			"3"		"dmg falloff decreased"
+			"4"		"lifesteal ability"
+			"5"		"reveal cloaked victim on hit"
+			"6"		"reveal disguised victim on hit"
 		}
 		"Launcher specific upgrades"
 		{
-			"Attr0"		"fire rate bonus(multshit)"
-			"Attr1"		"clip size bonus"
-			"Attr2"		"faster reload rate"
-			"Attr7"		"reload clip all at once"
-			"Attr3"		"Projectile speed increased(DH)"
-			"Attr4"		"self dmg push force increased"
-			"Attr5"		"rocket jump damage reduction"
-			"Attr6"		"air control when blast jumping"
-			"Attr8"		"Weapons Deals No Knockback"
+			"0"		"fire rate bonus(multshit)"
+			"1"		"clip size bonus"
+			"2"		"faster reload rate"
+			"3"		"reload clip all at once"
+			"4"		"Projectile speed increased(DH)"
+			"5"		"self dmg push force increased"
+			"6"		"rocket jump damage reduction"
+			"7"		"air control when blast jumping"
+			"8"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
-			"Sp0"		"Scorching Napalm"
-			"Sp1"		"Rockets' Red Glare"
+			"0"		"Scorching Napalm"
+			"1"		"Rockets' Red Glare"
 		}
 	}
 	"rlauncher"
@@ -2479,31 +2474,31 @@
 		"special_tweaks_listid"		"2"
 		"Damage upgrades"
 		{
-			"Attr0"			"damage bonus"
-			"Attr20"		"ap (armyofnotmany)"
-			"Attr13"		"Extra Damage Bonus"
-			"Attr1"			"blast radius increased"
-			"Attr9"			"dmg falloff decreased"
-			"Attr13"		"lifesteal ability"
-			"Attr13"		"reveal cloaked victim on hit"
-			"Attr14"		"reveal disguised victim on hit"
+			"0"		"damage bonus"
+			"1"		"ap (global)"
+			"2"		"Extra Damage Bonus"
+			"3"		"blast radius increased"
+			"4"		"dmg falloff decreased"
+			"5"		"lifesteal ability"
+			"6"		"reveal cloaked victim on hit"
+			"7"		"reveal disguised victim on hit"
 		}
 		"Launcher specific upgrades"
 		{
-			"Attr0"		"fire rate bonus(multshit)"
-			"Attr1"		"clip size bonus"
-			"Attr2"		"faster reload rate"
-			"Attr7"		"reload clip all at once"
-			"Attr3"		"Projectile speed increased"
-			"Attr4"		"self dmg push force increased"
-			"Attr5"		"rocket jump damage reduction"
-			"Attr6"		"air control when blast jumping"
-			"Attr8"		"Weapons Deals No Knockback"
+			"0"		"fire rate bonus(multshit)"
+			"1"		"clip size bonus"
+			"2"		"faster reload rate"
+			"3"		"reload clip all at once"
+			"4"		"Projectile speed increased"
+			"5"		"self dmg push force increased"
+			"6"		"rocket jump damage reduction"
+			"7"		"air control when blast jumping"
+			"8"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
-			"Sp0"		"Scorching Napalm"
-			"Sp1"		"Rockets' Red Glare"
+			"0"		"Scorching Napalm"
+			"1"		"Rockets' Red Glare"
 		}
 	}
 	"liberty"
@@ -2511,25 +2506,25 @@
 		"special_tweaks_listid"		"-1"
 		"Damage upgrades"
 		{
-			"Attr0"			"damage bonus"
-			"Attr20"		"ap (armyofnotmany)"
-			"Attr13"		"Extra Damage Bonus"
-			"Attr1"			"blast radius increased"
-			"Attr9"			"dmg falloff decreased"
-			"Attr13"		"lifesteal ability"
-			"Attr13"		"reveal cloaked victim on hit"
-			"Attr14"		"reveal disguised victim on hit"
+			"0"		"damage bonus"
+			"1"		"ap (global)"
+			"2"		"Extra Damage Bonus"
+			"3"		"blast radius increased"
+			"4"		"dmg falloff decreased"
+			"5"		"lifesteal ability"
+			"6"		"reveal cloaked victim on hit"
+			"7"		"reveal disguised victim on hit"
 		}
 		"Launcher specific upgrades"
 		{
-			"Attr0"		"fire rate bonus(multshit)"
-			"Attr1"		"clip size bonus (G)"
-			"Attr2"		"faster reload rate"
-			"Attr3"		"Projectile speed increased"
-			"Attr4"		"self dmg push force increased"
-			"Attr5"		"rocket jump damage reduction"
-			"Attr6"		"air control when blast jumping"
-			"Attr8"		"Weapons Deals No Knockback"
+			"0"		"fire rate bonus(multshit)"
+			"1"		"clip size bonus (G)"
+			"2"		"faster reload rate"
+			"3"		"Projectile speed increased"
+			"4"		"self dmg push force increased"
+			"5"		"rocket jump damage reduction"
+			"6"		"air control when blast jumping"
+			"7"		"Weapons Deals No Knockback"
 		}
 	}
 	"autofirebow"
@@ -2537,25 +2532,25 @@
 		"special_tweaks_listid"		"2"
 		"Damage upgrades"
 		{
-			"Attr0"		"damage bonus"
-			"Attr15"	"ap (slowswing)"
-			"Attr16"	"Extra Damage Bonus"
-			"Attr13"	"lifesteal ability"
-			"Attr8"		"reveal cloaked victim on hit"
-			"Attr9"		"reveal disguised victim on hit"
+			"0"		"damage bonus"
+			"1"		"ap (global)"
+			"2"		"Extra Damage Bonus"
+			"3"		"lifesteal ability"
+			"4"		"reveal cloaked victim on hit"
+			"5"		"reveal disguised victim on hit"
 		}
 		"Autofire Bow specific upgrades"
 		{
-			"Attr2"		"fire rate bonus(multshit)"
-			"Attr3"		"clip size bonus (B)"
-			"Attr4"		"faster reload rate (U)"
-			"Attr5"		"Projectile speed increased"
-			"Attr8"		"Weapons Deals No Knockback"
+			"0"		"fire rate bonus(multshit)"
+			"1"		"clip size bonus (B)"
+			"2"		"faster reload rate (U)"
+			"3"		"Projectile speed increased"
+			"4"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
-			"Sp0"		"Fire Infusion"
-			"Sp1"		"Frost Infusion"
+			"0"		"Fire Infusion"
+			"1"		"Frost Infusion"
 		}
 	}
 	"lunchbox_bonk"//cola & bonk
@@ -2563,13 +2558,13 @@
 		"special_tweaks_listid"		"1"
 		"Lunchbox specific upgrades"
 		{
-			"Attr2"		"dmg from all reduced(wearable)"
-			"Attr0"		"effect bar recharge rate increased"
+			"0"		"dmg from all reduced(wearable)"
+			"1"		"effect bar recharge rate increased"
 		}
 		"Special Tweaks"
 		{
-			"Sp0"		"Berserker's Fury"
-			"Sp1"		"Weapon Inheritance"
+			"0"		"Berserker's Fury"
+			"1"		"Weapon Inheritance"
 		}
 	}	
 }
