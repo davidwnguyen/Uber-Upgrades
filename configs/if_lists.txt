@@ -5,98 +5,98 @@
 		"special_tweaks_listid"		"-1"
 		"Protection upgrades"
 		{
-			"Attr0"		"Health Bonus"
-			"Attr1"		"health regen"
-			"Attr2"		"Armor Capability"
-			"Attr3"		"Defense"
-			"Attr5"		"patient overheal bonus"
-			"Attr7"		"critical block rating"
+			"0"		"Health Bonus"
+			"1"		"health regen"
+			"2"		"Armor Capability"
+			"3"		"Defense"
+			"4"		"patient overheal bonus"
+			"5"		"critical block rating"
 		}
 		"Physical upgrades"
 		{
-			"Attr0"		"move speed(SC)"
-			"Attr1"		"jump height"
-			"Attr10"	"increased air control(S)"	
-			"Attr3"		"knockback resistance"
-			"Attr6"		"cancel falling damage"
-			"Attr8"		"Weighdown Ability"
+			"0"		"move speed(SC)"
+			"1"		"jump height"
+			"2"	"increased air control(S)"	
+			"3"		"knockback resistance"
+			"4"		"cancel falling damage"
+			"5"		"Weighdown Ability"
 		}
 		"Ammo upgrades"
 		{
-			"Attr0"		"maxammo primary increased"
-			"Attr1"		"maxammo secondary increased"
-			"Attr2"		"ammo regen"
+			"0"		"maxammo primary increased"
+			"1"		"maxammo secondary increased"
+			"2"		"ammo regen"
 		}
 		"Status Effect Upgrades"
 		{
-			"Attr1"		"buff magnitude bonus"
-			"Attr2"		"debuff magnitude bonus"
-			"Attr16"	"debuff block rating"
-			"Attr18"	"Bleed Resistance"
-			"Attr19"	"Slow immunity"
+			"0"		"buff magnitude bonus"
+			"1"		"debuff magnitude bonus"
+			"2"		"debuff block rating"
+			"3"		"Bleed Resistance"
+			"4"		"Slow immunity"
 		}
 		"Arcane Upgrades"
 		{
 			"!Arcane Stats"
 			{
-				"Attr1"		"damage bonus"
-				"Attr2"		"Arcane Power"
-				"Attr3"		"Arcane Damage"
-				"Attr4"		"Max Focus"
-				"Attr5"		"Focus Regeneration"
-				"Attr6"		"Arcane Cooldown Reduction"
-				"Attr7"		"Arcane Spell Level"
+				"0"		"damage bonus"
+				"1"		"ap (global)"
+				"2"		"Arcane Power"
+				"3"		"Max Focus"
+				"4"		"Focus Regeneration"
+				"5"		"Arcane Cooldown Reduction"
+				"6"		"Arcane Spell Level"
 			}
 			"!Tier 1 Arcane Spells"
 			{
-				"Attr1"		"Arcane - Zap"
-				"Attr2"		"Arcane - Blacksky Eye"
-				"Attr3"		"Arcane - Lightning Strike"
-				"Attr4"		"Arcane - Healing Aura"
-				"Attr5"		"Arcane - Darkmoon Blade"
-				"Attr6"		"Arcane - Speed Aura"
+				"0"		"Arcane - Zap"
+				"1"		"Arcane - Blacksky Eye"
+				"2"		"Arcane - Lightning Strike"
+				"3"		"Arcane - Healing Aura"
+				"4"		"Arcane - Darkmoon Blade"
+				"5"		"Arcane - Speed Aura"
 			}
 			"!Tier 2 Arcane Spells"
 			{
-				"Attr1"		"Arcane - Sunlight Spear"
-				"Attr2"		"Arcane - Lightning Enchantment"
-				"Attr3"		"Arcane - Snap Freeze"
-				"Attr4"		"Arcane - Arcane Prison"
-				"Attr4"		"Arcane - Karmic Justice"
-				"Attr5"		"Arcane - Snowstorm"
+				"0"		"Arcane - Sunlight Spear"
+				"1"		"Arcane - Lightning Enchantment"
+				"2"		"Arcane - Snap Freeze"
+				"3"		"Arcane - Arcane Prison"
+				"4"		"Arcane - Karmic Justice"
+				"5"		"Arcane - Snowstorm"
 			}
 			"!Tier 3 Arcane Spells"
 			{
-				"Attr0"		"Arcane - A Call Beyond"
-				"Attr1"		"Arcane - Infernal Enchantment"
-				"Attr2"		"Arcane - Splitting Thunder"
+				"0"		"Arcane - A Call Beyond"
+				"1"		"Arcane - Infernal Enchantment"
+				"2"		"Arcane - Splitting Thunder"
 			}
 		}
 		"Powerup Upgrades"
 		{
 			"!Offensive Powerups"
 			{
-				"Attr0"		"Strength Powerup"
-				"Attr1"		"Vampire Powerup"
-				"Attr2"		"Revenge Powerup"
-				"Attr3"		"Precision Powerup"
-				"Attr4"		"Knockout Powerup"
-				"Attr5"		"Supernova Powerup"
+				"0"		"Strength Powerup"
+				"1"		"Vampire Powerup"
+				"2"		"Revenge Powerup"
+				"3"		"Precision Powerup"
+				"4"		"Knockout Powerup"
+				"5"		"Supernova Powerup"
 			}
 			"!Defensive Powerups"
 			{
-				"Attr0"		"Resistance Powerup"
-				"Attr1"		"Regeneration Powerup"
-				"Attr2"		"Inverter Powerup"
+				"0"		"Resistance Powerup"
+				"1"		"Regeneration Powerup"
+				"2"		"Inverter Powerup"
 			}
 			"!Support Powerups"
 			{
-				"Attr0"		"King Powerup"
-				"Attr1"		"Plague Powerup"
+				"0"		"King Powerup"
+				"1"		"Plague Powerup"
 			}
 			"!Misc. Powerups"
 			{
-				"Attr0"		"Agility Powerup"
+				"0"		"Agility Powerup"
 			}
 		}
 	}
@@ -105,99 +105,98 @@
 		"special_tweaks_listid"		"-1"
 		"Protection upgrades"
 		{
-			"Attr0"		"Health Bonus"
-			"Attr1"		"health regen"
-			"Attr3"		"Armor Capability"
-			"Attr19"	"Defense"
-			"Attr16"	"patient overheal bonus"
-			"Attr7"		"critical block rating"
+			"0"		"Health Bonus"
+			"1"		"health regen"
+			"2"		"Armor Capability"
+			"3"		"Defense"
+			"4"		"patient overheal bonus"
+			"5"		"critical block rating"
 		}
 		"Physical upgrades"
 		{
-			"Attr0"		"move speed(SN)"
-			"Attr1"		"jump height"
-			"Attr10"	"increased air control"
-			"Attr3"		"knockback resistance"
-			"Attr6"		"cancel falling damage"
-			"Attr8"		"Weighdown Ability"
-			
+			"0"		"move speed(SN)"
+			"2"		"jump height"
+			"3"		"increased air control"
+			"4"		"knockback resistance"
+			"5"		"cancel falling damage"
+			"6"		"Weighdown Ability"
 		}
 		"Ammo upgrades"
 		{
-			"Attr0"		"maxammo primary increased"
-			"Attr1"		"maxammo secondary increased"
-			"Attr2"		"ammo regen"
+			"0"		"maxammo primary increased"
+			"1"		"maxammo secondary increased"
+			"2"		"ammo regen"
 		}
 		"Status Effect Upgrades"
 		{
-			"Attr1"		"buff magnitude bonus"
-			"Attr2"		"debuff magnitude bonus"
-			"Attr16"	"debuff block rating"
-			"Attr18"	"Bleed Resistance"
-			"Attr19"	"Slow Resistance"
+			"0"		"buff magnitude bonus"
+			"1"		"debuff magnitude bonus"
+			"2"		"debuff block rating"
+			"3"		"Bleed Resistance"
+			"4"		"Slow Resistance"
 		}
 		"Arcane Upgrades"
 		{
 			"!Arcane Stats"
 			{
-				"Attr1"		"damage bonus"
-				"Attr2"		"Arcane Power"
-				"Attr3"		"Arcane Damage"
-				"Attr4"		"Max Focus"
-				"Attr5"		"Focus Regeneration"
-				"Attr6"		"Arcane Cooldown Reduction"
-				"Attr7"		"Arcane Spell Level"
+				"0"		"damage bonus"
+				"1"		"ap (global)"
+				"2"		"Arcane Power"
+				"3"		"Max Focus"
+				"4"		"Focus Regeneration"
+				"5"		"Arcane Cooldown Reduction"
+				"6"		"Arcane Spell Level"
 			}
 			"!Tier 1 Arcane Spells"
 			{
-				"Attr1"		"Arcane - Zap"
-				"Attr2"		"Arcane - Blacksky Eye"
-				"Attr3"		"Arcane - Lightning Strike"
-				"Attr4"		"Arcane - Healing Aura"
-				"Attr5"		"Arcane - Darkmoon Blade"
+				"0"		"Arcane - Zap"
+				"1"		"Arcane - Blacksky Eye"
+				"2"		"Arcane - Lightning Strike"
+				"3"		"Arcane - Healing Aura"
+				"4"		"Arcane - Darkmoon Blade"
 			}
 			"!Tier 2 Arcane Spells"
 			{
-				"Attr1"		"Arcane - Sunlight Spear"
-				"Attr2"		"Arcane - Lightning Enchantment"
-				"Attr3"		"Arcane - Snap Freeze"
-				"Attr4"		"Arcane - Arcane Prison"
-				"Attr4"		"Arcane - Karmic Justice"
-				"Attr5"		"Arcane - Snowstorm"
+				"0"		"Arcane - Sunlight Spear"
+				"1"		"Arcane - Lightning Enchantment"
+				"2"		"Arcane - Snap Freeze"
+				"3"		"Arcane - Arcane Prison"
+				"4"		"Arcane - Karmic Justice"
+				"5"		"Arcane - Snowstorm"
 			}
 			"!Tier 3 Arcane Spells"
 			{
-				"Attr0"		"Arcane - A Call Beyond"
-				"Attr1"		"Arcane - Infernal Enchantment"
-				"Attr2"		"Arcane - Splitting Thunder"
-				"Attr3"		"Arcane - Arcane Hunter"
+				"0"		"Arcane - A Call Beyond"
+				"1"		"Arcane - Infernal Enchantment"
+				"2"		"Arcane - Splitting Thunder"
+				"3"		"Arcane - Arcane Hunter"
 			}
 		}
 		"Powerup Upgrades"
 		{
 			"!Offensive Powerups"
 			{
-				"Attr0"		"Strength Powerup"
-				"Attr1"		"Vampire Powerup"
-				"Attr2"		"Revenge Powerup"
-				"Attr3"		"Precision Powerup"
-				"Attr4"		"Knockout Powerup"
-				"Attr5"		"Supernova Powerup"
+				"0"		"Strength Powerup"
+				"1"		"Vampire Powerup"
+				"2"		"Revenge Powerup"
+				"3"		"Precision Powerup"
+				"4"		"Knockout Powerup"
+				"5"		"Supernova Powerup"
 			}
 			"!Defensive Powerups"
 			{
-				"Attr0"		"Resistance Powerup"
-				"Attr1"		"Regeneration Powerup"
-				"Attr2"		"Inverter Powerup"
+				"0"		"Resistance Powerup"
+				"1"		"Regeneration Powerup"
+				"2"		"Inverter Powerup"
 			}
 			"!Support Powerups"
 			{
-				"Attr0"		"King Powerup"
-				"Attr1"		"Plague Powerup"
+				"0"		"King Powerup"
+				"1"		"Plague Powerup"
 			}
 			"!Misc. Powerups"
 			{
-				"Attr0"		"Agility Powerup"
+				"0"		"Agility Powerup"
 			}
 		}
 	}
@@ -206,99 +205,98 @@
 		"special_tweaks_listid"		"-1"
 		"Protection upgrades"
 		{
-			"Attr0"		"Health Bonus"
-			"Attr1"		"health regen"
-			"Attr3"		"Armor Capability"
-			"Attr19"	"Defense"
-			"Attr16"	"patient overheal bonus"
-			"Attr7"		"critical block rating"
+			"0"		"Health Bonus"
+			"1"		"health regen"
+			"2"		"Armor Capability"
+			"3"		"Defense"
+			"4"		"patient overheal bonus"
+			"5"		"critical block rating"
 		}
 		"Physical upgrades"
 		{
-			"Attr0"		"move speed(SO)"
-			"Attr1"		"jump height"
-			"Attr10"	"increased air control"
-			"Attr3"		"knockback resistance"
-			"Attr6"		"cancel falling damage"	
-			"Attr8"		"Weighdown Ability"
-			
+			"0"		"move speed(SO)"
+			"1"		"jump height"
+			"2"	"increased air control"
+			"3"		"knockback resistance"
+			"4"		"cancel falling damage"	
+			"5"		"Weighdown Ability"
 		}
 		"Ammo upgrades"
 		{
-			"Attr0"		"maxammo primary increased"
-			"Attr1"		"maxammo secondary increased"
-			"Attr2"		"ammo regen"
+			"0"		"maxammo primary increased"
+			"1"		"maxammo secondary increased"
+			"2"		"ammo regen"
 		}
 		"Status Effect Upgrades"
 		{
-			"Attr1"		"buff magnitude bonus"
-			"Attr2"		"debuff magnitude bonus"
-			"Attr16"	"debuff block rating"
-			"Attr18"	"Bleed Resistance"
-			"Attr19"	"Slow Resistance"
+			"0"		"buff magnitude bonus"
+			"1"		"debuff magnitude bonus"
+			"2"		"debuff block rating"
+			"3"		"Bleed Resistance"
+			"4"		"Slow Resistance"
 		}
 		"Arcane Upgrades"
 		{
 			"!Arcane Stats"
 			{
-				"Attr1"		"damage bonus"
-				"Attr2"		"Arcane Power"
-				"Attr3"		"Arcane Damage"
-				"Attr4"		"Max Focus"
-				"Attr5"		"Focus Regeneration"
-				"Attr6"		"Arcane Cooldown Reduction"
-				"Attr7"		"Arcane Spell Level"
+				"0"		"damage bonus"
+				"1"		"ap (global)"
+				"2"		"Arcane Power"
+				"3"		"Max Focus"
+				"4"		"Focus Regeneration"
+				"5"		"Arcane Cooldown Reduction"
+				"6"		"Arcane Spell Level"
 			}
 			"!Tier 1 Arcane Spells"
 			{
-				"Attr1"		"Arcane - Zap"
-				"Attr2"		"Arcane - Blacksky Eye"
-				"Attr3"		"Arcane - Lightning Strike"
-				"Attr4"		"Arcane - Healing Aura"
-				"Attr5"		"Arcane - Darkmoon Blade"
+				"0"		"Arcane - Zap"
+				"1"		"Arcane - Blacksky Eye"
+				"2"		"Arcane - Lightning Strike"
+				"3"		"Arcane - Healing Aura"
+				"4"		"Arcane - Darkmoon Blade"
 			}
 			"!Tier 2 Arcane Spells"
 			{
-				"Attr1"		"Arcane - Sunlight Spear"
-				"Attr2"		"Arcane - Lightning Enchantment"
-				"Attr3"		"Arcane - Snap Freeze"
-				"Attr4"		"Arcane - Arcane Prison"
-				"Attr4"		"Arcane - Karmic Justice"
-				"Attr5"		"Arcane - Snowstorm"
-				"Attr6"		"Arcane - Aerial Strike"
+				"0"		"Arcane - Sunlight Spear"
+				"1"		"Arcane - Lightning Enchantment"
+				"2"		"Arcane - Snap Freeze"
+				"3"		"Arcane - Arcane Prison"
+				"4"		"Arcane - Karmic Justice"
+				"5"		"Arcane - Snowstorm"
+				"6"		"Arcane - Aerial Strike"
 			}
 			"!Tier 3 Arcane Spells"
 			{
-				"Attr0"		"Arcane - A Call Beyond"
-				"Attr1"		"Arcane - Infernal Enchantment"
-				"Attr2"		"Arcane - Splitting Thunder"
+				"0"		"Arcane - A Call Beyond"
+				"1"		"Arcane - Infernal Enchantment"
+				"2"		"Arcane - Splitting Thunder"
 			}
 		}
 		"Powerup Upgrades"
 		{
 			"!Offensive Powerups"
 			{
-				"Attr0"		"Strength Powerup"
-				"Attr1"		"Vampire Powerup"
-				"Attr2"		"Revenge Powerup"
-				"Attr3"		"Precision Powerup"
-				"Attr4"		"Knockout Powerup"
-				"Attr5"		"Supernova Powerup"
+				"0"		"Strength Powerup"
+				"1"		"Vampire Powerup"
+				"2"		"Revenge Powerup"
+				"3"		"Precision Powerup"
+				"4"		"Knockout Powerup"
+				"5"		"Supernova Powerup"
 			}
 			"!Defensive Powerups"
 			{
-				"Attr0"		"Resistance Powerup"
-				"Attr1"		"Regeneration Powerup"
-				"Attr2"		"Inverter Powerup"
+				"0"		"Resistance Powerup"
+				"1"		"Regeneration Powerup"
+				"2"		"Inverter Powerup"
 			}
 			"!Support Powerups"
 			{
-				"Attr0"		"King Powerup"
-				"Attr1"		"Plague Powerup"
+				"0"		"King Powerup"
+				"1"		"Plague Powerup"
 			}
 			"!Misc. Powerups"
 			{
-				"Attr0"		"Agility Powerup"
+				"0"		"Agility Powerup"
 			}
 		}
 	}
@@ -307,99 +305,98 @@
 		"special_tweaks_listid"		"-1"
 		"Protection upgrades"
 		{
-			"Attr0"		"Health Bonus"
-			"Attr1"		"health regen"
-			"Attr3"		"Armor Capability"
-			"Attr19"	"Defense"
-			"Attr16"	"patient overheal bonus"
-			"Attr7"		"critical block rating"
+			"0"		"Health Bonus"
+			"1"		"health regen"
+			"2"		"Armor Capability"
+			"3"		"Defense"
+			"4"		"patient overheal bonus"
+			"5"		"critical block rating"
 		}
 		"Physical upgrades"
 		{
-			"Attr0"		"move speed(PY)"
-			"Attr1"		"jump height"
-			"Attr10"	"increased air control"
-			"Attr3"		"knockback resistance"
-			"Attr6"		"cancel falling damage"
-			"Attr8"		"Weighdown Ability"
-			
+			"0"		"move speed(PY)"
+			"2"		"jump height"
+			"3"		"increased air control"
+			"4"		"knockback resistance"
+			"5"		"cancel falling damage"
+			"6"		"Weighdown Ability"
 		}
 		"Ammo upgrades"
 		{
-			"Attr0"		"maxammo primary increased"
-			"Attr1"		"maxammo secondary increased"
-			"Attr2"		"ammo regen"
+			"0"		"maxammo primary increased"
+			"1"		"maxammo secondary increased"
+			"2"		"ammo regen"
 		}
 		"Status Effect Upgrades"
 		{
-			"Attr1"		"buff magnitude bonus"
-			"Attr2"		"debuff magnitude bonus"
-			"Attr16"	"debuff block rating"
-			"Attr18"	"Bleed Resistance"
-			"Attr19"	"Slow Resistance"
+			"0"		"buff magnitude bonus"
+			"1"		"debuff magnitude bonus"
+			"2"		"debuff block rating"
+			"3"		"Bleed Resistance"
+			"4"		"Slow Resistance"
 		}
 		"Arcane Upgrades"
 		{
 			"!Arcane Stats"
 			{
-				"Attr1"		"damage bonus"
-				"Attr2"		"Arcane Power"
-				"Attr3"		"Arcane Damage"
-				"Attr4"		"Max Focus"
-				"Attr5"		"Focus Regeneration"
-				"Attr6"		"Arcane Cooldown Reduction"
-				"Attr7"		"Arcane Spell Level"
+				"0"		"damage bonus"
+				"1"		"ap (global)"
+				"2"		"Arcane Power"
+				"3"		"Max Focus"
+				"4"		"Focus Regeneration"
+				"5"		"Arcane Cooldown Reduction"
+				"6"		"Arcane Spell Level"
 			}
 			"!Tier 1 Arcane Spells"
 			{
-				"Attr1"		"Arcane - Zap"
-				"Attr2"		"Arcane - Blacksky Eye"
-				"Attr3"		"Arcane - Lightning Strike"
-				"Attr4"		"Arcane - Healing Aura"
-				"Attr5"		"Arcane - Darkmoon Blade"
+				"0"		"Arcane - Zap"
+				"1"		"Arcane - Blacksky Eye"
+				"2"		"Arcane - Lightning Strike"
+				"3"		"Arcane - Healing Aura"
+				"4"		"Arcane - Darkmoon Blade"
 			}
 			"!Tier 2 Arcane Spells"
 			{
-				"Attr1"		"Arcane - Sunlight Spear"
-				"Attr2"		"Arcane - Lightning Enchantment"
-				"Attr3"		"Arcane - Snap Freeze"
-				"Attr4"		"Arcane - Arcane Prison"
-				"Attr4"		"Arcane - Karmic Justice"
-				"Attr5"		"Arcane - Snowstorm"
-				"Attr6"		"Arcane - Inferno"
+				"0"		"Arcane - Sunlight Spear"
+				"1"		"Arcane - Lightning Enchantment"
+				"2"		"Arcane - Snap Freeze"
+				"3"		"Arcane - Arcane Prison"
+				"4"		"Arcane - Karmic Justice"
+				"5"		"Arcane - Snowstorm"
+				"6"		"Arcane - Inferno"
 			}
 			"!Tier 3 Arcane Spells"
 			{
-				"Attr0"		"Arcane - A Call Beyond"
-				"Attr1"		"Arcane - Infernal Enchantment"
-				"Attr2"		"Arcane - Splitting Thunder"
+				"0"		"Arcane - A Call Beyond"
+				"1"		"Arcane - Infernal Enchantment"
+				"2"		"Arcane - Splitting Thunder"
 			}
 		}
 		"Powerup Upgrades"
 		{
 			"!Offensive Powerups"
 			{
-				"Attr0"		"Strength Powerup"
-				"Attr1"		"Vampire Powerup"
-				"Attr2"		"Revenge Powerup"
-				"Attr3"		"Precision Powerup"
-				"Attr4"		"Knockout Powerup"
-				"Attr5"		"Supernova Powerup"
+				"0"		"Strength Powerup"
+				"1"		"Vampire Powerup"
+				"2"		"Revenge Powerup"
+				"3"		"Precision Powerup"
+				"4"		"Knockout Powerup"
+				"5"		"Supernova Powerup"
 			}
 			"!Defensive Powerups"
 			{
-				"Attr0"		"Resistance Powerup"
-				"Attr1"		"Regeneration Powerup"
-				"Attr2"		"Inverter Powerup"
+				"0"		"Resistance Powerup"
+				"1"		"Regeneration Powerup"
+				"2"		"Inverter Powerup"
 			}
 			"!Support Powerups"
 			{
-				"Attr0"		"King Powerup"
-				"Attr1"		"Plague Powerup"
+				"0"		"King Powerup"
+				"1"		"Plague Powerup"
 			}
 			"!Misc. Powerups"
 			{
-				"Attr0"		"Agility Powerup"
+				"0"		"Agility Powerup"
 			}
 		}
 	}
@@ -408,99 +405,98 @@
 		"special_tweaks_listid"		"-1"
 		"Protection upgrades"
 		{
-			"Attr0"		"Health Bonus (Heavy)"
-			"Attr1"		"health regen"
-			"Attr3"		"Armor Capability"
-			"Attr19"	"Defense"
-			"Attr16"	"patient overheal bonus"
-			"Attr7"		"critical block rating"
+			"0"		"Health Bonus (Heavy)"
+			"1"		"health regen"
+			"2"		"Armor Capability"
+			"3"		"Defense"
+			"4"		"patient overheal bonus"
+			"5"		"critical block rating"
 		}
 		"Physical upgrades"
 		{
-			"Attr0"		"move speed (heavy)"
-			"Attr1"		"jump height"
-			"Attr10"	"increased air control"
-			"Attr3"		"knockback resistance"
-			"Attr6"		"cancel falling damage"
-			"Attr8"		"Weighdown Ability"
-			
+			"1"		"move speed (heavy)"
+			"2"		"jump height"
+			"3"		"increased air control"
+			"4"		"knockback resistance"
+			"5"		"cancel falling damage"
+			"6"		"Weighdown Ability"
 		}
 		"Ammo upgrades"
 		{
-			"Attr0"		"maxammo primary increased"
-			"Attr1"		"maxammo secondary increased"
-			"Attr2"		"ammo regen"
+			"0"		"maxammo primary increased"
+			"1"		"maxammo secondary increased"
+			"2"		"ammo regen"
 		}
 		"Status Effect Upgrades"
 		{
-			"Attr1"		"buff magnitude bonus"
-			"Attr2"		"debuff magnitude bonus"
-			"Attr16"	"debuff block rating"
-			"Attr18"	"Bleed Resistance"
-			"Attr19"	"Slow Resistance"
+			"0"		"buff magnitude bonus"
+			"1"		"debuff magnitude bonus"
+			"2"		"debuff block rating"
+			"3"		"Bleed Resistance"
+			"4"		"Slow Resistance"
 		}
 		"Arcane Upgrades"
 		{
 			"!Arcane Stats"
 			{
-				"Attr1"		"damage bonus"
-				"Attr2"		"Arcane Power"
-				"Attr3"		"Arcane Damage"
-				"Attr4"		"Max Focus"
-				"Attr5"		"Focus Regeneration"
-				"Attr6"		"Arcane Cooldown Reduction"
-				"Attr7"		"Arcane Spell Level"
+				"0"		"damage bonus"
+				"1"		"ap (global)"
+				"2"		"Arcane Power"
+				"3"		"Max Focus"
+				"4"		"Focus Regeneration"
+				"5"		"Arcane Cooldown Reduction"
+				"6"		"Arcane Spell Level"
 			}
 			"!Tier 1 Arcane Spells"
 			{
-				"Attr1"		"Arcane - Zap"
-				"Attr2"		"Arcane - Blacksky Eye"
-				"Attr3"		"Arcane - Lightning Strike"
-				"Attr4"		"Arcane - Healing Aura"
-				"Attr5"		"Arcane - Darkmoon Blade"
-				"Attr6"		"Arcane - Shockwave"
+				"0"		"Arcane - Zap"
+				"1"		"Arcane - Blacksky Eye"
+				"2"		"Arcane - Lightning Strike"
+				"3"		"Arcane - Healing Aura"
+				"4"		"Arcane - Darkmoon Blade"
+				"5"		"Arcane - Shockwave"
 			}
 			"!Tier 2 Arcane Spells"
 			{
-				"Attr1"		"Arcane - Sunlight Spear"
-				"Attr2"		"Arcane - Lightning Enchantment"
-				"Attr3"		"Arcane - Snap Freeze"
-				"Attr4"		"Arcane - Arcane Prison"
-				"Attr4"		"Arcane - Karmic Justice"
-				"Attr5"		"Arcane - Snowstorm"
+				"0"		"Arcane - Sunlight Spear"
+				"1"		"Arcane - Lightning Enchantment"
+				"2"		"Arcane - Snap Freeze"
+				"3"		"Arcane - Arcane Prison"
+				"4"		"Arcane - Karmic Justice"
+				"5"		"Arcane - Snowstorm"
 			}
 			"!Tier 3 Arcane Spells"
 			{
-				"Attr0"		"Arcane - A Call Beyond"
-				"Attr1"		"Arcane - Infernal Enchantment"
-				"Attr2"		"Arcane - Splitting Thunder"
+				"0"		"Arcane - A Call Beyond"
+				"1"		"Arcane - Infernal Enchantment"
+				"2"		"Arcane - Splitting Thunder"
 			}
 		}
 		"Powerup Upgrades"
 		{
 			"!Offensive Powerups"
 			{
-				"Attr0"		"Strength Powerup"
-				"Attr1"		"Vampire Powerup"
-				"Attr2"		"Revenge Powerup"
-				"Attr3"		"Precision Powerup"
-				"Attr4"		"Knockout Powerup"
-				"Attr5"		"Supernova Powerup"
+				"0"		"Strength Powerup"
+				"1"		"Vampire Powerup"
+				"2"		"Revenge Powerup"
+				"3"		"Precision Powerup"
+				"4"		"Knockout Powerup"
+				"5"		"Supernova Powerup"
 			}
 			"!Defensive Powerups"
 			{
-				"Attr0"		"Resistance Powerup"
-				"Attr1"		"Regeneration Powerup"
-				"Attr2"		"Inverter Powerup"
+				"0"		"Resistance Powerup"
+				"1"		"Regeneration Powerup"
+				"2"		"Inverter Powerup"
 			}
 			"!Support Powerups"
 			{
-				"Attr0"		"King Powerup"
-				"Attr1"		"Plague Powerup"
+				"0"		"King Powerup"
+				"1"		"Plague Powerup"
 			}
 			"!Misc. Powerups"
 			{
-				"Attr0"		"Agility Powerup"
+				"0"		"Agility Powerup"
 			}
 		}
 	}
@@ -509,99 +505,99 @@
 		"special_tweaks_listid"		"-1"
 		"Protection upgrades"
 		{
-			"Attr0"		"Health Bonus"
-			"Attr1"		"health regen"
-			"Attr3"		"Armor Capability"
-			"Attr19"	"Defense"
-			"Attr16"	"patient overheal bonus"
-			"Attr7"		"critical block rating"
+			"0"		"Health Bonus"
+			"1"		"health regen"
+			"2"		"Armor Capability"
+			"3"		"Defense"
+			"4"		"patient overheal bonus"
+			"5"		"critical block rating"
 		}
 		"Physical upgrades"
 		{
-			"Attr0"		"move speed(DE)"
-			"Attr1"		"jump height"
-			"Attr10"	"increased air control"
-			"Attr3"		"knockback resistance"
-			"Attr6"		"cancel falling damage"
-			"Attr8"		"Weighdown Ability"
+			"1"		"move speed(DE)"
+			"2"		"jump height"
+			"3"		"increased air control"
+			"4"		"knockback resistance"
+			"5"		"cancel falling damage"
+			"6"		"Weighdown Ability"
 			
 		}
 		"Ammo upgrades"
 		{
-			"Attr0"		"maxammo primary increased"
-			"Attr1"		"maxammo secondary increased"
-			"Attr2"		"ammo regen"
+			"0"		"maxammo primary increased"
+			"1"		"maxammo secondary increased"
+			"2"		"ammo regen"
 		}
 		"Status Effect Upgrades"
 		{
-			"Attr1"		"buff magnitude bonus"
-			"Attr2"		"debuff magnitude bonus"
-			"Attr16"	"debuff block rating"
-			"Attr18"	"Bleed Resistance"
-			"Attr19"	"Slow Resistance"
+			"0"		"buff magnitude bonus"
+			"1"		"debuff magnitude bonus"
+			"2"		"debuff block rating"
+			"3"		"Bleed Resistance"
+			"4"		"Slow Resistance"
 		}
 		"Arcane Upgrades"
 		{
 			"!Arcane Stats"
 			{
-				"Attr1"		"damage bonus"
-				"Attr2"		"Arcane Power"
-				"Attr3"		"Arcane Damage"
-				"Attr4"		"Max Focus"
-				"Attr5"		"Focus Regeneration"
-				"Attr6"		"Arcane Cooldown Reduction"
-				"Attr7"		"Arcane Spell Level"
+				"0"		"damage bonus"
+				"1"		"ap (global)"
+				"2"		"Arcane Power"
+				"3"		"Max Focus"
+				"4"		"Focus Regeneration"
+				"5"		"Arcane Cooldown Reduction"
+				"6"		"Arcane Spell Level"
 			}
 			"!Tier 1 Arcane Spells"
 			{
-				"Attr1"		"Arcane - Zap"
-				"Attr2"		"Arcane - Blacksky Eye"
-				"Attr3"		"Arcane - Lightning Strike"
-				"Attr4"		"Arcane - Healing Aura"
-				"Attr5"		"Arcane - Darkmoon Blade"
+				"0"		"Arcane - Zap"
+				"1"		"Arcane - Blacksky Eye"
+				"2"		"Arcane - Lightning Strike"
+				"3"		"Arcane - Healing Aura"
+				"4"		"Arcane - Darkmoon Blade"
 			}
 			"!Tier 2 Arcane Spells"
 			{
-				"Attr1"		"Arcane - Sunlight Spear"
-				"Attr2"		"Arcane - Lightning Enchantment"
-				"Attr3"		"Arcane - Snap Freeze"
-				"Attr4"		"Arcane - Arcane Prison"
-				"Attr4"		"Arcane - Karmic Justice"
-				"Attr5"		"Arcane - Snowstorm"
-				"Attr6"		"Arcane - Mine Field"
+				"0"		"Arcane - Sunlight Spear"
+				"1"		"Arcane - Lightning Enchantment"
+				"2"		"Arcane - Snap Freeze"
+				"3"		"Arcane - Arcane Prison"
+				"4"		"Arcane - Karmic Justice"
+				"5"		"Arcane - Snowstorm"
+				"6"		"Arcane - Mine Field"
 			}
 			"!Tier 3 Arcane Spells"
 			{
-				"Attr0"		"Arcane - A Call Beyond"
-				"Attr1"		"Arcane - Infernal Enchantment"
-				"Attr2"		"Arcane - Splitting Thunder"
+				"0"		"Arcane - A Call Beyond"
+				"1"		"Arcane - Infernal Enchantment"
+				"2"		"Arcane - Splitting Thunder"
 			}
 		}
 		"Powerup Upgrades"
 		{
 			"!Offensive Powerups"
 			{
-				"Attr0"		"Strength Powerup"
-				"Attr1"		"Vampire Powerup"
-				"Attr2"		"Revenge Powerup"
-				"Attr3"		"Precision Powerup"
-				"Attr4"		"Knockout Powerup"
-				"Attr5"		"Supernova Powerup"
+				"0"		"Strength Powerup"
+				"1"		"Vampire Powerup"
+				"2"		"Revenge Powerup"
+				"3"		"Precision Powerup"
+				"4"		"Knockout Powerup"
+				"5"		"Supernova Powerup"
 			}
 			"!Defensive Powerups"
 			{
-				"Attr0"		"Resistance Powerup"
-				"Attr1"		"Regeneration Powerup"
-				"Attr2"		"Inverter Powerup"
+				"0"		"Resistance Powerup"
+				"1"		"Regeneration Powerup"
+				"2"		"Inverter Powerup"
 			}
 			"!Support Powerups"
 			{
-				"Attr0"		"King Powerup"
-				"Attr1"		"Plague Powerup"
+				"0"		"King Powerup"
+				"1"		"Plague Powerup"
 			}
 			"!Misc. Powerups"
 			{
-				"Attr0"		"Agility Powerup"
+				"0"		"Agility Powerup"
 			}
 		}
 	}
@@ -610,70 +606,70 @@
 		"special_tweaks_listid"		"-1"
 		"Protection upgrades"
 		{
-			"Attr0"		"Health Bonus"
-			"Attr1"		"health regen"
-			"Attr3"		"Armor Capability"
-			"Attr19"	"Defense"
-			"Attr16"	"patient overheal bonus"
-			"Attr7"		"critical block rating"
+			"0"		"Health Bonus"
+			"1"		"health regen"
+			"2"		"Armor Capability"
+			"3"		"Defense"
+			"4"		"patient overheal bonus"
+			"5"		"critical block rating"
 		}
 		"Physical upgrades"
 		{
-			"Attr0"		"move speed(ME)"
-			"Attr1"		"jump height"
-			"Attr10"	"increased air control"
-			"Attr3"		"knockback resistance"
-			"Attr6"		"cancel falling damage"
-			"Attr8"		"Weighdown Ability"
+			"1"		"move speed(ME)"
+			"2"		"jump height"
+			"3"		"increased air control"
+			"4"		"knockback resistance"
+			"5"		"cancel falling damage"
+			"6"		"Weighdown Ability"
 			
 		}
 		"Ammo upgrades"
 		{
-			"Attr0"		"maxammo primary increased"
-			"Attr2"		"ammo regen"
+			"0"		"maxammo primary increased"
+			"1"		"ammo regen"
 		}
 		"Status Effect Upgrades"
 		{
-			"Attr1"		"buff magnitude bonus"
-			"Attr2"		"debuff magnitude bonus"
-			"Attr16"	"debuff block rating"
-			"Attr18"	"Bleed Resistance"
-			"Attr19"	"Slow Resistance"
+			"0"		"buff magnitude bonus"
+			"1"		"debuff magnitude bonus"
+			"2"		"debuff block rating"
+			"3"		"Bleed Resistance"
+			"4"		"Slow Resistance"
 		}
 		"Arcane Upgrades"
 		{
 			"!Arcane Stats"
 			{
-				"Attr1"		"damage bonus"
-				"Attr2"		"Arcane Power"
-				"Attr3"		"Arcane Damage"
-				"Attr4"		"Max Focus"
-				"Attr5"		"Focus Regeneration"
-				"Attr6"		"Arcane Cooldown Reduction"
-				"Attr7"		"Arcane Spell Level"
+				"0"		"damage bonus"
+				"1"		"ap (global)"
+				"2"		"Arcane Power"
+				"3"		"Max Focus"
+				"4"		"Focus Regeneration"
+				"5"		"Arcane Cooldown Reduction"
+				"6"		"Arcane Spell Level"
 			}
 			"!Tier 1 Arcane Spells"
 			{
-				"Attr1"		"Arcane - Zap"
-				"Attr2"		"Arcane - Blacksky Eye"
-				"Attr3"		"Arcane - Lightning Strike"
-				"Attr4"		"Arcane - Healing Aura"
-				"Attr5"		"Arcane - Darkmoon Blade"
+				"0"		"Arcane - Zap"
+				"1"		"Arcane - Blacksky Eye"
+				"2"		"Arcane - Lightning Strike"
+				"3"		"Arcane - Healing Aura"
+				"4"		"Arcane - Darkmoon Blade"
 			}
 			"!Tier 2 Arcane Spells"
 			{
-				"Attr1"		"Arcane - Sunlight Spear"
-				"Attr2"		"Arcane - Lightning Enchantment"
-				"Attr3"		"Arcane - Snap Freeze"
-				"Attr4"		"Arcane - Arcane Prison"
-				"Attr4"		"Arcane - Karmic Justice"
-				"Attr5"		"Arcane - Snowstorm"
+				"0"		"Arcane - Sunlight Spear"
+				"1"		"Arcane - Lightning Enchantment"
+				"2"		"Arcane - Snap Freeze"
+				"3"		"Arcane - Arcane Prison"
+				"4"		"Arcane - Karmic Justice"
+				"5"		"Arcane - Snowstorm"
 			}
 			"!Tier 3 Arcane Spells"
 			{
-				"Attr0"		"Arcane - A Call Beyond"
-				"Attr1"		"Arcane - Infernal Enchantment"
-				"Attr2"		"Arcane - Splitting Thunder"
+				"0"		"Arcane - A Call Beyond"
+				"1"		"Arcane - Infernal Enchantment"
+				"2"		"Arcane - Splitting Thunder"
 				"Attr3"		"Arcane - Soothing Sunlight"
 			}
 		}
@@ -681,27 +677,27 @@
 		{
 			"!Offensive Powerups"
 			{
-				"Attr0"		"Strength Powerup"
-				"Attr1"		"Vampire Powerup"
-				"Attr2"		"Revenge Powerup"
-				"Attr3"		"Precision Powerup"
-				"Attr4"		"Knockout Powerup"
-				"Attr5"		"Supernova Powerup"
+				"0"		"Strength Powerup"
+				"1"		"Vampire Powerup"
+				"2"		"Revenge Powerup"
+				"3"		"Precision Powerup"
+				"4"		"Knockout Powerup"
+				"5"		"Supernova Powerup"
 			}
 			"!Defensive Powerups"
 			{
-				"Attr0"		"Resistance Powerup"
-				"Attr1"		"Regeneration Powerup"
-				"Attr2"		"Inverter Powerup"
+				"0"		"Resistance Powerup"
+				"1"		"Regeneration Powerup"
+				"2"		"Inverter Powerup"
 			}
 			"!Support Powerups"
 			{
-				"Attr0"		"King Powerup"
-				"Attr1"		"Plague Powerup"
+				"0"		"King Powerup"
+				"1"		"Plague Powerup"
 			}
 			"!Misc. Powerups"
 			{
-				"Attr0"		"Agility Powerup"
+				"0"		"Agility Powerup"
 			}
 		}
 	}
@@ -710,50 +706,50 @@
 		"special_tweaks_listid"		"-1"
 		"Protection upgrades"
 		{
-			"Attr0"		"Health Bonus"
-			"Attr1"		"health regen"
-			"Attr3"		"Armor Capability"
-			"Attr19"	"Defense"
-			"Attr16"	"patient overheal bonus"
-			"Attr7"		"critical block rating"
+			"0"		"Health Bonus"
+			"1"		"health regen"
+			"2"		"Armor Capability"
+			"3"		"Defense"
+			"4"		"patient overheal bonus"
+			"5"		"critical block rating"
 		}
 		"Physical upgrades"
 		{
-			"Attr0"		"move speed(SP)"
-			"Attr1"		"jump height"
-			"Attr10"	"increased air control"
-			"Attr3"		"knockback resistance"
-			"Attr6"		"cancel falling damage"
-			"Attr8"		"Weighdown Ability"
+			"1"		"move speed(SP)"
+			"2"		"jump height"
+			"3"		"increased air control"
+			"4"		"knockback resistance"
+			"5"		"cancel falling damage"
+			"6"		"Weighdown Ability"
 			
 		}
 		"Ammo & Cloak upgrades"
 		{
-			"Attr1"		"maxammo secondary increased"
-			"Attr2"		"ammo regen"
-			"Attr3"		"cloak consume rate"
-			"Attr4"		"cloak rate"
-			"Attr5"		"decloak rate"
+			"0"		"maxammo secondary increased"
+			"1"		"ammo regen"
+			"2"		"cloak consume rate"
+			"3"		"cloak rate"
+			"4"		"decloak rate"
 		}
 		"Status Effect Upgrades"
 		{
-			"Attr1"		"buff magnitude bonus"
-			"Attr2"		"debuff magnitude bonus"
-			"Attr16"	"debuff block rating"
-			"Attr18"	"Bleed Resistance"
-			"Attr19"	"Slow Resistance"
+			"0"		"buff magnitude bonus"
+			"1"		"debuff magnitude bonus"
+			"2"		"debuff block rating"
+			"3"		"Bleed Resistance"
+			"4"		"Slow Resistance"
 		}
 		"Arcane Upgrades"
 		{
 			"!Arcane Stats"
 			{
-				"Attr1"		"damage bonus"
-				"Attr2"		"Arcane Power"
-				"Attr3"		"Arcane Damage"
-				"Attr4"		"Max Focus"
-				"Attr5"		"Focus Regeneration"
-				"Attr6"		"Arcane Cooldown Reduction"
-				"Attr7"		"Arcane Spell Level"
+				"0"		"damage bonus"
+				"1"		"ap (global)"
+				"2"		"Arcane Power"
+				"3"		"Max Focus"
+				"4"		"Focus Regeneration"
+				"5"		"Arcane Cooldown Reduction"
+				"6"		"Arcane Spell Level"
 			}
 			"!Tier 1 Arcane Spells"
 			{
@@ -766,45 +762,45 @@
 			}
 			"!Tier 2 Arcane Spells"
 			{
-				"Attr1"		"Arcane - Sunlight Spear"
-				"Attr2"		"Arcane - Lightning Enchantment"
-				"Attr3"		"Arcane - Snap Freeze"
-				"Attr4"		"Arcane - Arcane Prison"
-				"Attr4"		"Arcane - Karmic Justice"
-				"Attr5"		"Arcane - Snowstorm"
+				"0"		"Arcane - Sunlight Spear"
+				"1"		"Arcane - Lightning Enchantment"
+				"2"		"Arcane - Snap Freeze"
+				"3"		"Arcane - Arcane Prison"
+				"4"		"Arcane - Karmic Justice"
+				"5"		"Arcane - Snowstorm"
 			}
 			"!Tier 3 Arcane Spells"
 			{
-				"Attr0"		"Arcane - A Call Beyond"
-				"Attr1"		"Arcane - Infernal Enchantment"
-				"Attr2"		"Arcane - Splitting Thunder"
+				"0"		"Arcane - A Call Beyond"
+				"1"		"Arcane - Infernal Enchantment"
+				"2"		"Arcane - Splitting Thunder"
 			}
 		}
 		"Powerup Upgrades"
 		{
 			"!Offensive Powerups"
 			{
-				"Attr0"		"Strength Powerup"
-				"Attr1"		"Vampire Powerup"
-				"Attr2"		"Revenge Powerup"
-				"Attr3"		"Precision Powerup"
-				"Attr4"		"Knockout Powerup"
-				"Attr5"		"Supernova Powerup"
+				"0"		"Strength Powerup"
+				"1"		"Vampire Powerup"
+				"2"		"Revenge Powerup"
+				"3"		"Precision Powerup"
+				"4"		"Knockout Powerup"
+				"5"		"Supernova Powerup"
 			}
 			"!Defensive Powerups"
 			{
-				"Attr0"		"Resistance Powerup"
-				"Attr1"		"Regeneration Powerup"
-				"Attr2"		"Inverter Powerup"
+				"0"		"Resistance Powerup"
+				"1"		"Regeneration Powerup"
+				"2"		"Inverter Powerup"
 			}
 			"!Support Powerups"
 			{
-				"Attr0"		"King Powerup"
-				"Attr1"		"Plague Powerup"
+				"0"		"King Powerup"
+				"1"		"Plague Powerup"
 			}
 			"!Misc. Powerups"
 			{
-				"Attr0"		"Agility Powerup"
+				"0"		"Agility Powerup"
 			}
 		}
 	}
@@ -813,102 +809,102 @@
 		"special_tweaks_listid"		"-1"
 		"Protection upgrades"
 		{
-			"Attr0"		"Health Bonus"
-			"Attr1"		"health regen"
-			"Attr3"		"Armor Capability"
-			"Attr19"	"Defense"
-			"Attr16"	"patient overheal bonus"
-			"Attr7"		"critical block rating"
+			"0"		"Health Bonus"
+			"1"		"health regen"
+			"2"		"Armor Capability"
+			"3"		"Defense"
+			"4"		"patient overheal bonus"
+			"5"		"critical block rating"
 		}
 		"Physical upgrades"
 		{
-			"Attr0"		"move speed(EN)"
-			"Attr1"		"jump height"
-			"Attr10"	"increased air control"
-			"Attr3"		"knockback resistance"
-			"Attr6"		"cancel falling damage"
-			"Attr8"		"Weighdown Ability"
+			"1"		"move speed(EN)"
+			"2"		"jump height"
+			"3"		"increased air control"
+			"4"		"knockback resistance"
+			"5"		"cancel falling damage"
+			"6"		"Weighdown Ability"
 			
 		}
 		
 		"Ammo upgrades"
 		{
-			"Attr2"		"maxammo primary increased"
-			"Attr3"		"maxammo secondary increased"
-			"Attr4"		"ammo regen"
-			"Attr0"		"maxammo metal increased"
-			"Attr1"		"metal regen"
+			"0"		"maxammo primary increased"
+			"1"		"maxammo secondary increased"
+			"2"		"ammo regen"
+			"3"		"maxammo metal increased"
+			"4"		"metal regen"
 		}
 		"Status Effect Upgrades"
 		{
-			"Attr1"		"buff magnitude bonus"
-			"Attr2"		"debuff magnitude bonus"
-			"Attr16"	"debuff block rating"
-			"Attr18"	"Bleed Resistance"
-			"Attr19"	"Slow Resistance"
+			"0"		"buff magnitude bonus"
+			"1"		"debuff magnitude bonus"
+			"2"		"debuff block rating"
+			"3"		"Bleed Resistance"
+			"4"		"Slow Resistance"
 		}
 		"Arcane Upgrades"
 		{
 			"!Arcane Stats"
 			{
-				"Attr1"		"damage bonus"
-				"Attr2"		"Arcane Power"
-				"Attr3"		"Arcane Damage"
-				"Attr4"		"Max Focus"
-				"Attr5"		"Focus Regeneration"
-				"Attr6"		"Arcane Cooldown Reduction"
-				"Attr7"		"Arcane Spell Level"
+				"0"		"damage bonus"
+				"1"		"ap (global)"
+				"2"		"Arcane Power"
+				"3"		"Max Focus"
+				"4"		"Focus Regeneration"
+				"5"		"Arcane Cooldown Reduction"
+				"6"		"Arcane Spell Level"
 			}
 			"!Tier 1 Arcane Spells"
 			{
-				"Attr1"		"Arcane - Zap"
-				"Attr2"		"Arcane - Blacksky Eye"
-				"Attr3"		"Arcane - Lightning Strike"
-				"Attr4"		"Arcane - Healing Aura"
-				"Attr5"		"Arcane - Darkmoon Blade"
+				"0"		"Arcane - Zap"
+				"1"		"Arcane - Blacksky Eye"
+				"2"		"Arcane - Lightning Strike"
+				"3"		"Arcane - Healing Aura"
+				"4"		"Arcane - Darkmoon Blade"
 			}
 			"!Tier 2 Arcane Spells"
 			{
-				"Attr1"		"Arcane - Sunlight Spear"
-				"Attr2"		"Arcane - Lightning Enchantment"
-				"Attr3"		"Arcane - Snap Freeze"
-				"Attr4"		"Arcane - Arcane Prison"
-				"Attr4"		"Arcane - Karmic Justice"
-				"Attr5"		"Arcane - Snowstorm"
-				"Attr6"		"Arcane - Auto-Sentry"
+				"0"		"Arcane - Sunlight Spear"
+				"1"		"Arcane - Lightning Enchantment"
+				"2"		"Arcane - Snap Freeze"
+				"3"		"Arcane - Arcane Prison"
+				"4"		"Arcane - Karmic Justice"
+				"5"		"Arcane - Snowstorm"
+				"6"		"Arcane - Auto-Sentry"
 			}
 			"!Tier 3 Arcane Spells"
 			{
-				"Attr0"		"Arcane - A Call Beyond"
-				"Attr1"		"Arcane - Infernal Enchantment"
-				"Attr2"		"Arcane - Splitting Thunder"
+				"0"		"Arcane - A Call Beyond"
+				"1"		"Arcane - Infernal Enchantment"
+				"2"		"Arcane - Splitting Thunder"
 			}
 		}
 		"Powerup Upgrades"
 		{
 			"!Offensive Powerups"
 			{
-				"Attr0"		"Strength Powerup"
-				"Attr1"		"Vampire Powerup"
-				"Attr2"		"Revenge Powerup"
-				"Attr3"		"Precision Powerup"
-				"Attr4"		"Knockout Powerup"
-				"Attr5"		"Supernova Powerup"
+				"0"		"Strength Powerup"
+				"1"		"Vampire Powerup"
+				"2"		"Revenge Powerup"
+				"3"		"Precision Powerup"
+				"4"		"Knockout Powerup"
+				"5"		"Supernova Powerup"
 			}
 			"!Defensive Powerups"
 			{
-				"Attr0"		"Resistance Powerup"
-				"Attr1"		"Regeneration Powerup"
-				"Attr2"		"Inverter Powerup"
+				"0"		"Resistance Powerup"
+				"1"		"Regeneration Powerup"
+				"2"		"Inverter Powerup"
 			}
 			"!Support Powerups"
 			{
-				"Attr0"		"King Powerup"
-				"Attr1"		"Plague Powerup"
+				"0"		"King Powerup"
+				"1"		"Plague Powerup"
 			}
 			"!Misc. Powerups"
 			{
-				"Attr0"		"Agility Powerup"
+				"0"		"Agility Powerup"
 			}
 		}
 	}
