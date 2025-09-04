@@ -1572,11 +1572,9 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 		}
 		
 		if(weaponFireRate[weapon] > 0.0){
-			int i = RoundToCeil(TICKRATE/weaponFireRate[weapon]);
-			if(i <= 6 && i >= 0)
+			if(weaponFireRate[weapon] > TICKRATE)
 			{
-				if(i == 0) i = 1;
-				damage *= i*weaponFireRate[weapon]/TICKRATE;
+				damage *= 1+(weaponFireRate[weapon]-TICKRATE)/TICKRATE;
 			}
 			int secondary = GetWeapon(attacker, 1);
 			if(IsValidWeapon(secondary)){

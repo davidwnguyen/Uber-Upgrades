@@ -3907,7 +3907,6 @@ ResetVariables(){
 		MenuTimer[client] = 0.0;
 		ImpulseTimer[client] = 0.0;
 		g_flLastAttackTime[client] = 0.0;
-		RPS[client] = 0.0;
 		lastMinesTime[client] = 0.0;
 		weaponTrailTimer[client] = 0.0;
 		disableIFMiniHud[client] = 0.0;

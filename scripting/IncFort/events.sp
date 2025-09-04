@@ -759,6 +759,26 @@ public MRESReturn OnAirblast(int weapon, Handle hParams){
 	}
 	return MRES_Ignored;
 }
+public MRESReturn OnPrimaryAttack(int weapon, Handle hParams){
+	if(IsValidWeapon(weapon)){
+		float tickInterval = GetTickInterval();
+		float nextFireTime = GetEntPropFloat(weapon, Prop_Send, "m_flNextPrimaryAttack");
+		float fireInterval = nextFireTime-GetGameTime();
+		if(fireInterval <= tickInterval)
+			return MRES_Ignored;
+	
+		float leftover = 1-((fireInterval/tickInterval)-RoundToFloor(fireInterval/tickInterval));
+		weaponSavedAttackTime[weapon] += leftover*tickInterval;
+		if(weaponSavedAttackTime[weapon] >= tickInterval){
+			int overflowTimes = RoundToFloor(weaponSavedAttackTime[weapon]/tickInterval);
+			weaponSavedAttackTime[weapon] -= overflowTimes*tickInterval;
+			SetEntPropFloat(weapon, Prop_Send, "m_flNextPrimaryAttack", GetGameTime()+tickInterval*(RoundToCeil(fireInterval/tickInterval)-overflowTimes));
+			
+			//PrintToServer("times: %d | saved time: %f | old interval: %f | new interval: %f", overflowTimes, weaponSavedAttackTime[weapon], fireInterval, tickInterval*(RoundToCeil(fireInterval/tickInterval)-overflowTimes));
+		}
+	}
+	return MRES_Ignored;
+}
 public MRESReturn OnThermalThrusterLaunch(int weapon){
 	if(IsValidWeapon(weapon)){
 		int owner = getOwner(weapon);
@@ -966,6 +986,7 @@ public OnEntityCreated(entity, const char[] classname)
 
 	int reference = EntIndexToEntRef(entity);
 	weaponFireRate[entity] = -1.0;
+	weaponSavedAttackTime[entity] = 0.0;
 	isAimlessProjectile[entity] = false;
 	
 	if(StrEqual(classname, "obj_attachment_sapper"))
@@ -2753,7 +2774,6 @@ public Action TF2_CalcIsAttackCritical(int client, int weapon, char[] weaponname
 	int CWeapon = weapon;
 	if(IsValidWeapon(CWeapon))
 	{
-		PrintToServer("%f", GetEntPropFloat(weapon, Prop_Send, "m_flNextPrimaryAttack")-GetGameTime());
 		int critRating = TF2Attrib_HookValueInt(0, "critical_rating", client);
 		if(critRating > 0){
 			float critRate = critRating/(critRating+200.0);

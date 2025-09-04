@@ -441,6 +441,13 @@ public void OnPluginStart()
 		DHookEnableDetour(BlastHook, true, OnBlastExplosion);
 	}
 
+	//On Airblast Use
+	Handle g_DHookOnPrimaryAttack= DHookCreateFromConf(hConf, "CTFWeaponBaseGun::PrimaryAttack()");
+	if(!IsValidHandle(g_DHookOnPrimaryAttack))
+		PrintToServer("CustomAttrs | g_DHookOnPrimaryAttack fucked up.");
+	else
+		DHookEnableDetour(g_DHookOnPrimaryAttack, true, OnPrimaryAttack);
+
 	//On Bullet Trace (THIS HAS A CONFLICT WITH RAFMOD?)
 	Handle g_DHookOnBulletTrace = DHookCreateFromConf(hConf, "CBaseEntity::DispatchTraceAttack()");
 	if(!IsValidHandle(g_DHookOnBulletTrace))

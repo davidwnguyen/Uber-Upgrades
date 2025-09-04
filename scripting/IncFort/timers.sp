@@ -1550,21 +1550,7 @@ public Action WaveFailed(Handle timer)
 	}
 	return Plugin_Stop;
 }
-public Action:RemoveFire(Handle timer, any:data)
-{
-	ResetPack(data);
-	
-	int client = ReadPackCell(data);
-	float loss = ReadPackFloat(data);
-	
-	RPS[client] -= loss;
-	
-	if(RPS[client] < 0.0)
-	{
-		RPS[client] = 0.0;
-	}
-	CloseHandle(data);
-}
+
 public Action:WeaponReGiveUpgrades(Handle timer, any:userid)
 {
 	int client = GetClientOfUserId(userid);

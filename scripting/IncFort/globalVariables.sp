@@ -337,7 +337,6 @@ float DarkmoonBlade[MAXPLAYERS+1];
 float DarkmoonBladeDuration[MAXPLAYERS+1];
 float InfernalEnchantment[MAXPLAYERS+1];
 float InfernalEnchantmentDuration[MAXPLAYERS+1];
-float RPS[MAXPLAYERS+1];
 float lastMinesTime[MAXPLAYERS+1];
 float weaponTrailTimer[MAXPLAYERS+1];
 float upgrades_weapon_cost[NB_WEAPONS];
@@ -376,6 +375,7 @@ float savedCharge[MAXPLAYERS+1];
 float chainLightningAbilityCharge[MAXPLAYERS+1];
 float sunstarDuration[MAXPLAYERS+1];
 float lastSentryFiring[MAXENTITIES];
+float weaponSavedAttackTime[MAXENTITIES];
 
 //String
 char given_upgrd_classnames[LISTS][LISTS_CATEGORIES][128]
