@@ -1,5 +1,8 @@
 "Phrases"
 {
+	"projectile spread multiplier" {
+		"en"		"Projectile Spread Multiplier"
+	}
 	"Flare Damage Bonus" {
 		"en"		"Flare Damage Bonus"
 	}

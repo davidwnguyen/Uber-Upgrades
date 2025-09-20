@@ -1824,29 +1824,7 @@ refreshUpgrades(client, slot)
 		}
 		if(slot != 4 && IsValidEdict(slotItem) && slotItem > 0 && HasEntProp(slotItem, Prop_Data, "m_iClip1"))
 		{
-			float Spread = 0.0;
-			Address spread1 = TF2Attrib_GetByName(slotItem, "spread penalty");
-			if(spread1 != Address_Null)
-			{
-				Spread += 1.0;
-				Spread *= (TF2Attrib_GetValue(spread1)*2.0);
-			}
-			Address spread2 = TF2Attrib_GetByName(slotItem, "weapon spread bonus");
-			if(spread2 != Address_Null)
-			{
-				Spread -= 0.1
-				Spread *= TF2Attrib_GetValue(spread2);
-			}
-			Address precisionPowerup = TF2Attrib_GetByName(client, "precision powerup");
-			if(precisionPowerup != Address_Null)
-			{
-				float precisionPowerupValue = TF2Attrib_GetValue(precisionPowerup);
-				if(precisionPowerupValue > 0.0){
-					Spread = 0.0;
-				}
-			}
-			if(Spread != 0.0)
-				TF2Attrib_SetByName(slotItem, "projectile spread angle penalty", Spread);
+			TF2Attrib_SetByName(slotItem, "projectile spread multiplier", TF2Attrib_HookValueFloat(1.0, "mult_spread_scale", slotItem));
 
 			Address reloadActive = TF2Attrib_GetByName(slotItem, "multiple sentries");
 			if(reloadActive!=Address_Null)
