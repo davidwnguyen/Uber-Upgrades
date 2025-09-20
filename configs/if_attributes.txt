@@ -7102,7 +7102,7 @@
 			"attr_class"	"critical_block_rating"
 			"description"	"Gives [100*{VALUE}/({VALUE}+800)]% chance of blocking crits.\nDecreases crit damage taken by -[100*({VALUE}/200)]%."
 			"global"		"1"
-			"cost"		"2000"
+			"cost"		"1200"
 			"value"		"20.0"
 			"init"		"0.00"
 			"max"		"200.00"

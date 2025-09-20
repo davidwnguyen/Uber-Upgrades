@@ -2541,6 +2541,8 @@ public OnGameFrame()
 					if(RageBuildup[client] > 0.0)
 					{
 						RageBuildup[client] -= TICKINTERVAL / 10.0//Revenge lasts 10 seconds (granted they aren't gaining it at the same time)
+						if (RageBuildup[client] < 0.0)
+							RageBuildup[client] = 0.0;
 					}
 					else
 					{

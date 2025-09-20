@@ -414,8 +414,8 @@ public Action:Timer_Every100MS(Handle timer)
 				if(RageActive[client] == true){
 					TF2_AddCondition(client, TFCond_CritCanteen, 1.0);
 					TF2_AddCondition(client, TFCond_SpeedBuffAlly, 1.0);
-					TF2_AddCondition(client, TFCond_DefenseBuffMmmph, 1.0);
 					TF2_AddCondition(client, TFCond_KingAura, 1.0);
+					giveDefenseBuff(client, 1.0);
 				}
 			}
 			else if(GetAttribute(client, "revenge powerup", 0.0) == 2)
@@ -425,11 +425,13 @@ public Action:Timer_Every100MS(Handle timer)
 				miniCritStatusAttacker[client] = GetGameTime() + 1.0;
 				TF2_AddCondition(client, TFCond_SpeedBuffAlly, 1.0);
 				if(RageBuildup[client] > 0.3){
-					TF2_AddCondition(client, TFCond_DefenseBuffMmmph, 1.0);
 					TF2_AddCondition(client, TFCond_KingAura, 1.0);
 				}
 				if(RageBuildup[client] > 0.65){
 					TF2_AddCondition(client, TFCond_CritCanteen, 1.0);
+				}
+				if(RageBuildup[client] > 0.8){
+					giveDefenseBuff(client, 1.0);
 				}
 
 				RageBuildup[client] -= 0.007
@@ -535,7 +537,7 @@ public Action:Timer_Every100MS(Handle timer)
 			if(strongholdEnabled[client]){
 				if(GetAttribute(client, "resistance powerup", 0.0) == 3.0){
 					Buff strongholdBonus;
-					strongholdBonus.init("Stronghold", "Crit immunity & 1.33x healing", Buff_Stronghold, 1, client, 1.0);
+					strongholdBonus.init("Stronghold", "Crit Immunity", Buff_Stronghold, 1, client, 1.0);
 					for(int i=1;i<=MaxClients;++i){
 						if(!IsValidClient3(i)) continue;
 						if(IsOnDifferentTeams(client, i)) continue;

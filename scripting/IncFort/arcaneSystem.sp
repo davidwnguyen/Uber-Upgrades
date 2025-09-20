@@ -1736,28 +1736,31 @@ CastWarp(client){
 	AddVectors(vecorigin, fwd, telepos);
 
     for (int i = 0; i < 3; ++i){
-        mins[i] -= 3;
-        maxs[i] += 3;
+        mins[i] -= 6;
+        maxs[i] += 6;
     }
 
     TR_TraceHullFilter(vecorigin, telepos, mins, maxs, MASK_PLAYERSOLID,TraceEntityWarp, client);
     TR_GetEndPosition(vec);
+	PrintToServer("Position: %.2f | %.2f | %.2f", vec[0], vec[1], vec[2]);
 
     GetClientMins(client, mins);
     GetClientMaxs(client, maxs);
     
     for (int i = 0; i < 3; ++i){
-        mins[i] -= 9;
-        maxs[i] += 9;
+        mins[i] -= 30;
+        maxs[i] += 30;
     }
 
 	float endpos[3];
-	ScaleVector(fwd, -0.02);
+	ScaleVector(fwd, -0.1);
 	
 	AddVectors(vec, fwd, endpos);
 
     TR_TraceHullFilter(endpos, vec, mins, maxs, MASK_PLAYERSOLID, TraceEntityFilterPlayers, client);
     TR_GetEndPosition(endpos);
+
+	PrintToServer("Adjusted Position: %.2f | %.2f | %.2f", endpos[0], endpos[1], endpos[2]);
 
 	TeleportEntity(client, endpos, _, {0.0,0.0,0.0});
 
