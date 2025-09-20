@@ -1,5 +1,14 @@
 "Phrases"
 {
+	"Flare Damage Bonus" {
+		"en"		"Flare Damage Bonus"
+	}
+	"Jar Damage Bonus" {
+		"en"		"Jar Damage Bonus"
+	}
+	"Melee Damage Bonus" {
+		"en"		"Melee Damage Bonus"
+	}
 	"damage penetrates reductions"{
 		"en"		"Damage Pierces Reductions"
 	}
@@ -1134,9 +1143,6 @@
 	"High-Velocity Bullets"{
 		"en"		"High-Velocity Bullets"
 	}
-	"Extra Damage Bonus(fireball)"{
-		"en"		"Extra Damage Bonus"
-	}
 	"fire rate penalty(crossbow)"{
 		"en"		"Fire Rate Penalty"
 	}
@@ -1267,7 +1273,7 @@
 		"en"		"Blast radius increased"
 	}
 	"Extra Damage Bonus"{
-		"en"		"Extra Damage Bonus"
+		"en"		"Weapon Damage Bonus"
 	}
 	"Armor Recharge Rate Multiplier"{
 		"en"		"Armor Recharge Rate Multiplier"
@@ -2319,9 +2325,6 @@
 	"is_festive"{
 		"en"		"Festivizer"
 	}
-	"Extra damage bonus"{
-		"en"		"Damage Increased"
-	}
 	"single wep holster time increased"{
 		"en"		"Holster Time Increased"
 	}
@@ -2551,7 +2554,10 @@
 		"en"		"Bullets Per Shot Bonus"
 	}
 	"bullets per shot bonus (single)"{
-		"en"		"Bullets per Shot Increased"
+		"en"		"Bullets per Shot Bonus"
+	}
+	"bullets per shot bonus (short circuit)" {
+		"en"		"Bullets per Shot Bonus"
 	}
 	"absorb damage while cloaked"{
 		"en"		"Broken Attribute"

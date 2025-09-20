@@ -1360,7 +1360,7 @@ DisplayItemChange(client,itemidx)
 		}
 		case 1098:
 		{
-			ChangeString = "The Classic | Charged shots have 60% more scaling.";
+			ChangeString = "The Classic | Charged shots have 45% more scaling.";
 		}
 		case 752:
 		{
