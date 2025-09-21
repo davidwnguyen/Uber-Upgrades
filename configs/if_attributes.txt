@@ -601,7 +601,7 @@
 			"value"		"0.25"
 			"init"		"1.00"
 			"optimizer_style" "1"
-			"description"	"1:1 pure fire rate multiplier.\nAll fire-rate not contributing to\nnext tick threshold is converted\ninto damage."
+			"description"	"1:1 pure fire rate multiplier."
 			"max"		"28.0"
 		}
 		"12.1"
@@ -614,7 +614,7 @@
 			"value"		"0.25"
 			"init"		"1.00"
 			"optimizer_style" "1"
-			"description"	"1:1 pure fire rate multiplier.\nAll fire-rate not contributing to\nnext tick threshold is converted\ninto damage."
+			"description"	"1:1 pure fire rate multiplier."
 			"max"		"7.0"
 		}
 		"12.2"

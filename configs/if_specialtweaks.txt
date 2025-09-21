@@ -61,8 +61,7 @@
 		}
 		"Blade Stream"
 		{
-			"requirement"					"150k"
-			"cost"							"15k"
+			"gamestage"						"1"
 			"restriction"					"1"
 			"fire rate bonus HIDDEN"		"5.0"
 			"mult crit dmg"				"4.0"
@@ -70,7 +69,7 @@
 		}
 		"Fan of Knives"
 		{
-			"requirement"					"200k"
+			"gamestage"						"1"
 			"restriction"					"1"
 			"Fan of Knives"					"1"
 			"slow enemy on hit major"		"0.8"

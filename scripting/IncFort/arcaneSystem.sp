@@ -1742,7 +1742,6 @@ CastWarp(client){
 
     TR_TraceHullFilter(vecorigin, telepos, mins, maxs, MASK_PLAYERSOLID,TraceEntityWarp, client);
     TR_GetEndPosition(vec);
-	PrintToServer("Position: %.2f | %.2f | %.2f", vec[0], vec[1], vec[2]);
 
     GetClientMins(client, mins);
     GetClientMaxs(client, maxs);
@@ -1759,8 +1758,6 @@ CastWarp(client){
 
     TR_TraceHullFilter(endpos, vec, mins, maxs, MASK_PLAYERSOLID, TraceEntityFilterPlayers, client);
     TR_GetEndPosition(endpos);
-
-	PrintToServer("Adjusted Position: %.2f | %.2f | %.2f", endpos[0], endpos[1], endpos[2]);
 
 	TeleportEntity(client, endpos, _, {0.0,0.0,0.0});
 

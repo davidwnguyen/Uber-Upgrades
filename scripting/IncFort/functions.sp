@@ -3585,7 +3585,7 @@ GivePowerupDescription(int client, char[] name, int amount){
 		if(amount == 2){
 			CPrintToChat(client, "{community}Quaker Powerup {default}| {lightcyan}Weighdown is automatically activated after jumping. Stomp damage is spread to 2 other targets. 2x jump height. Damage is increased by +0.1%% times downward velocity.");
 		}else if(amount == 3){
-			CPrintToChat(client, "{community}Warp Powerup {default}| {lightcyan}Replaces shift middle click with teleport to crosshair. Deals 1200 base damage to all enemies through path of teleport. Each use consumes 10%% focus. Applies +4 additive dmg taken on teleport hit.");
+			CPrintToChat(client, "{community}Warp Powerup {default}| {lightcyan}Replaces shift middle click with teleport to crosshair. Deals 1200 base damage to all enemies through path of teleport. Each use consumes 10%% focus. Applies +20 additive dmg taken on teleport hit.");
 		}else{
 			CPrintToChat(client, "{community}Agility Powerup {default}| {lightcyan}+50%% reload & fire rate. infinite jumps, speed boost, 1.4x speed, 1.3x jump height, 1.75x self push force, immunity to crowd control effects, and 35%% dodge chance.");
 		}
@@ -3961,7 +3961,7 @@ public bool TraceEntityWarp(int entity, int contentsMask, any data) {
 			currentDamageType[data].second |= DMG_IGNOREHOOK;
 			SDKHooks_TakeDamage(entity,data,data,damageBoost*1200.0,DMG_CLUB|DMG_CRUSH,GetEntPropEnt(data, Prop_Send, "m_hActiveWeapon"),_,_,false);
 
-			Buff jarateDebuff; jarateDebuff.init("Jarated", "", Buff_Jarated, 4*RoundToNearest(damageBoost), data, 8.0);
+			Buff jarateDebuff; jarateDebuff.init("Jarated", "", Buff_Jarated, 2*RoundToNearest(damageBoost), data, 8.0);
 			insertBuff(entity, jarateDebuff);
 		}
 		return false;
