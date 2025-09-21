@@ -5156,14 +5156,14 @@
 		}
 		"1529.8"
 		{
-			"name"		"weapon spell id"
+			"name"		"weapon ability id"
 			"ref"		"Ability : Silent Dash"
 			"display"		"%.0f"
 			"cost"		"0"
 			"increase_ratio"	"0"
-			"value"		"1073741824"
+			"value"		"12"
 			"init"		"0"
-			"max"		"1073741824"
+			"max"		"12"
 		}	
 		"1529.9"
 		{
@@ -5891,11 +5891,11 @@
 			"name"		"mult projectile count"
 			"ref"		"Increased Projectile Count"
 			"display"		"%.0f"
-			"cost"		"0"
-			"increase_ratio"	"0.0"
+			"cost"		"9000"
+			"increase_ratio"	"0.3"
 			"value"		"1"
 			"init"		"1.0"
-			"max"		"500"
+			"max"		"10"
 		}
 		"1596"
 		{

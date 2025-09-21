@@ -108,7 +108,7 @@
 		{
 			"preserve_attributes"	"1"
 			"1"				"reload time increased hidden;3.0"
-			"2"				"weapon spell id;67108864.0"
+			"2"				"weapon ability id;12.0"
 			"3"				"provide on active;1"
 		}
 		"173"//Vita-Saw
@@ -185,7 +185,7 @@
 		{
 			"preserve_attributes"	"1"
 			"1"				"Converts Firerate to Damage; 1.0"
-			"2"				"weapon spell id;1073741824.0"
+			"2"				"weapon ability id;12.0"
 			"3"				"damage mult 13; 0.75"
 			"4"				"max pipebombs decreased;-6.0"
 			"5"				"provide on active;1"

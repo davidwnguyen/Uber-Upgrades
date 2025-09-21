@@ -2176,14 +2176,14 @@ public Action OnPlayerRunCmd(int client, int& buttons, int& impulse, float vel[3
 						if(weaponArtCooldown[client] > GetGameTime())
 						{
 							char CooldownTime[32]
-							Format(CooldownTime, sizeof(CooldownTime), "Silent Dash: %.1fs", weaponArtCooldown[client]-GetGameTime()); 
+							Format(CooldownTime, sizeof(CooldownTime), "Dash: %.1fs", weaponArtCooldown[client]-GetGameTime()); 
 							SetHudTextParams(0.8,0.9, TICKINTERVAL*10, 0, 101, 189, 255, 0, 0.0, 0.0, 0.0);
 							ShowSyncHudText(client, hudAbility, CooldownTime);
 						}
 						else
 						{
 							char CooldownTime[32]
-							Format(CooldownTime, sizeof(CooldownTime), "Silent Dash: READY (M3)"); 
+							Format(CooldownTime, sizeof(CooldownTime), "Dash: READY (M3)"); 
 							SetHudTextParams(0.8,0.9, TICKINTERVAL*10, 0, 220, 15, 255, 0, 0.0, 0.0, 0.0);
 							ShowSyncHudText(client, hudAbility, CooldownTime);
 							if(buttons & IN_ATTACK3)
@@ -3128,32 +3128,39 @@ public Action TF2_CalcIsAttackCritical(int client, int weapon, char[] weaponname
 				}
 				case 43.0:
 				{
-					int iEntity = CreateEntityByName("tf_projectile_spellfireball");
-					if (IsValidEdict(iEntity)) 
+					int projCount = RoundToNearest(TF2Attrib_HookValueFloat(1.0, "mult_projectile_count", client));
+					GetClientEyeAngles(client, fAngles);
+					fAngles[1] -= 15.0 + 15.0/projCount;
+					fAngles[0] -= 2.0;
+					for(int i = 0; i < projCount; ++i)
 					{
-						int iTeam = GetClientTeam(client);
-						float fwd[3]
-						SetEntPropEnt(iEntity, Prop_Send, "m_hOwnerEntity", client);
-						SetEntProp(iEntity, Prop_Send, "m_iTeamNum", iTeam);
-						GetClientEyeAngles(client, fAngles);
-						GetClientEyePosition(client, fOrigin);
+						fAngles[1] += 30.0/projCount;
+						int iEntity = CreateEntityByName("tf_projectile_spellfireball");
+						if (IsValidEdict(iEntity)) 
+						{
+							int iTeam = GetClientTeam(client);
+							float fwd[3]
+							SetEntPropEnt(iEntity, Prop_Send, "m_hOwnerEntity", client);
+							SetEntProp(iEntity, Prop_Send, "m_iTeamNum", iTeam);
+							GetClientEyePosition(client, fOrigin);
 
-						GetAngleVectors(fAngles,fwd, NULL_VECTOR, NULL_VECTOR);
-						ScaleVector(fwd, 30.0);
-						
-						AddVectors(fOrigin, fwd, fOrigin);
-						GetAngleVectors(fAngles, vBuffer, NULL_VECTOR, NULL_VECTOR);
-						
-						float velocity = 900.0;
-						fVelocity[0] = vBuffer[0]*velocity;
-						fVelocity[1] = vBuffer[1]*velocity;
-						fVelocity[2] = 150.0 + vBuffer[2]*velocity;
-						
-						TeleportEntity(iEntity, fOrigin, fAngles, fVelocity);
-						DispatchSpawn(iEntity);
-						SDKHook(iEntity, SDKHook_StartTouch, OnStartTouchChaos);
-						setProjGravity(iEntity, 0.4);
-						CreateTimer(10.0,SelfDestruct,EntIndexToEntRef(iEntity));
+							GetAngleVectors(fAngles,fwd, NULL_VECTOR, NULL_VECTOR);
+							ScaleVector(fwd, 30.0);
+							
+							AddVectors(fOrigin, fwd, fOrigin);
+							GetAngleVectors(fAngles, vBuffer, NULL_VECTOR, NULL_VECTOR);
+							
+							float velocity = 900.0;
+							fVelocity[0] = vBuffer[0]*velocity;
+							fVelocity[1] = vBuffer[1]*velocity;
+							fVelocity[2] = 150.0 + vBuffer[2]*velocity;
+							
+							TeleportEntity(iEntity, fOrigin, fAngles, fVelocity);
+							DispatchSpawn(iEntity);
+							SDKHook(iEntity, SDKHook_StartTouch, OnStartTouchChaos);
+							setProjGravity(iEntity, 0.4);
+							CreateTimer(10.0,SelfDestruct,EntIndexToEntRef(iEntity));
+						}
 					}
 				}
 				case 45.0:

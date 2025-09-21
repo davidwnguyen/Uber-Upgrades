@@ -1932,10 +1932,13 @@
 		"special_tweaks_listid"		"-1"
 		"Damage upgrades"
 		{
-			"0"		"Weapons Deals No Knockback"
-			"1"		"lifesteal ability"
-			"2"		"reveal cloaked victim on hit"
-			"3"		"reveal disguised victim on hit"
+			"0"		"damage bonus"
+			"1"		"ap (global)"
+			"2"		"Increased Projectile Count"
+			"3"		"lifesteal ability"
+			"4"		"Weapons Deals No Knockback"
+			"5"		"reveal cloaked victim on hit"
+			"6"		"reveal disguised victim on hit"
 		}
 	}
 	"buffban"
