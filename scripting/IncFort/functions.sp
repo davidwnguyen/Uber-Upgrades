@@ -2888,11 +2888,14 @@ SentryDelay(entity)
 public int getClientParticleStatus(int array[MAXPLAYERS+1], int client){
 	bool particleEnabler = false;
 	if(AreClientCookiesCached(client)){
-		char particleEnabled[64];
-		GetClientCookie(client, particleToggle, particleEnabled, sizeof(particleEnabled));
-		float menuValue = StringToFloat(particleEnabled);
-		if(menuValue == 1.0){
-			particleEnabler = true;
+		char particleEnabled[32];
+		Cookie thirdperson = FindClientCookie("tp_cookie");
+		if (thirdperson != null) {
+			GetClientCookie(client, thirdperson, particleEnabled, sizeof(particleEnabled));
+			float menuValue = StringToFloat(particleEnabled);
+			if(menuValue != 0){
+				particleEnabler = true;
+			}
 		}
 	}
 	int numClients;
