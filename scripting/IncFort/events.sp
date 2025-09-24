@@ -1804,7 +1804,9 @@ public Action OnPlayerRunCmd(int client, int& buttons, int& impulse, float vel[3
 					CreateParticleEx(client, "powerup_supernova_ready", 1, _, _, 5.0);
 					powerupParticle[client] = GetGameTime()+5.1;
 				}else if(TF2Attrib_GetValue(supernovaPowerup) == 2.0){
-					CreateParticleEx(client, "heavy_ring_of_fire");
+					CreateParticle(client, "heavy_ring_of_fire", false, "", 1.0,_,_,1);
+					int clients[MAXPLAYERS+1], numClients = getClientParticleStatus(clients, client);
+					TE_Send(clients,numClients)
 					powerupParticle[client] = GetGameTime()+1.0;
 				}else if(TF2Attrib_GetValue(supernovaPowerup) == 3.0){
 					CreateParticleEx(client, "utaunt_electric_mist", 1, _, _, 5.0);
