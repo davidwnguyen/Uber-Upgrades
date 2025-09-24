@@ -737,7 +737,7 @@ public Action:OnStartTouchJars(entity, other)
 }
 public Action:OnTouchExplodeJar(entity, other)
 {
-	float clientvec[3], Radius=144.0;
+	float clientvec[3], Radius=250.0;
 	int mode=jarateType[entity];
 	GetEntPropVector(entity, Prop_Send, "m_vecOrigin", clientvec);
 	int owner = GetEntPropEnt(entity, Prop_Data, "m_hOwnerEntity"); 
@@ -779,8 +779,9 @@ public Action:OnTouchExplodeJar(entity, other)
 			
 			EmitSoundToAll(SOUND_THUNDER, entity, _, SNDLEVEL_RAIDSIREN, _, 1.0, _,_,clientvec);
 			
-			float LightningDamage = 200.0 * damageBoost * entityMaelstromChargeCount[entity];
-			
+			float LightningDamage = 70.0 * damageBoost * entityMaelstromChargeCount[entity];
+			float squaredRadius = Radius*Radius*(1+0.01*entityMaelstromChargeCount[entity])*(1+0.01*entityMaelstromChargeCount[entity]);
+
 			int i = -1;
 			while ((i = FindEntityByClassname(i, "*")) != -1)
 			{
@@ -789,7 +790,7 @@ public Action:OnTouchExplodeJar(entity, other)
 					float VictimPos[3];
 					GetEntPropVector(i, Prop_Data, "m_vecOrigin", VictimPos);
 					VictimPos[2] += 30.0;
-					if(GetVectorDistance(clientvec,VictimPos,true) <= Radius*Radius*(1+0.01*entityMaelstromChargeCount[entity])*(1+0.01*entityMaelstromChargeCount[entity]))
+					if(GetVectorDistance(clientvec,VictimPos,true) <= squaredRadius)
 						if(IsPointVisible(clientvec,VictimPos)){
 							currentDamageType[owner].second |= DMG_IGNOREHOOK;
 							SDKHooks_TakeDamage(i,owner,owner, LightningDamage, 1073741824, _,_,_,false);

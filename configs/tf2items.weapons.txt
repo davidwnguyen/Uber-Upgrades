@@ -405,8 +405,8 @@
 		"220" //Shortstop
 		{
 			"preserve_attributes"	"1"
-			"1"				"damage taken mult 1;1.15"
-			"2"				"move speed bonus;1.15"
+			"1"				"damage taken mult 1;1.25"
+			"2"				"move speed bonus;1.25"
 		}
 		"448" //Soda Popper
 		{

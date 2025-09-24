@@ -1004,7 +1004,7 @@
 		{
 			"0"		"damage bonus"
 			"1"		"ap (global)"
-			"2"		"Accuracy Scales DMG Replacement"
+			"2"		"Increased Overall Damage"
 			"3"		"lifesteal ability"
 			"4"		"reveal cloaked victim on hit"
 			"5"		"reveal disguised victim on hit"
@@ -1032,7 +1032,7 @@
 		{
 			"0"		"damage bonus"
 			"1"		"ap (global)"
-			"2"		"Accuracy Scales DMG Replacement"
+			"2"		"Increased Overall Damage"
 			"3"		"lifesteal ability"
 			"4"		"reveal cloaked victim on hit"
 			"5"		"reveal disguised victim on hit"
@@ -1483,7 +1483,7 @@
 		{
 			"0"		"damage bonus"
 			"1"		"ap (global)"
-			"2"		"Accuracy Scales DMG Replacement"
+			"2"		"Increased Overall Damage"
 			"3"		"lifesteal ability"
 			"4"		"reveal cloaked victim on hit"
 			"5"		"reveal disguised victim on hit"
@@ -2241,7 +2241,7 @@
 		{
 			"0"		"damage bonus"
 			"1"		"ap (global)"
-			"2"		"Accuracy Scales DMG Replacement"
+			"2"		"Increased Overall Damage"
 			"3"		"lifesteal ability"
 			"4"		"reveal cloaked victim on hit"
 			"5"		"reveal disguised victim on hit"
@@ -2306,7 +2306,7 @@
 		{
 			"0"		"damage bonus"
 			"1"		"ap (global)"
-			"2"		"Accuracy Scales DMG Replacement"
+			"2"		"Increased Overall Damage"
 			"3"		"lifesteal ability"
 			"4"		"reveal cloaked victim on hit"
 			"5"		"reveal disguised victim on hit"

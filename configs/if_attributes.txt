@@ -265,7 +265,7 @@
 			"value"		"8192"
 			"init"		"0"
 			"description"	"Summons 20 automatically detonating grenades.\nEach deals 90 base 9.5 scaling.\nFor every second alive, the grenades gain +35% damage."
-			"max"		"1"
+			"max"		"8192"
 		}
 		"1542.9"
 		{

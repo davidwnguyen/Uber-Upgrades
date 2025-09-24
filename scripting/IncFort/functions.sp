@@ -1119,7 +1119,7 @@ DisplayItemChange(client,itemidx)
 		}
 		case 220:
 		{
-			ChangeString = "Shortstop | You deal and take 15% more damage. Take no damage from self-inflicted ways.";
+			ChangeString = "Shortstop | You deal and take 25% more damage.";
 		}
 		case 448:
 		{
