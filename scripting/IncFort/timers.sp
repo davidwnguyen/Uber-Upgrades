@@ -1076,7 +1076,7 @@ public Action:Timer_EveryTenSeconds(Handle timer)
 									SetEntityGravity(iEntity,0.01);
 									
 									SDKHook(iEntity, SDKHook_Touch, OnCollisionPhotoViscerator);
-									CreateTimer(0.01, HomingFlareThink, EntIndexToEntRef(iEntity), TIMER_REPEAT|TIMER_FLAG_NO_MAPCHANGE);
+									homingRadius[iEntity] = 400.0;
 									CreateParticle(iEntity, "utaunt_auroraglow_green_parent", true, _, 5.0);
 									CreateTimer(5.0, SelfDestruct, EntIndexToEntRef(iEntity));
 								}

@@ -3146,8 +3146,17 @@ public OnEntityHomingThink(entity)
 		}
 		MakeVectorFromPoints( ProjLocation, TargetPos, AimVector ); 
 		
-		GetEntPropVector( entity, Prop_Data, "m_vecAbsVelocity", ProjVector ); //50% HOME
-		//SubtractVectors( TargetPos, ProjLocation, ProjVector ); //100% HOME
+		switch(homingAimStyle[entity])
+		{
+			case 2:
+			{
+				SubtractVectors( TargetPos, ProjLocation, ProjVector ); //100% HOME
+			}
+			default:
+			{
+				GetEntPropVector( entity, Prop_Data, "m_vecAbsVelocity", ProjVector ); //50% HOME
+			}
+		}
 		AddVectors( ProjVector, AimVector, ProjVector ); 
 		NormalizeVector( ProjVector, ProjVector ); 
 		
