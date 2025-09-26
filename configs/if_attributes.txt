@@ -5317,8 +5317,9 @@
 		}
 		"1538.1"
 		{
-			"name"		"dmg penalty vs nonstunned"
+			"name"		"sentry rocket projectile add"
 			"ref"		"Double Sentry Rocket Shot"
+			"attr_class"	"sentry_rocket_proj_add"
 			"display"		"%.0f"
 			"cost"		"2500"
 			"increase_ratio"	"0"

@@ -3800,13 +3800,13 @@ stock SentryMultishot(entity)
 				int pda = GetWeapon(client,5);
 				if(IsValidEdict(pda))
 				{
-					Address doubleShotActive = TF2Attrib_GetByName(pda, "dmg penalty vs nonstunned");		
-					if(doubleShotActive != Address_Null && TF2Attrib_GetValue(doubleShotActive) > 0.0)
+					int projCount = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "sentry_rocket_proj_add", pda));
+					if(projCount > 0)
 					{
 						Handle hPack = CreateDataPack();
 						WritePackCell(hPack, EntIndexToEntRef(inflictor));
 						WritePackCell(hPack, EntIndexToEntRef(client));
-						WritePackCell(hPack, RoundToCeil(TF2Attrib_GetValue(doubleShotActive)));
+						WritePackCell(hPack, projCount);
 						CreateTimer(0.1,ShootTwice,hPack);
 					}
 				}

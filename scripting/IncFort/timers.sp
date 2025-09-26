@@ -2075,69 +2075,65 @@ public Action:ShootTwice(Handle timer, any:data)
 			int pda = GetWeapon(client,5);
 			if(IsValidEdict(pda))
 			{
-				Address doubleShotActive = TF2Attrib_GetByName(pda, "dmg penalty vs nonstunned");
-				if(doubleShotActive != Address_Null && TF2Attrib_GetValue(doubleShotActive) > 0.0)
+				int iEntity = CreateEntityByName("tf_projectile_sentryrocket");
+				if (IsValidEdict(iEntity)) 
 				{
-					int iEntity = CreateEntityByName("tf_projectile_sentryrocket");
-					if (IsValidEdict(iEntity)) 
-					{
-						float fAngles[3]
-						float fOrigin[3]
-						float vBuffer[3]
-						float fVelocity[3]
-						float fwd[3]
-						int iTeam = GetClientTeam(client);
-						SetEntPropEnt(iEntity, Prop_Send, "m_hOwnerEntity", client);
+					float fAngles[3]
+					float fOrigin[3]
+					float vBuffer[3]
+					float fVelocity[3]
+					float fwd[3]
+					int iTeam = GetClientTeam(client);
+					SetEntPropEnt(iEntity, Prop_Send, "m_hOwnerEntity", client);
 
-						SetEntProp(iEntity, Prop_Send, "m_iTeamNum", iTeam, 1);
-						SetEntProp(iEntity, Prop_Send, "m_nSkin", (iTeam-2));
-						SetEntPropEnt(iEntity, Prop_Data, "m_hOwnerEntity", client);
-						SetEntPropEnt(iEntity, Prop_Send, "m_hLauncher", client);
-									
-						int angleOffsetB = FindSendPropInfo("CObjectSentrygun", "m_iAmmoShells") - 16;
-						GetEntPropVector( inflictor, Prop_Send, "m_vecOrigin", fOrigin );
-						fOrigin[2] += 55.0;
-						GetEntDataVector( inflictor, angleOffsetB, fAngles );
-						
-						GetAngleVectors(fAngles, vBuffer, NULL_VECTOR, NULL_VECTOR);
-						GetAngleVectors(fAngles,fwd, NULL_VECTOR, NULL_VECTOR);
-						ScaleVector(fwd, 30.0);
-						
-						AddVectors(fOrigin, fwd, fOrigin);
-						
-						float Speed = 1100.0;
-						Address projspeed = TF2Attrib_GetByName(pda, "Projectile speed increased");
-						Address projspeed1 = TF2Attrib_GetByName(pda, "Projectile speed decreased");
-						if(projspeed != Address_Null){
-							Speed *= TF2Attrib_GetValue(projspeed)
-						}
-						if(projspeed1 != Address_Null){
-							Speed *= TF2Attrib_GetValue(projspeed1)
-						}
-						fVelocity[0] = vBuffer[0]*Speed;
-						fVelocity[1] = vBuffer[1]*Speed;
-						fVelocity[2] = vBuffer[2]*Speed;
-						
-						float ProjectileDamage = 100.0;
-						
-						Address SentryDmgActive = TF2Attrib_GetByName(pda, "engy sentry damage bonus");
-						if(SentryDmgActive != Address_Null)
-						{
-							ProjectileDamage *= TF2Attrib_GetValue(SentryDmgActive);
-						}
-						SetEntDataFloat(iEntity, FindSendPropInfo("CTFProjectile_Rocket", "m_iDeflected") + 4, ProjectileDamage, true);  
-						SetEntPropVector(iEntity, Prop_Send, "m_vInitialVelocity", fVelocity ); 
-						TeleportEntity(iEntity, fOrigin, fAngles, fVelocity);
-						DispatchSpawn(iEntity);
-						timesLeft--;
-						if(timesLeft > 0)
-						{
-							Handle hPack = CreateDataPack();
-							WritePackCell(hPack, EntIndexToEntRef(inflictor));
-							WritePackCell(hPack, EntIndexToEntRef(client));
-							WritePackCell(hPack, timesLeft);
-							CreateTimer(0.1,ShootTwice,hPack);
-						}
+					SetEntProp(iEntity, Prop_Send, "m_iTeamNum", iTeam, 1);
+					SetEntProp(iEntity, Prop_Send, "m_nSkin", (iTeam-2));
+					SetEntPropEnt(iEntity, Prop_Data, "m_hOwnerEntity", client);
+					SetEntPropEnt(iEntity, Prop_Send, "m_hLauncher", client);
+								
+					int angleOffsetB = FindSendPropInfo("CObjectSentrygun", "m_iAmmoShells") - 16;
+					GetEntPropVector( inflictor, Prop_Send, "m_vecOrigin", fOrigin );
+					fOrigin[2] += 55.0;
+					GetEntDataVector( inflictor, angleOffsetB, fAngles );
+					
+					GetAngleVectors(fAngles, vBuffer, NULL_VECTOR, NULL_VECTOR);
+					GetAngleVectors(fAngles,fwd, NULL_VECTOR, NULL_VECTOR);
+					ScaleVector(fwd, 30.0);
+					
+					AddVectors(fOrigin, fwd, fOrigin);
+					
+					float Speed = 1100.0;
+					Address projspeed = TF2Attrib_GetByName(pda, "Projectile speed increased");
+					Address projspeed1 = TF2Attrib_GetByName(pda, "Projectile speed decreased");
+					if(projspeed != Address_Null){
+						Speed *= TF2Attrib_GetValue(projspeed)
+					}
+					if(projspeed1 != Address_Null){
+						Speed *= TF2Attrib_GetValue(projspeed1)
+					}
+					fVelocity[0] = vBuffer[0]*Speed;
+					fVelocity[1] = vBuffer[1]*Speed;
+					fVelocity[2] = vBuffer[2]*Speed;
+					
+					float ProjectileDamage = 100.0;
+					
+					Address SentryDmgActive = TF2Attrib_GetByName(pda, "engy sentry damage bonus");
+					if(SentryDmgActive != Address_Null)
+					{
+						ProjectileDamage *= TF2Attrib_GetValue(SentryDmgActive);
+					}
+					SetEntDataFloat(iEntity, FindSendPropInfo("CTFProjectile_Rocket", "m_iDeflected") + 4, ProjectileDamage, true);  
+					SetEntPropVector(iEntity, Prop_Send, "m_vInitialVelocity", fVelocity ); 
+					TeleportEntity(iEntity, fOrigin, fAngles, fVelocity);
+					DispatchSpawn(iEntity);
+					timesLeft--;
+					if(timesLeft > 0)
+					{
+						Handle hPack = CreateDataPack();
+						WritePackCell(hPack, EntIndexToEntRef(inflictor));
+						WritePackCell(hPack, EntIndexToEntRef(client));
+						WritePackCell(hPack, timesLeft);
+						CreateTimer(0.1,ShootTwice,hPack);
 					}
 				}
 			}
