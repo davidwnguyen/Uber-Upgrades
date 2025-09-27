@@ -1972,7 +1972,7 @@
 	}
 	"jarat"
 	{
-		"special_tweaks_listid"		"4"
+		"special_tweaks_listid"		"3"
 		"Damage upgrades"
 		{
 			"0"		"damage bonus"
