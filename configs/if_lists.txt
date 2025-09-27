@@ -1988,18 +1988,14 @@
 			"1"		"effect bar recharge rate increased"
 			"2"		"Blast radius increased (Throwable)"
 			"3"		"Projectile speed increased"
-			"4"		"dmg from all reduced(wearable)"
 		}
-		"Debuff Upgrades"
-		{
-			"0"		"Bleed Per Hit(E)"
-			"1"		"Corrosive Damage Over Time"
-		}
-		"Support Upgrades"
+		"Specialty Upgrades"
 		{
 			"0"		"Afterburn Immunity Duration"
 			"1"		"Increases Haste Buff Duration"
 			"2"		"Batallion's Buff Duration"
+			"3"		"Bleed Per Hit(E)"
+			"4"		"Corrosive Damage Over Time"
 		}
 		"Special Tweaks"
 		{
@@ -2025,7 +2021,6 @@
 			"1"		"effect bar recharge rate increased"
 			"2"		"Blast radius increased (Throwable)"
 			"3"		"Projectile speed increased"
-			"4"		"dmg from all reduced(wearable)"
 		}
 		"Specialty Upgrades"
 		{

@@ -801,12 +801,6 @@
 	"Bleed Per Hit(E)"{
 		"en"		"Bleed Per Hit"
 	}
-	"Debuff Upgrades"{
-		"en"		"Debuff Upgrades"
-	}
-	"Support Upgrades"{
-		"en"		"Support Upgrades"
-	}
 	"Afterburn Immunity Duration"{
 		"en"		"Afterburn Immunity Duration"
 	}
