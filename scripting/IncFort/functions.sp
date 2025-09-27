@@ -4047,25 +4047,7 @@ stock float TF2_GetWeaponclassDPS(client, weapon)
 			}
 			else if(StrEqual(Classname,"tf_weapon_jar",false) || StrEqual(Classname,"tf_weapon_jar_milk",false))
 			{
-				weaponDPS = 70.0;
-				
-				Address corrosiveElement = TF2Attrib_GetByName(weapon, "building cost reduction");
-				if(corrosiveElement != Address_Null)
-				{
-					weaponDPS += 14.5*TF2Attrib_GetValue(corrosiveElement);
-				}
-				Address jarFragsToggle = TF2Attrib_GetByName(weapon, "overheal decay penalty");
-				if(jarFragsToggle != Address_Null)
-				{
-					weaponDPS += 10.0*TF2Attrib_GetValue(jarFragsToggle);
-					
-					Address fragmentExplosion = TF2Attrib_GetByName(weapon, "overheal decay bonus");
-					if(fragmentExplosion != Address_Null && TF2Attrib_GetValue(fragmentExplosion) > 0.0)
-					{
-						weaponDPS += TF2Attrib_GetValue(fragmentExplosion)*0.5*TF2Attrib_GetValue(jarFragsToggle);
-					}
-				}
-				
+				weaponDPS = 37.5;
 			}
 			else if(StrEqual(Classname,"tf_weapon_flaregun",false) || StrEqual(Classname,"tf_weapon_flaregun_revenge",false))
 			{

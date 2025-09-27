@@ -5622,27 +5622,29 @@
 		}
 		"1570"
 		{
-			"name"		"overheal decay penalty"
-			"ref"		"Jar Fragment Count"
+			"name"		"explosive fragment count"
+			"ref"		"Explosion Fragment Count"
+			"attr_class"	"explosive_frag_count"
 			"display"		"%.0f"
 			"cost"		"2500"
 			"increase_ratio"	"0.4"
 			"value"		"1"
 			"init"		"0"
-			"description"	"Upon jar shatter: shoots out X fragments that deal 15 base damage."
+			"description"	"Upon exploding: shoots out X fragments that deal 15 base damage."
 			"max"		"5"
 		}
 		"1571"
 		{
-			"name"		"overheal decay bonus"
+			"name"		"explosive_fragment_damage"
 			"ref"		"Fragment Explosion Base Damage"
+			"attr_class"	"explosive_frag_damage"
 			"display"		"%.0f"
 			"cost"		"600"
 			"increase_ratio"	"0.3"
 			"value"		"5"
 			"init"		"0"
-			"description"	"Upon fragment touching anything:\ndeals X damage within a 50*BlastRadiusAttribute hammer unit radius."
-			"max"		"300"
+			"description"	"Upon fragment touching anything:\ndeals [{VALUE}] damage within a 75HU radius."
+			"max"		"35"
 		}
 		"1572"
 		{
@@ -5720,9 +5722,9 @@
 			"display"		"%.0f%%"
 			"cost"		"2500"
 			"increase_ratio"	"0.6"
-			"value"		"0.2"
+			"value"		"0.25"
 			"init"		"0.0"
-			"max"		"15.0"
+			"max"		"5.0"
 		}
 		"1580"
 		{

@@ -2029,7 +2029,7 @@
 		}
 		"Specialty Upgrades"
 		{
-			"0"		"Jar Fragment Count"
+			"0"		"Explosion Fragment Count"
 			"1"		"Fragment Explosion Base Damage"
 			"2"		"Bleed Per Hit(E)"
 			"3"		"Mad Milk On Hit Duration (MadMilk)"

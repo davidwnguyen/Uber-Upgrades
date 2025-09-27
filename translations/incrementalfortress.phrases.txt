@@ -819,11 +819,8 @@
 	"Increases Haste Buff Duration"{
 		"en"		"Increases Haste Buff Duration"
 	}
-	"Fragmentation Upgrades"{
-		"en"		"Fragmentation Upgrades"
-	}
-	"Jar Fragment Count"{
-		"en"		"Jar Fragment Count"
+	"Explosion Fragment Count"{
+		"en"		"Explosion Fragment Count"
 	}
 	"Fragment Explosion Base Damage"{
 		"en"		"Fragment Explosion Base Damage"

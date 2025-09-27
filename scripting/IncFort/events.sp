@@ -2766,6 +2766,42 @@ public MRESReturn OnBlastExplosion(int entity, Handle hReturn){
 		}
 	}
 
+	float fragCount = TF2Attrib_HookValueFloat(0.0, "explosive_frag_count", CWeapon);
+	for(int i = 0;i<RoundToNearest(fragCount);++i)
+	{
+		int iEntity = CreateEntityByName("tf_projectile_syringe");
+		if (!IsValidEdict(iEntity)) 
+			continue;
+
+		int iTeam = GetClientTeam(owner);
+		float fAngles[3], fOrigin[3], vBuffer[3], fVelocity[3], fwd[3];
+		fOrigin[0] = position[0]; fOrigin[1] = position[1]; fOrigin[2] = position[2];
+		SetEntPropEnt(iEntity, Prop_Send, "m_hOwnerEntity", owner);
+		SetEntProp(iEntity, Prop_Send, "m_iTeamNum", iTeam);
+		fAngles[0] = GetRandomFloat(0.0,-60.0)
+		fAngles[1] = GetRandomFloat(-179.0,179.0)
+
+		GetAngleVectors(fAngles,fwd, NULL_VECTOR, NULL_VECTOR);
+		ScaleVector(fwd, 30.0);
+		AddVectors(fOrigin, fwd, fOrigin);
+		GetAngleVectors(fAngles, vBuffer, NULL_VECTOR, NULL_VECTOR);
+
+		float velocity = 2000.0;
+		fVelocity[0] = vBuffer[0]*velocity;
+		fVelocity[1] = vBuffer[1]*velocity;
+		fVelocity[2] = vBuffer[2]*velocity;
+		
+		TeleportEntity(iEntity, fOrigin, fAngles, fVelocity);
+		DispatchSpawn(iEntity);
+		setProjGravity(iEntity, 9.0);
+		SDKHook(iEntity, SDKHook_Touch, OnCollisionExplosiveFrag);
+		jarateWeapon[iEntity] = EntIndexToEntRef(CWeapon);
+		CreateTimer(1.0,SelfDestruct,EntIndexToEntRef(iEntity));
+		SetEntProp(iEntity, Prop_Send, "m_usSolidFlags", 0x0008);
+		SetEntProp(iEntity, Prop_Data, "m_nSolidType", 6);
+		SetEntProp(iEntity, Prop_Send, "m_CollisionGroup", 13);
+	}
+
 	return MRES_Ignored;
 }
 public MRESReturn OnFinishReload(int weapon)

@@ -892,48 +892,46 @@ public Action:OnTouchExplodeJar(entity, other)
 				}
 			}
 		}
-		Address jarFragsToggle = TF2Attrib_GetByName(CWeapon, "overheal decay penalty");
-		if(jarFragsToggle != Address_Null)
-		{
-			for(i = 0;i<RoundToNearest(TF2Attrib_GetValue(jarFragsToggle));++i)
-			{
-				int iEntity = CreateEntityByName("tf_projectile_syringe");
-				if (IsValidEdict(iEntity)) 
-				{
-					int iTeam = GetClientTeam(owner);
-					float fAngles[3]
-					float fOrigin[3];
-					float vBuffer[3]
-					float fVelocity[3]
-					float fwd[3]
-					SetEntPropEnt(iEntity, Prop_Send, "m_hOwnerEntity", owner);
-					SetEntProp(iEntity, Prop_Send, "m_iTeamNum", iTeam);
-					fOrigin = clientvec;
-					fAngles[0] = GetRandomFloat(0.0,-60.0)
-					fAngles[1] = GetRandomFloat(-179.0,179.0)
 
-					GetAngleVectors(fAngles,fwd, NULL_VECTOR, NULL_VECTOR);
-					ScaleVector(fwd, 30.0);
-					
-					AddVectors(fOrigin, fwd, fOrigin);
-					GetAngleVectors(fAngles, vBuffer, NULL_VECTOR, NULL_VECTOR);
-					
-					float velocity = 2000.0;
-					fVelocity[0] = vBuffer[0]*velocity;
-					fVelocity[1] = vBuffer[1]*velocity;
-					fVelocity[2] = vBuffer[2]*velocity;
-					
-					TeleportEntity(iEntity, fOrigin, fAngles, fVelocity);
-					DispatchSpawn(iEntity);
-					setProjGravity(iEntity, 9.0);
-					SDKHook(iEntity, SDKHook_Touch, OnCollisionJarateFrag);
-					jarateWeapon[iEntity] = EntIndexToEntRef(CWeapon);
-					CreateTimer(1.0,SelfDestruct,EntIndexToEntRef(iEntity));
-					SetEntProp(iEntity, Prop_Send, "m_usSolidFlags", 0x0008);
-					SetEntProp(iEntity, Prop_Data, "m_nSolidType", 6);
-					SetEntProp(iEntity, Prop_Send, "m_CollisionGroup", 13);
-				}
-			}
+		float fragCount = TF2Attrib_HookValueFloat(0.0, "explosive_frag_count", CWeapon);
+		for(i = 0;i<RoundToNearest(fragCount);++i)
+		{
+			int iEntity = CreateEntityByName("tf_projectile_syringe");
+			if (!IsValidEdict(iEntity)) 
+				continue;
+
+			int iTeam = GetClientTeam(owner);
+			float fAngles[3]
+			float fOrigin[3];
+			float vBuffer[3]
+			float fVelocity[3]
+			float fwd[3]
+			SetEntPropEnt(iEntity, Prop_Send, "m_hOwnerEntity", owner);
+			SetEntProp(iEntity, Prop_Send, "m_iTeamNum", iTeam);
+			fOrigin = clientvec;
+			fAngles[0] = GetRandomFloat(0.0,-60.0)
+			fAngles[1] = GetRandomFloat(-179.0,179.0)
+
+			GetAngleVectors(fAngles,fwd, NULL_VECTOR, NULL_VECTOR);
+			ScaleVector(fwd, 30.0);
+			
+			AddVectors(fOrigin, fwd, fOrigin);
+			GetAngleVectors(fAngles, vBuffer, NULL_VECTOR, NULL_VECTOR);
+			
+			float velocity = 2000.0;
+			fVelocity[0] = vBuffer[0]*velocity;
+			fVelocity[1] = vBuffer[1]*velocity;
+			fVelocity[2] = vBuffer[2]*velocity;
+			
+			TeleportEntity(iEntity, fOrigin, fAngles, fVelocity);
+			DispatchSpawn(iEntity);
+			setProjGravity(iEntity, 9.0);
+			SDKHook(iEntity, SDKHook_Touch, OnCollisionExplosiveFrag);
+			jarateWeapon[iEntity] = EntIndexToEntRef(CWeapon);
+			CreateTimer(1.0,SelfDestruct,EntIndexToEntRef(iEntity));
+			SetEntProp(iEntity, Prop_Send, "m_usSolidFlags", 0x0008);
+			SetEntProp(iEntity, Prop_Data, "m_nSolidType", 6);
+			SetEntProp(iEntity, Prop_Send, "m_CollisionGroup", 13);
 		}
 	}
 	switch(mode){
@@ -950,7 +948,7 @@ public Action:OnTouchExplodeJar(entity, other)
 	RemoveEntity(entity);
 	return Plugin_Handled;
 }
-public Action:OnCollisionJarateFrag(entity, client)
+public Action:OnCollisionExplosiveFrag(entity, client)
 {
 	int CWeapon = EntRefToEntIndex(jarateWeapon[entity])
 	if(IsValidEdict(CWeapon))
@@ -967,20 +965,12 @@ public Action:OnCollisionJarateFrag(entity, client)
 					SDKHooks_TakeDamage(client, owner, owner, damageDealt, DMG_BULLET, CWeapon, _,_,false);
 				}
 			}
-			Address fragmentExplosion = TF2Attrib_GetByName(CWeapon, "overheal decay bonus");
-			if(fragmentExplosion != Address_Null && TF2Attrib_GetValue(fragmentExplosion) > 0.0)
+			float fragExplosionDamage = TF2Attrib_HookValueFloat(0.0, "explosive_frag_damage", CWeapon);
+			if(fragExplosionDamage > 0.0)
 			{
-				float Radius = 50.0, clientvec[3];
+				float Radius = 75.0*TF2Attrib_HookValueFloat(1.0, "mult_explosion_radius", CWeapon), clientvec[3];
 				GetEntPropVector(entity, Prop_Send, "m_vecOrigin", clientvec)
-				Address blastRadius1 = TF2Attrib_GetByName(CWeapon, "Blast radius increased");
-				Address blastRadius2 = TF2Attrib_GetByName(CWeapon, "Blast radius decreased");
-				if(blastRadius1 != Address_Null){
-					Radius *= TF2Attrib_GetValue(blastRadius1)
-				}
-				if(blastRadius2 != Address_Null){
-					Radius *= TF2Attrib_GetValue(blastRadius2)
-				}
-				EntityExplosion(owner, TF2Attrib_GetValue(fragmentExplosion) * TF2_GetDamageModifiers(owner, CWeapon), Radius, clientvec, 0, true, entity, 0.4,_,CWeapon,_,75)
+				EntityExplosion(owner, fragExplosionDamage * TF2_GetDamageModifiers(owner, CWeapon), Radius, clientvec, 0, true, entity, 0.4,_,CWeapon,_,75)
 			}
 		}
 	}
