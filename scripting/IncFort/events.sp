@@ -534,7 +534,10 @@ public MRESReturn OnCondApply(Address pPlayerShared, Handle hParams) {
 			}
 			case TFCond_FocusBuff:
 			{
-				return MRES_Supercede;
+				int CWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
+				if(IsValidEdict(CWeapon))
+					if(TF2Attrib_HookValueFloat(0.0, "sniper_rage_DISPLAY_ONLY", CWeapon))
+						return MRES_Supercede;
 			}
 			case TFCond_Jarated, TFCond_MarkedForDeath, TFCond_MarkedForDeathSilent:
 			{

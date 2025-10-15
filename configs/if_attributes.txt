@@ -2016,9 +2016,9 @@
 			"display"		"%.0f%%"
 			"cost"		"200"
 			"increase_ratio" 	"0.75"
-			"value"		"0.20"
+			"value"		"0.25"
 			"init"		"1.00"
-			"max"		"3.00"
+			"max"		"3.75"
 		}
 		"1162"
 		{
