@@ -1,5 +1,11 @@
 "Phrases"
 {
+	"Syringe Damage Bonus" {
+		"en"		"Syringe Damage Bonus"
+	}
+	"Explosive Damage Bonus" {
+		"en"		"Explosive Damage Bonus"
+	}
 	"projectile spread multiplier" {
 		"en"		"Projectile Spread Multiplier"
 	}
@@ -1308,8 +1314,8 @@
 	"Qbuying as much as possible..."{
 		"en"		"Qbuying as much as possible..."
 	}
-	"Direct Flame Damage Multiplier"{
-		"en"		"Direct Flame Damage Multiplier"
+	"Flame Damage Multiplier"{
+		"en"		"Flame Damage Multiplier"
 	}
 	"Max Armor Capacity"{
 		"en"		"Max Armor Supply"

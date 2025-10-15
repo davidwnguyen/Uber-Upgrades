@@ -3700,7 +3700,7 @@
 			"init"		"1.00"
 			"optimizer_style" "1"
 			"description"	"1:1 pure damage multiplier.\nIncreases in cost by +$455 per purchase."
-			"max"		"16.0"
+			"max"		"20.0"
 		}
 		"301"
 		{
@@ -4872,7 +4872,7 @@
 		"1509"
 		{
 			"name"		"damage mult 7"
-			"ref"		"Direct Flame Damage Multiplier"
+			"ref"		"Flame Damage Multiplier"
 			"display"		"%.0f%%"
 			"cost"		"200"
 			"increase_ratio"	"0.2"
@@ -4946,6 +4946,32 @@
 			"optimizer_style" "1"
 			"description"	"1:1 pure damage multiplier.\nIncreases in cost by +$80 per purchase."
 			"max"		"40"
+		}
+		"1509.6"
+		{
+			"name"		"damage mult 9"
+			"ref"		"Explosive Damage Bonus"
+			"display"		"%.0f%%"
+			"cost"		"500"
+			"increase_ratio"	"0.2"
+			"value"		"0.25"
+			"init"		"1"
+			"optimizer_style" "1"
+			"description"	"1:1 pure damage multiplier.\nIncreases in cost by +$100 per purchase."
+			"max"		"15"
+		}
+		"1509.7"
+		{
+			"name"		"damage mult 9"
+			"ref"		"Syringe Damage Bonus"
+			"display"		"%.0f%%"
+			"cost"		"250"
+			"increase_ratio"	"0.2"
+			"value"		"0.25"
+			"init"		"1"
+			"optimizer_style" "1"
+			"description"	"1:1 pure damage multiplier.\nIncreases in cost by +$50 per purchase."
+			"max"		"15"
 		}
 		"1510"
 		{

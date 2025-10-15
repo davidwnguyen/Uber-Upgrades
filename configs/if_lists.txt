@@ -1258,7 +1258,7 @@
 		{
 			"0"		"damage bonus"
 			"1"		"ap (global)"
-			"2"		"Extra Damage Bonus"
+			"2"		"Syringe Damage Bonus"
 			"3"		"lifesteal ability"
 			"4"		"projectile penetration"
 			"5"		"reveal cloaked victim on hit"
@@ -1285,7 +1285,7 @@
 		{
 			"0"		"damage bonus"
 			"1"		"ap (global)"
-			"2"		"Extra Damage Bonus"
+			"2"		"Syringe Damage Bonus"
 			"3"		"Increased Overall Damage(F)"
 			"4"		"lifesteal ability"
 			"5"		"reveal cloaked victim on hit"
@@ -1338,7 +1338,7 @@
 		{
 			"0"		"damage bonus"
 			"1"		"ap (global)"
-			"2"		"Direct Flame Damage Multiplier"
+			"2"		"Flame Damage Multiplier"
 			"3"		"Increased Overall Damage(T)"
 			"4"		"lifesteal ability"
 			"5"		"Shoots extra projectile"
@@ -1364,7 +1364,7 @@
 		{
 			"0"		"damage bonus"
 			"1"		"ap (global)"
-			"2"		"Direct Flame Damage Multiplier"
+			"2"		"Flame Damage Multiplier"
 			"3"		"Increased Overall Damage(T)"
 			"4"		"lifesteal ability"
 			"5"		"Shoots extra projectile"
@@ -2083,7 +2083,7 @@
 		{
 			"0"		"damage bonus"
 			"1"		"ap (global)"
-			"2"		"Extra Damage Bonus"
+			"2"		"Explosive Damage Bonus"
 			"3"		"blast radius increased"
 			"4"		"dmg falloff decreased"
 			"5"		"lifesteal ability"
@@ -2117,7 +2117,7 @@
 		{
 			"0"		"damage bonus"
 			"1"		"ap (global)"
-			"2"		"Extra Damage Bonus"
+			"2"		"Explosive Damage Bonus"
 			"3"		"lifesteal ability"
 			"4"		"blast radius increased"
 			"5"		"reveal cloaked victim on hit"
@@ -2148,7 +2148,7 @@
 		{
 			"0"		"damage bonus"
 			"1"		"ap (global)"
-			"2"		"Extra Damage Bonus"
+			"2"		"Explosive Damage Bonus"
 			"3"		"blast radius increased"
 			"4"		"dmg falloff decreased"
 			"5"		"lifesteal ability"
@@ -2440,7 +2440,7 @@
 		{
 			"0"		"damage bonus"
 			"1"		"ap (global)"
-			"2"		"Extra Damage Bonus"
+			"2"		"Explosive Damage Bonus"
 			"3"		"dmg falloff decreased"
 			"4"		"lifesteal ability"
 			"5"		"reveal cloaked victim on hit"
@@ -2471,7 +2471,7 @@
 		{
 			"0"		"damage bonus"
 			"1"		"ap (global)"
-			"2"		"Extra Damage Bonus"
+			"2"		"Explosive Damage Bonus"
 			"3"		"blast radius increased"
 			"4"		"dmg falloff decreased"
 			"5"		"lifesteal ability"
@@ -2503,7 +2503,7 @@
 		{
 			"0"		"damage bonus"
 			"1"		"ap (global)"
-			"2"		"Extra Damage Bonus"
+			"2"		"Explosive Damage Bonus"
 			"3"		"blast radius increased"
 			"4"		"dmg falloff decreased"
 			"5"		"lifesteal ability"
