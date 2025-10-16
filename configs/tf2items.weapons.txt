@@ -260,7 +260,7 @@
 			"preserve_attributes"	"1"
 			"1"				"sniper fires tracer;0"
 			"2"				"sniper fires tracer HIDDEN;0"
-			"3"				"no charge impact range;1.45"
+			"3"				"damage penetrates reductions;0.15"
 		}
 		"305,1079" //Crusader's Crossbow
 		{

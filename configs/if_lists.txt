@@ -1532,35 +1532,6 @@
 			"1"		"Lacerating Rounds"
 		}
 	}
-	"classic"
-	{
-		"special_tweaks_listid"		"2"
-		"Damage upgrades"
-		{
-			"0"		"damage bonus"
-			"1"		"ap (global)"
-			"2"		"sniper full charge damage bonus"
-			"3"		"Increased Overall Damage"
-			"4"		"lifesteal ability"
-			"5"		"projectile penetration heavy"
-			"6"		"reveal cloaked victim on hit"
-			"7"		"reveal disguised victim on hit"
-		}
-		"Sniper specific upgrades"
-		{
-			"0"		"fire rate bonus(old)"
-			"1"		"faster reload rate"
-			"2"		"bullets per shot bonus (single)"
-			"3"		"Increased Charge percent"
-			"4"		"aiming movespeed increased"
-			"5"		"Weapons Deals No Knockback"
-		}
-		"Special Tweaks"
-		{
-			"0"		"Explosive Rounds"
-			"1"		"Sniper Mastery"
-		}
-	}
 	"hitmans"
 	{
 		"special_tweaks_listid"		"-1"

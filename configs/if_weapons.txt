@@ -69,7 +69,7 @@
 		"tf_weapon_buff_item"					"buffban"		//Banners
 		"tf_weapon_stickbomb"   				"explmel"		//Caber
 		"tf_wearable_razorback"					"wearable"		//Razorback
-		"tf_weapon_sniperrifle_classic"			"classic"		//Classic
+		"tf_weapon_sniperrifle_classic"			"snipe"		//Classic
 		"tf_weapon_parachute"					"chute"			//B.A.S.E
 		"tf_weapon_laser_pointer"				"pointer"		//wrangler
 		"tf_wearable"							"wearable"		//wearables

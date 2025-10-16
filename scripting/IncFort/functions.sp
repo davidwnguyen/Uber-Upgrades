@@ -1360,7 +1360,7 @@ DisplayItemChange(client,itemidx)
 		}
 		case 1098:
 		{
-			ChangeString = "The Classic | Charged shots have 45% more scaling.";
+			ChangeString = "The Classic | +15% conditional status pierce.";
 		}
 		case 752:
 		{
