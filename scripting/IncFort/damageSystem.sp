@@ -946,11 +946,9 @@ public Action:OnTakeDamagePre_Tank(victim, &attacker, &inflictor, float &damage,
 			if(TF2Util_GetWeaponSlot(weapon) == TFWeaponSlot_Melee && GetAttribute(attacker, "knockout powerup", 0.0) == 1)
 				damage *= 1.35;
 
-			int i = RoundToCeil(TICKRATE/weaponFireRate[weapon]);
-			if(i <= 6)
+			if(weaponFireRate[weapon] > TICKRATE)
 			{
-				if(i == 0) i = 1;
-				damage *= i*weaponFireRate[weapon]/TICKRATE;
+				damage *= 1+(weaponFireRate[weapon]-TICKRATE)/TICKRATE;
 			}
 			applyDamageAffinities(victim, attacker, inflictor, damage, weapon, damagetype, damagecustom, getDamageCategory(currentDamageType[attacker], attacker));
 		}
@@ -1039,11 +1037,9 @@ public Action:OnTakeDamagePre_Sentry(victim, &attacker, &inflictor, float &damag
 			if(TF2Util_GetWeaponSlot(weapon) == TFWeaponSlot_Melee && GetAttribute(attacker, "knockout powerup", 0.0) == 1)
 				damage *= 1.35;
 			
-			int i = RoundToCeil(TICKRATE/weaponFireRate[weapon]);
-			if(i <= 6)
+			if(weaponFireRate[weapon] > TICKRATE)
 			{
-				if(i == 0) i = 1;
-				damage *= i*weaponFireRate[weapon]/TICKRATE;
+				damage *= 1+(weaponFireRate[weapon]-TICKRATE)/TICKRATE;
 			}
 			if(damagecustom == TF_CUSTOM_PLASMA_CHARGED || damagecustom == TF_CUSTOM_PLASMA){
 				if(!GetAttribute(weapon, "energy weapon no hurt building", 1.0)){
