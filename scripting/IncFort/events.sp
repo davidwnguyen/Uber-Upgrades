@@ -1973,126 +1973,7 @@ public Action OnPlayerRunCmd(int client, int& buttons, int& impulse, float vel[3
 						fanOfKnivesCount[client] = 0;
 					}
 				}
-				if(buttons & IN_DUCK && buttons & IN_ATTACK3 && fl_GlobalCoolDown[client] <= GetGameTime())
-				{
-					fl_GlobalCoolDown[client] = GetGameTime()+0.4;
-					if(GetAttribute(client, "revenge powerup", 0.0) == 1 && RageActive[client] == false && RageBuildup[client] >= 1.0)
-					{
-						RageActive[client] = true;
-						EmitSoundToAll(SOUND_REVENGE, client, -1, 150, 0, 1.0);
-						EmitSoundToAll(SOUND_REVENGE, client, -1, 150, 0, 1.0);
-						
-						TF2_AddCondition(client, TFCond_CritCanteen, 1.0);
-						TF2_AddCondition(client, TFCond_SpeedBuffAlly, 1.0);
-						TF2_AddCondition(client, TFCond_DefenseBuffMmmph, 1.0);
-						TF2_AddCondition(client, TFCond_UberchargedHidden, 1.0);
-						TF2_AddCondition(client, TFCond_KingAura, 1.0);
-					}
-					if(GetAttribute(client, "revenge powerup", 0.0) == 3 && enragedKills[client] >= 80){
-						EmitSoundToAll(SOUND_REVENGE, client, -1, 150, 0, 1.0);
-						EmitSoundToAll(SOUND_REVENGE, client, -1, 150, 0, 1.0);
-						enragedKills[client] = 0;
-						TF2_AddCondition(client, TFCond_CritCanteen, 16.0);
-						TF2_AddCondition(client, TFCond_SpeedBuffAlly, 16.0);
-						Buff enraged;
-						enraged.init("Enraged", "", Buff_Enraged, 1, client, 16.0);
-						enraged.additiveAttackSpeedMult = 1.0;
-						enraged.multiplicativeDamageTaken = 0.4;
 
-						insertBuff(client, enraged);
-					}
-					if(duplicationCooldown[client] <= GetGameTime()){
-						if(GetAttribute(client, "regeneration powerup", 0.0) == 2.0){
-							duplicationCooldown[client] = GetGameTime()+10.0;
-							AddPlayerHealth(client, GetClientHealth(client), 2.0);
-							float fOrigin[3];
-							GetClientAbsOrigin(client, fOrigin);
-							EmitSoundToAll(SOUND_HEAL, client, _, _, _, _, _, _, fOrigin);
-						}
-					}
-					if(GetAttribute(client, "king powerup", 0.0) == 2.0){
-						for(int i=1;i<=MaxClients;++i)
-						{
-							if(!IsValidClient3(i) || i == client)
-								continue;
-							
-							if(!IsPlayerAlive(i))
-								continue;
-							
-							if(IsOnDifferentTeams(client,i))
-								continue;
-							
-							if(!IsTargetInSightRange(client, i, 10.0, 2000.0, true, false))
-								continue;
-
-							if(!IsAbleToSee(client,i, false))
-								continue;
-								
-							tagTeamTarget[client] = i;
-							break;
-						}
-					}
-					if(warpCooldown[client] <= GetGameTime()){
-						if(GetAttribute(client, "agility powerup", 0.0) == 3.0){
-							CastWarp(client);
-						}
-					}
-					if(GetAttribute(client, "resistance powerup", 0.0) == 3.0){
-						strongholdEnabled[client] = !strongholdEnabled[client];
-
-						if(strongholdEnabled[client]){
-							SetEntityMoveType(client, MOVETYPE_NONE);
-							float fOrigin[3];
-							GetClientAbsOrigin(client, fOrigin);
-							EmitSoundToAll(SOUND_STRONGHOLD, 0,_,_,_,1.0, _, _, fOrigin);
-							PrintHintText(client, "Stronghold Enabled");
-						}else{
-							SetEntityMoveType(client, MOVETYPE_WALK);
-							PrintHintText(client, "Stronghold Disabled");
-						}
-						TeleportEntity(client, _, _, {0.0,0.0,0.0});
-					}
-
-					if(SupernovaBuildup[client] >= 1.0)
-					{
-						SupernovaBuildup[client] = 0.0;
-						EmitSoundToAll(SOUND_SUPERNOVA, client, -1, 150, 0, 1.0);
-						EmitSoundToAll(SOUND_SUPERNOVA, client, -1, 150, 0, 1.0);
-						
-						int iTeam = GetClientTeam(client);
-						if(iTeam == 2)
-							CreateParticleEx(client, "powerup_supernova_explode_red");
-						else
-							CreateParticleEx(client, "powerup_supernova_explode_blue");
-						
-						float clientpos[3];
-						GetClientEyePosition(client,clientpos);
-						int i = -1;
-						while ((i = FindEntityByClassname(i, "*")) != -1)
-						{
-							if(IsValidForDamage(i) && IsOnDifferentTeams(client,i))
-							{
-								float VictimPos[3];
-								GetEntPropVector(i, Prop_Data, "m_vecOrigin", VictimPos);
-								VictimPos[2] += 30.0;
-								if(GetVectorDistance(clientpos,VictimPos,true) <= 640000.0)
-								{
-									if(IsValidClient3(i))
-									{
-										TF2_StunPlayer(i, 6.0, 1.0, TF_STUNFLAGS_NORMALBONK, client);
-									}
-									else if(HasEntProp(i,Prop_Send,"m_hBuilder"))
-									{
-										SetEntProp(i, Prop_Send, "m_bDisabled", 1);
-										CreateTimer(10.0, ReEnableBuilding, EntIndexToEntRef(i));
-									}
-								}
-							}
-						}
-						
-					}
-				}
-				
 				if(!(flags & FL_ONGROUND))
 				{
 					if(GetAttribute(client, "agility powerup", 0.0) == 2.0){
@@ -2422,6 +2303,127 @@ public Action OnPlayerRunCmd(int client, int& buttons, int& impulse, float vel[3
 						}
 					}
 				}
+
+				if(buttons & IN_DUCK && buttons & IN_ATTACK3 && fl_GlobalCoolDown[client] <= GetGameTime())
+				{
+					fl_GlobalCoolDown[client] = GetGameTime()+0.4;
+					if(GetAttribute(client, "revenge powerup", 0.0) == 1 && RageActive[client] == false && RageBuildup[client] >= 1.0)
+					{
+						RageActive[client] = true;
+						EmitSoundToAll(SOUND_REVENGE, client, -1, 150, 0, 1.0);
+						EmitSoundToAll(SOUND_REVENGE, client, -1, 150, 0, 1.0);
+						
+						TF2_AddCondition(client, TFCond_CritCanteen, 1.0);
+						TF2_AddCondition(client, TFCond_SpeedBuffAlly, 1.0);
+						TF2_AddCondition(client, TFCond_DefenseBuffMmmph, 1.0);
+						TF2_AddCondition(client, TFCond_UberchargedHidden, 1.0);
+						TF2_AddCondition(client, TFCond_KingAura, 1.0);
+					}
+					if(GetAttribute(client, "revenge powerup", 0.0) == 3 && enragedKills[client] >= 80){
+						EmitSoundToAll(SOUND_REVENGE, client, -1, 150, 0, 1.0);
+						EmitSoundToAll(SOUND_REVENGE, client, -1, 150, 0, 1.0);
+						enragedKills[client] = 0;
+						TF2_AddCondition(client, TFCond_CritCanteen, 16.0);
+						TF2_AddCondition(client, TFCond_SpeedBuffAlly, 16.0);
+						Buff enraged;
+						enraged.init("Enraged", "", Buff_Enraged, 1, client, 16.0);
+						enraged.additiveAttackSpeedMult = 1.0;
+						enraged.multiplicativeDamageTaken = 0.4;
+
+						insertBuff(client, enraged);
+					}
+					if(duplicationCooldown[client] <= GetGameTime()){
+						if(GetAttribute(client, "regeneration powerup", 0.0) == 2.0){
+							duplicationCooldown[client] = GetGameTime()+10.0;
+							AddPlayerHealth(client, GetClientHealth(client), 2.0);
+							float fOrigin[3];
+							GetClientAbsOrigin(client, fOrigin);
+							EmitSoundToAll(SOUND_HEAL, client, _, _, _, _, _, _, fOrigin);
+						}
+					}
+					if(GetAttribute(client, "king powerup", 0.0) == 2.0){
+						for(int i=1;i<=MaxClients;++i)
+						{
+							if(!IsValidClient3(i) || i == client)
+								continue;
+							
+							if(!IsPlayerAlive(i))
+								continue;
+							
+							if(IsOnDifferentTeams(client,i))
+								continue;
+							
+							if(!IsTargetInSightRange(client, i, 10.0, 2000.0, true, false))
+								continue;
+
+							if(!IsAbleToSee(client,i, false))
+								continue;
+								
+							tagTeamTarget[client] = i;
+							break;
+						}
+					}
+					if(warpCooldown[client] <= GetGameTime()){
+						if(GetAttribute(client, "agility powerup", 0.0) == 3.0){
+							CastWarp(client);
+						}
+					}
+					if(GetAttribute(client, "resistance powerup", 0.0) == 3.0){
+						strongholdEnabled[client] = !strongholdEnabled[client];
+
+						if(strongholdEnabled[client]){
+							SetEntityMoveType(client, MOVETYPE_NONE);
+							float fOrigin[3];
+							GetClientAbsOrigin(client, fOrigin);
+							EmitSoundToAll(SOUND_STRONGHOLD, 0,_,_,_,1.0, _, _, fOrigin);
+							PrintHintText(client, "Stronghold Enabled");
+						}else{
+							SetEntityMoveType(client, MOVETYPE_WALK);
+							PrintHintText(client, "Stronghold Disabled");
+						}
+						TeleportEntity(client, _, _, {0.0,0.0,0.0});
+					}
+
+					if(SupernovaBuildup[client] >= 1.0)
+					{
+						SupernovaBuildup[client] = 0.0;
+						EmitSoundToAll(SOUND_SUPERNOVA, client, -1, 150, 0, 1.0);
+						EmitSoundToAll(SOUND_SUPERNOVA, client, -1, 150, 0, 1.0);
+						
+						int iTeam = GetClientTeam(client);
+						if(iTeam == 2)
+							CreateParticleEx(client, "powerup_supernova_explode_red");
+						else
+							CreateParticleEx(client, "powerup_supernova_explode_blue");
+						
+						float clientpos[3];
+						GetClientEyePosition(client,clientpos);
+						int i = -1;
+						while ((i = FindEntityByClassname(i, "*")) != -1)
+						{
+							if(IsValidForDamage(i) && IsOnDifferentTeams(client,i))
+							{
+								float VictimPos[3];
+								GetEntPropVector(i, Prop_Data, "m_vecOrigin", VictimPos);
+								VictimPos[2] += 30.0;
+								if(GetVectorDistance(clientpos,VictimPos,true) <= 640000.0)
+								{
+									if(IsValidClient3(i))
+									{
+										TF2_StunPlayer(i, 6.0, 1.0, TF_STUNFLAGS_NORMALBONK, client);
+									}
+									else if(HasEntProp(i,Prop_Send,"m_hBuilder"))
+									{
+										SetEntProp(i, Prop_Send, "m_bDisabled", 1);
+										CreateTimer(10.0, ReEnableBuilding, EntIndexToEntRef(i));
+									}
+								}
+							}
+						}
+						
+					}
+				}
+				
 				float chainLightningAttribute = GetAttribute(CWeapon, "chain lightning meter on hit", 0.0);
 				if(chainLightningAttribute){
 					char CooldownTime[32]

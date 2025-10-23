@@ -114,7 +114,7 @@
 		"description"	"On a successful backstab - Gives stealthed condition for 3s.\nBackstabs increase victims radiation by 25.\n+25% movespeed, has the dash ability on the winger.\n0.8x damage dealt."
 		"cost"			"10000.0"
 		"provide on active"	"1"
-		"Ability : Silent Dash"	"1073741824"
+		"Ability : Silent Dash"	"12"
 		"move speed bonus"	"1.25"
 		"Radiation Buildup On Backstab"	"25"
 		"weapon damage mult"	"0.8"
