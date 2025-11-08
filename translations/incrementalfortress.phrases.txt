@@ -2895,9 +2895,6 @@
 	"dmg bonus while half dead"{
 		"en"		"PCT HP Lost Damage Bonus"
 	}
-	"multihit melee"{
-		"en"		"Additional Attacks"
-	}
 	"mod medic killed revenge"{
 		"en"		"Medic Killed Gives Revenge Crits"
 	}

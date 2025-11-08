@@ -2146,17 +2146,6 @@
 			"init"		"1.00"
 			"max"		"3.00"
 		}
-		"130.5"
-		{
-			"name"		"taunt move acceleration time"
-			"ref"		"multihit melee"
-			"display"		"%.0f"
-			"cost"		"15000"
-			"increase_ratio"	"0.6"
-			"value"		"1"
-			"init"		"0.00"
-			"max"		"4.00"
-		}
 		"131"
 		{
 			"name"		"mod medic killed revenge"
@@ -2661,7 +2650,7 @@
 		}
 		"192"
 		{
-			"name"		"overheal penalty"
+			"name"		"headshot damage increase"
 			"ref"		"headshot damage increase"
 			"display"		"%.0f%%"
 			"cost"		"500"
@@ -4663,20 +4652,6 @@
 			"init"		"1"
 			"max"		"0"
 		}
-		"1327"
-		{
-			"name"		"ubercharge"
-			"ref"		"Overall Damage Bonus"
-			"display"		"%.0f"
-			"cost"		"212.5"
-			"value"		"1.0"
-			"increase_ratio"	"0.4"
-			"init"		"0"
-			"staged_max"		"150.0,300.0,1000.0"
-			"optimizer_style"		"6"
-			"description"	"Multiplies damage by 1.05x\nper purchase.\nFormula is 1.05^value."
-			"max"		"60"
-		}
 		"1328"
 		{
 			"name"		"provide on active"
@@ -5060,15 +5035,16 @@
 		}
 		"1524"
 		{
-			"name"		"hidden secondary max ammo penalty"
+			"name"		"patient damage bonus"
 			"ref"		"Damage Multiplier for healed player"
+			"attr_class"	"patient_damage_bonus"
 			"display"		"%.0f%%"
-			"cost"		"900"
+			"cost"		"750"
 			"increase_ratio"	".9"
 			"value"		"0.05"
 			"init"		"0"
 			"description"	"Gives damage boost to player healed.\nStacks additively with other medics' boost"
-			"max"		"1"
+			"max"		"0.5"
 		}
 		"1528"
 		{
@@ -6533,8 +6509,9 @@
 		}
 		"1652"
 		{
-			"name"		"flame size penalty"
+			"name"		"sniper charged shots bounce"
 			"ref"		"Fully Charged Shots Ricochet"
+			"attr_class"	"sniper_charged_shots_bounce"
 			"display"		"%.0f"
 			"cost"		"0"
 			"increase_ratio"	"0"
@@ -6547,7 +6524,7 @@
 			"name"		"dps inheritance ratio"
 			"ref"		"dps inheritance ratio"
 			"attr_class"	"dps_inheritance_ratio"
-			"display"		"%.0f%%"
+			"display"		"%.2fx"
 			"cost"		"0"
 			"increase_ratio"	"0"
 			"value"		"0.1"
@@ -6823,7 +6800,7 @@
 		{
 			"name"		"vaccinator exhaust attribute"
 			"ref"		"vaccinator exhaust attribute"
-			"attr_class"	"vaccinator exhaust attribute"
+			"attr_class"	"vaccinator_exhaust_attribute"
 			"display"		"%.0f"
 			"cost"		"0"
 			"value"		"1"

@@ -1173,8 +1173,7 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 						damagecustom = 1;
 					}
 				}
-				float precisionPowerup = GetAttribute(attacker, "precision powerup", 0.0);
-				if(precisionPowerup == 1)
+				if(TF2Attrib_HookValueFloat(0.0, "precision powerup", attacker) == 1)
 				{
 					miniCritStatus[victim] = true;
 					damage *= 1.35;
@@ -1205,7 +1204,7 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 
 			damage *= 2+1.75*((400-distance)/400);
 		}
-		if(GetAttribute(attacker, "precision powerup", 0.0) == 3){
+		if(TF2Attrib_HookValueFloat(0.0, "precision powerup", attacker) == 3){
 			if(! ( StrEqual(classname, "tf_weapon_flamethrower") || StrEqual(classname, "tf_weapon_rocketlauncher_fireball") ) ){
 				damage *= 4.0;
 			}
@@ -1226,15 +1225,20 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 					continue;
 				
 				if(IsOnDifferentTeams(attacker, healer)){
-					medicDMGBonus -= (GetAttribute(healingWeapon, "medigun blast resist passive", 0.0)+GetAttribute(healingWeapon, "medigun bullet resist passive", 0.0)+GetAttribute(healingWeapon, "medigun fire resist passive", 0.0))/6.0;
+					// Using exhaust on vaccinator decreases damage dealt by the average of the resistances.
+					float exhaustCoefficient = TF2Attrib_HookValueFloat(0.0, "vaccinator_exhaust_attribute", healingWeapon);
+					if(exhaustCoefficient > 0.0)
+						medicDMGBonus -= (TF2Attrib_HookValueFloat(0.0, "medigun_blast_resist_passive", healingWeapon)+
+							TF2Attrib_HookValueFloat(0.0, "medigun_bullet_resist_passive", healingWeapon)+
+							TF2Attrib_HookValueFloat(0.0, "medigun_fire_resist_passive", healingWeapon))/3.0*exhaustCoefficient;
 				}
 				else{
-					medicDMGBonus += GetAttribute(healingWeapon, "hidden secondary max ammo penalty", 0.0);
+					medicDMGBonus += TF2Attrib_HookValueFloat(0.0, "patient_damage_bonus", healingWeapon);
 
 					if(TF2_IsPlayerInCondition(attacker, TFCond_Kritzkrieged))
 						medicDMGBonus += GetAttribute(healingWeapon, "ubercharge effectiveness", 1.0)-1.0;
 
-					medicDMGBonus *= GetAttribute(healingWeapon, "healing patient power", 1.0);
+					medicDMGBonus *= TF2Attrib_HookValueFloat(1.0, "healing_patient_power", healingWeapon);
 				}
 			}
 		}
@@ -1258,34 +1262,20 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 					
 					if(!IsOnDifferentTeams(healer, victim)){
 						if(GetClientHealth(victim) > TF2Util_GetEntityMaxHealth(victim))
-							medicRESBonus += GetAttribute(healingWeapon, "patient overheal to damage mult", 0.0);
+							medicRESBonus += TF2Attrib_HookValueFloat(0.0, "patient_overheal_to_damage_mult", healingWeapon);
 
 						if(TF2_IsPlayerInCondition(healer, TFCond_UberFireResist) || TF2_IsPlayerInCondition(healer, TFCond_UberBulletResist) || TF2_IsPlayerInCondition(healer, TFCond_UberBlastResist))
 							medicRESBonus += GetAttribute(healingWeapon, "ubercharge effectiveness", 1.0)-1.0;
 
-						medicRESBonus *= GetAttribute(healingWeapon, "healing patient power", 1.0);
+						medicRESBonus *= TF2Attrib_HookValueFloat(1.0, "healing_patient_power", healingWeapon);
 					}
 				}
 			}
 		}
 		damage /= medicRESBonus;
 
-		float SniperChargingFactorActive = GetAttribute(weapon, "no charge impact range");
-		if(SniperChargingFactorActive != 1.0)
-		{
-			if(LastCharge[attacker] > 50.0)
-				damage *= SniperChargingFactorActive;
-		}
-		float expodamageActive = GetAttribute(weapon, "taunt turn speed");
-		if(expodamageActive != 1.0)
-			damage *= Pow(expodamageActive, 6.0);
-
-		float HeadshotDamage = GetAttribute(weapon, "overheal penalty");
-		if(HeadshotDamage != 1.0 && damagecustom == 1)
-			damage *= HeadshotDamage;
-
 		if(!(currentDamageType[attacker].second & DMG_PIERCING)){
-			float additivePiercingDamage = GetAttribute(weapon, "additive piercing damage", 0.0);
+			float additivePiercingDamage = TF2Attrib_HookValueFloat(0.0, "additive piercing damage", weapon);
 			if(additivePiercingDamage != 0){
 				currentDamageType[attacker].second |= DMG_PIERCING;
 				currentDamageType[attacker].second |= DMG_IGNOREHOOK;
@@ -1293,38 +1283,28 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 			}
 		}
 
+		/*
+		**	Custom Damage Compatibility Rules
+		*/
+
+		//Bullets per shot gives damage instead on projectile overrides.
 		float overrideproj = GetAttribute(weapon, "override projectile type");
-		float energyWeapActive = GetAttribute(weapon, "energy weapon penetration", 0.0);
-		if(overrideproj != 1.0 || energyWeapActive != 0.0)
-		{
-			damage *= GetAttribute(weapon, "bullets per shot bonus");
-			damage *= GetAttribute(weapon, "accuracy scales damage");
+		if(overrideproj != 1.0){
+			damage *= TF2Attrib_HookValueFloat(1.0, "mult_bullets_per_shot", weapon);
 		}
-		if(damagecustom == TF_CUSTOM_PLASMA_CHARGED)
-		{
-			damage *= Pow(GetAttribute(weapon, "clip size bonus upgrade")+1.0, 0.9);
+
+		//Cow Mangler Charged Shots receive a ^0.8 bonus from clip size upgrades.
+		if(damagecustom == TF_CUSTOM_PLASMA_CHARGED){
+			damage *= Pow(TF2Attrib_HookValueFloat(1.0, "mult_clipsize_upgrade", weapon), 0.8);
 			damagetype |= DMG_CRIT;
 		}
 
-		float damageActive = GetAttribute(weapon, "ubercharge", 0.0);
-		if(damageActive != 0.0)
-			damage *= Pow(1.05,damageActive);
-
-		if(TF2_IsPlayerInCondition(attacker, TFCond_RunePrecision))
-			damage *= 2.0;
-
-		if(damagetype & DMG_CLUB)
-		{
-			float multiHitActive = GetAttribute(weapon, "taunt move acceleration time",0.0);
-			if(multiHitActive != 0.0)
-				DOTStock(victim,attacker,damage,weapon,damagetype + DMG_VEHICLE,RoundToNearest(multiHitActive),0.4,0.15,true);
-		}
-
-		if(damagetype & DMG_SLASH){//Bleed receives ^0.5 damage boost from fire rate.
+		//Bleed receives ^0.5 damage boost from fire rate.
+		if(damagetype & DMG_SLASH){
 			damage /= Pow(TF2Attrib_HookValueFloat(1.0, "mult_postfiredelay", weapon),  0.5);
 		}
 
-		float missingHealthDamageBonus = GetAttribute(weapon, "dmg per pct hp missing", 0.0)
+		float missingHealthDamageBonus = TF2Attrib_HookValueFloat(0.0, "dmg_per_pct_hp_missing", weapon);
 		if(missingHealthDamageBonus > 0.0){
 			float ratio = GetClientHealth(attacker)/float(TF2Util_GetEntityMaxHealth(attacker));
 			if(ratio < 1.0)
@@ -1332,13 +1312,13 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 		}
 
 		if(stickiesDetonated[attacker] > 0){
-			damage *= 1+GetAttribute(weapon, "dmg per sticky detonated", 0.0)*stickiesDetonated[attacker];
+			damage *= 1+TF2Attrib_HookValueFloat(0.0, "dmg_per_sticky_detonated", weapon)*stickiesDetonated[attacker];
 		}
 
 		if(isVictimPlayer)
 		{
 			if(immolationActive[attacker]){
-				float immolationRatio = GetAttribute(weapon, "immolation ratio", 0.0);
+				float immolationRatio = TF2Attrib_HookValueFloat(0.0, "immolation_ratio", weapon);
 				if(immolationRatio > 0.0){
 					Buff immolationStatus;
 					immolationStatus.init("Immolation Burn", "Rapidly losing health", Buff_ImmolationBurn, TF2Util_GetEntityMaxHealth(attacker)*RoundFloat(immolationRatio*100), attacker, 5.0, immolationRatio);
@@ -1346,7 +1326,7 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 				}
 			}
 			if(damagetype & DMG_CLUB){
-				float infernalExplosive = GetAttribute(weapon, "Dragon Bullets Radius", 0.0);
+				float infernalExplosive = TF2Attrib_HookValueFloat(0.0, "dragon_bullets_radius", weapon);
 				if(infernalExplosive){
 					float enemyPos[3];
 					GetClientEyePosition(victim, enemyPos);
@@ -1354,7 +1334,7 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 					CreateParticleEx(victim, "heavy_ring_of_fire");
 				}
 			}
-			float bouncingBullets = GetAttribute(weapon, "flame size penalty", 0.0);
+			float bouncingBullets = TF2Attrib_HookValueFloat(0.0, "sniper_charged_shots_bounce", weapon);
 			if(bouncingBullets != 0.0 && LastCharge[attacker] >= 150.0)
 			{
 				bool isBounced[MAXPLAYERS+1];
@@ -1406,7 +1386,7 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 					++i
 				}
 			}
-			float conferenceBonus = GetAttribute(weapon, "conference call damage", 0.0);
+			float conferenceBonus = TF2Attrib_HookValueFloat(0.0, "conference_call_damage", weapon);
 			if(conferenceBonus && baseDamage[attacker] > 0)
 			{
 				float victimPos[3];
@@ -1473,7 +1453,7 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 				}
 			}
 		}
-		if(GetAttribute(attacker, "supernova powerup", 0.0) == 1.0)
+		if(TF2Attrib_HookValueFloat(0.0, "supernova_powerup", attacker) == 1.0)
 		{
 			if(StrContains(getDamageCategory(currentDamageType[attacker], attacker),"blast",false) != -1)
 			{
@@ -1551,7 +1531,7 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 			}
 		}
 		
-		float arcaneWeaponScaling = GetAttribute(weapon,"arcane weapon scaling",0.0);
+		float arcaneWeaponScaling = TF2Attrib_HookValueFloat(0.0, "arcane_weapon_scaling", weapon);
 		if(arcaneWeaponScaling != 0.0){
 			currentDamageType[attacker].second |= DMG_IGNOREHOOK;
 			SDKHooks_TakeDamage(victim,attacker,attacker,10.0 + ArcaneDamage[attacker] * arcaneWeaponScaling,_,_,_,_,false);
@@ -1564,7 +1544,7 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 			}
 			int secondary = GetWeapon(attacker, 1);
 			if(IsValidWeapon(secondary)){
-				float inheritanceRatio = GetAttribute(secondary, "dps inheritance ratio", 0.0);
+				float inheritanceRatio = TF2Attrib_HookValueFloat(0.0, "dps_inheritance_ratio", attacker);
 				if(inheritanceRatio){
 					float strongestDPS = 0.0;
 					for(int e = 0;e<3;++e){
@@ -1606,8 +1586,8 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 				//afterburn slop
 				if(damagetype & DMG_IGNITE || 
 				(GetClientTeam(attacker) != GetClientTeam(victim) &&
-				(GetAttribute(weapon, "afterburn rating", 0.0) ||
-				GetAttribute(attacker, "supernova powerup", 0.0) == 2) &&
+				(TF2Attrib_HookValueFloat(0.0, "afterburn_rating", weapon) ||
+				TF2Attrib_HookValueFloat(0.0, "supernova_powerup", weapon) == 2) &&
 				!(damagetype & DMG_BURN && damagetype & DMG_PREVENT_PHYSICS_FORCE) &&
 				!(damagetype & DMG_SLASH))) // int afterburn system.
 				{
@@ -1678,7 +1658,7 @@ public float genericSentryDamageModification(victim, attacker, inflictor, float 
 
 			int secondary = GetWeapon(owner, 1);
 			if(IsValidWeapon(secondary)){
-				damage *= 1+GetEntProp(inflictor, Prop_Send, "m_iKills")*GetAttribute(secondary, "sentry dmg bonus per kill", 0.0);
+				damage *= 1+GetEntProp(inflictor, Prop_Send, "m_iKills")*TF2Attrib_HookValueFloat(0.0, "sentry_dmg_bonus_per_kill", secondary);
 			}
 			if((StrEqual("obj_sentrygun", classname) && GetEntProp(inflictor, Prop_Send, "m_bMiniBuilding") == 1))
 			{//Minisentries deal 4 damage base.
@@ -1713,7 +1693,7 @@ public void applyDamageAffinities(&victim, &attacker, &inflictor, float &damage,
 	}
 	else if(StrContains(damageCategory, "fire") != -1)
 	{
-		if(GetAttribute(attacker, "supernova powerup", 0.0) == 2){
+		if(TF2Attrib_HookValueFloat(0.0, "supernova_powerup", attacker) == 2){
 			damage *= 1.5;
 
 			int team = GetClientTeam(attacker);
@@ -1743,7 +1723,7 @@ public void applyDamageAffinities(&victim, &attacker, &inflictor, float &damage,
 	}
 	else if(StrContains(damageCategory, "electric") != -1)
 	{
-		if(GetAttribute(attacker, "supernova powerup", 0.0) == 3){
+		if(TF2Attrib_HookValueFloat(0.0, "supernova_powerup", attacker) == 3){
 			float buff = 1.0;
 			for(int i = 1;i<=MaxClients;++i){
 				if(isTagged[attacker][i])
