@@ -81,8 +81,8 @@
 			"cost"		"20000"
 			"increase_ratio"	"4.0"
 			"value"		"1"
-			"init"		"1"
-			"max"		"3"
+			"init"		"0"
+			"max"		"2"
 		}
 		"1542"
 		{
@@ -2366,17 +2366,6 @@
 			"init"		"1.00"
 			"max"		"0.0"
 		}
-		"156.5"
-		{
-			"name"		"effect bar recharge rate increased"
-			"ref"		"effect bar recharge rate increased(L)"
-			"display"		"%.0f%%"
-			"cost"		"125"
-			"value"		"-0.10"
-			"increase_ratio" 	"0.35"
-			"init"		"1.00"
-			"max"		"0.01"
-		}
 		"156.10"
 		{
 			"name"		"effect bar recharge rate increased"
@@ -3250,7 +3239,7 @@
 		{
 			"name"		"restore health on kill"
 			"ref"		"percent of hp healed on kill"
-			"display"		"%.0f"
+			"display"		"%.1f٪"
 			"cost"		"0"
 			"value"		"10.00"
 			"init"		"0.00"
@@ -4003,7 +3992,7 @@
 			"cost"		"250"
 			"value"		"0.5"
 			"init"		"1.00"
-			"max"		"45.00"
+			"max"		"25.00"
 		}
 		"151.5"
 		{
@@ -4858,16 +4847,17 @@
 		}
 		"1508"
 		{
-			"name"		"tool escrow until date"
+			"name"		"quadratic damage reduction"
 			"ref"		"Armor Capability"
+			"attr_class"	"quadratic_damage_reduction"
 			"display"		"%.0f"
 			"cost"		"500"
 			"increase_ratio"	"1.0"
 			"value"		"1"
-			"init"		"1"
+			"init"		"0"
 			"description"	"Divides damage taken by squared value.\nYou currently take 'DR'x less damage."
 			"optimizer_style"	"2"
-			"max"		"1001"
+			"max"		"1000"
 		}
 		"1509"
 		{
@@ -5039,11 +5029,11 @@
 			"attr_class"	"lifesteal_ability"
 			"display"		"%.0f%%"
 			"cost"		"1500"
-			"increase_ratio"	"0.1"
+			"increase_ratio"	"0.2"
 			"value"		"0.01"
 			"init"		"0.0"
-			"description"	"Increases lifesteal from damage.\nLifesteal on bots is 0.3x effective."
-			"max"		"0.4"
+			"description"	"[{VALUE}*100]% of dealt damage is given as health to you.\nLifesteal on bots is 0.3x effective."
+			"max"		"0.2"
 		}
 		"1521"
 		{
@@ -5316,8 +5306,9 @@
 		}
 		"1537"
 		{
-			"name"		"is throwable chargeable"
+			"name"		"quadratic damage reduction mult"
 			"ref"		"Defense"
+			"attr_class"	"quadratic_damage_reduction"
 			"display"		"%.0f%%"
 			"cost"		"1000"
 			"increase_ratio"	"0.9"
@@ -5325,7 +5316,7 @@
 			"init"		"1"
 			"description"	"Multiplies input Damage Reduction for formula.\nYou currently take 'DR'x less damage."
 			"optimizer_style"	"3"
-			"max"		"101"
+			"max"		"100"
 		}
 		"1538"
 		{
@@ -5398,8 +5389,9 @@
 		//Class Tweaks
 		"1547"
 		{
-			"name"		"mult cloak meter regen rate"
-			"ref"		"Teammate Damage Redirection"//Tweaks.
+			"name"		"redirect teammate damage taken"
+			"ref"		"Teammate Damage Redirection"
+			"attr_class"	"redirect_teammate_damage_taken"
 			"display"		"%.0f%%"
 			"increase_ratio" "0"
 			"cost"		"0"
@@ -5410,7 +5402,7 @@
 		"1548"
 		{
 			"name"		"damage penalty"
-			"ref"		"Damage Reduced"//Tweaks.
+			"ref"		"Damage Reduced"
 			"display"		"%.0f%%"
 			"increase_ratio" "0"
 			"cost"		"0"
@@ -5522,8 +5514,9 @@
 		}
 		"1556"
 		{
-			"name"		"scattergun knockback mult"
+			"name"		"apply vuln on sapped"
 			"ref"		"Vulnerability When Sapped"
+			"attr_class"	"apply_vuln_on_sapped"
 			"display"		"%.0f%%"
 			"cost"		"1000"
 			"increase_ratio"	"0.1"
@@ -5545,8 +5538,9 @@
 		}
 		"1558"
 		{
-			"name"		"has pipboy build interface"
+			"name"		"baseball base damage"
 			"ref"		"Ball Additive Damage Bonus"
+			"attr_class"	"baseball_base_damage"
 			"display"		"%.0f"
 			"cost"		"750"
 			"increase_ratio" 	"0.25"
@@ -5628,8 +5622,9 @@
 		}
 		"1568"
 		{
-			"name"		"no double jump"
+			"name"		"backstab radiation buildup"
 			"ref"		"Radiation Buildup On Backstab"
+			"attr_class"	"backstab_radiation_buildup"
 			"display"		"%.0f"
 			"cost"		"0"
 			"value"		"1"
@@ -5638,8 +5633,9 @@
 		}
 		"1569"
 		{
-			"name"		"airblast cost increased"
+			"name"		"stealthed backstab duration"
 			"ref"		"Stealth On Backstab"
+			"attr_class"	"stealthed_backstab_duration"
 			"display"		"%.0f"
 			"cost"		"0"
 			"value"		"1"
@@ -5674,9 +5670,10 @@
 		}
 		"1572"
 		{
-			"name"		"overheal decay disabled"
+			"name"		"jar buff afterburn immunity"
 			"ref"		"Afterburn Immunity Duration"
-			"display"		"%.0f"
+			"attr_class"	"jar_buff_afterburn_immunity"
+			"display"		"%.0fs"
 			"cost"		"600"
 			"increase_ratio"	"0.3"
 			"value"		"1.0"
@@ -5686,21 +5683,23 @@
 		}
 		"1573"
 		{
-			"name"		"no crit vs nonburning"
+			"name"		"jar buff haste"
 			"ref"		"Increases Haste Buff Duration"
-			"display"		"%.2f"
+			"attr_class"	"jar_buff_haste"
+			"display"		"%.2fs"
 			"cost"		"600"
 			"increase_ratio"	"0.6"
 			"value"		"0.05"
 			"init"		"0"
-			"description"	"Upon splashing your teammates: +X seconds of minor haste (+50% fire rate)."
+			"description"	"Upon splashing your teammates: +X seconds of minor haste (+34% fire rate)."
 			"max"		"0.5"
 		}
 		"1575"
 		{
-			"name"		"set cloak is feign death"
+			"name"		"jar buff defense"
 			"ref"		"Batallion's Buff Duration"
-			"display"		"%.2f"
+			"attr_class"	"jar_buff_defense"
+			"display"		"%.2fs"
 			"cost"		"600"
 			"increase_ratio"	"0.6"
 			"value"		"0.05"
@@ -5745,6 +5744,7 @@
 		{
 			"name"		"building cost reduction"
 			"ref"		"Corrosive Damage Over Time"
+			"attr_class"	"jar_debuff_corrosion"
 			"display"		"%.0f%%"
 			"cost"		"2500"
 			"increase_ratio"	"0.6"
@@ -5863,6 +5863,17 @@
 			"name"		"dragon bullets radius"
 			"ref"		"Dragon Bullets Radius"
 			"attr_class"	"dragon_bullets_radius"
+			"display"		"%.0f HU"
+			"cost"		"0"
+			"increase_ratio"	"0"
+			"value"		"1.0"
+			"init"		"0"
+			"max"		"1000"
+		}
+		"1589.10"
+		{
+			"name"		"dragon bullets radius"
+			"ref"		"Explosive Impact Radius"
 			"display"		"%.0f HU"
 			"cost"		"0"
 			"increase_ratio"	"0"
@@ -7277,6 +7288,39 @@
 			"value"		"0.1"
 			"init"		"0"
 			"max"		"5"
+		}
+		"1720"
+		{
+			"name"		"damage deflection"
+			"ref"		"damage deflection"
+			"display"	"%.2f%%"
+			"attr_class"	"damage_deflection"
+			"cost"		"0"
+			"value"		"0.1"
+			"init"		"0"
+			"max"		"1"
+		}
+		"1721"
+		{
+			"name"		"damage deflection"
+			"ref"		"damage deflection"
+			"display"	"%.2f%%"
+			"attr_class"	"damage_deflection"
+			"cost"		"0"
+			"value"		"0.1"
+			"init"		"0"
+			"max"		"1"
+		}
+		"1722"
+		{
+			"name"		"mark for death on hit duration"
+			"ref"		"mark for death on hit duration"
+			"display"	"%.1fs"
+			"attr_class"	"mark_for_death_on_hit_duration"
+			"cost"		"0"
+			"value"		"0.1"
+			"init"		"0"
+			"max"		"1"
 		}
 		//Filler
 		"1900.0"

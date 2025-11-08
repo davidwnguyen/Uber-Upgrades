@@ -125,7 +125,7 @@ public Action:Timer_FixedVariables(Handle timer)
 
 		if(snowstormActive[client]){
 			if(GetAttribute(client, "arcane snowstorm", 0.0)){
-				int spellLevel = RoundToNearest(GetAttribute(client, "arcane spell level", 1.0));
+				int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 				float ratio = fl_CurrentFocus[client]/fl_MaxFocus[client];
 				if(ratio >= 0.005){
 					float damageDealt = (25.0 + ArcaneDamage[client] * 90.0) * 0.1;
@@ -1901,7 +1901,7 @@ public Action Timer_SplittingThunderThink(Handle timer, int entityRef){
 	if(GetAttribute(owner, "arcane splitting thunder", 0.0) < 1)
 		return Plugin_Continue;
 
-	int spellLevel = RoundToNearest(GetAttribute(owner, "arcane spell level", 1.0));
+	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", owner)) + 1;
 
 	float startpos[3], endpos[3];
 	GetEntPropVector(entity, Prop_Data, "m_vecOrigin", endpos);

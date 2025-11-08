@@ -15,13 +15,17 @@ public int getNextAfterburnStack(int client){
 	return id;
 }
 
-float GetResistance(int client, bool includeReduction = false, float increaseBase = 0.0, float increaseMult = 0.0, float increaseTotal = 0.0)
+float GetResistance(int client, bool includeReduction = false, float penetration = 0.0)
 {
-	float TotalResistance = 1.0;
-
-	TotalResistance = increaseTotal+(increaseBase+GetAttribute(client, "tool escrow until date"))*(increaseMult+GetAttribute(client, "is throwable chargeable"));
+	float TotalResistance = TF2Attrib_HookValueFloat(0.0, "quadratic_damage_reduction", client);
 	if(hasBuffIndex(client, Buff_BrokenArmor)){
 		TotalResistance -= playerBuffs[client][getBuffInArray(client,Buff_BrokenArmor)].priority;
+	}
+	if(penetration > 0.0){
+		TotalResistance -= penetration;
+	}
+	if(TotalResistance < 1){
+		TotalResistance = 1.0;
 	}
 	
 	TotalResistance *= TotalResistance;

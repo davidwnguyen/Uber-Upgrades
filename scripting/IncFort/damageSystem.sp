@@ -11,7 +11,7 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 	if(IsValidClient3(victim))
 	{
 		lastKBSource[victim] = attacker;
-		if(GetAttribute(victim, "resistance powerup", 0.0) == 2.0){
+		if(TF2Attrib_HookValueFloat(0.0, "resistance_powerup", victim) == 2.0){
 			if(frayNextTime[victim] <= GetGameTime()){
 				damage = 0.0;
 				frayNextTime[victim] = GetGameTime()+1.0
@@ -63,7 +63,7 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 			else
 				damage *= dmgReduction
 
-			float linearReduction = GetAttribute(victim, "dmg taken divided");
+			float linearReduction = TF2Attrib_HookValueFloat(1.0, "dmg taken divided", victim);
 			if(linearReduction != 1.0)
 				damage /= linearReduction;
 
@@ -92,7 +92,7 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 					insertBuff(victim, infernalDOT);
 				}
 				if(damagetype & DMG_SLASH){
-					if(GetAttribute(attacker, "knockout powerup", 0.0) == 2 && TF2Util_GetWeaponSlot(weapon) == TFWeaponSlot_Melee){
+					if(TF2Attrib_HookValueFloat(0.0, "knockout_powerup", attacker) == 2 && TF2Util_GetWeaponSlot(weapon) == TFWeaponSlot_Melee){
 						damage *= 5;
 					}
 				}
@@ -186,7 +186,7 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 			if(!IsValidWeapon(healingWeapon))
 				continue;
 
-			if(GetAttribute(healingWeapon, "magnify patient damage", 0.0))
+			if(TF2Attrib_HookValueFloat(0.0, "magnify_patient_damage", healingWeapon))
 				pylonCharge[healer] += damage;
 
 			if(currentDamageType[healer].second & DMG_IGNOREHOOK)
@@ -303,11 +303,12 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 					}
 					if(StrEqual(weaponClassName,"tf_weapon_jar_milk",false))
 					{
-						if(GetAttribute(victim, "inverter powerup", 0.0) == 1.0){
+						float inverterPowerup = TF2Attrib_HookValueFloat(0.0, "inverter_powerup", victim);
+						if(inverterPowerup == 1.0){
 							MadmilkDuration[attacker] = GetGameTime()+6.0;
 							MadmilkInflictor[attacker] = victim;
 						}
-						else if(GetAttribute(victim, "inverter powerup", 0.0) == 2.0){
+						else if(inverterPowerup == 2.0){
 							MadmilkDuration[victim] = GetGameTime()+12.0;
 							MadmilkInflictor[victim] = victim;
 						}
@@ -323,11 +324,12 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 				{
 					float value = TF2Attrib_GetValue(MadMilkOnhit);
 
-					if(GetAttribute(victim, "inverter powerup", 0.0) == 1){
+					float inverterPowerup = TF2Attrib_HookValueFloat(0.0, "inverter_powerup", victim);
+					if(inverterPowerup == 1.0){
 						MadmilkDuration[attacker] = GetGameTime()+value;
 						MadmilkInflictor[attacker] = victim;
 					}
-					else if(GetAttribute(victim, "inverter powerup", 0.0) == 2.0){
+					else if(inverterPowerup == 2.0){
 						MadmilkDuration[victim] = GetGameTime()+2*value;
 						MadmilkInflictor[victim] = victim;
 					}
@@ -339,7 +341,7 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 				}
 			}
 
-			if(attacker != victim && GetAttribute(attacker, "inverter powerup", 0.0) == 2){
+			if(attacker != victim && TF2Attrib_HookValueFloat(0.0, "inverter_powerup", victim) == 2){
 				if(hasBuffIndex(attacker, Buff_CritMarkedForDeath)){
 					Buff critligma;
 					critligma.init("Marked for Crits", "All hits taken are critical", Buff_CritMarkedForDeath, 1, victim, 8.0);
@@ -365,7 +367,7 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 			if(bleedBuild != Address_Null && !(damagetype & DMG_PREVENT_PHYSICS_FORCE && damagetype & DMG_BURN))//Specifically doesn't apply on afterburn, but works on bleeding DOT.
 			{
 				float bleedAdd = TF2Attrib_GetValue(bleedBuild);
-				if(GetAttribute(attacker, "knockout powerup", 0.0) == 2 && TF2Util_GetWeaponSlot(weapon) == TFWeaponSlot_Melee)
+				if(TF2Attrib_HookValueFloat(0.0, "knockout_powerup", attacker) == 2 && TF2Util_GetWeaponSlot(weapon) == TFWeaponSlot_Melee)
 					bleedAdd *= 3;
 
 				if(hasBuffIndex(attacker, Buff_Plunder)){
@@ -382,7 +384,7 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 			if(!(damagetype & DMG_PREVENT_PHYSICS_FORCE) && radiationBuild != Address_Null)
 			{
 				float radiationAdd = TF2Attrib_GetValue(radiationBuild);
-				if(GetAttribute(attacker, "knockout powerup", 0.0) == 2 && TF2Util_GetWeaponSlot(weapon) == TFWeaponSlot_Melee)
+				if(TF2Attrib_HookValueFloat(0.0, "knockout_powerup", attacker) == 2 && TF2Util_GetWeaponSlot(weapon) == TFWeaponSlot_Melee)
 					radiationAdd *= 3;
 
 				if(hasBuffIndex(attacker, Buff_Plunder)){
@@ -397,7 +399,7 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 		}
 		if(damagetype == (DMG_RADIATION|DMG_DISSOLVE))//Radiation.
 		{
-			if(GetAttribute(attacker, "knockout powerup", 0.0) == 2)
+			if(TF2Attrib_HookValueFloat(0.0, "knockout_powerup", attacker) == 2)
 				damage *= 3;
 			if(hasBuffIndex(attacker, Buff_Plunder)){
 				Buff plunderBuff;
@@ -408,7 +410,7 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 			checkRadiation(victim,attacker);
 		}
 
-		if(GetAttribute(attacker, "inverter powerup", 0.0) == 3){
+		if(TF2Attrib_HookValueFloat(0.0, "inverter_powerup", attacker) == 3){
 			Buff nullification;
 			nullification.init("Nullification", "No status effects", Buff_Nullification, 1, victim, 2.0);
 			insertBuff(victim, nullification);
@@ -434,45 +436,45 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 
 		ApplyVaccinatorDamageReduction(victim, damagetype, damage, pierce);
 
-		if(GetAttribute(victim, "resistance powerup", 0.0) == 1 || GetAttribute(victim, "resistance powerup", 0.0) == 3)
+		if(TF2Attrib_HookValueFloat(0.0, "resistance_powerup", victim) == 1 || TF2Attrib_HookValueFloat(0.0, "resistance_powerup", victim) == 3)
 			damage *= ConsumePierce(0.5, pierce);
 
 		//Just in case in the future I ever want multiple powerups...
-		if(GetAttribute(victim, "revenge powerup", 0.0) == 1)
+		if(TF2Attrib_HookValueFloat(0.0, "revenge_powerup", victim) == 1)
 			damage *= ConsumePierce(0.8, pierce);
 
-		if(GetAttribute(victim, "knockout powerup", 0.0) == 1)
+		if(TF2Attrib_HookValueFloat(0.0, "knockout_powerup", victim) == 1)
 			damage *= ConsumePierce(0.8, pierce);
-		else if(GetAttribute(victim, "knockout powerup", 0.0) == 2)
+		else if(TF2Attrib_HookValueFloat(0.0, "knockout_powerup", victim) == 2)
 			damage *= ConsumePierce(0.66, pierce);
 
-		if(GetAttribute(victim, "king powerup", 0.0) == 1)
+		if(TF2Attrib_HookValueFloat(0.0, "king_powerup", victim) == 1)
 			damage *= ConsumePierce(0.8, pierce);
 		
-		if(GetAttribute(victim, "supernova powerup", 0.0) == 1)
+		if(TF2Attrib_HookValueFloat(0.0, "supernova_powerup", victim) == 1)
 			damage *= ConsumePierce(0.8, pierce);
 
-		if(GetAttribute(victim, "inverter powerup", 0.0) == 1)
+		if(TF2Attrib_HookValueFloat(0.0, "inverter_powerup", victim) == 1)
 			damage *= ConsumePierce(0.8, pierce);
-		else if(GetAttribute(victim, "inverter powerup", 0.0) == 2)
+		else if(TF2Attrib_HookValueFloat(0.0, "inverter_powerup", victim) == 2)
 			damage *= ConsumePierce(0.5, pierce);
 
-		if(GetAttribute(victim, "regeneration powerup", 0.0) == 1)
+		if(TF2Attrib_HookValueFloat(0.0, "regeneration_powerup", victim) == 1)
 			damage *= ConsumePierce(0.75, pierce);
 
-		if(GetAttribute(victim, "vampire powerup", 0.0) == 1)
+		if(TF2Attrib_HookValueFloat(0.0, "vampire_powerup", victim) == 1)
 			damage *= ConsumePierce(0.75, pierce);
 
 		//This is actually valid.
-		if(1 <= GetAttribute(victim, "plague powerup", 0.0) <= 2)
+		if(1 <= TF2Attrib_HookValueFloat(0.0, "plague_powerup", victim) <= 2)
 			damage *= ConsumePierce(0.75, pierce);
 
 		if(TF2_IsPlayerInCondition(attacker, TFCond_Plague))
 		{
 			int plagueInflictor = TF2Util_GetPlayerConditionProvider(attacker, TFCond_Plague);
 			if(IsValidClient3(plagueInflictor))
-				if(GetAttribute(plagueInflictor, "plague powerup", 0.0))
-					damage /= 2.0;
+				if(TF2Attrib_HookValueFloat(0.0, "regeneration_powerup", plagueInflictor))
+					damage *= 0.5;
 		}
 		
 		Address strengthPowerup = TF2Attrib_GetByName(attacker, "strength powerup");
@@ -515,7 +517,7 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 			}
 		}
 		
-		if(RageActive[attacker] == true && GetAttribute(attacker, "revenge powerup", 0.0) == 1)
+		if(RageActive[attacker] == true && TF2Attrib_HookValueFloat(0.0, "revenge_powerup", attacker) == 1)
 		{
 			damage *= 1.5;
 			if(powerupParticle[attacker] <= GetGameTime())
@@ -524,12 +526,12 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 				powerupParticle[attacker] = GetGameTime()+0.6;
 			}
 		}
-		if(GetAttribute(attacker, "revenge powerup", 0.0) == 2)
+		if(TF2Attrib_HookValueFloat(0.0, "revenge_powerup", attacker) == 2)
 			damage *= 1 + RageBuildup[attacker]*0.5;
 		
-		if(GetAttribute(attacker, "precision powerup", 0.0) == 1)
+		if(TF2Attrib_HookValueFloat(0.0, "precision_powerup", attacker) == 1)
 			damage *= 1.35;
-		else if(GetAttribute(attacker, "precision powerup", 0.0) == 2){
+		else if(TF2Attrib_HookValueFloat(0.0, "precision_powerup", attacker) == 2){
 			if(IsValidEntity(inflictor) && isAimlessProjectile[inflictor]){
 				float victimPosition[3];
 				GetEntPropVector(victim, Prop_Data, "m_vecAbsOrigin", victimPosition); 
@@ -544,7 +546,15 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 
 		if(IsValidClient3(tagTeamTarget[attacker])){
 			if(isTagged[tagTeamTarget[attacker]][victim]){
-				if(GetAttribute(victim, "king powerup", 0.0) == 2)
+				if(TF2Attrib_HookValueFloat(0.0, "king_powerup", attacker) == 2)
+					damage *= 1.75
+			}
+		}
+		else if(hasBuffIndex(attacker, Buff_TagTeam)) {
+			Buff tagTeamBuff;
+			tagTeamBuff = playerBuffs[attacker][getBuffInArray(attacker, Buff_TagTeam)]
+			if(isTagged[tagTeamBuff.inflictor][victim]){
+				if(TF2Attrib_HookValueFloat(0.0, "king_powerup", tagTeamBuff.inflictor) == 2)
 					damage *= 1.75
 			}
 		}
@@ -553,7 +563,7 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 		GetEntPropVector(attacker, Prop_Data, "m_vecAbsVelocity", velocity);
 
 		if(velocity[2] < -400.0){
-			if(GetAttribute(attacker, "agility powerup", 0.0) == 2){
+			if(TF2Attrib_HookValueFloat(0.0, "agility powerup", attacker) == 2){
 				damage *= 1.0 + (-velocity[2]-400.0)*0.001;
 			}
 			if(IsValidWeapon(weapon)){
@@ -589,6 +599,7 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 
 		//Prevent piercing damage from being guardian'd
 		if(!(currentDamageType[attacker].second & DMG_PIERCING)){
+			//Only guardian from the highest source.
 			int guardian = -1;
 			float guardianPercentage;
 			for(int i = 1; i <= MaxClients; ++i)
@@ -604,11 +615,12 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 
 				float guardianPos[3];
 				GetClientEyePosition(i,guardianPos);
+				// 1400 HU Radius
 				if(GetVectorDistance(victimPos,guardianPos, true) < 1960000)
 				{
 					int guardianWeapon = GetEntPropEnt(i, Prop_Send, "m_hActiveWeapon");
 					if(IsValidWeapon(guardianWeapon)){
-						float redirect = GetAttribute(guardianWeapon, "mult cloak meter regen rate", 0.0) + GetAttribute(i, "mult cloak meter regen rate", 0.0);
+						float redirect = TF2Attrib_HookValueFloat(0.0, "redirect_teammate_damage_taken", i);
 						if(redirect > 0.0){
 							if(redirect > guardianPercentage){
 								guardian = i;
@@ -616,7 +628,7 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 							}
 						}
 					}
-					if(damage > GetClientHealth(victim) && GetAttribute(i, "king powerup", 0.0) == 3.0){
+					if(damage > GetClientHealth(victim) && TF2Attrib_HookValueFloat(0.0, "king powerup", i) == 3.0){
 						currentDamageType[attacker].second |= DMG_IGNOREHOOK;
 						SDKHooks_TakeDamage(i, attacker, attacker, damage, (DMG_PREVENT_PHYSICS_FORCE|DMG_ENERGYBEAM),_,_,_,false);
 						currentDamageType[attacker].second |= DMG_PIERCING;
@@ -637,7 +649,7 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 		}
 		if(IsValidWeapon(VictimCWeapon)){
 			if(HasEntProp(VictimCWeapon, Prop_Send, "m_hHealingTarget") && miniCritStatusVictim[victim] < GetGameTime()){
-				if(GetAttribute(VictimCWeapon, "escape plan healing", 0.0)){
+				if(TF2Attrib_HookValueFloat(0.0, "escape plan healing", VictimCWeapon)){
 					int healingTarget = GetEntPropEnt(VictimCWeapon, Prop_Send, "m_hHealingTarget");
 					if(IsValidClient3(healingTarget)){
 						int medicHealth = GetClientHealth(victim);
@@ -651,7 +663,7 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 					}
 				}
 			}
-			float teamTacticsRatio = GetAttribute(VictimCWeapon, "savior sacrifice attribute", 0.0);
+			float teamTacticsRatio = TF2Attrib_HookValueFloat(0.0, "savior sacrifice attribute", VictimCWeapon);
 			if(teamTacticsRatio > 0.0){
 				float ratio = damage / TF2Util_GetEntityMaxHealth(victim);
 				if(ratio > 1.0)
@@ -665,11 +677,12 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 
 		if(IsValidWeapon(weapon)){
 			if(damagecustom == TF_CUSTOM_HEADSHOT){
-				if(GetAttribute(weapon, "mult sniper charge after headshot", 0.0))
-					savedCharge[attacker] = GetAttribute(weapon, "mult sniper charge after headshot", 0.0);
+				float chargeAfterShot = TF2Attrib_HookValueFloat(0.0, "mult sniper charge after headshot", weapon);
+				if(chargeAfterShot > 0.0)
+					savedCharge[attacker] = chargeAfterShot;
 			}
 
-			float fireworksChance = GetAttribute(weapon, "fireworks chance", 0.0)
+			float fireworksChance = TF2Attrib_HookValueFloat(0.0, "fireworks_chance", weapon)
 			if(fireworksChance*damage/TF2Util_GetEntityMaxHealth(victim) >= GetRandomFloat() && !(currentDamageType[attacker].second & DMG_IGNOREHOOK)){
 				currentDamageType[attacker].second |= DMG_PIERCING;
 				currentDamageType[attacker].second |= DMG_IGNOREHOOK;
@@ -677,32 +690,11 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 				EmitSoundToAll(DetonatorExplosionSound, victim);
 			}
 
-			if(GetAttribute(attacker, "vampire powerup", 0.0) == 3.0 && !(currentDamageType[attacker].second & DMG_PIERCING)){
-				float tempDmg = damage;
-				if(GetClientHealth(attacker) - tempDmg < TF2Util_GetEntityMaxHealth(attacker)*0.2)
-					tempDmg = GetClientHealth(attacker) - TF2Util_GetEntityMaxHealth(attacker)*0.2;
-
-				if(tempDmg > 0){
-					currentDamageType[attacker].second |= DMG_PIERCING;
-					currentDamageType[attacker].second |= DMG_IGNOREHOOK;
-					SDKHooks_TakeDamage(attacker, attacker, attacker, tempDmg, DMG_PREVENT_PHYSICS_FORCE);
-					bloodboundDamage[attacker] += tempDmg;
-				}
-
-				if(bloodboundDamage[attacker] > 0){
-					currentDamageType[attacker].second |= DMG_PIERCING;
-					currentDamageType[attacker].second |= DMG_IGNOREHOOK;
-					SDKHooks_TakeDamage(victim, attacker, attacker, bloodboundDamage[attacker], DMG_PREVENT_PHYSICS_FORCE);
-					bloodboundHealing[attacker] += bloodboundDamage[attacker];
-					bloodboundDamage[attacker] = 0.0
-				}
-			}
-
 			if(!(currentDamageType[attacker].second & DMG_IGNOREHOOK) && !(currentDamageType[attacker].second & DMG_FROST) && !(currentDamageType[attacker].second & DMG_PIERCING) && !(damagetype == DMG_BURN + DMG_PREVENT_PHYSICS_FORCE)){ //Make sure it isn't piercing, frost or afterburn damage...
-				float freezeRatio = GetAttribute(weapon, "damage causes freeze", 0.0);
+				float freezeRatio = TF2Attrib_HookValueFloat(0.0, "damage_causes_freeze", weapon);
 				if(freezeRatio > 0){
 					float frostIncrease = freezeRatio*damage/TF2Util_GetEntityMaxHealth(victim);
-					if(GetAttribute(attacker, "knockout powerup", 0.0) == 2 && TF2Util_GetWeaponSlot(weapon) == TFWeaponSlot_Melee)
+					if(TF2Attrib_HookValueFloat(0.0, "knockout powerup", attacker) == 2 && TF2Util_GetWeaponSlot(weapon) == TFWeaponSlot_Melee)
 						frostIncrease *= 2.0;
 					if(hasBuffIndex(attacker, Buff_Plunder)){
 						Buff plunderBuff;
@@ -766,10 +758,10 @@ public Action TF2_OnTakeDamage(int victim, int &attacker, int &inflictor, float 
 		{
 			damage = 150.0;
 			critType = CritType_Crit;
-			float backstabRadiation = GetAttribute(weapon, "no double jump");
-			if(backstabRadiation != 1.0)
+			float backstabRadiation = TF2Attrib_HookValueFloat(0.0, "backstab_radiation_buildup", weapon);
+			if(backstabRadiation > 0.0)
 			{
-				if(GetAttribute(attacker, "knockout powerup", 0.0) == 2)
+				if(TF2Attrib_HookValueFloat(0.0, "knockout powerup", attacker) == 2)
 					backstabRadiation *= 3;
 
 				if(hasBuffIndex(attacker, Buff_Plunder)){
@@ -781,7 +773,7 @@ public Action TF2_OnTakeDamage(int victim, int &attacker, int &inflictor, float 
 				RadiationBuildup[victim] += backstabRadiation;
 				checkRadiation(victim,attacker);
 			}
-			float stealthedBackstab = GetAttribute(weapon, "airblast cost increased");
+			float stealthedBackstab = TF2Attrib_HookValueFloat(0.0, "stealthed_backstab_duration", weapon);
 			if(stealthedBackstab != 1.0)
 			{
 				TF2_AddCondition(attacker, TFCond_StealthedUserBuffFade, stealthedBackstab);
@@ -792,29 +784,25 @@ public Action TF2_OnTakeDamage(int victim, int &attacker, int &inflictor, float 
 		if (damagecustom == 46 && damagetype & DMG_SHOCK)//Short Circuit Balls
 		{
 			damage = 10.0;
-			damage *= GetAttribute(weapon, "damage bonus");
-			damage *= GetAttribute(weapon, "bullets per shot bonus");
-			damage *= GetAttribute(weapon, "damage bonus HIDDEN");
-			damage *= GetAttribute(weapon, "damage penalty");
+			damage *= TF2Attrib_HookValueFloat(1.0, "mult_dmg", weapon);
+			damage *= TF2Attrib_HookValueFloat(1.0, "mult_bullets_per_shot", weapon);
 			changed = Plugin_Changed;
 		}
 		if(damagecustom == TF_CUSTOM_BASEBALL)//Sandman Balls & Wrap Assassin Ornaments
 		{
-			damage = 45.0;
-			damage += GetAttribute(weapon, "has pipboy build interface");
-			damage *= GetAttribute(weapon, "damage bonus");
-			damage *= GetAttribute(weapon, "damage bonus HIDDEN");
-			damage *= GetAttribute(weapon, "damage penalty");
+			damage = 35.0;
+			damage += TF2Attrib_HookValueFloat(0.0, "baseball_base_damage", weapon);
+			damage *= TF2Attrib_HookValueFloat(1.0, "mult_dmg", weapon);
 			changed = Plugin_Changed;
 		}
 	}
 
 	if(IsValidWeapon(weapon)){
 		if(TF2Util_GetWeaponSlot(weapon) == TFWeaponSlot_Melee){
-			if(GetAttribute(attacker, "knockout powerup", 0.0) == 1){
+			if(TF2Attrib_HookValueFloat(0.0, "knockout_powerup", attacker) == 1){
 				damage *= 1.75
 			}
-			else if(GetAttribute(attacker, "knockout powerup", 0.0) == 3 && !isTagged[attacker][victim]){
+			else if(TF2Attrib_HookValueFloat(0.0, "knockout_powerup", attacker) == 3 && !isTagged[attacker][victim]){
 				damage *= 4.0;
 				critType = CritType_Crit;
 				changed = Plugin_Changed;
@@ -822,7 +810,7 @@ public Action TF2_OnTakeDamage(int victim, int &attacker, int &inflictor, float 
 		}
 	}
 
-	if(hasBuffIndex(victim, Buff_Stronghold) || GetAttribute(victim, "resistance powerup", 0.0) == 1){
+	if(hasBuffIndex(victim, Buff_Stronghold) || TF2Attrib_HookValueFloat(0.0, "resistance_powerup", victim) == 1){
 		critType = CritType_None;
 		changed = Plugin_Changed;
 	}
@@ -883,12 +871,12 @@ public Action OnTakeDamage(victim, &attacker, &inflictor, float &damage, &damage
 			if(dmgReduction != 1.0)
 				damage *= dmgReduction
 
-			float linearReduction = GetAttribute(victim, "dmg taken divided");
+			float linearReduction = TF2Attrib_HookValueFloat(1.0, "dmg taken divided", victim);
 			if(linearReduction != 1.0)
 				damage /= linearReduction;
 
 			if(!IsFakeClient(victim)){
-				damage /= GetResistance(victim, _, _,_, -armorPenetration);
+				damage /= GetResistance(victim, _, armorPenetration);
 			}else{
 				//Armor penetration just gives +10% damage on bots.
 				damage *= 1.0 + armorPenetration*0.1;
@@ -905,7 +893,7 @@ public Action:OnTakeDamagePre_Tank(victim, &attacker, &inflictor, float &damage,
 		if(IsValidWeapon(weapon))
 		{
 			if(current_class[attacker] == TFClass_Spy && TF2Util_GetWeaponSlot(weapon) == TFWeaponSlot_Melee){
-				float backstabCapability = GetAttribute(weapon, "backstab tanks capability", 0.0);
+				float backstabCapability = TF2Attrib_HookValueFloat(0.0, "backstab_tanks_capability", weapon);
 				if(backstabCapability){
 					float tankRotation[3], attackerOrigin[3], attackerAngle[3], difference[3];
 					GetEntPropVector(victim, Prop_Data, "m_angRotation", tankRotation);
@@ -943,7 +931,7 @@ public Action:OnTakeDamagePre_Tank(victim, &attacker, &inflictor, float &damage,
 		damage = genericPlayerDamageModification(victim, attacker, inflictor, damage, weapon, damagetype, damagecustom);
 		if(IsValidWeapon(weapon))
 		{
-			if(TF2Util_GetWeaponSlot(weapon) == TFWeaponSlot_Melee && GetAttribute(attacker, "knockout powerup", 0.0) == 1)
+			if(TF2Util_GetWeaponSlot(weapon) == TFWeaponSlot_Melee && TF2Attrib_HookValueFloat(0.0, "knockout_powerup", attacker) == 1)
 				damage *= 1.35;
 
 			if(weaponFireRate[weapon] > TICKRATE)
@@ -1034,7 +1022,7 @@ public Action:OnTakeDamagePre_Sentry(victim, &attacker, &inflictor, float &damag
 		damage = genericPlayerDamageModification(victim, attacker, inflictor, damage, weapon, damagetype, damagecustom);
 		if(IsValidWeapon(weapon))
 		{
-			if(TF2Util_GetWeaponSlot(weapon) == TFWeaponSlot_Melee && GetAttribute(attacker, "knockout powerup", 0.0) == 1)
+			if(TF2Util_GetWeaponSlot(weapon) == TFWeaponSlot_Melee && TF2Attrib_HookValueFloat(0.0, "knockout powerup", attacker) == 1)
 				damage *= 1.35;
 			
 			if(weaponFireRate[weapon] > TICKRATE)
@@ -1065,11 +1053,11 @@ public Action:OnTakeDamagePre_Sentry(victim, &attacker, &inflictor, float &damag
 				if(!IsValidWeapon(sapper))
 					continue;
 
-				float sapperBonus = GetAttribute(sapper, "scattergun knockback mult");
+				float sapperBonus = TF2Attrib_HookValueFloat(1.0, "apply_vuln_on_sapped", sapper);
 				if(sapperBonus == 1.0)
 					continue;
 
-				damage *= GetAttribute(sapper, "scattergun knockback mult");
+				damage *= sapperBonus;
 			}
 		}
 	}
@@ -1093,10 +1081,14 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 	if(!IsOnDifferentTeams(victim, attacker))
 		return damage;
 
-	damage += TF2Attrib_HookValueInt(0, "additive_damage", attacker);
+	float flatDamage = TF2Attrib_HookValueFloat(0.0, "additive_damage", attacker);
 	if(IsValidWeapon(weapon)){
-		if(GetAttribute(weapon, "damage reduction to additive damage", 0.0) > 0.0)
-			damage += GetAttribute(attacker, "tool escrow until date", 0.0) * GetAttribute(attacker, "is throwable chargeable", 0.0) * GetAttribute(weapon, "damage reduction to additive damage", 0.0)
+		float resistanceToFlatDamage = TF2Attrib_HookValueFloat(0.0, "damage_reduction_to_additive_damage", weapon);
+		if(resistanceToFlatDamage > 0.0)
+			flatDamage += TF2Attrib_HookValueFloat(0.0, "quadratic_damage_reduction", attacker) * resistanceToFlatDamage;
+	}
+	if(flatDamage > 0){
+		damage += flatDamage;
 	}
 
 	if(isVictimPlayer)
@@ -1122,14 +1114,12 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 		if(damagetype == 2052 && damagecustom == 3 && TF2_GetPlayerClass(attacker) == TFClass_Pyro){
 			int secondary = GetWeapon(attacker,1);
 			if(IsValidEdict(secondary) && weapon == secondary){
-				float gasExplosionDamage = GetAttribute(weapon, "ignition explosion damage bonus");
-				if(gasExplosionDamage != 1.0)
-					damage *= gasExplosionDamage;
+				damage *= TF2Attrib_HookValueFloat(1.0, "explosion_damage_bonus", weapon);
 				damagetype |= DMG_IGNITE;
 			}
 		}
 		if(TF2_GetPlayerClass(victim) == TFClass_Spy && (TF2_IsPlayerInCondition(victim, TFCond_Cloaked) || TF2_IsPlayerInCondition(victim, TFCond_Stealthed))){
-			float CloakResistance = GetAttribute(GetPlayerWeaponSlot(victim,4), "absorb damage while cloaked");
+			float CloakResistance = TF2Attrib_HookValueFloat(1.0, "absorb damage while cloaked", victim);
 			if(CloakResistance != 1.0)
 				damage *= CloakResistance;
 		}
@@ -1154,11 +1144,11 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 		}
 		if(isVictimPlayer && attacker != victim)
 		{
-			float minicritVictimOnHit = GetAttribute(weapon, "recipe component defined item 1", 0.0);
-			if(minicritVictimOnHit != 0.0)
-				miniCritStatusVictim[victim] = minicritVictimOnHit;
+			float minicritVictimOnHit = TF2Attrib_HookValueFloat(0.0, "mark_for_death_on_hit_duration", weapon);
+			if(minicritVictimOnHit > 0 && miniCritStatusVictim[victim]-GetGameTime() > minicritVictimOnHit)
+				miniCritStatusVictim[victim] = GetGameTime()+minicritVictimOnHit;
 			
-			float rageOnHit = GetAttribute(weapon, "mod rage on hit bonus", 0.0);
+			float rageOnHit = TF2Attrib_HookValueFloat(0.0, "rage_on_hit", weapon);
 			if(rageOnHit != 0.0)
 			{
 				if(GetEntPropFloat(attacker, Prop_Send, "m_flRageMeter") < 150.0)

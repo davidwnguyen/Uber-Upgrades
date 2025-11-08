@@ -1,5 +1,8 @@
 "Phrases"
 {
+	"Explosive Impact Radius" {
+		"en"		"Explosive Impact Radius"
+	}
 	"Syringe Damage Bonus" {
 		"en"		"Syringe Damage Bonus"
 	}
@@ -1267,7 +1270,7 @@
 		"en"		"Projectile Speed Increased"
 	}
 	"lifesteal ability"{
-		"en"		"Life Steal Ability"
+		"en"		"Lifesteal Damage Dealt"
 	}
 	"Blast radius increased (Throwable)"{
 		"en"		"Blast radius increased"
@@ -1981,7 +1984,7 @@
 		"en"		"Health Scales Speed"
 	}
 	"percent of hp healed on kill"{
-		"en"		"%% Health Restored on Kill"
+		"en"		"Health Restored on Kill"
 	}
 	"mod see enemy health"{
 		"en"		"See Enemy Health"
@@ -2953,9 +2956,6 @@
 		"en"		"Bidirectional Teleporter"
 	}
 	"effect bar recharge rate increased"{
-		"en"		"Recharge Rate Increased"
-	}
-	"effect bar recharge rate increased(L)"{
 		"en"		"Recharge Rate Increased"
 	}
 	"override projectile type"{

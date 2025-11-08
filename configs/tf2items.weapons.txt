@@ -128,11 +128,11 @@
 		}
 		"230"//Sydney Sleeper
 		{
-			"1"				"recipe component defined item 1;2.0"
+			"1"				"mark for death on hit duration;2.0"
 		}
 		"355"// Fan O'War
 		{
-			"1"				"recipe component defined item 1;4.0"
+			"1"				"mark for death on hit duration;4.0"
 			"2"				"accepted wedding ring account id 1;1.75"
 			"3"				"damage mult 13; 0.6"
 		}

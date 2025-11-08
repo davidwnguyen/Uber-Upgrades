@@ -224,9 +224,6 @@ public Action:Command_UseArcane(client, args)
 //Arcane Spells
 CastMarkForDeath(client, attuneSlot)
 {
-	int spellLevel = RoundToNearest(GetAttribute(client, "arcane mark for death", 0.0));
-	if(spellLevel < 1)
-		return;
 	if(applyArcaneRestrictions(client, attuneSlot, fl_MaxFocus[client]*0.5, 25.0))
 		return; 
 
@@ -267,7 +264,7 @@ CastMarkForDeath(client, attuneSlot)
 }
 CastSunlightSpear(client, attuneSlot)
 {
-	int spellLevel = RoundToNearest(GetAttribute(client, "arcane spell level", 1.0));
+	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
 	if(applyArcaneRestrictions(client, attuneSlot, 30.0 + (20.0 * TF2Attrib_HookValueFloat(1.0, "arcane_damage", client)), 0.4))
 		return; 
@@ -330,9 +327,7 @@ CastSunlightSpear(client, attuneSlot)
 }
 CastLightningEnchantment(client, attuneSlot)
 {
-	int spellLevel = RoundToNearest(GetAttribute(client, "arcane lightning enchantment", 0.0));
-	if(spellLevel < 1)
-		return;
+	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 	if(applyArcaneRestrictions(client, attuneSlot, 150.0 + (40.0 * TF2Attrib_HookValueFloat(1.0, "arcane_damage", client)), 30.0))
 		return;
 		
@@ -342,9 +337,7 @@ CastLightningEnchantment(client, attuneSlot)
 }
 CastDarkmoonBlade(client, attuneSlot)
 {
-	int spellLevel = RoundToNearest(GetAttribute(client, "arcane darkmoon blade", 0.0));
-	if(spellLevel < 1)
-		return;
+	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 	if(applyArcaneRestrictions(client, attuneSlot, 100.0 + (20.0 * TF2Attrib_HookValueFloat(1.0, "arcane_damage", client)), 25.0))
 		return; 
 	
@@ -354,9 +347,7 @@ CastDarkmoonBlade(client, attuneSlot)
 }
 CastAntisepticBlast(client, attuneSlot)
 {
-	int spellLevel = RoundToNearest(GetAttribute(client, "arcane antiseptic blast", 0.0));
-	if(spellLevel < 1)
-		return;
+	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
 	if(applyArcaneRestrictions(client, attuneSlot, 400.0 + (120.0 * TF2Attrib_HookValueFloat(1.0, "arcane_damage", client)), 120.0))
 		return; 
@@ -454,7 +445,7 @@ FinishKarmicJustice(client){
 	}
 }
 KarmicJusticeExplosion(client){
-	int spellLevel = RoundToNearest(GetAttribute(client, "arcane spell level", 1.0));
+	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
 	float damageDealt = 500.0 + ArcaneDamage[client] * karmicJusticeScaling[client];
 	
@@ -482,7 +473,7 @@ KarmicJusticeExplosion(client){
 }
 CastInfernalEnchantment(client, attuneSlot)
 {
-	int spellLevel = RoundToNearest(GetAttribute(client, "arcane spell level", 1.0));
+	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
 	if(applyArcaneRestrictions(client, attuneSlot, 400.0 + (120.0 * TF2Attrib_HookValueFloat(1.0, "arcane_damage", client)), 120.0))
 		return; 
@@ -506,7 +497,7 @@ FinishCastInfernalEnchantment(int client, int spellLevel)
 
 CastSplittingThunder(client, attuneSlot)
 {
-	int spellLevel = RoundToNearest(GetAttribute(client, "arcane spell level", 1.0));
+	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
 	if(applyArcaneRestrictions(client, attuneSlot, 400.0 + (120.0 * TF2Attrib_HookValueFloat(1.0, "arcane_damage", client)), 50.0))
 		return; 
@@ -582,7 +573,7 @@ FinishCastSplittingThunder(int client, int spellLevel)
 
 CastSnapFreeze(client, attuneSlot)
 {
-	int spellLevel = RoundToNearest(GetAttribute(client, "arcane spell level", 1.0));
+	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
 	if(applyArcaneRestrictions(client, attuneSlot, 50.0 + (20.0 * TF2Attrib_HookValueFloat(1.0, "arcane_damage", client)), 9.0))
 		return; 
@@ -626,7 +617,7 @@ CastSnapFreeze(client, attuneSlot)
 }
 CastArcanePrison(client, attuneSlot)
 {
-	int spellLevel = RoundToNearest(GetAttribute(client, "arcane spell level", 1.0));
+	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
 	if(applyArcaneRestrictions(client, attuneSlot, 50.0 + (35.0 * TF2Attrib_HookValueFloat(1.0, "arcane_damage", client)), 20.0))
 		return; 
@@ -710,7 +701,7 @@ CastArcanePrison(client, attuneSlot)
 }
 CastSpeedAura(client, attuneSlot)
 {
-	int spellLevel = RoundToNearest(GetAttribute(client, "arcane spell level", 1.0));
+	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
 	if(applyArcaneRestrictions(client, attuneSlot, fl_MaxFocus[client]*0.4, 40.0))
 		return; 
@@ -743,7 +734,7 @@ CastSpeedAura(client, attuneSlot)
 }
 CastAerialStrike(client, attuneSlot)
 {
-	int spellLevel = RoundToNearest(GetAttribute(client, "arcane spell level", 1.0));
+	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
 	float cooldown[] = {0.0,50.0,30.0,10.0}
 	if(applyArcaneRestrictions(client, attuneSlot, 50.0 + (45.0 * TF2Attrib_HookValueFloat(1.0, "arcane_damage", client)), cooldown[spellLevel]))
@@ -833,7 +824,7 @@ public Action:aerialStrike(Handle timer,any:data)
 }
 CastInferno(client, attuneSlot)
 {
-	int spellLevel = RoundToNearest(GetAttribute(client, "arcane spell level", 1.0));
+	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
 	float cooldown[] = {0.0,50.0,40.0,30.0}
 	if(applyArcaneRestrictions(client, attuneSlot, 50.0 + (45.0 * TF2Attrib_HookValueFloat(1.0, "arcane_damage", client)), cooldown[spellLevel]))
@@ -901,7 +892,7 @@ CastInferno(client, attuneSlot)
 
 CastMineField(client, attuneSlot)
 {
-	int spellLevel = RoundToNearest(GetAttribute(client, "arcane spell level", 1.0));
+	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
 	if(applyArcaneRestrictions(client, attuneSlot, 50.0 + (45.0 * TF2Attrib_HookValueFloat(1.0, "arcane_damage", client)), 50.0))
 		return;
@@ -981,7 +972,7 @@ public Action:Timer_GrenadeMines(Handle timer, any:ref)
 	int client = GetEntPropEnt(entity, Prop_Data, "m_hThrower"); 
 	if(!IsValidClient3(client)){KillTimer(timer);return;}
 
-	int spellLevel = RoundToNearest(GetAttribute(client, "arcane spell level", 1.0));
+	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
 	float extraRadius[] = {0.0,1.1,1.3,1.5}
 	float damageRate[] = {0.0,0.35,0.5,0.8}
@@ -1025,7 +1016,7 @@ public Action:Timer_GrenadeMines(Handle timer, any:ref)
 }
 CastShockwave(client, attuneSlot)
 {
-	int spellLevel = RoundToNearest(GetAttribute(client, "arcane spell level", 1.0));
+	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
 	if(applyArcaneRestrictions(client, attuneSlot, 50.0 + (30.0 * TF2Attrib_HookValueFloat(1.0, "arcane_damage", client)), 20.0))
 		return; 
@@ -1124,7 +1115,7 @@ public Action:RemoveAutoSentryID(Handle timer, any:ref)
 }
 CastSoothingSunlight(client, attuneSlot)
 {
-	int spellLevel = RoundToNearest(GetAttribute(client, "arcane spell level", 1.0));
+	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
 	float cooldown[] = {0.0,180.0,120.0,60.0}
 
@@ -1151,7 +1142,7 @@ public Action:SoothingSunlight(Handle timer, client)
 	if(!IsPlayerAlive(client))
 		return;
 
-	int spellLevel = RoundToNearest(GetAttribute(client, "arcane spell level", 1.0));
+	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
 	int iTeam = GetClientTeam(client)
 	float ClientPos[3];
@@ -1182,7 +1173,7 @@ public Action:SoothingSunlight(Handle timer, client)
 }
 CastArcaneHunter(client, attuneSlot)
 {
-	int spellLevel = RoundToNearest(GetAttribute(client, "arcane spell level", 1.0));
+	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
 	if(applyArcaneRestrictions(client, attuneSlot, 200.0 + (70.0 * TF2Attrib_HookValueFloat(1.0, "arcane_damage", client)), 40.0))
 		return; 
@@ -1206,7 +1197,7 @@ public Action:ArcaneHunter(Handle timer, client)
 {
 	if(!IsPlayerAlive(client))
 		return;
-	int spellLevel = RoundToNearest(GetAttribute(client, "arcane spell level", 1.0));
+	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
 	float clientpos[3], soundPos[3], clientAng[3], fwd[3];
 	TracePlayerAim(client, clientpos);
@@ -1305,7 +1296,7 @@ public Action:ArcaneHunter(Handle timer, client)
 }
 CastBlackskyEye(client, attuneSlot)
 {
-	int spellLevel = RoundToNearest(GetAttribute(client, "arcane spell level", 1.0));
+	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
 	if(applyArcaneRestrictions(client, attuneSlot, 8.0 + (3.0 * TF2Attrib_HookValueFloat(1.0, "arcane_damage", client)), 0.25))
 		return; 
@@ -1402,7 +1393,7 @@ public Action:ACallBeyond(Handle timer, client)
 	if(!IsPlayerAlive(client))
 		return;
 	
-	int spellLevel = RoundToNearest(GetAttribute(client, "arcane spell level", 1.0));
+	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
 	int projCount[] = {0,15,25,40};
 	float radius[] = {0.0,1500.0,2500.0,2500.0};
@@ -1464,7 +1455,7 @@ public Action:ACallBeyond(Handle timer, client)
 }
 CastZap(client, attuneSlot)
 {
-	int spellLevel = RoundToNearest(GetAttribute(client, "arcane spell level", 1.0));
+	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
 	float focusCost = (3.0 + (0.5 * TF2Attrib_HookValueFloat(1.0, "arcane_damage", client)))/ArcanePower[client]
 	if(fl_CurrentFocus[client] < focusCost)
@@ -1572,7 +1563,7 @@ public Action:zapAgain(Handle timer,any:data)
 }
 CastLightning(client, attuneSlot)
 {
-	int spellLevel = RoundToNearest(GetAttribute(client, "arcane spell level", 1.0));
+	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
 	if(applyArcaneRestrictions(client, attuneSlot, 50.0 + (30.0 * TF2Attrib_HookValueFloat(1.0, "arcane_damage", client)), 11.0))
 		return; 
@@ -1654,7 +1645,7 @@ CastLightning(client, attuneSlot)
 }
 CastHealing(client, attuneSlot)//Projected Healing
 {
-	int spellLevel = RoundToNearest(GetAttribute(client, "arcane spell level", 1.0));
+	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
 	if(applyArcaneRestrictions(client, attuneSlot, fl_MaxFocus[client]*0.65, 15.0))
 		return; 

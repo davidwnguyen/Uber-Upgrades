@@ -21,7 +21,7 @@ public Action:OnStartTouchStomp(client, other)
 			float stompDamage = TF2_GetDamageModifiers(client, CWeapon, true, true, false) * 200.0;
 			stompDamage *= 1.0+(((trueVel[client][2]*-1.0) - 300.0)/1000.0)
 
-			if(GetAttribute(client, "agility powerup", 0.0) == 2.0){
+			if(TF2Attrib_HookValueFloat(0.0, "agility_powerup", client) == 2.0){
 				int splash = 0;
 				for(int i = 1;i <= MaxClients; ++i){
 					if(!IsValidClient3(i)) continue;
@@ -110,7 +110,7 @@ public Action:OnSplittingThunderCollision(entity, client)
 	if(!IsValidClient3(owner) || client == owner)
 		return Plugin_Continue;
 	
-	int spellLevel = RoundToNearest(GetAttribute(owner, "arcane spell level", 1.0));
+	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", owner)) + 1;
 	
 	float origin[3];
 	GetEntPropVector(entity, Prop_Data, "m_vecOrigin", origin);
@@ -140,7 +140,7 @@ public Action:OnSunlightSpearCollision(entity, client)
 			int owner = GetEntPropEnt(entity, Prop_Send, "m_hOwnerEntity")
 			if(IsOnDifferentTeams(owner,client))
 			{
-				int spellLevel = RoundToNearest(GetAttribute(owner, "arcane spell level", 1.0));
+				int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", owner)) + 1;
 
 				float scaling[] = {0.0, 35.0, 70.0, 140.0};
 				float ProjectileDamage = 140.0 + scaling[spellLevel]*ArcaneDamage[owner];
@@ -190,7 +190,7 @@ public Action:BlackskyEyeCollision(entity, client)
 	if(StrEqual(strName,"tf_projectile_arrow",false))
 		return Plugin_Continue;
 
-	int spellLevel = RoundToNearest(GetAttribute(owner, "arcane spell level", 1.0));
+	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", owner)) + 1;
 
 	float projvec[3];
 	float radius[] = {0.0, 300.0,500.0,800.0};
@@ -233,7 +233,7 @@ public Action:CallBeyondCollision(entity, client)
 		return Plugin_Continue;
 		
 	float projvec[3];
-	int spellLevel = RoundToNearest(GetAttribute(owner, "arcane spell level", 1.0));
+	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", owner)) + 1;
 	float scaling[] = {0.0, 250.0, 400.0, 650.0};
 	float ProjectileDamage = 90.0 + scaling[spellLevel]*ArcaneDamage[owner];
 	if(HasEntProp(entity, Prop_Data, "m_vecOrigin"))
@@ -559,7 +559,7 @@ public Action:OnCollisionMoonveil(entity, client)
 				int CWeapon = GetEntPropEnt(owner, Prop_Send, "m_hActiveWeapon");
 				if(IsValidEdict(CWeapon))
 				{
-					float mult = 1.0/GetAttribute(CWeapon, "fire rate bonus", 1.0);
+					float mult = 1.0/TF2Attrib_HookValueFloat(1.0, "mult_postfiredelay", client);
 					currentDamageType[owner].second |= DMG_ARCANE;
 					currentDamageType[owner].second |= DMG_ARCANESCALING;
 					currentDamageType[owner].second |= DMG_IGNOREHOOK;
@@ -841,19 +841,18 @@ public Action:OnTouchExplodeJar(entity, other)
 							}//corrosiveDOT
 							if(isPlayer)
 							{
-								Address jarArmorBrokenBuff = TF2Attrib_GetByName(CWeapon, "jar applies armor decay");
-								if(jarArmorBrokenBuff != Address_Null)
+								float jarArmorBrokenBuff = TF2Attrib_HookValueFloat(0.0, "jar_applies_armor_decay", CWeapon);
+								if(jarArmorBrokenBuff > 0.0)
 								{
 									Buff pierceBuff;
-									pierceBuff.init("Broken Armor", "", Buff_BrokenArmor, RoundFloat(TF2Attrib_GetValue(jarArmorBrokenBuff)), owner, 6.0, TF2Attrib_GetValue(jarArmorBrokenBuff));
+									pierceBuff.init("Broken Armor", "", Buff_BrokenArmor, RoundFloat(jarArmorBrokenBuff), owner, 6.0, jarArmorBrokenBuff);
 									insertBuff(i, pierceBuff);
 								}
-								Address jarCorrosive = TF2Attrib_GetByName(CWeapon, "building cost reduction");
-								if(jarCorrosive != Address_Null)
+								float jarCorrosive = TF2Attrib_HookValueFloat(0.0, "jar_debuff_corrosion", CWeapon);
+								if(jarCorrosive > 0.0)
 								{
-									float damageDealt = TF2_GetDPSModifiers(owner,CWeapon)*TF2Attrib_GetValue(jarCorrosive);
-									corrosiveDOT[i][owner][0] = damageDealt;
-									corrosiveDOT[i][owner][1] = 2.0
+									corrosiveDOT[i][owner][0] = TF2_GetDPSModifiers(owner,CWeapon)*jarCorrosive;
+									corrosiveDOT[i][owner][1] = 2.0;
 								}
 							}
 						}
@@ -862,27 +861,28 @@ public Action:OnTouchExplodeJar(entity, other)
 							if(!isPlayer)
 								continue;
 								
-							Address jarAfterburnImmunity = TF2Attrib_GetByName(CWeapon, "overheal decay disabled");
-							if(jarAfterburnImmunity != Address_Null)
-								TF2_AddCondition(i,TFCond_AfterburnImmune,TF2Attrib_GetValue(jarAfterburnImmunity));
+							float jarAfterburnImmunity = TF2Attrib_HookValueFloat(0.0, "jar_buff_afterburn_immunity", CWeapon);
+							if(jarAfterburnImmunity > 0)
+								TF2_AddCondition(i,TFCond_AfterburnImmune,jarAfterburnImmunity);
 
-							if(GetAttribute(CWeapon, "no crit vs nonburning", 0.0) > 0.0)
+							float jarBuffHaste = TF2Attrib_HookValueFloat(0.0, "jar_buff_haste", CWeapon);
+							if(jarBuffHaste > 0.0)
 							{
 								Buff hasteBuff;
-								hasteBuff.init("Minor Haste", "", Buff_Haste, 1, owner, GetAttribute(CWeapon, "no crit vs nonburning", 0.0));
-								hasteBuff.additiveAttackSpeedMult = 0.5;
+								hasteBuff.init("Minor Haste", "", Buff_Haste, 1, owner, jarBuffHaste);
+								hasteBuff.additiveAttackSpeedMult = 0.34;
 								insertBuff(i, hasteBuff);
 							}
 
-							Address jarDefensiveBuff = TF2Attrib_GetByName(CWeapon, "set cloak is feign death");
-							if(jarDefensiveBuff != Address_Null)
-								giveDefenseBuff(i,TF2Attrib_GetValue(jarDefensiveBuff));
+							float jarBuffDefense = TF2Attrib_HookValueFloat(0.0, "jar_buff_defense", CWeapon);
+							if(jarBuffDefense > 0.0)
+								giveDefenseBuff(i,jarBuffDefense);
 
-							Address jarArmorPierceBuff = TF2Attrib_GetByName(CWeapon, "jar gives armor penetration");
-							if(jarArmorPierceBuff != Address_Null)
+							float jarArmorPierceBuff = TF2Attrib_HookValueFloat(0.0, "jar_gives_armor_penetration", CWeapon);
+							if(jarArmorPierceBuff > 0.0)
 							{
 								Buff pierceBuff;
-								pierceBuff.init("Armor Piercing Boost", "", Buff_PiercingBuff, 1, owner, 6.0, TF2Attrib_GetValue(jarArmorPierceBuff));
+								pierceBuff.init("Armor Piercing Boost", "", Buff_PiercingBuff, 1, owner, 6.0, jarArmorPierceBuff);
 								insertBuff(i, pierceBuff);
 							}
 							

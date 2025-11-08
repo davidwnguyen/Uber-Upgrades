@@ -26,14 +26,15 @@
 			"gamestage"						"1"
 			"restriction"					"1"
 			"honorbound"					"1.0"
-			"percent of hp healed on kill"	"5.0"
-			"weapon fire rate(tweakbonus)"		"0.65"
+			"percent of hp healed on kill"	"0.5"
+			"weapon fire rate(tweakbonus)"		"0.5"
+			"move speed bonus"				"0"
 		}
 		"Infernal Impulse"
 		{
 			"gamestage"						"1"
 			"restriction"					"1"
-			"Dragon Bullets Radius"			"600.0"
+			"Explosive Impact Radius"		"600.0"
 			"afterburn time increased(N)"	"1.5"
 			"damage bonus HIDDEN(b)"		"4.0"
 			"weapon fire rate(tweak)"		"2.0"
