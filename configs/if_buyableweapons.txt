@@ -126,10 +126,10 @@
 		"weapon_class"	"tf_weapon_pistol"
 		"weapon_menu"	"tf_weapon_pistol"
 		"class"			"scout,engineer"
-		"description"	"Converts fire rate into damage bonus. Can headshot for 4x damage."
+		"description"	"Converts fire rate into damage bonus. Can headshot for 2x damage."
 		"cost"			"5000.0"
 		"Converts Firerate to Damage"	"1"
-		"revolver use hit locations"		"4"
+		"weapon can headshot"		"2"
 	}
 	"Sniper's Revolver"
 	{
@@ -137,10 +137,10 @@
 		"weapon_class"	"tf_weapon_revolver"
 		"weapon_menu"	"tf_weapon_revolver"
 		"class"			"sniper"
-		"description"	"Converts fire rate into damage bonus. Can headshot for 4x damage."
+		"description"	"Converts fire rate into damage bonus. Can headshot for 2x damage."
 		"cost"			"4000.0"
 		"Converts Firerate to Damage"	"1"
-		"revolver use hit locations"		"4"
+		"weapon can headshot"		"2"
 	}
 	"Sky Stallion"
 	{

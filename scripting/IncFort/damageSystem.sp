@@ -1157,8 +1157,8 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 			int hitgroup = GetEntProp(victim, Prop_Data, "m_LastHitGroup");
 			if(StrEqual(getDamageCategory(currentDamageType[attacker]),"direct",false) && hitgroup == 1)
 			{
-				float HeadshotsActive = GetAttribute(weapon, "charge time decreased",0.0);
-				if(HeadshotsActive != 0.0)
+				float HeadshotsActive = TF2Attrib_HookValueFloat(0.0, "weapon_can_headshot", weapon);
+				if(HeadshotsActive > 0)
 				{
 					critStatus[victim] = true;
 					damagecustom = 1;

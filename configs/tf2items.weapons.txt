@@ -222,7 +222,7 @@
 		{
 			"preserve_attributes"	"1"
 			"1"				"Converts Firerate to Damage; 1.0"
-			"2"				"charge time decreased;1.0"
+			"2"				"weapon can headshot;2.0"
 			"3"				"weapon fire rate;2.0"
 		}
 		"461" //Big Earner
