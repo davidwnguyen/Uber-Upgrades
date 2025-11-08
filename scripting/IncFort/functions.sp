@@ -17,7 +17,7 @@ public int getNextAfterburnStack(int client){
 
 float GetResistance(int client, bool includeReduction = false, float penetration = 0.0)
 {
-	float TotalResistance = TF2Attrib_HookValueFloat(0.0, "quadratic_damage_reduction", client);
+	float TotalResistance = 1+TF2Attrib_HookValueFloat(0.0, "quadratic_damage_reduction", client);
 	if(hasBuffIndex(client, Buff_BrokenArmor)){
 		TotalResistance -= playerBuffs[client][getBuffInArray(client,Buff_BrokenArmor)].priority;
 	}
