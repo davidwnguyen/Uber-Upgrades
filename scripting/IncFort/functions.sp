@@ -3569,11 +3569,11 @@ GivePowerupDescription(int client, char[] name, int amount){
 	}
 	else if(StrEqual("vampire powerup", name)){
 		if(amount == 2){
-			CPrintToChat(client, "{community}Leech Powerup {default}| {lightcyan}30%% lifesteal, drains healing of everyone (including teammates!) by 50%% if nearby. Also applies on hitting an enemy.");
+			CPrintToChat(client, "{community}Leech Powerup {default}| {lightcyan}25%% lifesteal, drains healing of everyone (including teammates!) by 50%% if nearby. Also applies on hitting an enemy.");
 		}else if(amount == 3){
 			CPrintToChat(client, "{community}Bloodbound Powerup {default}| {lightcyan}25%% incoming damage reduction. Lifesteal at maximum health instead fills Overleech, consumed to heal when lifestealing.\nRight-click to consume Overleech, dealing piercing damage to all tagged enemies.");
 		}else{
-			CPrintToChat(client, "{community}Vampire Powerup {default}| {lightcyan}80%% lifesteal, 1.25x bleed damage, and 0.75x damage taken.");
+			CPrintToChat(client, "{community}Vampire Powerup {default}| {lightcyan}50%% lifesteal, 1.25x bleed damage, and 0.75x damage taken.");
 		}
 	}
 	else if(StrEqual("precision powerup", name)){
@@ -3623,7 +3623,7 @@ GivePowerupDescription(int client, char[] name, int amount){
 	}
 	else if(StrEqual("king powerup", name)){
 		if(amount == 2){
-			CPrintToChat(client, "{community}Tag-Team Powerup {default}| {lightcyan}Press RELOAD to link yourself to a teammate:\n Giving both of you 1.4x damage. Healing is shared between both of you and attacking an enemy makes the other linked person deal 1.75x vs that victim.");
+			CPrintToChat(client, "{community}Tag-Team Powerup {default}| {lightcyan}Press RELOAD to link yourself to a teammate:\n Giving both of you 1.4x damage. Your healing is shared to your patient and attacking an enemy makes the patient deal 1.75x vs that victim.");
 		}else if(amount == 3){
 			CPrintToChat(client, "{community}Martyr Powerup {default}| {lightcyan}-66%% healing from all sources. Sacrifice (15%% max health + dmg taken) to absorb fatal teammate damage and give uber for 0.5s.");
 		}else{
