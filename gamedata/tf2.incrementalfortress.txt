@@ -15,6 +15,11 @@
 				"linux"		"396"
 				"windows"	"396"
 			}
+			"CTFWeaponBase::PrimaryAttack()"
+			{
+				"linux"		"293"
+				"windows"	"287"
+			}
 		}
 		"Functions"
 		{
@@ -242,13 +247,6 @@
 				"return"		"float"
 				"this"			"entity"
 			}
-			"CTFWeaponBaseGun::PrimaryAttack()"
-			{
-				"signature"		"CTFWeaponBaseGun::PrimaryAttack()"
-				"callconv"		"thiscall"
-				"return"		"void"
-				"this"			"entity"
-			}
 		}
 		"Signatures"
 		{
@@ -385,11 +383,6 @@
 			{
 				"library"	"server"
 				"linux"		"@_ZN15CTFPlayerShared10StunPlayerEffiP9CTFPlayer"
-			}
-			"CTFWeaponBaseGun::PrimaryAttack()"
-			{
-				"library"	"server"
-				"linux"		"@_ZN16CTFWeaponBaseGun13PrimaryAttackEv"
 			}
 		}
 	}

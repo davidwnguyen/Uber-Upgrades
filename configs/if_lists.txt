@@ -7,10 +7,9 @@
 		{
 			"0"		"Health Bonus"
 			"1"		"health regen"
-			"2"		"Armor Capability"
-			"3"		"Defense"
-			"4"		"patient overheal bonus"
-			"5"		"critical block rating"
+"2"		"Quadratic Damage Reduction"
+			"3"		"patient overheal bonus"
+			"4"		"critical block rating"
 		}
 		"Physical upgrades"
 		{
@@ -89,14 +88,11 @@
 				"1"		"Regeneration Powerup"
 				"2"		"Inverter Powerup"
 			}
-			"!Support Powerups"
+			"!Support/Misc Powerups"
 			{
 				"0"		"King Powerup"
 				"1"		"Plague Powerup"
-			}
-			"!Misc. Powerups"
-			{
-				"0"		"Agility Powerup"
+				"2"		"Agility Powerup"
 			}
 		}
 	}
@@ -107,10 +103,9 @@
 		{
 			"0"		"Health Bonus"
 			"1"		"health regen"
-			"2"		"Armor Capability"
-			"3"		"Defense"
-			"4"		"patient overheal bonus"
-			"5"		"critical block rating"
+"2"		"Quadratic Damage Reduction"
+			"3"		"patient overheal bonus"
+			"4"		"critical block rating"
 		}
 		"Physical upgrades"
 		{
@@ -189,14 +184,11 @@
 				"1"		"Regeneration Powerup"
 				"2"		"Inverter Powerup"
 			}
-			"!Support Powerups"
+			"!Support/Misc Powerups"
 			{
 				"0"		"King Powerup"
 				"1"		"Plague Powerup"
-			}
-			"!Misc. Powerups"
-			{
-				"0"		"Agility Powerup"
+				"2"		"Agility Powerup"
 			}
 		}
 	}
@@ -207,10 +199,9 @@
 		{
 			"0"		"Health Bonus"
 			"1"		"health regen"
-			"2"		"Armor Capability"
-			"3"		"Defense"
-			"4"		"patient overheal bonus"
-			"5"		"critical block rating"
+			"2"		"Quadratic Damage Reduction"
+			"3"		"patient overheal bonus"
+			"4"		"critical block rating"
 		}
 		"Physical upgrades"
 		{
@@ -289,14 +280,11 @@
 				"1"		"Regeneration Powerup"
 				"2"		"Inverter Powerup"
 			}
-			"!Support Powerups"
+			"!Support/Misc Powerups"
 			{
 				"0"		"King Powerup"
 				"1"		"Plague Powerup"
-			}
-			"!Misc. Powerups"
-			{
-				"0"		"Agility Powerup"
+				"2"		"Agility Powerup"
 			}
 		}
 	}
@@ -307,10 +295,9 @@
 		{
 			"0"		"Health Bonus"
 			"1"		"health regen"
-			"2"		"Armor Capability"
-			"3"		"Defense"
-			"4"		"patient overheal bonus"
-			"5"		"critical block rating"
+"2"		"Quadratic Damage Reduction"
+			"3"		"patient overheal bonus"
+			"4"		"critical block rating"
 		}
 		"Physical upgrades"
 		{
@@ -389,14 +376,11 @@
 				"1"		"Regeneration Powerup"
 				"2"		"Inverter Powerup"
 			}
-			"!Support Powerups"
+			"!Support/Misc Powerups"
 			{
 				"0"		"King Powerup"
 				"1"		"Plague Powerup"
-			}
-			"!Misc. Powerups"
-			{
-				"0"		"Agility Powerup"
+				"2"		"Agility Powerup"
 			}
 		}
 	}
@@ -407,10 +391,9 @@
 		{
 			"0"		"Health Bonus (Heavy)"
 			"1"		"health regen"
-			"2"		"Armor Capability"
-			"3"		"Defense"
-			"4"		"patient overheal bonus"
-			"5"		"critical block rating"
+"2"		"Quadratic Damage Reduction"
+			"3"		"patient overheal bonus"
+			"4"		"critical block rating"
 		}
 		"Physical upgrades"
 		{
@@ -489,14 +472,11 @@
 				"1"		"Regeneration Powerup"
 				"2"		"Inverter Powerup"
 			}
-			"!Support Powerups"
+			"!Support/Misc Powerups"
 			{
 				"0"		"King Powerup"
 				"1"		"Plague Powerup"
-			}
-			"!Misc. Powerups"
-			{
-				"0"		"Agility Powerup"
+				"2"		"Agility Powerup"
 			}
 		}
 	}
@@ -507,10 +487,9 @@
 		{
 			"0"		"Health Bonus"
 			"1"		"health regen"
-			"2"		"Armor Capability"
-			"3"		"Defense"
-			"4"		"patient overheal bonus"
-			"5"		"critical block rating"
+"2"		"Quadratic Damage Reduction"
+			"3"		"patient overheal bonus"
+			"4"		"critical block rating"
 		}
 		"Physical upgrades"
 		{
@@ -590,14 +569,11 @@
 				"1"		"Regeneration Powerup"
 				"2"		"Inverter Powerup"
 			}
-			"!Support Powerups"
+			"!Support/Misc Powerups"
 			{
 				"0"		"King Powerup"
 				"1"		"Plague Powerup"
-			}
-			"!Misc. Powerups"
-			{
-				"0"		"Agility Powerup"
+				"2"		"Agility Powerup"
 			}
 		}
 	}
@@ -608,10 +584,9 @@
 		{
 			"0"		"Health Bonus"
 			"1"		"health regen"
-			"2"		"Armor Capability"
-			"3"		"Defense"
-			"4"		"patient overheal bonus"
-			"5"		"critical block rating"
+"2"		"Quadratic Damage Reduction"
+			"3"		"patient overheal bonus"
+			"4"		"critical block rating"
 		}
 		"Physical upgrades"
 		{
@@ -690,14 +665,11 @@
 				"1"		"Regeneration Powerup"
 				"2"		"Inverter Powerup"
 			}
-			"!Support Powerups"
+			"!Support/Misc Powerups"
 			{
 				"0"		"King Powerup"
 				"1"		"Plague Powerup"
-			}
-			"!Misc. Powerups"
-			{
-				"0"		"Agility Powerup"
+				"2"		"Agility Powerup"
 			}
 		}
 	}
@@ -708,10 +680,9 @@
 		{
 			"0"		"Health Bonus"
 			"1"		"health regen"
-			"2"		"Armor Capability"
-			"3"		"Defense"
-			"4"		"patient overheal bonus"
-			"5"		"critical block rating"
+"2"		"Quadratic Damage Reduction"
+			"3"		"patient overheal bonus"
+			"4"		"critical block rating"
 		}
 		"Physical upgrades"
 		{
@@ -793,14 +764,11 @@
 				"1"		"Regeneration Powerup"
 				"2"		"Inverter Powerup"
 			}
-			"!Support Powerups"
+			"!Support/Misc Powerups"
 			{
 				"0"		"King Powerup"
 				"1"		"Plague Powerup"
-			}
-			"!Misc. Powerups"
-			{
-				"0"		"Agility Powerup"
+				"2"		"Agility Powerup"
 			}
 		}
 	}
@@ -811,10 +779,9 @@
 		{
 			"0"		"Health Bonus"
 			"1"		"health regen"
-			"2"		"Armor Capability"
-			"3"		"Defense"
-			"4"		"patient overheal bonus"
-			"5"		"critical block rating"
+"2"		"Quadratic Damage Reduction"
+			"3"		"patient overheal bonus"
+			"4"		"critical block rating"
 		}
 		"Physical upgrades"
 		{
@@ -897,14 +864,11 @@
 				"1"		"Regeneration Powerup"
 				"2"		"Inverter Powerup"
 			}
-			"!Support Powerups"
+			"!Support/Misc Powerups"
 			{
 				"0"		"King Powerup"
 				"1"		"Plague Powerup"
-			}
-			"!Misc. Powerups"
-			{
-				"0"		"Agility Powerup"
+				"2"		"Agility Powerup"
 			}
 		}
 	}

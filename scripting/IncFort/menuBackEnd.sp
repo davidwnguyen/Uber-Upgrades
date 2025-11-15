@@ -505,10 +505,6 @@ public MenuHandler_BuyUpgrade(Handle menu, MenuAction:action, client, param2)
 			{//Change preferences menu
 				Menu_ChangePreferences(client);
 			}
-			case 9:
-			{//Show wiki
-				Menu_ShowWiki(client);
-			}
 			default:
 			{
 				char fstr[30]
@@ -954,92 +950,7 @@ public MenuHandler_KnockbackPreferences(Handle menu, MenuAction:action, client, 
     if (action == MenuAction_End)
         {CloseHandle(menu);}
 }
-public MenuHandler_Wiki(Handle menu, MenuAction:action, client, param2)
-{
-	if (action == MenuAction_Select && IsValidClient(client) && IsPlayerAlive(client))
-	{
-		if(param2 >= 0 && MenuTimer[client] < GetGameTime())
-		{
-			MenuTimer[client] = 1.0+GetGameTime()
-			switch(param2)
-			{
-				case 0:
-				{
-					CPrintToChat(client, " ");
-					CPrintToChat(client, "{valve}Wiki {white}| Upgrades in Incremental Fortress have a base cost, increase ratio, value, initial value & max.\n You can buy these upgrades with the console command 'menuselect' or 'qbuy'.");
-					CPrintToChat(client, "{valve}Wiki {white}| Using menuselect means to choose whatever selection by console. Using crouch multiplies purchases by 10x, reload multiplies by 100x, and jump key inverts to negative to refund.");
-					CPrintToChat(client, "{valve}Wiki {white}| ★ Damage Multiplier ★ upgrades do not increase in cost. ");
-					CPrintToChat(client, " ");
-				}
-				case 1:
-				{
-					CPrintToChat(client, " ");
-					CPrintToChat(client, "{valve}Wiki {white}| Damage upgrades are all multiplicative with each other.");
-					CPrintToChat(client, "{valve}Wiki {white}| 'Life Steal Ability' takes the post-damage dealt of an attack, then divides it by 10, then multiplies is by the attribute's value, and returns it as healing.");
-					CPrintToChat(client, "{valve}Wiki {white}| Many attributes are meant to scale universally regardless of weapon changes. For example, bullets per shot increases damage of rocket weapons as well.");
-					CPrintToChat(client, " ");
-				}
-				case 2:
-				{
-					CPrintToChat(client, " ");
-					CPrintToChat(client, "{valve}Wiki {white}| The armor calculation is an exponential divisor to damage taken.");
-					CPrintToChat(client, "{valve}Wiki {white}| The divisor formula is | damage = damage/(DamageReduction*DamageReductionMultiplier)^2");
-					CPrintToChat(client, "{valve}Wiki {white}| Subtractions/additions to armor via statuses affect the DamageReduction*DamageReductionMultiplier part of the formula.");
-					CPrintToChat(client, " ");
-				}
-				case 3:
-				{
-					CPrintToChat(client, " ");
-					CPrintToChat(client, "{valve}Wiki {white}| Special Tweaks are stage locked upgrades that are incompatible with each other, and have a great increase to the overall power of a weapon.");
-					CPrintToChat(client, "{valve}Wiki {white}| By going to the 'Upgrade Manager' on the front page of the menu, you can remove the downgrades or remove any upgrades you need to refund.");
-					CPrintToChat(client, "{valve}Wiki {white}| Special Tweaks can have requirements and costs. If the tweak has a requirement, you cannot refund your weapon below that spent cost.");
-					CPrintToChat(client, " ");
-				}
-				case 4:
-				{
-					CPrintToChat(client, " ");
-					CPrintToChat(client, "{valve}Wiki {white}| Special Abilities are triggered by using the middle click button. Very few weapons have special abilities.");
-					CPrintToChat(client, "{valve}Wiki {white}| Stun Shot is the shotgun's ability. Gives an additonal 3x bullets per shot, and freezes your weapon for .3s. Your shot will inflict 0.6s of stun.");
-					CPrintToChat(client, "{valve}Wiki {white}| Explosive shot is the Fortified Compound's ability. Your next shot will deal a 120 base damage explosion.");
-					CPrintToChat(client, "{valve}Wiki {white}| Detonate is the Huo-Long-Heater's ability. It detonates all of the flares that are active, just like the detonator. Cannot inflict damage to self.");
-					CPrintToChat(client, "{valve}Wiki {white}| Adrenaline is the ability for melees. Massively increases dodge chance for 2.5s and gives minicrits for 5s. Clears all effects.");
-					CPrintToChat(client, " ");
-				}
-				case 5:
-				{
-					CPrintToChat(client, " ");
-					CPrintToChat(client, "{valve}Wiki {white}| Dragon's Breath is the ability for the Dragon's Fury. Shoots 5 bouncing fireballs that deal 35 base DPS.");
-					CPrintToChat(client, "{valve}Wiki {white}| Dash is the ability for The Winger, it re-directs your movement up to 3x of it's base max. Vertical velocity is decreased by -25%%.");
-					CPrintToChat(client, "{valve}Wiki {white}| Sunstar is the ability for short circuit tweak, it deals 10 base DPS per beam every 0.1s and automatically aims. For every 500 metal consumed, you gain +1s of duration.");
-					CPrintToChat(client, "{valve}Wiki {white}| Immolation is the ability for gas passer tweak, dealing 20% maxHP/s (of your maxhp) to you and targets lit by gas passer.");
-					CPrintToChat(client, " ");
-				}
-				case 6:
-				{
-					CPrintToChat(client, " ");
-					CPrintToChat(client, "{valve}Wiki {white}| Arcane are spells that are triggered through the 'Use Arcane Spells' category. They have exponential scaling which allows them to compete with weapons and armor upgrades. ");
-					CPrintToChat(client, "{valve}Wiki {white}| ie : Zap has a formula of '(20.0 + ((ArcaneDamage * (ArcanePower^4.0))^2.25) * 3.0))'. Zap can also chain-trigger the effect with a 30%% chance.");
-					CPrintToChat(client, "{valve}Wiki {white}| All arcanes follow the formula [baseDMG + (ArcaneDMG * ArcanePower^4)^(2.15+0.1*Spelllvl) * scaling]");
-					CPrintToChat(client, "{valve}Wiki {white}| Arcane Power exponentially increases your Arcane Damage total, increases regeneration, max focus, decreases cooldowns, and buff durations.");
-					CPrintToChat(client, "{valve}Wiki {white}| You can add key bindings for arcane usage by using 'sm_arcane #'. ie: 'sm_arcane 2' will use your second arcane spell attuned.");
-					CPrintToChat(client, " ");
-				}
-				default:
-				{
-					PrintHintText(client, "Sorry, we havent implemented this yet!");
-				}
-			}
-		}
-		Menu_ShowWiki(client, GetMenuSelectionPosition());
-	}
-	if(action == MenuAction_Cancel && param2 == MenuCancel_ExitBack)
-	{
-		Menu_BuyUpgrade(client, 7);
-	}
-	if(action == MenuAction_End)
-		CloseHandle(menu);
-	return; 
-}
+
 public MenuHandler_StatsViewer(Handle menu, MenuAction:action, client, param2)
 {
 	if(action == MenuAction_Select)

@@ -699,8 +699,8 @@
 	"!Defensive Powerups"{
 		"en"		"Defensive Powerups"
 	}
-	"!Support Powerups"{
-		"en"		"Support Powerups"
+	"!Support/Misc Powerups"{
+		"en"		"Support/Misc Powerups"
 	}
 	"!Misc. Powerups"{
 		"en"		"Misc. Powerups"
@@ -1158,9 +1158,6 @@
 	"gesture speed increase (phlog)"{
 		"en"		"Taunt Speed Increased"
 	}
-	"Defense"{
-		"en"		"Damage Reduction Multiplier"
-	}
 	"Ammo & Cloak upgrades"{
 		"en"		"Ammo & Cloak Upgrades"
 	}
@@ -1323,8 +1320,8 @@
 	"Max Armor Capacity"{
 		"en"		"Max Armor Supply"
 	}
-	"Armor Capability"{
-		"en"		"Damage Reduction"
+	"Quadratic Damage Reduction"{
+		"en"		"Quadratic Damage Reduction"
 	}
 	"Armor Resistance"{
 		"en"		"Armor Damage Reduction"
@@ -2164,7 +2161,7 @@
 		"en"		"Fuse Time Bonus"
 	}
 	"patient overheal bonus"{
-		"en"		"Incoming Overheal Max Bonus"
+		"en"		"Incoming Overheal Capacity"
 	}
 	"full charge turn control"{
 		"en"		"Full Charge Control"

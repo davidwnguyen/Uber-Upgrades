@@ -17,18 +17,23 @@ public int getNextAfterburnStack(int client){
 
 float GetResistance(int client, bool includeReduction = false, float penetration = 0.0)
 {
-	float TotalResistance = 1+TF2Attrib_HookValueFloat(0.0, "quadratic_damage_reduction", client);
+	float TotalResistance = TF2Attrib_HookValueFloat(0.0, "quadratic_damage_reduction", client);
 	if(hasBuffIndex(client, Buff_BrokenArmor)){
 		TotalResistance -= playerBuffs[client][getBuffInArray(client,Buff_BrokenArmor)].priority;
 	}
 	if(penetration > 0.0){
 		TotalResistance -= penetration;
 	}
+	
+	TotalResistance *= TotalResistance;
+
 	if(TotalResistance < 1){
 		TotalResistance = 1.0;
 	}
-	
-	TotalResistance *= TotalResistance;
+	else{
+		TotalResistance += 1.0;
+	}
+
 	if(includeReduction)
 	{
 		Address dmgReduction = TF2Attrib_GetByName(client, "sniper zoom penalty");
@@ -69,6 +74,7 @@ float GetResistance(int client, bool includeReduction = false, float penetration
 		if(GetAttribute(client, "knockout powerup", 0.0) == 2)
 			TotalResistance *= 1.5;
 	}
+
 	return TotalResistance;
 }
 stock void DOTStock(int victim,int attacker,float damage,int weapon = -1,int damagetype = 0,int repeats = 1,float initialDelay = 0.0,float tickspeed = 1.0, bool stackable = false)
@@ -3565,7 +3571,7 @@ GivePowerupDescription(int client, char[] name, int amount){
 		if(amount == 2){
 			CPrintToChat(client, "{community}Leech Powerup {default}| {lightcyan}30%% lifesteal, drains healing of everyone (including teammates!) by 50%% if nearby. Also applies on hitting an enemy.");
 		}else if(amount == 3){
-			CPrintToChat(client, "{community}Bloodbound Powerup {default}| {lightcyan}100%% of damage is self inflicted, 75%% damage taken -> piercing damage dealt. No fatal damage from self. If fatal damage, refill HP with bonus damage dealt.");
+			CPrintToChat(client, "{community}Bloodbound Powerup {default}| {lightcyan}25%% incoming damage reduction. Lifesteal at maximum health instead fills Overleech, consumed to heal when lifestealing.\nRight-click to consume Overleech, dealing piercing damage to all tagged enemies.");
 		}else{
 			CPrintToChat(client, "{community}Vampire Powerup {default}| {lightcyan}80%% lifesteal, 1.25x bleed damage, and 0.75x damage taken.");
 		}

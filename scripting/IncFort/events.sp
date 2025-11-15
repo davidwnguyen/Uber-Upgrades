@@ -107,14 +107,6 @@ public Event_Playerhurt(Handle event, const char[] name, bool:dontBroadcast)
 			if(SupernovaBuildup[client] > 1.0)
 				SupernovaBuildup[client] = 1.0;
 		}
-		if(GetAttribute(client, "vampire powerup", 0.0) == 3.0){
-			bloodboundDamage[client] += damage*0.75;
-			if(bloodboundHealing[client] > 0 && float(GetClientHealth(client)) - damage < -1){
-				AddPlayerHealth(client, RoundToCeil(bloodboundHealing[client]), 6.0, true, client);
-				bloodboundHealing[client] = 0.0;
-				bloodboundDamage[client] = 0.0;
-			}
-		}
 	}
 
 	if(IsValidClient3(attacker) && !IsFakeClient(attacker))
@@ -1106,6 +1098,10 @@ public OnEntityCreated(entity, const char[] classname)
 			isProjectileHoming[entity] = true;
 			CreateTimer(1.0, SelfDestruct, reference);
 		}
+	}
+	else if(StrContains(classname, "tf_weapon", false) == 0)
+	{
+		DHookEntity(g_DHookPrimaryAttack, true, entity);
 	}
 
 	if (HasEntProp(entity, Prop_Send, "m_bValidatedAttachedEntity"))
@@ -3481,6 +3477,7 @@ public Event_PlayerRespawn(Handle event, const char[] name, bool:dontBroadcast)
 
 		SetEntityRenderColor(client, 255, 255, 255, 255);
 		TF2_RemoveCondition(client,TFCond_Plague);
+		Overleech[client] = 0.0;
 		BleedBuildup[client] = 0.0;
 		RadiationBuildup[client] = 0.0;
 		RageActive[client] = false;
@@ -3500,8 +3497,6 @@ public Event_PlayerRespawn(Handle event, const char[] name, bool:dontBroadcast)
 		warpCooldown[client] = 0.0;
 		frayNextTime[client] = 0.0;
 		strongholdEnabled[client] = false;
-		bloodboundDamage[client] = 0.0;
-		bloodboundHealing[client] = 0.0;
 		pylonCharge[client] = 0.0;
 		tagTeamTarget[client] = -1;
 		immolationActive[client] = false;

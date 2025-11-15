@@ -320,6 +320,9 @@ public Action:Timer_FixedVariables(Handle timer)
 			if(GetAttribute(client, "regeneration powerup", 0.0) == 3.0){
 				Format(ArmorLeft, sizeof(ArmorLeft), "%s\nBlood Pool  | %.0f", ArmorLeft, bloodAcolyteBloodPool[client]); 
 			}
+			if(GetAttribute(client, "vampire powerup", 0.0) == 3.0){
+				Format(ArmorLeft, sizeof(ArmorLeft), "%s\nOverleech  | %.0f", ArmorLeft, Overleech[client]); 
+			}
 			if(CheckForAttunement(client))
 			{
 				Format(ArmorLeft, sizeof(ArmorLeft), "%s\nFocus  | %.0f / %.0f", ArmorLeft, fl_CurrentFocus[client],fl_MaxFocus[client]); 
@@ -444,10 +447,6 @@ public Action:Timer_Every100MS(Handle timer)
 					Format(StatusEffectText, sizeof(StatusEffectText),"Enraged: %d kills remaining", 80-enragedKills[client]);
 				else
 					Format(StatusEffectText, sizeof(StatusEffectText),"Enraged: READY (Crouch + Mouse3)");
-			}
-			else if(GetAttribute(client, "vampire powerup", 0.0) == 3)
-			{
-				Format(StatusEffectText, sizeof(StatusEffectText),"Bloodbound: +%.0f% dmg | +%.0f heal", bloodboundDamage[client], bloodboundHealing[client]);
 			}
 			else if(GetAttribute(client, "supernova powerup", 0.0) == 1)
 			{

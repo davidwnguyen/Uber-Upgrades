@@ -28,8 +28,7 @@ public Action Menu_BuyUpgrade(client, args)
 		AddMenuItem(menuBuy, "upgrade_stats", "View Stats");
 
 		AddMenuItem(menuBuy, "preferences", "Change Preferences/Settings");
-		
-		AddMenuItem(menuBuy, "wiki", "Display In-Game Wiki");
+	
 		
 		DisplayMenuAtItem(menuBuy, client, args, MENU_TIME_FOREVER)
 
@@ -516,27 +515,6 @@ public Menu_ChangeKnockbackPreferences(client)
 		DisplayMenu(menu, client, MENU_TIME_FOREVER);
 	}
 }
-Menu_ShowWiki(client, int item = 0)
-{
-	if (IsValidClient(client) && IsPlayerAlive(client))
-	{
-		Handle menu = CreateMenu(MenuHandler_Wiki);
-		
-		SetMenuExitBackButton(menu, true);
-		SetMenuTitle(menu, "★ Incremental Fortress Wiki ★");
-		AddMenuItem(menu, "UpgradeInfo", "Upgrades Explanation");
-		AddMenuItem(menu, "DamageInfo", "Damage Math Explanation");
-		AddMenuItem(menu, "ArmorInfo", "Armor Math Explanation");
-		AddMenuItem(menu, "SpecialTweaksInfo", "Special Tweaks Explanation");
-		AddMenuItem(menu, "SpecialAbilitiesInfo", "Special Abilities Explanation #1");
-		AddMenuItem(menu, "SpecialAbilitiesInfo2", "Special Abilities Explanation #2");
-		AddMenuItem(menu, "ArcaneInfo", "Arcane Explanation");
-		if (IsValidClient(client) && IsPlayerAlive(client))
-		{
-			DisplayMenuAtItem(menu, client, item, MENU_TIME_FOREVER);
-		}
-	}
-}
 public Action:ShowMults(client, args)
 {
 	if(IsPlayerAlive(client))
@@ -602,7 +580,7 @@ public Menu_ShowStatsSlot(client, param2)
 		GetAlphabetForm(GetResistance(client, true)),
 		DelayAmount,
 		GetAlphabetForm(GetEntPropFloat(client, Prop_Data, "m_flMaxspeed")),
-		GetAlphabetForm(fl_RegenFocus[client]*66.6)); 
+		GetAlphabetForm(fl_RegenFocus[client]*TICKRATE)); 
 		
 		Address zapActive = TF2Attrib_GetByName(client, "arcane zap");
 		if(zapActive != Address_Null && TF2Attrib_GetValue(zapActive) > 0.0)

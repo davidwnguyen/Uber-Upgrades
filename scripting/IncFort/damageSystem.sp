@@ -462,7 +462,7 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 		if(TF2Attrib_HookValueFloat(0.0, "regeneration_powerup", victim) == 1)
 			damage *= ConsumePierce(0.75, pierce);
 
-		if(TF2Attrib_HookValueFloat(0.0, "vampire_powerup", victim) == 1)
+		if(TF2Attrib_HookValueFloat(0.0, "vampire_powerup", victim) == 1 || TF2Attrib_HookValueFloat(0.0, "vampire_powerup", victim) == 3)
 			damage *= ConsumePierce(0.75, pierce);
 
 		//This is actually valid.

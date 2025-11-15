@@ -23,6 +23,7 @@ Handle g_SDKCallInitGrenade;
 Handle g_SDKCallJar;
 Handle g_SDKCallSentryThink;
 Handle g_SDKFastBuild;
+Handle g_DHookPrimaryAttack;
 
 Handle hudSync;
 Handle hudSpells;
@@ -368,14 +369,13 @@ float duplicationCooldown[MAXPLAYERS+1];
 float warpCooldown[MAXPLAYERS+1];
 float frayNextTime[MAXPLAYERS+1];
 float quakerTime[MAXPLAYERS+1];
-float bloodboundDamage[MAXPLAYERS+1];
-float bloodboundHealing[MAXPLAYERS+1];
 float pylonCharge[MAXPLAYERS+1];
 float savedCharge[MAXPLAYERS+1];
 float chainLightningAbilityCharge[MAXPLAYERS+1];
 float sunstarDuration[MAXPLAYERS+1];
 float lastSentryFiring[MAXENTITIES];
 float weaponSavedAttackTime[MAXENTITIES];
+float Overleech[MAXPLAYERS+1];
 
 //String
 char given_upgrd_classnames[LISTS][LISTS_CATEGORIES][128]
