@@ -3694,31 +3694,22 @@ GivePowerupDescription(int client, char[] name, int amount){
 	else if(StrEqual("catalyst powerup", name)){
 		if(amount == 2){
 			CPrintToChat(client, "{community}Conduit Powerup {default}| {lightcyan}Every buff applied to you is also applied to the entire team. 0.66x dmg taken.");
-		}else if(amount == 3){
-			CPrintToChat(client, "{community}Empowerment Powerup {default}| {lightcyan}Gives the skill Empowerment:");
-			CPrintToChat(client, "{lightcyan}Clears buffs to nearby enemies and debuffs to nearby teammates. (400 HU)");
-			CPrintToChat(client, "{lightcyan}Grants a temporary buff that stores +20 flat damage per every debuff and buff consumed.");
 		}else{
 			CPrintToChat(client, "{community}Catalyst Powerup {default}| {lightcyan}Grants 1%% focus & health leech on hit, which spread to nearby teammates. 0.66x dmg taken.");
 		}
 	}
-	else if(StrEqual("warlock powerup", name)){
+	else if(StrEqual("juggernaut powerup", name)){
 		if(amount == 2){
-			CPrintToChat(client, "{community}Elementalist Powerup {default}| {lightcyan}For every different spell you cast within 15s, gain +25%% arcane damage.");
-			CPrintToChat(client, "{lightcyan}Fire spells apply lightning weakness, lightning spells apply cold weakness, and cold spells apply fire weakness. (1.3x dmg taken)");
-		}else if(amount == 3){
-			CPrintToChat(client, "{community}Archmage Powerup {default}| {lightcyan}For every 100 max focus you have, you gain +5 flat damage on your spells. Adds +5%% max focus cost to spells.");
+			CPrintToChat(client, "{community}Unyielding Powerup {default}| {lightcyan}Gain up to 0.25x damage taken from sources as they get closer to 100% damage dealt as max health.");
 		}else{
-			CPrintToChat(client, "{community}Warlock Powerup {default}| {lightcyan}1.75x focus regeneration, 1.65x arcane damage, 0.66x spell cost & cooldown.");
+			CPrintToChat(client, "{community}Juggernaut Powerup {default}| {lightcyan}Gain up to 0.25x damage taken from sources as they get closer to 0 damage dealt.");
 		}
 	}
 	else if(StrEqual("sanctuary powerup", name)){
 		if(amount == 2){
 			CPrintToChat(client, "{community}Wellspring Powerup {default}| {lightcyan}In a 800 HU radius, 50%% of lost health and focus is recouped for teammates over 5s. 0.66x damage taken.");
-		}else if(amount == 3){
-			CPrintToChat(client, "{community}Rejuvenation Powerup {default}| {lightcyan}For every 500 max health, give +1 damage reduction rating and +10%% health regeneration.");
 		}else{
-			CPrintToChat(client, "{community}Sanctuary Powerup {default}| {lightcyan}1.75x focus regeneration, 1.65x arcane damage, 0.66x spell cost & cooldown.");
+			CPrintToChat(client, "{community}Sanctuary Powerup {default}| {lightcyan}???");
 		}
 	}
 }

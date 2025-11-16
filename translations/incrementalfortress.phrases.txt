@@ -783,8 +783,11 @@
 	"Balance Powerup"{
 		"en"		"Balance Powerup"
 	}
-	"Warlock Powerup"{
-		"en"		"Warlock Powerup"
+	"Juggernaut Powerup"{
+		"en"		"Juggernaut Powerup"
+	}
+	"Slayer Powerup"{
+		"en"		"Slayer Powerup"
 	}
 	"fire rate bonus(fortified)"{
 		"en"		"Fire Rate Bonus"
