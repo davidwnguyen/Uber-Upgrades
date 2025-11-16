@@ -6,7 +6,7 @@ public Action:Timer_Second(Handle timer)
 			singularBuysPerMinute[client]--;
 		if (IsValidClient3(client))
 		{
-			if(GetAttribute(client, "regeneration powerup", 0.0) == 1.0){
+			if(TF2Attrib_HookValueFloat(0.0, "regeneration_powerup", client) == 1.0){
 				for(int i=0;i<3;++i){
 					int weapon = GetWeapon(client, i);
 					if(!IsValidWeapon(weapon))
@@ -18,7 +18,7 @@ public Action:Timer_Second(Handle timer)
 					SetAmmo_Weapon(weapon, TF2Util_GetPlayerMaxAmmo(client, type, current_class[client]));
 				}
 			}
-			else if(GetAttribute(client, "regeneration powerup", 0.0) == 2.0){
+			else if(TF2Attrib_HookValueFloat(0.0, "regeneration_powerup", client) == 2.0){
 				for(int i=0;i<3;++i){
 					int weapon = GetWeapon(client, i);
 					if(!IsValidWeapon(weapon))
@@ -254,7 +254,7 @@ public Action:Timer_FixedVariables(Handle timer)
 			}
 		}
 
-		if(GetAttribute(client, "resistance powerup", 0.0) != 3.0){
+		if(TF2Attrib_HookValueFloat(0.0, "resistance_powerup", client) != 3.0){
 			if(strongholdEnabled[client]){
 				SetEntityMoveType(client, MOVETYPE_WALK);
 				PrintHintText(client, "Stronghold Disabled");
@@ -317,10 +317,10 @@ public Action:Timer_FixedVariables(Handle timer)
 			char ArmorLeft[64]
 			Format(ArmorLeft, sizeof(ArmorLeft), "Effective Health | %s", GetAlphabetForm(GetResistance(client, true)*GetClientHealth(client))); 
 
-			if(GetAttribute(client, "regeneration powerup", 0.0) == 3.0){
+			if(TF2Attrib_HookValueFloat(0.0, "regeneration_powerup", client) == 3.0){
 				Format(ArmorLeft, sizeof(ArmorLeft), "%s\nBlood Pool  | %.0f", ArmorLeft, bloodAcolyteBloodPool[client]); 
 			}
-			if(GetAttribute(client, "vampire powerup", 0.0) == 3.0){
+			if(TF2Attrib_HookValueFloat(0.0, "vampire_powerup", client) == 3.0){
 				Format(ArmorLeft, sizeof(ArmorLeft), "%s\nOverleech  | %.0f", ArmorLeft, Overleech[client]); 
 			}
 			if(CheckForAttunement(client))
@@ -407,7 +407,7 @@ public Action:Timer_Every100MS(Handle timer)
 			}
 			char StatusEffectText[256]
 
-			if(GetAttribute(client, "revenge powerup", 0.0) == 1)
+			if(TF2Attrib_HookValueFloat(0.0, "revenge_powerup", client) == 1)
 			{
 				if(RageBuildup[client] < 1.0)
 					Format(StatusEffectText, sizeof(StatusEffectText),"Revenge: %.0f%", RageBuildup[client]*100.0);
@@ -421,7 +421,7 @@ public Action:Timer_Every100MS(Handle timer)
 					giveDefenseBuff(client, 1.0);
 				}
 			}
-			else if(GetAttribute(client, "revenge powerup", 0.0) == 2)
+			else if(TF2Attrib_HookValueFloat(0.0, "revenge_powerup", client) == 2)
 			{
 				Format(StatusEffectText, sizeof(StatusEffectText),"Berserk: %.0f%", RageBuildup[client]*100.0);
 				
@@ -441,49 +441,49 @@ public Action:Timer_Every100MS(Handle timer)
 				if(RageBuildup[client] < 0)
 					RageBuildup[client] = 0.0;
 			}
-			else if(GetAttribute(client, "revenge powerup", 0.0) == 3)
+			else if(TF2Attrib_HookValueFloat(0.0, "revenge_powerup", client) == 3)
 			{
 				if(enragedKills[client] < 80)
 					Format(StatusEffectText, sizeof(StatusEffectText),"Enraged: %d kills remaining", 80-enragedKills[client]);
 				else
 					Format(StatusEffectText, sizeof(StatusEffectText),"Enraged: READY (Crouch + Mouse3)");
 			}
-			else if(GetAttribute(client, "supernova powerup", 0.0) == 1)
+			else if(TF2Attrib_HookValueFloat(0.0, "supernova_powerup", client) == 1)
 			{
 				if(SupernovaBuildup[client] < 1.0)
 					Format(StatusEffectText, sizeof(StatusEffectText),"Supernova: %.0f%", SupernovaBuildup[client]*100.0);
 				else
 					Format(StatusEffectText, sizeof(StatusEffectText),"Supernova: READY (Crouch + Mouse3)");
 			}
-			else if(GetAttribute(client, "regeneration powerup", 0.0) == 2.0)
+			else if(TF2Attrib_HookValueFloat(0.0, "regeneration_powerup", client) == 2.0)
 			{
 				if(duplicationCooldown[client] > GetGameTime())
 					Format(StatusEffectText, sizeof(StatusEffectText),"Duplication: %.2fs", duplicationCooldown[client] - GetGameTime());
 				else
 					Format(StatusEffectText, sizeof(StatusEffectText),"Duplication: READY (Crouch + Mouse3)");
 			}
-			else if(GetAttribute(client, "agility powerup", 0.0) == 3.0)
+			else if(TF2Attrib_HookValueFloat(0.0, "agility_powerup", client) == 3.0)
 			{
 				if(warpCooldown[client] > GetGameTime())
 					Format(StatusEffectText, sizeof(StatusEffectText),"Warp: %.2fs", warpCooldown[client] - GetGameTime());
 				else
 					Format(StatusEffectText, sizeof(StatusEffectText),"Warp: READY (Crouch + Mouse3)");
 			}
-			else if(GetAttribute(client, "resistance powerup", 0.0) == 2.0)
+			else if(TF2Attrib_HookValueFloat(0.0, "resistance_powerup", client) == 2.0)
 			{
 				if(frayNextTime[client] > GetGameTime())
 					Format(StatusEffectText, sizeof(StatusEffectText),"Fray: %.2fs", frayNextTime[client] - GetGameTime());
 				else
 					Format(StatusEffectText, sizeof(StatusEffectText),"Fray: READY");
 			}
-			else if(GetAttribute(client, "resistance powerup", 0.0) == 3.0)
+			else if(TF2Attrib_HookValueFloat(0.0, "resistance_powerup", client) == 3.0)
 			{
 				if(!strongholdEnabled[client])
 					Format(StatusEffectText, sizeof(StatusEffectText),"Stronghold: INACTIVE (Crouch + Mouse3)");
 				else
 					Format(StatusEffectText, sizeof(StatusEffectText),"Stronghold: ACTIVE (Crouch + Mouse3)");
 			}
-			else if(GetAttribute(client, "king powerup", 0.0) == 2.0)
+			else if(TF2Attrib_HookValueFloat(0.0, "king_powerup", client) == 2.0)
 			{
 				if(!IsValidClient3(tagTeamTarget[client]))
 					Format(StatusEffectText, sizeof(StatusEffectText),"Tag-Team: INACTIVE (Crouch + Mouse3)");
@@ -534,7 +534,7 @@ public Action:Timer_Every100MS(Handle timer)
 				}
 			}
 			if(strongholdEnabled[client]){
-				if(GetAttribute(client, "resistance powerup", 0.0) == 3.0){
+				if(TF2Attrib_HookValueFloat(0.0, "resistance_powerup", client) == 3.0){
 					Buff strongholdBonus;
 					strongholdBonus.init("Stronghold", "Crit Immunity", Buff_Stronghold, 1, client, 1.0);
 					for(int i=1;i<=MaxClients;++i){
@@ -551,7 +551,7 @@ public Action:Timer_Every100MS(Handle timer)
 				}
 			}
 
-			if(GetAttribute(client, "king powerup", 0.0) == 2.0){
+			if(TF2Attrib_HookValueFloat(0.0, "king_powerup", client) == 2.0){
 				if(IsValidClient3(tagTeamTarget[client]) && !IsOnDifferentTeams(client, tagTeamTarget[client]) && IsPlayerAlive(client)){
 					Buff tagteamBuff;
 					tagteamBuff.init("Tag-Team Linked", "", Buff_TagTeam, 1, client, 1.0);
@@ -582,7 +582,7 @@ public Action:Timer_Every100MS(Handle timer)
 					}
 				}
 				if(!hasBuffIndex(i, Buff_Leech)){
-					if(GetAttribute(i, "vampire powerup", 0.0) != 2.0 && GetAttribute(client, "vampire powerup", 0.0) == 2.0){
+					if(GetAttribute(i, "vampire powerup", 0.0) != 2.0 && TF2Attrib_HookValueFloat(0.0, "vampire_powerup", client) == 2.0){
 						float VictimPos[3];
 						GetEntPropVector(i, Prop_Data, "m_vecOrigin", VictimPos);
 						if(GetVectorDistance(clientPos,VictimPos, true) <= 360000.0)
@@ -591,7 +591,7 @@ public Action:Timer_Every100MS(Handle timer)
 				}
 				if(IsOnDifferentTeams(client,i)){
 					if(!hasBuffIndex(i, Buff_Decay)){
-						if(GetAttribute(client, "plague powerup", 0.0) == 2.0){
+						if(TF2Attrib_HookValueFloat(0.0, "plague_powerup", client) == 2.0){
 							float VictimPos[3];
 							GetEntPropVector(i, Prop_Data, "m_vecOrigin", VictimPos);
 							if(GetVectorDistance(clientPos,VictimPos, true) <= 160000.0)

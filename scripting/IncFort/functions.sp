@@ -61,17 +61,17 @@ float GetResistance(int client, bool includeReduction = false, float penetration
 		if(DodgeBody != Address_Null)
 			TotalResistance /= 1-TF2Attrib_GetValue(DodgeBody);
 
-		float resPowerup = GetAttribute(client, "resistance powerup", 0.0);
-		if(resPowerup == 1 || resPowerup == 3 || GetAttribute(client, "inverter powerup", 0.0) == 2)
+		float resPowerup = TF2Attrib_HookValueFloat(0.0, "resistance_powerup", client);
+		if(resPowerup == 1 || resPowerup == 3 || TF2Attrib_HookValueFloat(0.0, "inverter_powerup", client) == 2)
 			TotalResistance *= 2.0;
 		
-		if(GetAttribute(client, "revenge powerup", 0.0) == 1 || GetAttribute(client, "knockout powerup", 0.0) == 1 || GetAttribute(client, "king powerup", 0.0) == 1 || GetAttribute(client, "supernova powerup", 0.0) == 1 || GetAttribute(client, "inverter powerup", 0.0) == 1)
+		if(TF2Attrib_HookValueFloat(0.0, "revenge_powerup", client) == 1 || TF2Attrib_HookValueFloat(0.0, "knockout_powerup", client) == 1 || TF2Attrib_HookValueFloat(0.0, "king_powerup", client) == 1 || TF2Attrib_HookValueFloat(0.0, "supernova_powerup", client) == 1 || TF2Attrib_HookValueFloat(0.0, "inverter_powerup", client) == 1)
 			TotalResistance *= 1.25;
 		
-		if(GetAttribute(client, "regeneration powerup", 0.0) == 1 || GetAttribute(client, "vampire powerup", 0.0) == 1 || 1 <= GetAttribute(client, "plague powerup", 0.0) <= 2)
+		if(TF2Attrib_HookValueFloat(0.0, "regeneration_powerup", client) == 1 || TF2Attrib_HookValueFloat(0.0, "vampire_powerup", client) == 1 || 1 <= TF2Attrib_HookValueFloat(0.0, "plague_powerup", client) <= 2)
 			TotalResistance *= 1.333;
 		
-		if(GetAttribute(client, "knockout powerup", 0.0) == 2)
+		if(TF2Attrib_HookValueFloat(0.0, "knockout_powerup", client) == 2)
 			TotalResistance *= 1.5;
 	}
 
@@ -1780,7 +1780,7 @@ refreshUpgrades(client, slot)
 					TF2Attrib_SetByName(client, "health from healers reduced", 0.2);
 			}
 
-			if(GetAttribute(client, "resistance powerup", 0.0) == 2.0){
+			if(TF2Attrib_HookValueFloat(0.0, "resistance_powerup", client) == 2.0){
 				TF2Attrib_SetByName(client, "major move speed bonus", 1.2);
 			}
 			

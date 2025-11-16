@@ -11,7 +11,7 @@ public Action TF2_OnTakeHealthPre(int client, float &flAmount, int &flags){
 	if(hasBuffIndex(client, Buff_Leech)){
 		AddPlayerHealth(playerBuffs[client][getBuffInArray(client, Buff_Leech)].inflictor, RoundToCeil(flAmount*0.334));
 	}
-	if(GetAttribute(client, "king powerup", 0.0) == 2.0){
+	if(TF2Attrib_HookValueFloat(0.0, "king_powerup", client) == 2.0){
 		if(IsValidClient3(tagTeamTarget[client]) && IsPlayerAlive(tagTeamTarget[client]) && !IsOnDifferentTeams(client, tagTeamTarget[client]) ){
 			AddPlayerHealth(tagTeamTarget[client], RoundToCeil(flAmount), _, true, client);
 		}
@@ -26,12 +26,12 @@ float GetPlayerHealingMultiplier(client){
 	GetClientAbsOrigin(client, playerOrigin);
 
 	if(TF2_IsPlayerInCondition(client, TFCond_Bleeding)){
-		if(GetAttribute(client, "inverter powerup", 0.0) == 1.0){
+		if(TF2Attrib_HookValueFloat(0.0, "inverter_powerup", client) == 1.0){
 			multiplier *= 2.0;
 		}
 		else{
 			int inflictor = TF2Util_GetPlayerConditionProvider(client, TFCond_Bleeding);
-			if(IsValidClient3(inflictor) && GetAttribute(client, "knockout powerup", 0.0) == 2)
+			if(IsValidClient3(inflictor) && TF2Attrib_HookValueFloat(0.0, "knockout_powerup", client) == 2)
 				multiplier *= 0.1667;
 			else
 				multiplier *= 0.5;
@@ -54,7 +54,7 @@ float GetPlayerHealingMultiplier(client){
 		}
 		multiplier *= 1.0 + effectMult;
 	}
-	if(GetAttribute(client, "regeneration powerup", 0.0) == 3.0)
+	if(TF2Attrib_HookValueFloat(0.0, "regeneration_powerup", client) == 3.0)
 		multiplier *= 1.6;
 	if(hasBuffIndex(client, Buff_Stronghold))
 		multiplier *= 1.33;
@@ -62,7 +62,7 @@ float GetPlayerHealingMultiplier(client){
 		multiplier *= 0.5;
 	if(hasBuffIndex(client, Buff_Decay))
 		multiplier *= 0.25;
-	if(GetAttribute(client, "revenge powerup", 0.0) == 2.0)
+	if(TF2Attrib_HookValueFloat(0.0, "revenge_powerup", client) == 2.0)
 		multiplier *= 1.0 + RageBuildup[client]*0.5;
 	
 	return multiplier;

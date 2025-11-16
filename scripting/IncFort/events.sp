@@ -56,7 +56,7 @@ public Event_Playerhurt(Handle event, const char[] name, bool:dontBroadcast)
 						if(ConcussionBuildup[client] >= 100.0)
 						{
 							ConcussionBuildup[client] = 0.0;
-							if(GetAttribute(client, "inverter powerup", 0.0) == 1){
+							if(TF2Attrib_HookValueFloat(0.0, "inverter_powerup", client) == 1){
 								TF2_AddCondition(client, TFCond_MegaHeal, 10.0);
 								TF2_AddCondition(client, TFCond_DefenseBuffNoCritBlock, 10.0);
 							}else{
@@ -68,7 +68,7 @@ public Event_Playerhurt(Handle event, const char[] name, bool:dontBroadcast)
 				}
 			}
 		}
-		if(GetAttribute(attacker, "plague powerup", 0.0) == 3.0){
+		if(TF2Attrib_HookValueFloat(0.0, "plague powerup", attacker) == 3.0){
 			if(!hasBuffIndex(client, Buff_LifeLink)){
 				Buff lifelinkDebuff;
 				lifelinkDebuff.init("Life Link", "-35% HP drain/10s", Buff_LifeLink, RoundToCeil(GetClientHealth(attacker)*0.3), attacker, 10.0);
@@ -328,7 +328,7 @@ public MRESReturn OnPlayerStunned(Address pPlayerShared, Handle hParams){
 	if(!IsValidClient(client))
 		return MRES_Ignored;
 
-	if(GetAttribute(client, "agility powerup", 0.0) == 1){
+	if(TF2Attrib_HookValueFloat(0.0, "agility_powerup", client) == 1){
 		return MRES_Supercede;
 	}
 
@@ -533,11 +533,11 @@ public MRESReturn OnCondApply(Address pPlayerShared, Handle hParams) {
 			}
 			case TFCond_Jarated, TFCond_MarkedForDeath, TFCond_MarkedForDeathSilent:
 			{
-				if(GetAttribute(client, "inverter powerup", 0.0) == 1){
+				if(TF2Attrib_HookValueFloat(0.0, "inverter_powerup", client) == 1){
 					giveDefenseBuff(client, duration);
 					return MRES_Supercede;
 				}
-				else if(GetAttribute(client, "inverter powerup", 0.0) == 2){
+				else if(TF2Attrib_HookValueFloat(0.0, "inverter_powerup", client) == 2){
 					Buff critligma;
 					critligma.init("Marked for Crits", "All hits taken are critical", Buff_CritMarkedForDeath, 1, client, duration);
 					insertBuff(client, critligma);
@@ -553,26 +553,26 @@ public MRESReturn OnCondApply(Address pPlayerShared, Handle hParams) {
 			case TFCond_CritCola:
 			{
 				miniCritStatusAttacker[client] = GetGameTime()+duration;
-				if(GetAttribute(client, "inverter powerup", 0.0) == 1)
+				if(TF2Attrib_HookValueFloat(0.0, "inverter_powerup", client) == 1)
 					giveDefenseBuff(client, duration);
-				else if(GetAttribute(client, "inverter powerup", 0.0) == 2){
+				else if(TF2Attrib_HookValueFloat(0.0, "inverter_powerup", client) == 2){
 					Buff critligma;
 					critligma.init("Marked for Crits", "All hits taken are critical", Buff_CritMarkedForDeath, 1, client, duration);
 					insertBuff(client, critligma);
 				}
-				else if(GetAttribute(client, "inverter powerup", 0.0) != 3){
+				else if(TF2Attrib_HookValueFloat(0.0, "inverter_powerup", client) != 3){
 					miniCritStatusVictim[client] = GetGameTime()+duration;
 				}
 				return MRES_Supercede;
 			}
 			case TFCond_RestrictToMelee:
 			{
-				if(GetAttribute(client, "inverter powerup", 0.0) == 1 || GetAttribute(client, "inverter powerup", 0.0) == 3)
+				if(TF2Attrib_HookValueFloat(0.0, "inverter_powerup", client) == 1 || TF2Attrib_HookValueFloat(0.0, "inverter_powerup", client) == 3)
 					return MRES_Supercede;
 			}
 			case TFCond_Sapped:
 			{
-				if(GetAttribute(client, "inverter powerup", 0.0) != 3){
+				if(TF2Attrib_HookValueFloat(0.0, "inverter_powerup", client) != 3){
 					TF2_RemoveCondition(client, TFCond_Ubercharged);
 					TF2_RemoveCondition(client, TFCond_Cloaked);
 					TF2_RemoveCondition(client, TFCond_Disguised);
@@ -591,7 +591,7 @@ public MRESReturn OnCondApply(Address pPlayerShared, Handle hParams) {
 			case TFCond_Ubercharged, TFCond_Cloaked, TFCond_Disguised, TFCond_MegaHeal, TFCond_DefenseBuffNoCritBlock,TFCond_DefenseBuffMmmph,
 			TFCond_UberchargedHidden, TFCond_UberBulletResist, TFCond_UberBlastResist, TFCond_UberFireResist, TFCond_AfterburnImmune, TFCond_Kritzkrieged, TFCond_CritCanteen:
 			{
-				if(TF2_IsPlayerInCondition(client, TFCond_Sapped) || GetAttribute(client, "inverter powerup", 0.0) == 3 || hasBuffIndex(client, Buff_Nullification))
+				if(TF2_IsPlayerInCondition(client, TFCond_Sapped) || TF2Attrib_HookValueFloat(0.0, "inverter_powerup", client) == 3 || hasBuffIndex(client, Buff_Nullification))
 					return MRES_Supercede;
 			}
 			case TFCond_ParachuteDeployed:
@@ -914,7 +914,7 @@ public void TF2_OnConditionAdded(client, TFCond cond)
 			buffChange[client] = true;
 		}
 		case TFCond_Slowed:{
-			if(GetAttribute(client, "inverter powerup", 0.0) == 1){
+			if(TF2Attrib_HookValueFloat(0.0, "inverter_powerup", client) == 1){
 				TF2_AddCondition(client, TFCond_HalloweenSpeedBoost, 3.0);
 				TF2_RemoveCondition(client, cond);
 			}
@@ -1972,7 +1972,7 @@ public Action OnPlayerRunCmd(int client, int& buttons, int& impulse, float vel[3
 
 				if(!(flags & FL_ONGROUND))
 				{
-					if(GetAttribute(client, "agility powerup", 0.0) == 2.0){
+					if(TF2Attrib_HookValueFloat(0.0, "agility_powerup", client) == 2.0){
 						quakerTime[client]+=TICKINTERVAL;
 						if(quakerTime[client] >= 0.4){
 							Address weighDownAbility = TF2Attrib_GetByName(client, "noise maker");
@@ -2303,7 +2303,7 @@ public Action OnPlayerRunCmd(int client, int& buttons, int& impulse, float vel[3
 				if(buttons & IN_DUCK && buttons & IN_ATTACK3 && fl_GlobalCoolDown[client] <= GetGameTime())
 				{
 					fl_GlobalCoolDown[client] = GetGameTime()+0.4;
-					if(GetAttribute(client, "revenge powerup", 0.0) == 1 && RageActive[client] == false && RageBuildup[client] >= 1.0)
+					if(TF2Attrib_HookValueFloat(0.0, "revenge_powerup", client) == 1 && RageActive[client] == false && RageBuildup[client] >= 1.0)
 					{
 						RageActive[client] = true;
 						EmitSoundToAll(SOUND_REVENGE, client, -1, 150, 0, 1.0);
@@ -2315,7 +2315,7 @@ public Action OnPlayerRunCmd(int client, int& buttons, int& impulse, float vel[3
 						TF2_AddCondition(client, TFCond_UberchargedHidden, 1.0);
 						TF2_AddCondition(client, TFCond_KingAura, 1.0);
 					}
-					if(GetAttribute(client, "revenge powerup", 0.0) == 3 && enragedKills[client] >= 80){
+					if(TF2Attrib_HookValueFloat(0.0, "revenge_powerup", client) == 3 && enragedKills[client] >= 80){
 						EmitSoundToAll(SOUND_REVENGE, client, -1, 150, 0, 1.0);
 						EmitSoundToAll(SOUND_REVENGE, client, -1, 150, 0, 1.0);
 						enragedKills[client] = 0;
@@ -2329,7 +2329,7 @@ public Action OnPlayerRunCmd(int client, int& buttons, int& impulse, float vel[3
 						insertBuff(client, enraged);
 					}
 					if(duplicationCooldown[client] <= GetGameTime()){
-						if(GetAttribute(client, "regeneration powerup", 0.0) == 2.0){
+						if(TF2Attrib_HookValueFloat(0.0, "regeneration_powerup", client) == 2.0){
 							duplicationCooldown[client] = GetGameTime()+10.0;
 							AddPlayerHealth(client, GetClientHealth(client), 2.0);
 							float fOrigin[3];
@@ -2337,7 +2337,7 @@ public Action OnPlayerRunCmd(int client, int& buttons, int& impulse, float vel[3
 							EmitSoundToAll(SOUND_HEAL, client, _, _, _, _, _, _, fOrigin);
 						}
 					}
-					if(GetAttribute(client, "king powerup", 0.0) == 2.0){
+					if(TF2Attrib_HookValueFloat(0.0, "king_powerup", client) == 2.0){
 						for(int i=1;i<=MaxClients;++i)
 						{
 							if(!IsValidClient3(i) || i == client)
@@ -2360,11 +2360,11 @@ public Action OnPlayerRunCmd(int client, int& buttons, int& impulse, float vel[3
 						}
 					}
 					if(warpCooldown[client] <= GetGameTime()){
-						if(GetAttribute(client, "agility powerup", 0.0) == 3.0){
+						if(TF2Attrib_HookValueFloat(0.0, "agility_powerup", client) == 3.0){
 							CastWarp(client);
 						}
 					}
-					if(GetAttribute(client, "resistance powerup", 0.0) == 3.0){
+					if(TF2Attrib_HookValueFloat(0.0, "resistance_powerup", client) == 3.0){
 						strongholdEnabled[client] = !strongholdEnabled[client];
 
 						if(strongholdEnabled[client]){

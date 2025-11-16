@@ -207,7 +207,7 @@
 		{
 			"0"		"move speed(SO)"
 			"1"		"jump height"
-			"2"	"increased air control"
+			"2"		"increased air control"
 			"3"		"knockback resistance"
 			"4"		"cancel falling damage"	
 			"5"		"Weighdown Ability"
