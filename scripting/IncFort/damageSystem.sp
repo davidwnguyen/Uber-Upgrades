@@ -1521,7 +1521,7 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 
 		if(LightningEnchantmentDuration[attacker] > GetGameTime() && !(damagetype & DMG_VEHICLE)){
 			currentDamageType[attacker].second |= DMG_IGNOREHOOK;
-			SDKHooks_TakeDamage(victim,attacker,attacker,LightningEnchantment[attacker] / TF2_GetFireRate(attacker,weapon,0.6) * 20.0,_,_,_,_,false);
+			SDKHooks_TakeDamage(victim,attacker,attacker,LightningEnchantment[attacker] / TF2_GetFireRate(attacker,weapon,0.8),_,_,_,_,false);
 		}
 		else if(DarkmoonBladeDuration[attacker] > GetGameTime()){
 			int melee = GetWeapon(attacker,2);

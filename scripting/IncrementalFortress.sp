@@ -81,13 +81,13 @@
 #define SOUND_SLASHHIT2 "weapons/samurai/tf_katana_slice_02.wav"
 #define SOUND_SLASHHIT3 "weapons/samurai/tf_katana_slice_03.wav"
 
-#define PLUGIN_VERSION "INDEV-1.0"
+#define PLUGIN_VERSION "1.0"
 
 // Plugin Info
 public Plugin:myinfo =
 {
 	name = "Incremental Upgrades",
-	author = "Telia (post-2.0) & Razor (pre-2.0)",
+	author = "",
 	description = "Incremental game styled MvM upgrades on any gamemode.",
 	version = PLUGIN_VERSION,
 	url = "https://github.com/rustedBlood/Incremental-Fortress",

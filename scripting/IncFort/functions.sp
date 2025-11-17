@@ -485,7 +485,7 @@ public void ManagePlayerBuffs(int i){
 		return;
 
 	if(LightningEnchantmentDuration[i] > GetGameTime()){
-		Format(details, sizeof(details), "%s\nLightning Enchantment | %.2fs | +%s DPS", details, LightningEnchantmentDuration[i] - GetGameTime(),  GetAlphabetForm(LightningEnchantment[i]*20.0));
+		Format(details, sizeof(details), "%s\nLightning Enchantment | %.2fs | +%s DPS", details, LightningEnchantmentDuration[i] - GetGameTime(),  GetAlphabetForm(LightningEnchantment[i]));
 	}
 	if(DarkmoonBladeDuration[i] > GetGameTime()){
 		Format(details, sizeof(details), "%s\nDarkmoon Blade | %.2fs | +%s Melee Damage", details, DarkmoonBladeDuration[i] - GetGameTime(), GetAlphabetForm(DarkmoonBlade[i]));
@@ -858,7 +858,7 @@ void GiveNewUpgradedWeapon_(int client, int slot)
 		bpsMult *= GetAttribute(iEnt, "bullets per shot mult", 1.0);
 		bpsMult *= GetAttribute(iEnt, "bullets per shot mult 2", 1.0);
 		if(bpsMult != 1.0)
-			TF2Attrib_SetByName(iEnt, "bullets per shot bonus", bpsMult);
+			TF2Attrib_SetByName(iEnt, "bullets per shot bonus", bpsMult+0.01); // floating point number shenanigans :P
 		else
 			TF2Attrib_RemoveByName(iEnt, "bullets per shot bonus");
 

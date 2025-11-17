@@ -331,7 +331,7 @@ CastLightningEnchantment(client, attuneSlot)
 	if(applyArcaneRestrictions(client, attuneSlot, 150.0 + (40.0 * TF2Attrib_HookValueFloat(1.0, "arcane_damage", client)), 30.0))
 		return;
 		
-	LightningEnchantment[client] = 10.0 + ArcaneDamage[client] * 4.0;
+	LightningEnchantment[client] = ArcaneDamage[client] * 80.0;
 	LightningEnchantmentLevel[client] = spellLevel;
 	LightningEnchantmentDuration[client] = GetGameTime() + 20.0*ArcanePower[client];	
 }
@@ -341,7 +341,7 @@ CastDarkmoonBlade(client, attuneSlot)
 	if(applyArcaneRestrictions(client, attuneSlot, 100.0 + (20.0 * TF2Attrib_HookValueFloat(1.0, "arcane_damage", client)), 25.0))
 		return; 
 	
-	DarkmoonBlade[client] = 10.0 + ArcaneDamage[client] * 4.5;
+	DarkmoonBlade[client] = ArcaneDamage[client] * 10.0;
 	DarkmoonBladeLevel[client] = spellLevel;
 	DarkmoonBladeDuration[client] = GetGameTime() + 20.0*ArcanePower[client];
 }
@@ -447,7 +447,7 @@ FinishKarmicJustice(client){
 KarmicJusticeExplosion(client){
 	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
-	float damageDealt = 500.0 + ArcaneDamage[client] * karmicJusticeScaling[client];
+	float damageDealt = ArcaneDamage[client] * karmicJusticeScaling[client];
 	
 	float explosionRadius[] = {0.0, 500.0, 1000.0, 1250.0};
 	float pos[3];
@@ -486,7 +486,7 @@ FinishCastInfernalEnchantment(int client, int spellLevel)
 {
 	client = EntRefToEntIndex(client)
 	if(IsValidClient3(client) && IsPlayerAlive(client)){
-		InfernalEnchantment[client] = 300.0 + 100 * ArcaneDamage[client];
+		InfernalEnchantment[client] = 80.0 * ArcaneDamage[client];
 		InfernalEnchantmentLevel[client] = spellLevel;
 		InfernalEnchantmentDuration[client] = GetGameTime() + 30.0*ArcanePower[client];
 		CreateParticle(client, "utaunt_auroraglow_orange_parent", true, "", 30.0*ArcanePower[client],_,_,1);
@@ -581,7 +581,7 @@ CastSnapFreeze(client, attuneSlot)
 	float clientpos[3];
 	GetClientEyePosition(client, clientpos);
 	EmitSoundToAll(SOUND_FREEZE, 0, client, SNDLEVEL_RAIDSIREN, _, 1.0, _,_,clientpos);
-	float damage = 100.0 + ArcaneDamage[client] * 60.0;
+	float damage = ArcaneDamage[client] * 100.0;
 	int i = -1;
 	while ((i = FindEntityByClassname(i, "*")) != -1)
 	{
@@ -619,7 +619,7 @@ CastArcanePrison(client, attuneSlot)
 {
 	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
-	if(applyArcaneRestrictions(client, attuneSlot, 50.0 + (35.0 * TF2Attrib_HookValueFloat(1.0, "arcane_damage", client)), 20.0))
+	if(applyArcaneRestrictions(client, attuneSlot, 50.0 + (35.0 * TF2Attrib_HookValueFloat(1.0, "arcane_damage", client)), 75.0))
 		return; 
 
 	float ClientPos[3];
@@ -635,7 +635,7 @@ CastArcanePrison(client, attuneSlot)
 	float vBuffer[3]
 
 	int magnitude[] = {0,1,2,2};
-	float damage = 20.0 + ArcaneDamage[client] * 7.5;
+	float damage = ArcaneDamage[client] * 10.0;
 	if(spellLevel < 3){
 		if(LookPoint(client,fOrigin))
 		{
@@ -744,7 +744,7 @@ CastAerialStrike(client, attuneSlot)
 	float ClientPos[3];
 	TracePlayerAim(client, ClientPos);
 	int iTeam = GetClientTeam(client)
-	float ProjectileDamage = 90.0 + ArcaneDamage[client] * 25.0;
+	float ProjectileDamage = ArcaneDamage[client] * 60.0;
 	Handle hPack = CreateDataPack();
 	WritePackCell(hPack, GetClientSerial(client));
 	WritePackCell(hPack, iTeam);
@@ -867,9 +867,8 @@ CastInferno(client, attuneSlot)
 	CreateParticle(-1, "cinefx_goldrush_flames", _, _, _, flamePos);
 	
 	
-	float DMGDealt = 20.0 + ArcaneDamage[client] * 12.5;
+	float DMGDealt = ArcaneDamage[client] * 15.0;
 	float range[] = {0.0,800.0,1200.0,1600.0}
-	float hitRate[] = {0.0,0.15,0.08,0.03}
 	int maxHits[] = {0,20,30,40}
 	int i = -1;
 	while ((i = FindEntityByClassname(i, "*")) != -1)
@@ -884,9 +883,9 @@ CastInferno(client, attuneSlot)
 		if(GetVectorDistance(ClientPos,VictimPos,true) > range[spellLevel]*range[spellLevel])
 			continue;
 
-		CreateParticleEx(i, "dragons_fury_effect_parent", 1, _, _, hitRate[spellLevel]*maxHits[spellLevel]);
+		CreateParticleEx(i, "dragons_fury_effect_parent", 1, _, _, 0.15*maxHits[spellLevel]);
 		CreateParticleEx(i, "utaunt_glowyplayer_orange_glow", 1);
-		DOTStock(i,client,DMGDealt,-1,DMG_BURN,maxHits[spellLevel],1.0,hitRate[spellLevel],true);
+		DOTStock(i,client,DMGDealt,-1,DMG_BURN,maxHits[spellLevel],1.0,0.15,true);
 	}
 }
 
@@ -904,7 +903,7 @@ CastMineField(client, attuneSlot)
 	float spellRadius[] = {0.0,300.0,500.0,900.0}
 	float spread[] = {0.0,300.0,200.0,100.0}
 	float radius = spellRadius[spellLevel]*ArcanePower[client];
-	float damage = 90.0 + ArcaneDamage[client] * 6.5;
+	float damage = ArcaneDamage[client] * 10.0;
 	for(int i = 0;i<quantity[spellLevel];++i)
 	{
 		int iEntity = CreateEntityByName("tf_projectile_pipe_remote");
@@ -1018,14 +1017,14 @@ CastShockwave(client, attuneSlot)
 {
 	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
-	if(applyArcaneRestrictions(client, attuneSlot, 50.0 + (30.0 * TF2Attrib_HookValueFloat(1.0, "arcane_damage", client)), 20.0))
+	if(applyArcaneRestrictions(client, attuneSlot, 50.0, 20.0))
 		return; 
 
 	float ClientPos[3];
 	GetClientEyePosition(client,ClientPos);
 	ClientPos[2] -= 20.0;
 		
-	float damageDealt = 100.0 + ArcaneDamage[client] * 60.0;
+	float damageDealt = ArcaneDamage[client] * 100.0;
 	int i = -1;
 	while ((i = FindEntityByClassname(i, "*")) != -1)
 	{
@@ -1175,7 +1174,7 @@ CastArcaneHunter(client, attuneSlot)
 {
 	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
-	if(applyArcaneRestrictions(client, attuneSlot, 200.0 + (70.0 * TF2Attrib_HookValueFloat(1.0, "arcane_damage", client)), 40.0))
+	if(applyArcaneRestrictions(client, attuneSlot, 200.0, 40.0))
 		return; 
 
 	float CPOS[3];
@@ -1271,7 +1270,7 @@ public Action:ArcaneHunter(Handle timer, client)
 		CreateTimer(0.5, Timer_KillParticle, EntIndexToEntRef(iPart2));
 	}
 
-	float LightningDamage = 200.0 + ArcaneDamage[client] * 80.0;
+	float LightningDamage = ArcaneDamage[client] * 100.0;
 	int i = -1;
 	while ((i = FindEntityByClassname(i, "*")) != -1)
 	{
@@ -1298,7 +1297,7 @@ CastBlackskyEye(client, attuneSlot)
 {
 	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
-	if(applyArcaneRestrictions(client, attuneSlot, 8.0 + (3.0 * TF2Attrib_HookValueFloat(1.0, "arcane_damage", client)), 0.25))
+	if(applyArcaneRestrictions(client, attuneSlot, 8.0, 0.25))
 		return; 
 
 	float clientpos[3];
@@ -1372,7 +1371,7 @@ CastBlackskyEye(client, attuneSlot)
 }
 CastACallBeyond(client, attuneSlot)
 {
-	if(applyArcaneRestrictions(client, attuneSlot, 50.0 + (70.0 * TF2Attrib_HookValueFloat(1.0, "arcane_damage", client)), 50.0))
+	if(applyArcaneRestrictions(client, attuneSlot, 50.0, 50.0))
 		return; 
 
 
@@ -1457,18 +1456,18 @@ CastZap(client, attuneSlot)
 {
 	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
-	float focusCost = (3.0 + (0.5 * TF2Attrib_HookValueFloat(1.0, "arcane_damage", client)))/ArcanePower[client]
+	float focusCost = 3.0/ArcanePower[client]
 	if(fl_CurrentFocus[client] < focusCost)
 	{
 		PrintHintText(client, "Not enough focus! Requires %.2f focus.",focusCost);
 		EmitSoundToClient(client, SOUND_FAIL);
 		return;
 	}
-	if(SpellCooldowns[client][attuneSlot] > 0.0)
+	if(SpellCooldowns[client][attuneSlot] > GetGameTime())
 		return;
 
 	//zap yeah?
-	int closestClient[MAXENTITIES];
+	int closestClient[MAXPLAYERS]; // Lets assume zap never targets more than max players.. hopefully.
 	float clientpos[3];
 	GetClientEyePosition(client,clientpos);
 	clientpos[2] -= 15.0;
@@ -1482,6 +1481,8 @@ CastZap(client, attuneSlot)
 		if(!IsValidForDamage(i))
 			continue;
 		if(!IsOnDifferentTeams(client,i))
+			continue;
+		if(validCount == maximumTargets[spellLevel])
 			continue;
 
 		float VictimPos[3];
@@ -1499,17 +1500,13 @@ CastZap(client, attuneSlot)
 			}
 		}
 	}
-	validCount = 0;
-	for(int it = MAXENTITIES-1;it>=0 && validCount < maximumTargets[spellLevel];it--)
-	{
-		if(closestClient[it] != 0){
-			validCount++;
-			DoZap(client,closestClient[it], spellLevel);
-		}
-	}
+
 	if(validCount > 0)
 	{
 		applyArcaneRestrictions(client, attuneSlot, focusCost, 0.1);
+		for (int victim = 0;victim < validCount;victim++){
+			DoZap(client,closestClient[victim], spellLevel);
+		}
 	}
 	else
 	{
@@ -1528,7 +1525,7 @@ DoZap(client,victim,spellLevel)
 	GetEntPropVector(victim, Prop_Data, "m_vecOrigin", VictimPosition);
 	VictimPosition[2] += 15.0;
 	
-	float range[] = {0.0,600.0,1500.0,1500.0};
+	float range[] = {0.0,600.0,800.0,1000.0};
 	
 	TE_SetupBeamRingPoint(clientpos, 20.0, range[spellLevel]*1.25, g_LightningSprite, spriteIndex, 0, 5, 0.5, 10.0, 1.0, {255,0,255,133}, 140, 0);
 	TE_SendToAll();
@@ -1536,19 +1533,17 @@ DoZap(client,victim,spellLevel)
 	TE_SendToAll();
 	EmitSoundToAll(SOUND_ZAP, 0, _, SNDLEVEL_CONVO, _, 1.0, _,_,clientpos);
 	
-	float LightningDamage = 20.0 + ArcaneDamage[client] * 3.0;
-	float radiationAmount[] = {0.0,6.0,10.0,25.0};
-	SDKHooks_TakeDamage(victim,client,client, radiationAmount[spellLevel], (DMG_RADIATION|DMG_DISSOLVE), _, _, _, false);
+	float LightningDamage = 20.0 * ArcaneDamage[client];
 	currentDamageType[client].second |= DMG_IGNOREHOOK;
 	SDKHooks_TakeDamage(victim,client,client, LightningDamage, 1073741824, -1, NULL_VECTOR, NULL_VECTOR, false);
-	float chance[] = {0.0,0.3,0.6,0.9};
+	float chance[] = {0.0,0.3,0.4,0.5};
 		
 	if(chance[spellLevel] >= GetRandomFloat(0.0, 1.0))
 	{
 		Handle hPack = CreateDataPack();
 		WritePackCell(hPack, EntIndexToEntRef(client));
 		WritePackCell(hPack, EntIndexToEntRef(victim));
-		WritePackCell(hPack, EntIndexToEntRef(spellLevel));
+		WritePackCell(hPack, spellLevel);
 		CreateTimer(0.1,zapAgain,hPack);
 	}
 }
@@ -1557,7 +1552,7 @@ public Action:zapAgain(Handle timer,any:data)
 	ResetPack(data);
 	int client = EntRefToEntIndex(ReadPackCell(data));
 	int victim = EntRefToEntIndex(ReadPackCell(data));
-	int spellLevel = EntRefToEntIndex(ReadPackCell(data));
+	int spellLevel = ReadPackCell(data);
 	DoZap(client,victim,spellLevel);
 	CloseHandle(data);
 }
@@ -1565,7 +1560,7 @@ CastLightning(client, attuneSlot)
 {
 	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
-	if(applyArcaneRestrictions(client, attuneSlot, 50.0 + (30.0 * TF2Attrib_HookValueFloat(1.0, "arcane_damage", client)), 11.0))
+	if(applyArcaneRestrictions(client, attuneSlot, 50.0, 11.0))
 		return; 
 
 	float clientpos[3];
@@ -1615,7 +1610,7 @@ CastLightning(client, attuneSlot)
 		TE_SendToAll();
 		
 		int i = -1;
-		float LightningDamage = 200.0 + ArcaneDamage[client] * 80.0;
+		float LightningDamage = 200.0 * ArcaneDamage[client];
 		while ((i = FindEntityByClassname(i, "*")) != -1)
 		{
 			if(!IsValidForDamage(i)) 

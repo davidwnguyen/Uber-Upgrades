@@ -115,8 +115,8 @@ public Action:OnSplittingThunderCollision(entity, client)
 	float origin[3];
 	GetEntPropVector(entity, Prop_Data, "m_vecOrigin", origin);
 
-	float scaling[] = {0.0, 300.0, 400.0, 600.0};
-	float ProjectileDamage = 5000.0 + scaling[spellLevel] * ArcaneDamage[owner];
+	float scaling[] = {0.0, 200.0, 250.0, 300.0};
+	float ProjectileDamage = scaling[spellLevel] * ArcaneDamage[owner];
 	EntityExplosion(owner, ProjectileDamage, 300.0, origin, _, _, entity);
 	RemoveEntity(entity);
 
@@ -142,8 +142,8 @@ public Action:OnSunlightSpearCollision(entity, client)
 			{
 				int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", owner)) + 1;
 
-				float scaling[] = {0.0, 35.0, 70.0, 140.0};
-				float ProjectileDamage = 140.0 + scaling[spellLevel]*ArcaneDamage[owner];
+				float scaling[] = {0.0, 100.0, 125.0, 160.0};
+				float ProjectileDamage = scaling[spellLevel]*ArcaneDamage[owner];
 				currentDamageType[owner].second |= DMG_IGNOREHOOK;
 				SDKHooks_TakeDamage(client, owner, owner, ProjectileDamage, DMG_SHOCK,_,_,_,false);
 				CreateParticleEx(client, "dragons_fury_effect_parent", 1);
@@ -194,8 +194,8 @@ public Action:BlackskyEyeCollision(entity, client)
 
 	float projvec[3];
 	float radius[] = {0.0, 300.0,500.0,800.0};
-	float scaling[] = {0.0, 7.5, 8.5, 12.0};
-	float ProjectileDamage = 10.0 + scaling[spellLevel]*ArcaneDamage[owner];
+	float scaling[] = {0.0, 10.0, 12.5, 15.0};
+	float ProjectileDamage = scaling[spellLevel]*ArcaneDamage[owner];
 	if(HasEntProp(entity, Prop_Data, "m_vecOrigin"))
 	{
 		GetEntPropVector(entity, Prop_Data, "m_vecOrigin", projvec);
@@ -234,8 +234,8 @@ public Action:CallBeyondCollision(entity, client)
 		
 	float projvec[3];
 	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", owner)) + 1;
-	float scaling[] = {0.0, 250.0, 400.0, 650.0};
-	float ProjectileDamage = 90.0 + scaling[spellLevel]*ArcaneDamage[owner];
+	float scaling[] = {0.0, 90.0, 125.0, 200.0};
+	float ProjectileDamage = scaling[spellLevel]*ArcaneDamage[owner];
 	if(HasEntProp(entity, Prop_Data, "m_vecOrigin"))
 	{
 		GetEntPropVector(entity, Prop_Data, "m_vecOrigin", projvec);

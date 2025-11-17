@@ -46,7 +46,7 @@ public Action:Timer_Second(Handle timer)
 			}
 
 			ArcanePower[client] = TF2Attrib_HookValueFloat(1.0, "arcane_power", client);
-			ArcaneDamage[client] = TF2Attrib_HookValueFloat(1.0, "arcane_damage", client) * GetAttribute(client, "damage mult 4", 1.0) * ArcanePower[client]*ArcanePower[client];
+			ArcaneDamage[client] = TF2Attrib_HookValueFloat(1.0, "arcane_damage", client) * GetAttribute(client, "damage mult 12", 1.0) * GetAttribute(client, "damage mult 4", 1.0) * ArcanePower[client];
 			fl_MaxFocus[client] = (100.0+TF2Attrib_HookValueInt(0, "arcane_focus_max", client)) * ArcanePower[client]*ArcanePower[client];
 			fl_RegenFocus[client] = fl_MaxFocus[client] * TICKINTERVAL * 0.05 * TF2Attrib_HookValueFloat(1.0, "arcane_focus_regeneration", client) * ArcanePower[client]*ArcanePower[client];
 
@@ -128,7 +128,7 @@ public Action:Timer_FixedVariables(Handle timer)
 				int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 				float ratio = fl_CurrentFocus[client]/fl_MaxFocus[client];
 				if(ratio >= 0.005){
-					float damageDealt = (25.0 + ArcaneDamage[client] * 90.0) * 0.1;
+					float damageDealt = ArcaneDamage[client] * 9.0;
 					float explosionRadius[] = {0.0, 300.0, 600.0, 1500.0};
 					float pos[3];
 					GetEntPropVector(client, Prop_Data, "m_vecOrigin", pos);
@@ -1927,8 +1927,8 @@ public Action Timer_SplittingThunderThink(Handle timer, int entityRef){
 	TE_SetupSmoke(endpos, g_SmokeSprite, 5.0, 10);
 	TE_SendToAll();
 	
-	float scaling[] = {0.0, 100.0, 200.0, 300.0};
-	float ProjectileDamage = 2000.0 + (ArcaneDamage[owner] * scaling[spellLevel]);
+	float scaling[] = {0.0, 135.0, 165.0, 225.0};
+	float ProjectileDamage = ArcaneDamage[owner] * scaling[spellLevel];
 
 	EntityExplosion(owner, ProjectileDamage, 300.0, endpos, -1, false, entity);
 	EmitSoundToAll(SOUND_THUNDER, entity, _, SNDLEVEL_RAIDSIREN, _, 1.0, _,_,endpos);
