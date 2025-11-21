@@ -76,7 +76,7 @@
 			"ref"		"Arcane Spell Level"
 			"attr_class"	"arcane_spell_level"
 			"display"		"%.0f"
-			"cost"		"20000"
+			"cost"		"25000"
 			"increase_ratio"	"4.0"
 			"value"		"1"
 			"init"		"0"
