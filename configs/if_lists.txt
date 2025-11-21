@@ -41,7 +41,6 @@
 				"0"		"damage bonus"
 				"1"		"ap (global)"
 				"2"		"Arcane Power"
-				"3"		"Max Focus"
 				"4"		"Focus Regeneration"
 				"5"		"Arcane Spell Level"
 			}
@@ -136,7 +135,6 @@
 				"0"		"damage bonus"
 				"1"		"ap (global)"
 				"2"		"Arcane Power"
-				"3"		"Max Focus"
 				"4"		"Focus Regeneration"
 				"5"		"Arcane Spell Level"
 			}
@@ -231,7 +229,6 @@
 				"0"		"damage bonus"
 				"1"		"ap (global)"
 				"2"		"Arcane Power"
-				"3"		"Max Focus"
 				"4"		"Focus Regeneration"
 				"5"		"Arcane Spell Level"
 			}
@@ -326,7 +323,6 @@
 				"0"		"damage bonus"
 				"1"		"ap (global)"
 				"2"		"Arcane Power"
-				"3"		"Max Focus"
 				"4"		"Focus Regeneration"
 				"5"		"Arcane Spell Level"
 			}
@@ -421,7 +417,6 @@
 				"0"		"damage bonus"
 				"1"		"ap (global)"
 				"2"		"Arcane Power"
-				"3"		"Max Focus"
 				"4"		"Focus Regeneration"
 				"5"		"Arcane Spell Level"
 			}
@@ -517,7 +512,6 @@
 				"0"		"damage bonus"
 				"1"		"ap (global)"
 				"2"		"Arcane Power"
-				"3"		"Max Focus"
 				"4"		"Focus Regeneration"
 				"5"		"Arcane Spell Level"
 			}
@@ -612,7 +606,6 @@
 				"0"		"damage bonus"
 				"1"		"ap (global)"
 				"2"		"Arcane Power"
-				"3"		"Max Focus"
 				"4"		"Focus Regeneration"
 				"5"		"Arcane Spell Level"
 			}
@@ -710,7 +703,6 @@
 				"0"		"damage bonus"
 				"1"		"ap (global)"
 				"2"		"Arcane Power"
-				"3"		"Max Focus"
 				"4"		"Focus Regeneration"
 				"5"		"Arcane Spell Level"
 			}
@@ -809,7 +801,6 @@
 				"0"		"damage bonus"
 				"1"		"ap (global)"
 				"2"		"Arcane Power"
-				"3"		"Max Focus"
 				"4"		"Focus Regeneration"
 				"5"		"Arcane Spell Level"
 			}

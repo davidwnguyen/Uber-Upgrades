@@ -2647,7 +2647,7 @@ setNoMetal(int client){
 public bool applyArcaneRestrictions(int client, int attuneSlot, float focusCost, float cooldown)
 {
 	focusCost /= ArcanePower[client];
-	cooldown *= TF2Attrib_HookValueFloat(1.0, "arcane_cooldown_rate", client)/ArcanePower[client];
+	cooldown *= TF2Attrib_HookValueFloat(1.0, "arcane_cooldown_rate", client)/SquareRoot(ArcanePower[client]);
 
 	if(fl_CurrentFocus[client] < focusCost)
 	{

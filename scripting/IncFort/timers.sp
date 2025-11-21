@@ -46,9 +46,9 @@ public Action:Timer_Second(Handle timer)
 			}
 
 			ArcanePower[client] = TF2Attrib_HookValueFloat(1.0, "arcane_power", client);
-			ArcaneDamage[client] = TF2Attrib_HookValueFloat(1.0, "arcane_damage", client) * GetAttribute(client, "damage mult 12", 1.0) * GetAttribute(client, "damage mult 4", 1.0) * ArcanePower[client];
-			fl_MaxFocus[client] = (100.0+TF2Attrib_HookValueInt(0, "arcane_focus_max", client)) * ArcanePower[client]*ArcanePower[client];
-			fl_RegenFocus[client] = fl_MaxFocus[client] * TICKINTERVAL * 0.05 * TF2Attrib_HookValueFloat(1.0, "arcane_focus_regeneration", client) * ArcanePower[client]*ArcanePower[client];
+			ArcaneDamage[client] = TF2Attrib_HookValueFloat(1.0, "arcane_damage", client) * GetAttribute(client, "damage mult 12", 1.0) * GetAttribute(client, "damage mult 4", 1.0) * ArcanePower[client] * ArcanePower[client] * ArcanePower[client];
+			fl_MaxFocus[client] = (100.0+TF2Attrib_HookValueInt(0, "arcane_focus_max", client)) * ArcanePower[client];
+			fl_RegenFocus[client] = fl_MaxFocus[client] * TICKINTERVAL * 0.05 * TF2Attrib_HookValueFloat(1.0, "arcane_focus_regeneration", client);
 
 			bool isOnFire = false;
 			float damageAccumulation[MAXPLAYERS];

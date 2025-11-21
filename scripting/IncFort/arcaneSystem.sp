@@ -266,7 +266,7 @@ CastSunlightSpear(client, attuneSlot)
 {
 	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
-	if(applyArcaneRestrictions(client, attuneSlot, 30.0 + (20.0 * TF2Attrib_HookValueFloat(1.0, "arcane_damage", client)), 0.4))
+	if(applyArcaneRestrictions(client, attuneSlot, 30.0 + (20.0 * TF2Attrib_HookValueFloat(1.0, "arcane_damage", client)), 0.5))
 		return; 
 
 	float clientpos[3];
@@ -341,7 +341,7 @@ CastDarkmoonBlade(client, attuneSlot)
 	if(applyArcaneRestrictions(client, attuneSlot, 100.0 + (20.0 * TF2Attrib_HookValueFloat(1.0, "arcane_damage", client)), 25.0))
 		return; 
 	
-	DarkmoonBlade[client] = ArcaneDamage[client] * 10.0;
+	DarkmoonBlade[client] = ArcaneDamage[client] * 15.0;
 	DarkmoonBladeLevel[client] = spellLevel;
 	DarkmoonBladeDuration[client] = GetGameTime() + 20.0*ArcanePower[client];
 }
@@ -506,7 +506,7 @@ CastSplittingThunder(client, attuneSlot)
 	GetClientAbsOrigin(client, clientpos);
 	EmitSoundToAll(SOUND_ARCANESHOOTREADY, 0, client, SNDLEVEL_RAIDSIREN, _, 1.0, _,_,clientpos);
 	int args[2];args[0] = EntIndexToEntRef(client);args[1] = spellLevel;
-	SetPawnTimer(FinishCastSplittingThunder, 5.0, args, 2);
+	SetPawnTimer(FinishCastSplittingThunder, 3.0, args, 2);
 	CreateParticleEx(client, "utaunt_electricity_discharge");
 	CreateParticleEx(client, "utaunt_electricity_purple_discharge");
 }
@@ -575,7 +575,7 @@ CastSnapFreeze(client, attuneSlot)
 {
 	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
-	if(applyArcaneRestrictions(client, attuneSlot, 50.0 + (20.0 * TF2Attrib_HookValueFloat(1.0, "arcane_damage", client)), 9.0))
+	if(applyArcaneRestrictions(client, attuneSlot, 50.0 + (20.0 * TF2Attrib_HookValueFloat(1.0, "arcane_damage", client)), 18.0))
 		return; 
 
 	float clientpos[3];
@@ -1297,7 +1297,7 @@ CastBlackskyEye(client, attuneSlot)
 {
 	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
-	if(applyArcaneRestrictions(client, attuneSlot, 8.0, 0.25))
+	if(applyArcaneRestrictions(client, attuneSlot, 8.0, 0.5))
 		return; 
 
 	float clientpos[3];
@@ -1456,7 +1456,7 @@ CastZap(client, attuneSlot)
 {
 	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
-	float focusCost = 3.0/ArcanePower[client]
+	float focusCost = 5.0/ArcanePower[client];
 	if(fl_CurrentFocus[client] < focusCost)
 	{
 		PrintHintText(client, "Not enough focus! Requires %.2f focus.",focusCost);
@@ -1503,7 +1503,7 @@ CastZap(client, attuneSlot)
 
 	if(validCount > 0)
 	{
-		applyArcaneRestrictions(client, attuneSlot, focusCost, 0.1);
+		applyArcaneRestrictions(client, attuneSlot, focusCost*ArcanePower[client], 0.5);
 		for (int victim = 0;victim < validCount;victim++){
 			DoZap(client,closestClient[victim], spellLevel);
 		}
@@ -1533,7 +1533,7 @@ DoZap(client,victim,spellLevel)
 	TE_SendToAll();
 	EmitSoundToAll(SOUND_ZAP, 0, _, SNDLEVEL_CONVO, _, 1.0, _,_,clientpos);
 	
-	float LightningDamage = 20.0 * ArcaneDamage[client];
+	float LightningDamage = 35.0 * ArcaneDamage[client];
 	currentDamageType[client].second |= DMG_IGNOREHOOK;
 	SDKHooks_TakeDamage(victim,client,client, LightningDamage, 1073741824, -1, NULL_VECTOR, NULL_VECTOR, false);
 	float chance[] = {0.0,0.3,0.4,0.5};

@@ -744,7 +744,10 @@ public Action TF2_OnTakeDamage(int victim, int &attacker, int &inflictor, float 
 
 	if(currentDamageType[attacker].second & DMG_ARCANESCALING)
 	{
-		damage *= ArcaneDamage[attacker]
+		if (IsValidEntity(weapon) && TF2Util_IsEntityWeapon(weapon)) {
+			damage *= GetAttribute(weapon, "damage mult 15");
+		}
+		damage *= ArcaneDamage[attacker];
 		changed = Plugin_Changed;
 	}
 		
@@ -1533,8 +1536,9 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 		
 		float arcaneWeaponScaling = TF2Attrib_HookValueFloat(0.0, "arcane_weapon_scaling", weapon);
 		if(arcaneWeaponScaling != 0.0){
+			arcaneWeaponScaling *= GetAttribute(weapon, "damage mult 15");
 			currentDamageType[attacker].second |= DMG_IGNOREHOOK;
-			SDKHooks_TakeDamage(victim,attacker,attacker,10.0 + ArcaneDamage[attacker] * arcaneWeaponScaling,_,_,_,_,false);
+			SDKHooks_TakeDamage(victim,attacker,attacker,ArcaneDamage[attacker] * arcaneWeaponScaling,_,_,_,_,false);
 		}
 		
 		if(weaponFireRate[weapon] > 0.0){

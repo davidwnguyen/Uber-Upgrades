@@ -20,12 +20,13 @@
 		"weapon_class"	"tf_weapon_katana"
 		"weapon_menu"	"menuKatana"
 		"class"			"demo"
-		"description"	"Has innate 4.5 arcane scaling.\nTransient Moonlight fires a projectile that has a large vertical hitbox\nOn direct contact, it deals 25 arcane scaling multiplied\nby your additional attacks stat. 1.33x slower fire rate."
+		"description"	"Has innate 35 arcane scaling.\nTransient Moonlight fires a projectile that has a large vertical hitbox\nOn direct contact, it deals 150 arcane damage. 1.33x slower fire rate & converts fire rate into damage."
 		"cost"			"5000.0"
 		"provide on active"	"1"
-		"Arcane Weapon Scaling"	"4.5"
+		"Arcane Weapon Scaling"	"35"
 		"Ability : Transient Moonlight"	"134217728"
 		"weapon fire rate"	"1.33"
+		"Converts Firerate to Damage"	"1"
 	}
 	"Repeater Crossbow"
 	{

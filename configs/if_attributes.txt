@@ -40,7 +40,7 @@
 			"value"		"0.1"
 			"init"		"1"
 			"staged_max"		"5,7,8"
-			"description"	"Multiplies all arcane stats by ^2."
+			"description"	"Multiplies focus capacity.\nMultiplies arcane damage by ^3.\nDecreases cooldowns by ^1/2x.\nDecreases focus costs by x value."
 			"optimizer_style"	"5"
 			"max"		"3.0"
 		}
@@ -95,7 +95,7 @@
 			"increase_ratio"	"20"
 			"value"		"1"
 			"init"		"0"
-			"description"	"Zaps closest enemy for 20 base damage.\n30% chance to zap another time."
+			"description"	"Zaps closest enemy for 35 base damage.\n30% chance to zap another time.\n0.5s CD"
 			"max"		"1"
 		}
 		"1542.1"
@@ -108,7 +108,7 @@
 			"increase_ratio"	"20"
 			"value"		"2"
 			"init"		"0"
-			"description"	"Smites in an AOE at crosshair.\n200 base damage.\nApplies 2 seconds of heavy afterburn."
+			"description"	"Smites in an AOE at crosshair.\n200 base damage.\nApplies 2 seconds of heavy afterburn.\n11s CD"
 			"max"		"2"
 		}
 		"1542.2"
@@ -121,7 +121,7 @@
 			"increase_ratio"	"20"
 			"value"		"4"
 			"init"		"0"
-			"description"	"Heals for 20% max health in an AOE at collision."
+			"description"	"Heals for 20% max health in an AOE at collision.\n15s CD"
 			"max"		"4"
 		}
 		"1542.3"
@@ -134,7 +134,7 @@
 			"increase_ratio"	"20"
 			"value"		"8"
 			"init"		"0"
-			"description"	"Shoots 25 homing bolts that deal\n90 base damage on collision."
+			"description"	"Shoots 25 homing bolts that deal\n90 base damage on collision.\n50s CD"
 			"max"		"8"
 		}
 		"1542.4"
@@ -147,7 +147,7 @@
 			"increase_ratio"	"20"
 			"value"		"16"
 			"init"		"0"
-			"description"	"Shoots a homing bolt that deals\n10 base damage on collision."
+			"description"	"Shoots a homing bolt that deals\n15 base damage on collision.\n0.5s CD"
 			"max"		"16"
 		}
 		"1542.5"
@@ -160,7 +160,7 @@
 			"increase_ratio"	"20"
 			"value"		"32"
 			"init"		"0"
-			"description"	"Shoots a spear that deals 100 base damage."
+			"description"	"Shoots a spear that deals 100 base damage.\n0.5s CD"
 			"max"		"32"
 		}
 		"1542.6"
@@ -173,7 +173,7 @@
 			"increase_ratio"	"20"
 			"value"		"64"
 			"init"		"0"
-			"description"	"Adds +80 Base DPS to your current weapon."
+			"description"	"Adds +80 Base DPS to your current weapon.\n30s CD, 20s duration."
 			"max"		"64"
 		}
 		"1542.7"
@@ -186,7 +186,7 @@
 			"increase_ratio"	"20"
 			"value"		"128"
 			"init"		"0"
-			"description"	"Deals 100 base damage in an AOE around you.\nStuns targets for 0.4s and shortly massively increases dodge chance."
+			"description"	"Deals 100 base damage in an AOE around you.\nStuns targets for 0.4s and shortly massively increases dodge chance.\n18s CD."
 			"max"		"128"
 		}
 		"1542.8"
@@ -199,7 +199,7 @@
 			"increase_ratio"	"20"
 			"value"		"256"
 			"init"		"0"
-			"description"	"Traps enemies at crosshair and deals\n10 base damage per tick.\nSlowly increases radiation buildup."
+			"description"	"Traps enemies at crosshair and deals\n10 base damage per tick.\nSlowly increases radiation buildup.\n75s CD."
 			"max"		"256"
 		}
 		"1542.9"
@@ -212,7 +212,7 @@
 			"increase_ratio"	"20"
 			"value"		"512"
 			"init"		"0"
-			"description"	"Adds +10 base damage to your melee."
+			"description"	"Adds +15 base damage to your melee.\n25s CD, 20s duration."
 			"max"		"512"
 		}
 		//Arcane V2
@@ -226,7 +226,7 @@
 			"increase_ratio"	"20"
 			"value"		"1024"
 			"init"		"0"
-			"description"	"Gives agility rune and speed bonus for 8s\n& for everyone around you.\nIncreases dodge chance to 75% for 1.5s."
+			"description"	"Gives agility rune and speed bonus for 8s\n& for everyone around you.\nIncreases dodge chance to 75% for 1.5s.\n40s CD."
 			"max"		"1024"
 		}
 		"1542.9"
@@ -239,7 +239,7 @@
 			"increase_ratio"	"20"
 			"value"		"2048"
 			"init"		"0"
-			"description"	"Summons 30 rockets to fall at crosshair,\neach dealing 60 base damage."
+			"description"	"Summons 30 rockets to fall at crosshair,\neach dealing 60 base damage.\n50s CD."
 			"max"		"2048"
 		}
 		"1542.9"
@@ -252,7 +252,7 @@
 			"increase_ratio"	"20"
 			"value"		"4096"
 			"init"		"0"
-			"description"	"Applies a deadly DOT in an AOE around you.\nDeals 15 base damage\nper tick. Applies 20 ticks."
+			"description"	"Applies a deadly DOT in an AOE around you.\nDeals 15 base damage\nper tick. Applies 20 ticks.\n50s CD."
 			"max"		"4096"
 		}
 		"1542.9"
@@ -265,7 +265,7 @@
 			"increase_ratio"	"20"
 			"value"		"8192"
 			"init"		"0"
-			"description"	"Summons 20 automatically detonating grenades.\nEach deals 10 base damage.\nFor every second alive, the grenades gain +35% damage."
+			"description"	"Summons 20 automatically detonating grenades.\nEach deals 10 base damage.\nFor every second alive, the grenades gain +35% damage.\n50s CD."
 			"max"		"8192"
 		}
 		"1542.9"
@@ -278,7 +278,7 @@
 			"increase_ratio"	"20"
 			"value"		"16384"
 			"init"		"0"
-			"description"	"Deals 100 base damage in an AOE around you.\nStuns targets for 2.25s and pushes them away 900 HU."
+			"description"	"Deals 100 base damage in an AOE around you.\nStuns targets for 2.25s and pushes them away 900 HU.\n20s CD."
 			"max"		"16384"
 		}
 		"1542.9"
@@ -291,7 +291,7 @@
 			"increase_ratio"	"20"
 			"value"		"32768"
 			"init"		"0"
-			"description"	"Summons a sentry ontop of your head."
+			"description"	"Summons a sentry ontop of your head.\n80s CD, 10s duration."
 			"max"		"32768"
 		}
 		"1542.9"
@@ -304,7 +304,7 @@
 			"increase_ratio"	"20"
 			"value"		"65536"
 			"init"		"0"
-			"description"	"Heals in an AOE for 4x your health."
+			"description"	"Heals in an AOE for 4x your health.\n180s CD, -60s CD per level."
 			"max"		"65536"
 		}
 		"1542.9"
@@ -317,7 +317,7 @@
 			"increase_ratio"	"20"
 			"value"		"131072"
 			"init"		"0"
-			"description"	"Shoots 5 rays that deal 100 base damage.\nAutomatically homes in witihn 10 degrees and also splashes."
+			"description"	"Shoots 5 rays that deal 100 base damage.\nAutomatically homes in witihn 10 degrees and also splashes.\n40s CD."
 			"max"		"131072"
 		}
 		"1542.9"
@@ -330,7 +330,7 @@
 			"increase_ratio"	"20"
 			"value"		"262144"
 			"init"		"0"
-			"description"	"Applies the sapped effect to all enemies around crosshair.\n-50% speed and jump height, lasts 10 seconds."
+			"description"	"Applies the sapped effect to all enemies around crosshair.\n-50% speed and jump height, lasts 10 seconds.\n25s CD."
 			"max"		"262144"
 		}
 		"1543.1"
@@ -343,7 +343,7 @@
 			"increase_ratio"	"20"
 			"value"		"524288"
 			"init"		"0"
-			"description"	"Gives 30s of Infernal Enchantment, which:\nMakes all attacks apply DOT for 80 arcane base DPS."
+			"description"	"Gives 30s of Infernal Enchantment, which:\nMakes all attacks apply DOT for 80 arcane base DPS.\n120s CD."
 			"max"		"524288"
 		}
 		"1543.2"
@@ -356,7 +356,7 @@
 			"increase_ratio"	"20"
 			"value"		"1048576"
 			"init"		"0"
-			"description"	"Casts for 5s and shoots 5 angularly separated sunlight spears.\nEach creating lines of lightning, dealing 135 base damage and applying +150 radiation."
+			"description"	"Casts for 3s and shoots 5 angularly separated sunlight spears.\nEach creating lines of lightning, dealing 135 base damage and applying +150 radiation.\n50s CD."
 			"max"		"1048576"
 		}
 		"1543.3"
@@ -369,7 +369,7 @@
 			"increase_ratio"	"20"
 			"value"		"2097152"
 			"init"		"0"
-			"description"	"Casts for 3s and within a 800 HU cone, deal 400 base damage\nwith an additional +50% damage per debuff.\nClears debuffs post-damage."
+			"description"	"Casts for 3s and within a 800 HU cone, deal 400 base damage\nwith an additional +50% damage per debuff.\nClears debuffs post-damage.\n120s CD."
 			"max"		"2097152"
 		}
 		"1543.4"
@@ -382,7 +382,7 @@
 			"increase_ratio"	"20"
 			"value"		"4194304"
 			"init"		"0"
-			"description"	"For every 1% damage received during a 8s period:\n+8 base damage to spell. Automatically procs upon\nhitting 400 base damage."
+			"description"	"For every 1% damage received during a 8s period:\n+8 base damage to spell. Automatically procs upon\nhitting 400 base damage.\n15s CD."
 			"max"		"4194304"
 		}
 		"1543.5"

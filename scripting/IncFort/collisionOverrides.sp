@@ -194,7 +194,7 @@ public Action:BlackskyEyeCollision(entity, client)
 
 	float projvec[3];
 	float radius[] = {0.0, 300.0,500.0,800.0};
-	float scaling[] = {0.0, 10.0, 12.5, 15.0};
+	float scaling[] = {0.0, 15.0, 20.0, 25.0};
 	float ProjectileDamage = scaling[spellLevel]*ArcaneDamage[owner];
 	if(HasEntProp(entity, Prop_Data, "m_vecOrigin"))
 	{
@@ -559,11 +559,10 @@ public Action:OnCollisionMoonveil(entity, client)
 				int CWeapon = GetEntPropEnt(owner, Prop_Send, "m_hActiveWeapon");
 				if(IsValidEdict(CWeapon))
 				{
-					float mult = 1.0/TF2Attrib_HookValueFloat(1.0, "mult_postfiredelay", client);
 					currentDamageType[owner].second |= DMG_ARCANE;
 					currentDamageType[owner].second |= DMG_ARCANESCALING;
 					currentDamageType[owner].second |= DMG_IGNOREHOOK;
-					SDKHooks_TakeDamage(client,owner,owner,mult*40.0,DMG_GENERIC,CWeapon, _,_,false);
+					SDKHooks_TakeDamage(client,owner,owner,150.0,DMG_GENERIC,CWeapon, _,_,false);
 				}
 				RemoveEntity(entity);
 			}
