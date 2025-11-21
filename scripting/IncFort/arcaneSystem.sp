@@ -475,7 +475,7 @@ CastInfernalEnchantment(client, attuneSlot)
 {
 	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
-	if(applyArcaneRestrictions(client, attuneSlot, 400.0 + (120.0 * TF2Attrib_HookValueFloat(1.0, "arcane_damage", client)), 120.0))
+	if(applyArcaneRestrictions(client, attuneSlot, 400.0 + (120.0 * TF2Attrib_HookValueFloat(1.0, "arcane_damage", client)), 60.0))
 		return; 
 	
 	int args[2];args[0] = EntIndexToEntRef(client);args[1] = spellLevel;
@@ -826,7 +826,7 @@ CastInferno(client, attuneSlot)
 {
 	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
-	float cooldown[] = {0.0,50.0,40.0,30.0}
+	float cooldown[] = {0.0,20.0,15.0,10.0}
 	if(applyArcaneRestrictions(client, attuneSlot, 50.0 + (45.0 * TF2Attrib_HookValueFloat(1.0, "arcane_damage", client)), cooldown[spellLevel]))
 		return;
 

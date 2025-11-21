@@ -35,14 +35,13 @@
 			"ref"		"Arcane Power"
 			"attr_class"	"arcane_power"
 			"display"		"%.0f%%"
-			"cost"		"650"
-			"increase_ratio"	"0.4"
-			"value"		"0.1"
+			"cost"		"850"
+			"increase_ratio"	"0.2"
+			"value"		"0.15"
 			"init"		"1"
-			"staged_max"		"5,7,8"
-			"description"	"Multiplies focus capacity.\nMultiplies arcane damage by ^3.\nDecreases cooldowns by ^1/2x.\nDecreases focus costs by x value."
+			"description"	"Multiplies focus capacity.\nMultiplies arcane damage by ^3.\nDecreases cooldowns by ^1/2x.\nDecreases focus costs by x value.\nThis is your main arcane scaler! Please upgrade it."
 			"optimizer_style"	"5"
-			"max"		"3.0"
+			"max"		"5.5"
 		}
 		"1541.2"
 		{
@@ -252,7 +251,7 @@
 			"increase_ratio"	"20"
 			"value"		"4096"
 			"init"		"0"
-			"description"	"Applies a deadly DOT in an AOE around you.\nDeals 15 base damage\nper tick. Applies 20 ticks.\n50s CD."
+			"description"	"Applies a deadly DOT in an AOE around you.\nDeals 15 base damage\nper tick. Applies 20 ticks.\n20s CD."
 			"max"		"4096"
 		}
 		"1542.9"
@@ -343,7 +342,7 @@
 			"increase_ratio"	"20"
 			"value"		"524288"
 			"init"		"0"
-			"description"	"Gives 30s of Infernal Enchantment, which:\nMakes all attacks apply DOT for 80 arcane base DPS.\n120s CD."
+			"description"	"Gives 30s of Infernal Enchantment, which:\nMakes all attacks apply DOT for 80 arcane base DPS.\n60s CD."
 			"max"		"524288"
 		}
 		"1543.2"
