@@ -1759,7 +1759,7 @@ public Action:eurekaDelayed(Handle timer, int client)
 				
 				EmitSoundToAll(SOUND_THUNDER, 0, _, SNDLEVEL_RAIDSIREN, _, 1.0, _,_,clientpos);
 				
-				float LightningDamage = 500.0 * TF2_GetSentryDPSModifiers(client, melee);
+				float LightningDamage = 500.0 * TF2_GetSentryDPSModifiers(client);
 				
 				int i = -1;
 				while ((i = FindEntityByClassname(i, "*")) != -1)

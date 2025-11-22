@@ -814,7 +814,7 @@ public Menu_ShowStatsSlot(client, param2)
 					}
 				}
 				
-				SentryDPS *= TF2_GetSentryDPSModifiers(client, melee);
+				SentryDPS *= TF2_GetSentryDPSModifiers(client);
 				
 				Format(Description, sizeof(Description), "%s\nSentry DPS = %s/each", Description, GetAlphabetForm(SentryDPS));
 			}

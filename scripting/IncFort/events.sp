@@ -1165,12 +1165,11 @@ public OnEntityDestroyed(entity)
 			isPrimed[entity] = false;
 			float vec[3];
 			GetEntPropVector(entity, Prop_Data, "m_vecOrigin", vec);
+			vec[2] += 15.0;
+
 			int owner = GetEntPropEnt(entity, Prop_Send, "m_hBuilder");
 			if(IsValidClient3(owner)){
-				int wrench = GetWeapon(owner,2);
-				if(IsValidWeapon(wrench)){
-					EntityExplosion(owner, TF2_GetSentryDPSModifiers(owner,wrench)*70.0, 350.0, vec, _, _, owner, _ ,DMG_SHOCK, wrench);
-				}
+				EntityExplosion(owner, TF2_GetSentryDPSModifiers(owner)*70.0, 350.0, vec, _, _, owner, _ ,DMG_SHOCK);
 			}
 		}
 	}
@@ -2187,7 +2186,7 @@ public Action OnPlayerRunCmd(int client, int& buttons, int& impulse, float vel[3
 									int melee = GetWeapon(client, 2);
 
 									if(IsValidWeapon(melee))
-										rocketDamage *= TF2_GetSentryDPSModifiers(client, melee);
+										rocketDamage *= TF2_GetSentryDPSModifiers(client);
 									
 									DataPack pack = new DataPack();
 									pack.Reset();
@@ -3627,7 +3626,7 @@ public Event_Teleported(Handle event, const char[] name, bool:dontBroadcast)
 				
 				EmitSoundToAll(SOUND_THUNDER, 0, _, SNDLEVEL_RAIDSIREN, _, 1.0, _,_,clientpos);
 				
-				float LightningDamage = 325.0 * TF2_GetSentryDPSModifiers(client, melee);
+				float LightningDamage = 325.0 * TF2_GetSentryDPSModifiers(client);
 				
 				int i = -1;
 				while ((i = FindEntityByClassname(i, "*")) != -1)
@@ -3891,7 +3890,7 @@ public Action TF2_SentryFireBullet(int sentry, int builder, int &shots, float sr
 							TeleportEntity(iEntity, src, fAngles, fVelocity);
 							DispatchSpawn(iEntity);
 							//why does it hit twice??? also, minisentries deal 25% dmg.
-							projectileDamage[iEntity] = 50.0*TF2_GetSentryDamageModifiers(attacker, pda);
+							projectileDamage[iEntity] = 50.0*TF2_GetSentryDamageModifiers(attacker);
 							if(GetEntProp(sentry, Prop_Send, "m_bMiniBuilding"))
 								projectileDamage[iEntity] *= 0.25;
 						}
@@ -3905,7 +3904,7 @@ public Action TF2_SentryFireBullet(int sentry, int builder, int &shots, float sr
 					int iEntity = CreateEntityByName(projName);
 					if (IsValidEdict(iEntity)) 
 					{
-						projectileDamage[iEntity] = 20.0 * TF2_GetSentryDamageModifiers(builder, pda);
+						projectileDamage[iEntity] = 20.0 * TF2_GetSentryDamageModifiers(builder);
 						if(GetEntProp(sentry, Prop_Send, "m_bMiniBuilding"))
 							projectileDamage[iEntity] *= 0.25;
 

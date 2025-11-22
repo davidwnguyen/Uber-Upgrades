@@ -3921,6 +3921,9 @@ ResetVariables(){
 		for(int buffID = 0; buffID<MAXBUFFS; buffID++){
 			playerBuffs[client][buffID].clear();
 		}
+		for(int spellID = 0; spellID <= sizeof(ArcaneSpellList); spellID++) {
+			SpellCooldowns[client][spellID] = 0.0;
+		}
 	}
 	for(int entity = 0; entity<MAXENTITIES; entity++){
 		currentDamageType[entity].clear();
@@ -4225,7 +4228,7 @@ stock float TF2_GetFireRate(client, weapon, float efficiency = 1.0)
 	}
 	return 1.0;
 }
-stock float TF2_GetSentryDamageModifiers(client, melee){
+stock float TF2_GetSentryDamageModifiers(client){
 	float dmgBonus = 1.0;
 	int CWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
 	if(IsValidWeapon(CWeapon))
@@ -4236,34 +4239,16 @@ stock float TF2_GetSentryDamageModifiers(client, melee){
 			dmgBonus *= TF2Attrib_GetValue(SentryDmgActive);
 		}
 	}
-	Address SentryDmgActive1 = TF2Attrib_GetByName(melee, "throwable detonation time");
-	if(SentryDmgActive1 != Address_Null)
-		dmgBonus *= TF2Attrib_GetValue(SentryDmgActive1);
-	
-	Address SentryDmgActive2 = TF2Attrib_GetByName(melee, "throwable fire speed");
-	if(SentryDmgActive2 != Address_Null)
-		dmgBonus *= TF2Attrib_GetValue(SentryDmgActive2);
-	
-	Address damageActive = TF2Attrib_GetByName(melee, "ubercharge");
-	if(damageActive != Address_Null)
-		dmgBonus *= Pow(1.05,TF2Attrib_GetValue(damageActive));
-	
-	Address damageActive2 = TF2Attrib_GetByName(melee, "engy sentry damage bonus");
-	if(damageActive2 != Address_Null)
-		dmgBonus *= TF2Attrib_GetValue(damageActive2);
 
-	Address damageActive3 = TF2Attrib_GetByName(melee, "sentry bullets per shot");
-	if(damageActive3 != Address_Null)
-		dmgBonus *= TF2Attrib_GetValue(damageActive3);
+	dmgBonus *= TF2Attrib_HookValueFloat(1.0, "dmg_outgoing_mult", client);
+	dmgBonus *= TF2Attrib_HookValueFloat(1.0, "mult_engy_sentry_damage", client);
+	dmgBonus *= TF2Attrib_HookValueFloat(1.0, "sentry_bullets_per_shot", client);
 	
 	return dmgBonus;
 }
-stock float TF2_GetSentryDPSModifiers(client, melee){
-	float dmgBonus = TF2_GetSentryDamageModifiers(client,melee);
-	Address fireRateActive = TF2Attrib_GetByName(melee, "engy sentry fire rate increased");
-	if(fireRateActive != Address_Null)
-		dmgBonus /= TF2Attrib_GetValue(fireRateActive);
-	
+stock float TF2_GetSentryDPSModifiers(client){
+	float dmgBonus = TF2_GetSentryDamageModifiers(client);
+	dmgBonus /= TF2Attrib_HookValueFloat(1.0, "mult_sentry_firerate", client);
 	return dmgBonus;
 }
 stock float TF2_GetSentryDPS(client, melee){
@@ -4289,7 +4274,7 @@ stock float TF2_GetSentryDPS(client, melee){
 		}
 	}
 	
-	SentryDPS *= TF2_GetSentryDPSModifiers(client, melee);
+	SentryDPS *= TF2_GetSentryDPSModifiers(client);
 
 	return SentryDPS;
 }

@@ -726,7 +726,7 @@ public Action TouchThrownSentryDeploy(entity, other){
 	SDKCall(g_SDKFastBuild, building, true);
 	SetEntityRenderMode(building, RENDER_NORMAL);
 	RemoveEntity(entity);
-	isPrimed[entity] = true;
+	isPrimed[building] = true;
 	return Plugin_Stop;
 }
 public Action:OnStartTouchJars(entity, other)

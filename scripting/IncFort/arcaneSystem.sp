@@ -201,10 +201,7 @@ public Action:Command_UseArcane(client, args)
 	if (!IsPlayerAlive(client))
 		return Plugin_Handled;
 
-	Address slotActive = TF2Attrib_GetByName(client, "arcane attunement slots");
-	int attuneSlots = 1 + (slotActive == Address_Null ? 0 : RoundToNearest(TF2Attrib_GetValue(slotActive)));
-
-	if(param2 < 0 || param2 > attuneSlots) 
+	if(param2 < 0 || param2 > Max_Attunement_Slots)
 		return Plugin_Handled;
 
 	if(AttunedSpells[client][param2] == 0.0)
@@ -1069,12 +1066,6 @@ CastAutoSentry(client, attuneSlot)
 	int iLink = CreateLink(client,true);
 	float angles[3];
 	float position[3];
-	//angles[0] -= 180.0;
-	//angles[1] -= 90.0;
-	//angles[2] += 90.0;
-	
-	//position[0] -= 30.0;
-	//position[1] += 20.0;
 	position[2] -= 75.0;
 	
 	SetVariantString("!activator");
@@ -1083,7 +1074,7 @@ CastAutoSentry(client, attuneSlot)
 	AcceptEntityInput(iEntity, "SetParentAttachment", iLink); 
 	SetEntPropEnt(iEntity, Prop_Send, "m_hEffectEntity", iLink);
 	SetEntPropVector(iEntity, Prop_Send, "m_angRotation", angles);
-	TeleportEntity(iEntity, position, NULL_VECTOR, NULL_VECTOR);
+	TeleportEntity(iLink, position, NULL_VECTOR, NULL_VECTOR);
 	DispatchSpawn(iEntity);
 	SetEntProp(iEntity, Prop_Data, "m_spawnflags", 8);
 	SetEntProp(iEntity, Prop_Data, "m_takedamage", 0);
@@ -1102,9 +1093,9 @@ CastAutoSentry(client, attuneSlot)
 	SetEntPropEnt(iEntity, Prop_Send, "m_hBuilder", client); 
 	SetEntPropEnt(iEntity, Prop_Send, "m_hOwnerEntity", client); 
 	
-	CreateTimer(10.0,SelfDestruct,  EntIndexToEntRef(iEntity));
-	CreateTimer(10.0,SelfDestruct,  EntIndexToEntRef(iLink));
-	CreateTimer(10.0,RemoveAutoSentryID, EntIndexToEntRef(client));
+	CreateTimer(30.0,SelfDestruct,  EntIndexToEntRef(iEntity));
+	CreateTimer(30.0,SelfDestruct,  EntIndexToEntRef(iLink));
+	CreateTimer(30.0,RemoveAutoSentryID, EntIndexToEntRef(client));
 	autoSentryID[client] = iEntity;
 }
 public Action:RemoveAutoSentryID(Handle timer, any:ref) 

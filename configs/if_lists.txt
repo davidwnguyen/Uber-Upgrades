@@ -19,6 +19,7 @@
 			"3"		"knockback resistance"
 			"4"		"cancel falling damage"
 			"5"		"Weighdown Ability"
+			"6"		"deploy time decreased"
 		}
 		"Ammo upgrades"
 		{
@@ -108,11 +109,12 @@
 		"Physical upgrades"
 		{
 			"0"		"move speed(SN)"
-			"2"		"jump height"
-			"3"		"increased air control"
-			"4"		"knockback resistance"
-			"5"		"cancel falling damage"
-			"6"		"Weighdown Ability"
+			"1"		"jump height"
+			"2"		"increased air control"
+			"3"		"knockback resistance"
+			"4"		"cancel falling damage"
+			"5"		"Weighdown Ability"
+			"6"		"deploy time decreased"
 		}
 		"Ammo upgrades"
 		{
@@ -207,6 +209,7 @@
 			"3"		"knockback resistance"
 			"4"		"cancel falling damage"	
 			"5"		"Weighdown Ability"
+			"6"		"deploy time decreased"
 		}
 		"Ammo upgrades"
 		{
@@ -296,11 +299,12 @@
 		"Physical upgrades"
 		{
 			"0"		"move speed(PY)"
-			"2"		"jump height"
-			"3"		"increased air control"
-			"4"		"knockback resistance"
-			"5"		"cancel falling damage"
-			"6"		"Weighdown Ability"
+			"1"		"jump height"
+			"2"		"increased air control"
+			"3"		"knockback resistance"
+			"4"		"cancel falling damage"
+			"5"		"Weighdown Ability"
+			"6"		"deploy time decreased"
 		}
 		"Ammo upgrades"
 		{
@@ -389,12 +393,13 @@
 		}
 		"Physical upgrades"
 		{
-			"1"		"move speed (heavy)"
-			"2"		"jump height"
-			"3"		"increased air control"
-			"4"		"knockback resistance"
-			"5"		"cancel falling damage"
-			"6"		"Weighdown Ability"
+			"0"		"move speed (heavy)"
+			"1"		"jump height"
+			"2"		"increased air control"
+			"3"		"knockback resistance"
+			"4"		"cancel falling damage"
+			"5"		"Weighdown Ability"
+			"6"		"deploy time decreased"
 		}
 		"Ammo upgrades"
 		{
@@ -483,13 +488,13 @@
 		}
 		"Physical upgrades"
 		{
-			"1"		"move speed(DE)"
-			"2"		"jump height"
-			"3"		"increased air control"
-			"4"		"knockback resistance"
-			"5"		"cancel falling damage"
-			"6"		"Weighdown Ability"
-			
+			"0"		"move speed(DE)"
+			"1"		"jump height"
+			"2"		"increased air control"
+			"3"		"knockback resistance"
+			"4"		"cancel falling damage"
+			"5"		"Weighdown Ability"
+			"6"		"deploy time decreased"
 		}
 		"Ammo upgrades"
 		{
@@ -578,13 +583,13 @@
 		}
 		"Physical upgrades"
 		{
-			"1"		"move speed(ME)"
-			"2"		"jump height"
-			"3"		"increased air control"
-			"4"		"knockback resistance"
-			"5"		"cancel falling damage"
-			"6"		"Weighdown Ability"
-			
+			"0"		"move speed(ME)"
+			"1"		"jump height"
+			"2"		"increased air control"
+			"3"		"knockback resistance"
+			"4"		"cancel falling damage"
+			"5"		"Weighdown Ability"
+			"6"		"deploy time decreased"
 		}
 		"Ammo upgrades"
 		{
@@ -672,13 +677,13 @@
 		}
 		"Physical upgrades"
 		{
-			"1"		"move speed(SP)"
-			"2"		"jump height"
-			"3"		"increased air control"
-			"4"		"knockback resistance"
-			"5"		"cancel falling damage"
-			"6"		"Weighdown Ability"
-			
+			"0"		"move speed(SP)"
+			"1"		"jump height"
+			"2"		"increased air control"
+			"3"		"knockback resistance"
+			"4"		"cancel falling damage"
+			"5"		"Weighdown Ability"
+			"6"		"deploy time decreased"
 		}
 		"Ammo & Cloak upgrades"
 		{
@@ -769,13 +774,13 @@
 		}
 		"Physical upgrades"
 		{
-			"1"		"move speed(EN)"
-			"2"		"jump height"
-			"3"		"increased air control"
-			"4"		"knockback resistance"
-			"5"		"cancel falling damage"
-			"6"		"Weighdown Ability"
-			
+			"0"		"move speed(EN)"
+			"1"		"jump height"
+			"2"		"increased air control"
+			"3"		"knockback resistance"
+			"4"		"cancel falling damage"
+			"5"		"Weighdown Ability"
+			"6"		"deploy time decreased"
 		}
 		
 		"Ammo upgrades"
