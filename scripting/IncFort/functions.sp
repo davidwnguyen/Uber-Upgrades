@@ -1733,7 +1733,7 @@ refreshUpgrades(client, slot)
 			
 			TF2Attrib_RemoveByName(client,"ubercharge rate bonus");
 			TF2Attrib_RemoveByName(client,"heal rate bonus");
-			TF2Attrib_RemoveByName(client, "health from healers reduced");
+			TF2Attrib_RemoveByName(client,"health from healers reduced");
 			TF2Attrib_RemoveByName(client,"weapon spread bonus");
 			TF2Attrib_RemoveByName(client,"Projectile speed increased");
 			TF2Attrib_RemoveByName(client,"Projectile range increased");
@@ -1747,7 +1747,7 @@ refreshUpgrades(client, slot)
 			TF2Attrib_RemoveByName(client,"SET BONUS: chance of hunger decrease");
 			TF2Attrib_RemoveByName(client,"has pipboy build interface");
 			TF2Attrib_RemoveByName(client,"weapon burn dmg increased");
-			TF2Attrib_RemoveByName(client, "critical rating mult");
+			TF2Attrib_RemoveByName(client,"critical rating");
 
 			if(current_class[client] == TFClass_DemoMan)
 			{
@@ -1759,12 +1759,9 @@ refreshUpgrades(client, slot)
 			}
 
 			float strengthPowerup = GetAttribute(client, "strength powerup");
-			if(1 <= strengthPowerup <= 3)
-			{
-				if(strengthPowerup == 2){
-					TF2Attrib_SetByName(client,"critical rating mult", 1.33);
-					TF2Attrib_SetByName(client,"damage penetrates reductions", 0.5);
-				}
+			if(strengthPowerup == 2){
+				TF2Attrib_SetByName(client,"critical rating", 100.0);
+				TF2Attrib_SetByName(client,"damage penetrates reductions", 0.5);
 			}
 
 			//Powerups
@@ -3551,7 +3548,7 @@ projGravity(entity)
 GivePowerupDescription(int client, char[] name, int amount){
 	if(StrEqual("strength powerup", name)){
 		if(amount == 2){
-			CPrintToChat(client, "{community}Dexterity Powerup {default}| {lightcyan}Gives 1.33x crit rating & increases conditional damage reduction penetration by +50%%.");
+			CPrintToChat(client, "{community}Dexterity Powerup {default}| {lightcyan}Gives +100 crit rating & increases conditional damage reduction penetration by +50%%.");
 		}else if(amount == 3){
 			CPrintToChat(client, "{community}Bruised Powerup {default}| {lightcyan}Tagged enemies will be hit with a finisher that is a crit + deals 25%% maxHP. Hits above 40%% maxHP instantly kill for -5%% of your health.");
 		}else{
