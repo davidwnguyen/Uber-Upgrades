@@ -1843,9 +1843,10 @@ refreshUpgrades(client, slot)
 				TF2Attrib_SetFromStringValue(slotItem, "explosion particle", "ExplosionCore_sapperdestroyed");
 
 			Address firerateActive = TF2Attrib_GetByName(slotItem, "disguise speed penalty");
-			Address heavyweaponActive = TF2Attrib_GetByName(slotItem, "Converts Firerate to Damage");//Implement "Heavy" Weapons
-			if(heavyweaponActive != Address_Null && TF2Attrib_GetValue(heavyweaponActive) != 0.0)
+			float convFireRateToDamage = TF2Attrib_HookValueFloat(0.0, "convert_firerate_to_damage", slotItem);
+			if(convFireRateToDamage != 0.0)
 			{
+				//Sadly yeah, this old fuckass way of dealing it seems to be the best way right now.
 				Address firerateActive2 = TF2Attrib_GetByName(slotItem, "fire rate bonus HIDDEN");
 				Address firerateActive3 = TF2Attrib_GetByName(slotItem, "fire rate penalty HIDDEN");
 				Address firerateActive4 = TF2Attrib_GetByName(slotItem, "mult_item_meter_charge_rate");
@@ -1871,7 +1872,7 @@ refreshUpgrades(client, slot)
 					TF2Attrib_RemoveByName(slotItem, "mult_item_meter_charge_rate");
 				}
 				//If their weapon doesn't have a clip, reload rate also affects fire rate.
-				if((HasEntProp(slotItem, Prop_Data, "m_iClip1") && GetEntProp(slotItem,Prop_Data,"m_iClip1")  == -1) || TF2Attrib_GetValue(heavyweaponActive) > 1.0)
+				if(TF2Util_GetWeaponMaxClip(slotItem) == -1)
 				{
 					Address DPSMult12 = TF2Attrib_GetByName(slotItem, "faster reload rate");
 					Address DPSMult13 = TF2Attrib_GetByName(slotItem, "Reload time increased");
@@ -1879,20 +1880,20 @@ refreshUpgrades(client, slot)
 					Address DPSMult15 = TF2Attrib_GetByName(slotItem, "reload time increased hidden");
 					
 					if(DPSMult12 != Address_Null) {
-					damageModifier /= TF2Attrib_GetValue(DPSMult12);
-					TF2Attrib_RemoveByName(slotItem, "faster reload rate");
+						damageModifier /= TF2Attrib_GetValue(DPSMult12);
+						TF2Attrib_RemoveByName(slotItem, "faster reload rate");
 					}
 					if(DPSMult13 != Address_Null) {
-					damageModifier /= TF2Attrib_GetValue(DPSMult13);
-					TF2Attrib_RemoveByName(slotItem, "Reload time increased");
+						damageModifier /= TF2Attrib_GetValue(DPSMult13);
+						TF2Attrib_RemoveByName(slotItem, "Reload time increased");
 					}
 					if(DPSMult14 != Address_Null) {
-					damageModifier /= TF2Attrib_GetValue(DPSMult14);
-					TF2Attrib_RemoveByName(slotItem, "Reload time decreased");
+						damageModifier /= TF2Attrib_GetValue(DPSMult14);
+						TF2Attrib_RemoveByName(slotItem, "Reload time decreased");
 					}
 					if(DPSMult15 != Address_Null) {
-					damageModifier /= TF2Attrib_GetValue(DPSMult15);
-					TF2Attrib_RemoveByName(slotItem, "reload time increased hidden");
+						damageModifier /= TF2Attrib_GetValue(DPSMult15);
+						TF2Attrib_RemoveByName(slotItem, "reload time increased hidden");
 					}
 				}
 				TF2Attrib_SetByName(slotItem,"damage mult 15", damageModifier);
@@ -4178,7 +4179,7 @@ stock float TF2_GetFireRate(client, weapon, float efficiency = 1.0)
 				Address apsMult6 = TF2Attrib_GetByName(weapon, "mult_item_meter_charge_rate");
 				Address apsMod = TF2Attrib_GetByName(weapon, "energy weapon penetration");
 				//If their weapon doesn't have a clip, reload rate also affects fire rate.
-				if(HasEntProp(weapon, Prop_Data, "m_iClip1") && GetEntProp(weapon,Prop_Data,"m_iClip1")  == -1)
+				if(TF2Util_GetWeaponMaxClip(weapon) == -1)
 				{
 					Address ModClip = TF2Attrib_GetByName(weapon, "mod max primary clip override");
 					if(ModClip == Address_Null)
@@ -4289,7 +4290,7 @@ stock float TF2_GetDPSModifiers(client,weapon, bool CountReloadModifiers = true,
 			//If their weapon doesn't have a clip, reload rate also affects fire rate.
 			if(CountReloadModifiers)
 			{
-				if(HasEntProp(weapon, Prop_Data, "m_iClip1") && GetEntProp(weapon,Prop_Data,"m_iClip1")  == -1)
+				if(TF2Util_GetWeaponMaxClip(weapon) == -1)
 				{
 					Address ModClip = TF2Attrib_GetByName(weapon, "mod max primary clip override");
 					if(ModClip == Address_Null)

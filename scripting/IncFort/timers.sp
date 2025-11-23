@@ -29,7 +29,7 @@ public Action:Timer_Second(Handle timer)
 						continue;
 
 					if(HasEntProp(weapon, Prop_Send, "m_iClip1")){
-						if(GetEntProp(weapon,Prop_Data,"m_iClip1")  == -1)
+						if(TF2Util_GetWeaponMaxClip(weapon) == -1)
 							SetAmmo_Weapon(weapon, TF2Util_GetPlayerMaxAmmo(client, GetEntProp(weapon, Prop_Send, "m_iPrimaryAmmoType"), current_class[client]));
 						else
 							SetEntProp(weapon, Prop_Send, "m_iClip1", 4*TF2Util_GetWeaponMaxClip(weapon));

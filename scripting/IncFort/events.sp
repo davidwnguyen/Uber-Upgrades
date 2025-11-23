@@ -2573,7 +2573,7 @@ public OnGameFrame()
 					TF2Attrib_SetByName(client,"major increased jump height", 1.0);
 					CurrentSlowTimer[client] = 0.0;
 				}
-				//Firerate for Secondaries
+				//Firerate for Secondary Fire
 				int CWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
 				int melee = GetPlayerWeaponSlot(client,2)
 				int primary = GetPlayerWeaponSlot(client,0)
@@ -2587,8 +2587,6 @@ public OnGameFrame()
 					if(IsValidEdict(primary) && CWeapon == primary )
 						if(TF2_GetPlayerClass(client) == TFClass_Heavy || TF2_GetPlayerClass(client) == TFClass_Sniper)
 							flag=false;
-
-					if(GetEntProp(CWeapon, Prop_Data, "m_iClip1") == 0) flag=false;
 
 					if(flag)
 					{
