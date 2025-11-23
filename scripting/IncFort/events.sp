@@ -925,6 +925,7 @@ public void TF2_OnConditionAdded(client, TFCond cond)
 			TF2_RemoveCondition(client, cond);
 		}
 	}
+	TF2Util_UpdatePlayerSpeed(client);
 }
 public void TF2_OnConditionRemoved(client, TFCond:cond)
 {
@@ -973,6 +974,7 @@ public void TF2_OnConditionRemoved(client, TFCond:cond)
 			buffChange[client] = true;
 		}
 	}
+	TF2Util_UpdatePlayerSpeed(client);
 }
 public OnEntityCreated(entity, const char[] classname)
 {
