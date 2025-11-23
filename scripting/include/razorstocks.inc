@@ -37,8 +37,6 @@ Yeah.
 #define UBER_DEFENSE 1 << 4
 #define UBER_SPEED 1 << 5
 
-#define GetWeapon TF2Util_GetPlayerLoadoutEntity
-
 bool ShouldNotHome[MAXENTITIES][MAXPLAYERS+1];
 bool ShouldNotHit[MAXENTITIES][MAXENTITIES];
 
@@ -115,7 +113,7 @@ stock float GetAttributeAccumulateAdditive(int client, const char[] attrName, fl
 	int weapon;
 	for(int i=0;i<3;++i)
 	{
-		weapon = GetWeapon(client,i);
+		weapon = TF2Util_GetPlayerLoadoutEntity(client,i);
 		if(!IsValidWeapon(weapon))
 			continue;
 
@@ -136,7 +134,7 @@ stock float GetAttributeAccumulateMultiplicative(int client, const char[] attrNa
 
 	for(int i=0;i<3;++i)
 	{
-		weapon = GetWeapon(client,i);
+		weapon = TF2Util_GetPlayerLoadoutEntity(client,i);
 		if(!IsValidWeapon(weapon))
 			continue;
 
@@ -282,7 +280,7 @@ stock refreshAllWeapons(client)
 	TF2Attrib_ClearCache(client);
 	for(int i=0;i<5;++i)
 	{
-		int weapon = GetWeapon(client,i);
+		int weapon = TF2Util_GetPlayerLoadoutEntity(client,i);
 		if(IsValidEdict(weapon))
 		{
 			TF2Attrib_ClearCache(weapon);
@@ -1311,7 +1309,7 @@ stock bool TF2_AttribListAttributesBySlot(client, iSlot = -1)
 		}
         default: 
         { 
-            iEntity = GetWeapon(client, iSlot); 
+            iEntity = TF2Util_GetPlayerLoadoutEntity(client, iSlot); 
             if (!IsValidEdict(iEntity)) 
             { 
                 PrintToChat(client, "----- No weapon found for (%N) in slot (%i) -----", client, iSlot); 
@@ -1336,7 +1334,7 @@ stock bool TF2_AttribListAttributesBySlot(client, iSlot = -1)
     { 
         PrintToChat(client, "----- No attributes found for (%N) in slot (%i) -----", client, iSlot); 
     }
-	//int weapon = GetWeapon(client,iSlot);
+	//int weapon = TF2Util_GetPlayerLoadoutEntity(client,iSlot);
 	//PrintToChatAll("%i weapon",weapon);
     return true; 
 }

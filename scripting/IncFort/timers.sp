@@ -8,7 +8,7 @@ public Action:Timer_Second(Handle timer)
 		{
 			if(TF2Attrib_HookValueFloat(0.0, "regeneration_powerup", client) == 1.0){
 				for(int i=0;i<3;++i){
-					int weapon = GetWeapon(client, i);
+					int weapon = TF2Util_GetPlayerLoadoutEntity(client, i);
 					if(!IsValidWeapon(weapon))
 						continue;
 					if(!HasEntProp(weapon, Prop_Send, "m_iPrimaryAmmoType"))
@@ -20,7 +20,7 @@ public Action:Timer_Second(Handle timer)
 			}
 			else if(TF2Attrib_HookValueFloat(0.0, "regeneration_powerup", client) == 2.0){
 				for(int i=0;i<3;++i){
-					int weapon = GetWeapon(client, i);
+					int weapon = TF2Util_GetPlayerLoadoutEntity(client, i);
 					if(!IsValidWeapon(weapon))
 						continue;
 					if(!HasEntProp(weapon, Prop_Send, "m_iPrimaryAmmoType"))
@@ -366,8 +366,8 @@ public Action:Timer_Every100MS(Handle timer)
 			DoSapperEffects(client);
 			Address bleedResistance = TF2Attrib_GetByName(client, "sapper damage penalty");
 			int CWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
-			int primary = GetWeapon(client, 0);
-			int secondary = GetWeapon(client, 1);
+			int primary = TF2Util_GetPlayerLoadoutEntity(client, 0);
+			int secondary = TF2Util_GetPlayerLoadoutEntity(client, 1);
 			if(bleedResistance != Address_Null)
 			{
 				BleedMaximum[client] = 100.0 + TF2Attrib_GetValue(bleedResistance);
@@ -1234,7 +1234,7 @@ public Action:BuildingRegeneration(Handle timer, any:entity)
 		int mode = 2;
 		if(mode == 1)
 		{
-			int pda = GetWeapon(owner,5);
+			int pda = TF2Util_GetPlayerLoadoutEntity(owner,5);
 			Address BuildingRegen = TF2Attrib_GetByName(pda, "Projectile speed decreased");
 			if(BuildingRegen != Address_Null)
 			{
@@ -1278,7 +1278,7 @@ public Action:BuildingRegeneration(Handle timer, any:entity)
 	GetEdictClassname(sentrynumber, SentryObject, sizeof(SentryObject));
 	if (StrEqual(SentryObject, "obj_sentrygun"))
 	{
-		int pda = GetWeapon(owner,5);
+		int pda = TF2Util_GetPlayerLoadoutEntity(owner,5);
 		int sentryLevel = GetEntLevel(entity);
 		int shells = GetEntProp(entity, Prop_Send, "m_iAmmoShells");
 		int rockets = GetEntProp(entity, Prop_Send, "m_iAmmoRockets");
@@ -1610,7 +1610,7 @@ public Action:MvMFailTimer(Handle timer, any:userid)
 		TF2_RespawnPlayer(client);
 		for (int slot = 0; slot < NB_SLOTS_UED; slot++)
 		{
-			int weaponinSlot = GetWeapon(client,slot);
+			int weaponinSlot = TF2Util_GetPlayerLoadoutEntity(client,slot);
 			if(IsValidEdict(weaponinSlot)){
 				TF2Attrib_ClearCache(weaponinSlot);
 			}
@@ -1647,8 +1647,8 @@ public Action:GiveMaxAmmo(Handle timer, any:userid)
 	int client = GetClientOfUserId(userid);
 	if(IsValidClient3(client))
 	{
-		int primary = GetWeapon(client,0);
-		int secondary = GetWeapon(client,1);
+		int primary = TF2Util_GetPlayerLoadoutEntity(client,0);
+		int secondary = TF2Util_GetPlayerLoadoutEntity(client,1);
 		if(IsValidWeapon(primary) && HasEntProp(primary, Prop_Data, "m_iClip1"))
 		{
 			float autoFires = GetAttribute(primary, "auto fires full clip", 0.0);
@@ -2071,7 +2071,7 @@ public Action:ShootTwice(Handle timer, any:data)
 	{
 		if(IsValidClient3(client))
 		{
-			int pda = GetWeapon(client,5);
+			int pda = TF2Util_GetPlayerLoadoutEntity(client,5);
 			if(IsValidEdict(pda))
 			{
 				int iEntity = CreateEntityByName("tf_projectile_sentryrocket");

@@ -46,7 +46,7 @@ float GetPlayerHealingMultiplier(client){
 			if(!IsValidClient3(healer))
 				continue;
 
-			int healingWeapon = GetWeapon(healer, 1);
+			int healingWeapon = TF2Util_GetPlayerLoadoutEntity(healer, 1);
 			if(!IsValidWeapon(healingWeapon))
 				continue;
 

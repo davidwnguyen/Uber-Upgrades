@@ -182,7 +182,7 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 			if(!IsValidClient3(healer))
 				continue;
 
-			int healingWeapon = GetWeapon(healer, 1);
+			int healingWeapon = TF2Util_GetPlayerLoadoutEntity(healer, 1);
 			if(!IsValidWeapon(healingWeapon))
 				continue;
 
@@ -969,7 +969,7 @@ public Action:OnTakeDamagePre_Sapper(victim, &attacker, &inflictor, float &damag
 	}
 	currentDamageType[attacker].first = damagetype;
 	damage = 50.0;
-	int melee = (GetWeapon(attacker,2));
+	int melee = (TF2Util_GetPlayerLoadoutEntity(attacker,2));
 	Address firerate = TF2Attrib_GetByName(melee, "fire rate bonus HIDDEN");
 	if(firerate != Address_Null)
 	{
@@ -999,7 +999,7 @@ public Action:OnTakeDamagePre_Sentry(victim, &attacker, &inflictor, float &damag
 		int SapperOwner = GetEntPropEnt(attacker, Prop_Send, "m_hBuilder");
 		if(IsValidClient3(SapperOwner))
 		{
-			int sapperItem = GetWeapon(SapperOwner, 6);
+			int sapperItem = TF2Util_GetPlayerLoadoutEntity(SapperOwner, 6);
 			if(IsValidEdict(sapperItem))
 			{
 				Address LifestealActive = TF2Attrib_GetByName(sapperItem,"mult airblast refire time");
@@ -1052,7 +1052,7 @@ public Action:OnTakeDamagePre_Sentry(victim, &attacker, &inflictor, float &damag
 				if(TF2_GetPlayerClass(i) != TFClass_Spy)
 					continue;
 
-				int sapper = GetWeapon(i,5);
+				int sapper = TF2Util_GetPlayerLoadoutEntity(i,5);
 				if(!IsValidWeapon(sapper))
 					continue;
 
@@ -1115,7 +1115,7 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 		}
 
 		if(damagetype == 2052 && damagecustom == 3 && TF2_GetPlayerClass(attacker) == TFClass_Pyro){
-			int secondary = GetWeapon(attacker,1);
+			int secondary = TF2Util_GetPlayerLoadoutEntity(attacker,1);
 			if(IsValidEdict(secondary) && weapon == secondary){
 				damage *= TF2Attrib_HookValueFloat(1.0, "explosion_damage_bonus", weapon);
 				damagetype |= DMG_IGNITE;
@@ -1223,7 +1223,7 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 				if(!IsValidClient3(healer))
 					continue;
 					
-				int healingWeapon = GetWeapon(healer, 1);
+				int healingWeapon = TF2Util_GetPlayerLoadoutEntity(healer, 1);
 				if(!IsValidWeapon(healingWeapon))
 					continue;
 				
@@ -1259,7 +1259,7 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 					if(!IsValidClient3(healer))
 						continue;
 						
-					int healingWeapon = GetWeapon(healer, 1);
+					int healingWeapon = TF2Util_GetPlayerLoadoutEntity(healer, 1);
 					if(!IsValidWeapon(healingWeapon))
 						continue;
 					
@@ -1527,7 +1527,7 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 			SDKHooks_TakeDamage(victim,attacker,attacker,LightningEnchantment[attacker] / TF2_GetFireRate(attacker,weapon,0.8),_,_,_,_,false);
 		}
 		else if(DarkmoonBladeDuration[attacker] > GetGameTime()){
-			int melee = GetWeapon(attacker,2);
+			int melee = TF2Util_GetPlayerLoadoutEntity(attacker,2);
 			if(melee == weapon){
 				currentDamageType[attacker].second |= DMG_IGNOREHOOK;
 				SDKHooks_TakeDamage(victim,attacker,attacker,DarkmoonBlade[attacker],_,_,_,_,false);
@@ -1546,13 +1546,13 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 			{
 				damage *= 1+(weaponFireRate[weapon]-TICKRATE)/TICKRATE;
 			}
-			int secondary = GetWeapon(attacker, 1);
+			int secondary = TF2Util_GetPlayerLoadoutEntity(attacker, 1);
 			if(IsValidWeapon(secondary)){
 				float inheritanceRatio = TF2Attrib_HookValueFloat(0.0, "dps_inheritance_ratio", attacker);
 				if(inheritanceRatio){
 					float strongestDPS = 0.0;
 					for(int e = 0;e<3;++e){
-						int tempWeapon = GetWeapon(attacker, e);
+						int tempWeapon = TF2Util_GetPlayerLoadoutEntity(attacker, e);
 						if(!IsValidWeapon(tempWeapon) || tempWeapon == weapon)
 							continue;
 						float currentDPS = TF2_GetWeaponclassDPS(attacker, tempWeapon) * TF2_GetDPSModifiers(attacker, tempWeapon);
@@ -1660,7 +1660,7 @@ public float genericSentryDamageModification(victim, attacker, inflictor, float 
 				}
 			}
 
-			int secondary = GetWeapon(owner, 1);
+			int secondary = TF2Util_GetPlayerLoadoutEntity(owner, 1);
 			if(IsValidWeapon(secondary)){
 				damage *= 1+GetEntProp(inflictor, Prop_Send, "m_iKills")*TF2Attrib_HookValueFloat(0.0, "sentry_dmg_bonus_per_kill", secondary);
 			}

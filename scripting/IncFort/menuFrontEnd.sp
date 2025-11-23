@@ -553,15 +553,15 @@ public Menu_ShowStatsSlot(client, param2)
 	int melee = -1;
 	if(TF2_GetPlayerClass(client) == TFClass_Spy)
 	{
-		primary = GetWeapon(client,1);
-		secondary = GetWeapon(client,2);
+		primary = TF2Util_GetPlayerLoadoutEntity(client,1);
+		secondary = TF2Util_GetPlayerLoadoutEntity(client,2);
 		melee = GetPlayerWeaponSlot(client,2);
 	}
 	else 
 	{
-		primary = GetWeapon(client,0);
-		secondary = GetWeapon(client,1);
-		melee = GetWeapon(client,2);
+		primary = TF2Util_GetPlayerLoadoutEntity(client,0);
+		secondary = TF2Util_GetPlayerLoadoutEntity(client,1);
+		melee = TF2Util_GetPlayerLoadoutEntity(client,2);
 	}
 	int CWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
 	if(param2 == 0)

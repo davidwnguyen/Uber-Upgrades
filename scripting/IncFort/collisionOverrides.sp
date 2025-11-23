@@ -50,7 +50,7 @@ public Action:OnStartTouchStomp(client, other)
 
 		float strongestDPS = 0.0;
 		for(int e = 0;e<3;++e){
-			int tempWeapon = GetWeapon(client, e);
+			int tempWeapon = TF2Util_GetPlayerLoadoutEntity(client, e);
 			if(!IsValidWeapon(tempWeapon))
 				continue;
 

@@ -125,7 +125,7 @@ public Event_Playerhurt(Handle event, const char[] name, bool:dontBroadcast)
 					if(!IsValidClient3(healer))
 						continue;
 						
-					int healingWeapon = GetWeapon(healer, 1);
+					int healingWeapon = TF2Util_GetPlayerLoadoutEntity(healer, 1);
 					if(!IsValidWeapon(healingWeapon))
 						continue;
 
@@ -313,7 +313,7 @@ public Event_UberDeployed(Event event, const char[] name, bool dontBroadcast){
 	if(!IsValidClient3(medic) || !IsPlayerAlive(medic) || TF2_GetPlayerClass(medic) != TFClass_Medic)
 		return;
 	
-	int medigun = GetWeapon(medic, 1);
+	int medigun = TF2Util_GetPlayerLoadoutEntity(medic, 1);
 	if(!IsValidWeapon(medigun))
 		return;
 	
@@ -389,7 +389,7 @@ public MRESReturn OnModifyRagePre(Address pPlayerShared, Handle hParams) {
 		}
 		case TFClass_Sniper:{
 			int CWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
-			if (IsValidEdict(CWeapon) && GetWeapon(client,1) == CWeapon)
+			if (IsValidEdict(CWeapon) && TF2Util_GetPlayerLoadoutEntity(client,1) == CWeapon)
 			{
 				DHookSetParam(hParams, 1, 1.0);
 			}
@@ -887,7 +887,7 @@ public TF2Spawn_EnterSpawn(int client, int spawn)
 {
 	if(IsValidClient(client) && IsPlayerAlive(client))
 	{
-		int melee = GetWeapon(client,2);
+		int melee = TF2Util_GetPlayerLoadoutEntity(client,2);
 		if(IsValidEdict(melee))
 		{
 			TF2Attrib_SetByName(melee,"airblast vulnerability multiplier hidden", 0.0);
@@ -899,7 +899,7 @@ public TF2Spawn_LeaveSpawn(int client, int spawn)
 {
 	if(IsValidClient(client) && IsPlayerAlive(client))
 	{
-		int melee = GetWeapon(client,2);
+		int melee = TF2Util_GetPlayerLoadoutEntity(client,2);
 		if(IsValidEdict(melee))
 		{
 			TF2Attrib_SetByName(melee,"airblast vulnerability multiplier hidden", 1.0);
@@ -941,7 +941,7 @@ public void TF2_OnConditionRemoved(client, TFCond:cond)
 			if(IsValidEdict(CWeapon))
 			{
 				float damage = TF2_GetDPSModifiers(client,CWeapon,false,false) * 70.0;
-				int secondary = GetWeapon(client,1);
+				int secondary = TF2Util_GetPlayerLoadoutEntity(client,1);
 				if(IsValidEdict(secondary))
 				{
 					Address bashBonusActive = TF2Attrib_GetByName(secondary, "charge impact damage increased")
@@ -1408,7 +1408,7 @@ public Action:Event_PlayerDeath(Handle event, const char[] name, bool:dontBroadc
 				EntityExplosion(attack, 100.0*TF2_GetDPSModifiers(attack, weapon)*fireworksChance, 400.0, position, _, _, client);
 			}
 		}
-		int secondary = GetWeapon(attack, 1);
+		int secondary = TF2Util_GetPlayerLoadoutEntity(attack, 1);
 		if(IsValidWeapon(secondary)){
 			int damagetype = GetEventInt(event, "damagebits");
 			if(damagetype == DMG_ALWAYSGIB + DMG_DISSOLVE){
@@ -2185,7 +2185,7 @@ public Action OnPlayerRunCmd(int client, int& buttons, int& impulse, float vel[3
 									weaponArtCooldown[client] = GetGameTime()+25.0;
 
 									float rocketDamage = 25.0;
-									int melee = GetWeapon(client, 2);
+									int melee = TF2Util_GetPlayerLoadoutEntity(client, 2);
 
 									if(IsValidWeapon(melee))
 										rocketDamage *= TF2_GetSentryDPSModifiers(client);
@@ -3868,7 +3868,7 @@ public Action TF2_SentryFireBullet(int sentry, int builder, int &shots, float sr
 	lastSentryFiring[sentry] = GetGameTime();
 
 	if(IsValidClient3(builder)){
-		int pda = GetWeapon(builder, 5);
+		int pda = TF2Util_GetPlayerLoadoutEntity(builder, 5);
 		if(IsValidWeapon(pda)){
 			float override = TF2Attrib_HookValueFloat(0.0, "sentry_override_projectile_type", pda);
 			switch (override){

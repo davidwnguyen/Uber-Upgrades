@@ -42,7 +42,7 @@ float GetResistance(int client, bool includeReduction = false, float penetration
 			TotalResistance /= TF2Attrib_GetValue(dmgReduction);
 		}
 		for(int i=0;i<=NB_SLOTS_UED;++i){
-			int id = GetWeapon(client, i);
+			int id = TF2Util_GetPlayerLoadoutEntity(client, i);
 			if(!IsValidWeapon(id))
 				continue;
 			
@@ -437,7 +437,7 @@ public void ManagePlayerBuffs(int i){
 	{
 		int spy = TF2Util_GetPlayerConditionProvider(i, TFCond_Sapped);
 		if(IsValidClient3(spy)){
-			int sapper = GetWeapon(spy,5);
+			int sapper = TF2Util_GetPlayerLoadoutEntity(spy,5);
 			if(IsValidWeapon(sapper)){
 				multiplicativeDamageTakenBuff *= GetAttribute(sapper, "scattergun knockback mult");
 			}
@@ -1619,7 +1619,7 @@ public void ThrowBuilding(any buildref) {
 	jarateWeapon[phys] = EntIndexToEntRef(building);
 }
 public void function_AllowBuilding(int client){
-	int wrench = GetWeapon(client,2);
+	int wrench = TF2Util_GetPlayerLoadoutEntity(client,2);
 	if(!IsValidWeapon(wrench)) return;
 
 	int DispenserLimit = RoundToNearest(GetAttribute(wrench, "dispenser amount"));
@@ -1726,6 +1726,7 @@ refreshUpgrades(client, slot)
 		{
 			slotItem = currentitem_ent_idx[client][slot];
 		}
+
 		if(slot == 4)
 		{
 			UpdatePlayerSpellSlots(client);
@@ -1751,7 +1752,7 @@ refreshUpgrades(client, slot)
 
 			if(current_class[client] == TFClass_DemoMan)
 			{
-				int secondary = GetWeapon(client,1);
+				int secondary = TF2Util_GetPlayerLoadoutEntity(client,1);
 				if(IsValidEdict(secondary))
 				{
 					TF2Attrib_RemoveByName(secondary,"sticky arm time penalty");
@@ -1793,7 +1794,7 @@ refreshUpgrades(client, slot)
 					TF2Attrib_SetByName(client,"blast dmg to self increased", 0.001);
 					if(current_class[client] == TFClass_DemoMan)
 					{
-						int secondary = GetWeapon(client,1);
+						int secondary = TF2Util_GetPlayerLoadoutEntity(client,1);
 						if(IsValidEdict(secondary))
 						{
 							TF2Attrib_SetByName(secondary,"sticky arm time penalty", -2.0);
@@ -1829,7 +1830,7 @@ refreshUpgrades(client, slot)
 			}
 
 		}
-		if(slot != 4 && IsValidEdict(slotItem) && slotItem > 0 && HasEntProp(slotItem, Prop_Data, "m_iClip1"))
+		else if(IsValidEntity(slotItem) && TF2Util_IsEntityWeapon(slotItem))
 		{
 			TF2Attrib_SetByName(slotItem, "projectile spread multiplier", TF2Attrib_HookValueFloat(1.0, "mult_spread_scale", slotItem));
 
@@ -1945,9 +1946,9 @@ public Action:GiveBotUpgrades(Handle timer, any:userid)
 	int client = GetClientOfUserId(userid);
 	if(DisableBotUpgrades != 1 && IsValidClient3(client) && IsPlayerAlive(client))
 	{
-		int primary = (GetWeapon(client,0));
-		int secondary = (GetWeapon(client,1));
-		int melee = (GetWeapon(client,2));
+		int primary = TF2Util_GetPlayerLoadoutEntity(client,0);
+		int secondary = TF2Util_GetPlayerLoadoutEntity(client,1);
+		int melee = TF2Util_GetPlayerLoadoutEntity(client,2);
 		if(TF2_GetPlayerClass(client) == TFClass_Spy)
 		{
 			melee = GetPlayerWeaponSlot(client,2);
@@ -2007,7 +2008,7 @@ public Action:GiveBotUpgrades(Handle timer, any:userid)
 		}
 		for(i=0;i<2;++i)
 		{
-			int weap = GetWeapon(client,i);
+			int weap = TF2Util_GetPlayerLoadoutEntity(client,i);
 			if(!IsValidWeapon(weap))
 				continue;
 
@@ -2042,7 +2043,7 @@ public Action:GiveBotUpgrades(Handle timer, any:userid)
 				}
 				for(i=0;i<3;++i)
 				{
-					int weap = GetWeapon(client,i);
+					int weap = TF2Util_GetPlayerLoadoutEntity(client,i);
 					if(!IsValidWeapon(weap))
 						continue;
 					if((additionalstartmoney+StartMoney) <= 400000/OverAllMultiplier)
@@ -2071,7 +2072,7 @@ public Action:GiveBotUpgrades(Handle timer, any:userid)
 				}
 				for(i=0;i<3;++i)
 				{
-					int weap = GetWeapon(client,i);
+					int weap = TF2Util_GetPlayerLoadoutEntity(client,i);
 					if(!IsValidWeapon(weap))
 						continue;
 
@@ -2125,7 +2126,7 @@ public Action:GiveBotUpgrades(Handle timer, any:userid)
 				}
 				for(i=0;i<3;++i)
 				{
-					int weap = GetWeapon(client,i);
+					int weap = TF2Util_GetPlayerLoadoutEntity(client,i);
 					if(!IsValidWeapon(weap))
 						continue;
 					if((additionalstartmoney+StartMoney) <= 1000000 / OverAllMultiplier)
@@ -2166,7 +2167,7 @@ public Action:GiveBotUpgrades(Handle timer, any:userid)
 				TF2Attrib_SetByName(secondary,"Projectile speed increased",(3.5));
 				for(i=0;i<3;++i)
 				{
-					int weap = GetWeapon(client,i);
+					int weap = TF2Util_GetPlayerLoadoutEntity(client,i);
 					if(!IsValidWeapon(weap))
 						continue;
 					if(i != 2)
@@ -2204,7 +2205,7 @@ public Action:GiveBotUpgrades(Handle timer, any:userid)
 				}
 				for(i=0;i<3;++i)
 				{
-					int weap = GetWeapon(client,i);
+					int weap = TF2Util_GetPlayerLoadoutEntity(client,i);
 					if(!IsValidWeapon(weap))
 						continue;
 					if((additionalstartmoney+StartMoney) > 90000)
@@ -2236,7 +2237,7 @@ public Action:GiveBotUpgrades(Handle timer, any:userid)
 				}
 				for(i=0;i<3;++i)
 				{
-					int weap = GetWeapon(client,i);
+					int weap = TF2Util_GetPlayerLoadoutEntity(client,i);
 					if(!IsValidWeapon(weap))
 						continue;
 					if((additionalstartmoney+StartMoney) <= 800000/OverAllMultiplier)
@@ -2315,7 +2316,7 @@ void DoSapperEffects(int client){
 	if(!IsValidClient(inflictor))
 		return;
 
-	int sapper = GetWeapon(inflictor,5);
+	int sapper = TF2Util_GetPlayerLoadoutEntity(inflictor,5);
 	if(!IsValidWeapon(sapper))
 		return;
 
@@ -2614,7 +2615,7 @@ wrenchBonus(DataPack pack)
 	if(!IsValidClient3(owner))
 		{delete pack; return;}
 
-	int melee = GetWeapon(owner,2);
+	int melee = TF2Util_GetPlayerLoadoutEntity(owner,2);
 	if(IsValidEdict(melee))
 	{
 		int weaponIndex = GetEntProp(melee, Prop_Send, "m_iItemDefinitionIndex");
@@ -2827,7 +2828,7 @@ SentryDelay(entity)
 			if(IsValidClient3(owner))
 			{
 				//PrintToChatAll("3");
-				int melee = GetWeapon(owner,2);
+				int melee = TF2Util_GetPlayerLoadoutEntity(owner,2);
 				if(IsValidEdict(melee))
 				{
 					//PrintToChatAll("4");
@@ -3795,7 +3796,7 @@ stock SentryMultishot(entity)
 			client = GetEntPropEnt(inflictor, Prop_Send, "m_hBuilder");
 			if(IsValidClient3(client))
 			{
-				int pda = GetWeapon(client,5);
+				int pda = TF2Util_GetPlayerLoadoutEntity(client,5);
 				if(IsValidEdict(pda))
 				{
 					int projCount = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "sentry_rocket_proj_add", pda));
