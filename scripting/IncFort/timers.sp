@@ -767,7 +767,7 @@ public Action:Timer_Every100MS(Handle timer)
 						float plunderBonus = GetAttribute(secondary, "buff plunder multiplier", 1.0)
 						if(plunderBonus > 1.0){
 							Buff plunderBuff;
-							plunderBuff.init("Plunder Bonus", "Increased Hit&Kill Effects", Buff_Plunder, RoundFloat(plunderBonus*100), client, 0.5, plunderBonus);
+							plunderBuff.init("Plunder Bonus", "Increased Hit or Kill Effects", Buff_Plunder, RoundFloat(plunderBonus*100), client, 0.5, plunderBonus);
 
 							float VictimPos[3];
 							for(int i=1;i<=MaxClients;++i)

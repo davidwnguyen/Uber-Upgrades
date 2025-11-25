@@ -399,12 +399,12 @@ public void ManagePlayerBuffs(int i){
 
 		additiveDamageRawBuff += playerBuffs[i][buff].additiveDamageRaw * playerBuffs[i][buff].severity;
 		additiveDamageMultBuff += playerBuffs[i][buff].additiveDamageMult * playerBuffs[i][buff].severity;
-		multiplicativeDamageBuff *= playerBuffs[i][buff].multiplicativeDamage * playerBuffs[i][buff].severity;
+		multiplicativeDamageBuff *= 1+(playerBuffs[i][buff].multiplicativeDamage-1) * playerBuffs[i][buff].severity;
 		additiveAttackSpeedMultBuff += playerBuffs[i][buff].additiveAttackSpeedMult * playerBuffs[i][buff].severity;
-		multiplicativeAttackSpeedMultBuff *= playerBuffs[i][buff].multiplicativeAttackSpeedMult;
+		multiplicativeAttackSpeedMultBuff *= 1+(playerBuffs[i][buff].multiplicativeAttackSpeedMult-1) * playerBuffs[i][buff].severity;
 		additiveMoveSpeedMultBuff += playerBuffs[i][buff].additiveMoveSpeedMult * playerBuffs[i][buff].severity;
 		additiveDamageTakenBuff += playerBuffs[i][buff].additiveDamageTaken * playerBuffs[i][buff].severity;
-		multiplicativeDamageTakenBuff *= playerBuffs[i][buff].multiplicativeDamageTaken * playerBuffs[i][buff].severity;
+		multiplicativeDamageTakenBuff *= 1+(playerBuffs[i][buff].multiplicativeDamageTaken-1) * playerBuffs[i][buff].severity;
 		additiveArmorPenetration += playerBuffs[i][buff].additiveArmorPenetration * playerBuffs[i][buff].severity;
 
 		if(playerBuffs[i][buff].description[0] != '\0')
