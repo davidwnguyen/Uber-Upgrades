@@ -1,5 +1,8 @@
 "Phrases"
 {
+	"ammo conservation" {
+		"en"		"Ammo Conservation Rate"
+	}
 	"Explosive Impact Radius" {
 		"en"		"Explosive Impact Radius"
 	}

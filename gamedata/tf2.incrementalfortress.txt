@@ -247,6 +247,13 @@
 				"return"		"float"
 				"this"			"entity"
 			}
+			"CTFWeaponBaseGun::GetAmmoPerShot()"
+			{
+				"signature"		"CTFWeaponBaseGun::GetAmmoPerShot()"
+				"callconv"		"thiscall"
+				"return"		"int"
+				"this"			"entity"
+			}
 		}
 		"Signatures"
 		{
@@ -383,6 +390,11 @@
 			{
 				"library"	"server"
 				"linux"		"@_ZN15CTFPlayerShared10StunPlayerEffiP9CTFPlayer"
+			}
+			"CTFWeaponBaseGun::GetAmmoPerShot()"
+			{
+				"library"	"server"
+				"linux"		"@_ZN16CTFWeaponBaseGun14GetAmmoPerShotEv"
 			}
 		}
 	}

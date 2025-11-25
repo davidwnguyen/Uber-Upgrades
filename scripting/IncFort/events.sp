@@ -2817,6 +2817,23 @@ public MRESReturn OnFinishReload(int weapon)
 	return MRES_Ignored;
 }
 
+public MRESReturn OnAmmoPerShot(int weapon, Handle hReturn)
+{
+	if(!IsValidWeapon(weapon))
+		return MRES_Ignored;
+
+	int client = getOwner(weapon);
+	if(!IsValidClient3(client))
+		return MRES_Ignored;
+
+	float conservationRate = TF2Attrib_HookValueFloat(0.0, "ammo_conservation", weapon);
+	if(conservationRate >= GetRandomFloat() * 100){
+		DHookSetReturn(hReturn, 0);
+		return MRES_Supercede;
+	}
+	return MRES_Ignored;
+}
+
 public Action TF2_CalcIsAttackCritical(int client, int weapon, char[] weaponname, bool& result)
 {
 	if(!IsValidClient3(client) || !IsValidEdict(client))

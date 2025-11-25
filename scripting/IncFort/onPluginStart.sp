@@ -456,6 +456,12 @@ public void OnPluginStart()
 	else
 		DHookEnableDetour(g_DHookOnBulletTrace, false, OnBulletTrace);
 	
+	//Ammo per shot shenanigans
+	Handle AmmoPerShotHook = DHookCreateFromConf(hConf, "CTFWeaponBaseGun::GetAmmoPerShot()");
+	if(AmmoPerShotHook == null)
+		PrintToServer("CustomAttrs | Error with \"CTFWeaponBaseGun::GetAmmoPerShot()\" gamedata.");
+	DHookEnableDetour(AmmoPerShotHook, false, OnAmmoPerShot);
+
 	g_offset_CTFPlayerShared_pOuter = view_as<Address>(GameConfGetOffset(hConf, "CTFPlayerShared::m_pOuter"));
 	delete hConf;
 			

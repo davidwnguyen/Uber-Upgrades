@@ -26,6 +26,7 @@
 			"0"		"maxammo primary increased"
 			"1"		"maxammo secondary increased"
 			"2"		"ammo regen"
+			"3"		"ammo conservation"
 		}
 		"Status Effect Upgrades"
 		{
@@ -121,6 +122,7 @@
 			"0"		"maxammo primary increased"
 			"1"		"maxammo secondary increased"
 			"2"		"ammo regen"
+			"3"		"ammo conservation"
 		}
 		"Status Effect Upgrades"
 		{
@@ -216,6 +218,7 @@
 			"0"		"maxammo primary increased"
 			"1"		"maxammo secondary increased"
 			"2"		"ammo regen"
+			"3"		"ammo conservation"
 		}
 		"Status Effect Upgrades"
 		{
@@ -311,6 +314,7 @@
 			"0"		"maxammo primary increased"
 			"1"		"maxammo secondary increased"
 			"2"		"ammo regen"
+			"3"		"ammo conservation"
 		}
 		"Status Effect Upgrades"
 		{
@@ -406,6 +410,7 @@
 			"0"		"maxammo primary increased"
 			"1"		"maxammo secondary increased"
 			"2"		"ammo regen"
+			"3"		"ammo conservation"
 		}
 		"Status Effect Upgrades"
 		{
@@ -501,6 +506,7 @@
 			"0"		"maxammo primary increased"
 			"1"		"maxammo secondary increased"
 			"2"		"ammo regen"
+			"3"		"ammo conservation"
 		}
 		"Status Effect Upgrades"
 		{
@@ -595,6 +601,7 @@
 		{
 			"0"		"maxammo primary increased"
 			"1"		"ammo regen"
+			"2"		"ammo conservation"
 		}
 		"Status Effect Upgrades"
 		{
@@ -689,9 +696,10 @@
 		{
 			"0"		"maxammo secondary increased"
 			"1"		"ammo regen"
-			"2"		"cloak consume rate"
-			"3"		"cloak rate"
-			"4"		"decloak rate"
+			"2"		"ammo conservation"
+			"3"		"cloak consume rate"
+			"4"		"cloak rate"
+			"5"		"decloak rate"
 		}
 		"Status Effect Upgrades"
 		{
@@ -788,8 +796,9 @@
 			"0"		"maxammo primary increased"
 			"1"		"maxammo secondary increased"
 			"2"		"ammo regen"
-			"3"		"maxammo metal increased"
-			"4"		"metal regen"
+			"3"		"ammo conservation"
+			"4"		"maxammo metal increased"
+			"5"		"metal regen"
 		}
 		"Status Effect Upgrades"
 		{

@@ -1354,7 +1354,7 @@
 			"name"		"maxammo primary increased"
 			"ref"		"maxammo primary increased"
 			"display"		"%.0f%%"
-			"cost"		"62.5"
+			"cost"		"100.0"
 			"value"		"0.25"
 			"init"		"1.00"
 			"max"		"22.00"
@@ -1374,7 +1374,7 @@
 			"name"		"maxammo secondary increased"
 			"ref"		"maxammo secondary increased"
 			"display"		"%.0f%%"
-			"cost"		"62.5"
+			"cost"		"100.0"
 			"value"		"0.25"
 			"init"		"1.00"
 			"max"		"22.00"
@@ -1637,6 +1637,7 @@
 			"cost"		"500"
 			"value"		"0.05"
 			"init"		"0.00"
+			"description"		"Regenerate [{VALUE}*100]% of your ammo every 5s."
 			"max"		"0.5"
 		}
 		"83"
@@ -4810,7 +4811,7 @@
 			"increase_ratio"	"0.03"
 			"value"		"0.75"
 			"init"		"1"
-			"description"	"Increases your health by {[VALUE]}x.\nAffects your buildings if applicable."
+			"description"	"Increases your health by [{VALUE}]x.\nAffects your buildings if applicable."
 			"max"		"1001"
 		}
 		"1505.1"
@@ -4822,7 +4823,7 @@
 			"increase_ratio"	"0.03"
 			"value"		"0.75"
 			"init"		"1"
-			"description"	"Increases your health by {[VALUE]}x.\nAffects your buildings if applicable."
+			"description"	"Increases your health by [{VALUE}]x.\nAffects your buildings if applicable."
 			"max"		"1001"
 		}
 		"1508"
@@ -7290,6 +7291,18 @@
 			"init"		"0"
 			"max"		"1"
 		}
+		"1723"
+		{
+			"name"		"ammo conservation"
+			"ref"		"ammo conservation"
+			"attr_class"	"ammo_conservation"
+			"display"		"%.2f٪"
+			"cost"		"800"
+			"value"		"10"
+			"increase_ratio" 	"0.5"
+			"init"		"0"
+			"max"		"50"
+		}
 		//Filler
 		"1900.0"
 		{
@@ -7522,7 +7535,7 @@
 			"init"		"0.00"
 			"max"		"0.00"
 		}
-		"383.5"
+		"1900.2"
 		{
 			"name"		"projectile spread multiplier"
 			"ref"		"projectile spread multiplier"
