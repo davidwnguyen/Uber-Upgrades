@@ -28,7 +28,6 @@
 			"honorbound"					"1.0"
 			"percent of hp healed on kill"	"0.5"
 			"weapon fire rate(tweakbonus)"		"0.5"
-			"move speed bonus"				"0"
 		}
 		"Infernal Impulse"
 		{
