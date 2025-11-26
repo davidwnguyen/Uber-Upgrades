@@ -101,15 +101,6 @@
 			"Explosive Bullets Radius (tweak)"	"350.0"
 			"fire rate penalty(unremoveable)"	"50"
 		}
-		"Explosive Bullets(Shortstop)"
-		{
-			"gamestage"						"1"
-			"restriction"					"1"
-			"bullets per shot mult"			"7.5"
-			"Overall Damage"				"80"
-			"Explosive Bullets Radius (tweak)"	"350.0"
-			"fire rate penalty(unremoveable)"	"50"
-		}
 		"Explosive Bullets(S)"
 		{
 			"gamestage"						"1"

@@ -2151,9 +2151,6 @@
 	"Afterburn Damage Increased Multiplier"{
 		"en"		"Afterburn Damage Multiplier"
 	}
-	"Explosive Bullets(Shortstop)"{
-		"en"		"Explosive Bullets"
-	}
 	"Jumper"{
 		"en"		"Jumper"
 	}

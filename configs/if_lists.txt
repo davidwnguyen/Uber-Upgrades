@@ -1488,7 +1488,7 @@
 		}
 		"Special Tweaks"
 		{
-			"0"		"Explosive Bullets(Shortstop)"
+			"0"		"Explosive Bullets"
 			"1"		"Lacerating Rounds"
 		}
 	}
