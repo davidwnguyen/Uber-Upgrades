@@ -1313,7 +1313,7 @@
 		}
 		"Special Tweaks"
 		{
-			"0"		"Pressure Increase"
+			"0"		"Everlasting Flame"
 			"1"		"Temperature rise"
 		}
 	}
@@ -1340,7 +1340,7 @@
 		}
 		"Special Tweaks"
 		{
-			"0"		"Pressure Increase"
+			"0"		"Everlasting Flame"
 			"1"		"Temperature rise"
 		}
 	}

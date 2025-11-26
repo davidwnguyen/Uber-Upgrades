@@ -3307,8 +3307,8 @@
 	"Concentrated Fire"{
 		"en"		"Concentrated Fire"
 	}
-	"Pressure Increase"{
-		"en"		"Pressure Increase"
+	"Everlasting Flame"{
+		"en"		"Everlasting Flame"
 	}
 	"Temperature rise"{
 		"en"		"Temperature rise"

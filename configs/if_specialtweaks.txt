@@ -2,7 +2,7 @@
 {
 	"Special_tweaks"
 	{
-		"Pressure Increase"
+		"Everlasting Flame"
 		{
 			"gamestage"						"1"
 			"restriction"					"1"
@@ -18,8 +18,8 @@
 			"restriction"					"1"
 			"flame ammopersec increased (tweak)"	"15.0"
 			"minicrit vs burning player"			"1.0"
-			"Afterburn Damage Multiplier"		"6.0"
-			"mult crit dmg"				"10.0"
+			"Afterburn Damage Multiplier"			"6.0"
+			"critical rating"						"5.0"
 		}
 		"Honor!"
 		{
