@@ -96,8 +96,8 @@
 		{
 			"gamestage"						"1"
 			"restriction"					"1"
-			"bullets per shot mult"			"7.5"
-			"Overall Damage"				"90"
+			"bullets per shot mult"			"8"
+			"Overall Damage"				"100"
 			"Explosive Bullets Radius (tweak)"	"350.0"
 			"fire rate penalty(unremoveable)"	"50"
 		}
