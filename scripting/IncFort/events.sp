@@ -2826,9 +2826,25 @@ public MRESReturn OnAmmoPerShot(int weapon, Handle hReturn)
 	if(!IsValidClient3(client))
 		return MRES_Ignored;
 
-	float conservationRate = TF2Attrib_HookValueFloat(0.0, "ammo_conservation", weapon);
-	if(conservationRate >= GetRandomFloat() * 100){
+	float conservationRate = 1-TF2Attrib_HookValueFloat(1.0, "ammo_conservation", weapon);
+	if(conservationRate >= GetRandomFloat()){
 		DHookSetReturn(hReturn, 0);
+		return MRES_Supercede;
+	}
+	return MRES_Ignored;
+}
+
+public MRESReturn OnEnergyPerShot(int weapon)
+{
+	if(!IsValidWeapon(weapon))
+		return MRES_Ignored;
+
+	int client = getOwner(weapon);
+	if(!IsValidClient3(client))
+		return MRES_Ignored;
+
+	float conservationRate = 1-TF2Attrib_HookValueFloat(1.0, "ammo_conservation", weapon);
+	if(conservationRate >= GetRandomFloat()){
 		return MRES_Supercede;
 	}
 	return MRES_Ignored;

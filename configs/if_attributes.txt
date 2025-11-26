@@ -7296,12 +7296,12 @@
 			"name"		"ammo conservation"
 			"ref"		"ammo conservation"
 			"attr_class"	"ammo_conservation"
-			"display"		"%.2f٪"
+			"display"		"%.0f%%"
 			"cost"		"800"
-			"value"		"10"
+			"value"		"-0.1"
 			"increase_ratio" 	"0.5"
-			"init"		"0"
-			"max"		"50"
+			"init"		"1"
+			"max"		"0.5"
 		}
 		//Filler
 		"1900.0"

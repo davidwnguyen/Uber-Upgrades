@@ -1829,6 +1829,7 @@ refreshUpgrades(client, slot)
 					TF2Attrib_SetByName(client,"weapon burn dmg increased", 2.0);
 			}
 
+			TF2Attrib_SetByName(client, "flame ammopersec decreased", TF2Attrib_HookValueFloat(1.0, "ammo_conservation", client));
 		}
 		else if(IsValidEntity(slotItem) && TF2Util_IsEntityWeapon(slotItem))
 		{

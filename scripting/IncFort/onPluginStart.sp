@@ -462,6 +462,11 @@ public void OnPluginStart()
 		PrintToServer("CustomAttrs | Error with \"CTFWeaponBaseGun::GetAmmoPerShot()\" gamedata.");
 	DHookEnableDetour(AmmoPerShotHook, false, OnAmmoPerShot);
 
+	Handle EnergyPerShotHook = DHookCreateFromConf(hConf, "CTFWeaponBase::Energy_DrainEnergy()");
+	if(EnergyPerShotHook == null)
+		PrintToServer("CustomAttrs | Error with \"CTFWeaponBase::Energy_DrainEnergy()\" gamedata.");
+	DHookEnableDetour(EnergyPerShotHook, false, OnEnergyPerShot);
+
 	g_offset_CTFPlayerShared_pOuter = view_as<Address>(GameConfGetOffset(hConf, "CTFPlayerShared::m_pOuter"));
 	delete hConf;
 			

@@ -254,6 +254,13 @@
 				"return"		"int"
 				"this"			"entity"
 			}
+			"CTFWeaponBase::Energy_DrainEnergy()"
+			{
+				"signature"		"CTFWeaponBase::Energy_DrainEnergy()"
+				"callconv"		"thiscall"
+				"return"		"void"
+				"this"			"entity"
+			}
 		}
 		"Signatures"
 		{
@@ -395,6 +402,11 @@
 			{
 				"library"	"server"
 				"linux"		"@_ZN16CTFWeaponBaseGun14GetAmmoPerShotEv"
+			}
+			"CTFWeaponBase::Energy_DrainEnergy()"
+			{
+				"library"	"server"
+				"linux"		"@_ZN13CTFWeaponBase18Energy_DrainEnergyEv"
 			}
 		}
 	}
