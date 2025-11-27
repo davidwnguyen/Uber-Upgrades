@@ -260,7 +260,7 @@
 	{
 		"index"			"200"
 		"weapon_class"	"tf_weapon_scattergun"
-		"weapon_menu"	"tf_weapon_scattergun"
+		"weapon_menu"	"tf_weapon_shotgun_building_rescue"
 		"class"			"scout"
 		"description"	"Fires a burst of 3 rockets rapidly.\nConverts all fire rate into damage bonus.\n+100% projectile speed."
 		"cost"			"10000.0"
@@ -354,7 +354,7 @@
 	{
 		"index"			"200"
 		"weapon_class"	"tf_weapon_scattergun"
-		"weapon_menu"	"tf_weapon_scattergun"
+		"weapon_menu"	"tf_weapon_shotgun_building_rescue"
 		"class"			"scout"
 		"description"	"-40% bullets per shot. -34% damage dealt.\nShoots three round bursts of burning tracer rounds.\nConverts fire rate into damage bonus."
 		"cost"			"5000.0"

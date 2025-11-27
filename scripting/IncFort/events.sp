@@ -1860,10 +1860,9 @@ public Action OnPlayerRunCmd(int client, int& buttons, int& impulse, float vel[3
 
 		if (impulse == 201 && ImpulseTimer[client] < GetGameTime())
 		{
-			if(currentitem_level[client][3] == 242 && client_new_weapon_ent_id[client] != 0 && IsValidEdict(client_new_weapon_ent_id[client]))
+			if(IsValidEntity(client_new_weapon_ent_id[client]))
 			{
 				TF2Util_SetPlayerActiveWeapon(client, client_new_weapon_ent_id[client]);
-				//SetEntPropFloat(client_new_weapon_ent_id[client], Prop_Send, "m_flNextPrimaryAttack", 0.3+GetGameTime()+(1/weaponFireRate[client_new_weapon_ent_id[client]]));
 			}
 			ImpulseTimer[client] = GetGameTime()+0.3;
 		}
@@ -2456,31 +2455,32 @@ public OnGameFrame()
 	int i = -1;
 	while ((i = FindEntityByClassname(i, "*")) != -1)
 	{
-		if(IsValidEdict(i)){
-			if(isProjectileHoming[i])
-				OnThinkPost(i);
-			
-			if(isProjectileBoomerang[i])
-				BoomerangThink(i);
-			
-			if(projectileHomingDegree[i] > 0.0)
-				OnHomingThink(i);
-			
-			if(isEntitySentry[i])
-			{
-				sentryThought[i] = false;
-				SDKCall(g_SDKCallSentryThink, i);
-			}
+		if(!IsValidEdict(i))
+			continue;
 
-			if(homingRadius[i] > 0.0 && homingDelay[i] < GetGameTime() - entitySpawnTime[i])
-				OnEntityHomingThink(i);
-			
-			if(isProjectileFireball[i])
-				OnFireballThink(i);
+		if(isProjectileHoming[i])
+			OnThinkPost(i);
+		
+		if(projectileHomingDegree[i] > 0.0)
+			OnHomingThink(i);
 
-			if(isAimlessProjectile[i])
-				OnAimlessThink(i);
+		if(homingRadius[i] > 0.0 && homingDelay[i] < GetGameTime() - entitySpawnTime[i])
+			OnEntityHomingThink(i);
+		
+		if(isEntitySentry[i])
+		{
+			sentryThought[i] = false;
+			SDKCall(g_SDKCallSentryThink, i);
 		}
+		
+		if(isProjectileFireball[i])
+			OnFireballThink(i);
+
+		if(isAimlessProjectile[i])
+			OnAimlessThink(i);
+
+		if(isProjectileBoomerang[i])
+			BoomerangThink(i);
 	}
 	for(int client=1; client<=MaxClients; client++)
 	{
@@ -3434,6 +3434,7 @@ public OnClientDisconnect(client)
 }
 public OnClientPutInServer(client)
 {
+	ResetClientUpgrades(client);
 	fl_MaxFocus[client] = 100.0;
 	fl_CurrentFocus[client] = 100.0;
 	BleedMaximum[client] = 100.0;

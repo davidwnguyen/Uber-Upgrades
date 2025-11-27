@@ -63,7 +63,7 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 			else
 				damage *= dmgReduction
 
-			float linearReduction = TF2Attrib_HookValueFloat(1.0, "dmg taken divided", victim);
+			float linearReduction = TF2Attrib_HookValueFloat(1.0, "dmg_taken_divided", victim);
 			if(linearReduction != 1.0)
 				damage /= linearReduction;
 
@@ -874,7 +874,7 @@ public Action OnTakeDamage(victim, &attacker, &inflictor, float &damage, &damage
 			if(dmgReduction != 1.0)
 				damage *= dmgReduction
 
-			float linearReduction = TF2Attrib_HookValueFloat(1.0, "dmg taken divided", victim);
+			float linearReduction = TF2Attrib_HookValueFloat(1.0, "dmg_taken_divided", victim);
 			if(linearReduction != 1.0)
 				damage /= linearReduction;
 

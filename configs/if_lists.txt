@@ -44,7 +44,6 @@
 				"1"		"ap (global)"
 				"2"		"Arcane Power"
 				"4"		"Focus Regeneration"
-				"5"		"Arcane Spell Level"
 			}
 			"!Tier 1 Arcane Spells"
 			{
@@ -140,7 +139,6 @@
 				"1"		"ap (global)"
 				"2"		"Arcane Power"
 				"4"		"Focus Regeneration"
-				"5"		"Arcane Spell Level"
 			}
 			"!Tier 1 Arcane Spells"
 			{
@@ -236,7 +234,6 @@
 				"1"		"ap (global)"
 				"2"		"Arcane Power"
 				"4"		"Focus Regeneration"
-				"5"		"Arcane Spell Level"
 			}
 			"!Tier 1 Arcane Spells"
 			{
@@ -332,7 +329,6 @@
 				"1"		"ap (global)"
 				"2"		"Arcane Power"
 				"4"		"Focus Regeneration"
-				"5"		"Arcane Spell Level"
 			}
 			"!Tier 1 Arcane Spells"
 			{
@@ -428,7 +424,6 @@
 				"1"		"ap (global)"
 				"2"		"Arcane Power"
 				"4"		"Focus Regeneration"
-				"5"		"Arcane Spell Level"
 			}
 			"!Tier 1 Arcane Spells"
 			{
@@ -524,7 +519,6 @@
 				"1"		"ap (global)"
 				"2"		"Arcane Power"
 				"4"		"Focus Regeneration"
-				"5"		"Arcane Spell Level"
 			}
 			"!Tier 1 Arcane Spells"
 			{
@@ -619,7 +613,6 @@
 				"1"		"ap (global)"
 				"2"		"Arcane Power"
 				"4"		"Focus Regeneration"
-				"5"		"Arcane Spell Level"
 			}
 			"!Tier 1 Arcane Spells"
 			{
@@ -717,7 +710,6 @@
 				"1"		"ap (global)"
 				"2"		"Arcane Power"
 				"4"		"Focus Regeneration"
-				"5"		"Arcane Spell Level"
 			}
 			"!Tier 1 Arcane Spells"
 			{
@@ -816,7 +808,6 @@
 				"1"		"ap (global)"
 				"2"		"Arcane Power"
 				"4"		"Focus Regeneration"
-				"5"		"Arcane Spell Level"
 			}
 			"!Tier 1 Arcane Spells"
 			{
@@ -1488,7 +1479,7 @@
 		}
 		"Special Tweaks"
 		{
-			"0"		"Explosive Bullets"
+			"0"		"Explosive Bullets(P)"
 			"1"		"Lacerating Rounds"
 		}
 	}

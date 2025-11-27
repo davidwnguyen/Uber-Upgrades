@@ -374,7 +374,7 @@ public Action:Timer_Every100MS(Handle timer)
 			}
 			if(BleedBuildup[client] > 0.0 || RadiationBuildup[client] > 0.0)
 			{
-				char StatusEffectText[1024]
+				char StatusEffectText[256]
 				Format(StatusEffectText, sizeof(StatusEffectText), " | Status Effects | "); 
 				
 				if(BleedBuildup[client] > 0.0)
@@ -402,7 +402,7 @@ public Action:Timer_Every100MS(Handle timer)
 					StrCat(StatusEffectText,sizeof(StatusEffectText),buildup);
 				}
 				
-				SetHudTextParams(0.43, 0.21, 0.21, 199, 28, 28, 255, 0, 0.0, 0.0, 0.0);
+				SetHudTextParams(0.43, 0.21, 0.4, 199, 28, 28, 255, 0, 0.0, 0.0, 0.0);
 				ShowSyncHudText(client, hudStatus, StatusEffectText);
 			}
 			char StatusEffectText[256]
@@ -1562,7 +1562,7 @@ public Action:WeaponReGiveUpgrades(Handle timer, any:userid)
 			client_respawn_handled[client] = 1
 			for (int slot = 0; slot < NB_SLOTS_UED; slot++)
 			{
-				if (slot == 3 && client_new_weapon_ent_id[client])
+				if (slot == 3 && IsValidEntity(client_new_weapon_ent_id[client]))
 				{
 					GiveNewWeapon(client, 3);
 				}

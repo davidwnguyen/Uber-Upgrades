@@ -360,47 +360,59 @@ stock MoveForward(const float vPos[3], const float vAng[3], float vReturn[3], fl
     vReturn[1] += vDir[1] * fDistance;
 	vReturn[2] += vDir[2] * fDistance;
 }
-stock GetClosestTarget(entity, owner, bool isFriendly = false, bool pierceWalls = false)
+stock GetClosestTarget(entity, owner, bool isFriendly = false)
 {
+	if(!IsValidClient3(owner)) 
+		return -1;
+
 	float TargetDistance = 0.0;
 	int ClosestTarget = 0;
-	for(int i = 1; i <= MaxClients; ++i) 
-	{
-		if(ShouldNotHome[entity][i] || !IsValidClient3(i) || !IsValidClient3(owner) || i == owner || (!isFriendly && GetClientTeam(owner) == GetClientTeam(i)) || (isFriendly && GetClientTeam(owner) != GetClientTeam(i)) || !IsValidForHoming( i, owner, entity) || !IsAbleToSee(owner, i)) continue;
-		float EntityLocation[3], TargetLocation[3];
-		GetEntPropVector(entity, Prop_Data, "m_vecAbsOrigin", EntityLocation);
-		GetClientAbsOrigin(i, TargetLocation);
-		if(pierceWalls == false)
+	float EntityPosition[3], TargetPosition[3], OwnerPosition[3];
+	GetEntPropVector(entity, Prop_Data, "m_vecAbsOrigin", EntityPosition);
+	GetClientEyePosition(owner, OwnerPosition);
+	if(isFriendly) {
+		for(int i = 1; i <= MaxClients; ++i) 
 		{
-			Handle hTrace = TR_TraceRayFilterEx( TargetLocation, EntityLocation, MASK_SOLID, RayType_EndPoint, TraceFilterIgnoreSelf, entity ); 
-			if( hTrace != INVALID_HANDLE )
+			if(ShouldNotHome[entity][i] || 
+				!IsClientConnected(i) ||
+				GetClientTeam(owner) != GetClientTeam(i) || 
+				!IsValidForHoming(i, owner, entity)) 
+				continue;
+
+			GetClientAbsOrigin(i, TargetPosition);
+			if(!IsPointVisible(OwnerPosition, TargetPosition))
+				continue;
+
+			float distance = GetVectorDistance(EntityPosition, TargetPosition, true);
+			if(TargetDistance)
 			{
-				if( TR_DidHit( hTrace ) )
-				{
-					CloseHandle( hTrace ); 
-					continue; 
-				}
-				
-				CloseHandle( hTrace ); 
-				float distance = GetVectorDistance(EntityLocation, TargetLocation, true);
-				if(TargetDistance)
-				{
-					if(distance < TargetDistance) 
-					{
-						ClosestTarget = i;
-						TargetDistance = distance;			
-					}
-				}
-				else
+				if(distance < TargetDistance) 
 				{
 					ClosestTarget = i;
-					TargetDistance = distance;
+					TargetDistance = distance;			
 				}
 			}
+			else
+			{
+				ClosestTarget = i;
+				TargetDistance = distance;
+			}
 		}
-		else
+	}
+	else {
+		for(int i = 1; i <= MaxClients; ++i) 
 		{
-			float distance = GetVectorDistance(EntityLocation, TargetLocation, true);
+			if(ShouldNotHome[entity][i] || 
+				!IsClientConnected(i) ||
+				GetClientTeam(owner) == GetClientTeam(i) || 
+				!IsValidForHoming(i, owner, entity)) 
+				continue;
+
+			GetClientAbsOrigin(i, TargetPosition);
+			if(!IsPointVisible(OwnerPosition, TargetPosition))
+				continue;
+
+			float distance = GetVectorDistance(EntityPosition, TargetPosition, true);
 			if(TargetDistance)
 			{
 				if(distance < TargetDistance) 
@@ -509,27 +521,19 @@ public bool TraceFilterIgnoreSelf( entity, contentsMask, any:hiok )
     if ( entity == hiok || entity > 0 && entity <= MaxClients ) return false; 
     return true; 
 }
-stock bool IsValidForHoming( client, owner, entity)
+stock bool IsValidForHoming(client, owner, entity)
 {
-    if ( IsValidClient3( owner ) && IsValidClient3( client ) && IsValidEdict( entity ) )
-    {
-        float OwnerPos[3], TargetPos[3]; 
-        GetClientAbsOrigin( owner, OwnerPos ); 
-        GetClientAbsOrigin( client, TargetPos );
-        if ( GetVectorDistance(OwnerPos, TargetPos, true) <= 21316.0 ) return false; 
-    
-        int team = GetEntProp( entity, Prop_Send, "m_iTeamNum" ); 
-        if (IsPlayerAlive( client ) && client != owner)
-        {
-            if ( !TF2_IsPlayerInCondition( client, TFCond_Cloaked ) && !TF2_IsPlayerInCondition( client, TFCond_Ubercharged )
-			&& !TF2_IsPlayerInCondition( client, TFCond_Bonked ) && !TF2_IsPlayerInCondition( client, TFCond_Stealthed )
-			&& !TF2_IsPlayerInCondition( client, TFCond_BlastImmune ) && !TF2_IsPlayerInCondition( client, TFCond_HalloweenGhostMode )
-			&& !TF2_IsPlayerInCondition( client, TFCond_Disguised ) && GetEntProp( client, Prop_Send, "m_nDisguiseTeam" ) != team )
-            {
-               return true;
-            }
-        }
-    }
+	int team = GetEntProp( entity, Prop_Send, "m_iTeamNum" ); 
+	if (IsPlayerAlive(client) && client != owner)
+	{
+		if ( !TF2_IsPlayerInCondition( client, TFCond_Cloaked ) && !TF2_IsPlayerInCondition( client, TFCond_Ubercharged)
+		&& !TF2_IsPlayerInCondition( client, TFCond_UberchargedHidden ) && !TF2_IsPlayerInCondition( client, TFCond_Bonked ) 
+		&& !TF2_IsPlayerInCondition( client, TFCond_Stealthed ) && !TF2_IsPlayerInCondition( client, TFCond_HalloweenGhostMode )
+		&& !TF2_IsPlayerInCondition( client, TFCond_Disguised ) && GetEntProp( client, Prop_Send, "m_nDisguiseTeam" ) != team )
+		{
+			return true;
+		}
+	}
     return false; 
 }
 

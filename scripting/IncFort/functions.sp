@@ -25,7 +25,7 @@ float GetResistance(int client, bool includeReduction = false, float penetration
 		TotalResistance -= penetration;
 	}
 	
-	TotalResistance *= TotalResistance;
+	TotalResistance = Pow(TotalResistance, 2.75);
 
 	if(TotalResistance < 1){
 		TotalResistance = 1.0;
@@ -1024,8 +1024,8 @@ public ResetClientUpgrade_slot(client, slot)
 		currentitem_ent_idx[client][slot] = -1
 		upgrades_weapon_current[client] = -1;
 		GiveNewUpgradedWeapon_(client, slot)
-		client_new_weapon_ent_id[client] = 0;
-		client_new_weapon_ent_id_mvm_chkp[client] = 0;
+		client_new_weapon_ent_id[client] = -1;
+		client_new_weapon_ent_id_mvm_chkp[client] = -1;
 	}
 	if (slot == 4)
 	{
@@ -1714,11 +1714,11 @@ public TFObjectType function_GetBuildingType(int entIndex){
 //PostUpgrade
 refreshUpgrades(client, slot)
 {
-	if(IsValidClient3(client) && IsPlayerAlive(client))
+	if(IsValidClient3(client))
 	{
 		current_class[client] = TF2_GetPlayerClass(client);
 		int slotItem;
-		if(slot == 3 && IsValidEdict(client_new_weapon_ent_id[client]) && client_new_weapon_ent_id[client] > 0)
+		if(slot == 3 && IsValidEntity(client_new_weapon_ent_id[client]))
 		{
 			slotItem = client_new_weapon_ent_id[client];
 		}
@@ -1833,8 +1833,6 @@ refreshUpgrades(client, slot)
 		}
 		else if(IsValidEntity(slotItem) && TF2Util_IsEntityWeapon(slotItem))
 		{
-			TF2Attrib_SetByName(slotItem, "projectile spread multiplier", TF2Attrib_HookValueFloat(1.0, "mult_spread_scale", slotItem));
-
 			Address reloadActive = TF2Attrib_GetByName(slotItem, "multiple sentries");
 			if(reloadActive!=Address_Null)
 				SetEntProp(slotItem, Prop_Data, "m_bReloadsSingly", TF2Attrib_GetValue(reloadActive) != 0 ? 0 : 1);
@@ -1905,7 +1903,18 @@ refreshUpgrades(client, slot)
 				if(TF2Util_IsEntityWeapon(slotItem) && TF2Util_GetWeaponSlot(slotItem) == TFWeaponSlot_Melee)
 					TF2Attrib_SetByName(slotItem,"mult smack time", 1.0/TF2Attrib_GetValue(firerateActive));
 			}
-			TF2Attrib_ClearCache(slotItem);
+		}
+
+		for(int i = 0;i < NB_SLOTS_UED; i++) {
+			int weapon = TF2Util_GetPlayerLoadoutEntity(client, i);
+			if(!IsValidEntity(weapon))
+				continue;
+
+			TF2Attrib_SetByName(weapon, "projectile spread multiplier", TF2Attrib_HookValueFloat(1.0, "mult_spread_scale", weapon));
+		}
+
+		if(IsValidEntity(client_new_weapon_ent_id[client])) {
+			TF2Attrib_SetByName(client_new_weapon_ent_id[client], "projectile spread multiplier", TF2Attrib_HookValueFloat(1.0, "mult_spread_scale", client_new_weapon_ent_id[client]));
 		}
 	}
 }
