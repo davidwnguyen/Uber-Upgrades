@@ -253,7 +253,7 @@ int currentitem_ent_idx[MAXPLAYERS+1][NB_SLOTS_UED+1]
 int currentitem_catidx[MAXPLAYERS+1][NB_SLOTS_UED+1]
 int upgrades_ref_to_idx[MAXPLAYERS+1][NB_SLOTS_UED+1][MAX_ATTRIBUTES]
 int _u_id;
-int client_new_weapon_ent_id[MAXPLAYERS+1]
+int UniqueWeaponRef[MAXPLAYERS+1]
 int client_last_up_slot[MAXPLAYERS+1]
 int client_last_up_idx[MAXPLAYERS+1]		
 int client_respawn_handled[MAXPLAYERS+1]
@@ -437,7 +437,7 @@ TFClassType allowedBotClasses[] = {TFClass_Scout,TFClass_Soldier,TFClass_Pyro,TF
 int currentupgrades_idx_mvm_chkp[MAXPLAYERS+1][NB_SLOTS_UED+1][MAX_ATTRIBUTES_ITEM]
 int currentupgrades_number_mvm_chkp[MAXPLAYERS+1][NB_SLOTS_UED+1]
 int upgrades_ref_to_idx_mvm_chkp[MAXPLAYERS+1][NB_SLOTS_UED+1][MAX_ATTRIBUTES]
-int client_new_weapon_ent_id_mvm_chkp[MAXPLAYERS+1]
+int UniqueWeaponRef_mvm_chkp[MAXPLAYERS+1]
 int currentupgrades_restriction_mvm_chkp[MAXPLAYERS+1][NB_SLOTS_UED+1][5];
 float currentupgrades_val_mvm_chkp[MAXPLAYERS+1][NB_SLOTS_UED+1][MAX_ATTRIBUTES_ITEM]
 float client_spent_money_mvm_chkp[MAXPLAYERS+1][NB_SLOTS_UED+1]

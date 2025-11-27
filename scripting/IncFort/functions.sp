@@ -787,27 +787,23 @@ CheckForAttunement(client)
 }
 public bool GiveNewWeapon(client, slot)
 {
-	Handle newItem = TF2Items_CreateItem(PRESERVE_ATTRIBUTES+FORCE_GENERATION);
-	int Flags = 0;
+	int oldWeapon = EntRefToEntIndex(UniqueWeaponRef[client]);
+	if(IsValidEntity(oldWeapon)) {
+		EquipPlayerWeapon(client, oldWeapon);
+		return true;
+	}
 	
-	int itemDefinitionIndex = currentitem_idx[client][slot]
-	TF2Items_SetItemIndex(newItem, itemDefinitionIndex);
-	
+	Handle newItem = TF2Items_CreateItem(PRESERVE_ATTRIBUTES|FORCE_GENERATION);
 	TF2Items_SetLevel(newItem, 242);
-	
-	Flags = PRESERVE_ATTRIBUTES;
-	Flags |= FORCE_GENERATION;
-	
-	TF2Items_SetFlags(newItem, Flags);
-	
+	TF2Items_SetItemIndex(newItem, currentitem_idx[client][slot]);
 	TF2Items_SetClassname(newItem, currentitem_classname[client][slot]);
 	
 	int entity = TF2Items_GiveNamedItem(client, newItem);
 	if (IsValidEdict(entity))
 	{
-		client_new_weapon_ent_id[client] = entity;
+		UniqueWeaponRef[client] = EntIndexToEntRef(entity);
 		currentitem_level[client][slot] = 242;
-		GiveNewUpgradedWeapon_(client, slot)
+		GiveNewUpgradedWeapon_(client, slot);
 		EquipPlayerWeapon(client, entity);
 		return true;
 	}
@@ -829,7 +825,7 @@ void GiveNewUpgradedWeapon_(int client, int slot)
 	else
 	{
 		slot = 3
-		iEnt = client_new_weapon_ent_id[client];
+		iEnt = EntRefToEntIndex(UniqueWeaponRef[client]);
 	}
 	if (IsValidEdict(iEnt) && HasEntProp(iEnt, Prop_Send, "m_AttributeList"))
 	{
@@ -1024,8 +1020,8 @@ public ResetClientUpgrade_slot(client, slot)
 		currentitem_ent_idx[client][slot] = -1
 		upgrades_weapon_current[client] = -1;
 		GiveNewUpgradedWeapon_(client, slot)
-		client_new_weapon_ent_id[client] = -1;
-		client_new_weapon_ent_id_mvm_chkp[client] = -1;
+		UniqueWeaponRef[client] = -1;
+		UniqueWeaponRef_mvm_chkp[client] = -1;
 	}
 	if (slot == 4)
 	{
@@ -1718,9 +1714,10 @@ refreshUpgrades(client, slot)
 	{
 		current_class[client] = TF2_GetPlayerClass(client);
 		int slotItem;
-		if(slot == 3 && IsValidEntity(client_new_weapon_ent_id[client]))
+		int uniqueWeaponID = EntRefToEntIndex(UniqueWeaponRef[client])
+		if(slot == 3 && IsValidEntity(uniqueWeaponID))
 		{
-			slotItem = client_new_weapon_ent_id[client];
+			slotItem = uniqueWeaponID;
 		}
 		else
 		{
@@ -1913,8 +1910,8 @@ refreshUpgrades(client, slot)
 			TF2Attrib_SetByName(weapon, "projectile spread multiplier", TF2Attrib_HookValueFloat(1.0, "mult_spread_scale", weapon));
 		}
 
-		if(IsValidEntity(client_new_weapon_ent_id[client])) {
-			TF2Attrib_SetByName(client_new_weapon_ent_id[client], "projectile spread multiplier", TF2Attrib_HookValueFloat(1.0, "mult_spread_scale", client_new_weapon_ent_id[client]));
+		if(IsValidEntity(uniqueWeaponID)) {
+			TF2Attrib_SetByName(uniqueWeaponID, "projectile spread multiplier", TF2Attrib_HookValueFloat(1.0, "mult_spread_scale", uniqueWeaponID));
 		}
 	}
 }

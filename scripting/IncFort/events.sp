@@ -1359,7 +1359,7 @@ public Event_mvm_wave_begin(Handle event, const char[] name, bool:dontBroadcast)
 					currentupgrades_restriction_mvm_chkp[client][slot][y] = currentupgrades_restriction[client][slot][y];
 				}
 			}
-			client_new_weapon_ent_id_mvm_chkp[client] = client_new_weapon_ent_id[client];
+			UniqueWeaponRef_mvm_chkp[client] = UniqueWeaponRef[client];
 		}
 	}
 	StartMoneySaved = StartMoney + additionalstartmoney;
@@ -1860,9 +1860,9 @@ public Action OnPlayerRunCmd(int client, int& buttons, int& impulse, float vel[3
 
 		if (impulse == 201 && ImpulseTimer[client] < GetGameTime())
 		{
-			if(IsValidEntity(client_new_weapon_ent_id[client]))
+			if(IsValidEntity(EntRefToEntIndex(UniqueWeaponRef[client])))
 			{
-				TF2Util_SetPlayerActiveWeapon(client, client_new_weapon_ent_id[client]);
+				TF2Util_SetPlayerActiveWeapon(client, EntRefToEntIndex(UniqueWeaponRef[client]));
 			}
 			ImpulseTimer[client] = GetGameTime()+0.3;
 		}

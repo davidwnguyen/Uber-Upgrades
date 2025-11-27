@@ -838,10 +838,10 @@ public Menu_ShowStatsSlot(client, param2)
 			AddMenuItem(menu, "melee_description", Description, ITEMDRAW_DISABLED);
 		}
 	}
-	else if(param2 == 4 && IsValidWeapon(client_new_weapon_ent_id[client]))
+	else if(param2 == 4 && IsValidWeapon(EntRefToEntIndex(UniqueWeaponRef[client])))
 	{
 		char strName[64];
-		int weapon = client_new_weapon_ent_id[client];
+		int weapon = EntRefToEntIndex(UniqueWeaponRef[client]);
 		GetEntityClassname(weapon, strName, 64)
 		if(StrContains(strName, "weapon") != -1)
 		{

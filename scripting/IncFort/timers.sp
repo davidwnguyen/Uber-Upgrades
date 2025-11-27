@@ -1530,7 +1530,7 @@ public Action WaveFailed(Handle timer)
 							currentupgrades_restriction[client][slot][y] = currentupgrades_restriction_mvm_chkp[client][slot][y];
 						}
 					}
-					client_new_weapon_ent_id[client] = client_new_weapon_ent_id_mvm_chkp[client];
+					UniqueWeaponRef[client] = UniqueWeaponRef_mvm_chkp[client];
 					if (!client_respawn_handled[client])
 					{
 						CreateTimer(2.0, ClChangeClassTimer, GetClientUserId(client));
@@ -1562,7 +1562,7 @@ public Action:WeaponReGiveUpgrades(Handle timer, any:userid)
 			client_respawn_handled[client] = 1
 			for (int slot = 0; slot < NB_SLOTS_UED; slot++)
 			{
-				if (slot == 3 && IsValidEntity(client_new_weapon_ent_id[client]))
+				if (slot == 3 && currentitem_level[client][3] == 242)
 				{
 					GiveNewWeapon(client, 3);
 				}

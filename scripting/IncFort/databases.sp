@@ -61,9 +61,9 @@ SavePlayerData(client)
 
 	pack.WriteCell(current_class[client]);
 	if(IsMvM())
-		pack.WriteCell(client_new_weapon_ent_id_mvm_chkp[client]);
+		pack.WriteCell(UniqueWeaponRef_mvm_chkp[client]);
 	else
-		pack.WriteCell(client_new_weapon_ent_id[client]);
+		pack.WriteCell(UniqueWeaponRef[client]);
 
 	pack.WriteCell(upgrades_weapon_current[client]);
 	Format(queryString, sizeof(queryString), "REPLACE INTO PlayerList (steamid, datapack) VALUES ('%s', '%i')", steamid, pack);
@@ -169,8 +169,8 @@ GivePlayerData(client)
 			CurrencyFormulated -= client_spent_money[client][s];
 		}
 		current_class[client] = pack.ReadCell();
-		client_new_weapon_ent_id[client] = pack.ReadCell();
-		client_new_weapon_ent_id_mvm_chkp[client] = client_new_weapon_ent_id[client]
+		UniqueWeaponRef[client] = pack.ReadCell();
+		UniqueWeaponRef_mvm_chkp[client] = UniqueWeaponRef[client]
 		upgrades_weapon_current[client] = pack.ReadCell();
 		previous_class[client] = current_class[client];
 		CurrencyOwned[client] = CurrencyFormulated;
