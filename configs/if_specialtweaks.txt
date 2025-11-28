@@ -302,7 +302,7 @@
 		{
 			"gamestage"						"1"
 			"restriction"					"1"
-			"buff plunder multiplier"		"10"
+			"buff plunder multiplier"		"3.5"
 			"Banner Summons Lightning"		"10"
 		}
 		"Barrage"

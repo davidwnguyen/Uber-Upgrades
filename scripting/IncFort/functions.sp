@@ -521,13 +521,13 @@ public void ManagePlayerBuffs(int i){
 	if(additiveDamageTakenBuff*multiplicativeDamageTakenBuff > 1.0)
 		Format(details, sizeof(details), "%s\n+%i٪ Damage Vulnerability", details, RoundToNearest(((additiveDamageTakenBuff*multiplicativeDamageTakenBuff)-1.0)*100.0) );
 	else if (additiveDamageTakenBuff*multiplicativeDamageTakenBuff < 1.0)
-		Format(details, sizeof(details), "%s\n-%i٪ Damage Taken", details, RoundToNearest( (1.0-(additiveDamageTakenBuff*multiplicativeDamageTakenBuff)) *100.0) );
+		Format(details, sizeof(details), "%s\n-%i٪ Damage Taken", details, RoundToNearest((1.0-(additiveDamageTakenBuff*multiplicativeDamageTakenBuff)) *100.0) );
 
 	float healingMult = GetPlayerHealingMultiplier(i);
 	if(healingMult > 1.0)
-		Format(details, sizeof(details), "%s\n+%i٪ Healing Received", details, RoundToNearest( (healingMult - 1.0) * 100.0) );
+		Format(details, sizeof(details), "%s\n+%i٪ Healing Received", details, RoundToNearest((healingMult - 1.0) * 100.0) );
 	else if (healingMult < 1.0)
-		Format(details, sizeof(details), "%s\n-%i٪ Healing Received", details, RoundToNearest( (1.0-healingMult) * 100.0) );
+		Format(details, sizeof(details), "%s\n-%i٪ Healing Received", details, RoundToNearest((1.0-healingMult) * 100.0) );
 
 	SendItemInfo(i, details);
 }
@@ -676,17 +676,17 @@ stock EntityExplosion(owner, float damage, float radius, float pos[3], soundType
 	}
 	if(visual)
 	{
-		/*int particle = CreateEntityByName( "info_particle_system" );
-		if ( IsValidEdict( particle ) )
+		/*int particle = CreateEntityByName("info_particle_system" );
+		if (IsValidEdict(particle ) )
 		{
-			TeleportEntity( particle, pos, NULL_VECTOR, NULL_VECTOR );
-			DispatchKeyValue( particle, "effect_name", "ExplosionCore_MidAir" );
-			DispatchSpawn( particle );
-			ActivateEntity( particle );
-			AcceptEntityInput( particle, "start" );
-			SetVariantString( "OnUser1 !self:Kill::8:-1" );
-			AcceptEntityInput( particle, "AddOutput" );
-			AcceptEntityInput( particle, "FireUser1" );
+			TeleportEntity(particle, pos, NULL_VECTOR, NULL_VECTOR );
+			DispatchKeyValue(particle, "effect_name", "ExplosionCore_MidAir" );
+			DispatchSpawn(particle );
+			ActivateEntity(particle );
+			AcceptEntityInput(particle, "start" );
+			SetVariantString("OnUser1 !self:Kill::8:-1" );
+			AcceptEntityInput(particle, "AddOutput" );
+			AcceptEntityInput(particle, "FireUser1" );
 			CreateTimer(0.01, SelfDestruct, EntIndexToEntRef(particle));
 		}*/
 		CreateParticleEx(-1, particle, -1, -1, pos);
@@ -830,7 +830,7 @@ void GiveNewUpgradedWeapon_(int client, int slot)
 	if (IsValidEdict(iEnt) && HasEntProp(iEnt, Prop_Send, "m_AttributeList"))
 	{
 		TF2Attrib_RemoveByName(iEnt, "bullets per shot bonus");
-		if( iNumAttributes > 0 )
+		if(iNumAttributes > 0 )
 		{
 			float multiplier = GetAttribute(iEnt, "upgrade effectiveness", 1.0);
 			for(int a = 0; a < iNumAttributes ; a++ )
@@ -1057,7 +1057,7 @@ public DefineAttributesTab(client, itemidx, slot, entity)
 		int attributeIndexes[21];
 		int attributeCount = TF2Attrib_ListDefIndices(entity, attributeIndexes);
 		Address attr;
-		for( a = 0, a2 = 0; a < attributeCount && a < 21; a++ )
+		for(a = 0, a2 = 0; a < attributeCount && a < 21; a++ )
 		{
 			attr = TF2Attrib_GetByDefIndex(entity, attributeIndexes[a]);
 			if(attr == Address_Null)
@@ -1065,7 +1065,7 @@ public DefineAttributesTab(client, itemidx, slot, entity)
 
 			char Buf[64]
 			a_i = attributeIndexes[a];
-			TF2Econ_GetAttributeName( a_i, Buf, 64);
+			TF2Econ_GetAttributeName(a_i, Buf, 64);
 			if (GetTrieValue(_upg_names, Buf, i))
 			{	
 				currentupgrades_idx[client][slot][a2] = i
@@ -1086,7 +1086,7 @@ public DefineAttributesTab(client, itemidx, slot, entity)
 			}
 			if(cancel){continue;}
 			char Buf[64]
-			TF2Econ_GetAttributeName( a_i, Buf, 64);
+			TF2Econ_GetAttributeName(a_i, Buf, 64);
 			if (GetTrieValue(_upg_names, Buf, i))
 			{
 				currentupgrades_idx[client][slot][a2] = i
@@ -1099,7 +1099,7 @@ public DefineAttributesTab(client, itemidx, slot, entity)
 		delete inumAttr;
 
 		if(currentitem_level[client][slot] == 242){
-			for( a = 0; a < upgrades_weapon_nb_att[upgrades_weapon_current[client]] && a < 42; a++ )
+			for(a = 0; a < upgrades_weapon_nb_att[upgrades_weapon_current[client]] && a < 42; a++ )
 			{
 				currentupgrades_idx[client][slot][a2] = upgrades_weapon_att_idx[upgrades_weapon_current[client]][a]
 				upgrades_ref_to_idx[client][slot][currentupgrades_idx[client][slot][a2]] = a2;
@@ -1632,7 +1632,7 @@ public void function_AllowBuilding(int client){
 
 		decl String:netclass[32];
 		GetEntityNetClass(i, netclass, sizeof(netclass));
-		if ( !(strcmp(netclass, "CObjectSentrygun") == 0 || strcmp(netclass, "CObjectDispenser") == 0) ){
+		if (!(strcmp(netclass, "CObjectSentrygun") == 0 || strcmp(netclass, "CObjectDispenser") == 0) ){
 			continue;
 		}
 
@@ -1677,7 +1677,7 @@ public void function_AllowDestroying(int client){
 		decl String:netclass[32];
 		GetEntityNetClass(i, netclass, sizeof(netclass));
 
-		if ( !(strcmp(netclass, "CObjectSentrygun") == 0 || strcmp(netclass, "CObjectDispenser") == 0) ){
+		if (!(strcmp(netclass, "CObjectSentrygun") == 0 || strcmp(netclass, "CObjectDispenser") == 0) ){
 			continue;
 		}
 
@@ -1785,8 +1785,6 @@ refreshUpgrades(client, slot)
 				float precisionPowerupValue = TF2Attrib_GetValue(precisionPowerup);
 				if(precisionPowerupValue == 1){
 					TF2Attrib_SetByName(client,"weapon spread bonus", 0.05);
-					TF2Attrib_SetByName(client,"Projectile speed increased", 2.0);
-					TF2Attrib_SetByName(client,"Projectile range increased", 1.35);
 					TF2Attrib_SetByName(client,"sniper charge per sec", 1.75);
 					TF2Attrib_SetByName(client,"blast dmg to self increased", 0.001);
 					if(current_class[client] == TFClass_DemoMan)
@@ -2877,7 +2875,7 @@ SentryDelay(entity)
 		float ClientPosition[3];
 		int ClosestClient = -1;
 		GetEntPropVector(entity, Prop_Data, "m_vecAbsOrigin", EntityPos); 
-		for( int client = 1; client <= MaxClients; client++ )
+		for(int client = 1; client <= MaxClients; client++ )
 		{
 			if(IsValidClient(client) && !IsClientObserver(client) && IsPlayerAlive(client))
 			{ 
@@ -2930,58 +2928,6 @@ public void SetZeroGravity(ref)
 		SetEntityGravity(entity, -0.003);
     }
 }
-public void OnHomingThink(entity) 
-{ 
-	if(!IsValidEntity(entity))
-		return;
-
-	int owner = getOwner(entity);
-	if(!IsValidClient3(owner))
-		return;
-
-	int Target = GetClosestTarget(entity, owner); 
-	if(!IsValidClient3(Target))
-		return;
-
-	int CWeapon = GetEntPropEnt(owner, Prop_Send, "m_hActiveWeapon");
-	if(!IsValidWeapon(CWeapon))
-		return;
-
-	float TargetPos[3];
-	GetClientAbsOrigin(Target, TargetPos);
-	TargetPos[2]+=40.0;
-	float flRocketPos[3];
-	GetEntPropVector(entity, Prop_Send, "m_vecOrigin", flRocketPos);
-	float distance = GetVectorDistance(flRocketPos, TargetPos, true); 
-	
-	if( distance <= projectileHomingDegree[entity]*projectileHomingDegree[entity] && GetGameTime() - entitySpawnTime[entity] < 3.0 )
-	{
-		float ProjVector[3],ProjAngle[3],AimVector[3],InitialSpeed[3]; 
-
-		GetEntPropVector( entity, Prop_Data, "m_vecAbsVelocity", InitialSpeed ); 
-		if ( GetVectorLength( InitialSpeed ) < 50.0 ) GetEntPropVector( entity, Prop_Send, "m_vInitialVelocity", InitialSpeed );
-		
-		GetEntPropVector( entity, Prop_Data, "m_vecAbsOrigin", flRocketPos ); 
-		GetClientAbsOrigin( Target, TargetPos ); 
-		TargetPos[2] += 30.0;
-		MakeVectorFromPoints( flRocketPos, TargetPos, AimVector );
-
-		//if(distance <= 1000.0)
-			SubtractVectors( TargetPos, flRocketPos, ProjVector );
-		//else
-		//	GetEntPropVector( entity, Prop_Data, "m_vecAbsVelocity", ProjVector );
-
-		AddVectors( ProjVector, AimVector, ProjVector ); 
-		NormalizeVector( ProjVector, ProjVector );
-		
-		GetEntPropVector( entity, Prop_Data, "m_angRotation", ProjAngle ); 
-		GetVectorAngles( ProjVector, ProjAngle ); 
-		
-		ScaleVector( ProjVector, GetVectorLength( InitialSpeed )); 
-		
-		TeleportEntity( entity, NULL_VECTOR, ProjAngle, ProjVector ); 
-	}
-}
 public OnAimlessThink(entity){
 	if(!IsValidEdict(entity))
 		return;
@@ -2990,18 +2936,18 @@ public OnAimlessThink(entity){
 	GetEntityClassname(entity, classname, sizeof(classname));
 
 	float ProjAngle[3], ProjVector[3], ProjVelocity[3];
-	GetEntPropVector( entity, Prop_Data, "m_angRotation", ProjAngle ); 
+	GetEntPropVector(entity, Prop_Data, "m_angRotation", ProjAngle ); 
 	ProjAngle[1] += GetRandomFloat(-5.0, 5.0);
 
-	GetEntPropVector( entity, Prop_Send, "m_vInitialVelocity", ProjVelocity ); 
-	if ( GetVectorLength( ProjVelocity ) < 10.0 )
-		GetEntPropVector( entity, Prop_Data, "m_vecAbsVelocity", ProjVelocity ); 
+	GetEntPropVector(entity, Prop_Send, "m_vInitialVelocity", ProjVelocity ); 
+	if (GetVectorLength(ProjVelocity ) < 10.0 )
+		GetEntPropVector(entity, Prop_Data, "m_vecAbsVelocity", ProjVelocity ); 
 
 	GetAngleVectors(ProjAngle, ProjVector, NULL_VECTOR, NULL_VECTOR);
 
 	ScaleVector(ProjVector, GetVectorLength(ProjVelocity));
 
-	TeleportEntity( entity, NULL_VECTOR, ProjAngle, ProjVector ); 
+	TeleportEntity(entity, NULL_VECTOR, ProjAngle, ProjVector ); 
 }
 public OnThinkPost(entity) 
 { 
@@ -3033,7 +2979,7 @@ public OnThinkPost(entity)
 		GetEntPropVector(entity, Prop_Send, "m_vecOrigin", flRocketPos);
 		float distance = GetVectorDistance(flRocketPos, flTargetPos, true); 
 		
-		if( distance <= TF2Attrib_GetValue(homingActive)*TF2Attrib_GetValue(homingActive) )
+		if(distance <= TF2Attrib_GetValue(homingActive)*TF2Attrib_GetValue(homingActive) )
 		{
 			float flVelocityChange[3];
 			TeleportEntity(entity, flTargetPos, NULL_VECTOR, flVelocityChange);
@@ -3121,6 +3067,9 @@ public OnEntityHomingThink(entity)
 	if(!HasEntProp(entity,Prop_Send,"m_vInitialVelocity"))
 		return;
 
+	if(GetEntityMoveType(entity) == MOVETYPE_NONE)
+		return;
+
 	int owner = getOwner(entity);
 	if(!IsValidClient3(owner) && IsValidEdict(owner) && HasEntProp(owner,Prop_Send,"m_hBuilder"))
 		owner = GetEntPropEnt(owner,Prop_Send,"m_hBuilder" );
@@ -3128,61 +3077,68 @@ public OnEntityHomingThink(entity)
 	if (!IsValidClient3(owner))
 		return;
 
-	int Target = GetClosestTarget(entity, owner); 
-	if(!IsValidClient3(Target) || owner == Target)
-		return;
+	float distance = 9999999.0;
+	int Target = GetClosestTarget(entity, owner, _, distance); 
 
-	float EntityPos[3], TargetPos[3]; 
-	GetEntPropVector( entity, Prop_Data, "m_vecAbsOrigin", EntityPos ); 
-	GetClientAbsOrigin( Target, TargetPos ); 
-	
-	if( GetVectorDistance(EntityPos, TargetPos, true) > homingRadius[entity]*homingRadius[entity] )
+	if(!IsValidClient3(Target) || distance > homingRadius[entity]*homingRadius[entity]) {
+		if(homingAimStyle[entity] == HomingStyle_Fast) {
+			float InitialSpeed[3]; 
+			GetEntPropVector(entity, Prop_Send, "m_vInitialVelocity", InitialSpeed ); 
+			if (GetVectorLength(InitialSpeed) > 10.0 ) {
+				float ProjAngle[3], ProjVector[3];
+				GetEntPropVector(entity, Prop_Data, "m_angRotation", ProjAngle ); 
+				GetAngleVectors(ProjAngle, ProjVector, NULL_VECTOR, NULL_VECTOR)
+				ScaleVector(ProjVector, GetVectorLength(InitialSpeed) );
+				TeleportEntity(entity, NULL_VECTOR, NULL_VECTOR, ProjVector); 
+			}
+		}
 		return;
+	}
 
 	if(homingTickRate[entity] == 0 || homingTicks[entity] % homingTickRate[entity] == 0)
 	{
-		float ProjLocation[3], ProjVector[3], BaseSpeed, NewSpeed, ProjAngle[3], AimVector[3], InitialSpeed[3]; 
+		float ProjLocation[3], ProjVector[3], NewSpeed, ProjAngle[3], AimVector[3], InitialSpeed[3], TargetPos[3];  
 		
-		GetEntPropVector( entity, Prop_Send, "m_vInitialVelocity", InitialSpeed ); 
-		if ( GetVectorLength( InitialSpeed ) < 10.0 ) GetEntPropVector( entity, Prop_Data, "m_vecAbsVelocity", InitialSpeed ); 
-		BaseSpeed = GetVectorLength( InitialSpeed ) * 0.333; 
+		GetEntPropVector(entity, Prop_Send, "m_vInitialVelocity", InitialSpeed ); 
+		if (GetVectorLength(InitialSpeed ) < 10.0 ) 
+			GetEntPropVector(entity, Prop_Data, "m_vecAbsVelocity", InitialSpeed ); 
 		
-		GetEntPropVector( entity, Prop_Data, "m_vecAbsOrigin", ProjLocation ); 
+		NewSpeed = GetVectorLength(InitialSpeed );
+		
+		GetEntPropVector(entity, Prop_Data, "m_vecAbsOrigin", ProjLocation ); 
 		switch(homingAimStyle[entity])
 		{
-			case 1:
+			case HomingStyle_Headshot:
 			{
-				GetClientEyePosition( Target, TargetPos ); 
+				GetClientEyePosition(Target, TargetPos ); 
 			}
 			default:
 			{
-				GetClientAbsOrigin( Target, TargetPos ); 
-				TargetPos[2] += 20.0;
+				GetClientAbsOrigin(Target, TargetPos ); 
+				TargetPos[2] += 35.0;
 			}
 		}
-		MakeVectorFromPoints( ProjLocation, TargetPos, AimVector ); 
+		MakeVectorFromPoints(ProjLocation, TargetPos, AimVector ); 
 		
 		switch(homingAimStyle[entity])
 		{
-			case 2:
+			case HomingStyle_Fast:
 			{
-				SubtractVectors( TargetPos, ProjLocation, ProjVector ); //100% HOME
+				SubtractVectors(TargetPos, ProjLocation, ProjVector ); //100% HOME
+				if(NewSpeed > 1000)
+					NewSpeed = 1000.0;
 			}
 			default:
 			{
-				GetEntPropVector( entity, Prop_Data, "m_vecAbsVelocity", ProjVector ); //50% HOME
+				GetEntPropVector(entity, Prop_Data, "m_vecAbsVelocity", ProjVector ); //50% HOME
 			}
 		}
-		AddVectors( ProjVector, AimVector, ProjVector ); 
-		NormalizeVector( ProjVector, ProjVector ); 
-		
-		GetEntPropVector( entity, Prop_Data, "m_angRotation", ProjAngle ); 
-		GetVectorAngles( ProjVector, ProjAngle ); 
-		
-		NewSpeed = ( BaseSpeed * 2.0 ) + 1.0 * BaseSpeed * 1.1; 
-		ScaleVector( ProjVector, NewSpeed ); 
-		
-		TeleportEntity( entity, NULL_VECTOR, ProjAngle, ProjVector ); 
+		AddVectors(ProjVector, AimVector, ProjVector ); 
+		NormalizeVector(ProjVector, ProjVector ); 
+		GetEntPropVector(entity, Prop_Data, "m_angRotation", ProjAngle ); 
+		GetVectorAngles(ProjVector, ProjAngle ); 
+		ScaleVector(ProjVector, NewSpeed ); 
+		TeleportEntity(entity, NULL_VECTOR, ProjAngle, ProjVector ); 
 		SetEntityGravity(entity, 0.001);
 	}
 	homingTicks[entity]++;
@@ -3426,8 +3382,10 @@ PrecisionHoming(entity)
 			Address precisionPowerup = TF2Attrib_GetByName(client, "precision powerup");
 			if(precisionPowerup == Address_Null) return;
 
-			if(TF2Attrib_GetValue(precisionPowerup) == 1)
-				projectileHomingDegree[entity] = 200.0;
+			if(TF2Attrib_GetValue(precisionPowerup) == 1){
+				homingRadius[entity] = 200.0;
+				homingAimStyle[entity] = HomingStyle_Fast;
+			}
 			else if(TF2Attrib_GetValue(precisionPowerup) == 2)
 				if(!Phys_IsPhysicsObject(entity))
 					isAimlessProjectile[entity] = true;
@@ -3490,7 +3448,7 @@ projGravity(entity)
 				+ GetAttribute(client, "cloak_consume_on_feign_death_activate", 0.0);
 
 				char strClassname[64];
-				GetEntityClassname( entity, strClassname, sizeof(strClassname) );
+				GetEntityClassname(entity, strClassname, sizeof(strClassname) );
 
 				if(projgravity)
 				{
@@ -3588,7 +3546,7 @@ GivePowerupDescription(int client, char[] name, int amount){
 		}else if(amount == 3){
 			CPrintToChat(client, "{community}Railgun Powerup {default}| {lightcyan}All weapons have 4x slower fire rate, but 4x damage. Grants +35%% conditional damage reduction pierce.");
 		}else{
-			CPrintToChat(client, "{community}Precision Powerup {default}| {lightcyan}+100%% projectile speed, charge rate, and no spread. 1.35x damage and hitscan can headshot. Certain projectiles will home aggressively.");
+			CPrintToChat(client, "{community}Precision Powerup {default}| {lightcyan}+100%% charge rate, and no spread. 1.35x damage and hitscan can headshot. Certain projectiles will home aggressively.");
 		}
 	}
 	else if(StrEqual("regeneration powerup", name)){
@@ -4479,11 +4437,11 @@ stock float TF2_GetDamageModifiers(client,weapon,bool status=true, bool bullets_
 				{
 					dpsMult *= 1.35;
 				}
-				if(TF2_IsPlayerInCondition( client, TFCond_RuneStrength ))
+				if(TF2_IsPlayerInCondition(client, TFCond_RuneStrength ))
 				{
 					dpsMult *= 2.0;
 				}
-				if(TF2_IsPlayerInCondition( client, TFCond_RunePrecision ))
+				if(TF2_IsPlayerInCondition(client, TFCond_RunePrecision ))
 				{
 					dpsMult *= 2.0;
 				}

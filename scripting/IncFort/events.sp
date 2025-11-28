@@ -1131,7 +1131,6 @@ public OnEntityDestroyed(entity)
 	isProjectileHoming[entity] = false;
 	isProjectileBoomerang[entity] = false;
 	isProjectileFireball[entity] = false;
-	projectileHomingDegree[entity] = 0.0;
 	gravChanges[entity] = false;
 	homingRadius[entity] = 0.0;
 	homingTickRate[entity] = 0;
@@ -1293,7 +1292,7 @@ public Event_PlayerChangeTeam(Handle event, const char[] name, bool:dontBroadcas
 }
 public Event_ResetStats(Handle event, const char[] name, bool:dontBroadcast)
 {
-	PrintToServer("MvM reset stats????");
+	PrintToServer("IF | Reset all players stats. (MvM)");
 	OverAllMultiplier = GetConVarFloat(cvar_BotMultiplier);
 	replenishStatus = true;
 	for(int i = 1; i<=MaxClients;++i){
@@ -2460,9 +2459,6 @@ public OnGameFrame()
 
 		if(isProjectileHoming[i])
 			OnThinkPost(i);
-		
-		if(projectileHomingDegree[i] > 0.0)
-			OnHomingThink(i);
 
 		if(homingRadius[i] > 0.0 && homingDelay[i] < GetGameTime() - entitySpawnTime[i])
 			OnEntityHomingThink(i);

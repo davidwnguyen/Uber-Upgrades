@@ -5580,8 +5580,9 @@
 		}
 		"1567"
 		{
-			"name"		"accepted wedding ring account id 1"
+			"name"		"radiation buildup"
 			"ref"		"Radiation Buildup"
+			"attr_class"	"radiation_buildup_onhit"
 			"display"		"%.0f"
 			"cost"		"0"
 			"value"		"1"
@@ -7230,11 +7231,11 @@
 			"ref"		"debuff block rating"
 			"display"	"%.0f"
 			"attr_class"	"debuff_block_rating"
-			"description"	"Reduces incoming debuffs severity and duration by 5% per rating."
-			"cost"		"800"
+			"description"	"Reduces incoming debuffs severity and duration\nby [{VALUE}*5]%, linearly."
+			"cost"		"400"
 			"value"		"1"
 			"init"		"0"
-			"max"		"20"
+			"max"		"30"
 		}
 		"1718"
 		{

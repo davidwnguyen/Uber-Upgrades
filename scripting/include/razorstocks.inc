@@ -360,12 +360,11 @@ stock MoveForward(const float vPos[3], const float vAng[3], float vReturn[3], fl
     vReturn[1] += vDir[1] * fDistance;
 	vReturn[2] += vDir[2] * fDistance;
 }
-stock GetClosestTarget(entity, owner, bool isFriendly = false)
+stock int GetClosestTarget(entity, owner, bool isFriendly = false, float &TargetDistance = 9999999.0)
 {
 	if(!IsValidClient3(owner)) 
 		return -1;
 
-	float TargetDistance = 0.0;
 	int ClosestTarget = 0;
 	float EntityPosition[3], TargetPosition[3], OwnerPosition[3];
 	GetEntPropVector(entity, Prop_Data, "m_vecAbsOrigin", EntityPosition);
@@ -384,15 +383,7 @@ stock GetClosestTarget(entity, owner, bool isFriendly = false)
 				continue;
 
 			float distance = GetVectorDistance(EntityPosition, TargetPosition, true);
-			if(TargetDistance)
-			{
-				if(distance < TargetDistance) 
-				{
-					ClosestTarget = i;
-					TargetDistance = distance;			
-				}
-			}
-			else
+			if(distance < TargetDistance)
 			{
 				ClosestTarget = i;
 				TargetDistance = distance;
@@ -413,18 +404,10 @@ stock GetClosestTarget(entity, owner, bool isFriendly = false)
 				continue;
 
 			float distance = GetVectorDistance(EntityPosition, TargetPosition, true);
-			if(TargetDistance)
-			{
-				if(distance < TargetDistance) 
-				{
-					ClosestTarget = i;
-					TargetDistance = distance;			
-				}
-			}
-			else
+			if(distance < TargetDistance)
 			{
 				ClosestTarget = i;
-				TargetDistance = distance;
+				TargetDistance = distance;			
 			}
 		}
 	}

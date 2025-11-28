@@ -79,10 +79,6 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 				char classname[32]; 
 				GetEdictClassname(inflictor, classname, sizeof(classname));
 				isSentry = StrEqual("obj_sentrygun", classname) || StrEqual("tf_projectile_sentryrocket", classname);
-
-				if(projectileHomingDegree[inflictor] > 0.0 && StrEqual(classname, "tf_projectile_flare")){
-					projectileHomingDegree[inflictor] = 0.0;
-				}
 			}
 
 			if(IsValidWeapon(weapon) && !isSentry)
@@ -380,20 +376,19 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 
 				checkBleed(victim, attacker, weapon);
 			}
-			Address radiationBuild = TF2Attrib_GetByName(weapon, "accepted wedding ring account id 1");
-			if(!(damagetype & DMG_PREVENT_PHYSICS_FORCE) && radiationBuild != Address_Null)
+			float radiationAmount = TF2Attrib_HookValueFloat(0.0, "radiation_buildup_onhit", weapon);
+			if(!(damagetype & DMG_PREVENT_PHYSICS_FORCE) && radiationAmount > 0)
 			{
-				float radiationAdd = TF2Attrib_GetValue(radiationBuild);
 				if(TF2Attrib_HookValueFloat(0.0, "knockout_powerup", attacker) == 2 && TF2Util_GetWeaponSlot(weapon) == TFWeaponSlot_Melee)
-					radiationAdd *= 3;
+					radiationAmount *= 3;
 
 				if(hasBuffIndex(attacker, Buff_Plunder)){
 					Buff plunderBuff;
 					plunderBuff = playerBuffs[attacker][getBuffInArray(attacker, Buff_Plunder)]
-					radiationAdd *= plunderBuff.severity;
+					radiationAmount *= plunderBuff.severity;
 				}
 
-				RadiationBuildup[victim] += radiationAdd;
+				RadiationBuildup[victim] += radiationAmount;
 				checkRadiation(victim,attacker);
 			}
 		}

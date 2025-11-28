@@ -218,6 +218,12 @@ enum struct AfterburnStack{
 	float damage;
 }
 
+enum {
+	HomingStyle_Slow,
+	HomingStyle_Headshot,
+	HomingStyle_Fast
+}
+
 Buff playerBuffs[MAXPLAYERS+1][MAXBUFFS+1];
 bool buffChange[MAXPLAYERS+1] = {false,...};
 //oh boy
@@ -464,7 +470,6 @@ bool isProjectileHoming[MAXENTITIES];
 bool isProjectileBoomerang[MAXENTITIES];
 bool isProjectileFireball[MAXENTITIES];
 bool isAimlessProjectile[MAXENTITIES];
-float projectileHomingDegree[MAXENTITIES];
 float projectileDamage[MAXENTITIES];
 float entitySpawnTime[MAXENTITIES];
 /*-- homing shit --*/

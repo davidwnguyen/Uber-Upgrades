@@ -56,12 +56,15 @@ float GetPlayerHealingMultiplier(client){
 	}
 	if(TF2Attrib_HookValueFloat(0.0, "regeneration_powerup", client) == 3.0)
 		multiplier *= 1.6;
-	if(hasBuffIndex(client, Buff_Stronghold))
+	if(hasBuffIndex(client, Buff_Stronghold)){
 		multiplier *= 1.33;
-	if(hasBuffIndex(client, Buff_Leech))
-		multiplier *= 0.5;
-	if(hasBuffIndex(client, Buff_Decay))
-		multiplier *= 0.25;
+	}
+	if(hasBuffIndex(client, Buff_Leech)){
+		multiplier /= 1 + playerBuffs[client][getBuffInArray(client, Buff_Leech)].severity;
+	}
+	if(hasBuffIndex(client, Buff_Decay)){
+		multiplier /= 1 + 3.0*playerBuffs[client][getBuffInArray(client, Buff_Decay)].severity;
+	}
 	if(TF2Attrib_HookValueFloat(0.0, "revenge_powerup", client) == 2.0)
 		multiplier *= 1.0 + RageBuildup[client]*0.5;
 	
