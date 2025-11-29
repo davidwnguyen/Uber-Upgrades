@@ -365,9 +365,10 @@
 		"308" //Loch-n-Load
 		{
 			"preserve_attributes"	"1"
-			"1"				"damage bonus;1.2"
-			"2"				"cloak_consume_on_feign_death_activate;4.0"
-			"3"				"grenade explode on impact;1"
+			"1"				"damage bonus;1.0"
+			"2"				"damage mult 13;1.2"
+			"3"				"cloak_consume_on_feign_death_activate;4.0"
+			"4"				"grenade explode on impact;1"
 		}
 		"996" //Loose Cannon
 		{
