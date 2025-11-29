@@ -745,7 +745,7 @@ public Action:Timer_Every100MS(Handle timer)
 								{
 									GetClientAbsOrigin(i, VictimPos);
 									if(GetVectorDistance(ClientPos,VictimPos, true) <= range*range)
-										TF2_AddCondition(i, TFCond_DefenseBuffNoCritBlock, 0.3)
+										giveDefenseBuff(client, 2.0);
 								}
 							}
 						}
