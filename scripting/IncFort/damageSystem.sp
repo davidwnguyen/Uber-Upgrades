@@ -131,8 +131,9 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 					if (!TF2_IsPlayerInCondition(victim,TFCond_UberchargedHidden) && GetClientHealth(victim) - damage < TF2_GetMaxHealth(victim) - (TF2_GetMaxHealth(victim)*(0.5*(bossPhase[victim]+1))))//boss phases
 					{
 						damage = GetClientHealth(victim) - (TF2_GetMaxHealth(victim) - (TF2_GetMaxHealth(victim)*(0.25*(bossPhase[victim]+1))));
-						TF2_AddCondition(victim, TFCond_MegaHeal, 5.0);
-						TF2_AddCondition(victim, TFCond_UberchargedHidden, 0.5);
+						TF2_AddCondition(victim, TFCond_MegaHeal, 15.0);
+						TF2_AddCondition(victim, TFCond_UberchargedHidden, 1.0);
+						giveDefenseBuff(victim, 6.0);
 						for(int i=1;i<=MaxClients;++i)
 						{
 							if(IsValidClient3(i) && IsOnDifferentTeams(victim,i) && !IsClientObserver(i) && IsPlayerAlive(i))
@@ -159,6 +160,7 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 
 										TeleportEntity(iEntity, fOrigin, fAngles, NULL_VECTOR);
 										DispatchSpawn(iEntity);
+										break;
 									}
 								}
 							}
