@@ -278,10 +278,7 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 	}
 	if(IsValidClient3(attacker) && IsValidClient3(victim))
 	{
-		char damageCategory[64];
-		damageCategory = getDamageCategory(currentDamageType[attacker], attacker);
-
-		applyDamageAffinities(victim, attacker, inflictor, damage, weapon, damagetype, damagecustom, damageCategory);
+		applyDamageAffinities(victim, attacker, inflictor, damage, weapon, damagetype, damagecustom);
 
 		if(IsValidWeapon(weapon)){
 			char weaponClassName[64]; 
@@ -938,7 +935,7 @@ public Action:OnTakeDamagePre_Tank(victim, &attacker, &inflictor, float &damage,
 			{
 				damage *= 1+(weaponFireRate[weapon]-TICKRATE)/TICKRATE;
 			}
-			applyDamageAffinities(victim, attacker, inflictor, damage, weapon, damagetype, damagecustom, getDamageCategory(currentDamageType[attacker], attacker));
+			applyDamageAffinities(victim, attacker, inflictor, damage, weapon, damagetype, damagecustom);
 		}
 	}
 	if(damage < 0.0)
@@ -1070,7 +1067,7 @@ public Action:OnTakeDamagePre_Sentry(victim, &attacker, &inflictor, float &damag
 		}
 		damage *= TF2Attrib_HookValueFloat(1.0, "dmg_incoming_mult", owner);
 
-		applyDamageAffinities(owner, attacker, inflictor, damage, weapon, damagetype, damagecustom, getDamageCategory(currentDamageType[attacker], attacker));
+		applyDamageAffinities(owner, attacker, inflictor, damage, weapon, damagetype, damagecustom);
 	}
 	return Plugin_Changed;
 }
@@ -1155,7 +1152,7 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 					SetEntPropFloat(attacker, Prop_Send, "m_flRageMeter", GetEntPropFloat(attacker, Prop_Send, "m_flRageMeter") + rageOnHit)
 			}
 			int hitgroup = GetEntProp(victim, Prop_Data, "m_LastHitGroup");
-			if(StrEqual(getDamageCategory(currentDamageType[attacker]),"direct",false) && hitgroup == 1)
+			if(damagetype & DMG_BULLET && hitgroup == 1)
 			{
 				float HeadshotsActive = TF2Attrib_HookValueFloat(0.0, "weapon_can_headshot", weapon);
 				if(HeadshotsActive > 0)
@@ -1455,7 +1452,7 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 		}
 		if(TF2Attrib_HookValueFloat(0.0, "supernova_powerup", attacker) == 1.0)
 		{
-			if(StrContains(getDamageCategory(currentDamageType[attacker], attacker),"blast",false) != -1)
+			if(damagetype & DMG_BLAST || damagetype & DMG_BLAST_SURFACE)
 			{
 				damage *= 1.8;
 			}
@@ -1499,7 +1496,10 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 				}
 			}
 		}
-		if(isVictimPlayer && StrContains(getDamageCategory(currentDamageType[attacker], attacker),"electric",false) != -1){
+		if(TF2Attrib_HookValueFloat(0.0, "supernova_powerup", attacker) == 3){
+			damagetype |= DMG_SHOCK;
+		}
+		if(isVictimPlayer && damagetype & DMG_SHOCK){
 			int team = GetClientTeam(attacker);
 			float arcDamage = baseDamage[attacker] * TF2_GetDamageModifiers(attacker, weapon, true) * 0.5;
 			for(int i = 1;i<=MaxClients;++i){
@@ -1515,7 +1515,7 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 					continue;
 
 				currentDamageType[attacker].second |= DMG_IGNOREHOOK;
-				SDKHooks_TakeDamage(i, attacker, attacker, arcDamage, DMG_SHOCK, weapon,_,_,false);
+				SDKHooks_TakeDamage(i, attacker, attacker, arcDamage, DMG_SHOCK, _,_,_,false);
 			}
 		}
 
@@ -1674,17 +1674,21 @@ public float genericSentryDamageModification(victim, attacker, inflictor, float 
 		
 	return damage;
 }
-public void applyDamageAffinities(&victim, &attacker, &inflictor, float &damage, &weapon, &damagetype, &damagecustom, char[] damageCategory)
+public void applyDamageAffinities(&victim, &attacker, &inflictor, float &damage, &weapon, &damagetype, &damagecustom)
 {
 	//Now's the time!
 
 	if(!IsValidWeapon(weapon))
 		return;
 
-	currentDamageType[attacker].clear();
 	bool isVictimPlayer = IsValidClient3(victim);
 
-	if(StrContains(damageCategory, "direct") != -1)
+	extendedDamageTypes customtype;
+	customtype = currentDamageType[attacker];
+
+	if(customtype.first & DMG_BULLET || customtype.first & DMG_SLASH || 
+	customtype.first & DMG_VEHICLE || customtype.first & DMG_FALL || customtype.first & DMG_CLUB || 
+	customtype.first & DMG_BUCKSHOT)
 	{
 		if(isVictimPlayer){
 			Address dmgTakenMultAddr = TF2Attrib_GetByName(victim, "direct damage taken reduced");
@@ -1692,7 +1696,10 @@ public void applyDamageAffinities(&victim, &attacker, &inflictor, float &damage,
 				damage *= TF2Attrib_GetValue(dmgTakenMultAddr);
 		}
 	}
-	else if(StrContains(damageCategory, "fire") != -1)
+	/*if(customtype.first & DMG_BLAST || customtype.first & DMG_BLAST_SURFACE)
+	{
+	}*/
+	if(customtype.first & DMG_BURN || customtype.first & DMG_SLOWBURN || customtype.first & DMG_IGNITE)
 	{
 		if(TF2Attrib_HookValueFloat(0.0, "supernova_powerup", attacker) == 2){
 			damage *= 1.5;
@@ -1722,7 +1729,7 @@ public void applyDamageAffinities(&victim, &attacker, &inflictor, float &damage,
 			}
 		}
 	}
-	else if(StrContains(damageCategory, "electric") != -1)
+	if(customtype.first & DMG_SHOCK || customtype.first & DMG_ENERGYBEAM)
 	{
 		if(TF2Attrib_HookValueFloat(0.0, "supernova_powerup", attacker) == 3){
 			float buff = 1.0;
@@ -1733,7 +1740,7 @@ public void applyDamageAffinities(&victim, &attacker, &inflictor, float &damage,
 			damage *= buff;
 		}
 	}
-	else if(StrContains(damageCategory, "arcane") != -1)
+	if(customtype.second & DMG_ARCANE)
 	{
 		if(isVictimPlayer){
 			Address dmgTakenMultAddr = TF2Attrib_GetByName(victim, "arcane damage taken reduced");
@@ -1741,6 +1748,8 @@ public void applyDamageAffinities(&victim, &attacker, &inflictor, float &damage,
 				damage *= TF2Attrib_GetValue(dmgTakenMultAddr);
 		}
 	}
+
+	currentDamageType[attacker].clear();
 }
 
 void ApplyVaccinatorDamageReduction(int victim, int damagetype, float& damage, float& pierce){

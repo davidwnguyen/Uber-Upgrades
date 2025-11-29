@@ -730,48 +730,7 @@ stock EntityExplosion(owner, float damage, float radius, float pos[3], soundType
 		}
 	}
 }
-stock char[] getDamageCategory(extendedDamageTypes damagetype, int attacker = -1)
-{
-	//int damagebits2;
-	char damageCategory[64];
 
-	if(IsValidClient3(attacker)){
-		if(GetAttribute(attacker, "supernova powerup", 0.0) == 3)
-			StrCat(damageCategory, sizeof(damageCategory), "electric");
-	}
-
-	if(damagetype.second & DMG_PIERCING)
-	{
-		StrCat(damageCategory, sizeof(damageCategory), "piercing");
-	}
-	else if(damagetype.first & DMG_BULLET || damagetype.first & DMG_SLASH || 
-	damagetype.first & DMG_VEHICLE || damagetype.first & DMG_FALL || damagetype.first & DMG_CLUB || 
-	damagetype.first & DMG_BUCKSHOT)
-	{
-		StrCat(damageCategory, sizeof(damageCategory), "direct");
-	}
-	else if(damagetype.first & DMG_BLAST || damagetype.first & DMG_BLAST_SURFACE)
-	{
-		StrCat(damageCategory, sizeof(damageCategory), "blast");
-	}
-	else if(damagetype.first & DMG_BURN || damagetype.first & DMG_SLOWBURN || damagetype.first & DMG_IGNITE)
-	{
-		StrCat(damageCategory, sizeof(damageCategory), "fire");
-	}
-	else if(damagetype.first & DMG_SHOCK || damagetype.first & DMG_ENERGYBEAM)
-	{
-		StrCat(damageCategory, sizeof(damageCategory), "electric");
-	}
-	else if(damagetype.second & DMG_ARCANE)
-	{
-		StrCat(damageCategory, sizeof(damageCategory), "arcane");
-	}
-	else
-	{
-		StrCat(damageCategory, sizeof(damageCategory), "generic");
-	}
-	return damageCategory;
-}
 CheckForAttunement(client)
 {
 	bool flag = false;
