@@ -910,18 +910,6 @@
 			"optimizer_style" "1"
 			"max"		"5.00"
 		}
-		"38.5"
-		{
-			"name"		"bullets per shot bonus"
-			"ref"		"bullets per shot bonus (short circuit)"
-			"display"		"%.0f"
-			"cost"		"1600"
-			"increase_ratio" "2.00"
-			"value"		"1.00"
-			"init"		"1.00"
-			"optimizer_style" "1"
-			"max"		"3.00"
-		}
 		"40"
 		{
 			"name"		"weapon can headshot"

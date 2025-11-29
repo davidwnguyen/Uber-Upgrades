@@ -1065,7 +1065,7 @@
 		{
 			"0"		"damage bonus"
 			"1"		"ap (global)"
-			"2"		"Extra Damage Bonus"
+			"2"		"Flare Damage Bonus"
 			"3"		"lifesteal ability"
 			"4"		"reveal cloaked victim on hit"
 			"5"		"reveal disguised victim on hit"
@@ -1073,9 +1073,8 @@
 		"Short circuit specific upgrades"
 		{
 			"0"		"fire rate bonus(multshit)"
-			"1"		"bullets per shot bonus (short circuit)"
-			"2"		"Increased Shock Range"
-			"3"		"Weapons Deals No Knockback"
+			"1"		"Increased Shock Range"
+			"2"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
