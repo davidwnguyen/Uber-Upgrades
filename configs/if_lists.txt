@@ -1272,6 +1272,7 @@
 		{
 			"0"		"fire rate bonus(old)"
 			"1"		"clip size bonus (B)"
+			"2"		"projectile penetration heavy"
 			"3"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
