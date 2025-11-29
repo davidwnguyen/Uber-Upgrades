@@ -1366,7 +1366,7 @@ DisplayItemChange(client,itemidx)
 		}
 		case 752:
 		{
-			ChangeString = "The Hitman's Heatmaker | Shoots rockets with 20% more damage. Focus gives minicrits and increased firerate. Deals 50% more damage if victim is overhealed.";
+			ChangeString = "The Hitman's Heatmaker | Shoots explosive rounds. Gain +1% focus on hit; Focus now gives 2x fire rate and minicrits. 50% ammo conservation.";
 		}
 		case 56,1005:
 		{
