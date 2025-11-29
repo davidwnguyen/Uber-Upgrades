@@ -6,7 +6,7 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 	
 	float pierce = 0.0;
 	if(IsValidWeapon(weapon))
-		pierce = TF2Attrib_HookValueFloat(0.0, "damage penetrates reductions", weapon);
+		pierce = TF2Attrib_HookValueFloat(0.0, "dmg_dr_penetration", weapon);
 
 	if(IsValidClient3(victim))
 	{
@@ -557,7 +557,7 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 		GetEntPropVector(attacker, Prop_Data, "m_vecAbsVelocity", velocity);
 
 		if(velocity[2] < -400.0){
-			if(TF2Attrib_HookValueFloat(0.0, "agility powerup", attacker) == 2){
+			if(TF2Attrib_HookValueFloat(0.0, "agility_powerup", attacker) == 2){
 				damage *= 1.0 + (-velocity[2]-400.0)*0.001;
 			}
 			if(IsValidWeapon(weapon)){
@@ -622,7 +622,7 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 							}
 						}
 					}
-					if(damage > GetClientHealth(victim) && TF2Attrib_HookValueFloat(0.0, "king powerup", i) == 3.0){
+					if(damage > GetClientHealth(victim) && TF2Attrib_HookValueFloat(0.0, "king_powerup", i) == 3.0){
 						currentDamageType[attacker].second |= DMG_IGNOREHOOK;
 						SDKHooks_TakeDamage(i, attacker, attacker, damage, (DMG_PREVENT_PHYSICS_FORCE|DMG_ENERGYBEAM),_,_,_,false);
 						currentDamageType[attacker].second |= DMG_PIERCING;
@@ -657,7 +657,7 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 					}
 				}
 			}
-			float teamTacticsRatio = TF2Attrib_HookValueFloat(0.0, "savior sacrifice attribute", VictimCWeapon);
+			float teamTacticsRatio = TF2Attrib_HookValueFloat(0.0, "savior_sacrifice_attribute", VictimCWeapon);
 			if(teamTacticsRatio > 0.0){
 				float ratio = damage / TF2Util_GetEntityMaxHealth(victim);
 				if(ratio > 1.0)
@@ -671,7 +671,7 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 
 		if(IsValidWeapon(weapon)){
 			if(damagecustom == TF_CUSTOM_HEADSHOT){
-				float chargeAfterShot = TF2Attrib_HookValueFloat(0.0, "mult sniper charge after headshot", weapon);
+				float chargeAfterShot = TF2Attrib_HookValueFloat(0.0, "mult_sniper_charge_after_headshot", weapon);
 				if(chargeAfterShot > 0.0)
 					savedCharge[attacker] = chargeAfterShot;
 			}
@@ -688,7 +688,7 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 				float freezeRatio = TF2Attrib_HookValueFloat(0.0, "damage_causes_freeze", weapon);
 				if(freezeRatio > 0){
 					float frostIncrease = freezeRatio*damage/TF2Util_GetEntityMaxHealth(victim);
-					if(TF2Attrib_HookValueFloat(0.0, "knockout powerup", attacker) == 2 && TF2Util_GetWeaponSlot(weapon) == TFWeaponSlot_Melee)
+					if(TF2Attrib_HookValueFloat(0.0, "knockout_powerup", attacker) == 2 && TF2Util_GetWeaponSlot(weapon) == TFWeaponSlot_Melee)
 						frostIncrease *= 2.0;
 					if(hasBuffIndex(attacker, Buff_Plunder)){
 						Buff plunderBuff;
@@ -784,7 +784,7 @@ public Action TF2_OnTakeDamage(int victim, int &attacker, int &inflictor, float 
 			float backstabRadiation = TF2Attrib_HookValueFloat(0.0, "backstab_radiation_buildup", weapon);
 			if(backstabRadiation > 0.0)
 			{
-				if(TF2Attrib_HookValueFloat(0.0, "knockout powerup", attacker) == 2)
+				if(TF2Attrib_HookValueFloat(0.0, "knockout_powerup", attacker) == 2)
 					backstabRadiation *= 3;
 
 				if(hasBuffIndex(attacker, Buff_Plunder)){
@@ -888,7 +888,7 @@ public Action OnTakeDamage(victim, &attacker, &inflictor, float &damage, &damage
 		}
 		
 		if(!(currentDamageType[attacker].second & DMG_PIERCING) && attacker != victim){
-			float armorPenetration = TF2Attrib_HookValueFloat(0.0, "armor penetration buff", attacker);
+			float armorPenetration = TF2Attrib_HookValueFloat(0.0, "armor_penetration_buff", attacker);
 
 			float dmgReduction = TF2Attrib_HookValueFloat(1.0, "dmg_incoming_mult", victim);
 			if(dmgReduction != 1.0)
@@ -1196,7 +1196,7 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 						damagecustom = 1;
 					}
 				}
-				if(TF2Attrib_HookValueFloat(0.0, "precision powerup", attacker) == 1)
+				if(TF2Attrib_HookValueFloat(0.0, "precision_powerup", attacker) == 1)
 				{
 					miniCritStatus[victim] = true;
 					damage *= 1.35;
@@ -1227,7 +1227,7 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 
 			damage *= 2+1.75*((400-distance)/400);
 		}
-		if(TF2Attrib_HookValueFloat(0.0, "precision powerup", attacker) == 3){
+		if(TF2Attrib_HookValueFloat(0.0, "precision_powerup", attacker) == 3){
 			if(! ( StrEqual(classname, "tf_weapon_flamethrower") || StrEqual(classname, "tf_weapon_rocketlauncher_fireball") ) ){
 				damage *= 4.0;
 			}
@@ -1298,7 +1298,7 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 		damage /= medicRESBonus;
 
 		if(!(currentDamageType[attacker].second & DMG_PIERCING)){
-			float additivePiercingDamage = TF2Attrib_HookValueFloat(0.0, "additive piercing damage", weapon);
+			float additivePiercingDamage = TF2Attrib_HookValueFloat(0.0, "additive_piercing_damage", weapon);
 			if(additivePiercingDamage != 0){
 				currentDamageType[attacker].second |= DMG_PIERCING;
 				currentDamageType[attacker].second |= DMG_IGNOREHOOK;

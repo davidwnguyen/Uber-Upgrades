@@ -34,7 +34,7 @@ public Event_Playerhurt(Handle event, const char[] name, bool:dontBroadcast)
 		WritePackFloat(hPack, damage);
 		CreateTimer(1.01, RemoveDamage, hPack);
 
-		if(TF2Attrib_HookValueFloat(0.0, "plague powerup", attacker) == 3.0){
+		if(TF2Attrib_HookValueFloat(0.0, "plague_powerup", attacker) == 3.0){
 			if(!hasBuffIndex(client, Buff_LifeLink)){
 				Buff lifelinkDebuff;
 				lifelinkDebuff.init("Life Link", "-35% HP drain/10s", Buff_LifeLink, RoundToCeil(GetClientHealth(attacker)*0.3), attacker, 10.0);

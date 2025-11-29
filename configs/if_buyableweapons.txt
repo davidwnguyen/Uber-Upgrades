@@ -223,7 +223,7 @@
 		"class"			"engineer"
 		"description"	"Deals +40 piercing damage. +100% damage vs sentry target\n2x slower fire rate, and converts firerate into damage bonus."
 		"cost"			"8000.0"
-		"additive piercing damage"		"50"
+		"additive piercing damage"		"40"
 		"damage bonus bullet vs sentry target"	"2.0"
 		"weapon fire rate"		"2.0"
 		"Converts Firerate to Damage"	"1"
