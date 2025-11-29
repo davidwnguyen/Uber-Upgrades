@@ -1282,10 +1282,7 @@ public Event_PlayerChangeTeam(Handle event, const char[] name, bool:dontBroadcas
 	if (IsValidClient(client) && IsClientObserver(client) == false && IsPlayerAlive(client))
 	{
 		current_class[client] = TF2_GetPlayerClass(client)
-		if (!client_respawn_handled[client])
-		{
-			CreateTimer(0.4, ClChangeClassTimer, GetClientUserId(client));
-		}
+		CreateTimer(0.4, ChangeClassTimer, GetClientUserId(client));
 		CancelClientMenu(client);
 		Menu_BuyUpgrade(client, 0);
 	}
@@ -1321,7 +1318,7 @@ public Event_mvm_wave_failed(Handle event, const char[] name, bool:dontBroadcast
 	int ObjectiveEntity = FindEntityByClassname(-1, "tf_objective_resource");
 	if(IsValidEntity(ObjectiveEntity))
 		GetEntPropString(ObjectiveEntity, Prop_Send, "m_iszMvMPopfileName", missionName, sizeof(missionName));
-	PrintToServer("lol | %s | %s", oldMission, missionName);
+	PrintToServer("mission failed? | %s | %s", oldMission, missionName);
 	
 	if(oldMission[0] != '\0' && StrEqual(oldMission, missionName) && failLock){
 		CreateTimer(0.2, WaveFailed);
@@ -1344,21 +1341,21 @@ public Event_mvm_wave_begin(Handle event, const char[] name, bool:dontBroadcast)
 			{
 				for(a = 0; a < MAX_ATTRIBUTES_ITEM; a++)
 				{
-					currentupgrades_idx_mvm_chkp[client][slot][a] = currentupgrades_idx[client][slot][a];
-					currentupgrades_val_mvm_chkp[client][slot][a] = currentupgrades_val[client][slot][a];
+					currentupgrades_idx_mvm_checkpoint[client][slot][a] = currentupgrades_idx[client][slot][a];
+					currentupgrades_val_mvm_checkpoint[client][slot][a] = currentupgrades_val[client][slot][a];
 				}
 				for(a = 0; a < MAX_ATTRIBUTES; a++)
 				{
-					upgrades_ref_to_idx_mvm_chkp[client][slot][a] = upgrades_ref_to_idx[client][slot][a];
+					upgrades_ref_to_idx_mvm_checkpoint[client][slot][a] = upgrades_ref_to_idx[client][slot][a];
 				}
-				client_spent_money_mvm_chkp[client][slot] = client_spent_money[client][slot];
-				currentupgrades_number_mvm_chkp[client][slot] = currentupgrades_number[client][slot];
+				client_spent_money_mvm_checkpoint[client][slot] = client_spent_money[client][slot];
+				currentupgrades_number_mvm_checkpoint[client][slot] = currentupgrades_number[client][slot];
 				for(int y = 0;y<5;y++)
 				{
-					currentupgrades_restriction_mvm_chkp[client][slot][y] = currentupgrades_restriction[client][slot][y];
+					currentupgrades_restriction_mvm_checkpoint[client][slot][y] = currentupgrades_restriction[client][slot][y];
 				}
 			}
-			UniqueWeaponRef_mvm_chkp[client] = UniqueWeaponRef[client];
+			UniqueWeaponRef_mvm_checkpoint[client] = UniqueWeaponRef[client];
 		}
 	}
 	StartMoneySaved = StartMoney + additionalstartmoney;
@@ -3459,10 +3456,7 @@ public OnClientPostAdminCheck(client)
 		char clname[255]
 		GetClientName(client, clname, sizeof(clname))
 		client_no_d_team_upgrade[client] = 1
-		if (!client_respawn_handled[client])
-		{
-			CreateTimer(0.0, ClChangeClassTimer, GetClientUserId(client));
-		}
+		CreateTimer(0.0, ChangeClassTimer, GetClientUserId(client));
 		//GivePlayerData(client);
 
 		if(AreClientCookiesCached(client))
@@ -3487,8 +3481,6 @@ public Event_PlayerRespawn(Handle event, const char[] name, bool:dontBroadcast)
 		if(!IsFakeClient(client)){
 			CancelClientMenu(client);
 			TF2_AddCondition(client, TFCond_SpeedBuffAlly, 1.0);
-			client_respawn_handled[client] = 1;
-
 			if(!replenishStatus)
 				CreateTimer(0.3, WeaponReGiveUpgrades, GetClientUserId(client));
 	
@@ -3585,10 +3577,7 @@ public Event_PlayerChangeClass(Handle event, const char[] name, bool:dontBroadca
 			previous_class[client] = TF2_GetPlayerClass(client);
 			ResetClientUpgrades(client)
 			ChangeClassEffect(client);
-			if (!client_respawn_handled[client])
-			{
-				CreateTimer(0.1, ClChangeClassTimer, GetClientUserId(client));
-			}
+			CreateTimer(0.1, ChangeClassTimer, GetClientUserId(client));
 			CancelClientMenu(client);
 			CurrencyOwned[client] = (StartMoney + additionalstartmoney);
 			int slot;

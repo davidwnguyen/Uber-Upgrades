@@ -261,8 +261,7 @@ int upgrades_ref_to_idx[MAXPLAYERS+1][NB_SLOTS_UED+1][MAX_ATTRIBUTES]
 int _u_id;
 int UniqueWeaponRef[MAXPLAYERS+1]
 int client_last_up_slot[MAXPLAYERS+1]
-int client_last_up_idx[MAXPLAYERS+1]		
-int client_respawn_handled[MAXPLAYERS+1]
+int client_last_up_idx[MAXPLAYERS+1]
 int client_respawn_checkpoint[MAXPLAYERS+1]
 int client_no_d_team_upgrade[MAXPLAYERS+1]
 int blankArray[MAXPLAYERS+1][16]
@@ -291,7 +290,6 @@ int StrangeFarming[MAXPLAYERS+1][MAXPLAYERS+1];
 int firestormCounter[MAXPLAYERS+1];
 int lastFlag[MAXPLAYERS+1];
 int ShotsLeft[MAXPLAYERS+1] = {20};
-int logic;
 int TankTeleporter = -1;
 int jarateType[MAXENTITIES];
 int jarateWeapon[MAXENTITIES];
@@ -440,19 +438,13 @@ TFClassType current_class[MAXPLAYERS+1]
 TFClassType previous_class[MAXPLAYERS+1]
 TFClassType allowedBotClasses[] = {TFClass_Scout,TFClass_Soldier,TFClass_Pyro,TFClass_DemoMan,TFClass_Heavy,TFClass_Sniper,TFClass_Spy};
 //MvM
-int currentupgrades_idx_mvm_chkp[MAXPLAYERS+1][NB_SLOTS_UED+1][MAX_ATTRIBUTES_ITEM]
-int currentupgrades_number_mvm_chkp[MAXPLAYERS+1][NB_SLOTS_UED+1]
-int upgrades_ref_to_idx_mvm_chkp[MAXPLAYERS+1][NB_SLOTS_UED+1][MAX_ATTRIBUTES]
-int UniqueWeaponRef_mvm_chkp[MAXPLAYERS+1]
-int currentupgrades_restriction_mvm_chkp[MAXPLAYERS+1][NB_SLOTS_UED+1][5];
-float currentupgrades_val_mvm_chkp[MAXPLAYERS+1][NB_SLOTS_UED+1][MAX_ATTRIBUTES_ITEM]
-float client_spent_money_mvm_chkp[MAXPLAYERS+1][NB_SLOTS_UED+1]
-float waveToCurrency[] = {60000.0, 60000.0, 92000.0, 130400.0, 176480.0, 231776.0, 298131.2, 377757.4, 473308.9, 587970.7, 725564.0, 890677.8, 1088813.3, 1326576.0, 1611891.0, 1954269.0, 1954269.0, 2365123.0, 2858148.0}
-float OverallMod = 1.0;
-float DefenseMod = 1.75;
-float DamageMod = 2.1;
-float DefenseIncreasePerWaveMod = 0.03;
-float TankSentryDamageMod = 1.0;
+int currentupgrades_idx_mvm_checkpoint[MAXPLAYERS+1][NB_SLOTS_UED+1][MAX_ATTRIBUTES_ITEM]
+int currentupgrades_number_mvm_checkpoint[MAXPLAYERS+1][NB_SLOTS_UED+1]
+int upgrades_ref_to_idx_mvm_checkpoint[MAXPLAYERS+1][NB_SLOTS_UED+1][MAX_ATTRIBUTES]
+int UniqueWeaponRef_mvm_checkpoint[MAXPLAYERS+1]
+int currentupgrades_restriction_mvm_checkpoint[MAXPLAYERS+1][NB_SLOTS_UED+1][5];
+float currentupgrades_val_mvm_checkpoint[MAXPLAYERS+1][NB_SLOTS_UED+1][MAX_ATTRIBUTES_ITEM]
+float client_spent_money_mvm_checkpoint[MAXPLAYERS+1][NB_SLOTS_UED+1]
 
 //Status Effects
 float BleedBuildup[MAXPLAYERS+1];

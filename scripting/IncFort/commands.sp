@@ -521,19 +521,16 @@ public Action:Menu_QuickBuyUpgrade(client, args)
 	*/
 	return Plugin_Handled;
 }
+
 public Action:ReloadCfgFiles(client, args)
 {
 	InitializeConfigs();  
-	for (int cl = 0; cl <= MaxClients; cl++)
+	for (int cl = 1; cl <= MaxClients; cl++)
 	{
 		if(IsValidClient3(cl))
 		{
 			current_class[cl] = TF2_GetPlayerClass(cl)
-			
-			if (!client_respawn_handled[cl])
-			{
-				CreateTimer(0.2, ClChangeClassTimer, GetClientUserId(cl));
-			}
+			CreateTimer(0.2, ChangeClassTimer, GetClientUserId(cl));
 		}
 	}
 	return Plugin_Handled;

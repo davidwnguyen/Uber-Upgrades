@@ -30,7 +30,6 @@ public UberShopDefineUpgradeTabs()
 	int i = 0
 	while (i <= MaxClients)
 	{
-		client_respawn_handled[i] = 0
 		client_respawn_checkpoint[i] = 0
 		up_menus[i] = INVALID_HANDLE
 		int j = 0
@@ -245,8 +244,6 @@ public void OnPluginStart()
 	CreateTimer(1.0, Timer_Second, _, TIMER_REPEAT);
 	CreateTimer(10.0, Timer_EveryTenSeconds, _, TIMER_REPEAT);
 	CreateTimer(0.07, Timer_Every100MS, _, TIMER_REPEAT);
-	
-	logic = FindEntityByClassname(-1, "tf_objective_resource");
 
 	OwnerOffset = FindSendPropInfo("CBaseObject", "m_hBuilder");
 
@@ -519,7 +516,7 @@ public void OnPluginStart()
 		for(int i = 0; i < Max_Attunement_Slots; ++i){
 			AttunedSpells[client][i] = 0;
 		}
-		CreateTimer(0.2, ClChangeClassTimer, GetClientUserId(client));
+		CreateTimer(0.2, ChangeClassTimer, GetClientUserId(client));
 	}
 	for (int i = 1; i <= MaxClients; ++i)
 		if(IsValidClient3(i))

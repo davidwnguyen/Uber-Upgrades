@@ -1419,7 +1419,7 @@ public Action MissionLoaded(Handle timer){
 	disableMvMCash = true;
 	PrintToServer("%.2f Startmoney", StartMoney);
 
-	if(StrContains(missionName, "IF", false) != -1)
+	/*if(StrContains(missionName, "IF", false) != -1)
 	{
 		if(StrContains(missionName, "_Boss_Rush", false) != -1)
 		{
@@ -1485,7 +1485,7 @@ public Action MissionLoaded(Handle timer){
 			OverallMod = 1.0;
 			PrintToServer("IF | Set Mission to Default");
 		}
-	}
+	}*/
 	return Plugin_Stop;
 }
 //On a wave fail:
@@ -1513,28 +1513,25 @@ public Action WaveFailed(Handle timer)
 					{
 						for(i = 0; i < MAX_ATTRIBUTES_ITEM; ++i)
 						{
-							/*if(currentupgrades_idx[client][slot][i] != currentupgrades_idx_mvm_chkp[client][slot][i]){
+							/*if(currentupgrades_idx[client][slot][i] != currentupgrades_idx_mvm_checkpoint[client][slot][i]){
 								upgrades_ref_to_idx[client][slot][currentupgrades_idx[client][slot][i]]
 							}*/
-							currentupgrades_idx[client][slot][i] = currentupgrades_idx_mvm_chkp[client][slot][i]
-							currentupgrades_val[client][slot][i] = currentupgrades_val_mvm_chkp[client][slot][i]
+							currentupgrades_idx[client][slot][i] = currentupgrades_idx_mvm_checkpoint[client][slot][i]
+							currentupgrades_val[client][slot][i] = currentupgrades_val_mvm_checkpoint[client][slot][i]
 						}
 						for(i = 0; i < MAX_ATTRIBUTES; ++i)
 						{
-							upgrades_ref_to_idx[client][slot][i] = upgrades_ref_to_idx_mvm_chkp[client][slot][i]
+							upgrades_ref_to_idx[client][slot][i] = upgrades_ref_to_idx_mvm_checkpoint[client][slot][i]
 						}
-						client_spent_money[client][slot] = client_spent_money_mvm_chkp[client][slot];
-						currentupgrades_number[client][slot] = currentupgrades_number_mvm_chkp[client][slot]
+						client_spent_money[client][slot] = client_spent_money_mvm_checkpoint[client][slot];
+						currentupgrades_number[client][slot] = currentupgrades_number_mvm_checkpoint[client][slot]
 						for(int y = 0;y<5;y++)
 						{
-							currentupgrades_restriction[client][slot][y] = currentupgrades_restriction_mvm_chkp[client][slot][y];
+							currentupgrades_restriction[client][slot][y] = currentupgrades_restriction_mvm_checkpoint[client][slot][y];
 						}
 					}
-					UniqueWeaponRef[client] = UniqueWeaponRef_mvm_chkp[client];
-					if (!client_respawn_handled[client])
-					{
-						CreateTimer(2.0, ClChangeClassTimer, GetClientUserId(client));
-					}
+					UniqueWeaponRef[client] = UniqueWeaponRef_mvm_checkpoint[client];
+					CreateTimer(2.0, ChangeClassTimer, GetClientUserId(client));
 					CreateTimer(0.25, MvMFailTimer, GetClientUserId(client));
 					PrintToServer("%N has %.0f saved currency.", client, CurrencySaved[client]);
 				}
@@ -1559,7 +1556,6 @@ public Action:WeaponReGiveUpgrades(Handle timer, any:userid)
 	{
 		if (IsValidClient(client) && IsPlayerAlive(client))
 		{
-			client_respawn_handled[client] = 1
 			for (int slot = 0; slot < NB_SLOTS_UED; slot++)
 			{
 				if (slot == 3 && currentitem_level[client][3] == 242)
@@ -1579,7 +1575,6 @@ public Action:WeaponReGiveUpgrades(Handle timer, any:userid)
 				TF2Attrib_ClearCache(client);
 			}
 		}
-		client_respawn_handled[client] = 0
 	}
 }
 public Action:Timer_Resetupgrades(Handle timer, any:userid)
@@ -1590,13 +1585,10 @@ public Action:Timer_Resetupgrades(Handle timer, any:userid)
 		for (int slot = 0; slot < NB_SLOTS_UED; slot++)
 		{
 			client_spent_money[client][slot] = 0.0
-			client_spent_money_mvm_chkp[client][slot] = 0.0
+			client_spent_money_mvm_checkpoint[client][slot] = 0.0
 			client_tweak_highest_requirement[client][slot] = 0.0;
 		}
-		if (!client_respawn_handled[client])
-		{
-			CreateTimer(0.1, ClChangeClassTimer, GetClientUserId(client));
-		}
+		CreateTimer(0.1, ChangeClassTimer, GetClientUserId(client));
 	}
 }
 public Action:MvMFailTimer(Handle timer, any:userid)
@@ -1620,7 +1612,7 @@ public Action:MvMFailTimer(Handle timer, any:userid)
 		TF2Attrib_ClearCache(client);
 	}
 }
-public Action:ClChangeClassTimer(Handle timer, any:userid)
+public Action:ChangeClassTimer(Handle timer, any:userid)
 {
 	int client = GetClientOfUserId(userid);
 	if (IsValidClient(client) && IsPlayerAlive(client))

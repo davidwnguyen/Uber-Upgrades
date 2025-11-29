@@ -99,5 +99,6 @@
 		"chargelessRifle"						"chargelessRifle"	//Dragon Sniper Rifle
 		"tf_weapon_pda_engineer_build"			"pda"
 		"smoke_bomb"							"smoke_bomb"
+		"proj_scattergun"						"proj_scattergun"
 	}
 }

@@ -943,11 +943,11 @@ public Action:OnTakeDamagePre_Tank(victim, &attacker, &inflictor, float &damage,
 	{
 		damage = 0.0;
 	}
-	if(IsValidEdict(logic))
+	/*if(IsValidEdict(logic))
 	{
 		int round = GetEntProp(logic, Prop_Send, "m_nMannVsMachineWaveCount");
 		damage *= (Pow(7500.0/(StartMoney+additionalstartmoney), DefenseMod + (DefenseIncreasePerWaveMod * round)) * 6.0)/OverallMod;
-	}
+	}*/
 	return Plugin_Changed;
 }
 
@@ -1623,7 +1623,7 @@ public float genericSentryDamageModification(victim, attacker, inflictor, float 
 			GetEdictClassname(owner, Ownerclassname, sizeof(Ownerclassname)); 
 			if(StrEqual(Ownerclassname, "tank_boss"))
 			{
-				damage *= TankSentryDamageMod;
+				//damage *= TankSentryDamageMod;
 				damagetype |= DMG_PREVENT_PHYSICS_FORCE;
 			}
 		}

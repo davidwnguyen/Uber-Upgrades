@@ -973,39 +973,39 @@ public ResetClientUpgrade_slot(client, slot)
 {
 	int iNumAttributes = currentupgrades_number[client][slot]
 	
-	
 	if (client_spent_money[client][slot])
 	{
 		CurrencyOwned[client] += client_spent_money[client][slot];
 	}
 	currentitem_level[client][slot] = 0
 	client_spent_money[client][slot] = 0.0
-	client_spent_money_mvm_chkp[client][slot] = 0.0
+	CurrencySaved[client] += client_spent_money_mvm_checkpoint[client][slot];
+	client_spent_money_mvm_checkpoint[client][slot] = 0.0
 	currentupgrades_number[client][slot] = 0;
-	currentupgrades_number_mvm_chkp[client][slot] = 0;
+	currentupgrades_number_mvm_checkpoint[client][slot] = 0;
 	client_tweak_highest_requirement[client][slot] = 0.0;
 	
 	for(int y = 0; y<5;y++)
 	{
 		currentupgrades_restriction[client][slot][y] = 0;
-		currentupgrades_restriction_mvm_chkp[client][slot][y] = 0;
+		currentupgrades_restriction_mvm_checkpoint[client][slot][y] = 0;
 	}
 	
 	
 	for (int i = 0; i < iNumAttributes; ++i)
 	{
-		currentupgrades_val_mvm_chkp[client][slot][i] = 0.0;
+		currentupgrades_val_mvm_checkpoint[client][slot][i] = 0.0;
 		currentupgrades_val[client][slot][i] = 0.0;
 		currentupgrades_i[client][slot][i] = 0.0;
 		currentupgrades_idx[client][slot][i] = 0;
-		currentupgrades_idx_mvm_chkp[client][slot][i] = currentupgrades_idx[client][slot][i];
+		currentupgrades_idx_mvm_checkpoint[client][slot][i] = 0;
 	}
 	//I AM THE STORM THAT IS APPROACHING
 	//Thank you retard MR L
 	for(int i = 0; i < MAX_ATTRIBUTES; ++i)
 	{
 		upgrades_ref_to_idx[client][slot][i] = 20000;
-		upgrades_ref_to_idx_mvm_chkp[client][slot][i] = 20000;
+		upgrades_ref_to_idx_mvm_checkpoint[client][slot][i] = 20000;
 	}
 	
 	if (slot != 4 && currentitem_idx[client][slot] && !replenishStatus)
@@ -1013,7 +1013,6 @@ public ResetClientUpgrade_slot(client, slot)
 		currentitem_idx[client][slot] = 20000
 	}
 	
-
 	if (slot == 3)
 	{
 		currentitem_idx[client][slot] = 20000
@@ -1021,7 +1020,7 @@ public ResetClientUpgrade_slot(client, slot)
 		upgrades_weapon_current[client] = -1;
 		GiveNewUpgradedWeapon_(client, slot)
 		UniqueWeaponRef[client] = -1;
-		UniqueWeaponRef_mvm_chkp[client] = -1;
+		UniqueWeaponRef_mvm_checkpoint[client] = -1;
 	}
 	if (slot == 4)
 	{
@@ -1036,10 +1035,7 @@ public ResetClientUpgrade_slot(client, slot)
 
 public ResetClientUpgrades(client)
 {
-	int slot
-	
-	client_respawn_handled[client] = 0
-	for (slot = 0; slot < NB_SLOTS_UED; slot++)
+	for (int slot = 0; slot < NB_SLOTS_UED; slot++)
 	{
 		ResetClientUpgrade_slot(client, slot)
 	}
@@ -2707,11 +2703,11 @@ randomizeTankSpecialty(entity)
 					SetVariantInt(3);
 					AcceptEntityInput(iEntity, "SetTeam");
 					SetEntProp(iEntity, Prop_Send, "m_iTeamNum", 3)
-					if(IsValidEdict(logic))
+					/*if(IsValidEdict(logic))
 					{
 						int round = GetEntProp(logic, Prop_Send, "m_nMannVsMachineWaveCount");
 						TankSentryDamageMod = Pow((waveToCurrency[round]/11000.0), DamageMod + (round * 0.03)) * 1.8 * OverallMod;
-					}
+					}*/
 				}
 			}
 			case 1:

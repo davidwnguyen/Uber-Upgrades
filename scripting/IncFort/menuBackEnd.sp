@@ -5,7 +5,7 @@ public MenuHandler_UpgradeChoice(Handle menu, MenuAction:action, client, param2)
 	}
 	else if (action == MenuAction_Select)
 	{
-		client_respawn_handled[client] = 0
+		
 		int slot = current_slot_used[client]
 		int w_id = current_w_list_id[client]
 		int cat_id = current_w_c_list_id[client]
@@ -686,7 +686,6 @@ public MenuHandler_SpecialUpgradeChoice(Handle menu, MenuAction:action, client, 
 {
 	if (action == MenuAction_Select)
 	{
-		client_respawn_handled[client] = 0
 		char fstr[100]
 		int got_req = 1
 		int slot = current_slot_used[client]

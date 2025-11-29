@@ -39,29 +39,29 @@ SavePlayerData(client)
 	{
 		for(int s = 0; s < NB_SLOTS_UED; s++)
 		{
-			pack.WriteCell(currentupgrades_number_mvm_chkp[client][s]);
+			pack.WriteCell(currentupgrades_number_mvm_checkpoint[client][s]);
 			for(int i = 0; i < MAX_ATTRIBUTES_ITEM; ++i)
 			{
-				pack.WriteCell(currentupgrades_idx_mvm_chkp[client][s][i]);
-				pack.WriteFloat(currentupgrades_val_mvm_chkp[client][s][i]);
+				pack.WriteCell(currentupgrades_idx_mvm_checkpoint[client][s][i]);
+				pack.WriteFloat(currentupgrades_val_mvm_checkpoint[client][s][i]);
 				pack.WriteFloat(currentupgrades_i[client][s][i]);
-				pack.WriteCell(upgrades_ref_to_idx_mvm_chkp[client][s][currentupgrades_idx_mvm_chkp[client][s][i]]);
+				pack.WriteCell(upgrades_ref_to_idx_mvm_checkpoint[client][s][currentupgrades_idx_mvm_checkpoint[client][s][i]]);
 			}
-			pack.WriteFloat(client_spent_money_mvm_chkp[client][s]);
+			pack.WriteFloat(client_spent_money_mvm_checkpoint[client][s]);
 			pack.WriteFloat(client_tweak_highest_requirement[client][s]);
 			pack.WriteCell(currentitem_idx[client][s]);
 			pack.WriteCell(currentitem_level[client][s]);
 			pack.WriteString(currentitem_classname[client][s]);
 			for(int y = 0; y<5; y++)
 			{
-				pack.WriteCell(currentupgrades_restriction_mvm_chkp[client][s][y]);
+				pack.WriteCell(currentupgrades_restriction_mvm_checkpoint[client][s][y]);
 			}
 		}
 	}
 
 	pack.WriteCell(current_class[client]);
 	if(IsMvM())
-		pack.WriteCell(UniqueWeaponRef_mvm_chkp[client]);
+		pack.WriteCell(UniqueWeaponRef_mvm_checkpoint[client]);
 	else
 		pack.WriteCell(UniqueWeaponRef[client]);
 
@@ -145,10 +145,10 @@ GivePlayerData(client)
 				currentupgrades_idx[client][s][i] = temp_currentupgrades_idx[i];
 				currentupgrades_val[client][s][i] = temp_currentupgrades_val[i];
 				currentupgrades_i[client][s][i] = temp_currentupgrades_i[i];
-				currentupgrades_idx_mvm_chkp[client][s][i] = currentupgrades_idx[client][s][i];
-				currentupgrades_val_mvm_chkp[client][s][i] = currentupgrades_val[client][s][i];
+				currentupgrades_idx_mvm_checkpoint[client][s][i] = currentupgrades_idx[client][s][i];
+				currentupgrades_val_mvm_checkpoint[client][s][i] = currentupgrades_val[client][s][i];
 				upgrades_ref_to_idx[client][s][currentupgrades_idx[client][s][i]] = temp_upgrades_ref_to_idx[temp_currentupgrades_idx[i]];
-				upgrades_ref_to_idx_mvm_chkp[client][s][currentupgrades_idx_mvm_chkp[client][s][i]] = upgrades_ref_to_idx[client][s][currentupgrades_idx[client][s][i]]
+				upgrades_ref_to_idx_mvm_checkpoint[client][s][currentupgrades_idx_mvm_checkpoint[client][s][i]] = upgrades_ref_to_idx[client][s][currentupgrades_idx[client][s][i]]
 			}
 			client_spent_money[client][s] = temp_client_spent_money
 			client_tweak_highest_requirement[client][s] = temp_client_tweak_highest_requirement
@@ -159,18 +159,18 @@ GivePlayerData(client)
 			for(int y = 0; y<5; y++)
 			{
 				currentupgrades_restriction[client][s][y] = temp_currentupgrades_restriction[y];
-				currentupgrades_restriction_mvm_chkp[client][s][y] = currentupgrades_restriction[client][s][y];
+				currentupgrades_restriction_mvm_checkpoint[client][s][y] = currentupgrades_restriction[client][s][y];
 			}
 			
-			client_spent_money_mvm_chkp[client][s] = client_spent_money[client][s];
+			client_spent_money_mvm_checkpoint[client][s] = client_spent_money[client][s];
 			spentMoney += client_spent_money[client][s];
-			currentupgrades_number_mvm_chkp[client][s] = currentupgrades_number[client][s];
+			currentupgrades_number_mvm_checkpoint[client][s] = currentupgrades_number[client][s];
 			
 			CurrencyFormulated -= client_spent_money[client][s];
 		}
 		current_class[client] = pack.ReadCell();
 		UniqueWeaponRef[client] = pack.ReadCell();
-		UniqueWeaponRef_mvm_chkp[client] = UniqueWeaponRef[client]
+		UniqueWeaponRef_mvm_checkpoint[client] = UniqueWeaponRef[client]
 		upgrades_weapon_current[client] = pack.ReadCell();
 		previous_class[client] = current_class[client];
 		CurrencyOwned[client] = CurrencyFormulated;
