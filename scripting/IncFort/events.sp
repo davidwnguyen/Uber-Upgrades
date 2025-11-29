@@ -1082,8 +1082,6 @@ public OnEntityCreated(entity, const char[] classname)
 			RequestFrame(MultiShot, reference);
 			SDKHook(entity, SDKHook_StartTouch, OnStartTouch);
 			RequestFrame(projGravity, reference);
-			RequestFrame(PrecisionHoming, reference);
-			RequestFrame(ApplyFullHoming, reference);
 			RequestFrame(CheckGrenadeMines, reference);
 			RequestFrame(ChangeProjModel, reference);
 		}
