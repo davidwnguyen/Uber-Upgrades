@@ -700,6 +700,32 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 					checkFreeze(victim, attacker);
 				}
 			}
+			
+			if(TF2Attrib_HookValueFloat(0.0, "knockout_powerup", weapon) == 1){
+				if(TF2Util_GetWeaponSlot(weapon) == TFWeaponSlot_Melee)
+				{
+					float buildupIncrease = damage/TF2_GetMaxHealth(victim)*175.0;
+					
+					if(hasBuffIndex(attacker, Buff_Plunder)){
+						Buff plunderBuff;
+						plunderBuff = playerBuffs[attacker][getBuffInArray(attacker, Buff_Plunder)]
+						buildupIncrease *= plunderBuff.severity;
+					}
+
+					ConcussionBuildup[victim] += buildupIncrease;
+					if(ConcussionBuildup[victim] >= 100.0)
+					{
+						ConcussionBuildup[victim] = 0.0;
+						if(TF2Attrib_HookValueFloat(0.0, "inverter_powerup", victim) == 1){
+							TF2_AddCondition(victim, TFCond_MegaHeal, 10.0);
+							giveDefenseBuff(victim, 10.0);
+						}else{
+							miniCritStatusVictim[victim] = GetGameTime()+10.0;
+							TF2_StunPlayer(victim, 1.0, 1.0, TF_STUNFLAGS_NORMALBONK, attacker);
+						}
+					}
+				}
+			}
 		}
 	}
 
@@ -1633,29 +1659,15 @@ public float genericSentryDamageModification(victim, attacker, inflictor, float 
 		}
 		if(IsValidClient3(owner))
 		{
-			int melee = GetPlayerWeaponSlot(owner,2);
 			damagetype |= DMG_PREVENT_PHYSICS_FORCE;
 
 			int CWeapon = GetEntPropEnt(owner, Prop_Send, "m_hActiveWeapon");
-			if(IsValidEdict(CWeapon))
+			if(IsValidWeapon(CWeapon))
 			{
 				Address SentryDmgActive = TF2Attrib_GetByName(CWeapon, "ring of fire while aiming");
 				if(SentryDmgActive != Address_Null)
 				{
 					damage *= TF2Attrib_GetValue(SentryDmgActive);
-				}
-			}
-			if(IsValidEdict(melee))
-			{
-				Address SentryDmgActive1 = TF2Attrib_GetByName(melee, "throwable detonation time");
-				if(SentryDmgActive1 != Address_Null)
-				{
-					damage *= TF2Attrib_GetValue(SentryDmgActive1);
-				}
-				Address SentryDmgActive2 = TF2Attrib_GetByName(melee, "throwable fire speed");
-				if(SentryDmgActive2 != Address_Null)
-				{
-					damage *= TF2Attrib_GetValue(SentryDmgActive2);
 				}
 			}
 

@@ -4965,12 +4965,13 @@
 			"init"		"1"
 			"optimizer_style" "1"
 			"description"	"1:1 pure damage multiplier.\nIncreases in cost by +$600 per purchase.\nOnly works while held."
-			"max"		"3"
+			"max"		"1.5"
 		}
 		"1513"
 		{
-			"name"		"throwable detonation time"
+			"name"		"sentry damage multiplier"
 			"ref"		"Sentry Armor Piercing Damage"
+			"attr_class"	"mult_engy_sentry_damage"
 			"display"		"%.0f%%"
 			"cost"		"550"
 			"increase_ratio"	"0.1"
@@ -4978,7 +4979,7 @@
 			"init"		"1"
 			"optimizer_style" "1"
 			"description"	"1:1 pure damage multiplier.\nIncreases in cost by +$94 per purchase."
-			"max"		"18"
+			"max"		"25"
 		}
 		"1516"
 		{
@@ -5285,7 +5286,7 @@
 			"value"		"1"
 			"init"		"0"
 			"restriction_category"	"2"
-			"description"	"Replaces sentry bullets with extreme speed fireballs.\nShoots 4x slower, but fireballs deal 100 base damage and splash."
+			"description"	"Replaces sentry bullets with extreme speed fireballs.\nShoots 6x slower, but fireballs deal 200 base damage and splash."
 			"max"		"1"
 		}
 		"1538.1"
@@ -5300,7 +5301,7 @@
 			"init"		"0"
 			"restriction_category"	"2"
 			"description"	"Adds +1 rocket per rocket attack."
-			"max"		"4"
+			"max"		"3"
 		}
 		"1538.2"
 		{
@@ -5327,7 +5328,7 @@
 			"value"		"2"
 			"init"		"0"
 			"restriction_category"	"2"
-			"description"	"Sentry shoots out projectile bolts that deal 20 base damage.\nApplies +4 bleed buildup on hit and penetrates victims."
+			"description"	"Sentry shoots out projectile bolts that deal 30 base damage.\nApplies +4 bleed buildup on hit and penetrates victims."
 			"max"		"2"
 		}
 		"1538.4"
@@ -5847,7 +5848,8 @@
 			"increase_ratio"	"0.3"
 			"value"		"-0.1"
 			"init"		"1.0"
-			"max"		"0.1"
+			"restriction_category"	"2"
+			"max"		"0.6"
 		}
 		"1591"
 		{

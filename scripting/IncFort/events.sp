@@ -29,45 +29,11 @@ public Event_Playerhurt(Handle event, const char[] name, bool:dontBroadcast)
 			SetEventInt(event, "damageamount", 0);
 			PrintCenterText(attacker, "OVERLOAD DMG | %s |", GetAlphabetForm(damage));
 		}
-		int CWeapon = GetEntPropEnt(attacker, Prop_Send, "m_hActiveWeapon");
 		Handle hPack = CreateDataPack();
 		WritePackCell(hPack, EntIndexToEntRef(attacker));
 		WritePackFloat(hPack, damage);
 		CreateTimer(1.01, RemoveDamage, hPack);
 
-		Address knockoutPowerup = TF2Attrib_GetByName(attacker, "knockout powerup");
-		if(knockoutPowerup != Address_Null)
-		{
-			float knockoutPowerupValue = TF2Attrib_GetValue(knockoutPowerup);
-			if(knockoutPowerupValue == 1){
-				if (IsValidEdict(CWeapon))
-				{
-					if(TF2Util_GetWeaponSlot(CWeapon) == TFWeaponSlot_Melee)
-					{
-						float buildupIncrease = (damage/TF2_GetMaxHealth(client))*175.0;
-						
-						if(hasBuffIndex(attacker, Buff_Plunder)){
-							Buff plunderBuff;
-							plunderBuff = playerBuffs[attacker][getBuffInArray(attacker, Buff_Plunder)]
-							buildupIncrease *= plunderBuff.severity;
-						}
-
-						ConcussionBuildup[client] += buildupIncrease;
-						if(ConcussionBuildup[client] >= 100.0)
-						{
-							ConcussionBuildup[client] = 0.0;
-							if(TF2Attrib_HookValueFloat(0.0, "inverter_powerup", client) == 1){
-								TF2_AddCondition(client, TFCond_MegaHeal, 10.0);
-								TF2_AddCondition(client, TFCond_DefenseBuffNoCritBlock, 10.0);
-							}else{
-								miniCritStatusVictim[client] = GetGameTime()+10.0;
-								TF2_StunPlayer(client, 1.0, 1.0, TF_STUNFLAGS_NORMALBONK, attacker);
-							}
-						}
-					}
-				}
-			}
-		}
 		if(TF2Attrib_HookValueFloat(0.0, "plague powerup", attacker) == 3.0){
 			if(!hasBuffIndex(client, Buff_LifeLink)){
 				Buff lifelinkDebuff;
@@ -3888,7 +3854,7 @@ public Action TF2_SentryFireBullet(int sentry, int builder, int &shots, float sr
 			float override = TF2Attrib_HookValueFloat(0.0, "sentry_override_projectile_type", pda);
 			switch (override){
 				case 1.0:{
-					if(firestormCounter[builder] == 4)
+					if(firestormCounter[builder] == 6)
 					{
 						int iEntity = CreateEntityByName("tf_projectile_spellfireball");
 						if (IsValidEdict(iEntity)) 
@@ -3907,7 +3873,7 @@ public Action TF2_SentryFireBullet(int sentry, int builder, int &shots, float sr
 							TeleportEntity(iEntity, src, fAngles, fVelocity);
 							DispatchSpawn(iEntity);
 							//why does it hit twice??? also, minisentries deal 25% dmg.
-							projectileDamage[iEntity] = 50.0*TF2_GetSentryDamageModifiers(attacker);
+							projectileDamage[iEntity] = 100.0*TF2_GetSentryDamageModifiers(attacker);
 							if(GetEntProp(sentry, Prop_Send, "m_bMiniBuilding"))
 								projectileDamage[iEntity] *= 0.25;
 						}
@@ -3921,7 +3887,7 @@ public Action TF2_SentryFireBullet(int sentry, int builder, int &shots, float sr
 					int iEntity = CreateEntityByName(projName);
 					if (IsValidEdict(iEntity)) 
 					{
-						projectileDamage[iEntity] = 20.0 * TF2_GetSentryDamageModifiers(builder);
+						projectileDamage[iEntity] = 30.0 * TF2_GetSentryDamageModifiers(builder);
 						if(GetEntProp(sentry, Prop_Send, "m_bMiniBuilding"))
 							projectileDamage[iEntity] *= 0.25;
 
