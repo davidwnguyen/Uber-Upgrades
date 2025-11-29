@@ -1507,9 +1507,11 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 					continue;
 				if(!IsPlayerAlive(i))
 					continue;
-				if(GetClientTeam(i) == team)
-					continue;
 				if(!isTagged[attacker][i])
+					continue;
+				if(victim == i)
+					continue;
+				if(GetClientTeam(i) == team)
 					continue;
 				if(IsPlayerInSpawn(i))
 					continue;
