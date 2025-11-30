@@ -1,5 +1,8 @@
 "Phrases"
 {
+	"weapon can headshot" {
+		"en"		"Weapon Headshot Damage"
+	}
 	"ammo conservation" {
 		"en"		"Ammo Conservation Rate"
 	}

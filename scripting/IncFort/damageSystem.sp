@@ -1470,7 +1470,7 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 				for(int i = 1; i< MAXENTITIES; ++i){
 					if(isPenetrated[i]){
 						currentDamageType[attacker].second |= DMG_IGNOREHOOK;
-						SDKHooks_TakeDamage(i,attacker,attacker,baseDamage[attacker]*TF2_GetDamageModifiers(attacker, weapon)*conferenceBonus,damagetype,_,_,_,false);
+						SDKHooks_TakeDamage(i,attacker,attacker,baseDamage[attacker]*TF2_GetDamageModifiers(attacker, weapon)*conferenceBonus,DMG_BULLET,_,_,_,false);
 						isPenetrated[i] = false;
 					}
 				}
