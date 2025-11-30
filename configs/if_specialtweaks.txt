@@ -56,7 +56,7 @@
 		{
 			"cost"							"5k"
 			"restriction"					"1"
-			"Homing Projectiles"			"200"
+			"projectile homing radius"		"200"
 			"Bleed Per Hit"					"1"
 		}
 		"Blade Stream"
@@ -88,8 +88,8 @@
 		{
 			"gamestage"						"1"
 			"restriction"					"1"
-			"Homing Projectiles"			"200.0"
-			"mult crit dmg"				"3.0"
+			"projectile homing radius"		"200.0"
+			"mult crit dmg"					"3.0"
 			"Ability : Homing Flares"		"1"
 		}
 		"Explosive Bullets(P)"

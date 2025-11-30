@@ -64,7 +64,7 @@
 		"39,1081"//The Flare Gun
 		{
 			"preserve_attributes"	"1"
-			"1"				"crit from behind;35"
+			"1"				"projectile homing radius;50.0"
 			"2"				"crit vs burning players;1"
 		}
 		"59"//The Dead Ringer
@@ -440,7 +440,7 @@
 			"preserve_attributes"	"1"
 			"1"				"damage mult 13; 0.45"
 			"2"				"override projectile type;40.0"
-			"3"				"crit from behind;150.0"
+			"3"				"projectile homing radius;150.0"
 		}
 		"222,1121,58,1083,1105" //Jars
 		{

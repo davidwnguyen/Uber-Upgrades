@@ -105,6 +105,7 @@ enum {
 	Buff_ImmolationBurn=26,
 	Buff_InfernalLunge=27,
 	Buff_PowerupBurning=28, 
+	Buff_Plagued=29, 
 	BuffAmt
 };
 bool isBonus[BuffAmt] = {
@@ -135,6 +136,7 @@ bool isBonus[BuffAmt] = {
 	true,
 	false,
 	true,
+	false,
 	false,
 	false,
 }
@@ -458,7 +460,6 @@ float RadiationMaximum[MAXPLAYERS+1];
 float FreezeBuildup[MAXPLAYERS+1];
 
 //Projectile Properties
-bool isProjectileHoming[MAXENTITIES];
 bool isProjectileBoomerang[MAXENTITIES];
 bool isProjectileFireball[MAXENTITIES];
 bool isAimlessProjectile[MAXENTITIES];

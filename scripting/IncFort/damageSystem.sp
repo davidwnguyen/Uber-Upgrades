@@ -463,13 +463,8 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 		if(1 <= TF2Attrib_HookValueFloat(0.0, "plague_powerup", victim) <= 2)
 			damage *= ConsumePierce(0.75, pierce);
 
-		if(TF2_IsPlayerInCondition(attacker, TFCond_Plague))
-		{
-			int plagueInflictor = TF2Util_GetPlayerConditionProvider(attacker, TFCond_Plague);
-			if(IsValidClient3(plagueInflictor))
-				if(TF2Attrib_HookValueFloat(0.0, "regeneration_powerup", plagueInflictor))
-					damage *= 0.5;
-		}
+		if(hasBuffIndex(attacker, Buff_Plagued))
+			damage *= 0.5;
 		
 		Address strengthPowerup = TF2Attrib_GetByName(attacker, "strength powerup");
 		if(strengthPowerup != Address_Null)

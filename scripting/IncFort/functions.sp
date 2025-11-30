@@ -399,13 +399,14 @@ public void ManagePlayerBuffs(int i){
 
 		additiveDamageRawBuff += playerBuffs[i][buff].additiveDamageRaw * playerBuffs[i][buff].severity;
 		additiveDamageMultBuff += playerBuffs[i][buff].additiveDamageMult * playerBuffs[i][buff].severity;
-		multiplicativeDamageBuff *= 1+(playerBuffs[i][buff].multiplicativeDamage-1) * playerBuffs[i][buff].severity;
 		additiveAttackSpeedMultBuff += playerBuffs[i][buff].additiveAttackSpeedMult * playerBuffs[i][buff].severity;
-		multiplicativeAttackSpeedMultBuff *= 1+(playerBuffs[i][buff].multiplicativeAttackSpeedMult-1) * playerBuffs[i][buff].severity;
 		additiveMoveSpeedMultBuff += playerBuffs[i][buff].additiveMoveSpeedMult * playerBuffs[i][buff].severity;
 		additiveDamageTakenBuff += playerBuffs[i][buff].additiveDamageTaken * playerBuffs[i][buff].severity;
-		multiplicativeDamageTakenBuff *= 1+(playerBuffs[i][buff].multiplicativeDamageTaken-1) * playerBuffs[i][buff].severity;
 		additiveArmorPenetration += playerBuffs[i][buff].additiveArmorPenetration * playerBuffs[i][buff].severity;
+
+		multiplicativeDamageBuff *= 1+(playerBuffs[i][buff].multiplicativeDamage-1) * playerBuffs[i][buff].severity;
+		multiplicativeDamageTakenBuff *= 1+(playerBuffs[i][buff].multiplicativeDamageTaken-1) * playerBuffs[i][buff].severity;
+		multiplicativeAttackSpeedMultBuff *= 1+(playerBuffs[i][buff].multiplicativeAttackSpeedMult-1) * playerBuffs[i][buff].severity;
 
 		if(playerBuffs[i][buff].description[0] != '\0')
 			Format(details, sizeof(details), "%s\n%s: - %.1fs\n  %s", details, playerBuffs[i][buff].name, playerBuffs[i][buff].duration - GetGameTime(), playerBuffs[i][buff].description);
@@ -459,7 +460,7 @@ public void ManagePlayerBuffs(int i){
 	}
 
 	TF2Attrib_SetByName(i, "additive damage bonus", additiveDamageRawBuff);
-	TF2Attrib_SetByName(i, "damage bonus", additiveDamageMultBuff*multiplicativeDamageBuff);
+	TF2Attrib_SetByName(i, "damage mult 1", additiveDamageMultBuff*multiplicativeDamageBuff);
 	TF2Attrib_SetByName(i, "firerate player buff", 1.0/(additiveAttackSpeedMultBuff*multiplicativeAttackSpeedMultBuff));
 	TF2Attrib_SetByName(i, "recharge rate player buff", 1.0/(additiveAttackSpeedMultBuff*multiplicativeAttackSpeedMultBuff));
 	TF2Attrib_SetByName(i, "Reload time decreased", 1.0/(additiveAttackSpeedMultBuff*multiplicativeAttackSpeedMultBuff));
@@ -2299,22 +2300,6 @@ void DoSapperEffects(int client){
 		}
 	}
 }
-ApplyFullHoming(int entity){
-	entity = EntRefToEntIndex(entity);
-	if(!IsValidEdict(entity))
-		return;
-	int owner = getOwner(entity);
-	if(!IsValidClient3(owner))
-		return;
-	int CWeapon = GetEntPropEnt(owner, Prop_Send, "m_hActiveWeapon");
-	if(!IsValidWeapon(CWeapon))
-		return;
-	float homingActive = GetAttribute(CWeapon, "crit from behind", 0.0);
-	if(!homingActive)
-		return;
-
-	isProjectileHoming[entity] = true;
-}
 ApplyHomingCharacteristics(DataPack pack)//int,float,int,int
 {
 	pack.Reset();
@@ -2327,8 +2312,7 @@ ApplyHomingCharacteristics(DataPack pack)//int,float,int,int
 	int CWeapon = GetEntPropEnt(owner, Prop_Send, "m_hActiveWeapon");
 	if(!IsValidWeapon(CWeapon))
 		return;
-	float homingActive = GetAttribute(CWeapon, "crit from behind", 0.0)
-	+ GetAttribute(owner, "crit from behind", 0.0);
+	float homingActive = TF2Attrib_HookValueFloat(0.0, "projectile_homing_radius", CWeapon);
 	if(!homingActive)
 		return;
 	
@@ -2904,43 +2888,7 @@ public OnAimlessThink(entity){
 
 	TeleportEntity(entity, NULL_VECTOR, ProjAngle, ProjVector ); 
 }
-public OnThinkPost(entity) 
-{ 
-	if(!IsValidEdict(entity))
-		return;
 
-	int owner = GetEntPropEnt(entity, Prop_Data, "m_hOwnerEntity");
-	if(!IsValidClient3(owner))
-		return;
-
-	int Target = GetClosestTarget(entity, owner); 
-	if(!IsValidClient3(Target))
-		return;
-
-	int CWeapon = GetEntPropEnt(owner, Prop_Send, "m_hActiveWeapon");
-	if(!IsValidWeapon(CWeapon))
-		return;
-
-	Address homingActive = TF2Attrib_GetByName(CWeapon, "crit from behind");
-	if(homingActive == Address_Null)
-		return;
-
-	if(owner != Target)
-	{
-		float flTargetPos[3];
-		GetClientAbsOrigin(Target, flTargetPos);
-		flTargetPos[2]+=40.0;
-		float flRocketPos[3];
-		GetEntPropVector(entity, Prop_Send, "m_vecOrigin", flRocketPos);
-		float distance = GetVectorDistance(flRocketPos, flTargetPos, true); 
-		
-		if(distance <= TF2Attrib_GetValue(homingActive)*TF2Attrib_GetValue(homingActive) )
-		{
-			float flVelocityChange[3];
-			TeleportEntity(entity, flTargetPos, NULL_VECTOR, flVelocityChange);
-		}
-	}
-}
 public SetWeaponOwner(entity){
 	entity = EntRefToEntIndex(entity);
 	if(!IsValidEdict(entity))
@@ -3334,14 +3282,18 @@ PrecisionHoming(entity)
 		int client = getOwner(entity);
 		if(IsValidClient3(client))
 		{
-			Address precisionPowerup = TF2Attrib_GetByName(client, "precision powerup");
-			if(precisionPowerup == Address_Null) return;
+			float addedRadius = TF2Attrib_HookValueFloat(0.0, "projectile_homing_radius", client);
+			float precision = TF2Attrib_HookValueFloat(0.0, "precision_powerup", client);
 
-			if(TF2Attrib_GetValue(precisionPowerup) == 1){
-				homingRadius[entity] = 200.0;
+			if(addedRadius > 0){
+				homingRadius[entity] = addedRadius;
 				homingAimStyle[entity] = HomingStyle_Fast;
 			}
-			else if(TF2Attrib_GetValue(precisionPowerup) == 2)
+			if(precision == 1){
+				homingRadius[entity] += 200.0;
+				homingAimStyle[entity] = HomingStyle_Fast;
+			}
+			else if(precision == 2)
 				if(!Phys_IsPhysicsObject(entity))
 					isAimlessProjectile[entity] = true;
 		}
@@ -3555,7 +3507,7 @@ GivePowerupDescription(int client, char[] name, int amount){
 		}else if(amount == 3){
 			CPrintToChat(client, "{community}Life Link Powerup {default}| {lightcyan}Hitting an enemy will proc life link: Instantly deals 30%% currentHP%% to you, but drains 35%% currentHP%% of enemy over time. At end of duration, your team is healed by damage dealt to yourself.");
 		}else{
-			CPrintToChat(client, "{community}Plague Powerup {default}| {lightcyan}Steals all healthpacks nearby, giving 25%% max health heal. Enemies nearby will be plagued for 12s, weakening damage dealt by them by 0.5x. 0.75x incoming damage taken.");
+			CPrintToChat(client, "{community}Plague Powerup {default}| {lightcyan}Steals all healthpacks nearby, giving 25%% max health heal. Enemies nearby will be plagued for 10s, weakening damage dealt by them by 0.5x.");
 		}
 	}
 	else if(StrEqual("supernova powerup", name)){

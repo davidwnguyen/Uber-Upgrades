@@ -1006,7 +1006,6 @@ public OnEntityCreated(entity, const char[] classname)
 			RequestFrame(PrecisionHoming, reference);
 			CreateTimer(6.0, SelfDestruct, reference);
 			CreateTimer(0.1, ArrowThink, reference, TIMER_REPEAT|TIMER_FLAG_NO_MAPCHANGE);
-			RequestFrame(ApplyFullHoming, reference);
 			SDKHook(entity, SDKHook_Touch, FixProjectileCollision);
 		}
 		if(StrEqual(classname, "tf_projectile_syringe") || StrEqual(classname, "tf_projectile_rocket")
@@ -1016,7 +1015,6 @@ public OnEntityCreated(entity, const char[] classname)
 			SDKHook(entity, SDKHook_StartTouch, OnStartTouch);
 			RequestFrame(projGravity, reference);
 			RequestFrame(PrecisionHoming, reference);
-			RequestFrame(ApplyFullHoming, reference);
 			SDKHook(entity, SDKHook_Touch, FixProjectileCollision);
 		}
 		if(StrEqual(classname, "tf_projectile_rocket") || StrEqual(classname, "tf_projectile_flare") || StrEqual(classname, "tf_projectile_sentryrocket"))
@@ -1061,7 +1059,6 @@ public OnEntityCreated(entity, const char[] classname)
 		}
 		if(StrEqual(classname, "tf_projectile_energy_ring"))
 		{
-			isProjectileHoming[entity] = true;
 			CreateTimer(1.0, SelfDestruct, reference);
 		}
 	}
@@ -1092,7 +1089,6 @@ public OnEntityDestroyed(entity)
 	for(int i=0;i<MAXENTITIES;++i)
 	{ShouldNotHit[entity][i] = false;}
 	isEntitySentry[entity] = false;
-	isProjectileHoming[entity] = false;
 	isProjectileBoomerang[entity] = false;
 	isProjectileFireball[entity] = false;
 	gravChanges[entity] = false;
@@ -2417,9 +2413,6 @@ public OnGameFrame()
 	{
 		if(!IsValidEdict(i))
 			continue;
-
-		if(isProjectileHoming[i])
-			OnThinkPost(i);
 
 		if(homingRadius[i] > 0.0 && homingDelay[i] < GetGameTime() - entitySpawnTime[i])
 			OnEntityHomingThink(i);

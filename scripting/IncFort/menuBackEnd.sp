@@ -107,9 +107,9 @@ public MenuHandler_UpgradeChoice(Handle menu, MenuAction:action, client, param2)
 					if(nextcost < CurrencyOwned[client] && upgrades[upgrade_choice].ratio > 0.0 && 
 					(canBypassRestriction[client] == true || RoundFloat(upgrades_val*100.0)/100.0 < upgrades[upgrade_choice].m_val))
 					{
-						t_up_cost += up_cost + RoundFloat(up_cost * (idx_currentupgrades_val* upgrades[upgrade_choice].cost_inc_ratio))
-						idx_currentupgrades_val++		
-						upgrades_val += upgrades[upgrade_choice].ratio
+						t_up_cost += up_cost + RoundFloat(up_cost * (idx_currentupgrades_val* upgrades[upgrade_choice].cost_inc_ratio));
+						idx_currentupgrades_val++;
+						upgrades_val += upgrades[upgrade_choice].ratio;
 						times++;
 					}
 					else if(nextcost < CurrencyOwned[client] && upgrades[upgrade_choice].ratio < 0.0 && 

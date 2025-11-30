@@ -80,6 +80,7 @@
 #define SOUND_SLASHHIT1 "weapons/samurai/tf_katana_slice_01.wav"
 #define SOUND_SLASHHIT2 "weapons/samurai/tf_katana_slice_02.wav"
 #define SOUND_SLASHHIT3 "weapons/samurai/tf_katana_slice_03.wav"
+#define SOUND_PLAGUEPROC ")items/powerup_pickup_plague_infected.wav"
 
 #define PLUGIN_VERSION "1.0"
 

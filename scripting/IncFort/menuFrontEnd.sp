@@ -107,7 +107,7 @@ Action:Menu_UpgradeChoice(client, subcat_choice, cat_choice, char[] TitleStr, in
 			if(tmp_ref_idx != 20000)
 			{
 				float upgrades_val = currentupgrades_val[client][slot][tmp_ref_idx];
-				int idx_currentupgrades_val
+				int idx_currentupgrades_val;
 				if(currentupgrades_i[client][slot][tmp_ref_idx] != 0.0){
 					idx_currentupgrades_val = RoundFloat((currentupgrades_val[client][slot][tmp_ref_idx] - currentupgrades_i[client][slot][tmp_ref_idx])/ upgrades[tmp_up_idx].ratio)
 				}

@@ -566,6 +566,8 @@ public Action:Timer_Every100MS(Handle timer)
 			leechDebuff.init("Leeched", "", Buff_Leech, 1, client, 1.0);
 			Buff decayDebuff;
 			decayDebuff.init("Decay", "", Buff_Decay, 1, client, 1.0);
+			Buff plaguedCond;
+			plaguedCond.init("Plagued", "", Buff_Plagued, 1, client, 10.0);
 
 			for(int i=1;i<=MaxClients;++i)
 			{
@@ -598,11 +600,13 @@ public Action:Timer_Every100MS(Handle timer)
 								insertBuff(i, decayDebuff);
 						}
 					}
-					if(plagueActive && !TF2_IsPlayerInCondition(i, TFCond_Plague)){
+					if(plagueActive && !hasBuffIndex(i, Buff_Plagued)){
 						float VictimPos[3];
 						GetEntPropVector(i, Prop_Data, "m_vecOrigin", VictimPos);
-						if(GetVectorDistance(clientPos,VictimPos, true) <= 10000.0)
-							TF2_AddCondition(i, TFCond_Plague, TFCondDuration_Infinite, client);
+						if(GetVectorDistance(clientPos,VictimPos, true) <= 90000.0){
+							insertBuff(i, plaguedCond);
+							EmitSoundToAll(SOUND_PLAGUEPROC, i);
+						}
 					}
 				}
 			}
@@ -648,13 +652,12 @@ public Action:Timer_Every100MS(Handle timer)
 				}
 			}
 
-			int inflictor = TF2Util_GetPlayerConditionProvider(client, TFCond_Plague);
-			if(IsValidClient3(inflictor))
+			if(hasBuffIndex(client, Buff_Plagued))
 			{
-				//Deal 3 piercing damage to plagued opponents.
-				currentDamageType[inflictor].second |= DMG_PIERCING;
-				currentDamageType[inflictor].second |= DMG_IGNOREHOOK;
-				SDKHooks_TakeDamage(client, inflictor, inflictor, 3.0, DMG_PREVENT_PHYSICS_FORCE);
+				Buff plagueCond; plagueCond = playerBuffs[client][getBuffInArray(client, Buff_Plagued)];
+				currentDamageType[plagueCond.inflictor].second |= DMG_PIERCING;
+				currentDamageType[plagueCond.inflictor].second |= DMG_IGNOREHOOK;
+				SDKHooks_TakeDamage(client, plagueCond.inflictor, plagueCond.inflictor, plagueCond.severity*3, DMG_PREVENT_PHYSICS_FORCE);
 			}
 			if(IsValidWeapon(CWeapon))
 			{

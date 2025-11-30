@@ -727,7 +727,7 @@
 		"en"		"No Gravity Projectile"
 	}
 	"Homing Projectiles (cleaver)"{
-		"en"		"Homing Projectiles"
+		"en"		"Projectile Homing Radius"
 	}
 	"Projectile speed decreased(t)"{
 		"en"		"Projectile Speed Increased"
@@ -964,7 +964,7 @@
 		"en"		"Damage Multiplier"
 	}
 	"Homing Projectiles (crossbow)"{
-		"en"		"Homing Projectiles"
+		"en"		"Projectile Homing Radius"
 	}
 	"damage bonus HIDDEN(b)"{
 		"en"		"Damage Bonus Hidden"
@@ -1185,8 +1185,8 @@
 	"Bee Swarm"{
 		"en"		"Bee Swarm"
 	}
-	"Homing Projectiles"{
-		"en"		"Homing Projectiles"
+	"projectile homing radius"{
+		"en"		"Projectile Homing Radius"
 	}
 	"Fires More Projectiles"{
 		"en"		"Fires More Projectiles"

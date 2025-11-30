@@ -5220,8 +5220,9 @@
 		}
 		"1534"
 		{
-			"name"		"crit from behind"
-			"ref"		"Homing Projectiles"
+			"name"		"projectile homing radius"
+			"ref"		"projectile homing radius"
+			"attr_class"	"projectile_homing_radius"
 			"display"		"%.0f HU"
 			"cost"		"0"
 			"increase_ratio"	"0"
@@ -5231,7 +5232,7 @@
 		}
 		"1534.5"
 		{
-			"name"		"crit from behind"
+			"name"		"projectile homing radius"
 			"ref"		"Homing Projectiles (crossbow)"
 			"display"		"%.0f HU"
 			"cost"		"7000"
@@ -5243,7 +5244,7 @@
 		}
 		"1534.6"
 		{
-			"name"		"crit from behind"
+			"name"		"projectile homing radius"
 			"ref"		"Homing Projectiles (cleaver)"
 			"display"		"%.0f HU"
 			"cost"		"5000"
