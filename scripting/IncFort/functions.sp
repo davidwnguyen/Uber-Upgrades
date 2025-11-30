@@ -3507,7 +3507,7 @@ GivePowerupDescription(int client, char[] name, int amount){
 		}else if(amount == 3){
 			CPrintToChat(client, "{community}Life Link Powerup {default}| {lightcyan}Hitting an enemy will proc life link: Instantly deals 30%% currentHP%% to you, but drains 35%% currentHP%% of enemy over time. At end of duration, your team is healed by damage dealt to yourself.");
 		}else{
-			CPrintToChat(client, "{community}Plague Powerup {default}| {lightcyan}Steals all healthpacks nearby, giving 25%% max health heal. Enemies nearby will be plagued for 10s, weakening damage dealt by them by 0.5x.");
+			CPrintToChat(client, "{community}Plague Powerup {default}| {lightcyan}Steals all healthpacks nearby, giving 25%% max health heal. Enemies nearby will be plagued for 10s, weakening damage dealt by them by 0.5x. 0.75x damage taken.");
 		}
 	}
 	else if(StrEqual("supernova powerup", name)){
