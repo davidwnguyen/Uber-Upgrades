@@ -328,17 +328,6 @@
 		"weapon damage mult"	"1.5"
 		"weapon fire rate"		"2.0"
 	}
-	"Hand of Wisdom and Action"
-	{
-		"index"			"198"
-		"weapon_class"	"tf_weapon_bonesaw"
-		"weapon_menu"	"tf_weapon_bonesaw"
-		"class"			"medic"
-		"description"	"+150% Upgrade Effectiveness on Item. 0.05x damage dealt."
-		"cost"			"5000.0"
-		"upgrade effectiveness"	"2.5"
-		"weapon damage mult"	"0.05"
-	}
 	"Highland Crusader"
 	{
 		"index"			"132"
