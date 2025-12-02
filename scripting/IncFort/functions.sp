@@ -448,6 +448,7 @@ public void ManagePlayerBuffs(int i){
 		additiveAttackSpeedMultBuff += 0.5;
 	}
 	
+	float teamTacticsBonus = 0.0;
 	for(int savior = 1;savior<=MaxClients;++savior){
 		if(!IsValidClient3(savior))
 			continue;
@@ -456,7 +457,12 @@ public void ManagePlayerBuffs(int i){
 		if(IsOnDifferentTeams(i,savior))
 			continue;
 
-		additiveDamageMultBuff += TeamTacticsBuildup[savior];
+		teamTacticsBonus += TeamTacticsBuildup[savior];
+	}
+	additiveDamageMultBuff += teamTacticsBonus;
+
+	if(teamTacticsBonus > 0.0){
+		Format(details, sizeof(details), "%s\n%s - %.1f٪", details, "Team Tactics", teamTacticsBonus*100);
 	}
 
 	TF2Attrib_SetByName(i, "additive damage bonus", additiveDamageRawBuff);
