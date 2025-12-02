@@ -144,6 +144,11 @@ BrowseAttributesKV(Handle kv)
                         attrib.SetDescriptionFormat("value_is_additive");
                     }
                 }
+                else if(StrEqual(Buf,"attr_type"))
+                {
+                    KvGetString(kv, "", Buf, sizeof(Buf));
+                    attrib.SetDescriptionFormat(Buf);
+                }
 				else if(StrEqual(Buf,"description"))
 				{
 					KvGetString(kv, "", Buf, 256);

@@ -666,7 +666,7 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 
 		if(IsValidWeapon(weapon)){
 			if(damagecustom == TF_CUSTOM_HEADSHOT){
-				float chargeAfterShot = TF2Attrib_HookValueFloat(0.0, "mult_sniper_charge_after_headshot", weapon);
+				float chargeAfterShot = GetAttribute(weapon, "mult sniper charge after headshot", 0.0);
 				if(chargeAfterShot > 0.0)
 					savedCharge[attacker] = chargeAfterShot;
 			}

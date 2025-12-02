@@ -1834,9 +1834,10 @@ public Action OnPlayerRunCmd(int client, int& buttons, int& impulse, float vel[3
 			if(HasEntProp(CWeapon, Prop_Send, "m_flChargedDamage"))
 			{
 				float charging = GetEntPropFloat(CWeapon, Prop_Send, "m_flChargedDamage");
+				
 				if(charging > 0.0 || TF2_IsPlayerInCondition(client, TFCond_Zoomed))
 				{
-					if(charging < savedCharge[client]){
+					if(charging < savedCharge[client] && GetGameTime() >= GetEntPropFloat(CWeapon, Prop_Send, "m_flNextPrimaryAttack") - 0.1){
 						charging = savedCharge[client];
 						SetEntPropFloat(CWeapon, Prop_Send, "m_flChargedDamage", savedCharge[client]);
 						savedCharge[client] = 0.0;
