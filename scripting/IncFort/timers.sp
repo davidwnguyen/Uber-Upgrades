@@ -2150,7 +2150,7 @@ public Action RecursiveExplosions(Handle timer, DataPack ref)
 	position[2] = ref.ReadFloat();
 
 	if(IsValidClient3(owner) && IsValidWeapon(weapon)){
-		EntityExplosion(owner, ref.ReadFloat(), ref.ReadFloat(), position);
+		EntityExplosion(owner, ref.ReadFloat(), ref.ReadFloat(), position, _,_,_,0.65,_,_,_,_,_,_,_,_,"ExplosionCore_sapperdestroyed");
 		float chance = GetAttribute(weapon, "sticky recursive explosion chance", 0.0)
 		if(chance >= GetRandomFloat(0.0,1.0)){
 			return Plugin_Continue;
