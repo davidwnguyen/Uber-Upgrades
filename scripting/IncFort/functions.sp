@@ -3446,7 +3446,7 @@ GivePowerupDescription(int client, char[] name, int amount){
 	}
 	else if(StrEqual("vampire powerup", name)){
 		if(amount == 2){
-			CPrintToChat(client, "{community}Leech Powerup {default}| {lightcyan}25%% lifesteal, drains healing of everyone (including teammates!) by 50%% if nearby. Also applies on hitting an enemy.");
+			CPrintToChat(client, "{community}Leech Powerup {default}| {lightcyan}25%% lifesteal, drains healing of enemies by 50%% if nearby. Also applies on hitting an enemy.");
 		}else if(amount == 3){
 			CPrintToChat(client, "{community}Bloodbound Powerup {default}| {lightcyan}25%% incoming damage reduction. Lifesteal at maximum health instead fills Overleech, consumed to heal when lifestealing.\nRight-click to consume Overleech, dealing piercing damage to all tagged enemies.");
 		}else{

@@ -583,15 +583,15 @@ public Action:Timer_Every100MS(Handle timer)
 						SDKHooks_TakeDamage(client,i,i,corrosiveDOT[client][i][0],_,i,_,_,false);
 					}
 				}
-				if(!hasBuffIndex(i, Buff_Leech)){
-					if(GetAttribute(i, "vampire powerup", 0.0) != 2.0 && TF2Attrib_HookValueFloat(0.0, "vampire_powerup", client) == 2.0){
-						float VictimPos[3];
-						GetEntPropVector(i, Prop_Data, "m_vecOrigin", VictimPos);
-						if(GetVectorDistance(clientPos,VictimPos, true) <= 360000.0)
-							insertBuff(i, leechDebuff);
-					}
-				}
 				if(IsOnDifferentTeams(client,i)){
+					if(!hasBuffIndex(i, Buff_Leech)){
+						if(GetAttribute(i, "vampire powerup", 0.0) != 2.0 && TF2Attrib_HookValueFloat(0.0, "vampire_powerup", client) == 2.0){
+							float VictimPos[3];
+							GetEntPropVector(i, Prop_Data, "m_vecOrigin", VictimPos);
+							if(GetVectorDistance(clientPos,VictimPos, true) <= 360000.0)
+								insertBuff(i, leechDebuff);
+						}
+					}
 					if(!hasBuffIndex(i, Buff_Decay)){
 						if(TF2Attrib_HookValueFloat(0.0, "plague_powerup", client) == 2.0){
 							float VictimPos[3];
