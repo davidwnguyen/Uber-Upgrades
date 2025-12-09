@@ -369,46 +369,26 @@ stock int GetClosestTarget(entity, owner, bool isFriendly = false, float &Target
 	float EntityPosition[3], TargetPosition[3], OwnerPosition[3];
 	GetEntPropVector(entity, Prop_Data, "m_vecAbsOrigin", EntityPosition);
 	GetClientEyePosition(owner, OwnerPosition);
-	if(isFriendly) {
-		for(int i = 1; i <= MaxClients; ++i) 
+	for(int i = 1; i <= MaxClients; ++i) 
+	{
+		if(!IsClientConnected(i))
+			continue;
+		if(ShouldNotHome[entity][i])
+			continue;
+		if((GetClientTeam(owner) == GetClientTeam(i)) != isFriendly)
+			continue;
+		if(!IsValidForHoming(i, owner, entity)) 
+			continue;
+
+		GetClientAbsOrigin(i, TargetPosition);
+		if(!IsPointVisible(OwnerPosition, TargetPosition))
+			continue;
+
+		float distance = GetVectorDistance(EntityPosition, TargetPosition, true);
+		if(distance < TargetDistance)
 		{
-			if(ShouldNotHome[entity][i] || 
-				!IsClientConnected(i) ||
-				GetClientTeam(owner) != GetClientTeam(i) || 
-				!IsValidForHoming(i, owner, entity)) 
-				continue;
-
-			GetClientAbsOrigin(i, TargetPosition);
-			if(!IsPointVisible(OwnerPosition, TargetPosition))
-				continue;
-
-			float distance = GetVectorDistance(EntityPosition, TargetPosition, true);
-			if(distance < TargetDistance)
-			{
-				ClosestTarget = i;
-				TargetDistance = distance;
-			}
-		}
-	}
-	else {
-		for(int i = 1; i <= MaxClients; ++i) 
-		{
-			if(ShouldNotHome[entity][i] || 
-				!IsClientConnected(i) ||
-				GetClientTeam(owner) == GetClientTeam(i) || 
-				!IsValidForHoming(i, owner, entity)) 
-				continue;
-
-			GetClientAbsOrigin(i, TargetPosition);
-			if(!IsPointVisible(OwnerPosition, TargetPosition))
-				continue;
-
-			float distance = GetVectorDistance(EntityPosition, TargetPosition, true);
-			if(distance < TargetDistance)
-			{
-				ClosestTarget = i;
-				TargetDistance = distance;			
-			}
+			ClosestTarget = i;
+			TargetDistance = distance;
 		}
 	}
 	return ClosestTarget;
