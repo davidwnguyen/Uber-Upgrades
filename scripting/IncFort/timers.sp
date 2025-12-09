@@ -585,7 +585,7 @@ public Action:Timer_Every100MS(Handle timer)
 				}
 				if(IsOnDifferentTeams(client,i)){
 					if(!hasBuffIndex(i, Buff_Leech)){
-						if(GetAttribute(i, "vampire powerup", 0.0) != 2.0 && TF2Attrib_HookValueFloat(0.0, "vampire_powerup", client) == 2.0){
+						if(TF2Attrib_HookValueFloat(0.0, "vampire_powerup", i) != 2.0 && TF2Attrib_HookValueFloat(0.0, "vampire_powerup", client) == 2.0){
 							float VictimPos[3];
 							GetEntPropVector(i, Prop_Data, "m_vecOrigin", VictimPos);
 							if(GetVectorDistance(clientPos,VictimPos, true) <= 360000.0)
