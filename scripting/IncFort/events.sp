@@ -3563,8 +3563,8 @@ public Event_Teleported(Handle event, const char[] name, bool:dontBroadcast)
 	int owner = GetClientOfUserId(GetEventInt(event, "builderid"));
 	if(IsValidClient3(client) && IsValidClient3(owner))
 	{
-		int melee = (GetPlayerWeaponSlot(owner,2));
-		if(IsValidEdict(melee))
+		int melee = TF2Util_GetPlayerLoadoutEntity(owner,2);
+		if(IsValidEntity(melee))
 		{
 			int weaponIndex = GetEntProp(melee, Prop_Send, "m_iItemDefinitionIndex");
 			if(weaponIndex == 589)
@@ -3636,8 +3636,12 @@ public Event_Teleported(Handle event, const char[] name, bool:dontBroadcast)
 					}
 				}
 			}
-			Address teleportBuffActive = TF2Attrib_GetByName(melee, "zoom speed mod disabled");
-			if(teleportBuffActive != Address_Null && TF2Attrib_GetValue(teleportBuffActive) != 0.0)
+		}
+		int pda = TF2Util_GetPlayerLoadoutEntity(owner,5);
+		if(IsValidEntity(pda))
+		{
+			float tpBuffs = GetAttribute(pda, "zoom speed mod disabled", 0.0);
+			if(tpBuffs != 0.0)
 			{
 				TF2_AddCondition(client, TFCond_RuneAgility, 4.0);
 				TF2_AddCondition(client, TFCond_KingAura, 4.0);
