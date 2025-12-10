@@ -2306,8 +2306,10 @@
 		{
 			"0"		"heal rate bonus"
 			"1"		"heal rate bonus(A)"
-			"2"		"overheal bonus"
-			"3"		"Healing for Buildings"
+			"2"		"urgent healing bonus"
+			"3"		"overheal bonus"
+			"4"		"overheal decay bonus"
+			"5"		"Healing for Buildings"
 		}
 		"Medigun Specific upgrades"
 		{
@@ -2328,8 +2330,10 @@
 		{
 			"0"		"heal rate bonus"
 			"1"		"heal rate bonus(A)"
-			"2"		"overheal bonus"
-			"3"		"Healing for Buildings"
+			"2"		"urgent healing bonus"
+			"3"		"overheal bonus"
+			"4"		"overheal decay bonus"
+			"5"		"Healing for Buildings"
 		}
 		"Medigun Specific upgrades"
 		{

@@ -1,5 +1,8 @@
 "Phrases"
 {
+	"urgent healing bonus"{
+		"en"		"Urgent Healing Bonus"
+	}
 	"building health mult"{
 		"en"		"Building Health Multiplier"
 	}

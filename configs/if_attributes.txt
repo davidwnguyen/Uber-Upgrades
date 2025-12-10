@@ -7345,7 +7345,21 @@
 			"value"		"-0.1"
 			"increase_ratio" 	"0.5"
 			"init"		"1"
+			"description"	"Gives a chance to not consume any ammo."
 			"max"		"0.5"
+		}
+		"1724"
+		{
+			"name"		"urgent healing bonus"
+			"ref"		"urgent healing bonus"
+			"attr_class"	"low_health_heal_mult"
+			"display"		"%.0f%%"
+			"cost"		"1500"
+			"increase_ratio" 	"0.3"
+			"value"		"0.1"
+			"init"		"1"
+			"description"	"Increases the incoming healing of a patient\nbased on how much missing health they have."
+			"max"		"2.0"
 		}
 		//Filler
 		"1900.0"

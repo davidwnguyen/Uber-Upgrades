@@ -15,7 +15,7 @@ public Action TF2_OnTakeHealthPre(int client, float &flAmount, int &flags){
 		if(IsValidClient3(tagTeamTarget[client]) && IsPlayerAlive(tagTeamTarget[client]) && !IsOnDifferentTeams(client, tagTeamTarget[client]) ){
 			AddPlayerHealth(tagTeamTarget[client], RoundToCeil(flAmount), _, true, client);
 		}
-	} 
+	}
 	return Plugin_Continue;
 }
 
@@ -54,6 +54,23 @@ float GetPlayerHealingMultiplier(client){
 		}
 		multiplier *= 1.0 + effectMult;
 	}
+
+	int healers = GetEntProp(client, Prop_Send, "m_nNumHealers");
+	for(int i = 0;i<healers;++i){
+		int healer = TF2Util_GetPlayerHealer(client,i);
+		if(!IsValidClient3(healer))
+			continue;
+
+		int healingWeapon = TF2Util_GetPlayerLoadoutEntity(healer, 1);
+		if(!IsValidWeapon(healingWeapon))
+			continue;
+
+		if(TF2Util_GetEntityMaxHealth(client) > GetClientHealth(client)){
+			float bonusPerHealthMissing = (TF2Attrib_HookValueFloat(1.0, "low_health_heal_mult", healingWeapon)-1)/TF2Util_GetEntityMaxHealth(client);
+			multiplier *= bonusPerHealthMissing * (TF2Util_GetEntityMaxHealth(client) - GetClientHealth(client)) + 1;
+		}
+	}
+	
 	if(TF2Attrib_HookValueFloat(0.0, "regeneration_powerup", client) == 3.0)
 		multiplier *= 1.6;
 	if(hasBuffIndex(client, Buff_Stronghold)){
