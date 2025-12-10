@@ -2530,6 +2530,10 @@ public OnGameFrame()
 				int primary = GetPlayerWeaponSlot(client,0)
 				if(IsValidEdict(CWeapon))
 				{
+					if(TF2Attrib_HookValueFloat(0.0, "regenerate_stickbomb", CWeapon)) {
+						if(HasEntProp(CWeapon, Prop_Send, "m_iDetonated"))
+							SetEntProp(CWeapon, Prop_Send, "m_iDetonated", 0);
+					}
 					bool flag = true;
 					if(IsValidEntity(melee) && CWeapon == melee)
 						if(TF2_GetPlayerClass(client) == TFClass_Heavy)
@@ -2541,7 +2545,6 @@ public OnGameFrame()
 
 					if(flag)
 					{
-						
 						float SecondaryROF = 1.0;
 
 						Address Firerate1 = TF2Attrib_GetByName(CWeapon, "fire rate penalty");

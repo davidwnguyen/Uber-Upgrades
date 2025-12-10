@@ -850,8 +850,8 @@ public Action:OnTouchExplodeJar(entity, other)
 								float jarCorrosive = TF2Attrib_HookValueFloat(0.0, "jar_debuff_corrosion", CWeapon);
 								if(jarCorrosive > 0.0)
 								{
-									corrosiveDOT[i][owner][0] = TF2_GetDPSModifiers(owner,CWeapon)*jarCorrosive;
-									corrosiveDOT[i][owner][1] = 2.0;
+									corrosiveDOT[i][owner][0] = TF2_GetDPSModifiers(owner,CWeapon)*jarCorrosive/10.0;
+									corrosiveDOT[i][owner][1] = GetGameTime()+5.0;
 								}
 							}
 						}

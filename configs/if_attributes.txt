@@ -1740,6 +1740,17 @@
 			"init"		"1.00"
 			"max"		"35"
 		}
+		"92.75"
+		{
+			"name"		"rocket jump damage reduction"
+			"ref"		"caber self damage reduction"
+			"display"		"%.0f%%"
+			"cost"		"1500"
+			"value"		"-0.1"
+			"increase_ratio"	"0.45"
+			"init"		"1.00"
+			"max"		"0.5"
+		}
 		"93"
 		{
 			"name"		"mod sentry killed revenge"
@@ -5701,15 +5712,16 @@
 		}
 		"1579"
 		{
-			"name"		"building cost reduction"
+			"name"		"jarate corrosion dot"
 			"ref"		"Corrosive Damage Over Time"
 			"attr_class"	"jar_debuff_corrosion"
-			"display"		"%.2fx"
+			"display"		"%.0f DPS"
 			"cost"		"2500"
 			"increase_ratio"	"0.6"
-			"value"		"0.25"
+			"value"		"5"
 			"init"		"0.0"
-			"max"		"5.0"
+			"description"	"Applies a DOT effect upon inflicting enemies with Jarate.\nDeals [{VALUE}] DPS for 5s."
+			"max"		"75"
 		}
 		"1580"
 		{
@@ -6691,6 +6703,17 @@
 			"attr_class"	"dmg_per_sticky_detonated"
 			"display"		"%.0f%%"
 			"attr_type"		"value_is_additive"
+			"cost"		"0"
+			"value"		"0.10"
+			"init"		"0.00"
+			"max"		"0.00"
+		}
+		"1669"
+		{
+			"name"		"sticky recursive explosion chance"
+			"ref"		"sticky recursive explosion chance"
+			"attr_class"	"sticky_recursive_explosion_chance"
+			"display"		"%.0f%%"
 			"cost"		"0"
 			"value"		"0.10"
 			"init"		"0.00"

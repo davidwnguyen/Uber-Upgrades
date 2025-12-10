@@ -243,7 +243,7 @@ public void OnPluginStart()
 	
 	CreateTimer(1.0, Timer_Second, _, TIMER_REPEAT);
 	CreateTimer(10.0, Timer_EveryTenSeconds, _, TIMER_REPEAT);
-	CreateTimer(0.07, Timer_Every100MS, _, TIMER_REPEAT);
+	CreateTimer(0.1, Timer_Every100MS, _, TIMER_REPEAT);
 
 	OwnerOffset = FindSendPropInfo("CBaseObject", "m_hBuilder");
 

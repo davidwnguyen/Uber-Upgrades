@@ -1390,7 +1390,7 @@
 		{
 			"0"		"damage bonus"
 			"1"		"ap (global)"
-			"2"		"Extra Damage Bonus"
+			"2"		"Flare Damage Bonus"
 			"3"		"lifesteal ability"
 			"4"		"reveal cloaked victim on hit"
 			"5"		"reveal disguised victim on hit"
@@ -1414,7 +1414,7 @@
 		{
 			"0"		"damage bonus"
 			"1"		"ap (global)"
-			"2"		"Extra Damage Bonus"
+			"2"		"Flare Damage Bonus"
 			"3"		"lifesteal ability"
 			"4"		"reveal cloaked victim on hit"
 			"5"		"reveal disguised victim on hit"
@@ -1700,8 +1700,7 @@
 		"special_tweaks_listid"		"2"
 		"Protection upgrades"
 		{
-			"0"		"blast dmg to self decreased"
-			"1"		"dmg from all reduced(wearable)"
+			"0"		"dmg from all reduced(wearable)"
 		}
 		"Charge upgrades"
 		{
@@ -2003,8 +2002,9 @@
 		{
 			"0"		"melee attack rate bonus"
 			"1"		"melee range multiplier"
-			"2"		"self dmg push force increased"
-			"3"		"Weapons Deals No Knockback"
+			"2"		"blast radius increased"
+			"3"		"caber self damage reduction"
+			"4"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{

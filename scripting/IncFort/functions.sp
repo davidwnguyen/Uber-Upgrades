@@ -1238,7 +1238,7 @@ DisplayItemChange(client,itemidx)
 		//Demo Melees
 		case 307:
 		{
-			ChangeString = "Ullapool Caber | Infinite explosive charges.";
+			ChangeString = "Ullapool Caber | Infinite explosive charges & converts fire rate to damage.";
 		}
 		//Heavy Primaries
 		case 41:

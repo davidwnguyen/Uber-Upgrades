@@ -574,10 +574,8 @@ public Action:Timer_Every100MS(Handle timer)
 				if(!IsValidClient3(i)) continue; 
 				if(!IsPlayerAlive(i)) continue;
 
-				if(corrosiveDOT[client][i][0] != 0.0 && corrosiveDOT[client][i][1] >= 0.0)
+				if(corrosiveDOT[client][i][0] != 0.0 && corrosiveDOT[client][i][1] >= GetGameTime())
 				{
-					corrosiveDOT[client][i][1] -= TICKINTERVAL*10.0;
-					
 					if(IsValidClient3(i)){
 						currentDamageType[client].second |= DMG_IGNOREHOOK;
 						SDKHooks_TakeDamage(client,i,i,corrosiveDOT[client][i][0],_,i,_,_,false);

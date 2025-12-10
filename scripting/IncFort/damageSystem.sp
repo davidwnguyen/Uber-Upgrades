@@ -765,53 +765,58 @@ public Action TF2_OnTakeDamage(int victim, int &attacker, int &inflictor, float 
 		damage *= ArcaneDamage[attacker];
 		changed = Plugin_Changed;
 	}
-		
+
 	if(IsValidClient3(victim)){
 		if(damagetype & DMG_SLASH){
 			damagetype |= DMG_PREVENT_PHYSICS_FORCE
 			changed = Plugin_Changed;
 		}
 		
-		if (damagecustom == TF_CUSTOM_BACKSTAB)
-		{
-			damage = 150.0;
-			critType = CritType_Crit;
-			float backstabRadiation = TF2Attrib_HookValueFloat(0.0, "backstab_radiation_buildup", weapon);
-			if(backstabRadiation > 0.0)
+		switch(damagecustom) {
+			case TF_CUSTOM_BACKSTAB:
 			{
-				if(TF2Attrib_HookValueFloat(0.0, "knockout_powerup", attacker) == 2)
-					backstabRadiation *= 3;
+				damage = 150.0;
+				critType = CritType_Crit;
+				float backstabRadiation = TF2Attrib_HookValueFloat(0.0, "backstab_radiation_buildup", weapon);
+				if(backstabRadiation > 0.0)
+				{
+					if(TF2Attrib_HookValueFloat(0.0, "knockout_powerup", attacker) == 2)
+						backstabRadiation *= 3;
 
-				if(hasBuffIndex(attacker, Buff_Plunder)){
-					Buff plunderBuff;
-					plunderBuff = playerBuffs[attacker][getBuffInArray(attacker, Buff_Plunder)]
-					backstabRadiation *= plunderBuff.severity;
+					if(hasBuffIndex(attacker, Buff_Plunder)){
+						Buff plunderBuff;
+						plunderBuff = playerBuffs[attacker][getBuffInArray(attacker, Buff_Plunder)]
+						backstabRadiation *= plunderBuff.severity;
+					}
+
+					RadiationBuildup[victim] += backstabRadiation;
+					checkRadiation(victim,attacker);
 				}
-
-				RadiationBuildup[victim] += backstabRadiation;
-				checkRadiation(victim,attacker);
+				float stealthedBackstab = TF2Attrib_HookValueFloat(0.0, "stealthed_backstab_duration", weapon);
+				if(stealthedBackstab != 1.0)
+				{
+					TF2_AddCondition(attacker, TFCond_StealthedUserBuffFade, stealthedBackstab);
+					TF2_RemoveCondition(attacker, TFCond_Stealthed)
+				}
+				changed = Plugin_Changed;
 			}
-			float stealthedBackstab = TF2Attrib_HookValueFloat(0.0, "stealthed_backstab_duration", weapon);
-			if(stealthedBackstab != 1.0)
+			case 46://Short Circuit Balls
 			{
-				TF2_AddCondition(attacker, TFCond_StealthedUserBuffFade, stealthedBackstab);
-				TF2_RemoveCondition(attacker, TFCond_Stealthed)
+				if(damagetype & DMG_SHOCK)
+				{
+					damage = 10.0;
+					damage *= TF2Attrib_HookValueFloat(1.0, "mult_dmg", weapon);
+					damage *= TF2Attrib_HookValueFloat(1.0, "mult_bullets_per_shot", weapon);
+					changed = Plugin_Changed;
+				}
 			}
-			changed = Plugin_Changed;
-		}
-		if (damagecustom == 46 && damagetype & DMG_SHOCK)//Short Circuit Balls
-		{
-			damage = 10.0;
-			damage *= TF2Attrib_HookValueFloat(1.0, "mult_dmg", weapon);
-			damage *= TF2Attrib_HookValueFloat(1.0, "mult_bullets_per_shot", weapon);
-			changed = Plugin_Changed;
-		}
-		if(damagecustom == TF_CUSTOM_BASEBALL)//Sandman Balls & Wrap Assassin Ornaments
-		{
-			damage = 35.0;
-			damage += TF2Attrib_HookValueFloat(0.0, "baseball_base_damage", weapon);
-			damage *= TF2Attrib_HookValueFloat(1.0, "mult_dmg", weapon);
-			changed = Plugin_Changed;
+			case TF_CUSTOM_BASEBALL:
+			{
+				damage = 35.0;
+				damage += TF2Attrib_HookValueFloat(0.0, "baseball_base_damage", weapon);
+				damage *= TF2Attrib_HookValueFloat(1.0, "mult_dmg", weapon);
+				changed = Plugin_Changed;
+			}
 		}
 	}
 
@@ -874,7 +879,10 @@ public Action OnTakeDamage(victim, &attacker, &inflictor, float &damage, &damage
 				{
 					return Plugin_Stop;
 				}
-
+				if(victim == attacker && damagecustom == TF_CUSTOM_STICKBOMB_EXPLOSION){
+					damage *= TF2Attrib_HookValueFloat(1.0, "dmg_outgoing_mult", weapon);
+				}
+				
 				damage = genericPlayerDamageModification(victim, attacker, inflictor, damage, weapon, damagetype, damagecustom);
 			}
 

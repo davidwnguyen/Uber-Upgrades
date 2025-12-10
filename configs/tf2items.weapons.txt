@@ -463,6 +463,8 @@
 		{
 			"preserve_attributes"	"1"
 			"1"				"regenerate stickbomb;1.0"
+			"2"				"Converts Firerate to Damage;1.0"
+			"3"				"self dmg push force decreased;0.0"
 		}
 		"41"//Natascha
 		{

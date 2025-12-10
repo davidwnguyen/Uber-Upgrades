@@ -1,5 +1,8 @@
 "Phrases"
 {
+	"caber self damage reduction"{
+		"en"		"Caber Self Damage Reduction"
+	}
 	"weapon can headshot" {
 		"en"		"Weapon Headshot Damage"
 	}
