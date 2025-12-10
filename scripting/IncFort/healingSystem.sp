@@ -72,9 +72,12 @@ float GetPlayerHealingMultiplier(client){
 }
 void AddPlayerHealth(client, iAdd, float flOverheal = 1.5, bool bEvent = false, healer = -1)
 {
-	if(hasBuffIndex(client, Buff_Leech) && TF2Attrib_HookValueFloat(0.0, "vampire_powerup", client) != 2.0){
+	if(hasBuffIndex(client, Buff_Leech)){
 		Buff leechInfo; leechInfo = playerBuffs[client][getBuffInArray(client, Buff_Leech)];
-		AddPlayerHealth(leechInfo.inflictor, RoundToCeil(iAdd*0.5));
+		//You cant leech off yourself! dumb idiot infinite loop
+		if(client != leechInfo.inflictor){
+			AddPlayerHealth(leechInfo.inflictor, RoundToCeil(iAdd*0.5));
+		}
 	}
 	flOverheal *= TF2Attrib_HookValueFloat(1.0, "mult_patient_overheal_penalty", client);
 	
