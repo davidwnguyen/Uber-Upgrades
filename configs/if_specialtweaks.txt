@@ -171,9 +171,9 @@
 		"Toxic Infusion"
 		{
 			"restriction"					"1"
-			"Radiation Buildup"				"150"
+			"Radiation Buildup"				"200"
 			"projectile penetration"		"1"
-			"weapon fire rate"				"0.66"
+			"weapon fire rate"				"0.4"
 			"Projectile speed decreased"	"6.0"
 		}
 		"Explosive Arrows"
