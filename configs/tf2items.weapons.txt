@@ -356,7 +356,7 @@
 		{	
 			"preserve_attributes"	"1"
 			"classname"		"tf_weapon_grenadelauncher"
-			"1"				"damage mult 13; 0.5"
+			"1"				"damage mult 13; 0.67"
 			"2"				"auto fires full clip all at once;1.0"
 			"3"				"override projectile type;2.0"
 			"4"				"projectile spread angle penalty;2.0"
@@ -374,7 +374,7 @@
 		"996" //Loose Cannon
 		{
 			"preserve_attributes"	"1"
-			"1"				"damage mult 13; 0.5"
+			"1"				"damage mult 13; 0.67"
 			"2"				"auto fires full clip all at once;1.0"
 			"3"				"override projectile type;17.0"
 			"4"				"projectile spread angle penalty;2.0"

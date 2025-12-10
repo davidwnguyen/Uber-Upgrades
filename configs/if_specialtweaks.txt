@@ -79,17 +79,18 @@
 		{
 			"gamestage"						"1"
 			"restriction"					"1"
-			"mult projectile count"			"10"
+			"mult projectile count"			"5"
 			"projectile spread angle penalty"		"2"
-			"fire rate penalty(unremoveable)"		"60.0"
-			"mult crit dmg"				"20.0"
+			"fire rate penalty(unremoveable)"		"50.0"
+			"damage bonus HIDDEN(b)"		"1.0"
+			"mult crit dmg"				"7.5"
 		}
 		"Homing Flares"
 		{
 			"gamestage"						"1"
 			"restriction"					"1"
 			"projectile homing radius"		"200.0"
-			"mult crit dmg"					"3.0"
+			"mult crit dmg"					"7.5"
 			"Ability : Homing Flares"		"1"
 		}
 		"Explosive Bullets(P)"
