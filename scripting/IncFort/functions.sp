@@ -4430,7 +4430,7 @@ void UpdatePlayerMaxHealth(int client){
 
 		TF2Attrib_SetByName(client,"add health bonus", float(RoundToCeil(GetClientBaseHP(client)* (mult-1)) ) );
 		if(current_class[client] == TFClass_Engineer)
-			TF2Attrib_SetByName(client,"engy building health bonus", TF2Attrib_GetValue(healthActive));
+			TF2Attrib_SetByName(client,"building health mult", TF2Attrib_GetValue(healthActive));
 	}
 
 	SetEntityHealth(client, RoundFloat(percentageHealth*TF2Util_GetEntityMaxHealth(client)));

@@ -1,5 +1,8 @@
 "Phrases"
 {
+	"building health mult"{
+		"en"		"Building Health Multiplier"
+	}
 	"caber self damage reduction"{
 		"en"		"Caber Self Damage Reduction"
 	}

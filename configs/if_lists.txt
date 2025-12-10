@@ -2321,38 +2321,21 @@
 			"1"		"Blossom of Life"
 		}
 	}
-	"medigun"
-	{
-		"special_tweaks_listid"		"1"
-		"Medigun Specific upgrades"
-		{
-			"0"		"Medigun Heal Range Bonus"
-			"1"		"heal rate bonus"
-			"2"		"heal rate bonus(A)"
-			"3"		"overheal fill rate bonus"
-			"4"		"overheal bonus"
-			"5"		"ubercharge rate bonus"
-			"6"		"Damage Multiplier for healed player"
-			"7"		"Healing for Buildings"
-		}
-		"Special Tweaks"
-		{
-			"0"		"Stat Boost Ubercharge"
-		}
-	}
 	"vacc"
 	{
-		"special_tweaks_listid"		"1"
+		"special_tweaks_listid"		"2"
+		"Healing Upgrades"
+		{
+			"0"		"heal rate bonus"
+			"1"		"heal rate bonus(A)"
+			"2"		"overheal bonus"
+			"3"		"Healing for Buildings"
+		}
 		"Medigun Specific upgrades"
 		{
 			"0"		"Medigun Heal Range Bonus"
-			"1"		"heal rate bonus"
-			"2"		"heal rate bonus(A)"
-			"3"		"overheal bonus"
-			"4"		"ubercharge rate bonus"
-			"5"		"ubercharge rate multiplier"
-			"6"		"Damage Multiplier for healed player"
-			"7"		"Healing for Buildings"
+			"1"		"ubercharge rate bonus"
+			"2"		"Damage Multiplier for healed player"
 		}
 		"Special Tweaks"
 		{

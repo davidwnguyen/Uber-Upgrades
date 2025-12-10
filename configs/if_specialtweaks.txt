@@ -39,13 +39,6 @@
 			"weapon fire rate(tweak)"		"2.0"
 			"Afterburn Damage Multiplier"	"10.0"
 		}
-		"Stat Boost Ubercharge"
-		{
-			"restriction"					"1"
-			"requirement"					"50k"
-			"ubercharge rate penalty"		"3.3334"
-			"Additional Uber Effects"		"8.0"
-		}
 		"High-Velocity Bullets"
 		{
 			"cost"							"5k"

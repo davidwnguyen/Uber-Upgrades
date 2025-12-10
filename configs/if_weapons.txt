@@ -87,7 +87,6 @@
 		"tf_weapon_breakable_sign"				"demomel"		//Neon Annihilator
 		"autofirebow"							"autofirebow"	//Fortified Compound
 		"vaccinator"							"vacc"			//Vaccinator
-		"medigun"								"medigun"		//Stock Medigun
 		"tf_iron_bomber"						"ironbomber"	//Iron Bomber
 		"tf_quickiebomb"						"quickiebomb"	//Quickiebomb launcher
 		"hitmans"								"hitmans"		//Hitman's Heatmaker

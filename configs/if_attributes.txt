@@ -2388,6 +2388,17 @@
 			"init"		"1.00"
 			"max"		"175.00"
 		}
+		"158.5"
+		{
+			"name"		"building health mult"
+			"ref"		"building health mult"
+			"attr_class"	"mult_engy_building_health"
+			"display"		"%.0f%%"
+			"cost"		"0"
+			"value"		"0.0"
+			"init"		"1.00"
+			"max"		"1.00"
+		}
 		"159"
 		{
 			"name"		"engy sentry damage bonus"
@@ -7203,9 +7214,10 @@
 			"attr_class"	"buff_magnitude_mult"
 			"display"	"%.0f%%"
 			"cost"		"1600"
-			"value"		"0.1"
+			"value"		"0.05"
 			"init"		"1.00"
-			"max"		"2.0"
+			"staged_max"		"1.35,1.5,1.5"
+			"max"		"1.0"
 		}
 		"1713"
 		{
@@ -7214,9 +7226,10 @@
 			"attr_class"	"debuff_magnitude_mult"
 			"display"	"%.0f%%"
 			"cost"		"1600"
-			"value"		"0.1"
+			"value"		"0.05"
 			"init"		"1.00"
-			"max"		"2.0"
+			"staged_max"		"1.35,1.5,1.5"
+			"max"		"1.0"
 		}
 		"1714"
 		{
