@@ -1342,7 +1342,6 @@ public Action:Event_PlayerDeath(Handle event, const char[] name, bool:dontBroadc
 		
 	fanOfKnivesCount[client] = 0;
 	maelstromChargeCount[client] = 0;
-	RageBuildup[client] = 0.0;
 	frayNextTime[attack] = 0.0;
 	enragedKills[client] = 0;
 	TeamTacticsBuildup[client] = 0.0;
@@ -3484,6 +3483,7 @@ public Event_PlayerRespawn(Handle event, const char[] name, bool:dontBroadcast)
 		immolationActive[client] = false;
 		sunstarDuration[client] = 0.0;
 		MadmilkDuration[client] = 0.0;
+		RageBuildup[client] = 0.0;
 		for(int i=1;i<=MaxClients;++i)
 		{
 			corrosiveDOT[client][i][0] = 0.0;
