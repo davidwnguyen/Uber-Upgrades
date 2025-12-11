@@ -2968,8 +2968,7 @@ public OnEntityHomingThink(entity)
 		return;
 
 	float distance = 9999999.0;
-	int Target = GetClosestTarget(entity, owner, _, distance); 
-	float vImpulse[3];
+	int Target = GetClosestTarget(entity, owner, _, distance);
 
 	if(!IsValidClient3(Target) || distance > homingRadius[entity]*homingRadius[entity])
 		return;
@@ -3015,10 +3014,7 @@ public OnEntityHomingThink(entity)
 		GetEntPropVector(entity, Prop_Data, "m_angRotation", ProjAngle ); 
 		GetVectorAngles(ProjVector, ProjAngle ); 
 		ScaleVector(ProjVector, NewSpeed );
-		if(HasEntProp(entity, Prop_Send, "m_DmgRadius"))
-			SDKCall(g_SDKCallInitGrenade, entity, ProjVector, vImpulse, owner, 50, 146.0);
-		else
-			TeleportEntity(entity, NULL_VECTOR, ProjAngle, ProjVector );
+		TeleportEntity(entity, NULL_VECTOR, ProjAngle, ProjVector );
 		SetEntityGravity(entity, 0.001);
 	}
 	homingTicks[entity]++;
