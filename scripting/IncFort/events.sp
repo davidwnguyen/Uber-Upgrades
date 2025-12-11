@@ -232,6 +232,14 @@ public Event_Playerhurt(Handle event, const char[] name, bool:dontBroadcast)
 					healthHealed += RoundToCeil(lifestealFactor * damage * (MadmilkDuration[client]-GetGameTime()) * 1.66 / 100.0);
 				
 				if(healthHealed > 0){
+					if(TF2Attrib_HookValueFloat(0.0, "vampire_powerup", attacker) == 3) {
+						if(GetClientHealth(attacker) >= TF2Util_GetEntityMaxHealth(attacker)) {
+							if(Overleech[attacker] < TF2Util_GetEntityMaxHealth(attacker) * 9){
+								Overleech[attacker] += healthHealed;
+								healthHealed = 0;
+							}
+						}
+					}
 					AddPlayerHealth(attacker, healthHealed, 1.5, true, attacker);
 					float spreadRatio = GetAttribute(CWeapon, "lifesteal to team", 0.0);
 					if(spreadRatio > 0){
@@ -2496,6 +2504,17 @@ public OnGameFrame()
 
 				if(TF2_IsPlayerInCondition(client, TFCond_Plague))
 					RegenPerTick *= 0.0;
+
+				if(GetClientHealth(client) < TF2Util_GetEntityMaxHealth(client)){
+					if(Overleech[client] > 0 && TF2Attrib_HookValueFloat(0.0, "vampire_powerup", client) == 3) {
+						float overleechBonus = TF2Util_GetEntityMaxHealth(client)*TICKINTERVAL;
+						if(overleechBonus > Overleech[client]) {
+							overleechBonus = Overleech[client];
+						}
+						RegenPerTick += overleechBonus * 1.5;
+						Overleech[client] -= overleechBonus;
+					}
+				}
 	
 				remainderHealthRegeneration[client] += RegenPerTick;
 

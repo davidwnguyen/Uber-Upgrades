@@ -68,7 +68,7 @@ float GetResistance(int client, bool includeReduction = false, float penetration
 		if(TF2Attrib_HookValueFloat(0.0, "revenge_powerup", client) == 1 || TF2Attrib_HookValueFloat(0.0, "knockout_powerup", client) == 1 || TF2Attrib_HookValueFloat(0.0, "king_powerup", client) == 1 || TF2Attrib_HookValueFloat(0.0, "supernova_powerup", client) == 1 || TF2Attrib_HookValueFloat(0.0, "inverter_powerup", client) == 1)
 			TotalResistance *= 1.25;
 		
-		if(TF2Attrib_HookValueFloat(0.0, "regeneration_powerup", client) == 1 || TF2Attrib_HookValueFloat(0.0, "vampire_powerup", client) == 1 || 1 <= TF2Attrib_HookValueFloat(0.0, "plague_powerup", client) <= 2)
+		if(TF2Attrib_HookValueFloat(0.0, "regeneration_powerup", client) == 1 || TF2Attrib_HookValueFloat(0.0, "vampire_powerup", client) == 1 || TF2Attrib_HookValueFloat(0.0, "vampire_powerup", client) == 3 || 1 <= TF2Attrib_HookValueFloat(0.0, "plague_powerup", client) <= 2)
 			TotalResistance *= 1.333;
 		
 		if(TF2Attrib_HookValueFloat(0.0, "knockout_powerup", client) == 2)
@@ -3226,7 +3226,7 @@ GivePowerupDescription(int client, char[] name, int amount){
 		if(amount == 2){
 			CPrintToChat(client, "{community}Leech Powerup {default}| {lightcyan}25%% lifesteal, drains healing of enemies by 50%% if nearby. Also applies on hitting an enemy.");
 		}else if(amount == 3){
-			CPrintToChat(client, "{community}Bloodbound Powerup {default}| {lightcyan}25%% incoming damage reduction. Lifesteal at maximum health instead fills Overleech, consumed to heal when lifestealing.\nRight-click to consume Overleech, dealing piercing damage to all tagged enemies.");
+			CPrintToChat(client, "{community}Bloodbound Powerup {default}| {lightcyan}25%% incoming damage reduction. Lifesteal at maximum health instead fills Overleech, consumed to heal at 150%% while hurt.");
 		}else{
 			CPrintToChat(client, "{community}Vampire Powerup {default}| {lightcyan}40%% lifesteal, 1.25x bleed damage, and 0.75x damage taken.");
 		}
