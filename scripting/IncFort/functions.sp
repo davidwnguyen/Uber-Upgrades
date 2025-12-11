@@ -3015,7 +3015,6 @@ public OnEntityHomingThink(entity)
 		GetVectorAngles(ProjVector, ProjAngle ); 
 		ScaleVector(ProjVector, NewSpeed );
 		TeleportEntity(entity, NULL_VECTOR, ProjAngle, ProjVector );
-		SetEntityGravity(entity, 0.001);
 	}
 	homingTicks[entity]++;
 }
