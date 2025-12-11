@@ -998,7 +998,6 @@ public OnEntityCreated(entity, const char[] classname)
 		}
 		else if(StrEqual(classname, "tf_projectile_arrow") || StrEqual(classname, "tf_projectile_healing_bolt"))
 		{
-			RequestFrame(MultiShot, reference);
 			RequestFrame(ProjSpeedDelay, reference);
 			RequestFrame(SetZeroGravity, reference);
 			RequestFrame(ExplosiveArrow, reference);
@@ -1011,7 +1010,6 @@ public OnEntityCreated(entity, const char[] classname)
 		if(StrEqual(classname, "tf_projectile_syringe") || StrEqual(classname, "tf_projectile_rocket")
 		|| StrEqual(classname, "tf_projectile_flare"))
 		{
-			RequestFrame(MultiShot, reference);
 			SDKHook(entity, SDKHook_StartTouch, OnStartTouch);
 			RequestFrame(projGravity, reference);
 			RequestFrame(PrecisionHoming, reference);
@@ -1027,7 +1025,6 @@ public OnEntityCreated(entity, const char[] classname)
 		}
 		if(StrEqual(classname, "tf_projectile_stun_ball") || StrEqual(classname, "tf_projectile_ball_ornament") || StrEqual(classname, "tf_projectile_cleaver"))
 		{
-			RequestFrame(MultiShot, reference);
 			RequestFrame(projGravity, reference);
 			RequestFrame(ResizeProjectile, reference);
 			RequestFrame(PrecisionHoming, reference);
@@ -1037,7 +1034,6 @@ public OnEntityCreated(entity, const char[] classname)
 		}
 		if(StrEqual(classname, "tf_projectile_pipe"))
 		{
-			RequestFrame(MultiShot, reference);
 			SDKHook(entity, SDKHook_StartTouch, OnStartTouch);
 			RequestFrame(projGravity, reference);
 			RequestFrame(CheckGrenadeMines, reference);
