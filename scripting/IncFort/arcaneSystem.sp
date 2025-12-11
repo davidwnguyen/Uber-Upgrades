@@ -1380,7 +1380,7 @@ CastACallBeyond(client, attuneSlot)
 public Action:ACallBeyond(Handle timer, client) 
 {
 	client = EntRefToEntIndex(client)
-	if(!IsPlayerAlive(client))
+	if(!IsValidClient3(client) || !IsPlayerAlive(client))
 		return;
 	
 	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
