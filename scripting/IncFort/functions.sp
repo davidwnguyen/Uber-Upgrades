@@ -1113,7 +1113,7 @@ DisplayItemChange(client,itemidx)
 		}
 		case 349:
 		{
-			ChangeString = "Sun-on-a-Stick | Deals 7.5x afterburn, but initial melee hit deals half."
+			ChangeString = "Sun-on-a-Stick | Deals 3x afterburn, but initial melee hit deals half. Converts fire rate to damage."
 		}
 		//Soldier Primary
 		case 127:
@@ -1195,7 +1195,7 @@ DisplayItemChange(client,itemidx)
 		//Pyro Melee
 		case 348:
 		{
-			ChangeString = "Sharpened Volcano Fragment | Deals 7.5x afterburn, but initial melee hit deals half. Converts fire rate to damage."
+			ChangeString = "Sharpened Volcano Fragment | Deals 3x afterburn, but initial melee hit deals half. Converts fire rate to damage."
 		}
 		case 1181:
 		{
@@ -4218,7 +4218,7 @@ void UpdatePlayerMaxHealth(int client){
 void applyAfterburn(int victim, int attacker, int weapon, float damage){
 	float burndmgMult = 0.1
 	int burnTime = 6;
-	burndmgMult *= GetAttribute(weapon, "shot penetrate all players")*TF2Attrib_HookValueFloat(1.0, "mult_wpn_burndmg", weapon)*TF2Attrib_HookValueFloat(1.0, "debuff_magnitude_mult", weapon);
+	burndmgMult *= TF2Attrib_HookValueFloat(1.0, "mult_wpn_burndmg", weapon)*TF2Attrib_HookValueFloat(1.0, "debuff_magnitude_mult", weapon);
 	burnTime += RoundToNearest(GetAttribute(weapon, "afterburn rating", 0.0));
 
 	if(GetAttribute(attacker, "knockout powerup", 0.0) == 2 && TF2Util_GetWeaponSlot(weapon) == TFWeaponSlot_Melee)

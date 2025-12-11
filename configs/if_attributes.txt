@@ -4791,8 +4791,9 @@
 		}
 		"1346"
 		{
-			"name"		"shot penetrate all players"
+			"name"		"afterburn dmg multiplier"
 			"ref"		"Afterburn Damage Multiplier"
+			"attr_class"	"mult_wpn_burndmg"
 			"display"		"%.0f%%"
 			"cost"		"0"
 			"increase_ratio"	"0.35"

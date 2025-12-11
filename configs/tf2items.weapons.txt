@@ -195,8 +195,9 @@
 		{
 			"preserve_attributes"	"1"
 			"1"				"Converts Firerate to Damage; 1.0"
-			"2"				"shot penetrate all players;15.0"
+			"2"				"afterburn rating;1.0"
 			"3"				"damage mult 13; 0.5"
+			"4"				"afterburn dmg multiplier;6.0"
 		}
 		"44"//Sandman
 		{
@@ -421,9 +422,10 @@
 		}
 		"349" //Sun on a Stick
 		{
-			"1"				"shot penetrate all players;15.0"
-			"2"				"damage mult 13; 0.5"
-			"3"				"afterburn rating;1.0"
+			"1"				"Converts Firerate to Damage; 1.0"
+			"2"				"afterburn rating;1.0"
+			"3"				"damage mult 13; 0.5"
+			"4"				"afterburn dmg multiplier;6.0"
 		}
 		"17,204" //Syringe Gun 
 		{
