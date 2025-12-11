@@ -362,7 +362,7 @@ stock MoveForward(const float vPos[3], const float vAng[3], float vReturn[3], fl
 }
 stock int GetClosestTarget(entity, owner, bool isFriendly = false, float &TargetDistance = 9999999.0)
 {
-	if(!IsValidClient3(owner)) 
+	if(!IsValidClient3(owner) || !IsValidEntity(entity)) 
 		return -1;
 
 	int ClosestTarget = 0;
@@ -371,7 +371,7 @@ stock int GetClosestTarget(entity, owner, bool isFriendly = false, float &Target
 	GetClientEyePosition(owner, OwnerPosition);
 	for(int i = 1; i <= MaxClients; ++i) 
 	{
-		if(!IsClientConnected(i))
+		if(!IsClientInGame(i) || !IsPlayerAlive(i))
 			continue;
 		if(ShouldNotHome[entity][i])
 			continue;
@@ -957,9 +957,9 @@ stock bool IsTargetInSightRange(client, target, float angle=90.0, float distance
 {
 	if(angle > 360.0 || angle < 0.0)
 		ThrowError("Angle Max : 360 & Min : 0. %d isn't proper angle.", angle);
-	if(!IsClientConnected(client) && IsPlayerAlive(client))
+	if(!IsClientInGame(client) && IsPlayerAlive(client))
 		ThrowError("Client is not Alive.");
-	if(!IsClientConnected(target) && IsPlayerAlive(target))
+	if(!IsClientInGame(target) && IsPlayerAlive(target))
 		ThrowError("Target is not Alive.");
 		
 	float clientpos[3], targetpos[3], anglevector[3], targetvector[3], resultangle, resultdistance;
