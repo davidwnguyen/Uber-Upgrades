@@ -653,9 +653,11 @@ public Action:Timer_Every100MS(Handle timer)
 			if(hasBuffIndex(client, Buff_Plagued))
 			{
 				Buff plagueCond; plagueCond = playerBuffs[client][getBuffInArray(client, Buff_Plagued)];
-				currentDamageType[plagueCond.inflictor].second |= DMG_PIERCING;
-				currentDamageType[plagueCond.inflictor].second |= DMG_IGNOREHOOK;
-				SDKHooks_TakeDamage(client, plagueCond.inflictor, plagueCond.inflictor, plagueCond.severity*3, DMG_PREVENT_PHYSICS_FORCE);
+				if(IsValidClient3(plagueCond.inflictor)){
+					currentDamageType[plagueCond.inflictor].second |= DMG_PIERCING;
+					currentDamageType[plagueCond.inflictor].second |= DMG_IGNOREHOOK;
+					SDKHooks_TakeDamage(client, plagueCond.inflictor, plagueCond.inflictor, plagueCond.severity*3, DMG_PREVENT_PHYSICS_FORCE);
+				}
 			}
 			if(IsValidWeapon(CWeapon))
 			{
