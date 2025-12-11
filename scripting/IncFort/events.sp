@@ -1776,6 +1776,27 @@ public Action OnPlayerRunCmd(int client, int& buttons, int& impulse, float vel[3
 					powerupParticle[client] = GetGameTime()+5.1;
 				}
 			}
+			float revengePowerup = TF2Attrib_HookValueFloat(0.0, "revenge_powerup", client);
+			switch(revengePowerup) {
+				case 1.0: {
+					if(RageActive[client]){
+						CreateParticleEx(client, "utaunt_poweraura_teamcolor_red", 1, _, _, 1.0);
+						powerupParticle[client] = GetGameTime()+1.1;
+					}
+				}
+				case 2.0: {
+					if(RageBuildup[client] > 0.65){
+						CreateParticleEx(client, "utaunt_poweraura_teamcolor_red", 1, _, _, 1.0);
+						powerupParticle[client] = GetGameTime()+1.1;
+					}
+				}
+				case 3.0: {
+					if(enragedKills[client] >= 80){
+						CreateParticleEx(client, "utaunt_poweraura_teamcolor_red", 1, _, _, 1.0);
+						powerupParticle[client] = GetGameTime()+1.1;
+					}
+				}
+			}
 		}
 	}
 	if (!IsFakeClient(client))

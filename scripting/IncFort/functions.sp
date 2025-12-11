@@ -4221,7 +4221,7 @@ void applyAfterburn(int victim, int attacker, int weapon, float damage){
 	burnTime += RoundToNearest(GetAttribute(weapon, "afterburn rating", 0.0));
 
 	if(GetAttribute(attacker, "knockout powerup", 0.0) == 2 && TF2Util_GetWeaponSlot(weapon) == TFWeaponSlot_Melee)
-		burndmgMult *= 3;
+		burndmgMult *= 5;
 
 	AfterburnStack stack;
 	stack.owner = attacker;
