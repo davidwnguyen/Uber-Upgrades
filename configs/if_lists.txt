@@ -2387,7 +2387,7 @@
 			"1"		"clip size bonus"
 			"2"		"faster reload rate"
 			"3"		"reload clip all at once"
-			"4"		"Projectile speed increased(DH)"
+			"4"		"Projectile speed increased"
 			"5"		"self dmg push force increased"
 			"6"		"rocket jump damage reduction"
 			"7"		"air control when blast jumping"
