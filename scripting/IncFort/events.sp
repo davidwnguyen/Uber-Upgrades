@@ -215,7 +215,7 @@ public Event_Playerhurt(Handle event, const char[] name, bool:dontBroadcast)
 				Address vampirePowerup = TF2Attrib_GetByName(attacker, "vampire powerup");//Vampire Powerup
 				if(vampirePowerup != Address_Null)
 					if(TF2Attrib_GetValue(vampirePowerup) == 1)
-						healthHealed += RoundToCeil(0.5 * damage * lifestealFactor);
+						healthHealed += RoundToCeil(0.4 * damage * lifestealFactor);
 					else if(TF2Attrib_GetValue(vampirePowerup) == 2)
 						healthHealed += RoundToCeil(0.25 * damage * lifestealFactor);
 				

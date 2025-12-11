@@ -3228,7 +3228,7 @@ GivePowerupDescription(int client, char[] name, int amount){
 		}else if(amount == 3){
 			CPrintToChat(client, "{community}Bloodbound Powerup {default}| {lightcyan}25%% incoming damage reduction. Lifesteal at maximum health instead fills Overleech, consumed to heal when lifestealing.\nRight-click to consume Overleech, dealing piercing damage to all tagged enemies.");
 		}else{
-			CPrintToChat(client, "{community}Vampire Powerup {default}| {lightcyan}50%% lifesteal, 1.25x bleed damage, and 0.75x damage taken.");
+			CPrintToChat(client, "{community}Vampire Powerup {default}| {lightcyan}40%% lifesteal, 1.25x bleed damage, and 0.75x damage taken.");
 		}
 	}
 	else if(StrEqual("precision powerup", name)){
