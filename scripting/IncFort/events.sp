@@ -1034,20 +1034,15 @@ public OnEntityCreated(entity, const char[] classname)
 			RequestFrame(SetWeaponOwner, reference);
 			RequestFrame(ChangeProjModel, reference);
 			CreateTimer(1.5, SelfDestruct, reference);
-			DataPack pack = CreateDataPack();
-			pack.WriteCell(reference);
-			pack.WriteFloat(0.1);
-			pack.WriteCell(0);
-			pack.WriteCell(0);
-			RequestFrame(ApplyHomingCharacteristics, pack);
 		}
-		if(StrEqual(classname, "tf_projectile_pipe") || StrEqual(classname, "tf_projectile_pipe_remote"))
+		if(StrEqual(classname, "tf_projectile_pipe"))
 		{
 			RequestFrame(MultiShot, reference);
 			SDKHook(entity, SDKHook_StartTouch, OnStartTouch);
 			RequestFrame(projGravity, reference);
 			RequestFrame(CheckGrenadeMines, reference);
 			RequestFrame(ChangeProjModel, reference);
+			RequestFrame(PrecisionHoming, reference);
 		}
 		if(StrEqual(classname, "tf_projectile_sentryrocket"))
 		{

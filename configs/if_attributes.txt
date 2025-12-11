@@ -3710,7 +3710,7 @@
 			"ref"		"stickybomb charge rate"
 			"display"		"%.0f%%"
 			"cost"		"175"
-			"value"		"-0.05"
+			"value"		"-0.1"
 			"init"		"1"
 			"max"		"0.008"
 		}

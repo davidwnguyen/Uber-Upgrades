@@ -2306,28 +2306,6 @@ void DoSapperEffects(int client){
 		}
 	}
 }
-ApplyHomingCharacteristics(DataPack pack)//int,float,int,int
-{
-	pack.Reset();
-	int entity = EntRefToEntIndex(pack.ReadCell());
-	if(!IsValidEdict(entity))
-		return;
-	int owner = getOwner(entity);
-	if(!IsValidClient3(owner))
-		return;
-	int CWeapon = GetEntPropEnt(owner, Prop_Send, "m_hActiveWeapon");
-	if(!IsValidWeapon(CWeapon))
-		return;
-	float homingActive = TF2Attrib_HookValueFloat(0.0, "projectile_homing_radius", CWeapon);
-	if(!homingActive)
-		return;
-	
-	homingRadius[entity] = homingActive;
-	homingDelay[entity] = pack.ReadFloat();
-	homingTickRate[entity] = pack.ReadCell();
-	homingAimStyle[entity] = pack.ReadCell();
-	delete pack;
-}
 ExplosiveArrow(entity)
 {
 	entity = EntRefToEntIndex(entity);
@@ -2979,6 +2957,9 @@ public OnEntityHomingThink(entity)
 	if(GetEntityMoveType(entity) == MOVETYPE_NONE)
 		return;
 
+	if(HasEntProp(entity,Prop_Send,"m_bTouched") && GetEntProp(entity,Prop_Send,"m_bTouched"))
+		return;
+
 	int owner = getOwner(entity);
 	if(!IsValidClient3(owner) && IsValidEdict(owner) && HasEntProp(owner,Prop_Send,"m_hBuilder"))
 		owner = GetEntPropEnt(owner,Prop_Send,"m_hBuilder" );
@@ -2988,30 +2969,17 @@ public OnEntityHomingThink(entity)
 
 	float distance = 9999999.0;
 	int Target = GetClosestTarget(entity, owner, _, distance); 
+	float vImpulse[3];
 
-	if(!IsValidClient3(Target) || distance > homingRadius[entity]*homingRadius[entity]) {
-		if(homingAimStyle[entity] == HomingStyle_Fast) {
-			float InitialSpeed[3]; 
-			GetEntPropVector(entity, Prop_Send, "m_vInitialVelocity", InitialSpeed ); 
-			if (GetVectorLength(InitialSpeed) > 10.0 ) {
-				float ProjAngle[3], ProjVector[3];
-				GetEntPropVector(entity, Prop_Data, "m_angRotation", ProjAngle ); 
-				GetAngleVectors(ProjAngle, ProjVector, NULL_VECTOR, NULL_VECTOR)
-				ScaleVector(ProjVector, GetVectorLength(InitialSpeed) );
-				TeleportEntity(entity, NULL_VECTOR, NULL_VECTOR, ProjVector); 
-			}
-		}
+	if(!IsValidClient3(Target) || distance > homingRadius[entity]*homingRadius[entity])
 		return;
-	}
 
 	if(homingTickRate[entity] == 0 || homingTicks[entity] % homingTickRate[entity] == 0)
 	{
-		float ProjLocation[3], ProjVector[3], NewSpeed, ProjAngle[3], AimVector[3], InitialSpeed[3], TargetPos[3];  
-		
+		float ProjLocation[3], ProjVector[3], NewSpeed, ProjAngle[3], AimVector[3], InitialSpeed[3], TargetPos[3];
 		GetEntPropVector(entity, Prop_Send, "m_vInitialVelocity", InitialSpeed ); 
 		if (GetVectorLength(InitialSpeed ) < 10.0 ) 
 			GetEntPropVector(entity, Prop_Data, "m_vecAbsVelocity", InitialSpeed ); 
-		
 		NewSpeed = GetVectorLength(InitialSpeed );
 		
 		GetEntPropVector(entity, Prop_Data, "m_vecAbsOrigin", ProjLocation ); 
@@ -3046,8 +3014,11 @@ public OnEntityHomingThink(entity)
 		NormalizeVector(ProjVector, ProjVector ); 
 		GetEntPropVector(entity, Prop_Data, "m_angRotation", ProjAngle ); 
 		GetVectorAngles(ProjVector, ProjAngle ); 
-		ScaleVector(ProjVector, NewSpeed ); 
-		TeleportEntity(entity, NULL_VECTOR, ProjAngle, ProjVector ); 
+		ScaleVector(ProjVector, NewSpeed );
+		if(HasEntProp(entity, Prop_Send, "m_DmgRadius"))
+			SDKCall(g_SDKCallInitGrenade, entity, ProjVector, vImpulse, owner, 50, 146.0);
+		else
+			TeleportEntity(entity, NULL_VECTOR, ProjAngle, ProjVector );
 		SetEntityGravity(entity, 0.001);
 	}
 	homingTicks[entity]++;
@@ -3288,7 +3259,11 @@ PrecisionHoming(entity)
 		int client = getOwner(entity);
 		if(IsValidClient3(client))
 		{
-			float addedRadius = TF2Attrib_HookValueFloat(0.0, "projectile_homing_radius", client);
+			float addedRadius = 0.0;
+			int CWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
+			if(IsValidWeapon(CWeapon)) {
+				addedRadius += GetAttribute(CWeapon, "projectile homing radius", 0.0);
+			}
 			float precision = TF2Attrib_HookValueFloat(0.0, "precision_powerup", client);
 
 			if(addedRadius > 0){
