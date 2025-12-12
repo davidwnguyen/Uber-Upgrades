@@ -1,5 +1,8 @@
 "Phrases"
 {
+	"mark for death on hit duration"{
+		"en"		"Mark for Death on Hit"
+	}
 	"urgent healing bonus"{
 		"en"		"Urgent Healing Bonus"
 	}
