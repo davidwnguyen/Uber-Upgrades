@@ -25,7 +25,7 @@ float GetResistance(int client, bool includeReduction = false, float penetration
 		TotalResistance -= penetration;
 	}
 	
-	TotalResistance = Pow(TotalResistance, 2.75);
+	TotalResistance = TotalResistance*TotalResistance*TotalResistance;
 
 	if(TotalResistance < 1){
 		TotalResistance = 1.0;

@@ -3651,7 +3651,6 @@
 			"value"		"0.25"
 			"init"		"1.00"
 			"optimizer_style" "1"
-			"description"	"1:1 pure damage multiplier.\nIncreases in cost by +$165 per purchase."
 			"max"		"5.00"
 		}
 		"300.7"
@@ -3664,7 +3663,6 @@
 			"value"		"0.20"
 			"init"		"1.00"
 			"optimizer_style" "1"
-			"description"	"1:1 pure damage multiplier.\nIncreases in cost by +$150 per purchase."
 			"max"		"8.0"
 		}
 		"300.8"
@@ -3677,7 +3675,6 @@
 			"value"		"0.25"
 			"init"		"1.00"
 			"optimizer_style" "1"
-			"description"	"1:1 pure damage multiplier.\nIncreases in cost by +$455 per purchase."
 			"max"		"4.0"
 		}
 		"300.9"
@@ -4847,7 +4844,7 @@
 			"increase_ratio"	"1.0"
 			"value"		"1"
 			"init"		"0"
-			"description"	"Divides damage taken by ^2.75 value.\nYou currently take 'DR'x less damage.\nThis damage reduction is not affected by conditional pierce.\nAffects your buildings if applicable."
+			"description"	"Divides damage taken by ^3 value.\nYou currently take 'DR'x less damage.\nThis damage reduction is not affected by conditional pierce.\nAffects your buildings if applicable."
 			"optimizer_style"	"2"
 			"max"		"1000"
 		}
