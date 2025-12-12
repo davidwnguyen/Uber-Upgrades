@@ -336,10 +336,10 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 				}
 			}
 
-			if(attacker != victim && TF2Attrib_HookValueFloat(0.0, "inverter_powerup", victim) == 2){
+			if(attacker != victim && TF2Attrib_HookValueFloat(0.0, "inverter_powerup", attacker) == 2){
 				if(hasBuffIndex(attacker, Buff_CritMarkedForDeath)){
 					Buff critligma;
-					critligma.init("Marked for Crits", "All hits taken are critical", Buff_CritMarkedForDeath, 1, victim, 8.0);
+					critligma.init("Marked for Crits", "All hits taken are critical", Buff_CritMarkedForDeath, 1, attacker, 8.0);
 					insertBuff(victim, critligma);
 				}
 				if(MadmilkDuration[attacker] > GetGameTime()){
@@ -350,11 +350,30 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 				if(TF2_IsPlayerInCondition(attacker, TFCond_Bleeding)){
 					TF2Util_MakePlayerBleed(victim, attacker, 8.0, weapon, 8);
 				}
-				if(TF2_IsPlayerInCondition(attacker, TFCond_OnFire)){
-					TF2Util_IgnitePlayer(victim, attacker, 10.0, weapon);
-				}
 				if(TF2_IsPlayerInCondition(attacker, TFCond_Dazed) || TF2_IsPlayerInCondition(attacker, TFCond_FreezeInput)){
 					TF2_StunPlayer(victim, 0.35, _, TF_STUNFLAGS_BIGBONK);
+				}
+				float strongestAfterburn = 0.0;
+				int strongestAfterburnDuration = 0;
+				for(int i=0;i < MAX_AFTERBURN_STACKS; ++i){
+					if(playerAfterburn[attacker][i].remainingTicks <= 0)
+						continue;
+
+					int owner = playerAfterburn[attacker][i].owner;
+					if(!IsValidClient3(owner))
+						continue;
+
+					if(playerAfterburn[attacker][i].damage*playerAfterburn[attacker][i].remainingTicks > strongestAfterburn*strongestAfterburnDuration){
+						strongestAfterburn = playerAfterburn[attacker][i].damage;
+						strongestAfterburnDuration = playerAfterburn[attacker][i].remainingTicks;
+					}
+				}
+				if(strongestAfterburn*strongestAfterburnDuration > 0){
+					AfterburnStack strongestStack;
+					strongestStack.damage = strongestAfterburn;
+					strongestStack.remainingTicks = strongestAfterburnDuration;
+					strongestStack.owner = attacker;
+					insertAfterburn(victim, strongestStack);
 				}
 			}
 
