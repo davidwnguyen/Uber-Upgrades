@@ -501,7 +501,7 @@ public Action:Menu_QuickBuyUpgrade(client, args)
 							check_apply_maxvalue(client, arg1_, inum, upgrade_choice)
 							client_spent_money[client][arg1_] += t_up_cost
 							GiveNewUpgradedWeapon_(client, arg1_)
-							PrintToChat(client, "You bought %t %i times.",upgradesNames[upgrade_choice],times);
+							PrintToChat(client, "You bought %T %i times.",upgradesNames[upgrade_choice],times, client);
 						}
 					}
 				}

@@ -24,7 +24,7 @@ public MenuHandler_UpgradeChoice(Handle menu, MenuAction:action, client, param2)
 			char fstr3[20]
 			if (slot != 4)
 			{
-				Format(fstr, sizeof(fstr), "%t", given_upgrd_classnames[w_id][cat_id], 
+				Format(fstr, sizeof(fstr), "%T", given_upgrd_classnames[w_id][cat_id], 
 						client)
 				Format(fstr3, sizeof(fstr3), "%T", current_slot_name[slot], client)
 				Format(fstr2, sizeof(fstr2), "$%.0f [%s] - %s", CurrencyOwned[client], fstr3,
@@ -32,7 +32,7 @@ public MenuHandler_UpgradeChoice(Handle menu, MenuAction:action, client, param2)
 			}
 			else
 			{
-				Format(fstr, sizeof(fstr), "%t", given_upgrd_classnames[_:current_class[client] - 1][cat_id], 
+				Format(fstr, sizeof(fstr), "%T", given_upgrd_classnames[_:current_class[client] - 1][cat_id], 
 						client)
 				Format(fstr3, sizeof(fstr3), "%T", "Body Upgrades", client)
 				Format(fstr2, sizeof(fstr2), "$%.0f [%s] - %s", CurrencyOwned[client], fstr3,
@@ -165,7 +165,7 @@ public MenuHandler_UpgradeChoice(Handle menu, MenuAction:action, client, param2)
 
 					client_spent_money[client][slot] += t_up_cost
 					GiveNewUpgradedWeapon_(client, slot)
-					PrintToChat(client, "You bought %t %i times.",upgrades[upgrade_choice].name,times);
+					PrintToChat(client, "You bought %T %i times.",upgrades[upgrade_choice].name, client, times);
 
 					if(upgrades[upgrade_choice].description[0])
 					{
@@ -242,7 +242,7 @@ public MenuHandler_UpgradeChoice(Handle menu, MenuAction:action, client, param2)
 							check_apply_maxvalue(client, slot, inum, upgrade_choice)
 						client_spent_money[client][slot] += t_up_cost
 						GiveNewUpgradedWeapon_(client, slot)
-						PrintToChat(client, "You downgraded %t %i times.",upgrades[upgrade_choice].name,times);
+						PrintToChat(client, "You downgraded %T %i times.",upgrades[upgrade_choice].name, client,times);
 					}
 					if(idx_currentupgrades_val == 0)
 						remove_attribute(client,inum);

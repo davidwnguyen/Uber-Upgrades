@@ -1893,7 +1893,7 @@ public void getUpgradeMenuTitle(int client, int w_id, int cat_id, int slot, char
 	char fstr3[20]
 	if (slot != 4)
 	{
-		Format(fstr, sizeof(fstr), "%t", given_upgrd_classnames[w_id][cat_id], 
+		Format(fstr, sizeof(fstr), "%T", given_upgrd_classnames[w_id][cat_id], 
 				client)
 		Format(fstr3, sizeof(fstr3), "%T", current_slot_name[slot], client)
 		Format(fstr2, sizeof(fstr2), "$%.0f [%s] - %s", CurrencyOwned[client], fstr3,
@@ -1901,7 +1901,7 @@ public void getUpgradeMenuTitle(int client, int w_id, int cat_id, int slot, char
 	}
 	else
 	{
-		Format(fstr, sizeof(fstr), "%t", given_upgrd_classnames[_:current_class[client] - 1][cat_id], 
+		Format(fstr, sizeof(fstr), "%T", given_upgrd_classnames[_:current_class[client] - 1][cat_id], 
 				client)
 		Format(fstr3, sizeof(fstr3), "%T", "Body Upgrades", client)
 		Format(fstr2, sizeof(fstr2), "$%.0f [%s] - %s", CurrencyOwned[client], fstr3,

@@ -200,7 +200,7 @@ Action:Menu_UpgradeChoice(client, subcat_choice, cat_choice, char[] TitleStr, in
             
             Format(MaximumDisplayBuffer, sizeof(MaximumDisplayBuffer), upgrades[tmp_up_idx].display, StrContains(upgrades[tmp_up_idx].display, "%%") != -1 ? float(RoundFloat(m_val*100.0)) : m_val);
 
-            Format(Buffer, sizeof(Buffer), "%t | $%.0f\n %s%s [%s%s/%s]", upgrades[tmp_up_idx].name, t_up_cost, tmp_ratio*times > 0 ? "+" : "", DisplayBuffer, tmp_val > 0 ? "+" : "", TotalDisplayBuffer, MaximumDisplayBuffer);
+            Format(Buffer, sizeof(Buffer), "%T | $%.0f\n %s%s [%s%s/%s]", upgrades[tmp_up_idx].name, client, t_up_cost, tmp_ratio*times > 0 ? "+" : "", DisplayBuffer, tmp_val > 0 ? "+" : "", TotalDisplayBuffer, MaximumDisplayBuffer);
 
 			bool isEnabled = true;
 			if(upgrades[tmp_up_idx].requirement > (StartMoney + additionalstartmoney))
