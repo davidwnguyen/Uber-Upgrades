@@ -76,7 +76,7 @@ public Action:Timer_Second(Handle timer)
 				TF2_RemoveCondition(client, TFCond_OnFire);
 		}
 	}
-	if(IsMvM())
+	if(isMvM)
 	{
 		for(int i = 1; i <= MaxClients; ++i)
 		{
@@ -1569,13 +1569,6 @@ public Action:WeaponReGiveUpgrades(Handle timer, any:userid)
 				{
 					GiveNewUpgradedWeapon_(client, slot)
 				}
-			}
-		}
-		if(IsFakeClient(client) || MoneyBonusKill == 5000)
-		{
-			if(!IsValidClient(client) && (!IsMvM()))
-			{
-				TF2Attrib_ClearCache(client);
 			}
 		}
 	}

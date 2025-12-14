@@ -846,9 +846,6 @@ public MRESReturn OnCurrencySpawn(int entity, Handle hParams)  {
 
 	return MRES_ChangedHandled;
 }
-public MRESReturn OnBotJumpLogic(int entity, Handle hReturn, Handle hParams)  {
-	return MRES_Supercede;
-}
 public Event_PlayerHealed(Handle event, const char[] name, bool:dontBroadcast)
 {
 	//int client = GetClientOfUserId(GetEventInt(event, "patient"));
@@ -1337,19 +1334,9 @@ public Action:Event_PlayerDeath(Handle event, const char[] name, bool:dontBroadc
 		return;
 
 	isBotScrambled[client] = false;
-	isTagged[attack][client] = false;
-		
-	fanOfKnivesCount[client] = 0;
-	maelstromChargeCount[client] = 0;
-	frayNextTime[attack] = 0.0;
-	enragedKills[client] = 0;
-	TeamTacticsBuildup[client] = 0.0;
 	isDeathTick[client] = true;
-	AfterburnStack empty;
-	for(int i = 0;i < MAX_AFTERBURN_STACKS; ++i){
-		playerAfterburn[client][i] = empty;
-	}
 
+	cleanSlateClient(client);
 	CancelClientMenu(client);
 
 	if(IsValidClient3(attack)){
@@ -1434,20 +1421,6 @@ public Action:Event_PlayerDeath(Handle event, const char[] name, bool:dontBroadc
 		}
 	}
 
-	clearAllBuffs(client);
-
-	if(snowstormActive[client]){
-		int particleEffect = EntRefToEntIndex(snowstormParticle[client]);
-		if(IsValidEntity(particleEffect)){
-			SetVariantString("ParticleEffectStop");
-			AcceptEntityInput(particleEffect, "DispatchEffect");
-			RemoveEdict(particleEffect);
-		}
-		snowstormActive[client] = false;
-	}
-
-	karmicJusticeScaling[client] = 0.0;
-
 	if(IsValidEdict(autoSentryID[client]) && autoSentryID[client] > 32)
 	{
 		RemoveEntity(autoSentryID[client]);
@@ -1470,7 +1443,7 @@ public Action:Event_PlayerDeath(Handle event, const char[] name, bool:dontBroadc
 	if(attack == client)
 		return;
 
-	if (IsMvM())
+	if (isMvM)
 		return;
 
 	if((StartMoney + additionalstartmoney) < MAXMONEY)
@@ -2682,7 +2655,7 @@ public MRESReturn OnBlastExplosion(int entity, Handle hReturn){
 		return MRES_Ignored;
 
 	int owner = getOwner(entity);
-	if(!IsValidClient(owner))
+	if(!IsValidClient3(owner))
 		return MRES_Ignored;
 
 	++stickiesDetonated[owner];
@@ -3373,32 +3346,8 @@ public OnClientDisconnect(client)
 	dps[client] = 0.0;
 	Healed[client] = 0.0;
 	current_class[client] = TFClass_Unknown;
-	fl_MaxFocus[client] = 100.0;
-	fl_CurrentFocus[client] = 100.0;
-	BleedBuildup[client] = 0.0;
-	RadiationBuildup[client] = 0.0;
-	RageActive[client] = false;
-	RageBuildup[client] = 0.0;
-	SupernovaBuildup[client] = 0.0;
-	ConcussionBuildup[client] = 0.0;
-	FreezeBuildup[client] = 0.0;
-	fl_HighestFireDamage[client] = 0.0;
 	canBypassRestriction[client] = false;
-	AfterburnStack empty;
-	for(int i = 0;i < MAX_AFTERBURN_STACKS; ++i){
-		playerAfterburn[client][i] = empty;
-	}
-	clearAllBuffs(client);
-	if(snowstormActive[client]){
-		int particleEffect = EntRefToEntIndex(snowstormParticle[client]);
-		if(IsValidEntity(particleEffect)){
-			SetVariantString("ParticleEffectStop");
-			AcceptEntityInput(particleEffect, "DispatchEffect");
-			RemoveEdict(particleEffect);
-		}
-		snowstormActive[client] = false;
-	}
-
+	cleanSlateClient(client);
 	int i;
 	for(i = 0; i < Max_Attunement_Slots; ++i)
 	{
@@ -3465,7 +3414,6 @@ public OnClientPostAdminCheck(client)
 public Event_PlayerRespawn(Handle event, const char[] name, bool:dontBroadcast)
 {
 	int client = GetClientOfUserId(GetEventInt(event, "userid"));
-	bossPhase[client] = 0;
 	currentDamageType[client].clear();
 	if(IsValidClient3(client)){
 		RespawnEffect(client);
@@ -3486,53 +3434,9 @@ public Event_PlayerRespawn(Handle event, const char[] name, bool:dontBroadcast)
 				Menu_BuyUpgrade(client, 0);
 			}
 		}
-
-		SetEntityRenderColor(client, 255, 255, 255, 255);
-		TF2_RemoveCondition(client,TFCond_Plague);
-		Overleech[client] = 0.0;
-		BleedBuildup[client] = 0.0;
-		RadiationBuildup[client] = 0.0;
-		RageActive[client] = false;
-		SupernovaBuildup[client] = 0.0;
-		ConcussionBuildup[client] = 0.0;
-		FreezeBuildup[client] = 0.0;
-		fl_HighestFireDamage[client] = 0.0;
-		miniCritStatusAttacker[client] = 0.0;
-		miniCritStatusVictim[client] = 0.0;
-		CurrentSlowTimer[client] = 0.0;
-		canShootAgain[client] = true;
-		meleeLimiter[client] = 0;
-		//lastDamageTaken[client] = 0.0;
-		critStatus[client] = false;
-		bloodAcolyteBloodPool[client] = 0.0;
-		duplicationCooldown[client] = 0.0;
-		warpCooldown[client] = 0.0;
-		frayNextTime[client] = 0.0;
-		strongholdEnabled[client] = false;
-		pylonCharge[client] = 0.0;
-		tagTeamTarget[client] = -1;
-		immolationActive[client] = false;
-		sunstarDuration[client] = 0.0;
-		MadmilkDuration[client] = 0.0;
-		RageBuildup[client] = 0.0;
-		for(int i=1;i<=MaxClients;++i)
-		{
-			corrosiveDOT[client][i][0] = 0.0;
-			corrosiveDOT[client][i][1] = 0.0;
-			if(i == tagTeamTarget[client])
-				tagTeamTarget[client] = -1;
-		}
-		if(snowstormActive[client]){
-			int particleEffect = EntRefToEntIndex(snowstormParticle[client]);
-			if(IsValidEntity(particleEffect)){
-				SetVariantString("ParticleEffectStop");
-				AcceptEntityInput(particleEffect, "DispatchEffect");
-				RemoveEdict(particleEffect);
-			}
-			snowstormActive[client] = false;
-		}
+		cleanSlateClient(client);
 		if(IsFakeClient(client)){
-			if(IsMvM()){
+			if(isMvM){
 				BotTimer[client] = 45.0;
 				if(IsValidForDamage(TankTeleporter) && !GetEntProp(TankTeleporter, Prop_Send, "m_bDisabled")){
 					char classname[128]; 
@@ -3586,7 +3490,7 @@ public Event_PlayerChangeClass(Handle event, const char[] name, bool:dontBroadca
 			}
 		}
 	}
-	if(!IsMvM() && IsFakeClient(client))
+	if(!isMvM && IsFakeClient(client))
 	{
 		CreateTimer(0.4, GiveBotUpgrades, GetClientUserId(client));
 	}

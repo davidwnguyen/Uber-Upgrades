@@ -362,7 +362,7 @@
 			"3"				"override projectile type;2.0"
 			"4"				"projectile spread angle penalty;2.0"
 			"5"				"reload time increased hidden;0.4"
-			"6"				"fire rate penalty;6.0"
+			"6"				"weapon fire rate;6.0"
 		}
 		"308" //Loch-n-Load
 		{
@@ -380,7 +380,7 @@
 			"3"				"override projectile type;17.0"
 			"4"				"projectile spread angle penalty;2.0"
 			"5"				"reload time increased hidden;0.4"
-			"6"				"fire rate penalty;6.0"
+			"6"				"weapon fire rate;6.0"
 		}
 		"416" //Market Gardener
 		{

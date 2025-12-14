@@ -11,7 +11,7 @@ SavePlayerData(client)
 	
 	DataPack pack = CreateDataPack();
 	pack.Reset();
-	if(!IsMvM())
+	if(!isMvM)
 	{
 		for(int s = 0; s < NB_SLOTS_UED; s++)
 		{
@@ -60,7 +60,7 @@ SavePlayerData(client)
 	}
 
 	pack.WriteCell(current_class[client]);
-	if(IsMvM())
+	if(isMvM)
 		pack.WriteCell(UniqueWeaponRef_mvm_checkpoint[client]);
 	else
 		pack.WriteCell(UniqueWeaponRef[client]);

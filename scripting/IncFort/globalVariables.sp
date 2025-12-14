@@ -434,6 +434,7 @@ bool replenishStatus;
 bool disableMvMCash;
 bool DOTStacked[MAXENTITIES][MAXENTITIES];
 bool isBotScrambled[MAXPLAYERS+1];
+bool isMvM;
 //bool isHitForMelee[MAXPLAYERS+1][MAXENTITIES];
 //Other Datatypes
 TFClassType current_class[MAXPLAYERS+1]

@@ -4277,6 +4277,67 @@ void SendUpgradeDescription(int client, int upgrade_choice, float value){
 	}
 	SendItemInfo(client, textCopy);
 }
+
+cleanSlateClient(int client){
+	SetEntityRenderColor(client, 255, 255, 255, 255);
+	TF2_RemoveCondition(client,TFCond_Plague);
+	bossPhase[client] = 0;
+	Overleech[client] = 0.0;
+	BleedBuildup[client] = 0.0;
+	RadiationBuildup[client] = 0.0;
+	RageActive[client] = false;
+	SupernovaBuildup[client] = 0.0;
+	ConcussionBuildup[client] = 0.0;
+	FreezeBuildup[client] = 0.0;
+	fl_HighestFireDamage[client] = 0.0;
+	miniCritStatusAttacker[client] = 0.0;
+	miniCritStatusVictim[client] = 0.0;
+	CurrentSlowTimer[client] = 0.0;
+	canShootAgain[client] = true;
+	meleeLimiter[client] = 0;
+	critStatus[client] = false;
+	bloodAcolyteBloodPool[client] = 0.0;
+	duplicationCooldown[client] = 0.0;
+	warpCooldown[client] = 0.0;
+	frayNextTime[client] = 0.0;
+	strongholdEnabled[client] = false;
+	pylonCharge[client] = 0.0;
+	tagTeamTarget[client] = -1;
+	immolationActive[client] = false;
+	sunstarDuration[client] = 0.0;
+	MadmilkDuration[client] = 0.0;
+	RageBuildup[client] = 0.0;
+	fanOfKnivesCount[client] = 0;
+	maelstromChargeCount[client] = 0;
+	enragedKills[client] = 0;
+	TeamTacticsBuildup[client] = 0.0;
+	karmicJusticeScaling[client] = 0.0;
+	clearAllBuffs(client);
+	if(snowstormActive[client]){
+		int particleEffect = EntRefToEntIndex(snowstormParticle[client]);
+		if(IsValidEntity(particleEffect)){
+			SetVariantString("ParticleEffectStop");
+			AcceptEntityInput(particleEffect, "DispatchEffect");
+			RemoveEdict(particleEffect);
+		}
+		snowstormActive[client] = false;
+	}
+
+	AfterburnStack empty;
+	for(int i = 0;i < MAX_AFTERBURN_STACKS; ++i){
+		playerAfterburn[client][i] = empty;
+	}
+
+	for(int i=1;i<=MaxClients;++i)
+	{
+		corrosiveDOT[client][i][0] = 0.0;
+		corrosiveDOT[client][i][1] = 0.0;
+		isTagged[i][client] = false;
+		if(client == tagTeamTarget[i])
+			tagTeamTarget[i] = -1;
+	}
+}
+
 /*public void theBoxness(int client, int melee, const float pos[3], const float angle[3]){
 	float fwd[3], endVec[3], mins[3], maxs[3];
 	GetAngleVectors(angle, fwd, NULL_VECTOR, NULL_VECTOR);

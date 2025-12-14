@@ -395,7 +395,7 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 				checkBleed(victim, attacker, weapon);
 			}
 			float radiationAmount = TF2Attrib_HookValueFloat(0.0, "radiation_buildup_onhit", weapon);
-			if(!(damagetype & DMG_PREVENT_PHYSICS_FORCE) && radiationAmount > 0)
+			if(radiationAmount > 0)
 			{
 				if(TF2Attrib_HookValueFloat(0.0, "knockout_powerup", attacker) == 2 && TF2Util_GetWeaponSlot(weapon) == TFWeaponSlot_Melee)
 					radiationAmount *= 3;

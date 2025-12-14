@@ -212,6 +212,9 @@ public OnMapStart()
 		if(IsValidEntity(entity))
 			RemoveEntity(entity);
 	}
+
+	int i = FindEntityByClassname(-1, "tf_logic_mann_vs_machine");
+	if (i > MaxClients && IsValidEdict(i)) isMvM = true;
 	//DeleteSavedPlayerData();
 	ResetVariables();
 }
@@ -315,14 +318,6 @@ public void OnPluginStart()
 	else
 		DHookEnableDetour(g_DHookSentryThink, false, OnSentryThink);
 
-	//disable bot jumping
-	Handle g_DHookPlayerLocomotionJump = DHookCreateFromConf(hConf, "PlayerLocomotion::Jump()");
-	
-	if(g_DHookPlayerLocomotionJump == null)
-		PrintToServer("CustomAttrs | bot locomotion jump function error");
-	else
-		DHookEnableDetour(g_DHookPlayerLocomotionJump, false, OnBotJumpLogic);
-
 	//Currency
 	Handle g_DHookAddCurrency = DHookCreateFromConf(hConf, "CCurrencyPack::SetAmount()");
 	
@@ -346,14 +341,6 @@ public void OnPluginStart()
 		PrintToServer("CustomAttrs | Stun hook fucked up.");
 	else
 		DHookEnableDetour(g_DHookOnStun, false, OnPlayerStunned);
-
-	//Bot speed
-	Handle g_DHookBotSpeed = DHookCreateFromConf(hConf, "CTFBotLocomotion::GetRunSpeed()");
-	
-	if(g_DHookBotSpeed == null)
-		PrintToServer("CustomAttrs | Bot speed cap removal fucked up.");
-	else
-		DHookEnableDetour(g_DHookBotSpeed, true, OnCalculateBotSpeedPost);
 	
 	//On condition applied
 	Handle g_DHookCondApply = DHookCreateFromConf(hConf, "CTFPlayerShared::AddCond()");

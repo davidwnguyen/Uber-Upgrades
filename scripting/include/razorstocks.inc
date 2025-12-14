@@ -884,23 +884,6 @@ bool IsRectangleVisible(const float start[3], const float end[3], const float mi
 
     return false;
 }
-stock bool IsMvM(bool forceRecalc = false)
-{
-	static bool found = false;
-	static bool ismvm = false;
-	if (forceRecalc)
-	{
-		found = false;
-		ismvm = false;
-	}
-	if (!found)
-	{
-		int i = FindEntityByClassname(-1, "tf_logic_mann_vs_machine");
-		if (i > MaxClients && IsValidEdict(i)) ismvm = true;
-		found = true;
-	}
-	return ismvm;
-}
 stock VisualHealing(patient, healer, amount)
 {
     Event event = CreateEvent("player_healed");

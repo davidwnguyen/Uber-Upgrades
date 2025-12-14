@@ -969,7 +969,7 @@ public Action:OnCollisionExplosiveFrag(entity, client)
 			{
 				float Radius = 75.0*TF2Attrib_HookValueFloat(1.0, "mult_explosion_radius", CWeapon), clientvec[3];
 				GetEntPropVector(entity, Prop_Send, "m_vecOrigin", clientvec)
-				EntityExplosion(owner, fragExplosionDamage * TF2_GetDamageModifiers(owner, CWeapon), Radius, clientvec, 0, true, entity, 0.4,_,CWeapon,_,75)
+				EntityExplosion(owner, fragExplosionDamage * TF2_GetDamageModifiers(owner, CWeapon), Radius, clientvec, 0, true, entity, 0.25,_,CWeapon,_,75,_,_,_,_,"ExplosionCore_sapperdestroyed")
 			}
 		}
 	}
