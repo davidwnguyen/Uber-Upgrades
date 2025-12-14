@@ -3641,7 +3641,7 @@ public TF2Items_OnGiveNamedItem_Post(client, char[] classname, itemDefinitionInd
 				}
 			}
 			currentitem_catidx[client][4] = _:TF2_GetPlayerClass(client) - 1;
-			if (slot != 3 && slot <= NB_SLOTS_UED)
+			if (slot != 3 && slot <= NB_SLOTS_UED && slot > -1)
 			{
 				if (StrEqual(classname, "tf_weapon_revolver"))
 					slot =0;

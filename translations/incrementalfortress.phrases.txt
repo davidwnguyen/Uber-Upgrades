@@ -1,5 +1,11 @@
 "Phrases"
 {
+	"grenade bounce speed"{
+		"en"		"Grenade Bounce Speed"
+	}
+	"grenade bounce damage"{
+		"en"		"Grenade Bounce Damage"
+	}
 	"mark for death on hit duration"{
 		"en"		"Mark for Death on Hit"
 	}

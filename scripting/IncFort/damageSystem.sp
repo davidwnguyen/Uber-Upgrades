@@ -1154,7 +1154,7 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 			return 0.0;
 		}
 		int jaratedIndex = getBuffInArray(victim, Buff_Jarated);
-		if(jaratedIndex != -1){
+		if(jaratedIndex != -1 && IsValidClient3(playerBuffs[victim][jaratedIndex].inflictor)){
 			currentDamageType[playerBuffs[victim][jaratedIndex].inflictor].second |= DMG_IGNOREHOOK;
 			SDKHooks_TakeDamage(victim,playerBuffs[victim][jaratedIndex].inflictor,playerBuffs[victim][jaratedIndex].inflictor,10.0*playerBuffs[victim][jaratedIndex].priority,DMG_DISSOLVE,_,_,_,false);
 		}
