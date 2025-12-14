@@ -1108,12 +1108,24 @@ public Action:OnTakeDamagePre_Sentry(victim, &attacker, &inflictor, float &damag
 	}
 	if(IsValidClient3(owner))
 	{
-		if(!IsFakeClient(owner))
-		{
-			float armorAmt = GetResistance(owner);
-			damage /= armorAmt;
+		if(!(currentDamageType[attacker].second & DMG_PIERCING) && attacker != owner){
+			float armorPenetration = TF2Attrib_HookValueFloat(0.0, "armor_penetration_buff", attacker);
+
+			float dmgReduction = TF2Attrib_HookValueFloat(1.0, "dmg_incoming_mult", owner);
+			if(dmgReduction != 1.0)
+				damage *= dmgReduction
+
+			float linearReduction = TF2Attrib_HookValueFloat(1.0, "dmg_taken_divided", owner);
+			if(linearReduction != 1.0)
+				damage /= linearReduction;
+
+			if(!IsFakeClient(owner)){
+				damage /= GetResistance(owner, _, armorPenetration);
+			}else{
+				//Armor penetration just gives +10% damage on bots.
+				damage *= 1.0 + armorPenetration*0.1;
+			}
 		}
-		damage *= TF2Attrib_HookValueFloat(1.0, "dmg_incoming_mult", owner);
 
 		applyDamageAffinities(owner, attacker, inflictor, damage, weapon, damagetype, damagecustom);
 	}
