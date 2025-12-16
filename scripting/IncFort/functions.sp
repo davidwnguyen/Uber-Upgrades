@@ -4279,8 +4279,9 @@ void SendUpgradeDescription(int client, int upgrade_choice, float value){
 }
 
 cleanSlateClient(int client){
-	SetEntityRenderColor(client, 255, 255, 255, 255);
-	TF2_RemoveCondition(client,TFCond_Plague);
+	if(client <= 0 || client > MaxClients)
+		return;
+	
 	bossPhase[client] = 0;
 	Overleech[client] = 0.0;
 	BleedBuildup[client] = 0.0;
@@ -4313,16 +4314,6 @@ cleanSlateClient(int client){
 	TeamTacticsBuildup[client] = 0.0;
 	karmicJusticeScaling[client] = 0.0;
 	clearAllBuffs(client);
-	if(snowstormActive[client]){
-		int particleEffect = EntRefToEntIndex(snowstormParticle[client]);
-		if(IsValidEntity(particleEffect)){
-			SetVariantString("ParticleEffectStop");
-			AcceptEntityInput(particleEffect, "DispatchEffect");
-			RemoveEdict(particleEffect);
-		}
-		snowstormActive[client] = false;
-	}
-
 	AfterburnStack empty;
 	for(int i = 0;i < MAX_AFTERBURN_STACKS; ++i){
 		playerAfterburn[client][i] = empty;
@@ -4336,6 +4327,22 @@ cleanSlateClient(int client){
 		if(client == tagTeamTarget[i])
 			tagTeamTarget[i] = -1;
 	}
+
+	if(snowstormActive[client]){
+		int particleEffect = EntRefToEntIndex(snowstormParticle[client]);
+		if(IsValidEntity(particleEffect)){
+			SetVariantString("ParticleEffectStop");
+			AcceptEntityInput(particleEffect, "DispatchEffect");
+			RemoveEdict(particleEffect);
+		}
+		snowstormActive[client] = false;
+	}
+
+	if(!IsClientInGame(client))
+		return;
+
+	SetEntityRenderColor(client, 255, 255, 255, 255);
+	TF2_RemoveCondition(client,TFCond_Plague);
 }
 
 /*public void theBoxness(int client, int melee, const float pos[3], const float angle[3]){
