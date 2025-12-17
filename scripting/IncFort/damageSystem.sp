@@ -1184,17 +1184,6 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 	
 	if(IsValidWeapon(weapon))
 	{
-		int weaponIndex = GetEntProp(weapon, Prop_Send, "m_iItemDefinitionIndex");
-		switch(weaponIndex)
-		{
-			case 141,1004:
-			{
-				if(damagetype & DMG_CRIT)
-				{
-					TF2_AddCondition(victim, TFCond_TmpDamageBonus, 5.0);
-				}
-			}
-		}
 		float multPerStatusEffect = TF2Attrib_HookValueFloat(0.0, "damage_bonus_per_status_effect_on_self", weapon);
 		if(multPerStatusEffect != 0.0){
 			damage *= 1+multPerStatusEffect*GetAmountOfBuffs(attacker)*GetAmountOfDebuffs(attacker);
@@ -1374,6 +1363,17 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 
 		if(isVictimPlayer)
 		{
+			int weaponIndex = GetEntProp(weapon, Prop_Send, "m_iItemDefinitionIndex");
+			switch(weaponIndex)
+			{
+				case 141,1004:
+				{
+					if(damagetype & DMG_CRIT)
+					{
+						TF2_AddCondition(victim, TFCond_TmpDamageBonus, 5.0);
+					}
+				}
+			}
 			if(immolationActive[attacker]){
 				float immolationRatio = TF2Attrib_HookValueFloat(0.0, "immolation_ratio", weapon);
 				if(immolationRatio > 0.0){
