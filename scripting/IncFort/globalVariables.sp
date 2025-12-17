@@ -238,6 +238,8 @@ AfterburnStack playerAfterburn[MAXPLAYERS+1][MAX_AFTERBURN_STACKS];
 int OwnerOffset;
 int playerUpgradeMenus[MAXPLAYERS+1];
 int playerUpgradeMenuPage[MAXPLAYERS+1];
+int playerTweakMenus[MAXPLAYERS+1];
+int playerTweakMenuPage[MAXPLAYERS+1];
 int oldPlayerButtons[MAXPLAYERS+1];
 int DisableBotUpgrades
 int DisableCooldowns
@@ -265,7 +267,6 @@ int UniqueWeaponRef[MAXPLAYERS+1]
 int client_last_up_slot[MAXPLAYERS+1]
 int client_last_up_idx[MAXPLAYERS+1]
 int client_respawn_checkpoint[MAXPLAYERS+1]
-int client_no_d_team_upgrade[MAXPLAYERS+1]
 int blankArray[MAXPLAYERS+1][16]
 int blankArray1[MAXPLAYERS+1][16][MAX_ATTRIBUTES_ITEM];
 int MadmilkInflictor[MAXPLAYERS+1];

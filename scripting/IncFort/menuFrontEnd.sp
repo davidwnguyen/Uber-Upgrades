@@ -288,99 +288,96 @@ public Action:Menu_ChooseSubcat(client, subcat_choice, const char[] TitleStr)
 //Tweak menu
 public Action:Menu_SpecialUpgradeChoice(client, cat_choice, char[] TitleStr, selectidx)
 {
+	if (cat_choice == -1)
+		return;
+
 	int i, j
-	Handle menu = CreateMenu(MenuHandler_SpecialUpgradeChoice);
+	Handle menu = CreateMenu(MenuHandler_SpecialUpgradeChoice, MENU_ACTIONS_DEFAULT|MenuAction_DisplayItem);
 	SetMenuPagination(menu, 2);
 	SetMenuExitBackButton(menu, true);
+	playerTweakMenus[client] = view_as<int>(menu);
 	
-	if (cat_choice != -1)
+	char desc_str[512]
+	int w_id = current_w_list_id[client]
+	int tmp_up_idx
+	int tmp_spe_up_idx
+	int tmp_ref_idx
+	float tmp_val
+	float tmp_ratio
+	int slot
+	char plus_sign[4]
+	char buft[256]
+	float rate = (globalButtons[client] & IN_JUMP) ? -1.0 : 1.0;
+	current_w_c_list_id[client] = cat_choice
+	slot = current_slot_used[client]
+	for (i = 0; i < given_upgrd_classnames_tweak_nb[w_id]; ++i)
 	{
-		char desc_str[512]
-		int w_id = current_w_list_id[client]
-		int tmp_up_idx
-		int tmp_spe_up_idx
-		int tmp_ref_idx
-		float tmp_val
-		float tmp_ratio
-		int slot
-		char plus_sign[4]
-		char buft[256]
-	
-		current_w_c_list_id[client] = cat_choice
-		slot = current_slot_used[client]
-		for (i = 0; i < given_upgrd_classnames_tweak_nb[w_id]; ++i)
-		{
-			bool restricted = false;
-			tmp_spe_up_idx = given_upgrd_list[w_id][cat_choice][0][i]
+		bool restricted = false;
+		tmp_spe_up_idx = given_upgrd_list[w_id][cat_choice][0][i]
 
-			for(int k = 0;k < 5;++k){
-				if(currentupgrades_restriction[client][slot][k] == 0)
-					continue;
+		for(int k = 0;k < 5;++k){
+			if(currentupgrades_restriction[client][slot][k] == 0)
+				continue;
 
-				if(currentupgrades_restriction[client][slot][k] == tweaks[tmp_spe_up_idx].restriction){
-					restricted = true;
-					break;
-				}
-			}
-
-			Format(buft, sizeof(buft), "%T",  tweaks[tmp_spe_up_idx].tweaks, client);
-			if(tweaks[tmp_spe_up_idx].cost > 0.0)
-			{
-				Format(buft, sizeof(buft), "%s\nCost: $%.0f",  buft, tweaks[tmp_spe_up_idx].cost)
-			}
-			if(tweaks[tmp_spe_up_idx].requirement > 0.0)
-			{
-				Format(buft, sizeof(buft), "%s\nRequirement: $%.0f spent",  buft, tweaks[tmp_spe_up_idx].requirement)
-			}
-			if(tweaks[tmp_spe_up_idx].gamestage_requirement > gameStage)
-			{
-				Format(buft, sizeof(buft), "%s\nStage: %i",  buft, tweaks[tmp_spe_up_idx].gamestage_requirement)
+			if(rate >= 1.0 && currentupgrades_restriction[client][slot][k] == tweaks[tmp_spe_up_idx].restriction){
 				restricted = true;
+				break;
 			}
-			
-			if(canBypassRestriction[client])
-				restricted = false;
-
-			desc_str = buft;
-			for (j = 0; j < tweaks[tmp_spe_up_idx].nb_att; ++j)
-			{
-				tmp_up_idx = tweaks[tmp_spe_up_idx].att_idx[j]
-				tmp_ref_idx = upgrades_ref_to_idx[client][slot][tmp_up_idx]
-				if (tmp_ref_idx != 20000)
-				{	
-					tmp_val = currentupgrades_val[client][slot][tmp_ref_idx] - upgrades[tmp_up_idx].i_val
-				}
-				else
-				{
-					tmp_val = 0.0
-				}
-				tmp_ratio = upgrades[tmp_up_idx].ratio
-				if (tmp_ratio > 0.0)
-				{
-					plus_sign = "+"
-				}
-				else
-				{
-					tmp_ratio *= -1.0
-					plus_sign = "-"
-				}
-
-				tmp_ratio *= tweaks[tmp_spe_up_idx].att_ratio[j]
-
-				char buf[64]
-				char DisplayIncreaseBuffer[32];
-				char DisplayCurrentBuffer[32];
-				Format(buf, sizeof(buf), "%T", upgrades[tmp_up_idx].name, client)
-				Format(DisplayIncreaseBuffer, sizeof(DisplayIncreaseBuffer), upgrades[tmp_up_idx].display, StrContains(upgrades[tmp_up_idx].display, "%%") != -1 ? float(RoundFloat(tmp_ratio*100.0)) : tmp_ratio);
-				Format(DisplayCurrentBuffer, sizeof(DisplayCurrentBuffer), upgrades[tmp_up_idx].display, StrContains(upgrades[tmp_up_idx].display, "%%") != -1 ? float(RoundFloat(tmp_val*100.0)) : tmp_val);
-				
-				Format(desc_str, sizeof(desc_str), "%s\n% -%s\n   %s%s (%s)",desc_str, buf, plus_sign, DisplayIncreaseBuffer, DisplayCurrentBuffer);
-			}
-			AddMenuItem(menu, "upgrade", desc_str, restricted ? ITEMDRAW_DISABLED : ITEMDRAW_DEFAULT);
 		}
-	}
-	else{
-	CloseHandle(menu);
+
+		Format(buft, sizeof(buft), "%T",  tweaks[tmp_spe_up_idx].tweaks, client);
+		if(tweaks[tmp_spe_up_idx].cost > 0.0)
+		{
+			Format(buft, sizeof(buft), "%s\nCost: $%.0f",  buft, tweaks[tmp_spe_up_idx].cost)
+		}
+		if(tweaks[tmp_spe_up_idx].requirement > 0.0)
+		{
+			Format(buft, sizeof(buft), "%s\nRequirement: $%.0f spent",  buft, tweaks[tmp_spe_up_idx].requirement)
+			restricted = true;
+		}
+		if(tweaks[tmp_spe_up_idx].gamestage_requirement > gameStage)
+		{
+			Format(buft, sizeof(buft), "%s\nStage: %i",  buft, tweaks[tmp_spe_up_idx].gamestage_requirement)
+			restricted = true;
+		}
+		
+		if(canBypassRestriction[client])
+			restricted = false;
+
+		desc_str = buft;
+		for (j = 0; j < tweaks[tmp_spe_up_idx].nb_att; ++j)
+		{
+			tmp_up_idx = tweaks[tmp_spe_up_idx].att_idx[j]
+			tmp_ref_idx = upgrades_ref_to_idx[client][slot][tmp_up_idx]
+			if (tmp_ref_idx != 20000)
+			{	
+				tmp_val = currentupgrades_val[client][slot][tmp_ref_idx] - upgrades[tmp_up_idx].i_val
+			}
+			else
+			{
+				tmp_val = 0.0
+			}
+			tmp_ratio = upgrades[tmp_up_idx].ratio * rate * tweaks[tmp_spe_up_idx].att_ratio[j];
+			if (tmp_ratio > 0.0)
+			{
+				plus_sign = "+"
+			}
+			else
+			{
+				tmp_ratio *= -1.0
+				plus_sign = "-"
+			}
+
+			char buf[64]
+			char DisplayIncreaseBuffer[32];
+			char DisplayCurrentBuffer[32];
+			Format(buf, sizeof(buf), "%T", upgrades[tmp_up_idx].name, client)
+			Format(DisplayIncreaseBuffer, sizeof(DisplayIncreaseBuffer), upgrades[tmp_up_idx].display, StrContains(upgrades[tmp_up_idx].display, "%%") != -1 ? float(RoundFloat(tmp_ratio*100.0)) : tmp_ratio);
+			Format(DisplayCurrentBuffer, sizeof(DisplayCurrentBuffer), upgrades[tmp_up_idx].display, StrContains(upgrades[tmp_up_idx].display, "%%") != -1 ? float(RoundFloat(tmp_val*100.0)) : tmp_val);
+			
+			Format(desc_str, sizeof(desc_str), "%s\n% -%s\n   %s%s (%s)",desc_str, buf, plus_sign, DisplayIncreaseBuffer, DisplayCurrentBuffer);
+		}
+		AddMenuItem(menu, "upgrade", desc_str, restricted ? ITEMDRAW_DISABLED : ITEMDRAW_DEFAULT);
 	}
 	SetMenuTitle(menu, TitleStr);
 	DisplayMenuAtItem(menu, client, selectidx, MENU_TIME_FOREVER);

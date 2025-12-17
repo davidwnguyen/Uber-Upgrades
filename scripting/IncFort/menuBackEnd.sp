@@ -684,6 +684,9 @@ public MenuHandler_AttributesTweak_action(Handle menu, MenuAction:action, client
 }
 public MenuHandler_SpecialUpgradeChoice(Handle menu, MenuAction:action, client, param2)
 {
+	if(action == MenuAction_DisplayItem){
+		playerTweakMenuPage[client] = param2;
+	}
 	if (action == MenuAction_Select)
 	{
 		char fstr[100]
@@ -692,13 +695,14 @@ public MenuHandler_SpecialUpgradeChoice(Handle menu, MenuAction:action, client, 
 		int w_id = current_w_list_id[client]
 		int cat_id = current_w_c_list_id[client]
 		int spTweak = given_upgrd_list[w_id][cat_id][0][param2]
+		float rate = (globalButtons[client] & IN_JUMP) ? -1.0 : 1.0;
 
 		if(!canBypassRestriction[client]){
 			for(int k = 0;k < 5;k++){
 				if(currentupgrades_restriction[client][slot][k] == 0)
 					continue;
 
-				if(currentupgrades_restriction[client][slot][k] == tweaks[spTweak].restriction){
+				if(rate >= 1.0 && currentupgrades_restriction[client][slot][k] == tweaks[spTweak].restriction){
 					PrintToChat(client, "You already have a restricted upgrade for this tweak.");
 					EmitSoundToClient(client, SOUND_FAIL);
 					got_req = 0;
@@ -725,64 +729,47 @@ public MenuHandler_SpecialUpgradeChoice(Handle menu, MenuAction:action, client, 
 				got_req = 0;
 			}
 		}
-		for (int i = 0; i < tweaks[spTweak].nb_att && got_req == 1; ++i)
-		{
-			int upgrade_choice = tweaks[spTweak].att_idx[i]
-			int inum = upgrades_ref_to_idx[client][slot][upgrade_choice]
 
-			if(canBypassRestriction[client])
-				break;
-
-			if (inum != 20000)
-			{
-				if (currentupgrades_val[client][slot][inum] == upgrades[upgrade_choice].m_val)
-				{
-					PrintToChat(client, "You already have reached the maximum upgrade for this tweak.");
-					EmitSoundToClient(client, SOUND_FAIL);
-					got_req = 0
-					break;
-				}
-			}
-			else
-			{
-				if (currentupgrades_number[client][slot] + tweaks[spTweak].nb_att >= MAX_ATTRIBUTES_ITEM)
-				{
-					PrintToChat(client, "You have not enough upgrade category slots for this tweak.");
-					EmitSoundToClient(client, SOUND_FAIL);
-					got_req = 0
-					break;
-				}
-			}
-		}
 		if (got_req)
 		{
-			if(tweaks[spTweak].requirement > 1.0 && client_tweak_highest_requirement[client][slot] < tweaks[spTweak].requirement)
-			{
-				client_tweak_highest_requirement[client][slot] = tweaks[spTweak].requirement;
-			}
-			if(tweaks[spTweak].restriction != 0)
-			{
-				currentupgrades_restriction[client][slot][tweaks[spTweak].restriction] = tweaks[spTweak].restriction;
-			}
-			char clname[255]
-			GetClientName(client, clname, sizeof(clname))
-			for (int i = 1; i <= MaxClients; ++i)
-			{
-				if (IsValidClient(i) && !client_no_d_team_upgrade[i])
+			if(rate > 0) {
+				if(tweaks[spTweak].requirement > 1.0 && client_tweak_highest_requirement[client][slot] < tweaks[spTweak].requirement)
 				{
-					PrintToChat(i,"%s : [%s tweak] - %s!", 
-					clname, tweaks[spTweak].tweaks, current_slot_name[slot]);
+					client_tweak_highest_requirement[client][slot] = tweaks[spTweak].requirement;
 				}
+				if(tweaks[spTweak].restriction != 0)
+				{
+					currentupgrades_restriction[client][slot][tweaks[spTweak].restriction] = tweaks[spTweak].restriction;
+				}
+				for (int i = 0; i < tweaks[spTweak].nb_att; ++i)
+				{
+					int upgrade_choice = tweaks[spTweak].att_idx[i]
+					UpgradeItem(client, upgrade_choice, upgrades_ref_to_idx[client][slot][upgrade_choice], tweaks[spTweak].att_ratio[i], slot, true);
+				}
+				GiveNewUpgradedWeapon_(client, slot)
+				client_spent_money[client][slot] += tweaks[spTweak].cost;
+				if(!canBypassRestriction[client])
+					CurrencyOwned[client] -= tweaks[spTweak].cost;
 			}
-			for (int i = 0; i < tweaks[spTweak].nb_att; ++i)
-			{
-				int upgrade_choice = tweaks[spTweak].att_idx[i]
-				UpgradeItem(client, upgrade_choice, upgrades_ref_to_idx[client][slot][upgrade_choice], tweaks[spTweak].att_ratio[i], slot)
+			else {
+				if(tweaks[spTweak].restriction != 0)
+				{
+					currentupgrades_restriction[client][slot][tweaks[spTweak].restriction] = 0;
+				}
+				for (int i = 0; i < tweaks[spTweak].nb_att; ++i)
+				{
+					int upgrade_choice = tweaks[spTweak].att_idx[i]
+					int tmp_ref_idx = upgrades_ref_to_idx[client][slot][upgrade_choice]
+					if (tmp_ref_idx != 20000)
+					{
+						currentupgrades_val[client][slot][tmp_ref_idx] = upgrades[upgrade_choice].i_val;
+					}
+				}
+				GiveNewUpgradedWeapon_(client, slot)
+				client_spent_money[client][slot] -= tweaks[spTweak].cost;
+				if(!canBypassRestriction[client])
+					CurrencyOwned[client] += tweaks[spTweak].cost;
 			}
-			GiveNewUpgradedWeapon_(client, slot)
-			client_spent_money[client][slot] += tweaks[spTweak].cost;
-			if(!canBypassRestriction[client])
-				CurrencyOwned[client] -= tweaks[spTweak].cost;
 		}
 		char buf[128]
 		Format(buf, sizeof(buf), "%T", current_slot_name[slot], client);

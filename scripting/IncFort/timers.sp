@@ -278,6 +278,12 @@ public Action:Timer_FixedVariables(Handle timer)
 					getUpgradeMenuTitle(client, current_w_list_id[client], current_w_c_list_id[client], current_slot_used[client], fstr2);
 					Menu_UpgradeChoice(client, current_w_sc_list_id[client], current_w_c_list_id[client], fstr2, RoundToFloor(playerUpgradeMenuPage[client]/7.0)*7);
 				}
+				else if(IsValidHandle(view_as<Menu>(playerTweakMenus[client])))
+				{
+					char fstr2[100];
+					getUpgradeMenuTitle(client, current_w_list_id[client], current_w_c_list_id[client], current_slot_used[client], fstr2);
+					Menu_SpecialUpgradeChoice(client, current_w_c_list_id[client], fstr2, RoundToFloor(playerTweakMenuPage[client]/2.0)*2);
+				}
 			}
 
 			if(IsValidWeapon(CWeapon)){

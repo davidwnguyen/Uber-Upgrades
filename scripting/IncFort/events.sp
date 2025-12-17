@@ -3394,7 +3394,6 @@ public OnClientPostAdminCheck(client)
 	{
 		char clname[255]
 		GetClientName(client, clname, sizeof(clname))
-		client_no_d_team_upgrade[client] = 1
 		CreateTimer(0.0, ChangeClassTimer, GetClientUserId(client));
 		//GivePlayerData(client);
 

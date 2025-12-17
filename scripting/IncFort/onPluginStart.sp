@@ -496,7 +496,6 @@ public void OnPluginStart()
 
 		fl_MaxFocus[client] = 100.0;
 		fl_CurrentFocus[client] = 100.0;
-		client_no_d_team_upgrade[client] = 1
 		current_class[client] = TF2_GetPlayerClass(client)
 		CurrencyOwned[client] = (StartMoney + additionalstartmoney);
 		

@@ -1385,7 +1385,7 @@ DisplayItemChange(client,itemidx)
 		CPrintToChat(client, "{valve}Incremental Fortress {default}| {lightcyan}Weapon Changes | %s", ChangeString)
 	}
 }
-public UpgradeItem(client, upgrade_choice, int &inum, float ratio, slot)
+UpgradeItem(client, upgrade_choice, int &inum, float ratio, slot, bool bypassMax = false)
 {
 	if (inum == 20000)
 	{
@@ -1400,8 +1400,8 @@ public UpgradeItem(client, upgrade_choice, int &inum, float ratio, slot)
 	else
 	{
 		currentupgrades_val[client][slot][inum] += (upgrades[upgrade_choice].ratio * ratio);
-		if(!canBypassRestriction[client])
-		 check_apply_maxvalue(client, slot, inum, upgrade_choice)
+		if(!canBypassRestriction[client] && !bypassMax)
+			check_apply_maxvalue(client, slot, inum, upgrade_choice)
 	}
 	client_last_up_idx[client] = upgrade_choice
 	client_last_up_slot[client] = slot
@@ -3530,6 +3530,8 @@ ResetVariables(){
 		buffChange[client] = false;
 		playerUpgradeMenus[client] = 0;
 		playerUpgradeMenuPage[client] = 0;
+		playerTweakMenus[client] = 0;
+		playerTweakMenuPage[client] = 0;
 		oldPlayerButtons[client] = 0;
 		MadmilkInflictor[client] = 0;
 		autoSentryID[client] = 0;
