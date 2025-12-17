@@ -1336,7 +1336,6 @@ public Action:Event_PlayerDeath(Handle event, const char[] name, bool:dontBroadc
 	isBotScrambled[client] = false;
 	isDeathTick[client] = true;
 
-	cleanSlateClient(client);
 	CancelClientMenu(client);
 
 	if(IsValidClient3(attack)){
@@ -1426,7 +1425,7 @@ public Action:Event_PlayerDeath(Handle event, const char[] name, bool:dontBroadc
 		RemoveEntity(autoSentryID[client]);
 		autoSentryID[client] = -1;
 	}
-
+	cleanSlateClient(client);
 	if(!IsValidClient3(attack))
 		return;
 
