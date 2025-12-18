@@ -2291,7 +2291,7 @@
 		"Ball Upgrades"
 		{
 			"0"		"effect bar recharge rate increased"
-			"2"		"Ball Additive Damage Bonus"
+			"1"		"Ball Additive Damage Bonus"
 		}
 		"Special Tweaks"
 		{

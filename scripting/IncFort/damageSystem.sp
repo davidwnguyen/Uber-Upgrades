@@ -790,7 +790,6 @@ public Action TF2_OnTakeDamage(int victim, int &attacker, int &inflictor, float 
 			damagetype |= DMG_PREVENT_PHYSICS_FORCE
 			changed = Plugin_Changed;
 		}
-		
 		switch(damagecustom) {
 			case TF_CUSTOM_BACKSTAB:
 			{
@@ -831,10 +830,11 @@ public Action TF2_OnTakeDamage(int victim, int &attacker, int &inflictor, float 
 			}
 			case TF_CUSTOM_BASEBALL:
 			{
-				damage = 35.0;
-				damage += TF2Attrib_HookValueFloat(0.0, "baseball_base_damage", weapon);
-				damage *= TF2Attrib_HookValueFloat(1.0, "mult_dmg", weapon);
-				changed = Plugin_Changed;
+				if(damagetype & DMG_CLUB) {
+					damage = 35.0;
+					damage += TF2Attrib_HookValueFloat(0.0, "baseball_base_damage", weapon);
+					changed = Plugin_Changed;
+				}
 			}
 		}
 	}
