@@ -1132,7 +1132,7 @@ stock char[] GetAlphabetForm(float number)
 	char output[64];
 	if(number <= 0.0)//Prevent logmarithm from undefining.
 	{
-		IntToString(RoundToNearest(number), output, sizeof(output));
+		FloatToString(number, output, sizeof(output));
 		return output;
 	}
 	int digits = RoundToFloor(Logarithm(number))+1;
@@ -1162,74 +1162,63 @@ stock char[] GetAlphabetForm(float number)
 		case 4://Thousands
 		{
 			FloatToString(RoundToFloor(number/10.0)/100.0, output, sizeof(output));
-			Format(output, sizeof(output), "%.4s", output);
-			StrCat(output, sizeof(output), "K");
+			Format(output, sizeof(output), "%.4sK", output);
 		}
 		case 5:
 		{
 			FloatToString(RoundToFloor(number/10.0)/100.0, output, sizeof(output));
-			Format(output, sizeof(output), "%.5s", output);
-			StrCat(output, sizeof(output), "K");
+			Format(output, sizeof(output), "%.5sK", output);
 		}
 		case 6:
 		{
 			FloatToString(RoundToFloor(number/10.0)/100.0, output, sizeof(output));
-			Format(output, sizeof(output), "%.6s", output);
-			StrCat(output, sizeof(output), "K");
+			Format(output, sizeof(output), "%.6sK", output);
 		}
 		case 7://Millions
 		{
 			FloatToString(RoundToFloor(number/10000.0)/100.0, output, sizeof(output));
-			Format(output, sizeof(output), "%.4s", output);
-			StrCat(output, sizeof(output), "M");
+			Format(output, sizeof(output), "%.4sM", output);
 		}
 		case 8:
 		{
 			FloatToString(RoundToFloor(number/10000.0)/100.0, output, sizeof(output));
-			Format(output, sizeof(output), "%.5s", output);
-			StrCat(output, sizeof(output), "M");
+			Format(output, sizeof(output), "%.5sM", output);
 		}
 		case 9:
 		{
 			FloatToString(RoundToFloor(number/10000.0)/100.0, output, sizeof(output));
-			Format(output, sizeof(output), "%.6s", output);
-			StrCat(output, sizeof(output), "M");
+			Format(output, sizeof(output), "%.6sM", output);
 		}
 		case 10://Billions
 		{
 			FloatToString(RoundToFloor(number/10000000.0)/100.0, output, sizeof(output));
-			Format(output, sizeof(output), "%.4s", output);
-			StrCat(output, sizeof(output), "B");
+			Format(output, sizeof(output), "%.4sB", output);
 		}
 		case 11:
 		{
 			FloatToString(RoundToFloor(number/10000000.0)/100.0, output, sizeof(output));
-			Format(output, sizeof(output), "%.5s", output);
-			StrCat(output, sizeof(output), "B");
+			Format(output, sizeof(output), "%.5sB", output);
 		}
 		case 12:
 		{
 			FloatToString(RoundToFloor(number/10000000.0)/100.0, output, sizeof(output));
-			Format(output, sizeof(output), "%.6s", output);
-			StrCat(output, sizeof(output), "B");
+			Format(output, sizeof(output), "%.6sB", output);
 		}
 		case 13://Trillions
 		{
-			FloatToString(RoundToFloor(number/10000000000.0)/100.0, output, sizeof(output));
-			Format(output, sizeof(output), "%.4s", output);
-			StrCat(output, sizeof(output), "T");
+			PrintToServer("%.2f", number);
+			FloatToString(RoundToFloor(number/10000000.0/1000.0)/100.0, output, sizeof(output));
+			Format(output, sizeof(output), "%.4sT", output);
 		}
 		case 14:
 		{
-			FloatToString(RoundToFloor(number/10000000000.0)/100.0, output, sizeof(output));
-			Format(output, sizeof(output), "%.5s", output);
-			StrCat(output, sizeof(output), "T");
+			FloatToString(RoundToFloor(number/10000000.0/1000.0)/100.0, output, sizeof(output));
+			Format(output, sizeof(output), "%.5sT", output);
 		}
 		case 15:
 		{
-			FloatToString(RoundToFloor(number/10000000000.0)/100.0, output, sizeof(output));
-			Format(output, sizeof(output), "%.6s", output);
-			StrCat(output, sizeof(output), "T");
+			FloatToString(RoundToFloor(number/10000000.0/1000.0)/100.0, output, sizeof(output));
+			Format(output, sizeof(output), "%.6sT", output);
 		}
 		default:
 		{
