@@ -937,7 +937,7 @@ public void TF2_OnConditionRemoved(client, TFCond:cond)
 						applyAfterburn(i, client, CWeapon, damage);
 					}
 				}else{
-					EntityExplosion(client, damage, 500.0, grenadevec, 1, _, _, _, DMG_ALWAYSGIB + DMG_DISSOLVE, secondary);
+					EntityExplosion(client, damage, 500.0, grenadevec, 1, _, _, _, DMG_ALWAYSGIB | DMG_DISSOLVE, secondary);
 				}
 			}
 		}
@@ -1338,7 +1338,7 @@ public Action:Event_PlayerDeath(Handle event, const char[] name, bool:dontBroadc
 
 	CancelClientMenu(client);
 
-	if(IsValidClient3(attack)){
+	if(IsValidClient3(attack) && attack != client){
 		int weapon = GetEntPropEnt(attack, Prop_Send, "m_hActiveWeapon");
 		if(IsValidWeapon(weapon)){
 			float fireworksChance = GetAttribute(weapon, "fireworks chance", 0.0)
@@ -1348,15 +1348,12 @@ public Action:Event_PlayerDeath(Handle event, const char[] name, bool:dontBroadc
 				EntityExplosion(attack, 100.0*TF2_GetDPSModifiers(attack, weapon)*fireworksChance, 400.0, position, _, _, client);
 			}
 		}
-		int secondary = TF2Util_GetPlayerLoadoutEntity(attack, 1);
-		if(IsValidWeapon(secondary)){
-			int damagetype = GetEventInt(event, "damagebits");
-			if(damagetype == DMG_ALWAYSGIB + DMG_DISSOLVE){
-				float painTrainActive = GetAttribute(secondary, "chain charge on kill", 0.0)
-				if(painTrainActive){
-					SetEntPropFloat(attack, Prop_Send, "m_flChargeMeter", 100.0);
-					TF2_AddCondition(attack, TFCond_Charging);
-				}
+		int damagetype = GetEventInt(event, "damagebits");
+		if(damagetype & DMG_ALWAYSGIB | DMG_DISSOLVE){
+			float painTrainActive = TF2Attrib_HookValueFloat(0.0, "chain_charge_on_kill", attack);
+			if(painTrainActive){
+				SetEntPropFloat(attack, Prop_Send, "m_flChargeMeter", 100.0);
+				TF2_AddCondition(attack, TFCond_Charging);
 			}
 		}
 	}
