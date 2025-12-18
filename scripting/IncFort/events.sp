@@ -999,6 +999,7 @@ public OnEntityCreated(entity, const char[] classname)
 		{
 			RequestFrame(ProjSpeedDelay, reference);
 			RequestFrame(PrecisionHoming, reference);
+			RequestFrame(FragmentProperties, reference);
 			SDKHook(entity, SDKHook_Touch, FixProjectileCollision);
 		}
 		else if(StrEqual(classname, "tf_projectile_arrow") || StrEqual(classname, "tf_projectile_healing_bolt"))
@@ -1008,6 +1009,7 @@ public OnEntityCreated(entity, const char[] classname)
 			RequestFrame(ExplosiveArrow, reference);
 			RequestFrame(ChangeProjModel, reference);
 			RequestFrame(PrecisionHoming, reference);
+			RequestFrame(FragmentProperties, reference);
 			CreateTimer(6.0, SelfDestruct, reference);
 			CreateTimer(0.1, ArrowThink, reference, TIMER_REPEAT|TIMER_FLAG_NO_MAPCHANGE);
 			SDKHook(entity, SDKHook_Touch, FixProjectileCollision);
@@ -1026,6 +1028,7 @@ public OnEntityCreated(entity, const char[] classname)
 			RequestFrame(monoculusBonus, reference);
 			RequestFrame(PrecisionHoming, reference);
 			RequestFrame(meteorCollisionCheck, reference);
+			RequestFrame(FragmentProperties, reference);
 			SDKHook(entity, SDKHook_Touch, FixProjectileCollision);
 		}
 		if(StrEqual(classname, "tf_projectile_stun_ball") || StrEqual(classname, "tf_projectile_ball_ornament") || StrEqual(classname, "tf_projectile_cleaver"))
@@ -1035,6 +1038,7 @@ public OnEntityCreated(entity, const char[] classname)
 			RequestFrame(PrecisionHoming, reference);
 			RequestFrame(SetWeaponOwner, reference);
 			RequestFrame(ChangeProjModel, reference);
+			RequestFrame(FragmentProperties, reference);
 			CreateTimer(1.5, SelfDestruct, reference);
 		}
 		if(StrEqual(classname, "tf_projectile_pipe"))
@@ -1044,6 +1048,14 @@ public OnEntityCreated(entity, const char[] classname)
 			RequestFrame(CheckGrenadeMines, reference);
 			RequestFrame(ChangeProjModel, reference);
 			RequestFrame(PrecisionHoming, reference);
+			RequestFrame(FragmentProperties, reference);
+		}
+		if(StrEqual(classname, "tf_projectile_pipe_remote"))
+		{
+			RequestFrame(projGravity, reference);
+			RequestFrame(CheckGrenadeMines, reference);
+			RequestFrame(ChangeProjModel, reference);
+			RequestFrame(FragmentProperties, reference);
 		}
 		if(StrEqual(classname, "tf_projectile_sentryrocket"))
 		{
@@ -1094,6 +1106,7 @@ public OnEntityDestroyed(entity)
 	homingDelay[entity] = 0.0;
 	homingAimStyle[entity] = -1;
 	projectileDamage[entity] = 0.0;
+	projectileFragCount[entity] = 0;
 	
 	//isProjectileSlash[entity][0] = 0.0;
 	//isProjectileSlash[entity][1] = 0.0;
@@ -2719,8 +2732,7 @@ public MRESReturn OnBlastExplosion(int entity, Handle hReturn){
 		}
 	}
 
-	float fragCount = TF2Attrib_HookValueFloat(0.0, "explosive_frag_count", CWeapon);
-	for(int i = 0;i<RoundToNearest(fragCount);++i)
+	for(int i = 0;i<projectileFragCount[entity];++i)
 	{
 		int iEntity = CreateEntityByName("tf_projectile_syringe");
 		if (!IsValidEdict(iEntity)) 

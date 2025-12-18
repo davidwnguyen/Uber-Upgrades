@@ -5616,7 +5616,7 @@
 		"1570"
 		{
 			"name"		"explosive fragment count"
-			"ref"		"Explosion Fragment Count"
+			"ref"		"explosive fragment count"
 			"attr_class"	"explosive_frag_count"
 			"display"		"%.0f"
 			"cost"		"2500"
@@ -5629,7 +5629,7 @@
 		"1571"
 		{
 			"name"		"explosive_fragment_damage"
-			"ref"		"Fragment Explosion Base Damage"
+			"ref"		"explosive_fragment_damage"
 			"attr_class"	"explosive_frag_damage"
 			"display"		"%.0f"
 			"cost"		"600"

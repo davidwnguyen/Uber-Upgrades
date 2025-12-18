@@ -3083,6 +3083,21 @@ PrecisionHoming(entity)
 		}
     } 
 }
+FragmentProperties(entity) 
+{
+	entity = EntRefToEntIndex(entity);
+    if(IsValidEdict(entity)) 
+    { 
+		int client = getOwner(entity);
+		if(IsValidClient3(client))
+		{
+			int CWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
+			if(IsValidWeapon(CWeapon)) {
+				projectileFragCount[entity] = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "explosive_frag_count", CWeapon));
+			}
+		}
+    } 
+}
 ProjSpeedDelay(entity) 
 {
 	entity = EntRefToEntIndex(entity);

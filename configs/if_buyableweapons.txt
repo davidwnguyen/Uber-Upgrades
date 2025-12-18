@@ -418,4 +418,19 @@
 		"falling velocity to damage bonus"	"0.5"
 		"provide on active"	"1.0"
 	}
+	"Carpet Bomber"
+	{
+		"index"			"228"
+		"weapon_class"	"tf_weapon_rocketlauncher"
+		"weapon_menu"	"tf_weapon_rocketlauncher"
+		"class"			"soldier"
+		"description"	"Has 3x slower fire rate.\nOn Explosion: fragments out 35 explosive frags,\ndealing 10 base damage each.\nConverts fire rate into damage bonus."
+		"cost"			"15000.0"
+		"Converts Firerate to Damage"	"1"
+		"weapon fire rate"		"3"
+		"explosive fragment count"	"35"
+		"explosive_fragment_damage"	"10"
+		"paintkit_proto_def_index"	"426"
+		"set_item_texture_wear"		"0.0"
+	}
 }

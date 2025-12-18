@@ -852,10 +852,10 @@
 	"Increases Haste Buff Duration"{
 		"en"		"Increases Haste Buff Duration"
 	}
-	"Explosion Fragment Count"{
+	"explosive fragment count"{
 		"en"		"Explosion Fragment Count"
 	}
-	"Fragment Explosion Base Damage"{
+	"explosive_fragment_damage"{
 		"en"		"Fragment Explosion Base Damage"
 	}
 	"Stealth On Backstab"{

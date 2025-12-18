@@ -467,6 +467,7 @@ bool isProjectileFireball[MAXENTITIES];
 bool isAimlessProjectile[MAXENTITIES];
 float projectileDamage[MAXENTITIES];
 float entitySpawnTime[MAXENTITIES];
+int projectileFragCount[MAXENTITIES];
 /*-- homing shit --*/
 float homingRadius[MAXENTITIES];
 float homingDelay[MAXENTITIES];

@@ -1972,8 +1972,8 @@
 		}
 		"Specialty Upgrades"
 		{
-			"0"		"Explosion Fragment Count"
-			"1"		"Fragment Explosion Base Damage"
+			"0"		"explosive fragment count"
+			"1"		"explosive_fragment_damage"
 			"2"		"Bleed Per Hit(E)"
 			"3"		"Mad Milk On Hit Duration (MadMilk)"
 			"4"		"Afterburn Immunity Duration"
