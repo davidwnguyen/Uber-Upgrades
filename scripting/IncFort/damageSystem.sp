@@ -1190,7 +1190,7 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 		if(isVictimPlayer && attacker != victim)
 		{
 			float minicritVictimOnHit = TF2Attrib_HookValueFloat(0.0, "mark_for_death_on_hit_duration", weapon);
-			if(minicritVictimOnHit > 0 && miniCritStatusVictim[victim]-GetGameTime() > minicritVictimOnHit)
+			if(minicritVictimOnHit > 0 && minicritVictimOnHit > miniCritStatusVictim[victim]-GetGameTime())
 				miniCritStatusVictim[victim] = GetGameTime()+minicritVictimOnHit;
 			
 			float rageOnHit = TF2Attrib_HookValueFloat(0.0, "rage_on_hit", weapon);

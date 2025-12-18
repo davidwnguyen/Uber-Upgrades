@@ -22,7 +22,6 @@ public Action TF2_OnTakeHealthPre(int client, float &flAmount, int &flags){
 float GetPlayerHealingMultiplier(client){
 	float multiplier = 1.0;
 	float playerOrigin[3];
-	additionalstartmoney = STAGEONE;
 
 	GetClientAbsOrigin(client, playerOrigin);
 

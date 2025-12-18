@@ -1363,11 +1363,11 @@ DisplayItemChange(client,itemidx)
 		}
 		case 460:
 		{
-			ChangeString = "The Enforcer | Takes 2 ammo per shot. 2x fire rate. 7x slower reload speed. +20% conditional status pierce.";
+			ChangeString = "The Enforcer | Rapidly fires a two round burst. +20% conditional status pierce. Converts fire rate into damage.";
 		}
 		case 525:
 		{
-			ChangeString = "The Diamondback | Converts fire rate to damage. Fires 3 round bursts and has a slight delay afterwards.";
+			ChangeString = "The Diamondback | Converts fire rate to damage.";
 		}
 		//Spy Melees
 		case 356:
@@ -1747,7 +1747,7 @@ refreshUpgrades(client, slot)
 				float precisionPowerupValue = TF2Attrib_GetValue(precisionPowerup);
 				if(precisionPowerupValue == 1){
 					TF2Attrib_SetByName(client,"weapon spread bonus", 0.05);
-					TF2Attrib_SetByName(client,"sniper charge per sec", 1.75);
+					TF2Attrib_SetByName(client,"sniper charge per sec", 2.0);
 					TF2Attrib_SetByName(client,"blast dmg to self increased", 0.001);
 					if(current_class[client] == TFClass_DemoMan)
 					{

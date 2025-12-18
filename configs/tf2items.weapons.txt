@@ -140,8 +140,6 @@
 		{
 			"preserve_attributes"	"1"
 			"1"				"Converts Firerate to Damage; 1.0"
-			"2"				"burst fire count;-3"
-			"3"				"burst fire rate mult;2"
 		}
 		"127"//Direct Hit
 		{
@@ -279,11 +277,12 @@
 		"460" //Enforcer
 		{
 			"preserve_attributes"	"1"
-			"1"				"mod ammo per shot;2.0"
-			"2"				"fire rate penalty HIDDEN;0.5"
-			"3"				"reload time increased hidden;7.0"
+			"1"				"burst fire count;-2"
+			"2"				"burst fire rate mult;8"
+			"3"				"weapon fire rate;0.2"
 			"4"				"damage penetrates reductions;0.2"
-			"5"				"provide on active;1.0"
+			"5"				"Converts Firerate to Damage; 1.0"
+			"6"				"provide on active;1.0"
 		}
 		"45,1078" //Force a Nature
 		{
