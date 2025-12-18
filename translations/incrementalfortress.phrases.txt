@@ -1,5 +1,8 @@
 "Phrases"
 {
+	"sentry amount"{
+		"en"		"Maximum Sentry Count"
+	}
 	"Frostborn Wrath"{
 		"en"		"Frostborn Wrath"
 	}
