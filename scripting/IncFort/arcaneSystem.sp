@@ -1155,7 +1155,7 @@ public Action:SoothingSunlight(Handle timer, client)
 
 		float AmountHealing = TF2_GetMaxHealth(i) * ArcanePower[client];
 		AddPlayerHealth(i, RoundToCeil(AmountHealing), overhealMax[spellLevel] * ArcanePower[client], true, client);
-		TF2_AddCondition(i,TFCond_MegaHeal,incHealDuration[spellLevel]);
+		TF2_AddCondition(i,TFCond_MegaHeal,incHealDuration[spellLevel], client);
 
 		CreateParticleEx(i, "utaunt_glitter_parent_gold", 1, _, _, incHealDuration[spellLevel]);
 	}

@@ -279,7 +279,7 @@ public Action:ProjectedHealingCollision(entity, client)
 				if(GetVectorDistance(projvec,VictimPos, true) <= 1000000)
 				{
 					AddPlayerHealth(i, RoundToCeil(AmountHealing), 2.0 * ArcanePower[owner], true, owner);
-					TF2_AddCondition(i,TFCond_MegaHeal,3.0);
+					TF2_AddCondition(i,TFCond_MegaHeal,3.0, owner);
 				}
 			}
 		}

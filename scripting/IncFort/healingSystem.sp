@@ -22,6 +22,7 @@ public Action TF2_OnTakeHealthPre(int client, float &flAmount, int &flags){
 float GetPlayerHealingMultiplier(client){
 	float multiplier = 1.0;
 	float playerOrigin[3];
+	additionalstartmoney = STAGEONE;
 
 	GetClientAbsOrigin(client, playerOrigin);
 
@@ -32,9 +33,9 @@ float GetPlayerHealingMultiplier(client){
 		else{
 			int inflictor = TF2Util_GetPlayerConditionProvider(client, TFCond_Bleeding);
 			if(IsValidClient3(inflictor) && TF2Attrib_HookValueFloat(0.0, "knockout_powerup", client) == 2)
-				multiplier *= 0.1667;
+				multiplier /= 1+5*TF2Attrib_HookValueFloat(1.0, "debuff_magnitude_mult", inflictor);
 			else
-				multiplier *= 0.5;
+				multiplier /= 1+1*TF2Attrib_HookValueFloat(1.0, "debuff_magnitude_mult", inflictor);
 		}
 	}
 	if(TF2_IsPlayerInCondition(client, TFCond_MegaHeal)){
@@ -51,6 +52,10 @@ float GetPlayerHealingMultiplier(client){
 				continue;
 
 			effectMult += GetAttribute(healingWeapon, "ubercharge effectiveness", 1.0)-1.0;
+		}
+		int inflictor = TF2Util_GetPlayerConditionProvider(client, TFCond_MegaHeal);
+		if(IsValidClient3(inflictor)) {
+			effectMult += TF2Attrib_HookValueFloat(1.0, "buff_magnitude_mult", inflictor)-1.0;
 		}
 		multiplier *= 1.0 + effectMult;
 	}
@@ -74,7 +79,7 @@ float GetPlayerHealingMultiplier(client){
 	if(TF2Attrib_HookValueFloat(0.0, "regeneration_powerup", client) == 3.0)
 		multiplier *= 1.6;
 	if(hasBuffIndex(client, Buff_Stronghold)){
-		multiplier *= 1.33;
+		multiplier *= 1 + 0.33 * playerBuffs[client][getBuffInArray(client, Buff_Stronghold)].severity;
 	}
 	if(hasBuffIndex(client, Buff_Leech)){
 		multiplier /= 1 + playerBuffs[client][getBuffInArray(client, Buff_Leech)].severity;

@@ -523,7 +523,7 @@ public Action:Timer_Every100MS(Handle timer)
 							{
 								AddPlayerHealth(client, RoundToCeil(TF2_GetMaxHealth(client) * 0.25), 3.0, true, client);
 								TF2_RemoveCondition(client,TFCond_NoTaunting_DEPRECATED);
-								TF2_AddCondition(client, TFCond_MegaHeal, 2.0);
+								TF2_AddCondition(client, TFCond_MegaHeal, 2.0, client);
 								
 								if(GetEntProp(e, Prop_Data, "m_bAutoMaterialize"))
 								{
