@@ -339,7 +339,7 @@
 		"damage bonus per status effect on self"	"0.05"
 		"charge explosion ignites instead"			"1"
 	}
-	"Scaling Cracklers"
+	"Scalding Cracklers"
 	{
 		"index"			"200"
 		"weapon_class"	"tf_weapon_scattergun"

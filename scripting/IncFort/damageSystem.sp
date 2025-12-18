@@ -391,7 +391,6 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 				}
 
 				BleedBuildup[victim] += bleedAdd;
-
 				checkBleed(victim, attacker, weapon);
 			}
 			float radiationAmount = TF2Attrib_HookValueFloat(0.0, "radiation_buildup_onhit", weapon);

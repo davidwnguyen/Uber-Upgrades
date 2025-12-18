@@ -973,7 +973,7 @@
 		"Special Tweaks"
 		{
 			"0"		"Explosive Bullets(P)"
-			"1"		"Lacerating Rounds"
+			"1"		"Frostborn Wrath"
 		}
 	}
 	"sprweap2"
@@ -1001,7 +1001,7 @@
 		"Special Tweaks"
 		{
 			"0"		"Explosive Bullets(P)"
-			"1"		"Lacerating Rounds"
+			"1"		"Frostborn Wrath"
 		}
 	}
 	"sprweap1"
@@ -1451,7 +1451,7 @@
 		"Special Tweaks"
 		{
 			"0"		"Explosive Bullets(P)"
-			"1"		"Lacerating Rounds"
+			"1"		"Frostborn Wrath"
 		}
 	}
 	"proj_scattergun"
@@ -1478,7 +1478,7 @@
 		}
 		"Special Tweaks"
 		{
-			"0"		"Lacerating Rounds"
+			"0"		"Frostborn Wrath"
 		}
 	}
 	"scoweap2"
@@ -1506,7 +1506,7 @@
 		"Special Tweaks"
 		{
 			"0"		"Explosive Bullets(P)"
-			"1"		"Lacerating Rounds"
+			"1"		"Frostborn Wrath"
 		}
 	}
 	"hitmans"
@@ -2202,6 +2202,7 @@
 		"Special Tweaks"
 		{
 			"0"		"Lacerating Rounds"
+			"1"		"Frostborn Wrath"
 		}
 	}
 	"fireball"
@@ -2266,7 +2267,7 @@
 		"Special Tweaks"
 		{
 			"0"		"Explosive Bullets(P)"
-			"1"		"Lacerating Rounds"
+			"1"		"Frostborn Wrath"
 		}
 	}
 	"ball"

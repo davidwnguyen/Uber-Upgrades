@@ -1,5 +1,8 @@
 "Phrases"
 {
+	"Frostborn Wrath"{
+		"en"		"Frostborn Wrath"
+	}
 	"grenade bounce speed"{
 		"en"		"Grenade Bounce Speed"
 	}

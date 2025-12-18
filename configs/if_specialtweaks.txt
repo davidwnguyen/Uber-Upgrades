@@ -76,14 +76,14 @@
 			"projectile spread angle penalty"		"2"
 			"fire rate penalty(unremoveable)"		"50.0"
 			"damage bonus HIDDEN(b)"		"1.0"
-			"mult crit dmg"				"7.5"
+			"mult crit dmg"				"3.5"
 		}
 		"Homing Flares"
 		{
 			"gamestage"						"1"
 			"restriction"					"1"
 			"projectile homing radius"		"200.0"
-			"mult crit dmg"					"7.5"
+			"mult crit dmg"					"2.5"
 			"Ability : Homing Flares"		"1"
 		}
 		"Explosive Bullets(P)"
@@ -110,7 +110,16 @@
 			"restriction"					"1"
 			"bleeding duration"				"4"
 			"Bleed Per Hit"					"2"
-			"mult crit dmg"				"6.0"
+			"mult crit dmg"				"5.0"
+		}
+		"Frostborn Wrath"
+		{
+			"gamestage"						"1"
+			"restriction"					"1"
+			"accuracy scales damage"		"1"
+			"ammo conservation"				"5"
+			"damage causes freeze"			"120"
+			"mult crit dmg"					"3.0"
 		}
 		"Scorchiest Shot"
 		{
@@ -132,7 +141,7 @@
 			"restriction"					"1"
 			"additive piercing damage"		"100"
 			"damage causes freeze"			"120"
-			"mult crit dmg"				"10.0"
+			"mult crit dmg"				"5.0"
 		}
 		"Fireball Volley"
 		{
@@ -319,7 +328,7 @@
 			"gamestage"						"1"
 			"restriction"					"1"
 			"fireworks chance"				"3.5"
-			"mult crit dmg"				"7"
+			"mult crit dmg"				"3"
 			"damage bonus HIDDEN(b)"		"3"
 		}
 		"Splintering Wasps"
