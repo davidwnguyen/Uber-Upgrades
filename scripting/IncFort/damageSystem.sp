@@ -1063,25 +1063,27 @@ public Action:OnTakeDamagePre_Sentry(victim, &attacker, &inflictor, float &damag
 
 	if(IsValidClient3(attacker) && victim != attacker)
 	{
-		damage = genericPlayerDamageModification(victim, attacker, inflictor, damage, weapon, damagetype, damagecustom);
-		if(IsValidWeapon(weapon))
-		{
-			if(TF2Util_GetWeaponSlot(weapon) == TFWeaponSlot_Melee && TF2Attrib_HookValueFloat(0.0, "knockout powerup", attacker) == 1)
-				damage *= 1.35;
-			
-			if(weaponFireRate[weapon] > TICKRATE)
+		if(!(currentDamageType[attacker].second & DMG_IGNOREHOOK)){
+			damage = genericPlayerDamageModification(victim, attacker, inflictor, damage, weapon, damagetype, damagecustom);
+			if(IsValidWeapon(weapon))
 			{
-				damage *= 1+(weaponFireRate[weapon]-TICKRATE)/TICKRATE;
-			}
-			if(damagecustom == TF_CUSTOM_PLASMA_CHARGED || damagecustom == TF_CUSTOM_PLASMA){
-				if(!GetAttribute(weapon, "energy weapon no hurt building", 1.0)){
-					damage *= 5.0;
+				if(TF2Util_GetWeaponSlot(weapon) == TFWeaponSlot_Melee && TF2Attrib_HookValueFloat(0.0, "knockout powerup", attacker) == 1)
+					damage *= 1.35;
+				
+				if(weaponFireRate[weapon] > TICKRATE)
+				{
+					damage *= 1+(weaponFireRate[weapon]-TICKRATE)/TICKRATE;
+				}
+				if(damagecustom == TF_CUSTOM_PLASMA_CHARGED || damagecustom == TF_CUSTOM_PLASMA){
+					if(!GetAttribute(weapon, "energy weapon no hurt building", 1.0)){
+						damage *= 5.0;
+					}
 				}
 			}
-		}
-		if(TF2_IsPlayerMinicritBuffed(attacker))
-		{
-			damage *= 1.4;
+			if(TF2_IsPlayerMinicritBuffed(attacker))
+			{
+				damage *= 1.4;
+			}
 		}
 		if(GetEntProp(victim, Prop_Send, "m_bDisabled") == 1)
 		{
