@@ -762,7 +762,10 @@ public MenuHandler_SpecialUpgradeChoice(Handle menu, MenuAction:action, client, 
 					int tmp_ref_idx = upgrades_ref_to_idx[client][slot][upgrade_choice]
 					if (tmp_ref_idx != 20000)
 					{
-						currentupgrades_val[client][slot][tmp_ref_idx] = upgrades[upgrade_choice].i_val;
+						if(currentupgrades_i[client][slot][tmp_ref_idx] != 0.0)
+							currentupgrades_val[client][slot][tmp_ref_idx] = currentupgrades_i[client][slot][tmp_ref_idx];
+						else
+							currentupgrades_val[client][slot][tmp_ref_idx] = upgrades[upgrade_choice].i_val;
 					}
 				}
 				GiveNewUpgradedWeapon_(client, slot)
