@@ -881,7 +881,6 @@ CastInferno(client, attuneSlot)
 			continue;
 
 		CreateParticleEx(i, "dragons_fury_effect_parent", 1, _, _, 0.15*maxHits[spellLevel]);
-		CreateParticleEx(i, "utaunt_glowyplayer_orange_glow", 1);
 		DOTStock(i,client,DMGDealt,-1,DMG_BURN,maxHits[spellLevel],1.0,0.15,true);
 	}
 }

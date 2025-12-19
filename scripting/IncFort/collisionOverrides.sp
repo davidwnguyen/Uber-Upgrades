@@ -119,8 +119,6 @@ public Action:OnSplittingThunderCollision(entity, client)
 	float ProjectileDamage = scaling[spellLevel] * ArcaneDamage[owner];
 	EntityExplosion(owner, ProjectileDamage, 300.0, origin, _, _, entity);
 	RemoveEntity(entity);
-
-	SDKUnhook(entity, SDKHook_Touch, OnSplittingThunderCollision);
 	return Plugin_Continue;
 }
 public Action:OnStartTouchSunlightSpear(entity, other)
@@ -585,9 +583,6 @@ public Action:OnCollisionBoomerang(entity, client)
 	if(IsValidForDamage(client))
 	{
 		int owner = GetEntPropEnt(entity, Prop_Data, "m_hThrower");
-		if(owner == client)
-			{RemoveEntity(entity);return Plugin_Handled;}
-
 		if(IsValidClient3(owner) && IsOnDifferentTeams(owner,client))
 		{
 			int CWeapon = GetEntPropEnt(owner, Prop_Send, "m_hActiveWeapon");
@@ -612,8 +607,6 @@ public Action:OnCollisionBoomerang(entity, client)
 		delayedResetVelocity(entity, ProjVelocity);
 	}
 	SDKUnhook(entity, SDKHook_Touch, OnCollisionBoomerang);
-	if(!client)
-		RemoveEntity(entity);
 	return Plugin_Stop;
 }
 public Action:OnStartTouchPiercingRocket(entity, other)
@@ -1098,7 +1091,7 @@ public Action:OnTouchChaos(entity, other)
 			GetEntPropVector(entity, Prop_Data, "m_vecOrigin", vOrigin);
 			CreateParticleEx(entity, "heavy_ring_of_fire", 0, 0, vOrigin);
 			vOrigin[2]+= 30.0;
-			EntityExplosion(owner, 80.0, 500.0, vOrigin, 0,_,entity,1.0,DMG_GENERIC,CWeapon,0.75, _, _, _, DMG_ARCANE|DMG_ARCANESCALING);
+			EntityExplosion(owner, TF2_GetDamageModifiers(owner,CWeapon) * 25.0, 500.0, vOrigin, 0,_,entity,1.0,DMG_GENERIC,CWeapon,0.75);
 			RemoveEntity(entity);
 		}
 	}

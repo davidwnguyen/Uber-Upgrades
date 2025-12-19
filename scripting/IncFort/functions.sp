@@ -1105,11 +1105,11 @@ DisplayItemChange(client,itemidx)
 		//Scout Melee
 		case 44:
 		{
-			ChangeString = "The Sandman | Ball base damage increased to 40.";
+			ChangeString = "The Sandman | Ball base damage increased to 35.";
 		}
 		case 648:
 		{
-			ChangeString = "The Wrap Assassin | Ball base damage increased to 40. Fires balls on primary fire.";
+			ChangeString = "The Wrap Assassin | Ball base damage increased to 35. Fires balls on primary fire.";
 		}
 		case 349:
 		{
@@ -1122,7 +1122,7 @@ DisplayItemChange(client,itemidx)
 		}
 		case 228,1085:
 		{
-			ChangeString = "The Black Box | Applies afterburn to enemies. +1 rocket per shot but 2x slower fire rate.";
+			ChangeString = "The Black Box | +1 rocket per shot but 2x slower fire rate.";
 		}
 		case 414:
 		{
@@ -3268,7 +3268,7 @@ GivePowerupDescription(int client, char[] name, int amount){
 		if(amount == 2){
 			CPrintToChat(client, "{community}Berserk Powerup {default}| {lightcyan}Revenge instead becomes passive that drains by -7%%/s. Up to 1.5x healing effectiveness when meter is at 100%%. Effects are scaled to %%.");
 		}else if(amount == 3){
-			CPrintToChat(client, "{community}Enraged Powerup {default}| {lightcyan}Every kill gives +6%% HP heal. Every 80 kills, you can turn enraged, which gives:\n+100%% fire rate, full crits, and 0.4x damage taken.");
+			CPrintToChat(client, "{community}Enraged Powerup {default}| {lightcyan}Every kill gives +6%% HP heal. Every 10 kills, you can turn enraged, which gives:\n+100%% fire rate, full crits, and 0.4x damage taken.");
 		}else{
 			CPrintToChat(client, "{community}Revenge Powerup {default}| {lightcyan}66%% of damage taken is filled to revenge meter. 0.8x damage taken. On activation: +50%% dmg, 100%% crits, +33%% fire rate, and 35%% defense buff.");
 		}
@@ -3960,6 +3960,7 @@ stock float TF2_GetDPSModifiers(client,weapon, bool CountReloadModifiers = true,
 			dpsMult /= TF2Attrib_HookValueFloat(1.0, "mult_postfiredelay", weapon);
 			dpsMult /= GetAttribute(weapon, "halloween fire rate bonus");
 			dpsMult /= GetAttribute(weapon, "mult_item_meter_charge_rate");
+			dpsMult *= GetAttribute(weapon, "mult projectile count");
 			//If their weapon doesn't have a clip, reload rate also affects fire rate.
 			if(CountReloadModifiers)
 			{
@@ -4048,8 +4049,6 @@ stock float TF2_GetDamageModifiers(client,weapon,bool status=true, bool bullets_
 			if(DPSMult10 != Address_Null) {
 			dpsMult *= TF2Attrib_GetValue(DPSMult10);
 			}
-
-			dpsMult *= GetAttribute(weapon, "mult projectile count", 1.0);
 
 			float damageBonus = TF2Attrib_HookValueFloat(1.0, "dmg_outgoing_mult", weapon);
 			dpsMult *= damageBonus;

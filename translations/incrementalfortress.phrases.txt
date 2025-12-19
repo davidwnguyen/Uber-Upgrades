@@ -2013,7 +2013,7 @@
 	"hp scales move speed"{
 		"en"		"Health Scales Speed"
 	}
-	"percent of hp healed on kill"{
+	"restore health on kill"{
 		"en"		"Health Restored on Kill"
 	}
 	"mod see enemy health"{

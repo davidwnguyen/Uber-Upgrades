@@ -13,6 +13,7 @@
 		"Ability : Corpse Piler" "268435456"
 		"Converts Firerate to Damage"	"1"
 		"weapon fire rate"	"1.5"
+		"restore health on kill"	"5"
 	}
 	"Moonveil"
 	{
@@ -27,6 +28,7 @@
 		"Ability : Transient Moonlight"	"134217728"
 		"weapon fire rate"	"1.33"
 		"Converts Firerate to Damage"	"1"
+		"restore health on kill"	"5"
 	}
 	"Repeater Crossbow"
 	{
@@ -83,12 +85,12 @@
 		"weapon_class"	"tf_weapon_cleaver"
 		"weapon_menu"	"menuFireball"
 		"class"			"scout"
-		"description"	"Shoots a fireball that deals 80 arcane scaling, but has 50% falloff.\nInfinite ammo."
+		"description"	"Shoots a fireball that deals 25 damage.\nConverts fire rate into damage bonus.\nInfinite ammo."
 		"cost"			"50000.0"
 		"Ability : Chaos Bed Vestiges"	"11"
+		"Converts Firerate to Damage"	"1"
 		"override projectile type"	"43.0"
 		"Infinite Ammo Count"	"100.0"
-		"fire rate penalty HIDDEN" "4.0"
 	}
 	"Shredder"
 	{

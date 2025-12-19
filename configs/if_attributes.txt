@@ -3239,7 +3239,7 @@
 		"255"
 		{
 			"name"		"restore health on kill"
-			"ref"		"percent of hp healed on kill"
+			"ref"		"restore health on kill"
 			"display"		"%.1f٪"
 			"cost"		"0"
 			"value"		"10.00"
@@ -4766,14 +4766,14 @@
 		}
 		"1344"
 		{
-			"name"		"disguise on backstab"
+			"name"		"sentry ammo regeneration"
 			"ref"		"Sentry Ammo Regeneration"
+			"attr_class"	"sentry_ammo_regeneration"
 			"display"		"%.0f"
-			"cost"		"225"
-			"increase_ratio"	"0.1"
+			"cost"		"1300"
 			"value"		"1"
 			"init"		"0"
-			"max"		"1000"
+			"max"		"5"
 		}
 		"1345"
 		{
@@ -5908,7 +5908,7 @@
 			"increase_ratio"	"0.3"
 			"value"		"1"
 			"init"		"1.0"
-			"max"		"10"
+			"max"		"3"
 		}
 		"1596"
 		{

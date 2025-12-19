@@ -449,8 +449,8 @@ public Action:Timer_Every100MS(Handle timer)
 			}
 			else if(TF2Attrib_HookValueFloat(0.0, "revenge_powerup", client) == 3)
 			{
-				if(enragedKills[client] < 80)
-					Format(StatusEffectText, sizeof(StatusEffectText),"Enraged: %d kills remaining", 80-enragedKills[client]);
+				if(enragedKills[client] < 10)
+					Format(StatusEffectText, sizeof(StatusEffectText),"Enraged: %d kills remaining", 10-enragedKills[client]);
 				else
 					Format(StatusEffectText, sizeof(StatusEffectText),"Enraged: READY (Crouch + Mouse3)");
 			}
@@ -1216,96 +1216,58 @@ public Action:Timer_EveryTenSeconds(Handle timer)
 	theBoxness(client, weapon, fOrigin, fAngles);
 	return Plugin_Stop;
 }*/
-public Action:BuildingRegeneration(Handle timer, any:entity) 
+public Action BuildingRegeneration(Handle timer, int entity) 
 {
 	entity = EntRefToEntIndex(entity)
-	if(!IsValidEdict(entity) || !IsValidEdict(entity))
-	{
-		return;
-	}
+	if(!IsValidEdict(entity))
+		return Plugin_Stop;
+
 	int owner = GetEntPropEnt(entity, Prop_Send, "m_hBuilder"); 
-	if(!IsValidEdict(owner) || !IsValidEdict(owner))
-	{
-		return;
-	}
-	if(!IsClientInGame(owner))
-	{
-		return;
-	}
+	if(!IsValidClient3(owner))
+		return Plugin_Continue;
+
 	if(GetEntProp(entity, Prop_Send, "m_bDisabled") == 1)
-	{
-		return;
-	}
+		return Plugin_Continue;
+	
 	int BuildingMaxHealth = GetEntProp(entity, Prop_Send, "m_iMaxHealth");
 	int BuildingHealth = GetEntProp(entity, Prop_Send, "m_iHealth");
-	if(BuildingMaxHealth != BuildingHealth)
+	if(BuildingHealth < BuildingMaxHealth)
 	{
-		int mode = 2;
-		if(mode == 1)
+		float BuildingRegen = GetAttribute(owner, "disguise on backstab", 0.0);
+		if(BuildingRegen > 0.0)
 		{
-			int pda = TF2Util_GetPlayerLoadoutEntity(owner,5);
-			Address BuildingRegen = TF2Attrib_GetByName(pda, "Projectile speed decreased");
-			if(BuildingRegen != Address_Null)
+			int Regeneration = RoundToNearest(BuildingRegen/3);
+			if((Regeneration + BuildingHealth) > BuildingMaxHealth)
 			{
-				float buildingHPRegen = TF2Attrib_GetValue(BuildingRegen);
-				int Regeneration = RoundToNearest(((buildingHPRegen*BuildingMaxHealth)/100.0)/7.5);
-				if(BuildingHealth < BuildingMaxHealth)
-				{
-					if((Regeneration + BuildingHealth) > BuildingMaxHealth)
-					{
-						AddEntHealth(entity, BuildingMaxHealth - BuildingHealth)
-					}
-					else
-					{
-						AddEntHealth(entity, Regeneration)
-					}
-				}
+				AddEntHealth(entity, BuildingMaxHealth - BuildingHealth)
 			}
-		}
-		if(mode == 2)
-		{
-			Address BuildingRegen = TF2Attrib_GetByName(owner, "disguise on backstab");
-			if(BuildingRegen != Address_Null)
+			else
 			{
-				int Regeneration = RoundToNearest(TF2Attrib_GetValue(BuildingRegen)/3);
-				if(BuildingHealth < BuildingMaxHealth)
-				{
-					if((Regeneration + BuildingHealth) > BuildingMaxHealth)
-					{
-						AddEntHealth(entity, BuildingMaxHealth - BuildingHealth)
-					}
-					else
-					{
-						AddEntHealth(entity, Regeneration)
-					}
-				}
+				AddEntHealth(entity, Regeneration)
 			}
 		}
 	}
-	int sentrynumber = EntRefToEntIndex(entity)
-	char SentryObject[128];
-	GetEdictClassname(sentrynumber, SentryObject, sizeof(SentryObject));
-	if (StrEqual(SentryObject, "obj_sentrygun"))
+	char classname[32];
+	GetEdictClassname(entity, classname, sizeof(classname));
+	if (StrEqual(classname, "obj_sentrygun"))
 	{
 		int pda = TF2Util_GetPlayerLoadoutEntity(owner,5);
+		if(!IsValidWeapon(pda))
+			return Plugin_Continue;
+
 		int sentryLevel = GetEntLevel(entity);
 		int shells = GetEntProp(entity, Prop_Send, "m_iAmmoShells");
 		int rockets = GetEntProp(entity, Prop_Send, "m_iAmmoRockets");
-		Address AmmoRegen = TF2Attrib_GetByName(pda, "disguise on backstab");
-		float maxAmmoMultiplier = 1.0;
-		Address ammoMult = TF2Attrib_GetByName(pda, "mvm sentry ammo");
-		if(ammoMult != Address_Null)
-			maxAmmoMultiplier = TF2Attrib_GetValue(ammoMult);
+		int ammoRegenerationRate = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "sentry_ammo_regeneration", pda));
+		float maxAmmoMultiplier = TF2Attrib_HookValueFloat(1.0, "mvm_sentry_ammo", pda);
 
-		if(AmmoRegen != Address_Null)
+		if(ammoRegenerationRate > 0.0)
 		{
-			int AmmoRegeneration = RoundToNearest(TF2Attrib_GetValue(AmmoRegen)/5.0);
-			
 			if(sentryLevel != 1)
 			{
-				if((shells + AmmoRegeneration) < RoundToNearest(200.0 * maxAmmoMultiplier))
+				if((shells + ammoRegenerationRate) < RoundToNearest(200.0 * maxAmmoMultiplier))
 				{
-					SetEntProp(entity, Prop_Send, "m_iAmmoShells", shells + AmmoRegeneration);
+					SetEntProp(entity, Prop_Send, "m_iAmmoShells", shells + ammoRegenerationRate);
 				}
 				else
 				{
@@ -1314,9 +1276,9 @@ public Action:BuildingRegeneration(Handle timer, any:entity)
 			}
 			else
 			{
-				if((shells + AmmoRegeneration) < RoundToNearest(150.0 * maxAmmoMultiplier))
+				if((shells + ammoRegenerationRate) < RoundToNearest(150.0 * maxAmmoMultiplier))
 				{
-					SetEntProp(entity, Prop_Send, "m_iAmmoShells", shells + AmmoRegeneration);
+					SetEntProp(entity, Prop_Send, "m_iAmmoShells", shells + ammoRegenerationRate);
 				}
 				else
 				{
@@ -1325,9 +1287,9 @@ public Action:BuildingRegeneration(Handle timer, any:entity)
 			}
 			if(sentryLevel == 3)
 			{
-				if((rockets + (AmmoRegeneration/10)) < RoundToNearest(20.0 * maxAmmoMultiplier))
+				if((rockets + (ammoRegenerationRate/5)) < RoundToNearest(20.0 * maxAmmoMultiplier))
 				{
-					SetEntProp(entity, Prop_Send, "m_iAmmoRockets", rockets + (AmmoRegeneration/10));
+					SetEntProp(entity, Prop_Send, "m_iAmmoRockets", rockets + (ammoRegenerationRate/5));
 				}
 				else
 				{
@@ -1336,6 +1298,7 @@ public Action:BuildingRegeneration(Handle timer, any:entity)
 			}
 		}
 	}
+	return Plugin_Continue;
 }
 public Action Timer_UberCheck(Handle timer, int medigun){
 	int medigunID = EntRefToEntIndex(medigun);

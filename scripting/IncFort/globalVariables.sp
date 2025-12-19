@@ -410,7 +410,6 @@ bool inScore[MAXPLAYERS+1];
 bool hardcapWarning = false;
 bool isEntitySentry[MAXENTITIES+1];
 bool sentryThought[MAXENTITIES+1];
-bool b_Hooked[MAXPLAYERS+1];
 bool canShootAgain[MAXPLAYERS+1] = {true,...};
 bool gravChanges[MAXENTITIES];
 bool debugMode = false;

@@ -1120,7 +1120,6 @@ public OnEntityDestroyed(entity)
 			AcceptEntityInput(iLink, "ClearParent");
 			AcceptEntityInput(iLink, "Kill");
 		}
-		SDKUnhook(entity, SDKHook_OnTakeDamage, OnTakeDamagePre_Tank);
 	}
 	if(StrEqual(classname, "obj_sentrygun"))
 	{
@@ -1348,7 +1347,8 @@ public Action:Event_PlayerDeath(Handle event, const char[] name, bool:dontBroadc
 
 	isBotScrambled[client] = false;
 	isDeathTick[client] = true;
-
+	enragedKills[attack]++;
+	
 	CancelClientMenu(client);
 
 	if(IsValidClient3(attack) && attack != client){
@@ -1781,7 +1781,7 @@ public Action OnPlayerRunCmd(int client, int& buttons, int& impulse, float vel[3
 					}
 				}
 				case 3.0: {
-					if(enragedKills[client] >= 80){
+					if(enragedKills[client] >= 10){
 						CreateParticleEx(client, "utaunt_poweraura_teamcolor_red", 1, _, _, 1.0);
 						powerupParticle[client] = GetGameTime()+1.1;
 					}
@@ -2273,7 +2273,7 @@ public Action OnPlayerRunCmd(int client, int& buttons, int& impulse, float vel[3
 						TF2_AddCondition(client, TFCond_UberchargedHidden, 1.0);
 						TF2_AddCondition(client, TFCond_KingAura, 1.0);
 					}
-					if(TF2Attrib_HookValueFloat(0.0, "revenge_powerup", client) == 3 && enragedKills[client] >= 80){
+					if(TF2Attrib_HookValueFloat(0.0, "revenge_powerup", client) == 3 && enragedKills[client] >= 10){
 						EmitSoundToAll(SOUND_REVENGE, client, -1, 150, 0, 1.0);
 						EmitSoundToAll(SOUND_REVENGE, client, -1, 150, 0, 1.0);
 						enragedKills[client] = 0;
@@ -2844,7 +2844,7 @@ public Action TF2_CalcIsAttackCritical(int client, int weapon, char[] weaponname
 			int a = GetCarriedAmmo(client, 2)
 			if(a > 0)
 			{
-				if(ballCheck == 10.0)
+				if(ballCheck == -1.0)
 					SDKCall(g_SDKCallLaunchBall, CWeapon);
 			}
 		}
@@ -3202,7 +3202,7 @@ public Action TF2_CalcIsAttackCritical(int client, int weapon, char[] weaponname
 							float velocity = 900.0;
 							fVelocity[0] = vBuffer[0]*velocity;
 							fVelocity[1] = vBuffer[1]*velocity;
-							fVelocity[2] = 150.0 + vBuffer[2]*velocity;
+							fVelocity[2] = 100.0 + vBuffer[2]*velocity;
 							
 							TeleportEntity(iEntity, fOrigin, fAngles, fVelocity);
 							DispatchSpawn(iEntity);
@@ -3364,14 +3364,6 @@ public OnClientDisconnect(client)
 	for(i = 1;i<=MaxClients;++i){
 		isTagged[i][client] = false;
 	}
-	if(b_Hooked[client])
-	{
-		b_Hooked[client] = false;
-		SDKUnhook(client, SDKHook_OnTakeDamage, OnTakeDamage);
-		SDKUnhook(client, SDKHook_OnTakeDamageAlive, OnTakeDamageAlive);
-		SDKUnhook(client, SDKHook_StartTouch, OnStartTouchStomp);
-		SDKUnhook(client, SDKHook_WeaponSwitch, WeaponSwitch);
-	}
 }
 public OnClientPutInServer(client)
 {
@@ -3387,14 +3379,10 @@ public OnClientPutInServer(client)
 		AttunedSpells[client][i] = 0;
 	}
 	
-	if(!b_Hooked[client])
-	{
-		b_Hooked[client] = true;
-		SDKHook(client, SDKHook_OnTakeDamage, OnTakeDamage);
-		SDKHook(client, SDKHook_OnTakeDamageAlive, OnTakeDamageAlive);
-		SDKHook(client, SDKHook_StartTouch, OnStartTouchStomp);
-		SDKHook(client, SDKHook_WeaponSwitch, WeaponSwitch);
-	}
+	SDKHook(client, SDKHook_OnTakeDamage, OnTakeDamage);
+	SDKHook(client, SDKHook_OnTakeDamageAlive, OnTakeDamageAlive);
+	SDKHook(client, SDKHook_StartTouch, OnStartTouchStomp);
+	SDKHook(client, SDKHook_WeaponSwitch, WeaponSwitch);
 	ClientCommand(client, "sm_showhelp");
 }
 public OnClientPostAdminCheck(client)

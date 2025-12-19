@@ -23,10 +23,10 @@
 		}
 		"Honor!"
 		{
-			"gamestage"						"1"
-			"restriction"					"1"
-			"honorbound"					"1.0"
-			"percent of hp healed on kill"	"0.5"
+			"gamestage"							"1"
+			"restriction"						"1"
+			"honorbound"						"1.0"
+			"restore health on kill"			"0.5"
 			"weapon fire rate(tweakbonus)"		"0.5"
 		}
 		"Infernal Impulse"

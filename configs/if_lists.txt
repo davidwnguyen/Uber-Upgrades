@@ -1877,16 +1877,26 @@
 	}
 	"menuFireball"
 	{
-		"special_tweaks_listid"		"-1"
+		"special_tweaks_listid"		"2"
 		"Damage upgrades"
 		{
 			"0"		"damage bonus"
 			"1"		"ap (global)"
-			"2"		"Increased Projectile Count"
+			"2"		"Overall Damage"
 			"3"		"lifesteal ability"
 			"4"		"Weapons Deals No Knockback"
 			"5"		"reveal cloaked victim on hit"
 			"6"		"reveal disguised victim on hit"
+		}
+		"Cleaver specific upgrades"
+		{
+			"0"		"fire rate bonus(multshit)"
+			"1"		"Increased Projectile Count"
+			"2"		"Weapons Deals No Knockback"
+		}
+		"Special Tweaks"
+		{
+			"0"		"Blade Stream"
 		}
 	}
 	"buffban"
