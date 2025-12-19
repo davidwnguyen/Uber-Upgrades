@@ -303,7 +303,7 @@
 			"increase_ratio"	"20"
 			"value"		"65536"
 			"init"		"0"
-			"description"	"Heals in an AOE for 4x your health.\n180s CD, -60s CD per level."
+			"description"	"Heals in an AOE for 100% your health.\nApplies a +100% incoming healing buff for 6.5s.\n180s CD. Arcane Power increases healing."
 			"max"		"65536"
 		}
 		"1542.9"
