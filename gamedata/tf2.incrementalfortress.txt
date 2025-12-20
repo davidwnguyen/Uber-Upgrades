@@ -20,6 +20,11 @@
 				"linux"		"293"
 				"windows"	"287"
 			}
+			"CTFProjectile_Flare::GetRadius()"
+			{
+				"linux"		"245"
+				"windows"	"244"
+			}
 		}
 		"Functions"
 		{
@@ -226,13 +231,6 @@
 					}
 				}
 			}
-			"CTFProjectile_Flare::GetRadius()"
-			{
-				"signature"		"CTFProjectile_Flare::GetRadius()"
-				"callconv"		"thiscall"
-				"return"		"float"
-				"this"			"entity"
-			}
 			"CTFBaseRocket::GetRadius()"
 			{
 				"signature"		"CTFBaseRocket::GetRadius()"
@@ -377,11 +375,6 @@
 			{
 				"library"	"server"
 				"linux"		"@_ZN15CTFFlameThrower12FireAirBlastEi"
-			}
-			"CTFProjectile_Flare::GetRadius()"
-			{
-				"library"	"server"
-				"linux"		"@_ZN19CTFProjectile_Flare9GetRadiusEv"
 			}
 			"CTFBaseRocket::GetRadius()"
 			{

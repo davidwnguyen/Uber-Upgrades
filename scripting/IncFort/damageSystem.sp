@@ -767,6 +767,24 @@ public Action TF2_OnTakeDamageModifyRules(int victim, int &attacker, int &inflic
 				damage += damage*((1+critRating/200.0)/(1+critNullify/200));
 			}
 		}
+		if(critType == CritType_MiniCrit || miniCritStatus[victim]){
+			if(!miniCritStatus[victim])
+				damage /= 1.35;
+			else
+				critType = CritType_MiniCrit
+
+			float critNullify = TF2Attrib_HookValueFloat(0.0, "critical_block_rating", victim);
+			float critRating = TF2Attrib_HookValueFloat(0.0, "critical_rating", attacker);
+			if(critNullify/(critNullify+800) >= GetRandomFloat()){
+				critType = CritType_None;
+			}else{
+				float bonusDamage = damage*0.35*(1+(critRating-critNullify)/200);
+				if(bonusDamage < 0)
+					bonusDamage = 0.0;
+				damage += bonusDamage;
+			}
+			miniCritStatus[victim] = false;
+		}
 	}
 	return Plugin_Changed;
 }
@@ -1119,7 +1137,6 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 				if(TF2Attrib_HookValueFloat(0.0, "precision_powerup", attacker) == 1)
 				{
 					miniCritStatus[victim] = true;
-					damage *= 1.35;
 					damagecustom = 1;
 				}
 			}

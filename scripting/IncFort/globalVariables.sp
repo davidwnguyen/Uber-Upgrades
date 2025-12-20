@@ -24,6 +24,7 @@ Handle g_SDKCallJar;
 Handle g_SDKCallSentryThink;
 Handle g_SDKFastBuild;
 Handle g_DHookPrimaryAttack;
+Handle g_DHookFlareExplosion;
 
 Handle hudSync;
 Handle hudSpells;

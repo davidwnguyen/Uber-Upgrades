@@ -861,6 +861,9 @@
 	"explosive_fragment_damage"{
 		"en"		"Fragment Explosion Base Damage"
 	}
+	"frag explosion radius mult"{
+		"en"		"Fragment Explosion Radius Multiplier"
+	}
 	"Stealth On Backstab"{
 		"en"		"Stealth On Backstab"
 	}

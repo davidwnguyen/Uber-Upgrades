@@ -11,12 +11,6 @@ public Event_Playerhurt(Handle event, const char[] name, bool:dontBroadcast)
 		SetEventBool(event, "crit", true);
 		critStatus[client] = false;
 	}
-	else if(miniCritStatus[client])
-	{
-		SetEventBool(event, "minicrit", true);
-		miniCritStatus[client] = false;
-	}
-
 	if(damage == 0.0)
 		return;
 
@@ -1014,15 +1008,11 @@ public OnEntityCreated(entity, const char[] classname)
 			CreateTimer(0.1, ArrowThink, reference, TIMER_REPEAT|TIMER_FLAG_NO_MAPCHANGE);
 			SDKHook(entity, SDKHook_Touch, FixProjectileCollision);
 		}
-		if(StrEqual(classname, "tf_projectile_syringe") || StrEqual(classname, "tf_projectile_rocket")
-		|| StrEqual(classname, "tf_projectile_flare"))
+		if(StrEqual(classname, "tf_projectile_flare"))
 		{
-			SDKHook(entity, SDKHook_StartTouch, OnStartTouch);
-			RequestFrame(projGravity, reference);
-			RequestFrame(PrecisionHoming, reference);
-			SDKHook(entity, SDKHook_Touch, FixProjectileCollision);
+			DHookEntity(g_DHookFlareExplosion, true, entity);
 		}
-		if(StrEqual(classname, "tf_projectile_rocket") || StrEqual(classname, "tf_projectile_flare") || StrEqual(classname, "tf_projectile_sentryrocket"))
+		if(StrEqual(classname, "tf_projectile_syringe") || StrEqual(classname, "tf_projectile_rocket") || StrEqual(classname, "tf_projectile_flare") || StrEqual(classname, "tf_projectile_sentryrocket"))
 		{
 			RequestFrame(instantProjectile, reference);
 			RequestFrame(monoculusBonus, reference);
@@ -2660,113 +2650,7 @@ public OnGameFrame()
 	}
 }
 public MRESReturn OnBlastExplosion(int entity, Handle hReturn){
-	if(!IsValidEntity(entity))
-		return MRES_Ignored;
-
-	int owner = getOwner(entity);
-	if(!IsValidClient3(owner))
-		return MRES_Ignored;
-
-	++stickiesDetonated[owner];
-
-	int CWeapon = GetEntPropEnt(owner, Prop_Send, "m_hActiveWeapon");
-	if(!IsValidWeapon(CWeapon))
-		return MRES_Ignored;
-	
-	float position[3];
-	GetEntPropVector(entity, Prop_Data, "m_vecOrigin", position);
-	position[2] += 15.0;
-
-	float chance = GetAttribute(CWeapon, "sticky recursive explosion chance", 0.0)
-	if(chance >= GetRandomFloat(0.0,1.0)){
-
-		DataPack hPack = CreateDataPack();
-		hPack.Reset();
-		WritePackCell(hPack, EntIndexToEntRef(owner));
-		WritePackCell(hPack, EntIndexToEntRef(CWeapon));
-		WritePackFloat(hPack, position[0]);
-		WritePackFloat(hPack, position[1]);
-		WritePackFloat(hPack, position[2]);
-		WritePackFloat(hPack, 90.0 * TF2_GetDamageModifiers(owner, CWeapon));
-		WritePackFloat(hPack, 120.0 * TF2Attrib_HookValueFloat(1.0, "mult_explosion_radius", CWeapon));
-		CreateTimer(0.2, RecursiveExplosions, hPack, TIMER_REPEAT);
-	}
-
-	float waspsCount = GetAttribute(CWeapon, "explosion wasps", 0.0)
-	if(waspsCount > 0){
-		int targetsList[MAXPLAYERS+1];
-		float victimPosition[3];
-		int index;
-		float damage = 40.0 * TF2_GetDamageModifiers(owner, CWeapon);
-		for(int i=1;i<=MaxClients;++i){
-			if(!IsValidClient3(i))
-				continue;
-			if(!IsPlayerAlive(i))
-				continue;
-			if(!IsOnDifferentTeams(owner, i))
-				continue;
-			
-			GetEntPropVector(i, Prop_Data, "m_vecOrigin", victimPosition);
-			if(GetVectorDistance(position, victimPosition, true) < 250000){
-				targetsList[index] = i;
-				index++;
-			}
-		}
-		for(int i=0;i<waspsCount;++i){
-			int target = targetsList[GetRandomInt(0,index-1)];
-			if(!IsValidClient3(target))
-				continue;
-
-			currentDamageType[owner].second |= DMG_IGNOREHOOK;
-			SDKHooks_TakeDamage(target, owner, owner, damage,_,_,_,_,false);
-			currentDamageType[owner].second |= DMG_IGNOREHOOK;
-			SDKHooks_TakeDamage(target, owner, owner, 3.0, DMG_RADIATION|DMG_DISSOLVE,_,_,_,false);
-
-			if(hitParticle[target]+0.2 <= GetGameTime()){
-				GetEntPropVector(target, Prop_Data, "m_vecOrigin", victimPosition);
-				victimPosition[2] += 30.0;
-				TE_SetupBeamPoints(position,victimPosition,Laser,Laser,0,5,1.0,1.0,1.0,5,1.0,{247, 136, 0, 150},10);
-				TE_SendToAll();
-				hitParticle[target] = GetGameTime();
-			}
-		}
-	}
-
-	for(int i = 0;i<projectileFragCount[entity];++i)
-	{
-		int iEntity = CreateEntityByName("tf_projectile_syringe");
-		if (!IsValidEdict(iEntity)) 
-			continue;
-
-		int iTeam = GetClientTeam(owner);
-		float fAngles[3], fOrigin[3], vBuffer[3], fVelocity[3], fwd[3];
-		fOrigin[0] = position[0]; fOrigin[1] = position[1]; fOrigin[2] = position[2];
-		SetEntPropEnt(iEntity, Prop_Send, "m_hOwnerEntity", owner);
-		SetEntProp(iEntity, Prop_Send, "m_iTeamNum", iTeam);
-		fAngles[0] = GetRandomFloat(0.0,-60.0)
-		fAngles[1] = GetRandomFloat(-179.0,179.0)
-
-		GetAngleVectors(fAngles,fwd, NULL_VECTOR, NULL_VECTOR);
-		ScaleVector(fwd, 30.0);
-		AddVectors(fOrigin, fwd, fOrigin);
-		GetAngleVectors(fAngles, vBuffer, NULL_VECTOR, NULL_VECTOR);
-
-		float velocity = 2000.0;
-		fVelocity[0] = vBuffer[0]*velocity;
-		fVelocity[1] = vBuffer[1]*velocity;
-		fVelocity[2] = vBuffer[2]*velocity;
-		
-		TeleportEntity(iEntity, fOrigin, fAngles, fVelocity);
-		DispatchSpawn(iEntity);
-		setProjGravity(iEntity, 9.0);
-		SDKHook(iEntity, SDKHook_Touch, OnCollisionExplosiveFrag);
-		jarateWeapon[iEntity] = EntIndexToEntRef(CWeapon);
-		CreateTimer(1.0,SelfDestruct,EntIndexToEntRef(iEntity));
-		SetEntProp(iEntity, Prop_Send, "m_usSolidFlags", 0x0008);
-		SetEntProp(iEntity, Prop_Data, "m_nSolidType", 6);
-		SetEntProp(iEntity, Prop_Send, "m_CollisionGroup", 13);
-	}
-
+	ExplosionHookEffects(entity);
 	return MRES_Ignored;
 }
 public MRESReturn OnFinishReload(int weapon)

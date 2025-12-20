@@ -407,10 +407,12 @@ public void OnPluginStart()
 
 	//Blast Radius Overrides
 	{
-		Handle BlastHook = DHookCreateFromConf(hConf, "CTFProjectile_Flare::GetRadius()");
-		if(BlastHook == null)
-			PrintToServer("CustomAttrs | Error with \"CTFProjectile_Flare::GetRadius()\" gamedata.");
-		DHookEnableDetour(BlastHook, true, OnBlastExplosion);
+		int offset = GameConfGetOffset(hConf, "CTFProjectile_Flare::GetRadius()");
+		if(offset == -1)
+			PrintToServer("CustomAttrs | g_DHookFlareExplosion fucked up.");
+		else{
+			g_DHookFlareExplosion = DHookCreate(offset, HookType_Entity, ReturnType_Float, ThisPointer_CBaseEntity, OnBlastExplosion);
+		}
 	}
 	{
 		Handle BlastHook = DHookCreateFromConf(hConf, "CTFBaseRocket::GetRadius()");
