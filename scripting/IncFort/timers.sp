@@ -289,8 +289,8 @@ public Action:Timer_FixedVariables(Handle timer)
 			if(IsValidWeapon(CWeapon)){
 				if(GetAttribute(CWeapon, "magnify patient damage", 0.0)){
 					char buffer[32]
-					if(pylonCharge[client] < 10.0*TF2Util_GetEntityMaxHealth(client)*GetResistance(client, true))
-						Format(buffer, sizeof(buffer), "Pylon Charge: %.1f%", 10.0*pylonCharge[client]/(TF2Util_GetEntityMaxHealth(client)*GetResistance(client, true)));
+					if(pylonCharge[client] < TF2Util_GetEntityMaxHealth(client)*GetResistance(client, true))
+						Format(buffer, sizeof(buffer), "Pylon Charge: %.2f%", 100.0*pylonCharge[client]/(TF2Util_GetEntityMaxHealth(client)*GetResistance(client, true)));
 					else
 					 	Format(buffer, sizeof(buffer), "Pylon Charge: READY");
 

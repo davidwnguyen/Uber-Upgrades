@@ -4329,6 +4329,7 @@ cleanSlateClient(int client){
 	enragedKills[client] = 0;
 	TeamTacticsBuildup[client] = 0.0;
 	karmicJusticeScaling[client] = 0.0;
+	pylonCooldown[client] = 0.0;
 	clearAllBuffs(client);
 	AfterburnStack empty;
 	for(int i = 0;i < MAX_AFTERBURN_STACKS; ++i){

@@ -172,110 +172,6 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 		}
 	}
 	int VictimCWeapon = GetEntPropEnt(victim, Prop_Send, "m_hActiveWeapon");
-
-	if(IsValidClient3(attacker)){
-		int healers = GetEntProp(attacker, Prop_Send, "m_nNumHealers");
-		for(int i = 0;i<healers;++i){
-			int healer = TF2Util_GetPlayerHealer(attacker,i);
-			if(!IsValidClient3(healer))
-				continue;
-
-			int healingWeapon = TF2Util_GetPlayerLoadoutEntity(healer, 1);
-			if(!IsValidWeapon(healingWeapon))
-				continue;
-
-			if(TF2Attrib_HookValueFloat(0.0, "magnify_patient_damage", healingWeapon))
-				pylonCharge[healer] += damage;
-
-			if(currentDamageType[healer].second & DMG_IGNOREHOOK)
-				continue;
-
-			float pylonCap = 10.0*TF2Util_GetEntityMaxHealth(healer);
-			if(pylonCharge[healer] >= pylonCap){
-				float pylonDamage = 0.15 * pylonCap * GetResistance(healer);
-
-				bool isBounced[MAXPLAYERS+1];
-				isBounced[victim] = true
-				int lastBouncedTarget = victim;
-				float lastBouncedPosition[3], startpos[3];
-				GetClientEyePosition(healer, startpos)
-				GetClientEyePosition(lastBouncedTarget, lastBouncedPosition)
-				int iterations = 0
-				int maxBounces = 5;
-
-				char szCtrlParti[32];
-				char particleName[32];
-				particleName = GetClientTeam(attacker) == 2 ? "dxhr_sniper_rail_red" : "dxhr_sniper_rail_blue";
-
-				{
-					int iPart1 = CreateEntityByName("info_particle_system");
-					int iPart2 = CreateEntityByName("info_particle_system");
-
-					if (IsValidEdict(iPart1) && IsValidEdict(iPart2))
-					{
-						Format(szCtrlParti, sizeof(szCtrlParti), "tf2ctrlpart%i", iPart2);
-						DispatchKeyValue(iPart2, "targetname", szCtrlParti);
-
-						DispatchKeyValue(iPart1, "effect_name", particleName);
-						DispatchKeyValue(iPart1, "cpoint1", szCtrlParti);
-						DispatchSpawn(iPart1);
-						TeleportEntity(iPart1, startpos, NULL_VECTOR, NULL_VECTOR);
-						TeleportEntity(iPart2, lastBouncedPosition, NULL_VECTOR, NULL_VECTOR);
-						ActivateEntity(iPart1);
-						AcceptEntityInput(iPart1, "Start");
-						
-						CreateTimer(1.0, Timer_KillParticle, EntIndexToEntRef(iPart1));
-						CreateTimer(1.0, Timer_KillParticle, EntIndexToEntRef(iPart2));
-					}
-				}
-				currentDamageType[healer].second |= DMG_IGNOREHOOK;
-				SDKHooks_TakeDamage(victim,healer,healer,0.15*pylonDamage,DMG_BULLET,_,_,_,false)
-
-				for(int client=1;client<=MaxClients && iterations < maxBounces;client++)
-				{
-					if(!IsValidClient3(client)) {continue;}
-					if(!IsPlayerAlive(client)) {continue;}
-					if(!IsOnDifferentTeams(client,attacker)) {continue;}
-					if(isBounced[client]) {continue;}
-
-					float VictimPos[3]; 
-					GetClientEyePosition(client, VictimPos); 
-					if(GetVectorDistance(lastBouncedPosition, VictimPos, true) > 490000.0) {continue;}//700 HU range
-					
-					isBounced[client] = true;
-					GetClientEyePosition(lastBouncedTarget, lastBouncedPosition)
-					lastBouncedTarget = client
-					int iPart1 = CreateEntityByName("info_particle_system");
-					int iPart2 = CreateEntityByName("info_particle_system");
-
-					if (IsValidEdict(iPart1) && IsValidEdict(iPart2))
-					{
-						Format(szCtrlParti, sizeof(szCtrlParti), "tf2ctrlpart%i", iPart2);
-						DispatchKeyValue(iPart2, "targetname", szCtrlParti);
-
-						DispatchKeyValue(iPart1, "effect_name", particleName);
-						DispatchKeyValue(iPart1, "cpoint1", szCtrlParti);
-						DispatchSpawn(iPart1);
-						TeleportEntity(iPart1, lastBouncedPosition, NULL_VECTOR, NULL_VECTOR);
-						TeleportEntity(iPart2, VictimPos, NULL_VECTOR, NULL_VECTOR);
-						ActivateEntity(iPart1);
-						AcceptEntityInput(iPart1, "Start");
-						
-						CreateTimer(1.0, Timer_KillParticle, EntIndexToEntRef(iPart1));
-						CreateTimer(1.0, Timer_KillParticle, EntIndexToEntRef(iPart2));
-					}
-					currentDamageType[healer].second |= DMG_IGNOREHOOK;
-					SDKHooks_TakeDamage(client,healer,healer,0.15*pylonDamage,DMG_BULLET,_,_,_,false)
-					++iterations
-				}
-
-				pylonCharge[healer] -= pylonCap;
-				if(pylonCharge[healer] > pylonCap)
-					pylonCharge[healer]  = pylonCap;
-				EmitSoundToAll(SOUND_ARCANESHOOT, 1, _, SNDLEVEL_RAIDSIREN, _, 1.0, _,_,startpos);
-			}
-		}
-	}
 	if(IsValidClient3(attacker) && IsValidClient3(victim))
 	{
 		applyDamageAffinities(victim, attacker, inflictor, damage, weapon, damagetype, damagecustom);
@@ -1656,6 +1552,111 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 				!(damagetype & DMG_SLASH))) // int afterburn system.
 				{
 					applyAfterburn(victim, attacker, weapon, damage);
+				}
+			}
+
+			if(IsValidClient3(attacker)){
+				healers = GetEntProp(attacker, Prop_Send, "m_nNumHealers");
+				for(int i = 0;i<healers;++i){
+					int healer = TF2Util_GetPlayerHealer(attacker,i);
+					if(!IsValidClient3(healer))
+						continue;
+
+					int healingWeapon = TF2Util_GetPlayerLoadoutEntity(healer, 1);
+					if(!IsValidWeapon(healingWeapon))
+						continue;
+
+					if(TF2Attrib_HookValueFloat(0.0, "magnify_patient_damage", healingWeapon))
+						pylonCharge[healer] += damage;
+
+					if(currentDamageType[healer].second & DMG_IGNOREHOOK)
+						continue;
+
+					float pylonCap = TF2Util_GetEntityMaxHealth(healer) * GetResistance(healer);
+					if(pylonCharge[healer] >= pylonCap && GetGameTime() >= pylonCooldown[healer]){
+						float pylonDamage = 0.65*pylonCap;
+						pylonCooldown[healer] = GetGameTime()+1.0;
+
+						bool isBounced[MAXPLAYERS+1];
+						isBounced[victim] = true
+						int lastBouncedTarget = victim;
+						float lastBouncedPosition[3], startpos[3];
+						GetClientEyePosition(healer, startpos)
+						GetClientEyePosition(lastBouncedTarget, lastBouncedPosition)
+						int iterations = 0
+						int maxBounces = 5;
+
+						char szCtrlParti[32];
+						char particleName[32];
+						particleName = GetClientTeam(attacker) == 2 ? "dxhr_sniper_rail_red" : "dxhr_sniper_rail_blue";
+
+						{
+							int iPart1 = CreateEntityByName("info_particle_system");
+							int iPart2 = CreateEntityByName("info_particle_system");
+
+							if (IsValidEdict(iPart1) && IsValidEdict(iPart2))
+							{
+								Format(szCtrlParti, sizeof(szCtrlParti), "tf2ctrlpart%i", iPart2);
+								DispatchKeyValue(iPart2, "targetname", szCtrlParti);
+
+								DispatchKeyValue(iPart1, "effect_name", particleName);
+								DispatchKeyValue(iPart1, "cpoint1", szCtrlParti);
+								DispatchSpawn(iPart1);
+								TeleportEntity(iPart1, startpos, NULL_VECTOR, NULL_VECTOR);
+								TeleportEntity(iPart2, lastBouncedPosition, NULL_VECTOR, NULL_VECTOR);
+								ActivateEntity(iPart1);
+								AcceptEntityInput(iPart1, "Start");
+								
+								CreateTimer(1.0, Timer_KillParticle, EntIndexToEntRef(iPart1));
+								CreateTimer(1.0, Timer_KillParticle, EntIndexToEntRef(iPart2));
+							}
+						}
+						currentDamageType[healer].second |= DMG_IGNOREHOOK;
+						SDKHooks_TakeDamage(victim,healer,healer,pylonDamage,DMG_BULLET,_,_,_,false)
+
+						for(int client=1;client<=MaxClients && iterations < maxBounces;client++)
+						{
+							if(!IsValidClient3(client)) {continue;}
+							if(!IsPlayerAlive(client)) {continue;}
+							if(!IsOnDifferentTeams(client,attacker)) {continue;}
+							if(isBounced[client]) {continue;}
+
+							float VictimPos[3]; 
+							GetClientEyePosition(client, VictimPos); 
+							if(GetVectorDistance(lastBouncedPosition, VictimPos, true) > 490000.0) {continue;}//700 HU range
+							
+							isBounced[client] = true;
+							GetClientEyePosition(lastBouncedTarget, lastBouncedPosition)
+							lastBouncedTarget = client
+							int iPart1 = CreateEntityByName("info_particle_system");
+							int iPart2 = CreateEntityByName("info_particle_system");
+
+							if (IsValidEdict(iPart1) && IsValidEdict(iPart2))
+							{
+								Format(szCtrlParti, sizeof(szCtrlParti), "tf2ctrlpart%i", iPart2);
+								DispatchKeyValue(iPart2, "targetname", szCtrlParti);
+
+								DispatchKeyValue(iPart1, "effect_name", particleName);
+								DispatchKeyValue(iPart1, "cpoint1", szCtrlParti);
+								DispatchSpawn(iPart1);
+								TeleportEntity(iPart1, lastBouncedPosition, NULL_VECTOR, NULL_VECTOR);
+								TeleportEntity(iPart2, VictimPos, NULL_VECTOR, NULL_VECTOR);
+								ActivateEntity(iPart1);
+								AcceptEntityInput(iPart1, "Start");
+								
+								CreateTimer(1.0, Timer_KillParticle, EntIndexToEntRef(iPart1));
+								CreateTimer(1.0, Timer_KillParticle, EntIndexToEntRef(iPart2));
+							}
+							currentDamageType[healer].second |= DMG_IGNOREHOOK;
+							SDKHooks_TakeDamage(client,healer,healer,pylonDamage,DMG_BULLET,_,_,_,false)
+							++iterations
+						}
+
+						pylonCharge[healer] -= pylonCap;
+						if(pylonCharge[healer] > pylonCap)
+							pylonCharge[healer]  = pylonCap;
+						EmitSoundToAll(SOUND_ARCANESHOOT, 1, _, SNDLEVEL_RAIDSIREN, _, 1.0, _,_,startpos);
+					}
 				}
 			}
 		}
