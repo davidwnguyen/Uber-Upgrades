@@ -3902,6 +3902,11 @@ stock float TF2_GetFireRate(client, weapon, float efficiency = 1.0)
 }
 stock float TF2_GetSentryDamageModifiers(client){
 	float dmgBonus = 1.0;
+	int pda = TF2Util_GetPlayerLoadoutEntity(client, 5);
+	if(IsValidWeapon(pda))
+	{
+		dmgBonus *= TF2Attrib_HookValueFloat(1.0, "dmg_outgoing_mult", pda);
+	}
 	int CWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
 	if(IsValidWeapon(CWeapon))
 	{
@@ -3912,7 +3917,6 @@ stock float TF2_GetSentryDamageModifiers(client){
 		}
 	}
 
-	dmgBonus *= TF2Attrib_HookValueFloat(1.0, "dmg_outgoing_mult", client);
 	dmgBonus *= TF2Attrib_HookValueFloat(1.0, "mult_engy_sentry_damage", client);
 	dmgBonus *= TF2Attrib_HookValueFloat(1.0, "sentry_bullets_per_shot", client);
 	

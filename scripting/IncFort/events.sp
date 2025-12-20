@@ -3703,6 +3703,7 @@ public Action TF2_SentryFireBullet(int sentry, int builder, int &shots, float sr
 					if (IsValidEdict(iEntity)) 
 					{
 						projectileDamage[iEntity] = 35.0 * TF2_GetSentryDamageModifiers(builder);
+						jarateWeapon[iEntity] = EntIndexToEntRef(sentry);
 						if(GetEntProp(sentry, Prop_Send, "m_bMiniBuilding"))
 							projectileDamage[iEntity] *= 0.25;
 
