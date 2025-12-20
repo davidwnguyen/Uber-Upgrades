@@ -209,7 +209,7 @@ public Action:Command_UseArcane(client, args)
 			if(id < 0)
 				continue;
 			
-			if(StrContains(ArcaneSpellList[id], arg1, false)) {
+			if(StrContains(ArcaneSpellList[id], arg1, false) != -1) {
 				param2 = i;
 				break;
 			}
