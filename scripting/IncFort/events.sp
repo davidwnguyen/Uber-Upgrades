@@ -3818,7 +3818,7 @@ public Action TF2_SentryFireBullet(int sentry, int builder, int &shots, float sr
 					int iEntity = CreateEntityByName(projName);
 					if (IsValidEdict(iEntity)) 
 					{
-						projectileDamage[iEntity] = 30.0 * TF2_GetSentryDamageModifiers(builder);
+						projectileDamage[iEntity] = 35.0 * TF2_GetSentryDamageModifiers(builder);
 						if(GetEntProp(sentry, Prop_Send, "m_bMiniBuilding"))
 							projectileDamage[iEntity] *= 0.25;
 

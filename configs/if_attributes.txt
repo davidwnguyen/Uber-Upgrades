@@ -2382,11 +2382,11 @@
 			"name"		"engy building health bonus"
 			"ref"		"engy building health bonus"
 			"display"		"%.0f%%"
-			"increase_ratio" 	"0.10"
-			"cost"		"300"
-			"value"		"0.33"
+			"increase_ratio" 	"0.25"
+			"cost"		"1400"
+			"value"		"0.1"
 			"init"		"1.00"
-			"max"		"175.00"
+			"max"		"2.00"
 		}
 		"158.5"
 		{
@@ -4990,8 +4990,7 @@
 			"value"		"0.25"
 			"init"		"1"
 			"optimizer_style" "1"
-			"description"	"1:1 pure damage multiplier.\nIncreases in cost by +$94 per purchase."
-			"max"		"25"
+			"max"		"30"
 		}
 		"1516"
 		{
@@ -5341,7 +5340,7 @@
 			"value"		"2"
 			"init"		"0"
 			"restriction_category"	"2"
-			"description"	"Sentry shoots out projectile bolts that deal 30 base damage.\nApplies +4 bleed buildup on hit and penetrates victims."
+			"description"	"Sentry shoots out projectile bolts that deal 35 base damage.\nApplies +4 bleed buildup on hit and penetrates victims."
 			"max"		"2"
 		}
 		"1538.4"

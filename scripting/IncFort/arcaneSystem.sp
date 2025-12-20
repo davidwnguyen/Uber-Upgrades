@@ -205,7 +205,7 @@ public Action:Command_UseArcane(client, args)
 	//Attempt to search for string in array of arcane names
 	if(param2 == -1) {
 		for(int i = 0;i < Max_Attunement_Slots; i++) {
-			int id = AttunedSpells[client][i];
+			int id = AttunedSpells[client][i]-1;
 			if(id < 0)
 				continue;
 			

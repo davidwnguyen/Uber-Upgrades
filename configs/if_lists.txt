@@ -1124,12 +1124,13 @@
 		}
 		"Building Upgrades"
 		{
-			"0"		"Build rate bonus"
-			"1"		"bidirectional teleport"
-			"2"		"Dispenser Regeneration Rate"
-			"3"		"engy dispenser radius increased"
-			"4"		"Teleporter Gives Buffs"
-			"5"		"Teleporter Recharge Rate"
+			"0"		"engy building health bonus"
+			"1"		"Build rate bonus"
+			"2"		"bidirectional teleport"
+			"3"		"Dispenser Regeneration Rate"
+			"4"		"engy dispenser radius increased"
+			"5"		"Teleporter Gives Buffs"
+			"6"		"Teleporter Recharge Rate"
 		}
 		"Sentry Specializations"
 		{

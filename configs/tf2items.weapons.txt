@@ -241,7 +241,7 @@
 		"36" //Blutsauger
 		{
 			"preserve_attributes"	"1"
-			"1"				"lifesteal ability;0.1"
+			"1"				"lifesteal ability;0.05"
 		}
 		"312" //Brass Beast
 		{
@@ -459,6 +459,7 @@
 			"preserve_attributes"	"1"
 			"1"				"sentry amount;5.0"
 			"2"				"weapon ability id;17.0"
+			"3"				"building health mult;0.5"
 		}
 		"307"//Ullapool Caber
 		{

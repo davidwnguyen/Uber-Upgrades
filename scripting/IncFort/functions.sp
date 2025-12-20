@@ -1296,7 +1296,7 @@ DisplayItemChange(client,itemidx)
 		}
 		case 589:
 		{
-			ChangeString = "The Eureka Effect | Teleporting will deal 500 base DPS based on sentry upgrades, stun targets, and launch them into the air. Cannot build a sentry, but teleporters are instant-built.";
+			ChangeString = "The Eureka Effect | Teleporting will deal 500 base DPS based on sentry upgrades and apply +100 radiation. Cannot build a sentry, but teleporters are instant-built.";
 		}
 		case 142:
 		{
@@ -1305,7 +1305,7 @@ DisplayItemChange(client,itemidx)
 		//Medic Primaries
 		case 36:
 		{
-			ChangeString = "The Blutsauger | +10% life steal ability.";
+			ChangeString = "The Blutsauger | +5% life steal ability.";
 		}
 		//Medic Secondaries
 		case 411:

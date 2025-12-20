@@ -1661,11 +1661,6 @@ public Action:thunderClapPart2(Handle timer, DataPack data)
 	int client = EntRefToEntIndex(ReadPackCell(data));
 	if(IsValidClient3(client) && IsValidClient3(victim))
 	{
-		float velocity[3];
-		velocity[0]=0.0;
-		velocity[1]=0.0;
-		velocity[2]=-3000.0;
-		TeleportEntity(victim, NULL_VECTOR, NULL_VECTOR, velocity);
 		RadiationBuildup[victim] += 100.0;
 		checkRadiation(victim,client);
 	}
@@ -1734,11 +1729,6 @@ public Action:eurekaDelayed(Handle timer, int client)
 								SDKHooks_TakeDamage(i,client,client, LightningDamage, 1073741824, _,_,_,false);
 								if(IsValidClient3(i))
 								{
-									float velocity[3];
-									velocity[0]=0.0;
-									velocity[1]=0.0;
-									velocity[2]=1800.0;
-									TeleportEntity(i, NULL_VECTOR, NULL_VECTOR, velocity);
 									Handle hPack = CreateDataPack();
 									WritePackCell(hPack, EntIndexToEntRef(i));
 									WritePackCell(hPack, EntIndexToEntRef(client));
