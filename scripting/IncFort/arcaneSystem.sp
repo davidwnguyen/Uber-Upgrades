@@ -168,7 +168,7 @@ public MenuHandler_ArcaneCast(Handle menu, MenuAction:action, client, param2)
 		if(param2 < 0 || param2 > Max_Attunement_Slots)
 			return;
 
-		if(AttunedSpells[client][param2] == 0.0)
+		if(AttunedSpells[client][param2] == 0)
 			{PrintHintText(client, "You have nothing attuned to this slot!");return;}
 
 		if(TF2_IsPlayerInCondition(client, TFCond_Cloaked))
@@ -189,22 +189,37 @@ public MenuHandler_ArcaneCast(Handle menu, MenuAction:action, client, param2)
 }
 public Action:Command_UseArcane(client, args)
 {
-	char arg1[128];
-	int param2;
-	if (!GetCmdArg(1, arg1, sizeof(arg1)))
-		return Plugin_Handled;
-	
-	param2 = StringToInt(arg1)-1;
 	if (!IsValidClient(client))
 		return Plugin_Handled;
 
 	if (!IsPlayerAlive(client))
 		return Plugin_Handled;
 
+	char arg1[128];
+	int param2;
+	if (!GetCmdArg(1, arg1, sizeof(arg1)))
+		return Plugin_Handled;
+	
+	param2 = StringToInt(arg1)-1;
+
+	//Attempt to search for string in array of arcane names
+	if(param2 == -1) {
+		for(int i = 0;i < Max_Attunement_Slots; i++) {
+			int id = AttunedSpells[client][i];
+			if(id < 0)
+				continue;
+			
+			if(StrContains(ArcaneSpellList[id], arg1, false)) {
+				param2 = i;
+				break;
+			}
+		}
+	}
+
 	if(param2 < 0 || param2 > Max_Attunement_Slots)
 		return Plugin_Handled;
 
-	if(AttunedSpells[client][param2] == 0.0)
+	if(AttunedSpells[client][param2] == 0)
 		{PrintHintText(client, "You have nothing attuned to this slot!");return Plugin_Handled;}
 
 	if(TF2_IsPlayerInCondition(client, TFCond_Cloaked))
