@@ -1349,7 +1349,7 @@ DisplayItemChange(client,itemidx)
 		}
 		case 58	:
 		{
-			ChangeString = "Jarate | Jarate effect now applies +10 damage (based on your scaling) to every hit taken.";
+			ChangeString = "Jarate | Jarate effect now applies +5 damage (based on your scaling) to every hit taken.";
 		}
 		//Sniper Melees
 		case 232:
