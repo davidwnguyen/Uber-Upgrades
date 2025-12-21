@@ -1406,9 +1406,8 @@ UpgradeItem(client, upgrade_choice, int &inum, float ratio, slot, bool bypassMax
 	client_last_up_idx[client] = upgrade_choice
 	client_last_up_slot[client] = slot
 }
-public remove_attribute(client, inum)
+public remove_attribute(client, inum, slot)
 {
-	int slot = current_slot_used[client];
 	if(currentupgrades_i[client][slot][inum] != 0.0 && upgrades[currentupgrades_idx[client][slot][inum]].cost > 1.0)
 	{
 		currentupgrades_val[client][slot][inum] = currentupgrades_i[client][slot][inum];

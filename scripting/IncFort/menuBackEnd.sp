@@ -42,7 +42,7 @@ public MenuHandler_UpgradeChoice(Handle menu, MenuAction:action, client, param2)
 			PrintToChat(client,"The server has not reached this level yet.")
 			return param2;
 		}
-
+		PrintToServer("%i inum | %i upgrade_choice | ", inum, upgrade_choice);
 
 		if(rate == 1)
 		{
@@ -245,7 +245,7 @@ public MenuHandler_UpgradeChoice(Handle menu, MenuAction:action, client, param2)
 						PrintToChat(client, "You downgraded %T %i times.",upgrades[upgrade_choice].name, client,times);
 					}
 					if(idx_currentupgrades_val == 0)
-						remove_attribute(client,inum);
+						remove_attribute(client,inum,slot);
 				}
 			}
 		}
@@ -627,7 +627,7 @@ public MenuHandler_AttributesTweak_action(Handle menu, MenuAction:action, client
 						{
 							if (CurrencyOwned[client] >= up_cost)
 							{
-								remove_attribute(client, param2);
+								remove_attribute(client, param2, s);
 								CurrencyOwned[client] -= up_cost;
 								client_spent_money[client][s] += up_cost;
 							}
@@ -658,7 +658,7 @@ public MenuHandler_AttributesTweak_action(Handle menu, MenuAction:action, client
 						{
 							if(canBypassRestriction[client] || client_spent_money[client][s] - up_cost > client_tweak_highest_requirement[client][s] - 1.0)
 							{
-								remove_attribute(client, param2)
+								remove_attribute(client, param2, s)
 								CurrencyOwned[client] += up_cost;
 								client_spent_money[client][s] -= up_cost
 								PrintToChat(client, "Attribute refunded.")
