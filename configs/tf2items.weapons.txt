@@ -206,7 +206,7 @@
 		"648"//Wrap Assassin
 		{
 			"preserve_attributes"	"1"
-			"1"				"mod bat launches ornaments;10.0"
+			"1"				"mod bat launches ornaments;-1.0"
 			"2"				"alt-fire disabled;1"
 		}
 		"1104" //Air Strike
