@@ -1112,7 +1112,7 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 			float rageOnHit = TF2Attrib_HookValueFloat(0.0, "rage_on_hit", weapon);
 			if(rageOnHit != 0.0)
 			{
-				if(GetEntPropFloat(attacker, Prop_Send, "m_flRageMeter") < 150.0)
+				if(GetEntPropFloat(attacker, Prop_Send, "m_flRageMeter") < 100.0)
 					SetEntPropFloat(attacker, Prop_Send, "m_flRageMeter", GetEntPropFloat(attacker, Prop_Send, "m_flRageMeter") + rageOnHit)
 			}
 			int hitgroup = GetEntProp(victim, Prop_Data, "m_LastHitGroup");

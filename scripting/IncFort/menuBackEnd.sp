@@ -42,7 +42,6 @@ public MenuHandler_UpgradeChoice(Handle menu, MenuAction:action, client, param2)
 			PrintToChat(client,"The server has not reached this level yet.")
 			return param2;
 		}
-		PrintToServer("%i inum | %i upgrade_choice | ", inum, upgrade_choice);
 
 		if(rate == 1)
 		{

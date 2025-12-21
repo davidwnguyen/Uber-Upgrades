@@ -1332,7 +1332,7 @@ DisplayItemChange(client,itemidx)
 		}
 		case 752:
 		{
-			ChangeString = "The Hitman's Heatmaker | Shoots explosive rounds. Gain +1% focus on hit; Focus now gives 2x fire rate and minicrits. 50% ammo conservation.";
+			ChangeString = "The Hitman's Heatmaker | Shoots explosive rounds. Gain +1% focus on hit; Focus now gives 1.5x fire rate. 50% ammo conservation.";
 		}
 		case 56,1005:
 		{

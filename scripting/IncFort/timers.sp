@@ -702,8 +702,10 @@ public Action:Timer_Every100MS(Handle timer)
 					{
 						case 752:
 						{
-							miniCritStatusAttacker[client] = GetGameTime()+0.3
-							TF2_AddCondition(client, TFCond_RuneHaste, 0.3);
+							Buff hasteBuff;
+							hasteBuff.init("Minor Haste", "", Buff_Haste, 1, client, 0.5);
+							hasteBuff.additiveAttackSpeedMult = 0.5;
+							insertBuff(client, hasteBuff);
 						}
 						case 594:
 						{
