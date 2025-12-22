@@ -394,29 +394,9 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 				else
 					damage *= 3;
 			}
-			else if(strengthPowerupValue == 3.0){
+			else if(strengthPowerupValue == 3.0 && victim != attacker){
 				Buff finisherDebuff; finisherDebuff.init("Bruised", "Marked-for-Finisher", Buff_Bruised, 1, attacker, 8.0);
 				insertBuff(victim, finisherDebuff);
-
-				if(!(currentDamageType[attacker].second & DMG_PIERCING) && !(currentDamageType[attacker].second & DMG_IGNOREHOOK)){
-					float bruisedDamage = damage;
-					if(!(damagetype & DMG_CRIT)){
-						bruisedDamage *= 2.25;
-					}
-
-					if(damage >= TF2Util_GetEntityMaxHealth(victim) * 0.4){
-						currentDamageType[attacker].second |= DMG_PIERCING;
-						currentDamageType[victim].second |= DMG_PIERCING;
-						SDKHooks_TakeDamage(victim, attacker, attacker, 1.0*GetClientHealth(victim), DMG_PREVENT_PHYSICS_FORCE)
-						SDKHooks_TakeDamage(attacker, victim, victim, 0.05*TF2Util_GetEntityMaxHealth(attacker), DMG_PREVENT_PHYSICS_FORCE);
-					}
-					else if((GetClientHealth(victim) - bruisedDamage)/TF2Util_GetEntityMaxHealth(victim) <= 0.25){
-						critStatus[victim] = true;
-						damage = bruisedDamage;
-						currentDamageType[attacker].second |= DMG_PIERCING;
-						SDKHooks_TakeDamage(victim, attacker, attacker, 0.25*TF2Util_GetEntityMaxHealth(victim), DMG_PREVENT_PHYSICS_FORCE)
-					}
-				}
 			}
 		}
 		
@@ -633,6 +613,29 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 							TF2_StunPlayer(victim, 1.0, 1.0, TF_STUNFLAGS_NORMALBONK, attacker);
 						}
 					}
+				}
+			}
+		}
+
+		if(hasBuffIndex(victim, Buff_Bruised) && !(currentDamageType[attacker].second & DMG_PIERCING) && !(currentDamageType[attacker].second & DMG_IGNOREHOOK)){
+			int bruisedInflictor = playerBuffs[victim][getBuffInArray(victim, Buff_Bruised)].inflictor;
+			if(IsValidClient3(bruisedInflictor)){
+				float bruisedDamage = damage;
+				if(!(damagetype & DMG_CRIT)){
+					bruisedDamage *= 2.25;
+				}
+
+				if(damage >= TF2Util_GetEntityMaxHealth(victim) * 0.4){
+					currentDamageType[bruisedInflictor].second |= DMG_PIERCING;
+					currentDamageType[bruisedInflictor].second |= DMG_IGNOREHOOK;
+					SDKHooks_TakeDamage(victim, bruisedInflictor, bruisedInflictor, 1.0*GetClientHealth(victim), DMG_PREVENT_PHYSICS_FORCE)
+				}
+				else if((GetClientHealth(victim) - bruisedDamage)/TF2Util_GetEntityMaxHealth(victim) <= 0.25){
+					critStatus[victim] = true;
+					damage = bruisedDamage;
+					currentDamageType[bruisedInflictor].second |= DMG_PIERCING;
+					currentDamageType[bruisedInflictor].second |= DMG_IGNOREHOOK;
+					SDKHooks_TakeDamage(victim, bruisedInflictor, bruisedInflictor, 0.25*TF2Util_GetEntityMaxHealth(victim), DMG_PREVENT_PHYSICS_FORCE)
 				}
 			}
 		}

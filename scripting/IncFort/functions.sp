@@ -3222,7 +3222,7 @@ GivePowerupDescription(int client, char[] name, int amount){
 		if(amount == 2){
 			CPrintToChat(client, "{community}Dexterity Powerup {default}| {lightcyan}Gives +100 crit rating & increases conditional damage reduction penetration by +50%%.");
 		}else if(amount == 3){
-			CPrintToChat(client, "{community}Bruised Powerup {default}| {lightcyan}Tagged enemies will be hit with a finisher that is a crit + deals 25%% maxHP. Hits above 40%% maxHP instantly kill for -5%% of your health.");
+			CPrintToChat(client, "{community}Bruised Powerup {default}| {lightcyan}Tagged enemies will be hit with a finisher that is a crit + deals 25%% maxHP. Any single hit above 40%% victim's maxHP instantly kills.");
 		}else{
 			CPrintToChat(client, "{community}Strength Powerup {default}| {lightcyan}2x damage dealt.");
 		}
