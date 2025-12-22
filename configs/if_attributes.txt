@@ -632,8 +632,9 @@
 		}
 		"14"
 		{
-			"name"		"heal rate bonus"
-			"ref"		"heal rate bonus"
+			"name"		"heal rate mult"
+			"ref"		"heal rate mult"
+			"attr_class"	"mult_medigun_healrate"
 			"display"		"%.0f%%"
 			"cost"		"250"
 			"value"		"0.25"

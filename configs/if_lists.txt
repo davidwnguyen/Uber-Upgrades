@@ -2316,7 +2316,7 @@
 		"special_tweaks_listid"		"2"
 		"Healing Upgrades"
 		{
-			"0"		"heal rate bonus"
+			"0"		"heal rate mult"
 			"1"		"heal rate bonus(A)"
 			"2"		"urgent healing bonus"
 			"3"		"overheal bonus"
@@ -2340,7 +2340,7 @@
 		"special_tweaks_listid"		"2"
 		"Healing Upgrades"
 		{
-			"0"		"heal rate bonus"
+			"0"		"heal rate mult"
 			"1"		"heal rate bonus(A)"
 			"2"		"urgent healing bonus"
 			"3"		"overheal bonus"

@@ -2499,7 +2499,7 @@
 	"fire rate bonus(old)"{
 		"en"		"Fire Rate Bonus"
 	}
-	"heal rate bonus"{
+	"heal rate mult"{
 		"en"		"Heal Rate Bonus"
 	}
 	"ubercharge rate bonus"{
