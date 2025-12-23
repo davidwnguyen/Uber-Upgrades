@@ -1436,7 +1436,7 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 		}
 		if(TF2Attrib_HookValueFloat(0.0, "supernova_powerup", attacker) == 1.0)
 		{
-			if(damagetype & DMG_BLAST || damagetype & DMG_BLAST_SURFACE)
+			if(damagetype & DMG_BLAST)
 			{
 				damage *= 1.8;
 			}
