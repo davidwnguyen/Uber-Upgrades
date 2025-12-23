@@ -1001,7 +1001,7 @@ public Action:OnTakeDamagePre_Sentry(victim, &attacker, &inflictor, float &damag
 				damage /= linearReduction;
 
 			if(!IsFakeClient(owner)){
-				damage /= GetResistance(owner, _, armorPenetration);
+				damage /= GetResistance(owner, true, armorPenetration);
 			}else{
 				//Armor penetration just gives +10% damage on bots.
 				damage *= 1.0 + armorPenetration*0.1;
@@ -1012,6 +1012,56 @@ public Action:OnTakeDamagePre_Sentry(victim, &attacker, &inflictor, float &damag
 	}
 	return Plugin_Changed;
 }
+public Action OnTakeDamage_MedicShield(victim, &attacker, &inflictor, float &damage, &damagetype, &weapon, float damageForce[3], float damagePosition[3], damagecustom)
+{
+	if(0 < attacker <= MaxClients){
+		int owner = getOwner(victim);
+		if(!IsValidClient3(owner))
+			return Plugin_Continue;
+		
+		if(!(damagetype & DMG_IGNOREHOOK)){
+			baseDamage[attacker] = damage;
+
+			if(damagetype & DMG_USEDISTANCEMOD)
+				damagetype ^= DMG_USEDISTANCEMOD;
+
+			if(IsClientInGame(attacker)){
+				damage = genericPlayerDamageModification(owner, attacker, inflictor, damage, weapon, damagetype, damagecustom);
+			}
+
+			if (!IsValidClient3(inflictor) && IsValidEdict(inflictor)){
+				damage = genericSentryDamageModification(owner, attacker, inflictor, damage, weapon, damagetype, damagecustom);
+			}
+		}
+		
+		if(!(damagetype & DMG_PIERCING) && attacker != owner){
+			float armorPenetration = TF2Attrib_HookValueFloat(0.0, "armor_penetration_buff", attacker);
+
+			float dmgReduction = TF2Attrib_HookValueFloat(1.0, "dmg_incoming_mult", owner);
+			if(dmgReduction != 1.0)
+				damage *= dmgReduction
+
+			float linearReduction = TF2Attrib_HookValueFloat(1.0, "dmg_taken_divided", owner);
+			if(linearReduction != 1.0)
+				damage /= linearReduction;
+
+			if(!IsFakeClient(owner)){
+				damage /= GetResistance(owner, true, armorPenetration);
+			}else{
+				damage *= 1.0 + armorPenetration*0.1;
+			}
+		}
+		float currentRage = GetEntPropFloat(owner, Prop_Send, "m_flRageMeter");
+		if(currentRage > 0.0 && GetEntProp(owner, Prop_Send, "m_bRageDraining")){
+			currentRage -= 33.34*damage/float(TF2Util_GetEntityMaxHealth(owner));
+			if(currentRage < 0.0)
+				currentRage = 0.0;
+			SetEntPropFloat(owner, Prop_Send, "m_flRageMeter", currentRage)
+		}
+	}
+	return Plugin_Changed;
+}
+
 public float genericPlayerDamageModification(victim, attacker, inflictor, float damage, weapon, damagetype, damagecustom)
 {
 	bool isVictimPlayer = IsValidClient3(victim);

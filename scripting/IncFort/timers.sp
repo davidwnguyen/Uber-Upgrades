@@ -318,14 +318,14 @@ public Action:Timer_FixedVariables(Handle timer)
 			Format(ArmorLeft, sizeof(ArmorLeft), "Effective Health | %s", GetAlphabetForm(GetResistance(client, true)*GetClientHealth(client))); 
 
 			if(TF2Attrib_HookValueFloat(0.0, "regeneration_powerup", client) == 3.0){
-				Format(ArmorLeft, sizeof(ArmorLeft), "%s\nBlood Pool  | %.0f", ArmorLeft, bloodAcolyteBloodPool[client]); 
+				Format(ArmorLeft, sizeof(ArmorLeft), "%s\nBlood Pool | %.0f", ArmorLeft, bloodAcolyteBloodPool[client]); 
 			}
 			if(TF2Attrib_HookValueFloat(0.0, "vampire_powerup", client) == 3.0){
-				Format(ArmorLeft, sizeof(ArmorLeft), "%s\nOverleech  | %.0f", ArmorLeft, Overleech[client]); 
+				Format(ArmorLeft, sizeof(ArmorLeft), "%s\nOverleech | %.0f", ArmorLeft, Overleech[client]); 
 			}
 			if(CheckForAttunement(client))
 			{
-				Format(ArmorLeft, sizeof(ArmorLeft), "%s\nFocus  | %.0f / %.0f", ArmorLeft, fl_CurrentFocus[client],fl_MaxFocus[client]); 
+				Format(ArmorLeft, sizeof(ArmorLeft), "%s\nFocus | %.0f / %.0f", ArmorLeft, fl_CurrentFocus[client],fl_MaxFocus[client]); 
 				char spellHUD[1024]
 				Format(spellHUD, sizeof(spellHUD), "Current Spells: \n");
 				for(int i = 0;i<Max_Attunement_Slots;++i)
@@ -344,6 +344,10 @@ public Action:Timer_FixedVariables(Handle timer)
 				}
 				SetHudTextParams(0.02, 0.02, 0.21, 69, 245, 66, 255, 0, 0.0, 0.0, 0.0);
 				ShowSyncHudText(client, hudSpells, spellHUD);
+			}
+			if(TF2_GetPlayerClass(client) == TFClass_Medic && GetEntProp(client, Prop_Send, "m_bRageDraining") && GetEntPropFloat(client, Prop_Send, "m_flRageMeter") > 0)
+			{
+				Format(ArmorLeft, sizeof(ArmorLeft), "%s\nShield | %s", ArmorLeft, GetAlphabetForm(GetResistance(client, true)*GetClientHealth(client)*3*GetEntPropFloat(client, Prop_Send, "m_flRageMeter")/100.0)); 
 			}
 
 			if (AreClientCookiesCached(client)){

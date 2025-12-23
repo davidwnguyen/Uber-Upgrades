@@ -453,7 +453,7 @@ FinishKarmicJustice(client){
 	client = EntRefToEntIndex(client)
 	if(IsValidClient3(client) && IsPlayerAlive(client) && karmicJusticeScaling[client] > 0.0){
 		KarmicJusticeExplosion(client);
-	}
+	}	
 }
 KarmicJusticeExplosion(client){
 	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;

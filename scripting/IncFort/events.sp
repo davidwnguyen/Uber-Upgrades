@@ -353,6 +353,11 @@ public MRESReturn OnModifyRagePre(Address pPlayerShared, Handle hParams) {
 				DHookSetParam(hParams, 1, 1.0);
 			}
 		}
+		case TFClass_Medic:{
+			float value = DHookGetParam(hParams, 1);
+			// It originally takes 400 heals to build up, so 100/150 = 2/3x slower (~4x HP), and scales with max hp upgrade.
+			DHookSetParam(hParams, 1, 100.0*value/TF2Util_GetEntityMaxHealth(client));
+		}
 	}
 	return MRES_ChangedHandled;
 }
@@ -970,6 +975,10 @@ public OnEntityCreated(entity, const char[] classname)
 	{
 		SDKHook(entity, SDKHook_OnTakeDamage, OnTakeDamagePre_Tank);
 		RequestFrame(randomizeTankSpecialty, reference);
+	}
+	else if(StrEqual(classname, "entity_medigun_shield"))
+	{
+		SDKHook(entity, SDKHook_OnTakeDamage, OnTakeDamage_MedicShield);
 	}
 	
 	if(StrContains(classname, "tf_projectile_", false) == 0)

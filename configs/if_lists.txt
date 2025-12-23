@@ -2326,6 +2326,8 @@
 			"0"		"Medigun Heal Range Bonus"
 			"1"		"ubercharge rate bonus"
 			"2"		"Damage Multiplier for healed player"
+			"3"		"generate rage on heal"
+			"4"		"Shield Duration"
 		}
 		"Special Tweaks"
 		{
@@ -2350,6 +2352,8 @@
 			"0"		"Medigun Heal Range Bonus"
 			"1"		"ubercharge rate bonus"
 			"2"		"Damage Multiplier for healed player"
+			"3"		"generate rage on heal"
+			"4"		"Shield Duration"
 		}
 		"Special Tweaks"
 		{

@@ -2649,8 +2649,8 @@
 	"afterburn time increased"{
 		"en"		"Afterburn Duration Increased"
 	}
-	"generate shield on heal"{
-		"en"		"Medigun Shield"
+	"generate rage on heal"{
+		"en"		"Medigun Shield Level"
 	}
 	"Damage bonus vs player (S)"{
 		"en"		"Damage VS Players Bonus"
