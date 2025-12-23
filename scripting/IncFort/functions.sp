@@ -438,9 +438,9 @@ public void ManagePlayerBuffs(int i){
 	{
 		int spy = TF2Util_GetPlayerConditionProvider(i, TFCond_Sapped);
 		if(IsValidClient3(spy)){
-			int sapper = TF2Util_GetPlayerLoadoutEntity(spy,5);
+			int sapper = TF2Util_GetPlayerLoadoutEntity(spy,4);
 			if(IsValidWeapon(sapper)){
-				multiplicativeDamageTakenBuff *= GetAttribute(sapper, "scattergun knockback mult");
+				multiplicativeDamageTakenBuff *= TF2Attrib_HookValueFloat(1.0, "apply_vuln_on_sapped", sapper);
 			}
 		}
 	}
@@ -2283,14 +2283,14 @@ void DoSapperEffects(int client){
 	if(!IsValidClient(inflictor))
 		return;
 
-	int sapper = TF2Util_GetPlayerLoadoutEntity(inflictor,5);
+	int sapper = TF2Util_GetPlayerLoadoutEntity(inflictor,4);
 	if(!IsValidWeapon(sapper))
 		return;
 
 	float magnitude = GetAttribute(sapper, "sapper pulls enemies", 0.0);
 	if(magnitude){
 		for(int i = 1; i <= MaxClients; ++i){
-			if(!IsValidClient(i) || !IsPlayerAlive(i))
+			if(!IsValidClient3(i) || !IsPlayerAlive(i))
 				continue;
 
 			if(IsOnDifferentTeams(client,i))

@@ -18,11 +18,6 @@ public Event_Playerhurt(Handle event, const char[] name, bool:dontBroadcast)
 		isTagged[attacker][client] = true;
 		DamageDealt[attacker] += damage;
 		dps[attacker] += damage;
-		if(damage > 32767)
-		{
-			SetEventInt(event, "damageamount", 0);
-			PrintCenterText(attacker, "OVERLOAD DMG | %s |", GetAlphabetForm(damage));
-		}
 		Handle hPack = CreateDataPack();
 		WritePackCell(hPack, EntIndexToEntRef(attacker));
 		WritePackFloat(hPack, damage);
@@ -3491,40 +3486,19 @@ public TF2Items_OnGiveNamedItem_Post(client, char[] classname, itemDefinitionInd
 			int slot = TF2Econ_GetItemLoadoutSlot(itemDefinitionIndex, TF2_GetPlayerClass(client));
 			if (current_class[client] == TFClass_Spy)
 			{
-				if (StrEqual(classname, "tf_weapon_pda_spy"))
-				{
-					/*current_class[client] = TF2_GetPlayerClass(client)
-					currentitem_classname[client][1] = "tf_weapon_pda_spy"
-					currentitem_ent_idx[client][1] = entityIndex
-					DefineAttributesTab(client, 735, 1, entityIndex)
-					currentitem_catidx[client][1] = GetUpgrade_CatList("tf_weapon_pda_spy")
-					GiveNewUpgradedWeapon_(client, 1);
-					GiveNewUpgradedWeapon_(client, slot);
-					return;*/
+				if (StrEqual(classname, "tf_weapon_builder") || StrEqual(classname, "tf_weapon_sapper"))
 					slot = 1;
-				}
+				else if (StrEqual(classname, "tf_weapon_revolver"))
+					slot = 0;
 			}
 			if (current_class[client] == TFClass_Engineer)
 			{
 				if (StrEqual(classname, "tf_weapon_pda_engineer_build"))
-				{
-					/*current_class[client] = TF2_GetPlayerClass(client)
-					currentitem_classname[client][1] = "tf_weapon_pda_spy"
-					currentitem_ent_idx[client][1] = entityIndex
-					DefineAttributesTab(client, 735, 1, entityIndex)
-					currentitem_catidx[client][1] = GetUpgrade_CatList("tf_weapon_pda_spy")
-					GiveNewUpgradedWeapon_(client, 1);
-					GiveNewUpgradedWeapon_(client, slot);
-					return;*/
 					slot = 5;
-				}
 			}
 			currentitem_catidx[client][4] = _:TF2_GetPlayerClass(client) - 1;
 			if (slot != 3 && slot <= NB_SLOTS_UED && slot > -1)
 			{
-				if (StrEqual(classname, "tf_weapon_revolver"))
-					slot =0;
-				
 				GetEntityClassname(entityIndex, currentitem_classname[client][slot], 64);
 				currentitem_ent_idx[client][slot] = entityIndex
 				current_class[client] = TF2_GetPlayerClass(client)

@@ -1648,10 +1648,9 @@
 		"Sapper upgrades"
 		{
 			"0"		"robo sapper"
-			"1"		"effect bar recharge rate increased(sapper)"
-			"2"		"sapper damage leaches health"
-			"3"		"Vulnerability When Sapped"
-			"4"		"sapper pulls enemies"
+			"1"		"sapper damage leaches health"
+			"2"		"Vulnerability When Sapped"
+			"3"		"sapper pulls enemies"
 		}
 	}
 	"smoke_bomb"
