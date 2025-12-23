@@ -777,6 +777,7 @@ public MenuHandler_SpecialUpgradeChoice(Handle menu, MenuAction:action, client, 
 				}
 
 				if(removedRestriction){
+					removedRestriction = false;
 					for (int i = 0; i < tweaks[spTweak].nb_att; ++i)
 					{
 						int upgrade_choice = tweaks[spTweak].att_idx[i]
@@ -791,13 +792,15 @@ public MenuHandler_SpecialUpgradeChoice(Handle menu, MenuAction:action, client, 
 							}
 
 							if(tmp_val < 0){
-								if(currentupgrades_val[client][slot][tmp_ref_idx] > tmp_init){
+								if(currentupgrades_val[client][slot][tmp_ref_idx] >= tmp_init){
 									currentupgrades_val[client][slot][tmp_ref_idx] = tmp_init;
+									removedRestriction = true;
 								}
 							}
 							else if(tmp_val > 0){
-								if(currentupgrades_val[client][slot][tmp_ref_idx] < tmp_init){
+								if(currentupgrades_val[client][slot][tmp_ref_idx] <= tmp_init){
 									currentupgrades_val[client][slot][tmp_ref_idx] = tmp_init;
+									removedRestriction = true;
 								}
 							}
 						}
