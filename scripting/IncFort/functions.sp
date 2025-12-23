@@ -4217,6 +4217,9 @@ void UpdatePlayerMaxHealth(int client){
 }
 
 void applyAfterburn(int victim, int attacker, int weapon, float damage){
+	if(TF2_IsPlayerInCondition(victim, TFCond_UberchargedHidden))
+		return;
+
 	float burndmgMult = 0.1
 	int burnTime = 6;
 	burndmgMult *= TF2Attrib_HookValueFloat(1.0, "mult_wpn_burndmg", weapon)*TF2Attrib_HookValueFloat(1.0, "debuff_magnitude_mult", weapon);
