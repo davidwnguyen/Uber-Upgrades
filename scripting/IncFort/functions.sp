@@ -1240,7 +1240,7 @@ DisplayItemChange(client,itemidx)
 		//Heavy Primaries
 		case 41:
 		{
-			ChangeString = "Natascha | Shoots only 1 bullet per shot at 2x slower fire rate, but deals 6x damage and has tracer rounds. -70% spread. Converts fire rate into damage.";
+			ChangeString = "Natascha | Shoots only 1 bullet per shot at 2x slower fire rate, but deals 7x damage and has tracer rounds. -70% spread. Converts fire rate into damage.";
 		}
 		case 312:
 		{

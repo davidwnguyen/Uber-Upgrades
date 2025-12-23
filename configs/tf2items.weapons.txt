@@ -477,7 +477,7 @@
 			"4"				"spread penalty;0.3"
 			"5"				"damage penalty;1.0"
 			"6"				"weapon fire rate;2.0"
-			"7"				"damage mult 13; 6.0"
+			"7"				"damage mult 13; 7.0"
 		}
 		"357"//The Half-Zatoichi
 		{

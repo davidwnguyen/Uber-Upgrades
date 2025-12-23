@@ -2129,7 +2129,7 @@ public Action ElectricBallThink(Handle timer, any ref){
     { 
 		int client = getOwner(entity);
 		int weapon = GetEntPropEnt(entity, Prop_Send, "m_hLauncher");
-		float damage = 25.0*TF2_GetDPSModifiers(client, weapon);
+		float damage = 7.0*TF2_GetDPSModifiers(client, weapon);
 		float radius = 240.0*GetAttribute(weapon, "Blast radius increased");
 		float position[3];
 		GetEntPropVector(entity, Prop_Data, "m_vecOrigin", position);
