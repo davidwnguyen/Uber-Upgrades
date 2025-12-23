@@ -1516,7 +1516,7 @@
 		{
 			"0"		"damage bonus"
 			"1"		"ap (global)"
-			"2"		"Explosive Damage Bonus"
+			"2"		"Increased Overall Damage"
 			"3"		"blast radius increased"
 			"4"		"lifesteal ability"
 			"5"		"reveal cloaked victim on hit"

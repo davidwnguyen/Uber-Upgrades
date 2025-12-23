@@ -484,5 +484,10 @@
 			"preserve_attributes"	"1"
 			"1"				"restore health on kill;5.0"
 		}
+		"404"//The Persian Persuader
+		{
+			"preserve_attributes"	"1"
+			"1"				"Converts Firerate to Damage;1.0"
+		}
 	}
 }

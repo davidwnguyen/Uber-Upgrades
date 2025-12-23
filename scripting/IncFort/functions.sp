@@ -1233,6 +1233,10 @@ DisplayItemChange(client,itemidx)
 		{
 			ChangeString = "Ullapool Caber | Infinite explosive charges & converts fire rate to damage.";
 		}
+		case 404:
+		{
+			ChangeString = "Persian Persuader | Converts fire rate to damage.";
+		}
 		//Heavy Primaries
 		case 41:
 		{
