@@ -751,26 +751,66 @@ public MenuHandler_SpecialUpgradeChoice(Handle menu, MenuAction:action, client, 
 					CurrencyOwned[client] -= tweaks[spTweak].cost;
 			}
 			else {
-				if(tweaks[spTweak].restriction != 0)
-				{
-					currentupgrades_restriction[client][slot][tweaks[spTweak].restriction] = 0;
-				}
+				bool removedRestriction = true;
 				for (int i = 0; i < tweaks[spTweak].nb_att; ++i)
 				{
 					int upgrade_choice = tweaks[spTweak].att_idx[i]
 					int tmp_ref_idx = upgrades_ref_to_idx[client][slot][upgrade_choice]
-					if (tmp_ref_idx != 20000)
+					// In this case, the tweak hasn't been selected at all.
+					if (tmp_ref_idx == 20000)
 					{
-						if(currentupgrades_i[client][slot][tmp_ref_idx] != 0.0)
-							currentupgrades_val[client][slot][tmp_ref_idx] = currentupgrades_i[client][slot][tmp_ref_idx];
-						else
-							currentupgrades_val[client][slot][tmp_ref_idx] = upgrades[upgrade_choice].i_val;
+						removedRestriction = false;
+						break;
+					}
+					else // In this case, it has been selected, but has already been refunded.
+					{
+						if(currentupgrades_i[client][slot][tmp_ref_idx] != 0.0 &&
+							currentupgrades_val[client][slot][tmp_ref_idx] == currentupgrades_i[client][slot][tmp_ref_idx]){
+							removedRestriction = false;
+							break;
+						}
+						else if (currentupgrades_val[client][slot][tmp_ref_idx] == upgrades[upgrade_choice].i_val){
+							removedRestriction = false;
+							break;
+						}
 					}
 				}
-				GiveNewUpgradedWeapon_(client, slot)
-				client_spent_money[client][slot] -= tweaks[spTweak].cost;
-				if(!canBypassRestriction[client])
-					CurrencyOwned[client] += tweaks[spTweak].cost;
+
+				if(removedRestriction){
+					for (int i = 0; i < tweaks[spTweak].nb_att; ++i)
+					{
+						int upgrade_choice = tweaks[spTweak].att_idx[i]
+						int tmp_ref_idx = upgrades_ref_to_idx[client][slot][upgrade_choice]
+						if (tmp_ref_idx != 20000)
+						{
+							float tmp_val = upgrades[upgrade_choice].ratio*tweaks[spTweak].att_ratio[i];
+							float tmp_init = upgrades[upgrade_choice].i_val;
+							currentupgrades_val[client][slot][tmp_ref_idx] -= tmp_val;
+							if(currentupgrades_i[client][slot][tmp_ref_idx] != 0.0){
+								tmp_init = currentupgrades_i[client][slot][tmp_ref_idx];
+							}
+
+							if(tmp_val < 0){
+								if(currentupgrades_val[client][slot][tmp_ref_idx] > tmp_init){
+									currentupgrades_val[client][slot][tmp_ref_idx] = tmp_init;
+								}
+							}
+							else if(tmp_val > 0){
+								if(currentupgrades_val[client][slot][tmp_ref_idx] < tmp_init){
+									currentupgrades_val[client][slot][tmp_ref_idx] = tmp_init;
+								}
+							}
+						}
+					}
+					if(tweaks[spTweak].restriction != 0 && removedRestriction)
+					{
+						currentupgrades_restriction[client][slot][tweaks[spTweak].restriction] = 0;
+					}
+					GiveNewUpgradedWeapon_(client, slot)
+					client_spent_money[client][slot] -= tweaks[spTweak].cost;
+					if(!canBypassRestriction[client])
+						CurrencyOwned[client] += tweaks[spTweak].cost;
+				}
 			}
 		}
 		char buf[128]

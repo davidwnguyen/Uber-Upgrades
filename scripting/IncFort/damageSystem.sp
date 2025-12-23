@@ -563,7 +563,7 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 			if(!(damagetype & DMG_PIERCING) && !(damagetype & DMG_BURN|DMG_PREVENT_PHYSICS_FORCE)){ //Make sure it isn't piercing or afterburn damage...
 				float freezeRatio = TF2Attrib_HookValueFloat(0.0, "damage_causes_freeze", weapon);
 				if(freezeRatio > 0){
-					float frostIncrease = freezeRatio*damage/TF2Util_GetEntityMaxHealth(victim);
+					float frostIncrease = 100.0*freezeRatio*damage/TF2Util_GetEntityMaxHealth(victim);
 					if(TF2Attrib_HookValueFloat(0.0, "knockout_powerup", attacker) == 2 && TF2Util_GetWeaponSlot(weapon) == TFWeaponSlot_Melee)
 						frostIncrease *= 2.0;
 					if(hasBuffIndex(attacker, Buff_Plunder)){
