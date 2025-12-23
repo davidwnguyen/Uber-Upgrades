@@ -3468,10 +3468,10 @@ public TF2Items_OnGiveNamedItem_Post(client, char[] classname, itemDefinitionInd
 {
 	if (IsValidClient(client) && !TF2_IsPlayerInCondition(client, TFCond_Disguised))
 	{
+		current_class[client] = TF2_GetPlayerClass(client)
 		if (itemLevel == 242)
 		{
 			int slot = 3
-			current_class[client] = TF2_GetPlayerClass(client)
 			currentitem_ent_idx[client][slot] = entityIndex;
 			currentitem_level[client][slot] = 242;
 			if (!currentupgrades_number[client][slot])
@@ -3485,7 +3485,7 @@ public TF2Items_OnGiveNamedItem_Post(client, char[] classname, itemDefinitionInd
 		}
 		else
 		{
-			int slot = TF2Econ_GetItemLoadoutSlot(itemDefinitionIndex, TF2_GetPlayerClass(client));
+			int slot = TF2Econ_GetItemLoadoutSlot(itemDefinitionIndex, current_class[client]);
 			if (current_class[client] == TFClass_Spy)
 			{
 				if (StrEqual(classname, "tf_weapon_builder") || StrEqual(classname, "tf_weapon_sapper"))
@@ -3503,7 +3503,6 @@ public TF2Items_OnGiveNamedItem_Post(client, char[] classname, itemDefinitionInd
 			{
 				GetEntityClassname(entityIndex, currentitem_classname[client][slot], 64);
 				currentitem_ent_idx[client][slot] = entityIndex
-				current_class[client] = TF2_GetPlayerClass(client)
 				DefineAttributesTab(client, itemDefinitionIndex, slot, entityIndex)
 				currentitem_catidx[client][slot] = GetUpgrade_CatList(classname)
 				
