@@ -34,14 +34,12 @@ public Action:OnStartTouchStomp(client, other)
 					GetClientAbsOrigin(i, splashOrigin);
 					if(GetVectorDistance(splashOrigin, ClientPos, true) > 250000.0) continue;
 
-					currentDamageType[client].second |= DMG_IGNOREHOOK;
-					SDKHooks_TakeDamage(i,client,client,stompDamage,DMG_CLUB|DMG_CRUSH,CWeapon,_,_,false);
+					SDKHooks_TakeDamage(i,client,client,stompDamage,DMG_CLUB|DMG_CRUSH|DMG_IGNOREHOOK,CWeapon,_,_,false);
 					++splash;
 				}
 			}
 			
-			currentDamageType[client].second |= DMG_IGNOREHOOK;
-			SDKHooks_TakeDamage(other,client,client,stompDamage,DMG_CLUB|DMG_CRUSH,CWeapon,_,_,false);
+			SDKHooks_TakeDamage(other,client,client,stompDamage,DMG_CLUB|DMG_CRUSH|DMG_IGNOREHOOK,CWeapon,_,_,false);
 		}
 	}
 	if(hasBuffIndex(client, Buff_InfernalLunge)){
@@ -58,7 +56,7 @@ public Action:OnStartTouchStomp(client, other)
 			if(currentDPS > strongestDPS)
 				strongestDPS = currentDPS;
 		}
-		EntityExplosion(client, playerBuffs[client][getBuffInArray(client, Buff_InfernalLunge)].severity*strongestDPS, 500.0, ClientPos, 0,_,_,_,DMG_BLAST|DMG_BURN,CWeapon,0.25, _,_,_,_,_,_,300.0);
+		EntityExplosion(client, playerBuffs[client][getBuffInArray(client, Buff_InfernalLunge)].severity*strongestDPS, 500.0, ClientPos, 0,_,_,_,DMG_BLAST|DMG_BURN,CWeapon,0.25,_,_,_,300.0);
 		playerBuffs[client][getBuffInArray(client, Buff_InfernalLunge)].clear();
 	}
 }
@@ -142,8 +140,7 @@ public Action:OnSunlightSpearCollision(entity, client)
 
 				float scaling[] = {0.0, 100.0, 125.0, 160.0};
 				float ProjectileDamage = scaling[spellLevel]*ArcaneDamage[owner];
-				currentDamageType[owner].second |= DMG_IGNOREHOOK;
-				SDKHooks_TakeDamage(client, owner, owner, ProjectileDamage, DMG_SHOCK,_,_,_,false);
+				SDKHooks_TakeDamage(client, owner, owner, ProjectileDamage, DMG_SHOCK|DMG_IGNOREHOOK,_,_,_,false);
 				CreateParticleEx(client, "dragons_fury_effect_parent", 1);
 			}
 		}
@@ -204,7 +201,7 @@ public Action:BlackskyEyeCollision(entity, client)
 		}
 		else
 		{
-			EntityExplosion(owner,ProjectileDamage,radius[spellLevel], projvec,0,_,entity,0.65,1073741824,_,_,_,_,_,_,_,"ExplosionCore_sapperdestroyed");
+			EntityExplosion(owner,ProjectileDamage,radius[spellLevel], projvec,0,_,entity,0.65,1073741824,_,_,_,_,"ExplosionCore_sapperdestroyed");
 		}
 	}
 		
@@ -372,8 +369,7 @@ public Action:OnCollisionWarriorArrow(entity, client)
 			{
 				damageDealt *= TF2Attrib_GetValue(multiHitActive) + 1.0;
 			}
-			currentDamageType[owner].second |= DMG_IGNOREHOOK;
-			SDKHooks_TakeDamage(client, owner, owner, damageDealt*TF2_GetDamageModifiers(owner, CWeapon, false), DMG_BULLET, CWeapon, _,_,false);
+			SDKHooks_TakeDamage(client, owner, owner, damageDealt*TF2_GetDamageModifiers(owner, CWeapon, false), DMG_BULLET|DMG_IGNOREHOOK, CWeapon, _,_,false);
 		}
 		RemoveEntity(entity);
 	}
@@ -403,8 +399,7 @@ public Action:OnCollisionSentryBolt(entity, client)
 				int sentry = EntRefToEntIndex(jarateWeapon[entity]);
 				if(IsValidEntity(sentry))
 				{
-					currentDamageType[owner].second |= DMG_IGNOREHOOK;
-					SDKHooks_TakeDamage(client, sentry, owner, projectileDamage[entity], DMG_BULLET, _, _,_,false);
+					SDKHooks_TakeDamage(client, sentry, owner, projectileDamage[entity], DMG_BULLET|DMG_IGNOREHOOK, _, _,_,false);
 					if(IsValidClient3(client)){
 						ShouldNotHome[entity][client] = true;
 						BleedBuildup[client] += 4.0;
@@ -448,8 +443,7 @@ public Action:OnCollisionBossArrow(entity, client)
 				if(IsValidEdict(CWeapon))
 				{
 					float damageDealt = 240.0*TF2_GetDamageModifiers(owner, CWeapon, false);
-					currentDamageType[owner].second |= DMG_IGNOREHOOK;
-					SDKHooks_TakeDamage(client, owner, owner, damageDealt, DMG_BULLET, CWeapon, _,_,false);
+					SDKHooks_TakeDamage(client, owner, owner, damageDealt, DMG_BULLET|DMG_IGNOREHOOK, CWeapon, _,_,false);
 					if(IsValidClient3(client))
 					{
 						RadiationBuildup[client] += 100.0;
@@ -476,8 +470,7 @@ public Action:OnCollisionArrow(entity, client)
 			int CWeapon = GetEntPropEnt(owner, Prop_Send, "m_hActiveWeapon");
 			if(IsValidEdict(CWeapon))
 			{
-				currentDamageType[owner].second |= DMG_IGNOREHOOK;
-				SDKHooks_TakeDamage(client, owner, owner, 50.0*TF2_GetDamageModifiers(owner, CWeapon, false), DMG_BULLET, CWeapon, _,_,false);
+				SDKHooks_TakeDamage(client, owner, owner, 50.0*TF2_GetDamageModifiers(owner, CWeapon, false), DMG_BULLET|DMG_IGNOREHOOK, CWeapon, _,_,false);
 			}
 			RemoveEntity(entity);
 		}
@@ -514,8 +507,7 @@ public Action:OnCollisionPhotoViscerator(entity, client)
 						damage /= TF2Attrib_GetValue(lameMult);
 					}
 					DOTStock(client,owner,damage*0.1,CWeapon,DMG_BURN + DMG_PREVENT_PHYSICS_FORCE,20,0.5,0.2,true);
-					currentDamageType[owner].second |= DMG_IGNOREHOOK;
-					SDKHooks_TakeDamage(client,owner,owner,damage,DMG_BURN,CWeapon,_,_,false);
+					SDKHooks_TakeDamage(client,owner,owner,damage,DMG_BURN|DMG_IGNOREHOOK,CWeapon,_,_,false);
 				}
 				float pos[3]
 				GetEntPropVector(entity, Prop_Data, "m_vecOrigin", pos);
@@ -557,10 +549,12 @@ public Action:OnCollisionMoonveil(entity, client)
 				int CWeapon = GetEntPropEnt(owner, Prop_Send, "m_hActiveWeapon");
 				if(IsValidEdict(CWeapon))
 				{
-					currentDamageType[owner].second |= DMG_ARCANE;
-					currentDamageType[owner].second |= DMG_ARCANESCALING;
-					currentDamageType[owner].second |= DMG_IGNOREHOOK;
-					SDKHooks_TakeDamage(client,owner,owner,150.0,DMG_GENERIC,CWeapon, _,_,false);
+					float damage = 150.0;
+					if (IsValidEntity(CWeapon) && TF2Util_IsEntityWeapon(CWeapon)) {
+						damage *= GetAttribute(CWeapon, "damage mult 15");
+					}
+					damage *= ArcaneDamage[owner];
+					SDKHooks_TakeDamage(client,owner,owner,damage,DMG_GENERIC|DMG_IGNOREHOOK,CWeapon, _,_,false);
 				}
 				RemoveEntity(entity);
 			}
@@ -589,8 +583,7 @@ public Action:OnCollisionBoomerang(entity, client)
 			if(IsValidEdict(CWeapon))
 			{
 				float damageDealt = 180.0 * TF2_GetDamageModifiers(owner, CWeapon);
-				currentDamageType[owner].second |= DMG_IGNOREHOOK;
-				SDKHooks_TakeDamage(client, owner, owner, damageDealt, DMG_SLASH, CWeapon,_,_,false);
+				SDKHooks_TakeDamage(client, owner, owner, damageDealt, DMG_SLASH|DMG_IGNOREHOOK, CWeapon,_,_,false);
 			}
 		}
 		float origin[3],ProjAngle[3], vBuffer[3], ProjVelocity[3];
@@ -648,7 +641,7 @@ public Action:OnCollisionPiercingRocket(entity, client)
 				if(IsValidEdict(CWeapon))
 				{
 					float damageDealt = 70.0 * TF2_GetDamageModifiers(owner, CWeapon);
-					EntityExplosion(owner, damageDealt, 200.0, origin, 0, true, entity, _, _,_,_,_,_,_,_,_,_,_,true);
+					EntityExplosion(owner, damageDealt, 200.0, origin, 0, true, entity, _, _,_,_,_,_,_,_,true);
 				}
 				if(IsValidClient3(client))
 					ShouldNotHome[entity][client] = true;
@@ -784,8 +777,7 @@ public Action:OnTouchExplodeJar(entity, other)
 					VictimPos[2] += 30.0;
 					if(GetVectorDistance(clientvec,VictimPos,true) <= squaredRadius)
 						if(IsPointVisible(clientvec,VictimPos)){
-							currentDamageType[owner].second |= DMG_IGNOREHOOK;
-							SDKHooks_TakeDamage(i,owner,owner, LightningDamage, 1073741824, _,_,_,false);
+							SDKHooks_TakeDamage(i,owner,owner, LightningDamage, DMG_IGNOREHOOK, _,_,_,false);
 						}
 				}
 			}
@@ -813,8 +805,7 @@ public Action:OnTouchExplodeJar(entity, other)
 							{
 								case 0:
 								{
-									currentDamageType[owner].second |= DMG_IGNOREHOOK;
-									SDKHooks_TakeDamage(i,owner,owner,30.0*damageBoost,DMG_BULLET,CWeapon,_,_,false);
+									SDKHooks_TakeDamage(i,owner,owner,30.0*damageBoost,DMG_BULLET|DMG_IGNOREHOOK,CWeapon,_,_,false);
 									if(isPlayer){
 										miniCritStatusVictim[i] = GetGameTime()+8.0;
 										Buff jarateDebuff;
@@ -827,8 +818,7 @@ public Action:OnTouchExplodeJar(entity, other)
 									if(isPlayer)
 										TF2_AddCondition(i,TFCond_Milked,0.01);
 										
-									currentDamageType[owner].second |= DMG_IGNOREHOOK;
-									SDKHooks_TakeDamage(i,owner,owner,30.0*damageBoost,DMG_BULLET,CWeapon,_,_,false);
+									SDKHooks_TakeDamage(i,owner,owner,30.0*damageBoost,DMG_BULLET|DMG_IGNOREHOOK,CWeapon,_,_,false);
 								}
 							}//corrosiveDOT
 							if(isPlayer)
@@ -953,8 +943,7 @@ public Action:OnCollisionExplosiveFrag(entity, client)
 				if(IsOnDifferentTeams(owner,client))
 				{
 					float damageDealt = 15.0*TF2_GetDamageModifiers(owner, CWeapon, false);
-					currentDamageType[owner].second |= DMG_IGNOREHOOK;
-					SDKHooks_TakeDamage(client, owner, owner, damageDealt, DMG_BULLET, CWeapon, _,_,false);
+					SDKHooks_TakeDamage(client, owner, owner, damageDealt, DMG_BULLET|DMG_IGNOREHOOK, CWeapon, _,_,false);
 				}
 			}
 			float fragExplosionDamage = TF2Attrib_HookValueFloat(0.0, "explosive_frag_damage", CWeapon);
@@ -962,7 +951,7 @@ public Action:OnCollisionExplosiveFrag(entity, client)
 			{
 				float Radius = 75.0*TF2Attrib_HookValueFloat(1.0, "mult_explosion_radius", CWeapon)*TF2Attrib_HookValueFloat(1.0, "mult_frag_explosion_radius", CWeapon), clientvec[3];
 				GetEntPropVector(entity, Prop_Send, "m_vecOrigin", clientvec)
-				EntityExplosion(owner, fragExplosionDamage * TF2_GetDamageModifiers(owner, CWeapon), Radius, clientvec, 0, true, entity, 0.25,_,CWeapon,_,75,TF2Attrib_HookValueFloat(0.0, "afterburn_rating", CWeapon)>0,_,_,_,"ExplosionCore_sapperdestroyed")
+				EntityExplosion(owner, fragExplosionDamage * TF2_GetDamageModifiers(owner, CWeapon), Radius, clientvec, 0, true, entity, 0.25,_,CWeapon,_,75,TF2Attrib_HookValueFloat(0.0, "afterburn_rating", CWeapon)>0,"ExplosionCore_sapperdestroyed")
 			}
 		}
 	}
@@ -981,11 +970,8 @@ public Action:CollisionFrozenFrag(entity, client)
 			{
 				if(IsOnDifferentTeams(owner,client))
 				{
-					currentDamageType[owner].second |= DMG_FROST;
-					currentDamageType[owner].second |= DMG_PIERCING;
-					currentDamageType[owner].second |= DMG_IGNOREHOOK;
 					float damageDealt = 0.5*TF2Util_GetEntityMaxHealth(jarateWeapon[entity]);
-					SDKHooks_TakeDamage(client, owner, owner, damageDealt, DMG_PREVENT_PHYSICS_FORCE, CWeapon, _,_,false);
+					SDKHooks_TakeDamage(client, owner, owner, damageDealt, DMG_PREVENT_PHYSICS_FORCE|DMG_IGNOREHOOK|DMG_PIERCING, CWeapon, _,_,false);
 					RemoveEntity(entity);
 				}
 			}

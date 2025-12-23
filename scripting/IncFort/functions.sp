@@ -122,8 +122,7 @@ stock Action DOTDamage(Handle timer,any:data)
 	{
 		if(IsValidForDamage(victim) && IsValidClient3(attacker))
 		{
-			currentDamageType[attacker].second |= DMG_IGNOREHOOK;
-			SDKHooks_TakeDamage(victim,attacker,attacker,damage, damagetype,weapon,NULL_VECTOR,NULL_VECTOR,false);
+			SDKHooks_TakeDamage(victim,attacker,attacker,damage,damagetype|DMG_IGNOREHOOK,weapon,NULL_VECTOR,NULL_VECTOR,false);
 			repeats--;
 			Handle hPack = CreateDataPack();
 			WritePackCell(hPack, EntIndexToEntRef(victim));
@@ -623,7 +622,7 @@ public float ParseShorthand(char[] input, int size){
 
 	return num;
 }
-stock EntityExplosion(owner, float damage, float radius, float pos[3], soundType = 0, bool visual = true, entity = -1, float soundLevel = SNDVOL_NORMAL,damagetype = DMG_BLAST, weapon = -1, float falloff = 0.0, soundPriority = SNDLEVEL_NORMAL, bool ignition = false, int firstBits = 0, int secondBits = 0, int thirdBits = 0, char[] particle = "ExplosionCore_MidAir", float knockback = 0.0, bool noMultihit = false)
+stock EntityExplosion(owner, float damage, float radius, float pos[3], soundType = 0, bool visual = true, entity = -1, float soundLevel = SNDVOL_NORMAL,damagetype = DMG_BLAST, weapon = -1, float falloff = 0.0, soundPriority = SNDLEVEL_NORMAL, bool ignition = false, char[] particle = "ExplosionCore_MidAir", float knockback = 0.0, bool noMultihit = false)
 {
 	if(entity == -1 || !IsValidEdict(entity))
 		entity = owner;
@@ -655,15 +654,10 @@ stock EntityExplosion(owner, float damage, float radius, float pos[3], soundType
 							damage *= 1+3*((200-distance)/200);
 						}
 					}
-					
-					currentDamageType[owner].first = damagetype | firstBits;
-					currentDamageType[owner].second = secondBits;
-					currentDamageType[owner].third = thirdBits;
 
 					if(IsValidEdict(weapon) && IsValidClient3(i))
 					{
-						currentDamageType[owner].second |= DMG_IGNOREHOOK;
-						SDKHooks_TakeDamage(i,owner,owner,damage, damagetype,weapon,_,_,false)
+						SDKHooks_TakeDamage(i,owner,owner,damage,damagetype|DMG_IGNOREHOOK,weapon,_,_,false)
 						if(knockback > 0.0)
 							PushEntity(i, owner, knockback, 200.0);
 						
@@ -672,8 +666,7 @@ stock EntityExplosion(owner, float damage, float radius, float pos[3], soundType
 					}
 					else
 					{
-						currentDamageType[owner].second |= DMG_IGNOREHOOK;
-						SDKHooks_TakeDamage(i,owner,owner,damage, damagetype,_,_,_, false);
+						SDKHooks_TakeDamage(i,owner,owner,damage,damagetype|DMG_IGNOREHOOK,_,_,_, false);
 					}
 					if(noMultihit)
 						ShouldNotHit[entity][i] = true;
@@ -2405,10 +2398,7 @@ checkRadiation(victim,attacker)
 	if(RadiationBuildup[victim] >= RadiationMaximum[victim])
 	{
 		RadiationBuildup[victim] = 0.0;
-
-		currentDamageType[attacker].second |= DMG_PIERCING;
-		currentDamageType[attacker].second |= DMG_IGNOREHOOK;
-		SDKHooks_TakeDamage(victim, attacker, attacker, GetClientHealth(victim)*0.35, DMG_PREVENT_PHYSICS_FORCE);
+		SDKHooks_TakeDamage(victim, attacker, attacker, GetClientHealth(victim)*0.35, DMG_PREVENT_PHYSICS_FORCE|DMG_IGNOREHOOK|DMG_PIERCING);
 
 		Buff radiation;
 		radiation.init("Radiation", "", Buff_Radiation, 1, attacker, 8.0);
@@ -2435,10 +2425,7 @@ checkFreeze(int victim,int attacker)
 		insertBuff(victim, frozen);
 
 		TF2_AddCondition(victim, TFCond_FreezeInput, 6.0, attacker);
-		currentDamageType[attacker].second |= DMG_PIERCING;
-		currentDamageType[attacker].second |= DMG_FROST;
-		currentDamageType[attacker].second |= DMG_IGNOREHOOK;
-		SDKHooks_TakeDamage(victim, attacker, attacker, GetClientHealth(victim)*0.2, DMG_PREVENT_PHYSICS_FORCE);
+		SDKHooks_TakeDamage(victim, attacker, attacker, GetClientHealth(victim)*0.2, DMG_PREVENT_PHYSICS_FORCE|DMG_IGNOREHOOK|DMG_PIERCING);
 		SetEntityRenderColor(victim, 0, 128, 255, 80);
 		SetEntityMoveType(victim, MOVETYPE_NONE);
 	}
@@ -2465,11 +2452,7 @@ checkBleed(int victim,int attacker, int weapon = -1, float overrideDamage = 0.0)
 	while(BleedBuildup[victim] >= BleedMaximum[victim])
 	{
 		BleedBuildup[victim] -= BleedMaximum[victim];
-		
-		currentDamageType[attacker].second |= DMG_IGNOREHOOK;
-		SDKHooks_TakeDamage(victim, attacker, attacker, damage, DMG_PREVENT_PHYSICS_FORCE,_,_,_,false);
-
-
+		SDKHooks_TakeDamage(victim, attacker, attacker, damage, DMG_PREVENT_PHYSICS_FORCE|DMG_IGNOREHOOK,_,_,_,false);
 		CreateParticleEx(victim, "env_sawblood", 1, 0, damagePosition, 2.0);
 	}
 }
@@ -3596,9 +3579,6 @@ ResetVariables(){
 			SpellCooldowns[client][spellID] = 0.0;
 		}
 	}
-	for(int entity = 0; entity<MAXENTITIES; entity++){
-		currentDamageType[entity].clear();
-	}
 }
 public void CheckForGamestage(){
 	bool success = true;
@@ -3645,8 +3625,7 @@ public bool TraceEntityWarp(int entity, int contentsMask, any data) {
     if (0 < entity <= MaxClients){
 		if(IsValidClient3(entity) && IsPlayerAlive(entity) && IsOnDifferentTeams(entity, data)){
 			float damageBoost = TF2_GetDamageModifiers(data, GetEntPropEnt(data, Prop_Send, "m_hActiveWeapon"), true, true, false);
-			currentDamageType[data].second |= DMG_IGNOREHOOK;
-			SDKHooks_TakeDamage(entity,data,data,damageBoost*1200.0,DMG_CLUB|DMG_CRUSH,GetEntPropEnt(data, Prop_Send, "m_hActiveWeapon"),_,_,false);
+			SDKHooks_TakeDamage(entity,data,data,damageBoost*1200.0,DMG_CLUB|DMG_CRUSH|DMG_IGNOREHOOK,GetEntPropEnt(data, Prop_Send, "m_hActiveWeapon"),_,_,false);
 
 			Buff jarateDebuff; jarateDebuff.init("Jarated", "", Buff_Jarated, 2*RoundToNearest(damageBoost), data, 8.0);
 			insertBuff(entity, jarateDebuff);
@@ -4452,10 +4431,8 @@ ExplosionHookEffects(entity){
 			if(!IsValidClient3(target))
 				continue;
 
-			currentDamageType[owner].second |= DMG_IGNOREHOOK;
-			SDKHooks_TakeDamage(target, owner, owner, damage,_,_,_,_,false);
-			currentDamageType[owner].second |= DMG_IGNOREHOOK;
-			SDKHooks_TakeDamage(target, owner, owner, 3.0, DMG_RADIATION|DMG_DISSOLVE,_,_,_,false);
+			SDKHooks_TakeDamage(target, owner, owner, damage,DMG_IGNOREHOOK,_,_,_,false);
+			SDKHooks_TakeDamage(target, owner, owner, 3.0, DMG_RADIATION|DMG_DISSOLVE|DMG_IGNOREHOOK,_,_,_,false);
 
 			if(hitParticle[target]+0.2 <= GetGameTime()){
 				GetEntPropVector(target, Prop_Data, "m_vecOrigin", victimPosition);

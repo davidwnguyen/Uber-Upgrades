@@ -421,8 +421,7 @@ CastAntisepticBlast(client, attuneSlot)
 		if(!IsPointVisible(clientpos,VictimPos))
 			continue;
 
-		currentDamageType[client].second |= DMG_IGNOREHOOK;
-		SDKHooks_TakeDamage(i,client,client,LightningDamage * (1.0 + 0.5*GetAmountOfDebuffs(i)),_,-1,NULL_VECTOR,NULL_VECTOR, false);
+		SDKHooks_TakeDamage(i,client,client,LightningDamage * (1.0 + 0.5*GetAmountOfDebuffs(i)), DMG_IGNOREHOOK,-1,NULL_VECTOR,NULL_VECTOR, false);
 	}
 }
 CastSnowstorm(client, attuneSlot){
@@ -464,7 +463,7 @@ KarmicJusticeExplosion(client){
 	float explosionRadius[] = {0.0, 500.0, 1000.0, 1250.0};
 	float pos[3];
 	GetEntPropVector(client, Prop_Data, "m_vecOrigin", pos);
-	EntityExplosion(client, damageDealt, explosionRadius[spellLevel], pos, 1, _, client, _,_,_,_,_,_,_,DMG_ARCANE);
+	EntityExplosion(client, damageDealt, explosionRadius[spellLevel], pos, 1, _, client);
 	CreateParticleEx(client, "drg_cow_explosioncore_charged_blue", -1, -1, pos);
 	CreateParticleEx(client, "rd_robot_explosion", -1, -1, pos);
 
@@ -612,9 +611,7 @@ CastSnapFreeze(client, attuneSlot)
 		if(!IsPointVisible(clientpos,VictimPos))
 			continue;
 
-		currentDamageType[client].second |= DMG_FROST;
-		currentDamageType[client].second |= DMG_IGNOREHOOK;
-		SDKHooks_TakeDamage(i,client,client,damage,DMG_BULLET,-1,NULL_VECTOR,NULL_VECTOR, false);
+		SDKHooks_TakeDamage(i,client,client,damage,DMG_BULLET|DMG_IGNOREHOOK,-1,NULL_VECTOR,NULL_VECTOR, false);
 		if(IsValidClient3(i))
 		{
 			TF2_AddCondition(i, TFCond_FreezeInput, 0.4);
@@ -1054,8 +1051,7 @@ CastShockwave(client, attuneSlot)
 		if(GetVectorDistance(ClientPos,VictimPos,true) > 250000.0)
 			continue;
 
-		currentDamageType[client].second |= DMG_IGNOREHOOK;
-		SDKHooks_TakeDamage(i,client,client,damageDealt,DMG_BULLET,-1,NULL_VECTOR,NULL_VECTOR, false);
+		SDKHooks_TakeDamage(i,client,client,damageDealt,DMG_BULLET|DMG_IGNOREHOOK,-1,NULL_VECTOR,NULL_VECTOR, false);
 		if(IsValidClient3(i))
 		{
 			TF2_AddCondition(i, TFCond_FreezeInput, 0.4);
@@ -1294,8 +1290,7 @@ public Action:ArcaneHunter(Handle timer, client)
 		if(!IsPointVisible(clientpos,VictimPos))
 			continue;
 
-		currentDamageType[client].second |= DMG_IGNOREHOOK;
-		SDKHooks_TakeDamage(i,client,client,LightningDamage,1073741824,-1,NULL_VECTOR,NULL_VECTOR, false);
+		SDKHooks_TakeDamage(i,client,client,LightningDamage,DMG_BULLET|DMG_IGNOREHOOK,-1,NULL_VECTOR,NULL_VECTOR, false);
 	}
 }
 CastBlackskyEye(client, attuneSlot)
@@ -1539,8 +1534,7 @@ DoZap(client,victim,spellLevel)
 	EmitSoundToAll(SOUND_ZAP, 0, _, SNDLEVEL_CONVO, _, 1.0, _,_,clientpos);
 	
 	float LightningDamage = 35.0 * ArcaneDamage[client];
-	currentDamageType[client].second |= DMG_IGNOREHOOK;
-	SDKHooks_TakeDamage(victim,client,client, LightningDamage, 1073741824, -1, NULL_VECTOR, NULL_VECTOR, false);
+	SDKHooks_TakeDamage(victim,client,client, LightningDamage, DMG_IGNOREHOOK, -1, NULL_VECTOR, NULL_VECTOR, false);
 	float chance[] = {0.0,0.3,0.4,0.5};
 		
 	if(chance[spellLevel] >= GetRandomFloat(0.0, 1.0))
@@ -1632,8 +1626,7 @@ CastLightning(client, attuneSlot)
 			if(!IsPointVisible(clientpos,VictimPos))
 				continue;
 
-			currentDamageType[client].second |= DMG_IGNOREHOOK;
-			SDKHooks_TakeDamage(i,client,client,LightningDamage,DMG_SHOCK,_,_,_,false);
+			SDKHooks_TakeDamage(i,client,client,LightningDamage,DMG_SHOCK|DMG_IGNOREHOOK,_,_,_,false);
 			
 			if(IsValidClient3(i))
 				TF2_IgnitePlayer(i, client, 3.0);

@@ -17,17 +17,10 @@ Yeah.
 #define MAXENTITIES 2049
 #define PI 3.142
 
-//First
-#define DMG_ACTUALIGNITE 1 << 30
-
-//Second
-#define DMG_PIERCING 1 << 1
-#define DMG_ARCANE 1 << 2
-#define DMG_MINICRIT 1 << 3
-#define DMG_ACTUALCRIT 1 << 4
-#define DMG_FROST 1 << 5
-#define DMG_IGNOREHOOK 1 << 6
-#define DMG_ARCANESCALING 1 << 7
+//Damage Types
+#define DMG_PIERCING (1 << 30)
+#define DMG_IGNOREHOOK (1 << 31)
+#define DMG_ARCANESCALING (1 << 22)
 
 //Uber Stuff
 #define UBER_INVULN 1 << 0

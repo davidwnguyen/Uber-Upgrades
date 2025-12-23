@@ -66,8 +66,7 @@ public Action:Timer_Second(Handle timer)
 
 			for(int owner=0;owner<=MaxClients;++owner){
 				if(damageAccumulation[owner] > 0){
-					currentDamageType[owner].second |= DMG_IGNOREHOOK;
-					SDKHooks_TakeDamage(client, owner, owner, damageAccumulation[owner], DMG_BURN | DMG_PREVENT_PHYSICS_FORCE, _, _, _, false);
+					SDKHooks_TakeDamage(client, owner, owner, damageAccumulation[owner], DMG_BURN|DMG_PREVENT_PHYSICS_FORCE|DMG_IGNOREHOOK, _, _, _, false);
 					isOnFire = true;
 				}
 			}
@@ -132,7 +131,7 @@ public Action:Timer_FixedVariables(Handle timer)
 					float explosionRadius[] = {0.0, 300.0, 600.0, 1500.0};
 					float pos[3];
 					GetEntPropVector(client, Prop_Data, "m_vecOrigin", pos);
-					EntityExplosion(client, damageDealt, explosionRadius[spellLevel], pos, -1, false, client, _, _, _, _, _, _, _, DMG_FROST);
+					EntityExplosion(client, damageDealt, explosionRadius[spellLevel], pos, -1, false, client);
 					fl_CurrentFocus[client] -= fl_MaxFocus[client]*0.005/ArcanePower[client];
 				}else{
 					int particleEffect = EntRefToEntIndex(snowstormParticle[client]);
@@ -147,9 +146,7 @@ public Action:Timer_FixedVariables(Handle timer)
 			if(immolationActive[client]){
 				float immolationRatio = GetAttribute(CWeapon, "immolation ratio", 0.0);
 				if(immolationRatio > 0.0){
-					currentDamageType[client].second |= DMG_PIERCING
-					currentDamageType[client].second |= DMG_IGNOREHOOK;
-					SDKHooks_TakeDamage(client, client, client, TF2Util_GetEntityMaxHealth(client)*immolationRatio*0.1, DMG_PREVENT_PHYSICS_FORCE);
+					SDKHooks_TakeDamage(client, client, client, TF2Util_GetEntityMaxHealth(client)*immolationRatio*0.1, DMG_PREVENT_PHYSICS_FORCE|DMG_IGNOREHOOK|DMG_PIERCING);
 				}
 			}
 			if(sunstarDuration[client] >= GetGameTime()){
@@ -236,8 +233,7 @@ public Action:Timer_FixedVariables(Handle timer)
 						if(!IsPointVisible(clientpos,VictimPos))
 							continue;
 
-						currentDamageType[client].second |= DMG_IGNOREHOOK;
-						SDKHooks_TakeDamage(i,client,client,LightningDamage,DMG_SHOCK,CWeapon,_,_,false);
+						SDKHooks_TakeDamage(i,client,client,LightningDamage,DMG_SHOCK|DMG_IGNOREHOOK,CWeapon,_,_,false);
 					}
 				}
 			}
@@ -247,9 +243,7 @@ public Action:Timer_FixedVariables(Handle timer)
 			info = playerBuffs[client][getBuffInArray(client, Buff_ImmolationBurn)];
 			if(IsValidClient3(info.inflictor)){
 				if(info.severity > 0.0){
-					currentDamageType[info.inflictor].second |= DMG_PIERCING
-					currentDamageType[info.inflictor].second |= DMG_IGNOREHOOK;
-					SDKHooks_TakeDamage(client, info.inflictor, info.inflictor, TF2Util_GetEntityMaxHealth(info.inflictor)*info.severity*0.1, DMG_PREVENT_PHYSICS_FORCE);
+					SDKHooks_TakeDamage(client, info.inflictor, info.inflictor, TF2Util_GetEntityMaxHealth(info.inflictor)*info.severity*0.1, DMG_PREVENT_PHYSICS_FORCE|DMG_IGNOREHOOK|DMG_PIERCING);
 				}
 			}
 		}
@@ -583,8 +577,7 @@ public Action:Timer_Every100MS(Handle timer)
 				if(corrosiveDOT[client][i][0] != 0.0 && corrosiveDOT[client][i][1] >= GetGameTime())
 				{
 					if(IsValidClient3(i)){
-						currentDamageType[client].second |= DMG_IGNOREHOOK;
-						SDKHooks_TakeDamage(client,i,i,corrosiveDOT[client][i][0],_,i,_,_,false);
+						SDKHooks_TakeDamage(client,i,i,corrosiveDOT[client][i][0],DMG_IGNOREHOOK,i,_,_,false);
 					}
 				}
 				if(IsOnDifferentTeams(client,i)){
@@ -617,18 +610,14 @@ public Action:Timer_Every100MS(Handle timer)
 			if(hasBuffIndex(client, Buff_Decay)){
 				Buff decay; decay = playerBuffs[client][getBuffInArray(client, Buff_Decay)];
 				if(client != decay.inflictor && IsValidClient3(decay.inflictor) && IsOnDifferentTeams(client,decay.inflictor)){
-					currentDamageType[decay.inflictor].second |= DMG_IGNOREHOOK;
-					currentDamageType[decay.inflictor].second |= DMG_PIERCING;
-					SDKHooks_TakeDamage(client, decay.inflictor, decay.inflictor, 10.0 + GetClientHealth(client)*0.008 * decay.severity, DMG_PREVENT_PHYSICS_FORCE);
-					currentDamageType[decay.inflictor].second |= DMG_IGNOREHOOK;
-					SDKHooks_TakeDamage(client, decay.inflictor, decay.inflictor, 9.0,DMG_RADIATION|DMG_DISSOLVE,_,_,_,false);
+					SDKHooks_TakeDamage(client, decay.inflictor, decay.inflictor, 10.0 + GetClientHealth(client)*0.008 * decay.severity, DMG_PREVENT_PHYSICS_FORCE|DMG_IGNOREHOOK|DMG_PIERCING);
+					SDKHooks_TakeDamage(client, decay.inflictor, decay.inflictor, 9.0,DMG_RADIATION|DMG_DISSOLVE|DMG_IGNOREHOOK,_,_,_,false);
 				}
 			}
 			if(hasBuffIndex(client, Buff_InfernalDOT)){
 				Buff infernalDOT; infernalDOT = playerBuffs[client][getBuffInArray(client, Buff_InfernalDOT)];
 				if(client != infernalDOT.inflictor && IsValidClient3(infernalDOT.inflictor)){
-					currentDamageType[infernalDOT.inflictor].second |= DMG_IGNOREHOOK;
-					SDKHooks_TakeDamage(client, infernalDOT.inflictor, infernalDOT.inflictor, InfernalEnchantment[infernalDOT.inflictor]*0.1 * infernalDOT.severity,_,_,_,_,false);
+					SDKHooks_TakeDamage(client, infernalDOT.inflictor, infernalDOT.inflictor, InfernalEnchantment[infernalDOT.inflictor]*0.1 * infernalDOT.severity,DMG_IGNOREHOOK,_,_,_,false);
 					if(hitParticle[client]+0.4 <= GetGameTime()){
 						CreateParticleEx(client, "halloween_burningplayer_flyingbits", 1);
 						hitParticle[client] = GetGameTime()
@@ -638,17 +627,13 @@ public Action:Timer_Every100MS(Handle timer)
 			if(hasBuffIndex(client, Buff_LifeLink)){
 				Buff lifelink; lifelink = playerBuffs[client][getBuffInArray(client, Buff_LifeLink)];
 				if(IsValidClient3(lifelink.inflictor)){
-					currentDamageType[lifelink.inflictor].second |= DMG_PIERCING;
-					currentDamageType[lifelink.inflictor].second |= DMG_IGNOREHOOK;
-					SDKHooks_TakeDamage(client, lifelink.inflictor, lifelink.inflictor, GetClientHealth(client)*0.0035 * lifelink.severity, DMG_PREVENT_PHYSICS_FORCE);
+					SDKHooks_TakeDamage(client, lifelink.inflictor, lifelink.inflictor, GetClientHealth(client)*0.0035 * lifelink.severity, DMG_PREVENT_PHYSICS_FORCE|DMG_IGNOREHOOK|DMG_PIERCING);
 				}
 			}
 			if(hasBuffIndex(client, Buff_PowerupBurning)){
 				Buff infernalDOT; infernalDOT = playerBuffs[client][getBuffInArray(client, Buff_PowerupBurning)];
 				if(client != infernalDOT.inflictor && IsValidClient3(infernalDOT.inflictor)){
-					currentDamageType[infernalDOT.inflictor].second |= DMG_PIERCING;
-					currentDamageType[infernalDOT.inflictor].second |= DMG_IGNOREHOOK;
-					SDKHooks_TakeDamage(client, infernalDOT.inflictor, infernalDOT.inflictor, 10.0 * infernalDOT.severity, DMG_PREVENT_PHYSICS_FORCE);
+					SDKHooks_TakeDamage(client, infernalDOT.inflictor, infernalDOT.inflictor, 10.0 * infernalDOT.severity, DMG_PREVENT_PHYSICS_FORCE|DMG_IGNOREHOOK|DMG_PIERCING);
 					if(hitParticle[client]+0.4 <= GetGameTime()){
 						CreateParticleEx(client, "halloween_burningplayer_flyingbits", 1);
 						hitParticle[client] = GetGameTime()
@@ -660,9 +645,7 @@ public Action:Timer_Every100MS(Handle timer)
 			{
 				Buff plagueCond; plagueCond = playerBuffs[client][getBuffInArray(client, Buff_Plagued)];
 				if(IsValidClient3(plagueCond.inflictor)){
-					currentDamageType[plagueCond.inflictor].second |= DMG_PIERCING;
-					currentDamageType[plagueCond.inflictor].second |= DMG_IGNOREHOOK;
-					SDKHooks_TakeDamage(client, plagueCond.inflictor, plagueCond.inflictor, plagueCond.severity*3, DMG_PREVENT_PHYSICS_FORCE);
+					SDKHooks_TakeDamage(client, plagueCond.inflictor, plagueCond.inflictor, plagueCond.severity*3, DMG_PREVENT_PHYSICS_FORCE|DMG_IGNOREHOOK|DMG_PIERCING);
 				}
 			}
 			if(IsValidWeapon(CWeapon))
@@ -878,8 +861,7 @@ public Action:Timer_Every100MS(Handle timer)
 										VictimPos[2] += 30.0;
 										if(GetVectorDistance(clientpos,VictimPos,true) <= range*range*0.3)
 											if(IsPointVisible(clientpos,VictimPos)){
-												currentDamageType[client].second |= DMG_IGNOREHOOK;
-												SDKHooks_TakeDamage(i,client,client, LightningDamage, 1073741824, secondary, _,_,false);
+												SDKHooks_TakeDamage(i,client,client, LightningDamage, DMG_IGNOREHOOK, secondary, _,_,false);
 											}
 									}
 								}
@@ -1174,8 +1156,7 @@ public Action:Timer_EveryTenSeconds(Handle timer)
 									{
 										if(IsPointVisible(clientpos,VictimPos))
 										{
-											currentDamageType[client].second |= DMG_IGNOREHOOK;
-											SDKHooks_TakeDamage(i,client,client, LightningDamage, 1073741824, _,_,_,false);
+											SDKHooks_TakeDamage(i,client,client, LightningDamage, DMG_IGNOREHOOK, _,_,_,false);
 											if(IsValidClient3(i))
 											{
 												float velocity[3];
@@ -1727,8 +1708,7 @@ public Action:eurekaDelayed(Handle timer, int client)
 						{
 							if(IsPointVisible(clientpos,VictimPos))
 							{
-								currentDamageType[client].second |= DMG_IGNOREHOOK;
-								SDKHooks_TakeDamage(i,client,client, LightningDamage, 1073741824, _,_,_,false);
+								SDKHooks_TakeDamage(i,client,client, LightningDamage, DMG_IGNOREHOOK, _,_,_,false);
 								if(IsValidClient3(i))
 								{
 									Handle hPack = CreateDataPack();
@@ -1795,8 +1775,7 @@ public Action:CreateBloodTracer(Handle timer,DataPack data)
 					if(IsPointVisible(PlayerOrigin,VictimPos))
 					{
 						CreateParticleEx(i, "env_sawblood");
-						currentDamageType[client].second |= DMG_IGNOREHOOK;
-						SDKHooks_TakeDamage(i,client,client, mult, DMG_SLASH, weapon, _,_,false);
+						SDKHooks_TakeDamage(i,client,client, mult, DMG_SLASH|DMG_IGNOREHOOK, weapon, _,_,false);
 					}
 				}
 			}
@@ -2104,7 +2083,7 @@ public Action RecursiveExplosions(Handle timer, DataPack ref)
 	position[2] = ref.ReadFloat();
 
 	if(IsValidClient3(owner) && IsValidWeapon(weapon)){
-		EntityExplosion(owner, ref.ReadFloat(), ref.ReadFloat(), position, _,_,_,0.65,_,_,_,_,_,_,_,_,"ExplosionCore_sapperdestroyed");
+		EntityExplosion(owner, ref.ReadFloat(), ref.ReadFloat(), position, _,_,_,0.65,_,_,_,_,_,"ExplosionCore_sapperdestroyed");
 		float chance = GetAttribute(weapon, "sticky recursive explosion chance", 0.0)
 		if(chance >= GetRandomFloat(0.0,1.0)){
 			return Plugin_Continue;
@@ -2165,8 +2144,7 @@ public Action ElectricBallThink(Handle timer, any ref){
 			if(GetVectorDistance(position, victimPosition, true) > radius*radius)
 				continue;
 			
-			currentDamageType[client].second |= DMG_IGNOREHOOK;
-			SDKHooks_TakeDamage(i, entity, client, damage, DMG_BURN, weapon,_,_,false);
+			SDKHooks_TakeDamage(i, entity, client, damage, DMG_BURN|DMG_IGNOREHOOK, weapon,_,_,false);
 		}
 		return Plugin_Continue;
     }

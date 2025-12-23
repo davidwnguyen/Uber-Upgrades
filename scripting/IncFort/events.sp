@@ -28,10 +28,7 @@ public Event_Playerhurt(Handle event, const char[] name, bool:dontBroadcast)
 				Buff lifelinkDebuff;
 				lifelinkDebuff.init("Life Link", "-35% HP drain/10s", Buff_LifeLink, RoundToCeil(GetClientHealth(attacker)*0.3), attacker, 10.0);
 				insertBuff(client, lifelinkDebuff);
-
-				currentDamageType[attacker].second |= DMG_PIERCING;
-				currentDamageType[attacker].second |= DMG_IGNOREHOOK;
-				SDKHooks_TakeDamage(attacker, attacker, attacker, GetClientHealth(attacker)*0.3, DMG_PREVENT_PHYSICS_FORCE,_,_,_,false);
+				SDKHooks_TakeDamage(attacker, attacker, attacker, GetClientHealth(attacker)*0.3, DMG_PREVENT_PHYSICS_FORCE|DMG_IGNOREHOOK|DMG_PIERCING,_,_,_,false);
 			}
 		}
 	}
@@ -175,8 +172,7 @@ public Event_Playerhurt(Handle event, const char[] name, bool:dontBroadcast)
 								CreateTimer(1.0, Timer_KillParticle, EntIndexToEntRef(iPart1));
 								CreateTimer(1.0, Timer_KillParticle, EntIndexToEntRef(iPart2));
 							}
-							currentDamageType[attacker].second |= DMG_IGNOREHOOK;
-							SDKHooks_TakeDamage(target,attacker,attacker,100.0*TF2_GetDPSModifiers(attacker, CWeapon),DMG_SHOCK,_,_,_,false)
+							SDKHooks_TakeDamage(target,attacker,attacker,100.0*TF2_GetDPSModifiers(attacker, CWeapon),DMG_SHOCK|DMG_IGNOREHOOK,_,_,_,false)
 							++i
 						}
 					}
@@ -593,7 +589,7 @@ public MRESReturn OnBulletTrace(int victim, Handle hParams){
 
 			float explosiveBullet = GetAttribute(weapon, "explosive bullets radius", 0.0);
 			if(explosiveBullet)
-				EntityExplosion(attacker, info.m_flDamage * TF2_GetDamageModifiers(attacker, weapon, _, false), explosiveBullet, endpos, _, _, _, 0.4, _, weapon, 0.3, _, false, _,_,_,"ExplosionCore_sapperdestroyed");
+				EntityExplosion(attacker, info.m_flDamage * TF2_GetDamageModifiers(attacker, weapon, _, false), explosiveBullet, endpos, _, _, _, 0.4, _, weapon, 0.3, _, _, "ExplosionCore_sapperdestroyed");
 
 			float dragonBullet = GetAttribute(weapon, "dragon bullets radius", 0.0);
 			if(dragonBullet){
@@ -677,8 +673,7 @@ public MRESReturn OnAirblast(int weapon, Handle hParams){
 						if(GetClientTeam(i) != GetClientTeam(owner))//Enemies debuffed
 						{
 							CurrentSlowTimer[i] = GetGameTime()+Duration;
-							currentDamageType[owner].second |= DMG_IGNOREHOOK;
-							SDKHooks_TakeDamage(i,owner,owner,AirblastDamage,DMG_BLAST,weapon,_,_,false);
+							SDKHooks_TakeDamage(i,owner,owner,AirblastDamage,DMG_BLAST|DMG_IGNOREHOOK,weapon,_,_,false);
 							
 							bool immune = false;
 							
@@ -3288,7 +3283,6 @@ public OnClientPostAdminCheck(client)
 public Event_PlayerRespawn(Handle event, const char[] name, bool:dontBroadcast)
 {
 	int client = GetClientOfUserId(GetEventInt(event, "userid"));
-	currentDamageType[client].clear();
 	if(IsValidClient3(client)){
 		RespawnEffect(client);
 		if(!IsFakeClient(client)){
@@ -3429,8 +3423,7 @@ public Event_Teleported(Handle event, const char[] name, bool:dontBroadcast)
 						{
 							if(IsPointVisible(clientpos,VictimPos))
 							{
-								currentDamageType[client].second |= DMG_IGNOREHOOK;
-								SDKHooks_TakeDamage(i, client, client, LightningDamage, DMG_GENERIC, _,_,_,false);
+								SDKHooks_TakeDamage(i, client, client, LightningDamage, DMG_GENERIC|DMG_IGNOREHOOK, _,_,_,false);
 								if(IsValidClient3(i))
 								{
 									float velocity[3];
