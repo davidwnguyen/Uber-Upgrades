@@ -1152,9 +1152,9 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 					// Using exhaust on vaccinator decreases damage dealt by the average of the resistances.
 					float exhaustCoefficient = TF2Attrib_HookValueFloat(0.0, "vaccinator_exhaust_attribute", healingWeapon);
 					if(exhaustCoefficient > 0.0)
-						medicDMGBonus -= (TF2Attrib_HookValueFloat(0.0, "medigun_blast_resist_passive", healingWeapon)+
-							TF2Attrib_HookValueFloat(0.0, "medigun_bullet_resist_passive", healingWeapon)+
-							TF2Attrib_HookValueFloat(0.0, "medigun_fire_resist_passive", healingWeapon))/3.0*exhaustCoefficient;
+						medicDMGBonus -= (TF2Attrib_HookValueFloat(0.0, "medigun_bullet_resist_deployed", healingWeapon)+
+							TF2Attrib_HookValueFloat(0.0, "medigun_blast_resist_deployed", healingWeapon)+
+							TF2Attrib_HookValueFloat(0.0, "medigun_fire_resist_deployed", healingWeapon))/3.0*exhaustCoefficient;
 				}
 				else{
 					medicDMGBonus += TF2Attrib_HookValueFloat(0.0, "patient_damage_bonus", healingWeapon);
