@@ -1134,11 +1134,10 @@
 		}
 		"Sentry Specializations"
 		{
-			"0"		"Sentry Rocket Fire Rate"
-			"1"		"Double Sentry Rocket Shot"
-			"2"		"sentry bullets per shot"
-			"3"		"Firestorm Rounds"
-			"4"		"Bolt Ballista Sentry"
+			"0"		"Double Sentry Rocket Shot"
+			"1"		"sentry bullets per shot"
+			"2"		"Firestorm Rounds"
+			"3"		"Bolt Ballista Sentry"
 		}
 	}
 	"minigunweap"
