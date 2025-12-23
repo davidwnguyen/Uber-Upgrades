@@ -559,8 +559,7 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 				SDKHooks_TakeDamage(victim, attacker, attacker, 1.0*GetClientHealth(victim), DMG_PREVENT_PHYSICS_FORCE|DMG_PIERCING|DMG_IGNOREHOOK);
 				EmitSoundToAll(DetonatorExplosionSound, victim);
 			}
-
-			if(!(damagetype & DMG_PIERCING) && !(damagetype & DMG_BURN|DMG_PREVENT_PHYSICS_FORCE)){ //Make sure it isn't piercing or afterburn damage...
+			if(!(damagetype & DMG_PIERCING)){ //Make sure it isn't piercing damage...
 				float freezeRatio = TF2Attrib_HookValueFloat(0.0, "damage_causes_freeze", weapon);
 				if(freezeRatio > 0){
 					float frostIncrease = 100.0*freezeRatio*damage/TF2Util_GetEntityMaxHealth(victim);
