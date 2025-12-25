@@ -1744,9 +1744,6 @@ public float genericSentryDamageModification(victim, attacker, inflictor, float 
 public void applyDamageAffinities(&victim, &attacker, &inflictor, float &damage, &weapon, &damagetype, &damagecustom)
 {
 	//Now's the time!
-	if(!IsValidWeapon(weapon))
-		return;
-
 	if(damagetype & DMG_BURN || damagetype & DMG_SLOWBURN || damagetype & DMG_IGNITE)
 	{
 		if(TF2Attrib_HookValueFloat(0.0, "supernova_powerup", attacker) == 2){

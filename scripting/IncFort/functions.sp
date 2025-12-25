@@ -1702,7 +1702,6 @@ refreshUpgrades(client, slot)
 			TF2Attrib_RemoveByName(client,"self dmg push force increased");
 			TF2Attrib_RemoveByName(client,"SET BONUS: chance of hunger decrease");
 			TF2Attrib_RemoveByName(client,"has pipboy build interface");
-			TF2Attrib_RemoveByName(client,"weapon burn dmg increased");
 			TF2Attrib_RemoveByName(client,"critical rating");
 
 			if(current_class[client] == TFClass_DemoMan)
@@ -1773,13 +1772,6 @@ refreshUpgrades(client, slot)
 				}
 
 				TF2Attrib_SetByName(client,"major increased jump height", TF2Attrib_GetValue(agilityPowerup) == 1 ? 1.3 : (TF2Attrib_GetValue(agilityPowerup) == 2 ? 2.0 : 1.0));
-			}
-
-			Address supernovaPowerup = TF2Attrib_GetByName(client, "supernova powerup");
-			if(supernovaPowerup != Address_Null)
-			{
-				if(TF2Attrib_GetValue(supernovaPowerup) == 2)
-					TF2Attrib_SetByName(client,"weapon burn dmg increased", 2.0);
 			}
 
 			TF2Attrib_SetByName(client, "flame ammopersec decreased", TF2Attrib_HookValueFloat(1.0, "ammo_conservation", client));
@@ -4225,9 +4217,13 @@ void applyAfterburn(int victim, int attacker, int weapon, float damage){
 	burndmgMult *= TF2Attrib_HookValueFloat(1.0, "mult_wpn_burndmg", weapon)*TF2Attrib_HookValueFloat(1.0, "debuff_magnitude_mult", weapon);
 	burnTime += RoundToNearest(GetAttribute(weapon, "afterburn rating", 0.0));
 
-	if(GetAttribute(attacker, "knockout powerup", 0.0) == 2 && TF2Util_GetWeaponSlot(weapon) == TFWeaponSlot_Melee)
+	if(TF2Attrib_HookValueFloat(0.0, "supernova_powerup", attacker)) {
+		burndmgMult *= 2.0;
+	}
+	if(GetAttribute(attacker, "knockout powerup", 0.0) == 2 && TF2Util_GetWeaponSlot(weapon) == TFWeaponSlot_Melee){
 		burndmgMult *= 5;
-
+	}
+	
 	AfterburnStack stack;
 	stack.owner = attacker;
 	stack.damage = damage*burndmgMult;

@@ -64,7 +64,7 @@ public Action:Timer_Second(Handle timer)
 				playerAfterburn[client][i].remainingTicks--;
 			}
 
-			for(int owner=0;owner<=MaxClients;++owner){
+			for(int owner=1;owner<=MaxClients;++owner){
 				if(damageAccumulation[owner] > 0){
 					SDKHooks_TakeDamage(client, owner, owner, damageAccumulation[owner], DMG_BURN|DMG_PREVENT_PHYSICS_FORCE|DMG_IGNOREHOOK, _, _, _, false);
 					isOnFire = true;
@@ -2129,7 +2129,7 @@ public Action ElectricBallThink(Handle timer, any ref){
     { 
 		int client = getOwner(entity);
 		int weapon = GetEntPropEnt(entity, Prop_Send, "m_hLauncher");
-		float damage = 7.0*TF2_GetDPSModifiers(client, weapon);
+		float damage = 7.0*TF2_GetDamageModifiers(client, weapon);
 		float radius = 240.0*GetAttribute(weapon, "Blast radius increased");
 		float position[3];
 		GetEntPropVector(entity, Prop_Data, "m_vecOrigin", position);
