@@ -709,11 +709,13 @@ public Action TF2_OnTakeDamage(int victim, int &attacker, int &inflictor, float 
 	if(IsValidWeapon(weapon)){
 		if(TF2Util_GetWeaponSlot(weapon) == TFWeaponSlot_Melee){
 			if(TF2Attrib_HookValueFloat(0.0, "knockout_powerup", attacker) == 1){
-				damage *= 1.75
+				damage *= 1.75;
+				changed = Plugin_Changed;
 			}
 			else if(TF2Attrib_HookValueFloat(0.0, "knockout_powerup", attacker) == 3 && !isTagged[attacker][victim]){
 				damage *= 4.0;
 				critType = CritType_Crit;
+				isTagged[attacker][victim] = true;
 				changed = Plugin_Changed;
 			}
 		}
