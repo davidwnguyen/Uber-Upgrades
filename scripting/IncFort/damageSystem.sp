@@ -1266,15 +1266,15 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 			damage *= TF2Attrib_HookValueFloat(1.0, "mult_bullets_per_shot", weapon);
 		}
 
-		//Cow Mangler Charged Shots receive a ^0.8 bonus from clip size upgrades.
+		//Cow Mangler Charged Shots receive a bonus from clip size upgrades.
 		if(damagecustom == TF_CUSTOM_PLASMA_CHARGED){
-			damage *= Pow(TF2Attrib_HookValueFloat(1.0, "mult_clipsize_upgrade", weapon), 0.8);
+			damage *= TF2Attrib_HookValueFloat(1.0, "mult_clipsize_upgrade", weapon);
 			damagetype |= DMG_CRIT;
 		}
 
-		//Bleed receives ^0.5 damage boost from fire rate.
+		//Bleed receives ^0.8 damage boost from fire rate.
 		if(damagetype & DMG_SLASH){
-			damage /= Pow(TF2Attrib_HookValueFloat(1.0, "mult_postfiredelay", weapon),  0.5);
+			damage /= Pow(TF2Attrib_HookValueFloat(1.0, "mult_postfiredelay", weapon),  0.8);
 		}
 
 		float missingHealthDamageBonus = TF2Attrib_HookValueFloat(0.0, "dmg_per_pct_hp_missing", weapon);
