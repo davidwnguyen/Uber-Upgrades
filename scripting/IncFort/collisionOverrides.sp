@@ -196,12 +196,12 @@ public Action:BlackskyEyeCollision(entity, client)
 		GetEntPropVector(entity, Prop_Data, "m_vecOrigin", projvec);
 		if(IsValidForDamage(client))
 		{
-			EntityExplosion(owner,2.5*ProjectileDamage,radius[spellLevel], projvec,0,_,entity,0.75,1073741824);
+			EntityExplosion(owner,2.5*ProjectileDamage,radius[spellLevel], projvec,0,_,entity,0.75,DMG_BLAST);
 			RemoveEntity(entity);
 		}
 		else
 		{
-			EntityExplosion(owner,ProjectileDamage,radius[spellLevel], projvec,0,_,entity,0.65,1073741824,_,_,_,_,"ExplosionCore_sapperdestroyed");
+			EntityExplosion(owner,ProjectileDamage,radius[spellLevel], projvec,0,_,entity,0.65,DMG_BLAST,_,_,_,_,"ExplosionCore_sapperdestroyed");
 		}
 	}
 		
@@ -234,7 +234,7 @@ public Action:CallBeyondCollision(entity, client)
 	if(HasEntProp(entity, Prop_Data, "m_vecOrigin"))
 	{
 		GetEntPropVector(entity, Prop_Data, "m_vecOrigin", projvec);
-		EntityExplosion(owner,ProjectileDamage,500.0, projvec,0,_,entity,0.75,1073741824);
+		EntityExplosion(owner,ProjectileDamage,500.0, projvec,0,_,entity,0.75,DMG_BLAST);
 		RemoveEntity(entity);
 	}
 		

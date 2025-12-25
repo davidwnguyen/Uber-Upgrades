@@ -4199,11 +4199,11 @@ void UpdatePlayerMaxHealth(int client){
 	if(healthActive != Address_Null)
 	{
 		float mult = TF2Attrib_GetValue(healthActive);
-		float drConversion = GetAttributeAccumulateAdditive(client, "convert health to damage reduction", 0.0);
+		float drConversion = TF2Attrib_HookValueFloat(0.0, "health_to_damage_reduction", client);
 		if(drConversion > 0 && mult > 0){
-			float dr = 1+drConversion*(mult-1);
+			float dr = 1.0/(1-drConversion);
 			TF2Attrib_SetByName(client, "dmg taken divided", dr);
-			mult /= dr;
+			mult *= 1-drConversion;
 		}else{
 			TF2Attrib_SetByName(client, "dmg taken divided", 1.0);
 		}
