@@ -27,7 +27,7 @@
 			"restriction"						"1"
 			"honorbound"						"1.0"
 			"restore health on kill"			"0.5"
-			"weapon fire rate(tweakbonus)"		"0.5"
+			"weapon fire rate 2"				"-0.5"
 		}
 		"Infernal Impulse"
 		{
@@ -36,7 +36,7 @@
 			"Explosive Impact Radius"		"600.0"
 			"afterburn time increased(N)"	"1.5"
 			"damage bonus HIDDEN(b)"		"4.0"
-			"weapon fire rate(tweak)"		"2.0"
+			"weapon fire rate 3"			"2.0"
 			"Afterburn Damage Multiplier"	"10.0"
 		}
 		"High-Velocity Bullets"

@@ -565,13 +565,13 @@
 		"en"		"Weapon Damage Bonus"
 	}
 	"weapon fire rate"{
-		"en"		"Weapon Fire Rate Bonus"
+		"en"		"Weapon Fire Rate"
 	}
-	"weapon fire rate(tweak)"{
-		"en"		"Weapon Fire Rate Penalty"
+	"weapon fire rate 2"{
+		"en"		"Weapon Fire Rate"
 	}
-	"weapon fire rate(tweakbonus)"{
-		"en"		"Weapon Fire Rate Bonus"
+	"weapon fire rate 3"{
+		"en"		"Weapon Fire Rate"
 	}
 	"Arcane - Infernal Enchantment"{
 		"en"		"Arcane - Infernal Enchantment"

@@ -6057,25 +6057,25 @@
 		}
 		"1614.1"
 		{
-			"name"		"weapon fire rate(tweak)"
-			"ref"		"weapon fire rate(tweak)"
+			"name"		"weapon fire rate 2"
+			"ref"		"weapon fire rate 2"
 			"attr_class"	"mult_postfiredelay"
 			"display"		"%.0f%%"
 			"cost"		"0"
 			"value"		"1"
 			"init"		"1"
-			"max"		"10"
+			"max"		"1"
 		}
 		"1614.1"
 		{
-			"name"		"weapon fire rate(tweak)"
-			"ref"		"weapon fire rate(tweakbonus)"
+			"name"		"weapon fire rate 3"
+			"ref"		"weapon fire rate 3"
 			"attr_class"	"mult_postfiredelay"
 			"display"		"%.0f%%"
 			"cost"		"0"
-			"value"		"-1"
+			"value"		"1"
 			"init"		"1"
-			"max"		"0"
+			"max"		"1"
 		}
 		"1615"
 		{
