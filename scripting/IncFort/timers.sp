@@ -243,7 +243,7 @@ public Action:Timer_FixedVariables(Handle timer)
 			info = playerBuffs[client][getBuffInArray(client, Buff_ImmolationBurn)];
 			if(IsValidClient3(info.inflictor)){
 				if(info.severity > 0.0){
-					SDKHooks_TakeDamage(client, info.inflictor, info.inflictor, info.severity*0.1, DMG_PREVENT_PHYSICS_FORCE|DMG_IGNOREHOOK|DMG_PIERCING);
+					SDKHooks_TakeDamage(client, info.inflictor, info.inflictor, info.severity*0.1, DMG_PREVENT_PHYSICS_FORCE|DMG_IGNOREHOOK);
 				}
 			}
 		}
