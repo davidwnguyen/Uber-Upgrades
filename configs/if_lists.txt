@@ -2470,6 +2470,11 @@
 			"6"		"air control when blast jumping"
 			"7"		"Weapons Deals No Knockback"
 		}
+		"Special Tweaks"
+		{
+			"0"		"Scorching Napalm"
+			"1"		"Rockets' Red Glare"
+		}
 	}
 	"autofirebow"
 	{
