@@ -1655,7 +1655,7 @@ public Action OnPlayerRunCmd(int client, int& buttons, int& impulse, float vel[3
 					powerupParticle[client] = GetGameTime()+5.1;
 				}
 				else if(TF2Attrib_GetValue(knockoutPowerup) == 2){
-					CreateParticle(client, "utaunt_spellsplash_parent", true, _, 5.0);
+					CreateParticle(client, "utaunt_spellsplash_parent", true, _, 1.0);
 					powerupParticle[client] = GetGameTime()+5.1;
 				}
 				else if(TF2Attrib_GetValue(knockoutPowerup) == 3){

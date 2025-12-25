@@ -241,7 +241,7 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 					TF2Util_MakePlayerBleed(victim, attacker, 8.0, weapon, 8);
 				}
 				if(TF2_IsPlayerInCondition(attacker, TFCond_Dazed) || TF2_IsPlayerInCondition(attacker, TFCond_FreezeInput)){
-					TF2_StunPlayer(victim, 0.35, _, TF_STUNFLAGS_BIGBONK);
+					TF2_StunPlayer(victim, 0.35, 0.5, TF_STUNFLAG_SLOWDOWN);
 				}
 				float strongestAfterburn = 0.0;
 				int strongestAfterburnDuration = 0;
