@@ -1305,7 +1305,7 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 				float immolationRatio = TF2Attrib_HookValueFloat(0.0, "immolation_ratio", weapon);
 				if(immolationRatio > 0.0){
 					Buff immolationStatus;
-					immolationStatus.init("Immolation Burn", "Rapidly losing health", Buff_ImmolationBurn, TF2Util_GetEntityMaxHealth(attacker)*RoundFloat(immolationRatio*100), attacker, 5.0, immolationRatio);
+					immolationStatus.init("Immolation Burn", "Rapidly losing health", Buff_ImmolationBurn, 1, attacker, 8.0, 2.0*immolationRatio*damage);
 					insertBuff(victim, immolationStatus);
 				}
 			}

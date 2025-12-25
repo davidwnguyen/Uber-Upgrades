@@ -318,7 +318,7 @@
 			"gamestage"						"1"
 			"restriction"					"1"
 			"Ability : Immolation"			"1"
-			"immolation ratio"				"1.0"
+			"immolation ratio"				"2.0"
 			"afterburn time increased(N)"	"2.0"
 			"dmg per pct hp missing"		"0.1"
 			"additive piercing damage"		"5"
