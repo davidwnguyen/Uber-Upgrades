@@ -945,6 +945,7 @@ public OnEntityCreated(entity, const char[] classname)
 	weaponFireRate[entity] = -1.0;
 	weaponSavedAttackTime[entity] = 0.0;
 	isAimlessProjectile[entity] = false;
+	recursiveExplosionCount[entity] = 0;
 	
 	if(StrEqual(classname, "obj_attachment_sapper"))
 	{

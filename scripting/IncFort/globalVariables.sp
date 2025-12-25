@@ -312,6 +312,7 @@ int tagTeamTarget[MAXPLAYERS+1];
 int enragedKills[MAXPLAYERS+1];
 int stickiesDetonated[MAXPLAYERS+1];
 int AttunedSpells[MAXPLAYERS+1][Max_Attunement_Slots];
+int recursiveExplosionCount[MAXENTITIES];
 
 //Floats
 float MoneyBonusKill
