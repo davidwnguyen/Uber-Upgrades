@@ -946,7 +946,6 @@ public OnEntityCreated(entity, const char[] classname)
 	weaponSavedAttackTime[entity] = 0.0;
 	isAimlessProjectile[entity] = false;
 	recursiveExplosionCount[entity] = 0;
-	
 	if(StrEqual(classname, "obj_attachment_sapper"))
 	{
 		SDKHook(entity, SDKHook_OnTakeDamage, OnTakeDamagePre_Sapper); 
@@ -968,7 +967,7 @@ public OnEntityCreated(entity, const char[] classname)
 		SDKHook(entity, SDKHook_OnTakeDamage, OnTakeDamagePre_Sentry); 
 		CreateTimer(0.35, BuildingRegeneration, reference, TIMER_REPEAT|TIMER_FLAG_NO_MAPCHANGE);
 	}
-	else if(StrContains(classname, "item_powerup_rune", false) == 0)
+	else if(StrEqual(classname, "item_powerup_rune") || StrEqual(classname, "tf_gas_manager"))
 	{
 		RemoveEntity(entity);
 	}
