@@ -1,5 +1,8 @@
 "Phrases"
 {
+	"projectile speed multiplier"{
+		"en"		"Projectile Speed Multiplier"
+	}
 	"sentry amount"{
 		"en"		"Maximum Sentry Count"
 	}

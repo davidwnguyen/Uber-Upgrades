@@ -362,6 +362,8 @@
 			"4"				"projectile spread angle penalty;2.0"
 			"5"				"reload time increased hidden;0.4"
 			"6"				"weapon fire rate;6.0"
+			"7"				"explosive bullets;0.0"
+			"8"				"projectile speed multiplier;1.5"
 		}
 		"308" //Loch-n-Load
 		{
