@@ -359,7 +359,7 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 		if(TF2Attrib_HookValueFloat(0.0, "inverter_powerup", victim) == 1)
 			damage *= ConsumePierce(0.8, pierce);
 		else if(TF2Attrib_HookValueFloat(0.0, "inverter_powerup", victim) == 2)
-			damage *= ConsumePierce(0.5, pierce);
+			damage *= ConsumePierce(0.66, pierce);
 
 		if(TF2Attrib_HookValueFloat(0.0, "regeneration_powerup", victim) == 1)
 			damage *= ConsumePierce(0.75, pierce);

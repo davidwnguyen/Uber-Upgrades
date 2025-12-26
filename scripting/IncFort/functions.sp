@@ -62,7 +62,7 @@ float GetResistance(int client, bool includeReduction = false, float penetration
 			TotalResistance /= 1-TF2Attrib_GetValue(DodgeBody);
 
 		float resPowerup = TF2Attrib_HookValueFloat(0.0, "resistance_powerup", client);
-		if(resPowerup == 1 || resPowerup == 3 || TF2Attrib_HookValueFloat(0.0, "inverter_powerup", client) == 2)
+		if(resPowerup == 1 || resPowerup == 3)
 			TotalResistance *= 2.0;
 		
 		if(TF2Attrib_HookValueFloat(0.0, "revenge_powerup", client) == 1 || TF2Attrib_HookValueFloat(0.0, "knockout_powerup", client) == 1 || TF2Attrib_HookValueFloat(0.0, "king_powerup", client) == 1 || TF2Attrib_HookValueFloat(0.0, "supernova_powerup", client) == 1 || TF2Attrib_HookValueFloat(0.0, "inverter_powerup", client) == 1)
@@ -71,7 +71,7 @@ float GetResistance(int client, bool includeReduction = false, float penetration
 		if(TF2Attrib_HookValueFloat(0.0, "regeneration_powerup", client) == 1 || TF2Attrib_HookValueFloat(0.0, "vampire_powerup", client) == 1 || TF2Attrib_HookValueFloat(0.0, "vampire_powerup", client) == 3 || 1 <= TF2Attrib_HookValueFloat(0.0, "plague_powerup", client) <= 2)
 			TotalResistance *= 1.333;
 		
-		if(TF2Attrib_HookValueFloat(0.0, "knockout_powerup", client) == 2)
+		if(TF2Attrib_HookValueFloat(0.0, "knockout_powerup", client) == 2 || TF2Attrib_HookValueFloat(0.0, "inverter_powerup", client) == 2)
 			TotalResistance *= 1.5;
 	}
 
