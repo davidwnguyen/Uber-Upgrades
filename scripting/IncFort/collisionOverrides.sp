@@ -377,6 +377,25 @@ public Action:OnCollisionWarriorArrow(entity, client)
 	SDKUnhook(entity, SDKHook_Touch, OnCollisionWarriorArrow);
 	return Plugin_Stop;
 }
+public Action:OnStartTouchSentryFireball(entity, other)
+{
+	SDKHook(entity, SDKHook_Touch, OnCollisionSentryFireball);
+	return Plugin_Continue;
+}
+public Action:OnCollisionSentryFireball(entity, client)
+{
+	int owner = GetEntPropEnt(entity, Prop_Send, "m_hOwnerEntity")
+	if(IsValidClient3(owner)){
+		int pda = EntRefToEntIndex(jarateWeapon[entity]);
+		if(IsValidWeapon(pda)){
+			float projvec[3];
+			GetEntPropVector(entity, Prop_Data, "m_vecOrigin", projvec);
+			EntityExplosion(owner, projectileDamage[entity], 200.0, projvec, _, _, entity, _, _, pda, _, _, true);
+		}
+	}
+	RemoveEntity(entity);
+	return Plugin_Stop;
+}
 public Action:OnStartTouchSentryBolt(entity, other)
 {
 	SDKHook(entity, SDKHook_Touch, OnCollisionSentryBolt);
