@@ -3199,47 +3199,47 @@ projGravity(entity)
 GivePowerupDescription(int client, char[] name, int amount){
 	if(StrEqual("strength powerup", name)){
 		if(amount == 2){
-			CPrintToChat(client, "{community}Dexterity Powerup {default}| {lightcyan}Gives +100 crit rating & increases conditional damage reduction penetration by +50%%.");
+			CPrintToChat(client, "{community}Dexterity Powerup {default}| {lightcyan}Grants +33%% chance to crit, +50%% crit damage, and increases conditional damage reduction penetration by +50%%.");
 		}else if(amount == 3){
-			CPrintToChat(client, "{community}Bruised Powerup {default}| {lightcyan}Tagged enemies will be hit with a finisher that is a crit + deals 25%% maxHP. Any single hit above 40%% victim's maxHP instantly kills.");
+			CPrintToChat(client, "{community}Bruised Powerup {default}| {lightcyan}Tagged enemies will be finished off if they are below 25%% maxHP. Any single hit above 40%% victim's maxHP instantly kills.");
 		}else{
-			CPrintToChat(client, "{community}Strength Powerup {default}| {lightcyan}2x damage dealt.");
+			CPrintToChat(client, "{community}Strength Powerup {default}| {lightcyan}You deal 2x damage.");
 		}
 	}
 	else if(StrEqual("resistance powerup", name)){
 		if(amount == 2){
-			CPrintToChat(client, "{community}Fray Powerup {default}| {lightcyan}Every 1s, avoid one hit taken. Refreshed on kill. 1.2x movement speed.\nOn activation: gives +3s of defense and speed boost to you and nearby teammates.");
+			CPrintToChat(client, "{community}Fray Powerup {default}| {lightcyan}Every 1s or after a kill, avoid the next hit taken & grant +3s of defense and speed boost to you and nearby teammates. 1.2x movement speed.");
 		}else if(amount == 3){
-			CPrintToChat(client, "{community}Stronghold Powerup {default}| {lightcyan}1/2x damage taken, middle click to enter stronghold, completely immobilizing you but giving crit and status immunities with 1.33x healing. Nearby teammates get stronghold bonus.");
+			CPrintToChat(client, "{community}Stronghold Powerup {default}| {lightcyan}0.5x incoming damage, middle click to enter stronghold, immobilizing you but giving crit and status immunities with 1.33x healing. Nearby teammates get the immobilizing bonus.");
 		}else{
-			CPrintToChat(client, "{community}Resistance Powerup {default}| {lightcyan}1/2x damage taken. 1.5x critical block rating.");
+			CPrintToChat(client, "{community}Resistance Powerup {default}| {lightcyan}0.5x incoming damage. 1.5x critical block rating.");
 		}
 	}
 	else if(StrEqual("vampire powerup", name)){
 		if(amount == 2){
-			CPrintToChat(client, "{community}Leech Powerup {default}| {lightcyan}25%% lifesteal, drains healing of enemies by 50%% if nearby. Also applies on hitting an enemy.");
+			CPrintToChat(client, "{community}Leech Powerup {default}| {lightcyan}+25%% lifesteal, drains healing of enemies by 50%% if nearby. Also applies on hitting an enemy.");
 		}else if(amount == 3){
-			CPrintToChat(client, "{community}Bloodbound Powerup {default}| {lightcyan}25%% incoming damage reduction. Lifesteal at maximum health instead fills Overleech, consumed to heal at 150%% while hurt.");
+			CPrintToChat(client, "{community}Bloodbound Powerup {default}| {lightcyan}Lifesteal at maximum health instead fills Overleech, consumed to heal at 1.5x effectiveness while below 100%% HP. 0.75x incoming damage.");
 		}else{
-			CPrintToChat(client, "{community}Vampire Powerup {default}| {lightcyan}40%% lifesteal, 1.25x bleed damage, and 0.75x damage taken.");
+			CPrintToChat(client, "{community}Vampire Powerup {default}| {lightcyan}+40%% lifesteal, 1.25x bleed damage, and 0.75x incoming damage.");
 		}
 	}
 	else if(StrEqual("precision powerup", name)){
 		if(amount == 2){
-			CPrintToChat(client, "{community}Aimless Powerup {default}| {lightcyan}Projectiles randomly sway and deal up to +300%% damage based on distance of landing. Note that only projectiles that sway deal extra damage.");
+			CPrintToChat(client, "{community}Aimless Powerup {default}| {lightcyan}Projectiles randomly sway and deal up to +300%% damage based on their distance of landing. Only projectiles that sway deal extra damage.");
 		}else if(amount == 3){
-			CPrintToChat(client, "{community}Railgun Powerup {default}| {lightcyan}All weapons have 4x slower fire rate, but 4x damage. Grants +35%% conditional damage reduction pierce.");
+			CPrintToChat(client, "{community}Railgun Powerup {default}| {lightcyan}All weapons have 4x slower fire rate, but 4x outgoing damage. Grants +35%% conditional damage reduction pierce.");
 		}else{
-			CPrintToChat(client, "{community}Precision Powerup {default}| {lightcyan}+100%% charge rate, and no spread. 1.35x damage and hitscan can headshot. Certain projectiles will home aggressively.");
+			CPrintToChat(client, "{community}Precision Powerup {default}| {lightcyan}+100%% charge rate, and no spread. 1.35x outgoing damage and hitscan can headshot. Certain projectiles will home aggressively.");
 		}
 	}
 	else if(StrEqual("regeneration powerup", name)){
 		if(amount == 2){
 			CPrintToChat(client, "{community}Duplication Powerup {default}| {lightcyan}Shift middle click to double current HP (2x overheal max, 10s cd). All weapons have infinite clip.");
 		}else if(amount == 3){
-			CPrintToChat(client, "{community}Redistribution Powerup {default}| {lightcyan}-8%% maxHPR, but health drained goes into a health pool, which dealing (20+damage) gives back (can overheal & heals nearby teammates). 1.6x all healing.");
+			CPrintToChat(client, "{community}Redistribution Powerup {default}| {lightcyan}-8%% maxHPR, but health drained goes into a health pool. Dealing damage heals you and nearby teammates using the health pool. 1.6x all healing.");
 		}else{
-			CPrintToChat(client, "{community}Regeneration Powerup {default}| {lightcyan}0.75x damage taken, +10%% max HPR. 100%% ammo regeneration.");
+			CPrintToChat(client, "{community}Regeneration Powerup {default}| {lightcyan}0.75x incoming damage, +10%% max HPR. 100%% ammo regeneration.");
 		}
 	}
 	else if(StrEqual("revenge powerup", name)){
@@ -3248,61 +3248,61 @@ GivePowerupDescription(int client, char[] name, int amount){
 		}else if(amount == 3){
 			CPrintToChat(client, "{community}Enraged Powerup {default}| {lightcyan}Every kill gives +6%% HP heal. Every 10 kills, you can turn enraged, which gives:\n+100%% fire rate, full crits, and 0.4x damage taken.");
 		}else{
-			CPrintToChat(client, "{community}Revenge Powerup {default}| {lightcyan}66%% of damage taken is filled to revenge meter. 0.8x damage taken. On activation: +50%% dmg, 100%% crits, +33%% fire rate, and 35%% defense buff.");
+			CPrintToChat(client, "{community}Revenge Powerup {default}| {lightcyan}66%% of damage taken is filled to revenge meter. 0.8x incoming damage. On activation: 1.5x damage dealt, 100%% crits, +33%% fire rate, and 35%% defense buff.");
 		}
 	}
 	else if(StrEqual("agility powerup", name)){
 		if(amount == 2){
-			CPrintToChat(client, "{community}Quaker Powerup {default}| {lightcyan}Weighdown is automatically activated after jumping. Stomp damage is spread to 2 other targets. 2x jump height. Damage is increased by +0.1%% times downward velocity.");
+			CPrintToChat(client, "{community}Quaker Powerup {default}| {lightcyan}Weighdown is automatically activated after jumping. Stomp damage is splashed to 2 other targets. 2x jump height. All damage dealt is increased by +0.1%% times downward velocity.");
 		}else if(amount == 3){
-			CPrintToChat(client, "{community}Warp Powerup {default}| {lightcyan}Replaces shift middle click with teleport to crosshair. Deals 1200 base damage to all enemies through path of teleport. Each use consumes 10%% focus. Applies +20 additive dmg taken on teleport hit.");
+			CPrintToChat(client, "{community}Warp Powerup {default}| {lightcyan}Shift middle-click will teleport you to crosshair, consuming 10%% focus. Deals 1200 base damage to all enemies through path of teleport. Applies +20 additive dmg taken to victims on teleport hit.");
 		}else{
 			CPrintToChat(client, "{community}Agility Powerup {default}| {lightcyan}+50%% reload & fire rate. infinite jumps, speed boost, 1.4x speed, 1.3x jump height, 1.75x self push force, immunity to crowd control effects, and 35%% dodge chance.");
 		}
 	}
 	else if(StrEqual("knockout powerup", name)){
 		if(amount == 2){
-			CPrintToChat(client, "{community}Tainted Blade Powerup {default}| {lightcyan}Incoming damage is multiplied by 0.66x. Melee buildup debuffs are multiplied by 3x and DOTs deal 5x dmg. Secondary ailment effects are 3x effective.");
+			CPrintToChat(client, "{community}Tainted Blade Powerup {default}| {lightcyan}Incoming damage is multiplied by 0.66x. Melee applies amplified debuffs: 3x buildup rate, DoTs deal 5x dmg, and secondary ailment effects are 3x effective.");
 		}else if(amount == 3){
 			CPrintToChat(client, "{community}Assassin Powerup {default}| {lightcyan}When a victim has not taken damage from you, melee damage crits and deals 4x damage.");
 		}else{
-			CPrintToChat(client, "{community}Knockout Powerup {default}| {lightcyan}Melee damage is multiplied by 1.75x, and incoming damage by 0.8x. Damage causes concussion buildup. Victims with CC immunity take minicrits.");
+			CPrintToChat(client, "{community}Knockout Powerup {default}| {lightcyan}1.75x outgoing melee damage. 0.8x incoming damage. Melee damage causes concussion buildup, which stuns and marks for death after 57%% of their health has been damaged.");
 		}
 	}
 	else if(StrEqual("king powerup", name)){
 		if(amount == 2){
 			CPrintToChat(client, "{community}Tag-Team Powerup {default}| {lightcyan}Press RELOAD to link yourself to a teammate:\n Giving both of you 1.4x damage. Your healing is shared to your patient and attacking an enemy makes the patient deal 1.75x vs that victim.");
 		}else if(amount == 3){
-			CPrintToChat(client, "{community}Martyr Powerup {default}| {lightcyan}-66%% healing from all sources. Sacrifice (15%% max health + dmg taken) to absorb fatal teammate damage and give uber for 0.5s.");
+			CPrintToChat(client, "{community}Martyr Powerup {default}| {lightcyan}0.33x incoming healing. Sacrifice (15%% max health + dmg taken) to absorb fatal teammate damage and give uber for 0.5s.");
 		}else{
 			CPrintToChat(client, "{community}King Powerup {default}| {lightcyan}+33%% reload and fire rate, 1.5x uber and heal rate, and 1.2x dmg for teammates and you. 0.8x damage taken.");
 		}
 	}
 	else if(StrEqual("plague powerup", name)){
 		if(amount == 2){
-			CPrintToChat(client, "{community}Decay Powerup {default}| {lightcyan}Deals 100 + 8%% victim's currentHP piercing DPS & inflicts radiation to nearby enemies. Applies 0.25x healing to victims of decay. 0.75x damage taken.");
+			CPrintToChat(client, "{community}Decay Powerup {default}| {lightcyan}Deals 100 + 8%% victim's currentHP piercing DPS & inflicts +90/s radiation to nearby enemies. Applies 0.25x healing to victims of decay. 0.75x damage taken.");
 		}else if(amount == 3){
-			CPrintToChat(client, "{community}Life Link Powerup {default}| {lightcyan}Hitting an enemy will proc life link: Instantly deals 30%% currentHP%% to you, but drains 35%% currentHP%% of enemy over time. At end of duration, your team is healed by damage dealt to yourself.");
+			CPrintToChat(client, "{community}Life Link Powerup {default}| {lightcyan}Hitting an enemy will proc Life Link: Deals 30%% currentHP%% to you, but drains 35%% currentHP%% of enemy over time. At end of duration, your team is healed by damage dealt to yourself.");
 		}else{
-			CPrintToChat(client, "{community}Plague Powerup {default}| {lightcyan}Steals all healthpacks nearby, giving 25%% max health heal. Enemies nearby will be plagued for 10s, weakening damage dealt by them by 0.5x. 0.75x damage taken.");
+			CPrintToChat(client, "{community}Plague Powerup {default}| {lightcyan}Steals all healthpacks nearby, healing for +25%% maxHP. Enemies nearby will be plagued for 10s, weakening damage dealt by them by 0.5x. 0.75x damage taken.");
 		}
 	}
 	else if(StrEqual("supernova powerup", name)){
 		if(amount == 2){
-			CPrintToChat(client, "{community}Infernal Powerup {default}| {lightcyan}Fire damage spreads around 100 piercing DPS to nearby enemies. 1.5x fire damage. 2.0x afterburn stack damage. All attacks ignite.");
+			CPrintToChat(client, "{community}Infernal Powerup {default}| {lightcyan}Dealing fire damage splashes 100 piercing DPS DoT to nearby enemies. 1.5x fire damage. 2.0x afterburn stack damage. All attacks ignite.");
 		}else if(amount == 3){
 			CPrintToChat(client, "{community}Thunderstorm Powerup {default}| {lightcyan}All damage is converted into electric damage (hit enemies recieve splash to other hit enemies). For every enemy tagged: +8%% damage.");
 		}else{
-			CPrintToChat(client, "{community}Supernova Powerup {default}| {lightcyan}0.8x damage taken. If Splash Damage:\n1.8x damage.\nElse:\n1.35x damage dealt and splashes with falloff.\nDamage taken -> Supernova meter.\n On proc: Stuns nearby enemies for 6s & buildings for 10s.");
+			CPrintToChat(client, "{community}Supernova Powerup {default}| {lightcyan}0.8x incoming damage. If Splash Damage:\n1.8x damage.\nElse:\n1.35x damage dealt and splashes with falloff.\nDamage taken -> Supernova meter.\n On proc: Stuns nearby enemies for 6s & buildings for 10s.");
 		}
 	}
 	else if(StrEqual("inverter powerup", name)){
 		if(amount == 2){
-			CPrintToChat(client, "{community}Conductor Powerup {default}| {lightcyan}0.5x incoming damage taken. Amplifies the effects of ailments (eg: jarate -> crit jarate). Attacks will apply the amplified ailment while active.");
+			CPrintToChat(client, "{community}Conductor Powerup {default}| {lightcyan}0.66x incoming damage taken. Amplifies the effects of incoming ailments (eg: jarate -> crit jarate). Attacks will apply active ailments from you to victims.");
 		}else if(amount == 3){
 			CPrintToChat(client, "{community}Insulator Powerup {default}| {lightcyan}Nullifies all ailments and buffs (You do not recieve any buffs or ailments, and cancel enemy buffs on hit).");
 		}else{
-			CPrintToChat(client, "{community}Inverter Powerup {default}| {lightcyan}0.8x incoming damage taken. Flips the effects of ailments (eg: jarate -> battalion's backup)");
+			CPrintToChat(client, "{community}Inverter Powerup {default}| {lightcyan}0.8x incoming damage taken. Flips the effects of incoming ailments (eg: jarate -> battalion's backup)");
 		}
 	}
 	else if(StrEqual("glass powerup", name)){
