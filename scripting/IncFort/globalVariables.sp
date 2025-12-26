@@ -165,11 +165,13 @@ enum struct Buff{
 	void clear(){
 		switch(this.id){
 			case Buff_LifeLink:{
-				for(int i=1;i<=MaxClients;++i){
-					if(!IsValidClient3(i)) continue;
-					if(!IsPlayerAlive(i)) continue;
-					if(!IsOnDifferentTeams(this.inflictor,i))
-						AddPlayerHealth(i, this.priority, 2.0, true, this.inflictor);
+				if(IsValidClient3(this.inflictor)){
+					for(int i=1;i<=MaxClients;++i){
+						if(!IsValidClient3(i)) continue;
+						if(!IsPlayerAlive(i)) continue;
+						if(!IsOnDifferentTeams(this.inflictor,i))
+							AddPlayerHealth(i, this.priority, 2.0, true, this.inflictor);
+					}
 				}
 			}
 			case Buff_Frozen:{
