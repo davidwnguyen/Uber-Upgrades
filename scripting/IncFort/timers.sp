@@ -131,7 +131,7 @@ public Action:Timer_FixedVariables(Handle timer)
 					float explosionRadius[] = {0.0, 300.0, 600.0, 1500.0};
 					float pos[3];
 					GetEntPropVector(client, Prop_Data, "m_vecOrigin", pos);
-					EntityExplosion(client, damageDealt, explosionRadius[spellLevel], pos, -1, false, client);
+					EntityExplosion(client, damageDealt, explosionRadius[spellLevel], pos, -1, false, client, _, DMG_PREVENT_PHYSICS_FORCE);
 					fl_CurrentFocus[client] -= fl_MaxFocus[client]*0.005/ArcanePower[client];
 				}else{
 					int particleEffect = EntRefToEntIndex(snowstormParticle[client]);
