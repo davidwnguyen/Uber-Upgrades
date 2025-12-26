@@ -11,17 +11,10 @@ public Event_Playerhurt(Handle event, const char[] name, bool:dontBroadcast)
 		SetEventBool(event, "crit", true);
 		critStatus[client] = false;
 	}
-	if(damage == 0.0)
-		return;
 
 	if(attacker != client && IsValidClient(attacker)){
 		isTagged[attacker][client] = true;
 		DamageDealt[attacker] += damage;
-		dps[attacker] += damage;
-		Handle hPack = CreateDataPack();
-		WritePackCell(hPack, EntIndexToEntRef(attacker));
-		WritePackFloat(hPack, damage);
-		CreateTimer(1.01, RemoveDamage, hPack);
 
 		if(TF2Attrib_HookValueFloat(0.0, "plague_powerup", attacker) == 3.0){
 			if(!hasBuffIndex(client, Buff_LifeLink)){
@@ -63,10 +56,6 @@ public Event_Playerhurt(Handle event, const char[] name, bool:dontBroadcast)
 
 	if(IsValidClient3(attacker) && !IsFakeClient(attacker))
 	{
-		/*if(client != attacker && attacker != 0 && damage >= 1.0)
-		{
-			PrintToConsole(attacker, "%.1f post damage dealt.", damage);
-		}*/
 		if(damage > 0.0 && attacker != client && IsValidClient3(client))
 		{
 			int healers = GetEntProp(client, Prop_Send, "m_nNumHealers");
@@ -118,7 +107,7 @@ public Event_Playerhurt(Handle event, const char[] name, bool:dontBroadcast)
 			if(GetAttribute(attacker, "vampire powerup", 0.0) == 2.0){
 				Buff leechDebuff;
 				leechDebuff.init("Leeched", "", Buff_Leech, 1, client, 4.0);
-				insertBuff(client, leechDebuff)
+				insertBuff(client, leechDebuff);
 			}
 
 			int CWeapon = GetEntPropEnt(attacker, Prop_Send, "m_hActiveWeapon");
@@ -3234,7 +3223,6 @@ public OnClientDisconnect(client)
 	DamageDealt[client] = 0.0;
 	Kills[client] = 0;
 	Deaths[client] = 0;
-	dps[client] = 0.0;
 	Healed[client] = 0.0;
 	current_class[client] = TFClass_Unknown;
 	canBypassRestriction[client] = false;

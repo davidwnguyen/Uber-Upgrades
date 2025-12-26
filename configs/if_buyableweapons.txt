@@ -241,7 +241,7 @@
 		"additive piercing damage"		"300"
 		"weapon fire rate"		"2.0"
 		"add cond on hit"		"50"
-		"add cond on hit duration"		"6"
+		"add cond on hit duration"		"1"
 		"Converts Firerate to Damage"	"1"
 	}
 	"Dragon Dance"

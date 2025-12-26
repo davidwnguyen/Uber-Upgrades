@@ -1438,23 +1438,7 @@ public AddEntHealth(entity, amount)
     SetVariantInt(amount);
     AcceptEntityInput(entity, "AddHealth");
 }
-public Action:RemoveDamage(Handle timer, any:data)
-{
-	ResetPack(data);
-	
-	int client = EntRefToEntIndex(ReadPackCell(data));
-	float damage = ReadPackFloat(data);
-	if(IsValidClient(client))
-	{
-		dps[client] -= damage;
-		
-		if(dps[client] < 0.0)
-		{
-			dps[client] = 0.0;
-		}
-	}
-	CloseHandle(data);
-}
+
 RespawnEffect(client)
 {
 	current_class[client] = TF2_GetPlayerClass(client)
@@ -3543,7 +3527,6 @@ ResetVariables(){
 		Kills[client] = 0;
 		Deaths[client] = 0;
 		DamageDealt[client] = 0.0;
-		dps[client] = 0.0;
 		Healed[client] = 0.0;
 		MenuTimer[client] = 0.0;
 		ImpulseTimer[client] = 0.0;

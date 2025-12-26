@@ -328,7 +328,6 @@ float CurrencyOwned[MAXPLAYERS+1]
 float ServerMoneyMult = 1.0
 float OverAllMultiplier
 float DamageDealt[MAXPLAYERS+1]
-float dps[MAXPLAYERS+1]
 float Healed[MAXPLAYERS+1]
 float CurrencySaved[MAXPLAYERS+1];
 float StartMoneySaved;
