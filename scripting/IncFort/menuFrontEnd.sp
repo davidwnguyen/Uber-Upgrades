@@ -492,26 +492,10 @@ public Menu_ChangePreferences(client)
 		AddMenuItem(menu, "decreaseY", "-1 Y to armor hud.");
 		AddMenuItem(menu, "ifrespawn", "Toggle buy menu on spawn.");
 		AddMenuItem(menu, "particleToggle", "Toggle self-viewable particles.");
-		AddMenuItem(menu, "knockbackToggle", "Change knockback preferences.");
-		AddMenuItem(menu, "resetTutorial", "Reset all tutorial HUD elements.");
 		DisplayMenu(menu, client, MENU_TIME_FOREVER);
 	}
 }
-public Menu_ChangeKnockbackPreferences(client)
-{
-	if (IsValidClient3(client))
-	{
-		Menu menu = CreateMenu(MenuHandler_KnockbackPreferences, MENU_ACTIONS_DEFAULT|MenuAction_DisplayItem);
-		SetMenuExitBackButton(menu, true);
-		SetMenuTitle(menu, "Set Knockback Resistance Preferences");
-		AddMenuItem(menu, "selfkb", "Self Inflicted: ");
-		AddMenuItem(menu, "playerkb", "Player Damage: ");
-		AddMenuItem(menu, "truekb", "True Knockback: ");
-		AddMenuItem(menu, "horizontal", "Horizontal Axis: ");
-		AddMenuItem(menu, "vertical", "Vertical Axis: ");
-		DisplayMenu(menu, client, MENU_TIME_FOREVER);
-	}
-}
+
 public Action:ShowMults(client, args)
 {
 	if(IsPlayerAlive(client))

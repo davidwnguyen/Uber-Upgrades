@@ -17,7 +17,6 @@ Handle hArmorXPos;
 Handle hArmorYPos;
 Handle respawnMenu;
 Handle particleToggle;
-Handle knockbackToggle;
 Handle g_SDKCallLaunchBall;
 Handle g_SDKCallInitGrenade;
 Handle g_SDKCallJar;
@@ -31,11 +30,6 @@ Handle hudSpells;
 Handle hudAbility;
 Handle hudStatus;
 Address g_offset_CTFPlayerShared_pOuter;
-//Tutorial
-Handle EngineerTutorial;
-Handle ArmorTutorial;
-Handle ArcaneTutorial;
-Handle WeaponTutorial;
 //enum structy style
 enum struct Upgrade{
     float ratio;

@@ -605,36 +605,13 @@ public MRESReturn OnKnockbackApply(int client, Handle hParams) {
 			ScaleVector(initKB,GetAttribute(lastKBSource[client], "weapon push force multiplier", 1.0));
 		}
 
-		float KBMult = GetAttributeAccumulateMultiplicative(client, "knockback resistance", 1.0);
-		if(KBMult != 1.0){
-			if(IsFakeClient(client)){
-				ScaleVector(initKB, KBMult);
-			}
-			else{
-				if(knockbackFlags[client] & 1<<0 && client == lastKBSource[client]){
-					if(knockbackFlags[client] & 1<<3){
-						initKB[0] *= KBMult;
-						initKB[1] *= KBMult;
-					}if(knockbackFlags[client] & 1<<4){
-						initKB[2] *= KBMult;
-					}
-				}
-				else if(knockbackFlags[client] & 1<<1 && client != lastKBSource[client]){
-					if(knockbackFlags[client] & 1<<3){
-						initKB[0] *= KBMult;
-						initKB[1] *= KBMult;
-					}if(knockbackFlags[client] & 1<<4){
-						initKB[2] *= KBMult;
-					}
-				}
-				else if(knockbackFlags[client] & 1<<2 && lastKBSource[client] == 0){
-					if(knockbackFlags[client] & 1<<3){
-						initKB[0] *= KBMult;
-						initKB[1] *= KBMult;
-					}if(knockbackFlags[client] & 1<<4){
-						initKB[2] *= KBMult;
-					}
-				}
+		float KBMult = TF2Attrib_HookValueFloat(1.0, "knockback_resistance", client);
+		if(IsFakeClient(client)){
+			ScaleVector(initKB, KBMult);
+		}
+		else{
+			if(client != lastKBSource[client]){
+				ScaleVector(initKB, KBMult)
 			}
 		}
 		DHookSetParamVector(hParams, 1,initKB);
@@ -3264,17 +3241,6 @@ public OnClientPostAdminCheck(client)
 		GetClientName(client, clname, sizeof(clname))
 		CreateTimer(0.0, ChangeClassTimer, GetClientUserId(client));
 		//GivePlayerData(client);
-
-		if(AreClientCookiesCached(client))
-		{
-			char knockbackToggleEnabled[64];
-			GetClientCookie(client, knockbackToggle, knockbackToggleEnabled, sizeof(knockbackToggleEnabled));
-			if(StrEqual(knockbackToggleEnabled, "\0"))
-				{knockbackFlags[client] = (1<<1)|(1<<2)|(1<<3)|(1<<4);
-				IntToString(knockbackFlags[client],knockbackToggleEnabled,sizeof(knockbackToggleEnabled));SetClientCookie(client, knockbackToggle,knockbackToggleEnabled);}
-
-			knockbackFlags[client] = StringToInt(knockbackToggleEnabled);
-		}
 	}
 }
 public Event_PlayerRespawn(Handle event, const char[] name, bool:dontBroadcast)

@@ -1619,25 +1619,6 @@ public Action:GiveMaxAmmo(Handle timer, any:userid)
 			if(HasEntProp(secondary, Prop_Send, "m_flEnergy"))
 				SetEntPropFloat(secondary, Prop_Send, "m_flEnergy", float(secondaryAmmo));
 		}
-		
-		if(!IsFakeClient(client) && AreClientCookiesCached(client))
-		{
-			if(current_class[client] == TFClass_Engineer)
-			{
-				char TutorialString[32];
-				GetClientCookie(client, EngineerTutorial, TutorialString, sizeof(TutorialString));
-				if(StrEqual("0", TutorialString))
-				{
-					SetClientCookie(client, EngineerTutorial, "1"); 
-					
-					char TutorialText[256]
-					Format(TutorialText, sizeof(TutorialText), " | Tutorial | \nAs an engineer, your sentry inherits your survivability upgrades on the body.\nThe sentry upgrades are located on melee upgrades."); 
-					SetHudTextParams(-1.0, -1.0, 15.0, 252, 161, 3, 255, 0, 0.0, 0.0, 0.0);
-					ShowHudText(client, 10, TutorialText);
-					CPrintToChat(client, "{valve}Tutorial {white}| As an engineer, your sentry inherits your survivability upgrades on the body.\nThe sentry upgrades are located on melee upgrades.");
-				}
-			}
-		}
 	}
 }
 

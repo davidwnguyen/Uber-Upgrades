@@ -460,12 +460,7 @@ public void OnPluginStart()
 	hArmorXPos = RegClientCookie("razor_armorxpos", "X Coordinate of armor bar.", CookieAccess_Protected);
 	hArmorYPos = RegClientCookie("razor_armorypos", "Y Coordinate of armor bar.", CookieAccess_Protected);
 	respawnMenu = RegClientCookie("if_respawnmenu", "Toggles if you get the respawn menu on spawn.", CookieAccess_Protected);
-	EngineerTutorial = RegClientCookie("tutorial_engineer", "State of Tutorial", CookieAccess_Protected);
-	ArmorTutorial = RegClientCookie("tutorial_armor", "State of Tutorial", CookieAccess_Protected);
-	ArcaneTutorial = RegClientCookie("tutorial_arcane", "State of Tutorial", CookieAccess_Protected);
-	WeaponTutorial = RegClientCookie("tutorial_weapons", "State of Tutorial", CookieAccess_Protected);
 	particleToggle = RegClientCookie("particleToggle", "Toggles if you can see particles such as lightning enchantment on yourself.", CookieAccess_Protected);
-	knockbackToggle = RegClientCookie("knockbackToggle", "Select what knockback affects you.", CookieAccess_Protected);
 	//Config
 	SetConVarFloat(FindConVar("sv_maxvelocity"), 1000000000.0, true, false);
 	SetConVarFloat(FindConVar("tf_scout_bat_launch_delay"), 0.0, true, false);
