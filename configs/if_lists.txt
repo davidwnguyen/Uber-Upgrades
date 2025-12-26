@@ -2281,7 +2281,7 @@
 	}
 	"ball"
 	{
-		"special_tweaks_listid"		"3"
+		"special_tweaks_listid"		"2"
 		"Damage upgrades"
 		{
 			"0"		"damage bonus"
@@ -2294,14 +2294,10 @@
 		"Melee specific upgrades"
 		{
 			"0"		"fire rate bonus(multshit)"
-			"1"		"melee range multiplier"
-			"2"		"increase player capture value"
-			"3"		"Weapons Deals No Knockback"
-		}
-		"Ball Upgrades"
-		{
-			"0"		"effect bar recharge rate increased"
-			"1"		"Ball Additive Damage Bonus"
+			"1"		"effect bar recharge rate increased"
+			"2"		"melee range multiplier"
+			"3"		"increase player capture value"
+			"4"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
