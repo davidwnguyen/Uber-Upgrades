@@ -1561,6 +1561,7 @@
 		"Special Tweaks"
 		{
 			"0"		"Sniper Mastery"
+			"1"		"Lacerating Rounds"
 		}
 	}
 	"chargelessRifle"
@@ -1586,6 +1587,7 @@
 		"Special Tweaks"
 		{
 			"0"		"Sniper Mastery"
+			"1"		"Lacerating Rounds"
 		}
 	}
 	"c_bow"
