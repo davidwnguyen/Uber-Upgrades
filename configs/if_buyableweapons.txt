@@ -174,7 +174,7 @@
 		"afterburn rating"		"1"
 		"afterburn dmg increased"	"5.0"
 		"add cond when active"			"46"
-		"Dragon Bullets Radius"			"200.0"
+		"explosive impact radius"		"200.0"
 		"Sniper Rifle Charge Rate Penalty"	"0"
 		"paintkit_proto_def_index"	"390"
 		"set_item_texture_wear"		"0.0"
@@ -403,22 +403,6 @@
 		"burst fire count"		"-2"
 		"burst fire rate mult"		"35"
 		"reload clip all at once"	"1"
-	}
-	"Market Gardener"
-	{
-		"index"			"327"
-		"weapon_class"	"tf_weapon_sword"
-		"weapon_menu"	"tf_weapon_sword"
-		"class"			"demo"
-		"description"	"(But for demoman)"
-		"cost"			"200.0"
-		"paintkit_proto_def_index"	"303"
-		"set_item_texture_wear"		"0.0"
-		"Converts Firerate to Damage"	"1"
-		"mod crit while airborne"		"1"
-		"weapon fire rate"	"3.0"
-		"falling velocity to damage bonus"	"0.5"
-		"provide on active"	"1.0"
 	}
 	"Carpet Bomber"
 	{

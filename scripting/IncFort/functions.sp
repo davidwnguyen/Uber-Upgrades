@@ -1183,7 +1183,7 @@ DisplayItemChange(client,itemidx)
 		//Soldier Melee
 		case 416:
 		{
-			ChangeString = "The Market Gardener | 3x slower fire rate, but gains +0.05% damage bonus per downward velocity in hammer units/s. Converts fire rate to damage bonus.";
+			ChangeString = "The Market Gardener | 3x slower fire rate, gains +0.05% damage bonus per downward velocity in hammer units/s, splashes in a 300HU radius on hit. Converts fire rate to damage bonus.";
 		}
 		//Pyro Primary
 		case 215:

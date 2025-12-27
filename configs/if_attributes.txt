@@ -5833,20 +5833,9 @@
 		}
 		"1589.10"
 		{
-			"name"		"dragon bullets radius"
-			"ref"		"Dragon Bullets Radius"
+			"name"		"explosive impact radius"
+			"ref"		"explosive impact radius"
 			"attr_class"	"dragon_bullets_radius"
-			"display"		"%.0f HU"
-			"cost"		"0"
-			"increase_ratio"	"0"
-			"value"		"1.0"
-			"init"		"0"
-			"max"		"1000"
-		}
-		"1589.10"
-		{
-			"name"		"dragon bullets radius"
-			"ref"		"Explosive Impact Radius"
 			"display"		"%.0f HU"
 			"cost"		"0"
 			"increase_ratio"	"0"
