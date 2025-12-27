@@ -313,7 +313,7 @@
 		{
 			"preserve_attributes"	"1"
 			"classname"		"tf_weapon_fireaxe"
-			"1"				"detonate afterburn stacks on hit;15.0"
+			"1"				"detonate afterburn stacks on hit;40.0"
 			"2"				"Converts Firerate to Damage;1.0"
 		}
 		"56,1005" //Huntsman

@@ -1210,7 +1210,7 @@ DisplayItemChange(client,itemidx)
 		}
 		case 1181:
 		{
-			ChangeString = "Hot Hand | Detonates 15 stacks of afterburn on hit. Converts fire rate to damage. Acts as a normal fire axe."
+			ChangeString = "Hot Hand | Detonates 40 stacks of afterburn on hit. Converts fire rate to damage. Acts as a normal fire axe."
 		}
 		//Demo Primary
 		case 308:
