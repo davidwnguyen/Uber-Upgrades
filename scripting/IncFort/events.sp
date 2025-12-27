@@ -842,6 +842,12 @@ public void TF2_OnConditionAdded(client, TFCond cond)
 			TF2_AddCondition(client, TFCond_SpeedBuffAlly, 8.0);
 			TF2_AddCondition(client, TFCond_HalloweenQuickHeal, 8.0);
 			TF2_RemoveCondition(client, cond);
+			removeAfterburn(client);
+		}
+		case TFCond_Ubercharged, TFCond_UberchargedCanteen, TFCond_UberchargedHidden,
+		TFCond_AfterburnImmune:
+		{
+			removeAfterburn(client);
 		}
 	}
 	TF2Util_UpdatePlayerSpeed(client);

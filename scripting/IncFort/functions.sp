@@ -14,6 +14,12 @@ public int getNextAfterburnStack(int client){
 	}
 	return id;
 }
+public void removeAfterburn(int client){
+	AfterburnStack empty;
+	for(int i = 0;i < MAX_AFTERBURN_STACKS; i++){
+		playerAfterburn[client][i] = empty;
+	}
+}
 
 float GetResistance(int client, bool includeReduction = false, float penetration = 0.0)
 {
@@ -4195,7 +4201,10 @@ void UpdatePlayerMaxHealth(int client){
 }
 
 void applyAfterburn(int victim, int attacker, int weapon, float damage){
-	if(TF2_IsPlayerInCondition(victim, TFCond_UberchargedHidden))
+	if(TF2_IsPlayerInCondition(victim, TFCond_Ubercharged)
+	||TF2_IsPlayerInCondition(victim, TFCond_UberchargedHidden)
+	||TF2_IsPlayerInCondition(victim, TFCond_UberchargedCanteen)
+	||TF2_IsPlayerInCondition(victim, TFCond_AfterburnImmune))
 		return;
 
 	float burndmgMult = 0.1
@@ -4217,7 +4226,8 @@ void applyAfterburn(int victim, int attacker, int weapon, float damage){
 	stack.remainingTicks = RoundToNearest(burnTime);
 
 	insertAfterburn(victim, stack);
-	TF2Util_IgnitePlayer(victim, victim, 10.0);
+	TF2Util_IgnitePlayer(victim, victim, burnTime);
+	TF2_AddCondition(victim, TFCond_BurningPyro, burnTime);
 }
 
 void CreateSmokeBombEffect(float position[3], float duration, int team){
@@ -4303,10 +4313,7 @@ cleanSlateClient(int client){
 	karmicJusticeScaling[client] = 0.0;
 	pylonCooldown[client] = 0.0;
 	clearAllBuffs(client);
-	AfterburnStack empty;
-	for(int i = 0;i < MAX_AFTERBURN_STACKS; ++i){
-		playerAfterburn[client][i] = empty;
-	}
+	removeAfterburn(client);
 
 	for(int i=1;i<=MaxClients;++i)
 	{
