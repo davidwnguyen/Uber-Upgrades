@@ -513,8 +513,21 @@ public void ManagePlayerBuffs(int i){
 		Format(details, sizeof(details), "%s\n%s - %.1fs", details, "Milked", MadmilkDuration[i]-GetGameTime());
 	}
 
-	if(TF2_IsPlayerInCondition(i, TFCond_AfterburnImmune))
+	if(TF2_IsPlayerInCondition(i, TFCond_AfterburnImmune)){
 		Format(details, sizeof(details), "%s\n%s - %.1fs", details, "Afterburn Immunity", TF2Util_GetPlayerConditionDuration(i, TFCond_AfterburnImmune));
+	}
+	else{
+		float totalAfterburn = 0.0;
+		for(int stack=0; stack<MAX_AFTERBURN_STACKS;stack++){
+			if(playerAfterburn[i][stack].remainingTicks <= 0)
+				continue;
+			
+			totalAfterburn += playerAfterburn[i][stack].damage;
+		}
+		if(totalAfterburn > 0) {
+			Format(details, sizeof(details), "%s\nAfterburn | %s Incoming DPS", details, GetAlphabetForm(totalAfterburn));
+		}
+	}
 
 	if(additiveDamageRawBuff != 0.0)
 		Format(details, sizeof(details), "%s\n+%i Damage", details, RoundToNearest(additiveDamageRawBuff));
@@ -4226,8 +4239,8 @@ void applyAfterburn(int victim, int attacker, int weapon, float damage){
 	stack.remainingTicks = RoundToNearest(burnTime);
 
 	insertAfterburn(victim, stack);
-	TF2Util_IgnitePlayer(victim, victim, burnTime);
 	TF2_AddCondition(victim, TFCond_BurningPyro, burnTime);
+	TF2Util_IgnitePlayer(victim, victim, burnTime);
 }
 
 void CreateSmokeBombEffect(float position[3], float duration, int team){

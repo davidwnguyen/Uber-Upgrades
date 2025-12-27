@@ -400,10 +400,6 @@ public MRESReturn OnCondApply(Address pPlayerShared, Handle hParams) {
 		{
 			case TFCond_OnFire:
 			{
-				if(TF2_GetPlayerClass(client) == TFClass_Pyro || TF2_IsPlayerInCondition(client, TFCond_AfterburnImmune))
-				{
-					return MRES_Supercede;
-				}
 				Address attribute1 = TF2Attrib_GetByName(client, "absorb damage while cloaked");
 				if (attribute1 != Address_Null) 
 				{
