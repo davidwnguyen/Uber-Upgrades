@@ -6510,7 +6510,7 @@
 		"1652"
 		{
 			"name"		"sniper charged shots bounce"
-			"ref"		"Fully Charged Shots Ricochet"
+			"ref"		"sniper charged shots bounce"
 			"attr_class"	"sniper_charged_shots_bounce"
 			"display"		"%.0f"
 			"cost"		"0"

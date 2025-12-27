@@ -393,8 +393,8 @@
 	"explosive sniper shot"{
 		"en"		"Explosive Headshots"
 	}
-	"Fully Charged Shots Ricochet"{
-		"en"		"Fully Charged Shots Ricochet"
+	"sniper charged shots bounce"{
+		"en"		"Fully Charged Shots Chain"
 	}
 	"Magnification Pylon"{
 		"en"		"Magnification Pylon"

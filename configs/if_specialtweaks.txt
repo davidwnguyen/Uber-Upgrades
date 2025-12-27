@@ -237,7 +237,7 @@
 		{
 			"gamestage"						"1"
 			"restriction"					"1"
-			"Fully Charged Shots Ricochet"	"3"
+			"sniper charged shots bounce"	"3"
 			"mult sniper charge after headshot"	"75"
 			"additive piercing damage"		"20"
 		}

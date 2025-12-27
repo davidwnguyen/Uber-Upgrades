@@ -6,7 +6,7 @@
 		{
 			"preserve_attributes"	"1"
 			"1"				"sniper fires tracer;0"
-			"2"				"flame size penalty;3.0"
+			"2"				"sniper_charged_shots_bounce;3.0"
 		}
 		"642"//Cozy Camper
 		{
