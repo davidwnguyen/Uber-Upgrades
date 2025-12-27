@@ -453,6 +453,14 @@ public void OnPluginStart()
 		PrintToServer("CustomAttrs | Error with \"CTFWeaponBase::Energy_DrainEnergy()\" gamedata.");
 	DHookEnableDetour(EnergyPerShotHook, false, OnEnergyPerShot);
 
+	//Bleed Changes
+	Handle g_DHookOnMakeBleed = DHookCreateFromConf(hConf, "CTFPlayerShared::MakeBleed()");
+	
+	if(g_DHookOnMakeBleed == null)
+		PrintToServer("CustomAttrs | OnMakeBleed fucked up.");
+	else
+		DHookEnableDetour(g_DHookOnMakeBleed, false, OnMakeBleed);
+
 	g_offset_CTFPlayerShared_pOuter = view_as<Address>(GameConfGetOffset(hConf, "CTFPlayerShared::m_pOuter"));
 	delete hConf;
 			

@@ -492,10 +492,5 @@
 			"preserve_attributes"	"1"
 			"1"				"Converts Firerate to Damage;1.0"
 		}
-		"325"//The Boston Basher
-		{
-			"preserve_attributes"	"1"
-			"1"				"sapper damage bonus;6.0"
-		}
 	}
 }

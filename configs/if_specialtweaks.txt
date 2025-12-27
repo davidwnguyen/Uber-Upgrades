@@ -107,6 +107,7 @@
 		{
 			"gamestage"						"1"
 			"restriction"					"1"
+			"bleeding duration"				"6"
 			"Bleed Per Hit"					"2"
 			"mult crit dmg"				"5.0"
 		}

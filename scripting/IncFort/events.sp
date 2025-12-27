@@ -270,6 +270,17 @@ public Event_UberDeployed(Event event, const char[] name, bool dontBroadcast){
 
 	CreateTimer(0.1, Timer_UberCheck, EntIndexToEntRef(medigun), TIMER_REPEAT | TIMER_FLAG_NO_MAPCHANGE);
 }
+public MRESReturn OnMakeBleed(Address pPlayerShared, Handle hParams) {
+	int client = GetEntityFromAddress((DereferencePointer(pPlayerShared + g_offset_CTFPlayerShared_pOuter)));
+
+	if(!IsValidClient3(client))
+		return MRES_Ignored;
+
+	if(TF2_IsPlayerInCondition(client, TFCond_Bleeding))
+		return MRES_Supercede;
+		
+	return MRES_Ignored;
+}
 public MRESReturn OnPlayerStunned(Address pPlayerShared, Handle hParams){
 	int client = GetEntityFromAddress((DereferencePointer(pPlayerShared + g_offset_CTFPlayerShared_pOuter)));
 	float duration = DHookGetParam(hParams, 1);
@@ -408,10 +419,6 @@ public MRESReturn OnCondApply(Address pPlayerShared, Handle hParams) {
 						return MRES_Supercede;
 					}
 				}
-			}
-			case TFCond_Bleeding:
-			{
-				return MRES_Supercede;
 			}
 			case TFCond_Slowed, TFCond_Dazed://doesn't work for stuns lol
 			{

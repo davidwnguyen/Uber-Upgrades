@@ -1260,6 +1260,10 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 			damagetype |= DMG_CRIT;
 		}
 
+		if(damagetype & DMG_SLASH){
+			damage /= Pow(TF2Attrib_HookValueFloat(1.0, "mult_postfiredelay", weapon),  0.8);
+		}
+
 		float missingHealthDamageBonus = TF2Attrib_HookValueFloat(0.0, "dmg_per_pct_hp_missing", weapon);
 		if(missingHealthDamageBonus > 0.0){
 			float ratio = GetClientHealth(attacker)/float(TF2Util_GetEntityMaxHealth(attacker));
@@ -1430,7 +1434,7 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 				float victimPosition[3];
 				GetEntPropVector(victim, Prop_Data, "m_vecAbsOrigin", victimPosition); 
 				
-				EntityExplosion(attacker, damage, 300.0,victimPosition,_,weaponArtParticle[attacker] <= GetGameTime() ? true : false, victim, 0.4,_,weapon, 0.5);
+				EntityExplosion(attacker, damage, 300.0,victimPosition,_,weaponArtParticle[attacker] <= GetGameTime() ? true : false, victim, weaponArtParticle[attacker] <= GetGameTime() ? 0.8 : 0.0,_,weapon, 0.5);
 				//PARTICLES
 				if(weaponArtParticle[attacker] <= GetGameTime())
 				{

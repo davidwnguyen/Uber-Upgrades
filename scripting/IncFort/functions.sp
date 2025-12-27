@@ -1126,10 +1126,6 @@ DisplayItemChange(client,itemidx)
 		{
 			ChangeString = "Sun-on-a-Stick | Deals 3x afterburn, but initial melee hit deals half. Converts fire rate to damage."
 		}
-		case 325:
-		{
-			ChangeString = "The Boston Basher | Inflicts +6 bleed buildup on hit. No longer applies bleeding ailment."
-		}
 		//Soldier Primary
 		case 127:
 		{

@@ -259,6 +259,28 @@
 				"return"		"void"
 				"this"			"entity"
 			}
+			"CTFPlayerShared::MakeBleed()"
+			{
+				"signature"		"CTFPlayerShared::MakeBleed()"
+				"callconv"		"thiscall"
+				"return"		"void"
+				"this"			"address"
+				"arguments"
+				{
+					"attacker"
+					{
+						"type"	"cbaseentity"
+					}
+					"weapon"
+					{
+						"type"	"cbaseentity"
+					}
+					"duration"
+					{
+						"type"	"float"
+					}
+				}
+			}
 		}
 		"Signatures"
 		{
@@ -400,6 +422,11 @@
 			{
 				"library"	"server"
 				"linux"		"@_ZN13CTFWeaponBase18Energy_DrainEnergyEv"
+			}
+			"CTFPlayerShared::MakeBleed()"
+			{
+				"library"		"server"
+				"linux"			"@_ZN15CTFPlayerShared9MakeBleedEP9CTFPlayerP13CTFWeaponBasefibi"
 			}
 		}
 	}
