@@ -568,6 +568,11 @@ public Action:Timer_Every100MS(Handle timer)
 					insertBuff(tagTeamTarget[client], tagteamBuff);
 				}
 			}
+			if(TF2Attrib_HookValueFloat(0.0, "inverter_powerup", client) == 3.0){
+				Buff nullification;
+				nullification.init("Nullification", "No status effects", Buff_Nullification, 1, client, 1.0);
+				insertBuff(client, nullification);
+			}
 
 			Buff leechDebuff;
 			leechDebuff.init("Leeched", "", Buff_Leech, 1, client, 1.0);

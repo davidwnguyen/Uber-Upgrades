@@ -28,6 +28,7 @@
 			"honorbound"						"1.0"
 			"restore health on kill"			"0.5"
 			"weapon fire rate 2"				"-0.5"
+			"melee cleave attack"				"1"
 		}
 		"Infernal Impulse"
 		{

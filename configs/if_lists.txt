@@ -1478,7 +1478,8 @@
 		}
 		"Special Tweaks"
 		{
-			"0"		"Frostborn Wrath"
+			"0"		"Lacerating Rounds"
+			"1"		"Frostborn Wrath"
 		}
 	}
 	"scoweap2"
