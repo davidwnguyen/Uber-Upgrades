@@ -121,19 +121,19 @@ bool isBonus[BuffAmt] = {
 	false,
 	false,
 	false,
-	true,
-	false,
-	false,
-	false,
-	true,
-	false,
-	true,
-	true,
 	false,
 	true,
 	false,
 	false,
 	false,
+	true,
+	false,
+	true,
+	true,
+	false,
+	true,
+	false, 
+	false
 }
 
 //Temp buffs for players
@@ -323,7 +323,6 @@ float ServerMoneyMult = 1.0
 float OverAllMultiplier
 float DamageDealt[MAXPLAYERS+1]
 float Healed[MAXPLAYERS+1]
-float CurrencySaved[MAXPLAYERS+1];
 float StartMoneySaved;
 float blankArray2[MAXPLAYERS+1][16][MAX_ATTRIBUTES_ITEM]
 float MenuTimer[MAXPLAYERS +1];

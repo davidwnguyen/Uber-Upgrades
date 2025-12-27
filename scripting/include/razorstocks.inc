@@ -1199,7 +1199,6 @@ stock char[] GetAlphabetForm(float number)
 		}
 		case 13://Trillions
 		{
-			PrintToServer("%.2f", number);
 			FloatToString(RoundToFloor(number/10000000.0/1000.0)/100.0, output, sizeof(output));
 			Format(output, sizeof(output), "%.4sT", output);
 		}

@@ -415,14 +415,7 @@ public MRESReturn OnCondApply(Address pPlayerShared, Handle hParams) {
 			}
 			case TFCond_Bleeding:
 			{
-				Address attribute2 = TF2Attrib_GetByName(client, "always_transmit_so");
-				if (attribute2 != Address_Null) 
-				{
-					if(GetRandomFloat(0.0,1.0) <= TF2Attrib_GetValue(attribute2))
-					{
-						return MRES_Supercede;
-					}
-				}
+				return MRES_Supercede;
 			}
 			case TFCond_Slowed, TFCond_Dazed://doesn't work for stuns lol
 			{
@@ -1259,7 +1252,6 @@ public Event_mvm_wave_begin(Handle event, const char[] name, bool:dontBroadcast)
 		if(IsValidClient(client))
 		{
 			CancelClientMenu(client);
-			CurrencySaved[client] = CurrencyOwned[client];
 			for (slot = 0; slot < NB_SLOTS_UED; slot++)
 			{
 				for(a = 0; a < MAX_ATTRIBUTES_ITEM; a++)
@@ -3684,7 +3676,7 @@ Buff OnStatusEffectApplied(int victim, Buff newBuff){
 
 	if(IsValidClient3(victim)){
 		if(!isBonus[inserted.id]){
-			int block_rating = TF2Attrib_HookValueInt(0, "debuff_block_rating", victim);
+			float block_rating = TF2Attrib_HookValueFloat(0.0, "debuff_block_rating", victim);
 			inserted.severity /= 1 + 0.05*block_rating;
 			inserted.duration = GetGameTime() + ((inserted.duration-GetGameTime()) / (1 + 0.05*block_rating));
 		}

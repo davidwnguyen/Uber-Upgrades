@@ -2146,7 +2146,7 @@
 		"en"		"Flame Gravity"
 	}
 	"bleeding duration(L)"{
-		"en"		"Bleeding Duration"
+		"en"		"bleeding duration"
 	}
 	"afterburn dmg increased (H)"{
 		"en"		"Afterburn Damage Increased"

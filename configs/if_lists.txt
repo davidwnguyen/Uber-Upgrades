@@ -1856,11 +1856,10 @@
 			"0"		"damage bonus"
 			"1"		"ap (global)"
 			"2"		"Overall Damage"
-			"3"		"bleeding duration"
-			"4"		"Bleed Per Hit"
-			"5"		"lifesteal ability"
-			"6"		"reveal cloaked victim on hit"
-			"7"		"reveal disguised victim on hit"
+			"3"		"Bleed Per Hit"
+			"4"		"lifesteal ability"
+			"5"		"reveal cloaked victim on hit"
+			"6"		"reveal disguised victim on hit"
 		}
 		"Cleaver specific upgrades"
 		{

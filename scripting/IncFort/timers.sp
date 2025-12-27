@@ -376,38 +376,41 @@ public Action:Timer_Every100MS(Handle timer)
 			{
 				BleedMaximum[client] = 100.0 + TF2Attrib_GetValue(bleedResistance);
 			}
-			if(BleedBuildup[client] > 0.0 || RadiationBuildup[client] > 0.0)
+			bool isBuildupActive = false;
+			char buildupText[256]
+			Format(buildupText, sizeof(buildupText), " | Status Effects | "); 
+			
+			if(BleedBuildup[client] > 0.0)
 			{
-				char StatusEffectText[256]
-				Format(StatusEffectText, sizeof(StatusEffectText), " | Status Effects | "); 
-				
-				if(BleedBuildup[client] > 0.0)
-				{
-					char buildup[512];
-					Format(buildup, sizeof(buildup),"\n    BLEED: %.0f%", (BleedBuildup[client]/BleedMaximum[client])*100.0);
-					StrCat(StatusEffectText,sizeof(StatusEffectText),buildup);
-				}
-				if(RadiationBuildup[client] > 0.0)
-				{
-					char buildup[512];
-					Format(buildup, sizeof(buildup),"\n   RADIATION: %.0f%", (RadiationBuildup[client]/RadiationMaximum[client])*100.0);
-					StrCat(StatusEffectText,sizeof(StatusEffectText),buildup);
-				}
-				if(ConcussionBuildup[client] > 0.0)
-				{
-					char buildup[512];
-					Format(buildup, sizeof(buildup),"\n   CONCUSSION: %.0f%", ConcussionBuildup[client]*100.0);
-					StrCat(StatusEffectText,sizeof(StatusEffectText),buildup);
-				}
-				if(FreezeBuildup[client] > 0.0)
-				{
-					char buildup[512];
-					Format(buildup, sizeof(buildup),"\n   FREEZE: %.0f%", FreezeBuildup[client]*100.0);
-					StrCat(StatusEffectText,sizeof(StatusEffectText),buildup);
-				}
-				
+				char buildup[512];
+				Format(buildup, sizeof(buildup),"\n    BLEED: %.0f%%", (BleedBuildup[client]/BleedMaximum[client])*100.0);
+				StrCat(buildupText,sizeof(buildupText),buildup);
+				isBuildupActive = true;
+			}
+			if(RadiationBuildup[client] > 0.0)
+			{
+				char buildup[512];
+				Format(buildup, sizeof(buildup),"\n   RADIATION: %.0f%%", (RadiationBuildup[client]/RadiationMaximum[client])*100.0);
+				StrCat(buildupText,sizeof(buildupText),buildup);
+				isBuildupActive = true;
+			}
+			if(ConcussionBuildup[client] > 0.0)
+			{
+				char buildup[512];
+				Format(buildup, sizeof(buildup),"\n   CONCUSSION: %.0f%%", ConcussionBuildup[client]);
+				StrCat(buildupText,sizeof(buildupText),buildup);
+				isBuildupActive = true;
+			}
+			if(FreezeBuildup[client] > 0.0)
+			{
+				char buildup[512];
+				Format(buildup, sizeof(buildup),"\n   FREEZE: %.0f%%", FreezeBuildup[client]);
+				StrCat(buildupText,sizeof(buildupText),buildup);
+				isBuildupActive = true;
+			}
+			if(isBuildupActive){
 				SetHudTextParams(0.43, 0.21, 0.4, 199, 28, 28, 255, 0, 0.0, 0.0, 0.0);
-				ShowSyncHudText(client, hudStatus, StatusEffectText);
+				ShowSyncHudText(client, hudStatus, buildupText);
 			}
 			char StatusEffectText[256]
 
@@ -1351,7 +1354,6 @@ public Action ResetClientsTimer(Handle timer){
 			Menu_BuyUpgrade(client, 0);
 			TF2_RegeneratePlayer(client);
 		}
-		CurrencySaved[client] = 0.0;
 		CurrencyOwned[client] = (StartMoney + additionalstartmoney);
 		for(int j = 0; j < Max_Attunement_Slots;j++){
 			SpellCooldowns[client][j] = 0.0;
@@ -1463,9 +1465,13 @@ public Action WaveFailed(Handle timer)
 		
 		if(round > 0)
 		{
+			PrintToServer("MvM Mission Failed");
+			additionalstartmoney = StartMoneySaved - StartMoney;
+			PrintToServer("%.0f Start Money.", StartMoney + additionalstartmoney);
 			int slot,i
 			for (int client = 1; client <= MaxClients; client++)
 			{
+				float moneyReduction = 0.0;
 				if (IsValidClient(client))
 				{
 					for (slot = 0; slot < NB_SLOTS_UED; slot++)
@@ -1483,6 +1489,7 @@ public Action WaveFailed(Handle timer)
 							upgrades_ref_to_idx[client][slot][i] = upgrades_ref_to_idx_mvm_checkpoint[client][slot][i]
 						}
 						client_spent_money[client][slot] = client_spent_money_mvm_checkpoint[client][slot];
+						moneyReduction += client_spent_money_mvm_checkpoint[client][slot];
 						currentupgrades_number[client][slot] = currentupgrades_number_mvm_checkpoint[client][slot]
 						for(int y = 0;y<5;y++)
 						{
@@ -1492,17 +1499,13 @@ public Action WaveFailed(Handle timer)
 					UniqueWeaponRef[client] = UniqueWeaponRef_mvm_checkpoint[client];
 					CreateTimer(2.0, ChangeClassTimer, GetClientUserId(client));
 					CreateTimer(0.25, MvMFailTimer, GetClientUserId(client));
-					PrintToServer("%N has %.0f saved currency.", client, CurrencySaved[client]);
 				}
-				CurrencyOwned[client] = CurrencySaved[client];
+				CurrencyOwned[client] = StartMoney + additionalstartmoney - moneyReduction
 				for(int j = 0; j < Max_Attunement_Slots;j++)
 				{
 					SpellCooldowns[client][j] = 0.0;
 				}
 			}
-			PrintToServer("MvM Mission Failed");
-			additionalstartmoney = StartMoneySaved - StartMoney;
-			PrintToServer("%.0f Start Money.", StartMoney + additionalstartmoney);
 		}
 	}
 	return Plugin_Stop;

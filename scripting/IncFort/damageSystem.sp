@@ -639,23 +639,17 @@ public Action TF2_OnTakeDamage(int victim, int &attacker, int &inflictor, float 
 	if(!IsValidClient3(attacker))
 		return Plugin_Continue;
 
-	Action changed = Plugin_Continue;
-
-	if(hasBuffIndex(victim, Buff_CritMarkedForDeath))
-	{
+	if(hasBuffIndex(victim, Buff_CritMarkedForDeath)){
 		critType = CritType_Crit;
-		changed = Plugin_Changed;
 	}
 
 	if(damagetype & DMG_PIERCING){
 		critType = CritType_None;
-		changed = Plugin_Changed;
 	}
 
 	if(IsValidClient3(victim)){
 		if(damagetype & DMG_SLASH){
-			damagetype |= DMG_PREVENT_PHYSICS_FORCE
-			changed = Plugin_Changed;
+			damagetype |= DMG_PREVENT_PHYSICS_FORCE;
 		}
 		switch(damagecustom) {
 			case TF_CUSTOM_BACKSTAB:
@@ -683,7 +677,6 @@ public Action TF2_OnTakeDamage(int victim, int &attacker, int &inflictor, float 
 					TF2_AddCondition(attacker, TFCond_StealthedUserBuffFade, stealthedBackstab);
 					TF2_RemoveCondition(attacker, TFCond_Stealthed)
 				}
-				changed = Plugin_Changed;
 			}
 			case 46://Short Circuit Balls
 			{
@@ -692,7 +685,6 @@ public Action TF2_OnTakeDamage(int victim, int &attacker, int &inflictor, float 
 					damage = 10.0;
 					damage *= TF2Attrib_HookValueFloat(1.0, "mult_dmg", weapon);
 					damage *= TF2Attrib_HookValueFloat(1.0, "mult_bullets_per_shot", weapon);
-					changed = Plugin_Changed;
 				}
 			}
 			case TF_CUSTOM_BASEBALL:
@@ -700,7 +692,6 @@ public Action TF2_OnTakeDamage(int victim, int &attacker, int &inflictor, float 
 				if(damagetype & DMG_CLUB) {
 					damage = 35.0;
 					damage += TF2Attrib_HookValueFloat(0.0, "baseball_base_damage", weapon);
-					changed = Plugin_Changed;
 				}
 			}
 		}
@@ -710,22 +701,19 @@ public Action TF2_OnTakeDamage(int victim, int &attacker, int &inflictor, float 
 		if(TF2Util_GetWeaponSlot(weapon) == TFWeaponSlot_Melee){
 			if(TF2Attrib_HookValueFloat(0.0, "knockout_powerup", attacker) == 1){
 				damage *= 1.75;
-				changed = Plugin_Changed;
 			}
 			else if(TF2Attrib_HookValueFloat(0.0, "knockout_powerup", attacker) == 3 && !isTagged[attacker][victim]){
 				damage *= 4.0;
 				critType = CritType_Crit;
 				isTagged[attacker][victim] = true;
-				changed = Plugin_Changed;
 			}
 		}
 	}
 
 	if(hasBuffIndex(victim, Buff_Stronghold) || TF2Attrib_HookValueFloat(0.0, "resistance_powerup", victim) == 1){
 		critType = CritType_None;
-		changed = Plugin_Changed;
 	}
-	return changed;
+	return Plugin_Changed;
 }
 
 public Action TF2_OnTakeDamageModifyRules(int victim, int &attacker, int &inflictor, float &damage, int &damagetype, int &weapon, float damageForce[3], float damagePosition[3], int damagecustom, CritType &critType){
@@ -1270,11 +1258,6 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 		if(damagecustom == TF_CUSTOM_PLASMA_CHARGED){
 			damage *= TF2Attrib_HookValueFloat(1.0, "mult_clipsize_upgrade", weapon);
 			damagetype |= DMG_CRIT;
-		}
-
-		//Bleed receives ^0.8 damage boost from fire rate.
-		if(damagetype & DMG_SLASH){
-			damage /= Pow(TF2Attrib_HookValueFloat(1.0, "mult_postfiredelay", weapon),  0.8);
 		}
 
 		float missingHealthDamageBonus = TF2Attrib_HookValueFloat(0.0, "dmg_per_pct_hp_missing", weapon);

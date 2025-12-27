@@ -10,7 +10,7 @@
 			"airblast pushback scale"		"5"
 			"airblast radius multiplier"	"3"
 			"slow enemy on hit major"		"1"
-			"afterburn time increased(N)"	"4.0"
+			"afterburn time increased(N)"	"2.0"
 		}
 		"Temperature rise"
 		{
@@ -34,7 +34,6 @@
 			"gamestage"						"1"
 			"restriction"					"1"
 			"Explosive Impact Radius"		"600.0"
-			"afterburn time increased(N)"	"1.5"
 			"damage bonus HIDDEN(b)"		"4.0"
 			"weapon fire rate 3"			"2.0"
 			"Afterburn Damage Multiplier"	"10.0"
@@ -108,7 +107,6 @@
 		{
 			"gamestage"						"1"
 			"restriction"					"1"
-			"bleeding duration"				"4"
 			"Bleed Per Hit"					"2"
 			"mult crit dmg"				"5.0"
 		}
@@ -158,7 +156,7 @@
 			"Arrow Ignition Chance"			"20.0"
 			"Ignited Arrows Explode"		"6.0"
 			"Ignited Arrows Explosion Radius"	"2.0"
-			"afterburn time increased(N)"	"2.0"
+			"afterburn time increased(N)"	"1.0"
 		}
 		"Frost Infusion"
 		{
@@ -167,7 +165,6 @@
 			"additive piercing damage"		"10"
 			"damage causes freeze"			"140"
 			"mult crit dmg"				"5.0"
-			"bleeding duration"				"5"
 			"projectile penetration"		"1"
 		}
 		"Toxic Infusion"
@@ -189,7 +186,6 @@
 			"gamestage"						"1"
 			"restriction"					"1"
 			"afterburn rating"				"1"
-			"afterburn time increased(N)"	"1.0"
 			"minicrit vs burning player"	"1.0"
 			"sticky recursive explosion chance"		"2.5"
 			"additive piercing damage"		"12.0"
@@ -319,7 +315,7 @@
 			"restriction"					"1"
 			"Ability : Immolation"			"1"
 			"immolation ratio"				"2.0"
-			"afterburn time increased(N)"	"2.0"
+			"afterburn time increased(N)"	"1.0"
 			"dmg per pct hp missing"		"0.1"
 			"additive piercing damage"		"5"
 		}
@@ -399,7 +395,6 @@
 			"Ability : Sunstar"				"1"
 			"maxammo metal increased"		"2"
 			"afterburn dmg increased"		"5"
-			"afterburn time increased(N)"	"2.0"
 		}
 		"Starstorm"
 		{

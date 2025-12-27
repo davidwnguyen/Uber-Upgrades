@@ -938,7 +938,6 @@ public ResetClientUpgrade_slot(client, slot)
 	}
 	currentitem_level[client][slot] = 0
 	client_spent_money[client][slot] = 0.0
-	CurrencySaved[client] += client_spent_money_mvm_checkpoint[client][slot];
 	client_spent_money_mvm_checkpoint[client][slot] = 0.0
 	currentupgrades_number[client][slot] = 0;
 	currentupgrades_number_mvm_checkpoint[client][slot] = 0;
@@ -1107,6 +1106,10 @@ DisplayItemChange(client,itemidx)
 		case 349:
 		{
 			ChangeString = "Sun-on-a-Stick | Deals 3x afterburn, but initial melee hit deals half. Converts fire rate to damage."
+		}
+		case 325:
+		{
+			ChangeString = "The Boston Basher | Inflicts +6 bleed buildup on hit. No longer applies bleeding ailment."
 		}
 		//Soldier Primary
 		case 127:
@@ -3246,7 +3249,7 @@ GivePowerupDescription(int client, char[] name, int amount){
 	}
 	else if(StrEqual("knockout powerup", name)){
 		if(amount == 2){
-			CPrintToChat(client, "{community}Tainted Blade Powerup {default}| {lightcyan}Incoming damage is multiplied by 0.66x. Melee applies amplified debuffs: 3x buildup rate, DoTs deal 5x dmg, and secondary ailment effects are 3x effective.");
+			CPrintToChat(client, "{community}Tainted Blade Powerup {default}| {lightcyan}Incoming damage is multiplied by 0.66x. Melee applies amplified debuffs: 3x buildup rate, DoTs deal 5x dmg.");
 		}else if(amount == 3){
 			CPrintToChat(client, "{community}Assassin Powerup {default}| {lightcyan}When a victim has not taken damage from you, melee damage crits and deals 4x damage.");
 		}else{
@@ -4196,9 +4199,10 @@ void applyAfterburn(int victim, int attacker, int weapon, float damage){
 		return;
 
 	float burndmgMult = 0.1
-	int burnTime = 6;
+	float burnTime = 6.0;
 	burndmgMult *= TF2Attrib_HookValueFloat(1.0, "mult_wpn_burndmg", weapon)*TF2Attrib_HookValueFloat(1.0, "debuff_magnitude_mult", weapon);
-	burnTime += RoundToNearest(GetAttribute(weapon, "afterburn rating", 0.0));
+	burnTime += TF2Attrib_HookValueFloat(0.0, "afterburn_rating", weapon);
+	burnTime *= TF2Attrib_HookValueFloat(1.0, "mult_wpn_burntime", weapon);
 
 	if(TF2Attrib_HookValueFloat(0.0, "supernova_powerup", attacker)) {
 		burndmgMult *= 2.0;
@@ -4210,7 +4214,7 @@ void applyAfterburn(int victim, int attacker, int weapon, float damage){
 	AfterburnStack stack;
 	stack.owner = attacker;
 	stack.damage = damage*burndmgMult;
-	stack.remainingTicks = burnTime;
+	stack.remainingTicks = RoundToNearest(burnTime);
 
 	insertAfterburn(victim, stack);
 	TF2Util_IgnitePlayer(victim, victim, 10.0);
