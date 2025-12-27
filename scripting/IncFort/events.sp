@@ -599,7 +599,7 @@ public MRESReturn OnKnockbackApply(int client, Handle hParams) {
 			ScaleVector(initKB, KBMult);
 		}
 		else{
-			if(client != lastKBSource[client]){
+			if(!IsValidWeapon(lastKBSource[client]) && client != lastKBSource[client]){
 				ScaleVector(initKB, KBMult)
 			}
 		}
