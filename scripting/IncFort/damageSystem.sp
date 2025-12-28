@@ -871,28 +871,11 @@ public Action:OnTakeDamagePre_Tank(victim, &attacker, &inflictor, float &damage,
 public Action:OnTakeDamagePre_Sapper(victim, &attacker, &inflictor, float &damage, &damagetype, &weapon, float damageForce[3], float damagePosition[3], damagecustom) 
 {
 	int owner = GetEntPropEnt(victim, Prop_Send, "m_hBuilder"); 
-	if(!IsClientInGame(owner))
-	{
+	if(!IsValidClient3(owner) || !IsValidClient3(attacker))
 		return Plugin_Continue;
-	}
-	if(!IsClientInGame(attacker))
-	{
-		return Plugin_Continue;
-	}
-	damage = 50.0;
-	int melee = (TF2Util_GetPlayerLoadoutEntity(attacker,2));
-	Address firerate = TF2Attrib_GetByName(melee, "fire rate bonus HIDDEN");
-	if(firerate != Address_Null)
-	{
-		float dmgpenalty = TF2Attrib_GetValue(firerate);
-		damage *= dmgpenalty;
-	}
-	Address firerate1 = TF2Attrib_GetByName(melee, "fire rate bonus");
-	if(firerate1 != Address_Null)
-	{
-		float dmgpenalty = TF2Attrib_GetValue(firerate1);
-		damage *= dmgpenalty;
-	}
+
+	if(IsValidWeapon(weapon))
+		damage = 50.0 * TF2Attrib_HookValueFloat(1.0, "mult_postfiredelay", weapon);
 	return Plugin_Changed;
 }
 
