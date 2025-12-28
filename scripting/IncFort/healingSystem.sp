@@ -31,11 +31,15 @@ float GetPlayerHealingMultiplier(client){
 		}
 		else{
 			int inflictor = TF2Util_GetPlayerConditionProvider(client, TFCond_Bleeding);
-			if(IsValidClient3(inflictor) && TF2Attrib_HookValueFloat(0.0, "knockout_powerup", client) == 2)
-				multiplier /= 1+5*TF2Attrib_HookValueFloat(1.0, "debuff_magnitude_mult", inflictor);
-			else
-				multiplier /= 1+1*TF2Attrib_HookValueFloat(1.0, "debuff_magnitude_mult", inflictor);
-			multiplier *= 0.5;
+			if(IsValidClient3(inflictor)){
+				if(TF2Attrib_HookValueFloat(0.0, "knockout_powerup", client) == 2)
+					multiplier /= 1+5*TF2Attrib_HookValueFloat(1.0, "debuff_magnitude_mult", inflictor);
+				else
+					multiplier /= 1+1*TF2Attrib_HookValueFloat(1.0, "debuff_magnitude_mult", inflictor);
+			}
+			else{
+				multiplier *= 0.5;
+			}
 		}
 	}
 	if(TF2_IsPlayerInCondition(client, TFCond_MegaHeal)){
