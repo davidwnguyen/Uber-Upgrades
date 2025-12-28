@@ -1,5 +1,8 @@
 "Phrases"
 {
+	"sentry lifesteal while active"{
+		"en"		"Sentry Lifesteal While Active"
+	}
 	"projectile speed multiplier"{
 		"en"		"Projectile Speed Multiplier"
 	}

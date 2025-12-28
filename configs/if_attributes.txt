@@ -3614,7 +3614,7 @@
 			"name"		"rocket specialist"
 			"ref"		"rocket specialist"
 			"display"		"%.0f"
-			"cost"		"300"
+			"cost"		"2000"
 			"increase_ratio"	"1.00"
 			"value"		"1"
 			"init"		"0"
@@ -4987,12 +4987,12 @@
 			"ref"		"Sentry Armor Piercing Damage"
 			"attr_class"	"mult_engy_sentry_damage"
 			"display"		"%.0f%%"
-			"cost"		"550"
+			"cost"		"500"
 			"increase_ratio"	"0.1"
 			"value"		"0.25"
 			"init"		"1"
 			"optimizer_style" "1"
-			"max"		"30"
+			"max"		"45"
 		}
 		"1516"
 		{
@@ -7364,6 +7364,20 @@
 			"value"		"1"
 			"init"		"1"
 			"max"		"1"
+		}
+		"1727"
+		{
+			"name"		"sentry lifesteal while active"
+			"ref"		"sentry lifesteal while active"
+			"attr_class"	"sentry_lifesteal_while_active"
+			"display"		"%.0f%%"
+			"attr_type"		"value_is_additive"
+			"cost"		"1500"
+			"increase_ratio"	"0.2"
+			"value"		"0.01"
+			"init"		"0.0"
+			"description"	"[{VALUE}*100]% of dealt damage is given as health to your sentry.\nLifesteal on bots is 0.3x effective."
+			"max"		"0.2"
 		}
 		//Filler
 		"1900.0"

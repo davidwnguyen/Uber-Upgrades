@@ -22,12 +22,6 @@
 			"1"				"aiming knockback resistance;0"
 			"2"				"aiming no flinch;1"
 		}
-		"140,30668"//The Wrangler
-		{
-			"preserve_attributes"	"1"
-			"1"				"rocket specialist;1"
-			"2"				"engy sentry fire rate increased;0.80"
-		}
 		"812,833"//The Flying Guillotine
 		{
 			"preserve_attributes"	"1"

@@ -2028,8 +2028,9 @@
 		"special_tweaks_listid"		"1"
 		"Weapon Specific upgrades"
 		{
-			"0"		"Sentry Damage While Active"
-			"1"		"air control when blast jumping"
+			"0"		"rocket specialist"
+			"1"		"sentry lifesteal while active"
+			"2"		"air control when blast jumping"
 		}
 		"Special Tweaks"
 		{

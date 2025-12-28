@@ -165,7 +165,7 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 			}
 		}
 	}
-	int VictimCWeapon = GetEntPropEnt(victim, Prop_Send, "m_hActiveWeapon");
+
 	if(IsValidClient3(attacker) && IsValidClient3(victim))
 	{
 		applyDamageAffinities(victim, attacker, inflictor, damage, weapon, damagetype, damagecustom);
@@ -519,6 +519,7 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 				damage *= (1-guardianPercentage);
 			}
 		}
+		int VictimCWeapon = GetEntPropEnt(victim, Prop_Send, "m_hActiveWeapon");
 		if(IsValidWeapon(VictimCWeapon)){
 			if(HasEntProp(VictimCWeapon, Prop_Send, "m_hHealingTarget") && miniCritStatusVictim[victim] < GetGameTime()){
 				if(TF2Attrib_HookValueFloat(0.0, "escape plan healing", VictimCWeapon)){
@@ -603,6 +604,25 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 			}
 		}
 
+		if(IsValidEntity(inflictor)){
+			char inflictorClassname[32];
+			GetEdictClassname(inflictor, inflictorClassname, sizeof(inflictorClassname));
+			if(StrEqual("tf_projectile_sentryrocket", inflictorClassname)){
+				inflictor = getOwner(inflictor);
+				GetEdictClassname(inflictor, inflictorClassname, sizeof(inflictorClassname));
+			}
+			int attackerCWeapon = GetEntPropEnt(attacker, Prop_Send, "m_hActiveWeapon");
+			if(IsValidWeapon(attackerCWeapon)){
+				float sentryLifesteal = TF2Attrib_HookValueFloat(0.0, "sentry_lifesteal_while_active", attackerCWeapon);
+				if(sentryLifesteal > 0){
+					sentryLifesteal *= damage;
+					if(IsFakeClient(victim))
+						sentryLifesteal *= 0.3;
+
+					AddEntHealth(inflictor, RoundToCeil(sentryLifesteal));
+				}
+			}
+		}
 		if(hasBuffIndex(victim, Buff_Bruised) && !(damagetype & DMG_PIERCING) && !(damagetype & DMG_IGNOREHOOK)){
 			int bruisedInflictor = playerBuffs[victim][getBuffInArray(victim, Buff_Bruised)].inflictor;
 			if(IsValidClient3(bruisedInflictor)){
