@@ -1060,7 +1060,7 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 		if(jaratedIndex != -1 && IsValidClient3(playerBuffs[victim][jaratedIndex].inflictor)){
 			SDKHooks_TakeDamage(victim,playerBuffs[victim][jaratedIndex].inflictor,playerBuffs[victim][jaratedIndex].inflictor,5.0*playerBuffs[victim][jaratedIndex].priority,DMG_DISSOLVE|DMG_IGNOREHOOK,_,_,_,false);
 		}
-		if(hasBuffIndex(victim, Buff_DragonDance)){
+		if(hasBuffIndex(victim, Buff_DragonDance) && playerBuffs[victim][getBuffInArray(victim, Buff_DragonDance)].inflictor == attacker){
 			int temp = getBuffInArray(victim, Buff_DragonDance);
 			if(playerBuffs[victim][temp].priority != weapon){
 				SDKHooks_TakeDamage(victim,attacker,playerBuffs[victim][temp].inflictor,TF2_GetWeaponclassDPS(attacker, playerBuffs[victim][temp].priority) * TF2_GetDPSModifiers(attacker, playerBuffs[victim][temp].priority) * 2.5,DMG_DISSOLVE|DMG_IGNOREHOOK,_,_,_,false);
