@@ -324,7 +324,7 @@
 			"2"				"weapon fire rate;2.0"
 			"3"				"slow enemy on hit major;1.0"
 		}
-		"811" //Huo-long Heater
+		"811,832" //Huo-long Heater
 		{
 			"preserve_attributes"	"1"
 			"1"				"override projectile type;6.0"
