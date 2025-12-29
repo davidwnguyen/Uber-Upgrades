@@ -1698,7 +1698,7 @@ refreshUpgrades(client, slot)
 			TF2Attrib_RemoveByName(client,"sniper charge per sec");
 			TF2Attrib_RemoveByName(client,"blast dmg to self increased");
 			TF2Attrib_RemoveByName(client,"damage mult 1");
-			TF2Attrib_RemoveByName(client,"fire rate penalty");
+			TF2Attrib_RemoveByName(client,"weapon fire rate");
 			TF2Attrib_RemoveByName(client,"damage penetrates reductions");
 			TF2Attrib_RemoveByName(client,"major move speed bonus");
 			TF2Attrib_RemoveByName(client,"self dmg push force increased");
@@ -1757,7 +1757,7 @@ refreshUpgrades(client, slot)
 				}
 
 				if(precisionPowerupValue == 3){
-					TF2Attrib_SetByName(client,"fire rate penalty", 4.0);
+					TF2Attrib_SetByName(client,"weapon fire rate", 4.0);
 					TF2Attrib_SetByName(client,"damage penetrates reductions", 0.35);
 				}
 			}
