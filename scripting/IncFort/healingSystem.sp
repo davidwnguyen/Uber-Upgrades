@@ -82,6 +82,9 @@ float GetPlayerHealingMultiplier(client){
 	
 	if(TF2Attrib_HookValueFloat(0.0, "regeneration_powerup", client) == 3.0)
 		multiplier *= 1.6;
+	if(TF2Attrib_HookValueFloat(0.0, "king_powerup", client) == 3.0)
+		multiplier *= 0.35;
+		
 	if(hasBuffIndex(client, Buff_Stronghold)){
 		multiplier *= 1 + 0.33 * playerBuffs[client][getBuffInArray(client, Buff_Stronghold)].severity;
 	}

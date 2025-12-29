@@ -2431,7 +2431,7 @@ public OnGameFrame()
 					RegenPerTick *= TF2Attrib_GetValue(HealingReductionActive);
 				
 				Address regenerationPowerup = TF2Attrib_GetByName(client, "regeneration powerup");
-				if(regenerationPowerup != Address_Null)
+				if(regenerationPowerup != Address_Null){
 					if(TF2Attrib_GetValue(regenerationPowerup) == 1.0)
 						RegenPerTick += TF2_GetMaxHealth(client)*TICKINTERVAL*0.1;//+10% maxHPR/s
 					else if(TF2Attrib_GetValue(regenerationPowerup) == 3.0){
@@ -2440,7 +2440,12 @@ public OnGameFrame()
 							bloodAcolyteBloodPool[client] += TF2_GetMaxHealth(client)*TICKINTERVAL*0.08;
 						}
 					}
+				}
 
+				if(RegenPerTick > 0){
+					RegenPerTick *= GetPlayerHealingMultiplier(client);
+				}
+				
 				if(TF2_IsPlayerInCondition(client, TFCond_Plague))
 					RegenPerTick *= 0.0;
 

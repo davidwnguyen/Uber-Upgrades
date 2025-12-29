@@ -1692,7 +1692,6 @@ refreshUpgrades(client, slot)
 			
 			TF2Attrib_RemoveByName(client,"ubercharge rate bonus");
 			TF2Attrib_RemoveByName(client,"heal rate bonus");
-			TF2Attrib_RemoveByName(client,"health from healers reduced");
 			TF2Attrib_RemoveByName(client,"weapon spread bonus");
 			TF2Attrib_RemoveByName(client,"Projectile speed increased");
 			TF2Attrib_RemoveByName(client,"Projectile range increased");
@@ -1731,8 +1730,6 @@ refreshUpgrades(client, slot)
 					TF2Attrib_SetByName(client,"ubercharge rate bonus", 1.5);
 					TF2Attrib_SetByName(client,"heal rate bonus", 1.5);
 				}
-				if(kingPowerupValue == 3)
-					TF2Attrib_SetByName(client, "health from healers reduced", 0.2);
 			}
 
 			if(TF2Attrib_HookValueFloat(0.0, "resistance_powerup", client) == 2.0){
