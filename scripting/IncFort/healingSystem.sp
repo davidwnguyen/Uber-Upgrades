@@ -124,3 +124,21 @@ void AddPlayerHealth(client, iAdd, float flOverheal = 1.5, bool bEvent = false, 
         SetEntityHealth(client, iNewHealth);
     }
 }
+void AddBuildingHealth(building, heal, healer = -1){
+	int missingHealth = TF2Util_GetEntityMaxHealth(building) - GetEntProp(building, Prop_Send, "m_iHealth");
+	if(missingHealth == 0)
+		return;
+
+	if(heal > missingHealth){
+		heal = missingHealth;
+	}
+
+	if(IsValidClient3(healer)){
+		Handle hEvent = CreateEvent("building_healed", true);
+		SetEventInt(hEvent, "building", building);
+		SetEventInt(hEvent, "healer", healer);
+		SetEventInt(hEvent, "amount", heal);
+		FireEvent(hEvent);
+	}
+	AddEntHealth(building, heal);
+}

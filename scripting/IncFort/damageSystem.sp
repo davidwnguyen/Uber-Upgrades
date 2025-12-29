@@ -614,12 +614,23 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 			int attackerCWeapon = GetEntPropEnt(attacker, Prop_Send, "m_hActiveWeapon");
 			if(IsValidWeapon(attackerCWeapon)){
 				float sentryLifesteal = TF2Attrib_HookValueFloat(0.0, "sentry_lifesteal_while_active", attackerCWeapon);
+
+				Address vampirePowerup = TF2Attrib_GetByName(attacker, "vampire powerup");//Vampire Powerup
+				if(vampirePowerup != Address_Null)
+					if(TF2Attrib_GetValue(vampirePowerup) == 1)
+						sentryLifesteal += 0.4;
+					else if(TF2Attrib_GetValue(vampirePowerup) == 2)
+						sentryLifesteal += 0.25;
+				
+				if(TF2_IsPlayerInCondition(attacker, TFCond_MedigunDebuff))// Conch
+					sentryLifesteal += 0.15;
+
 				if(sentryLifesteal > 0){
 					sentryLifesteal *= damage;
 					if(IsFakeClient(victim))
 						sentryLifesteal *= 0.3;
 
-					AddEntHealth(inflictor, RoundToCeil(sentryLifesteal));
+					AddBuildingHealth(inflictor, RoundToCeil(sentryLifesteal), attacker);
 				}
 			}
 		}
@@ -652,6 +663,8 @@ public Action TF2_OnTakeDamage(int victim, int &attacker, int &inflictor, float 
 		int &damagetype, int &weapon, float damageForce[3], float damagePosition[3],
 		int damagecustom, CritType &critType)
 {
+	float originalDamage = damage;
+	CritType originalCrit = critType;
 	if(!IsValidClient3(attacker))
 		attacker = EntRefToEntIndex(attacker);
 
@@ -728,19 +741,42 @@ public Action TF2_OnTakeDamage(int victim, int &attacker, int &inflictor, float 
 				isTagged[attacker][victim] = true;
 			}
 		}
+
+		if(IsValidEntity(inflictor)) {
+			char classname[32];
+			GetEdictClassname(inflictor, classname, sizeof(classname));
+			if(StrEqual("tf_projectile_sentryrocket", classname)){
+				inflictor = getOwner(inflictor);
+				GetEdictClassname(inflictor, classname, sizeof(classname));
+			}
+
+			if(StrEqual("obj_sentrygun", classname)){
+				if(TF2_IsPlayerCritBuffed(attacker)){
+					critType = CritType_Crit;
+				}
+				float critRating = TF2Attrib_HookValueFloat(0.0, "critical_rating", weapon);
+				if(critRating > 0){
+					float critRate = critRating/(critRating+200.0);
+					if(critRate >= GetRandomFloat()){
+						critType = CritType_Crit;
+					}
+				}
+			}
+		}
 	}
 
 	if(hasBuffIndex(victim, Buff_Stronghold) || TF2Attrib_HookValueFloat(0.0, "resistance_powerup", victim) == 1){
 		critType = CritType_None;
 	}
-	return Plugin_Changed;
+	if(originalDamage != damage || originalCrit != critType)
+		return Plugin_Changed;
+	return Plugin_Continue;
 }
 
 public Action TF2_OnTakeDamageModifyRules(int victim, int &attacker, int &inflictor, float &damage, int &damagetype, int &weapon, float damageForce[3], float damagePosition[3], int damagecustom, CritType &critType){
 	if(0 < victim <= MaxClients && 0 < attacker <= MaxClients){
 		if(critType == CritType_Crit){
 			damage /= 3.0;
-
 			float critNullify = TF2Attrib_HookValueFloat(0.0, "critical_block_rating", victim);
 			float critRating = TF2Attrib_HookValueFloat(0.0, "critical_rating", attacker);
 			if(critNullify/(critNullify+800) >= GetRandomFloat()){
@@ -748,6 +784,7 @@ public Action TF2_OnTakeDamageModifyRules(int victim, int &attacker, int &inflic
 			}else{
 				damage += damage*((1+critRating/200.0)/(1+critNullify/200));
 			}
+			return Plugin_Changed;
 		}
 		if(critType == CritType_MiniCrit || miniCritStatus[victim]){
 			if(!miniCritStatus[victim])
@@ -766,9 +803,11 @@ public Action TF2_OnTakeDamageModifyRules(int victim, int &attacker, int &inflic
 				damage += bonusDamage;
 			}
 			miniCritStatus[victim] = false;
+			return Plugin_Changed;
 		}
 	}
-	return Plugin_Changed;
+
+	return Plugin_Continue;
 }
 
 public Action OnTakeDamage(victim, &attacker, &inflictor, float &damage, &damagetype, &weapon, float damageForce[3], float damagePosition[3], damagecustom)
@@ -999,7 +1038,7 @@ public Action:OnTakeDamagePre_Sentry(victim, &attacker, &inflictor, float &damag
 				damage *= 1.0 + armorPenetration*0.1;
 			}
 		}
-
+		
 		applyDamageAffinities(owner, attacker, inflictor, damage, weapon, damagetype, damagecustom);
 	}
 	return Plugin_Changed;
@@ -1185,7 +1224,7 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 				int healer = TF2Util_GetPlayerHealer(attacker,i);
 				if(!IsValidClient3(healer))
 					continue;
-					
+				
 				int healingWeapon = TF2Util_GetPlayerLoadoutEntity(healer, 1);
 				if(!IsValidWeapon(healingWeapon))
 					continue;
@@ -1427,7 +1466,7 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 		}
 		if(TF2Attrib_HookValueFloat(0.0, "supernova_powerup", attacker) == 1.0)
 		{
-			if(damagetype & DMG_BLAST)
+			if(damagetype & DMG_BLAST || hasSupernovaSplashed[attacker])
 			{
 				damage *= 1.8;
 			}
@@ -1438,6 +1477,7 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 				GetEntPropVector(victim, Prop_Data, "m_vecAbsOrigin", victimPosition); 
 				
 				EntityExplosion(attacker, damage, 300.0,victimPosition,_,weaponArtParticle[attacker] <= GetGameTime() ? true : false, victim, weaponArtParticle[attacker] <= GetGameTime() ? 0.8 : 0.0,_,weapon, 0.5);
+				hasSupernovaSplashed[attacker] = true;
 				//PARTICLES
 				if(weaponArtParticle[attacker] <= GetGameTime())
 				{
@@ -1474,7 +1514,7 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 		if(TF2Attrib_HookValueFloat(0.0, "supernova_powerup", attacker) == 3){
 			damagetype |= DMG_SHOCK;
 		}
-		if(isVictimPlayer && damagetype & DMG_SHOCK){
+		if(isVictimPlayer && damagetype & DMG_SHOCK && !hasSupernovaSplashed[attacker]){
 			int team = GetClientTeam(attacker);
 			float arcDamage = baseDamage[attacker] * TF2_GetDamageModifiers(attacker, weapon, true) * 0.5;
 			for(int i = 1;i<=MaxClients;++i){
@@ -1493,6 +1533,7 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 
 				SDKHooks_TakeDamage(i, attacker, attacker, arcDamage, DMG_SHOCK|DMG_IGNOREHOOK, _,_,_,false);
 			}
+			hasSupernovaSplashed[attacker] = true;
 		}
 
 		if(LightningEnchantmentDuration[attacker] > GetGameTime() && !(damagetype & DMG_VEHICLE)){
@@ -1690,7 +1731,7 @@ public float genericSentryDamageModification(victim, attacker, inflictor, float 
 		int owner; 
 		owner = GetEntPropEnt(inflictor, Prop_Send, "m_hBuilder");
 
-		if(IsValidForDamage(owner))
+		/*if(IsValidForDamage(owner))
 		{
 			char Ownerclassname[64]; 
 			GetEdictClassname(owner, Ownerclassname, sizeof(Ownerclassname)); 
@@ -1699,7 +1740,7 @@ public float genericSentryDamageModification(victim, attacker, inflictor, float 
 				//damage *= TankSentryDamageMod;
 				damagetype |= DMG_PREVENT_PHYSICS_FORCE;
 			}
-		}
+		}*/
 		if(IsValidClient3(owner))
 		{
 			damagetype |= DMG_PREVENT_PHYSICS_FORCE;

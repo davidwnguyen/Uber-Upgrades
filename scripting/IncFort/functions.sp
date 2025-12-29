@@ -473,6 +473,7 @@ public void ManagePlayerBuffs(int i){
 	TF2Attrib_SetByName(i, "additive damage bonus", additiveDamageRawBuff);
 	TF2Attrib_SetByName(i, "damage mult 1", additiveDamageMultBuff*multiplicativeDamageBuff);
 	TF2Attrib_SetByName(i, "firerate player buff", 1.0/(additiveAttackSpeedMultBuff*multiplicativeAttackSpeedMultBuff));
+	TF2Attrib_SetByName(i, "firerate sentry buff", 1.0/(additiveAttackSpeedMultBuff*multiplicativeAttackSpeedMultBuff));
 	TF2Attrib_SetByName(i, "recharge rate player buff", 1.0/(additiveAttackSpeedMultBuff*multiplicativeAttackSpeedMultBuff));
 	TF2Attrib_SetByName(i, "Reload time decreased", 1.0/(additiveAttackSpeedMultBuff*multiplicativeAttackSpeedMultBuff));
 	TF2Attrib_SetByName(i, "movespeed player buff", additiveMoveSpeedMultBuff);
@@ -3038,8 +3039,11 @@ PrecisionHoming(entity)
 {
 	entity = EntRefToEntIndex(entity);
     if(IsValidEdict(entity)) 
-    { 
+    {
 		int client = getOwner(entity);
+		if(!IsValidClient3(client) && IsValidEntity(client) && HasEntProp(client,Prop_Send,"m_hBuilder")){
+			client = GetEntPropEnt(client, Prop_Send, "m_hBuilder");
+		}
 		if(IsValidClient3(client))
 		{
 			float addedRadius = 0.0;

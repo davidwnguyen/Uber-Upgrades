@@ -2413,6 +2413,7 @@ public OnGameFrame()
 				int clientMaxHealth = TF2_GetMaxHealth(client);
 				stickiesDetonated[client] = 0;
 				isDeathTick[client] = false;
+				hasSupernovaSplashed[client] = false;
 				float RegenPerTick = 0.0;
 
 				if(TF2_IsPlayerInCondition(client, TFCond_HalloweenSpeedBoost)){
@@ -2672,10 +2673,9 @@ public Action TF2_CalcIsAttackCritical(int client, int weapon, char[] weaponname
 
 	canOverride[client] = true;
 	canShootAgain[client] = true;
-	int CWeapon = weapon;
-	if(IsValidWeapon(CWeapon))
+	if(IsValidWeapon(weapon))
 	{
-		int critRating = TF2Attrib_HookValueInt(0, "critical_rating", client);
+		float critRating = TF2Attrib_HookValueFloat(0.0, "critical_rating", weapon);
 		if(critRating > 0){
 			float critRate = critRating/(critRating+200.0);
 			if(critRate >= GetRandomFloat()){
@@ -2685,31 +2685,31 @@ public Action TF2_CalcIsAttackCritical(int client, int weapon, char[] weaponname
 
 		float fAngles[3], fVelocity[3], fOrigin[3], vBuffer[3];
 		meleeLimiter[client]++;
-		if(TF2Util_GetWeaponSlot(CWeapon) == TFWeaponSlot_Melee)
+		if(TF2Util_GetWeaponSlot(weapon) == TFWeaponSlot_Melee)
 		{
-			float ballCheck = GetAttribute(CWeapon, "mod bat launches balls", 0.0);
+			float ballCheck = GetAttribute(weapon, "mod bat launches balls", 0.0);
 			if(ballCheck == 0.0)
-				ballCheck = GetAttribute(CWeapon, "mod bat launches ornaments", 0.0);
+				ballCheck = GetAttribute(weapon, "mod bat launches ornaments", 0.0);
 
 			int a = GetCarriedAmmo(client, 2)
 			if(a > 0)
 			{
 				if(ballCheck == -1.0)
-					SDKCall(g_SDKCallLaunchBall, CWeapon);
+					SDKCall(g_SDKCallLaunchBall, weapon);
 			}
 		}
 		else
 		{
 			char classname[32]; 
-			GetEdictClassname(CWeapon, classname, sizeof(classname)); 
+			GetEdictClassname(weapon, classname, sizeof(classname)); 
 
 			if(StrEqual(classname, "tf_weapon_cleaver"))
 			{
-				if(weaponFireRate[CWeapon] > 5.0)
+				if(weaponFireRate[weapon] > 5.0)
 				{
-					Address override = TF2Attrib_GetByName(CWeapon, "override projectile type");
+					Address override = TF2Attrib_GetByName(weapon, "override projectile type");
 					if(override == Address_Null)
-						SDKCall(g_SDKCallJar, CWeapon);
+						SDKCall(g_SDKCallJar, weapon);
 				}
 			}
 		}
@@ -2750,8 +2750,8 @@ public Action TF2_CalcIsAttackCritical(int client, int weapon, char[] weaponname
 								AddVectors(fOrigin, fwd, fOrigin);
 								AddVectors(fOrigin, right, fOrigin);
 								float velocity = 5000.0;
-								Address projspeed = TF2Attrib_GetByName(CWeapon, "Projectile speed increased");
-								Address projspeed1 = TF2Attrib_GetByName(CWeapon, "Projectile speed decreased");
+								Address projspeed = TF2Attrib_GetByName(weapon, "Projectile speed increased");
+								Address projspeed1 = TF2Attrib_GetByName(weapon, "Projectile speed decreased");
 								if(projspeed != Address_Null){
 									velocity *= TF2Attrib_GetValue(projspeed)
 								}
@@ -2770,7 +2770,7 @@ public Action TF2_CalcIsAttackCritical(int client, int weapon, char[] weaponname
 								SetEntPropVector(iEntity, Prop_Send, "m_vInitialVelocity", fVelocity );
 								if(HasEntProp(iEntity, Prop_Send, "m_hLauncher"))
 								{
-									SetEntPropEnt(iEntity, Prop_Send, "m_hLauncher", CWeapon);
+									SetEntPropEnt(iEntity, Prop_Send, "m_hLauncher", weapon);
 								}
 								SetEntPropEnt(iEntity, Prop_Send, "m_hOriginalLauncher", client);
 								SetEntProp(iEntity, Prop_Send, "m_usSolidFlags", 0x0008);
@@ -2787,14 +2787,14 @@ public Action TF2_CalcIsAttackCritical(int client, int weapon, char[] weaponname
 				}
 			}
 		}
-		Address tracer = TF2Attrib_GetByName(CWeapon, "sniper fires tracer");
+		Address tracer = TF2Attrib_GetByName(weapon, "sniper fires tracer");
 		if(LastCharge[client] >= 150.0 && tracer != Address_Null && TF2Attrib_GetValue(tracer) == 1.0)
 		{
-			TF2Attrib_SetByName(CWeapon, "sniper fires tracer", 0.0);
+			TF2Attrib_SetByName(weapon, "sniper fires tracer", 0.0);
 		}
 		
-		Address projActive = TF2Attrib_GetByName(CWeapon, "sapper damage penalty hidden");
-		Address override = TF2Attrib_GetByName(CWeapon, "override projectile type");
+		Address projActive = TF2Attrib_GetByName(weapon, "sapper damage penalty hidden");
+		Address override = TF2Attrib_GetByName(weapon, "override projectile type");
 		if(override != Address_Null)
 		{
 			float projnum = TF2Attrib_GetValue(override);
@@ -2820,7 +2820,7 @@ public Action TF2_CalcIsAttackCritical(int client, int weapon, char[] weaponname
 						
 						GetAngleVectors(fAngles, vBuffer, NULL_VECTOR, NULL_VECTOR);
 						float Speed = 2000.0;
-						Address projspeed = TF2Attrib_GetByName(CWeapon, "Projectile speed increased");
+						Address projspeed = TF2Attrib_GetByName(weapon, "Projectile speed increased");
 						if(projspeed != Address_Null)
 						{
 							Speed *= TF2Attrib_GetValue(projspeed);
@@ -2831,13 +2831,13 @@ public Action TF2_CalcIsAttackCritical(int client, int weapon, char[] weaponname
 						
 						float ProjectileDamage = 90.0;
 						
-						Address DMGVSPlayer = TF2Attrib_GetByName(CWeapon, "dmg penalty vs players");
-						Address DamagePenalty = TF2Attrib_GetByName(CWeapon, "damage penalty");
-						Address DamageBonus = TF2Attrib_GetByName(CWeapon, "damage bonus");
-						Address DamageBonusHidden = TF2Attrib_GetByName(CWeapon, "damage bonus HIDDEN");
-						Address BulletsPerShot = TF2Attrib_GetByName(CWeapon, "bullets per shot bonus");
-						Address AccuracyScales = TF2Attrib_GetByName(CWeapon, "accuracy scales damage");
-						Address damageActive = TF2Attrib_GetByName(CWeapon, "ubercharge");
+						Address DMGVSPlayer = TF2Attrib_GetByName(weapon, "dmg penalty vs players");
+						Address DamagePenalty = TF2Attrib_GetByName(weapon, "damage penalty");
+						Address DamageBonus = TF2Attrib_GetByName(weapon, "damage bonus");
+						Address DamageBonusHidden = TF2Attrib_GetByName(weapon, "damage bonus HIDDEN");
+						Address BulletsPerShot = TF2Attrib_GetByName(weapon, "bullets per shot bonus");
+						Address AccuracyScales = TF2Attrib_GetByName(weapon, "accuracy scales damage");
+						Address damageActive = TF2Attrib_GetByName(weapon, "ubercharge");
 						
 						if(damageActive != Address_Null)
 						{
@@ -2902,8 +2902,8 @@ public Action TF2_CalcIsAttackCritical(int client, int weapon, char[] weaponname
 							AddVectors(fOrigin, fwd, fOrigin);
 							AddVectors(fOrigin, right, fOrigin);
 							float velocity = 3000.0;
-							Address projspeed = TF2Attrib_GetByName(CWeapon, "Projectile speed increased");
-							Address projspeed1 = TF2Attrib_GetByName(CWeapon, "Projectile speed decreased");
+							Address projspeed = TF2Attrib_GetByName(weapon, "Projectile speed increased");
+							Address projspeed1 = TF2Attrib_GetByName(weapon, "Projectile speed decreased");
 							if(projspeed != Address_Null){
 								velocity *= TF2Attrib_GetValue(projspeed)
 							}
@@ -2922,7 +2922,7 @@ public Action TF2_CalcIsAttackCritical(int client, int weapon, char[] weaponname
 							SetEntPropVector(iEntity, Prop_Send, "m_vInitialVelocity", fVelocity );
 							if(HasEntProp(iEntity, Prop_Send, "m_hLauncher"))
 							{
-								SetEntPropEnt(iEntity, Prop_Send, "m_hLauncher", CWeapon);
+								SetEntPropEnt(iEntity, Prop_Send, "m_hLauncher", weapon);
 							}
 							SetEntPropEnt(iEntity, Prop_Send, "m_hOriginalLauncher", client);
 							SetEntProp(iEntity, Prop_Send, "m_usSolidFlags", 0x0008);
@@ -2953,7 +2953,7 @@ public Action TF2_CalcIsAttackCritical(int client, int weapon, char[] weaponname
 						ScaleVector(vBuffer, 75.0);
 						AddVectors(fOrigin, vBuffer, fOrigin);
 
-						SetEntPropEnt(iEntity, Prop_Send, "m_hLauncher", CWeapon);
+						SetEntPropEnt(iEntity, Prop_Send, "m_hLauncher", weapon);
 						SetEntPropEnt(iEntity, Prop_Send, "m_hOriginalLauncher", client);
 						SetEntProp(iEntity, Prop_Data, "m_bIsLive", true);
 						SetEntProp(iEntity, Prop_Send, "m_bCritical", 1);
@@ -2996,8 +2996,8 @@ public Action TF2_CalcIsAttackCritical(int client, int weapon, char[] weaponname
 						ScaleVector(fwd, 20.0);
 						AddVectors(fOrigin, fwd, fOrigin);
 						float velocity = 2000.0;
-						Address projspeed = TF2Attrib_GetByName(CWeapon, "Projectile speed increased");
-						Address projspeed1 = TF2Attrib_GetByName(CWeapon, "Projectile speed decreased");
+						Address projspeed = TF2Attrib_GetByName(weapon, "Projectile speed increased");
+						Address projspeed1 = TF2Attrib_GetByName(weapon, "Projectile speed decreased");
 						if(projspeed != Address_Null){
 							velocity *= TF2Attrib_GetValue(projspeed)
 						}
@@ -3016,13 +3016,13 @@ public Action TF2_CalcIsAttackCritical(int client, int weapon, char[] weaponname
 						SetEntPropVector(iEntity, Prop_Send, "m_vInitialVelocity", fVelocity );
 						if(HasEntProp(iEntity, Prop_Send, "m_hLauncher"))
 						{
-							SetEntPropEnt(iEntity, Prop_Send, "m_hLauncher", CWeapon);
+							SetEntPropEnt(iEntity, Prop_Send, "m_hLauncher", weapon);
 						}
 						SetEntPropEnt(iEntity, Prop_Send, "m_hOriginalLauncher", client);
 						SDKHook(iEntity, SDKHook_StartTouch, OnStartTouchPiercingRocket);
 						SetEntityModel(iEntity, "models/weapons/w_models/w_rocket_airstrike/w_rocket_airstrike.mdl");
 						CreateTimer(3.0, SelfDestruct, EntIndexToEntRef(iEntity));
-						SetEntDataFloat(iEntity, FindSendPropInfo("CTFProjectile_Rocket", "m_iDeflected") + 4, 25.0 * TF2_GetDamageModifiers(client,CWeapon), true);  
+						SetEntDataFloat(iEntity, FindSendPropInfo("CTFProjectile_Rocket", "m_iDeflected") + 4, 25.0 * TF2_GetDamageModifiers(client,weapon), true);  
 					}
 				}
 				case 43.0:
@@ -3084,8 +3084,8 @@ public Action TF2_CalcIsAttackCritical(int client, int weapon, char[] weaponname
 						ScaleVector(fwd, 30.0);
 						AddVectors(fOrigin, fwd, fOrigin);
 						float velocity = 20000.0;
-						Address projspeed = TF2Attrib_GetByName(CWeapon, "Projectile speed increased");
-						Address projspeed1 = TF2Attrib_GetByName(CWeapon, "Projectile speed decreased");
+						Address projspeed = TF2Attrib_GetByName(weapon, "Projectile speed increased");
+						Address projspeed1 = TF2Attrib_GetByName(weapon, "Projectile speed decreased");
 						if(projspeed != Address_Null){
 							velocity *= TF2Attrib_GetValue(projspeed)
 						}
@@ -3103,11 +3103,11 @@ public Action TF2_CalcIsAttackCritical(int client, int weapon, char[] weaponname
 						SDKCall(g_SDKCallInitGrenade, iEntity, fVelocity, vecAngImpulse, client, 0, 5.0);
 						if(HasEntProp(iEntity, Prop_Send, "m_hLauncher"))
 						{
-							SetEntPropEnt(iEntity, Prop_Send, "m_hLauncher", CWeapon);
+							SetEntPropEnt(iEntity, Prop_Send, "m_hLauncher", weapon);
 						}
 						SetEntPropEnt(iEntity, Prop_Send, "m_hOriginalLauncher", client);
 						SetEntProp(iEntity, Prop_Data, "m_bIsLive", true);
-						//PrintToServer("%.2f", TF2_GetWeaponFireRate(CWeapon));
+						//PrintToServer("%.2f", TF2_GetWeaponFireRate(weapon));
 					}
 				}
 				case 46.0:
@@ -3132,14 +3132,14 @@ public Action TF2_CalcIsAttackCritical(int client, int weapon, char[] weaponname
 						AddVectors(fOrigin, fwd, fOrigin);
 						
 						float velocity = 700.0;
-						velocity *= GetAttribute(CWeapon, "Projectile speed increased");
-						velocity *= GetAttribute(CWeapon, "Projectile speed decreased");
+						velocity *= GetAttribute(weapon, "Projectile speed increased");
+						velocity *= GetAttribute(weapon, "Projectile speed decreased");
 						ScaleVector(vBuffer,velocity);
 					
 						DispatchSpawn(iEntity);
 						TeleportEntity(iEntity, fOrigin, fAngles, vBuffer);
 
-						SetEntPropEnt(iEntity, Prop_Send, "m_hLauncher", CWeapon);
+						SetEntPropEnt(iEntity, Prop_Send, "m_hLauncher", weapon);
 						SetEntPropEnt(iEntity, Prop_Send, "m_hOriginalLauncher", client);
 						CreateTimer(0.1, ElectricBallThink, EntIndexToEntRef(iEntity), TIMER_REPEAT|TIMER_FLAG_NO_MAPCHANGE);
 					}
@@ -3167,8 +3167,8 @@ public Action TF2_CalcIsAttackCritical(int client, int weapon, char[] weaponname
 					SetEntPropEnt(iEntity, Prop_Data, "m_hOwnerEntity", client);
 					DispatchSpawn(iEntity);
 
-					SetEntPropEnt(iEntity, Prop_Send, "m_hLauncher", CWeapon);
-					SetEntPropEnt(iEntity, Prop_Send, "m_hOriginalLauncher", CWeapon);
+					SetEntPropEnt(iEntity, Prop_Send, "m_hLauncher", weapon);
+					SetEntPropEnt(iEntity, Prop_Send, "m_hOriginalLauncher", weapon);
 					GetClientEyePosition(client, fOrigin);
 					fAngles = fEyeAngles[client];
 					
@@ -3178,7 +3178,7 @@ public Action TF2_CalcIsAttackCritical(int client, int weapon, char[] weaponname
 					fVelocity[1] = vBuffer[1]*Speed;
 					fVelocity[2] = vBuffer[2]*Speed;
 					SetEntPropVector( iEntity, Prop_Send, "m_vInitialVelocity", fVelocity );
-					float ProjectileDamage = 100.0 * GetAttribute(CWeapon, "bullets per shot bonus", 1.0);
+					float ProjectileDamage = 100.0 * GetAttribute(weapon, "bullets per shot bonus", 1.0);
 					
 					SetEntDataFloat(iEntity, FindSendPropInfo("CTFProjectile_Rocket", "m_iDeflected") + 4, ProjectileDamage, true);  
 					TeleportEntity(iEntity, fOrigin, fAngles, fVelocity);
@@ -3666,9 +3666,6 @@ public Action TF2_SentryFireBullet(int sentry, int builder, int &shots, float sr
 			}
 			
 			shots = RoundToCeil(GetAttribute(pda, "sentry bullets per shot", 1.0) * shots);
-			if(shots > 1){//Each bullets per shot increases spread by +50%.
-				ScaleVector(spread, 1+float(shots-1)/2.0);
-			}
 
 			if(GetAttribute(builder, "precision powerup", 0.0) == 1){//Precision removes sentry spread.
 				ScaleVector(spread, 0.0);

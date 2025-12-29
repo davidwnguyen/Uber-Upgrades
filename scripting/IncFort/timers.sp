@@ -243,7 +243,7 @@ public Action:Timer_FixedVariables(Handle timer)
 			info = playerBuffs[client][getBuffInArray(client, Buff_ImmolationBurn)];
 			if(IsValidClient3(info.inflictor)){
 				if(info.severity > 0.0){
-					SDKHooks_TakeDamage(client, info.inflictor, info.inflictor, info.severity*0.1, DMG_PREVENT_PHYSICS_FORCE|DMG_IGNOREHOOK);
+					SDKHooks_TakeDamage(client, info.inflictor, info.inflictor, info.severity*0.1, DMG_PREVENT_PHYSICS_FORCE|DMG_IGNOREHOOK, _, _, _, false);
 				}
 			}
 		}
@@ -1224,22 +1224,16 @@ public Action BuildingRegeneration(Handle timer, int entity)
 	if(GetEntProp(entity, Prop_Send, "m_bDisabled") == 1)
 		return Plugin_Continue;
 	
-	int BuildingMaxHealth = GetEntProp(entity, Prop_Send, "m_iMaxHealth");
-	int BuildingHealth = GetEntProp(entity, Prop_Send, "m_iHealth");
-	if(BuildingHealth < BuildingMaxHealth)
+	if(GetEntProp(entity, Prop_Send, "m_iHealth") < TF2Util_GetEntityMaxHealth(entity))
 	{
 		float BuildingRegen = GetAttribute(owner, "disguise on backstab", 0.0);
-		if(BuildingRegen > 0.0)
-		{
+		if(TF2Attrib_HookValueFloat(0.0, "regeneration_powerup", owner) == 1.0){
+			BuildingRegen += TF2Util_GetEntityMaxHealth(entity)*0.1;//+10% maxHPR/s
+		}
+
+		if(BuildingRegen > 0.0){
 			int Regeneration = RoundToNearest(BuildingRegen/3);
-			if((Regeneration + BuildingHealth) > BuildingMaxHealth)
-			{
-				AddEntHealth(entity, BuildingMaxHealth - BuildingHealth)
-			}
-			else
-			{
-				AddEntHealth(entity, Regeneration)
-			}
+			AddBuildingHealth(entity, Regeneration, owner);
 		}
 	}
 	char classname[32];
@@ -1255,6 +1249,9 @@ public Action BuildingRegeneration(Handle timer, int entity)
 		int rockets = GetEntProp(entity, Prop_Send, "m_iAmmoRockets");
 		int ammoRegenerationRate = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "sentry_ammo_regeneration", pda));
 		float maxAmmoMultiplier = TF2Attrib_HookValueFloat(1.0, "mvm_sentry_ammo", pda);
+
+		if(TF2Attrib_HookValueFloat(0.0, "regeneration_powerup", owner) == 1.0 || TF2Attrib_HookValueFloat(0.0, "regeneration_powerup", owner) == 2.0)
+			ammoRegenerationRate += 50.0;
 
 		if(ammoRegenerationRate > 0.0)
 		{
