@@ -100,7 +100,8 @@ enum {
 	Buff_ImmolationBurn=26,
 	Buff_InfernalLunge=27,
 	Buff_PowerupBurning=28, 
-	Buff_Plagued=29, 
+	Buff_Plagued=29,
+	Buff_Airblasted=30,
 	BuffAmt
 };
 bool isBonus[BuffAmt] = {
@@ -132,7 +133,8 @@ bool isBonus[BuffAmt] = {
 	true,
 	false,
 	true,
-	false, 
+	false,
+	false,
 	false
 }
 
@@ -155,6 +157,7 @@ enum struct Buff{
 	float multiplicativeDamageTaken;
 	float severity;
 	float additiveArmorPenetration;
+	float multiplicativeMoveSpeedMult;
 
 	void clear(){
 		switch(this.id){
@@ -190,6 +193,7 @@ enum struct Buff{
 		this.multiplicativeDamageTaken = 1.0;
 		this.severity = 1.0;
 		this.additiveArmorPenetration = 0.0;
+		this.multiplicativeMoveSpeedMult = 1.0;
 	}
 	void init(const char sName[32], const char sDescription[64], int iID, int iPriority, int iInflictor, float fDuration, float fSeverity = 1.0)
 	{
@@ -355,7 +359,6 @@ float BotTimer[MAXPLAYERS+1];
 float LastCharge[MAXPLAYERS+1];
 //float lastDamageTaken[MAXPLAYERS+1];
 float flNextSecondaryAttack[MAXPLAYERS+1];
-float CurrentSlowTimer[MAXPLAYERS+1];
 float fl_HighestFireDamage[MAXPLAYERS+1];
 float fEyeAngles[MAXPLAYERS+1][3];
 float trueVel[MAXPLAYERS+1][3];

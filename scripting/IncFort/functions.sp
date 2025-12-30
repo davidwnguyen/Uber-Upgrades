@@ -368,9 +368,22 @@ public int GetAmountOfBuffs(int i){
 	return amount;
 }
 
+float applyMultSeverityMod(float val, float severity){
+	/* 
+	//	we want all buffs and debuffs to scale based off of their effectiveness
+	//	so severity only applies to the buff/debuff portion of a value.
+	// 	eg: 0.8x movespeed (1.25x slow) with 2x severity would be 0.66x movespeed (1.5x slow)
+	//	eg: 1.25x damage with 2x severity would be 1.5x damage	
+	*/
+	if(val > 1.0)
+		return 1.0+(val-1.0)*severity;
+	else if(val < 1.0)
+		return 1.0/(1.0+(1.0/val-1.0)*severity);
+	return 1.0;
+}
 
 public void ManagePlayerBuffs(int i){
-	float additiveDamageRawBuff,additiveDamageMultBuff = 1.0,multiplicativeDamageBuff = 1.0,additiveAttackSpeedMultBuff = 1.0,multiplicativeAttackSpeedMultBuff = 1.0,additiveMoveSpeedMultBuff = 1.0,additiveDamageTakenBuff = 1.0,multiplicativeDamageTakenBuff = 1.0, additiveArmorPenetration = 0.0;
+	float additiveDamageRawBuff,additiveDamageMultBuff = 1.0,multiplicativeDamageBuff = 1.0,additiveAttackSpeedMultBuff = 1.0,multiplicativeAttackSpeedMultBuff = 1.0,additiveMoveSpeedMultBuff = 1.0,additiveDamageTakenBuff = 1.0,multiplicativeDamageTakenBuff = 1.0, additiveArmorPenetration = 0.0, multiplicativeMoveSpeedMult = 1.0;
 
 	char details[255] = "Statuses Active:"
 
@@ -409,9 +422,10 @@ public void ManagePlayerBuffs(int i){
 		additiveDamageTakenBuff += playerBuffs[i][buff].additiveDamageTaken * playerBuffs[i][buff].severity;
 		additiveArmorPenetration += playerBuffs[i][buff].additiveArmorPenetration * playerBuffs[i][buff].severity;
 
-		multiplicativeDamageBuff *= 1+(playerBuffs[i][buff].multiplicativeDamage-1) * playerBuffs[i][buff].severity;
-		multiplicativeDamageTakenBuff *= 1+(playerBuffs[i][buff].multiplicativeDamageTaken-1) * playerBuffs[i][buff].severity;
-		multiplicativeAttackSpeedMultBuff *= 1+(playerBuffs[i][buff].multiplicativeAttackSpeedMult-1) * playerBuffs[i][buff].severity;
+		multiplicativeDamageBuff *= applyMultSeverityMod(playerBuffs[i][buff].multiplicativeDamage, playerBuffs[i][buff].severity);
+		multiplicativeDamageTakenBuff *= applyMultSeverityMod(playerBuffs[i][buff].multiplicativeDamageTaken, playerBuffs[i][buff].severity);
+		multiplicativeAttackSpeedMultBuff *= applyMultSeverityMod(playerBuffs[i][buff].multiplicativeAttackSpeedMult, playerBuffs[i][buff].severity);
+		multiplicativeMoveSpeedMult *= applyMultSeverityMod(playerBuffs[i][buff].multiplicativeMoveSpeedMult, playerBuffs[i][buff].severity);
 
 		if(playerBuffs[i][buff].description[0] != '\0')
 			Format(details, sizeof(details), "%s\n%s: - %.1fs\n  %s", details, playerBuffs[i][buff].name, playerBuffs[i][buff].duration - GetGameTime(), playerBuffs[i][buff].description);
@@ -476,7 +490,7 @@ public void ManagePlayerBuffs(int i){
 	TF2Attrib_SetByName(i, "firerate sentry buff", 1.0/(additiveAttackSpeedMultBuff*multiplicativeAttackSpeedMultBuff));
 	TF2Attrib_SetByName(i, "recharge rate player buff", 1.0/(additiveAttackSpeedMultBuff*multiplicativeAttackSpeedMultBuff));
 	TF2Attrib_SetByName(i, "Reload time decreased", 1.0/(additiveAttackSpeedMultBuff*multiplicativeAttackSpeedMultBuff));
-	TF2Attrib_SetByName(i, "movespeed player buff", additiveMoveSpeedMultBuff);
+	TF2Attrib_SetByName(i, "movespeed player buff", additiveMoveSpeedMultBuff*multiplicativeMoveSpeedMult);
 	TF2Attrib_SetByName(i, "damage taken mult 4", additiveDamageTakenBuff*multiplicativeDamageTakenBuff);
 	TF2Attrib_SetByName(i, "armor penetration buff", additiveArmorPenetration);
 	TF2Attrib_ClearCache(i);
@@ -3561,7 +3575,6 @@ ResetVariables(){
 		LastCharge[client] = 0.0;
 		//lastDamageTaken[client] = 0.0;
 		flNextSecondaryAttack[client] = 0.0;
-		CurrentSlowTimer[client] = 0.0;
 		fl_HighestFireDamage[client] = 0.0;
 		miniCritStatusVictim[client] = 0.0;
 		miniCritStatusAttacker[client] = 0.0;
@@ -4301,7 +4314,6 @@ cleanSlateClient(int client){
 	fl_HighestFireDamage[client] = 0.0;
 	miniCritStatusAttacker[client] = 0.0;
 	miniCritStatusVictim[client] = 0.0;
-	CurrentSlowTimer[client] = 0.0;
 	canShootAgain[client] = true;
 	meleeLimiter[client] = 0;
 	critStatus[client] = false;

@@ -619,14 +619,13 @@ public MRESReturn OnAirblast(int weapon, Handle hParams){
 	if(IsValidWeapon(weapon)){
 		int owner = getOwner(weapon);
 
-		float SlowForce = 2.0 * GetAttribute(weapon, "airblast vertical pushback scale")
-		float AirblastDamage = 15.0 * GetAttribute(weapon, "airblast pushback scale")
-		float TotalRange = 600.0 * GetAttribute(weapon, "deflection size multiplier")
-		float Duration = 1.25 * GetAttribute(weapon, "melee range multiplier")
+		float AirblastDamage = 25.0 * GetAttribute(weapon, "airblast pushback scale") * TF2_GetDamageModifiers(owner, weapon);
+		float TotalRange = 600.0 * GetAttribute(weapon, "deflection size multiplier");
 		float ConeRadius = 40.0 * GetAttribute(weapon, "melee bounds multiplier");
 
-		AirblastDamage *= TF2_GetDamageModifiers(owner, weapon);
-
+		Buff airblasted;
+		airblasted.init("Airblasted", "", Buff_Airblasted, 1, owner, 1.25 * GetAttribute(weapon, "melee range multiplier"));
+		airblasted.multiplicativeMoveSpeedMult = 0.667 / GetAttribute(weapon, "airblast vertical pushback scale");
 		Buff dragonDance;
 		dragonDance.init("Combo Starter", "", Buff_DragonDance, weapon, owner, 2.0);
 		for(int i=1; i<=MaxClients; ++i)
@@ -637,37 +636,29 @@ public MRESReturn OnAirblast(int weapon, Handle hParams){
 				{
 					if(IsAbleToSee(owner,i, false) == true)
 					{
-						if(GetClientTeam(i) != GetClientTeam(owner))//Enemies debuffed
+						if(GetClientTeam(i) != GetClientTeam(owner))
 						{
-							CurrentSlowTimer[i] = GetGameTime()+Duration;
 							SDKHooks_TakeDamage(i,owner,owner,AirblastDamage,DMG_BLAST|DMG_IGNOREHOOK,weapon,_,_,false);
 							
-							bool immune = false;
-							
-							Address agilityPowerup = TF2Attrib_GetByName(i, "agility powerup");		
-							if(agilityPowerup != Address_Null && TF2Attrib_GetValue(agilityPowerup) > 0.0)
-								immune = true;
-							
-							if(TF2_IsPlayerInCondition(i,TFCond_MegaHeal))
-								immune = true;
-							
-							if(!immune)
-							{
-								TF2Attrib_SetByName(i,"move speed penalty", 1/SlowForce);
-								TF2Attrib_SetByName(i,"major increased jump height", Pow(1.2/SlowForce,0.3));
-							}
-
-							if(GetAttribute(weapon, "airblast flings enemy", 0.0)){
+							float dDanceAttr = TF2Attrib_HookValueFloat(0.0, "airblast_flings_enemy", weapon);
+							if(dDanceAttr){
 								float flingVelocity[3];
-								flingVelocity[2] = GetAttribute(weapon, "airblast flings enemy");
+								flingVelocity[2] = dDanceAttr;
 								TeleportEntity(i, NULL_VECTOR, NULL_VECTOR, flingVelocity);
-
 								insertBuff(i, dragonDance);
 							}
+
+							if(TF2Attrib_HookValueFloat(0.0, "agility_powerup", owner) == 1.0)
+								continue;
+							
+							if(TF2_IsPlayerInCondition(i,TFCond_MegaHeal))
+								continue;
+							
+							
 						}
-						else//Teammates buffed.
+						else
 						{
-							TF2_AddCondition(i, TFCond_AfterburnImmune, 6.0);
+							TF2_AddCondition(i, TFCond_AfterburnImmune, 6.0, owner);
 							TF2_AddCondition(i, TFCond_SpeedBuffAlly, 6.0);
 							TF2_AddCondition(i, TFCond_DodgeChance, 0.2);
 						}
@@ -2491,12 +2482,6 @@ public OnGameFrame()
 					{
 						RageActive[client] = false;
 					}
-				}
-				if(CurrentSlowTimer[client] <= GetGameTime() && CurrentSlowTimer[client] > 0.0)
-				{
-					TF2Attrib_SetByName(client,"move speed penalty", 1.0);
-					TF2Attrib_SetByName(client,"major increased jump height", 1.0);
-					CurrentSlowTimer[client] = 0.0;
 				}
 				//Firerate for Secondary Fire
 				int CWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
