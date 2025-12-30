@@ -611,9 +611,11 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 				inflictor = getOwner(inflictor);
 				GetEdictClassname(inflictor, inflictorClassname, sizeof(inflictorClassname));
 			}
-			int attackerCWeapon = GetEntPropEnt(attacker, Prop_Send, "m_hActiveWeapon");
-			if(IsValidWeapon(attackerCWeapon)){
-				float sentryLifesteal = TF2Attrib_HookValueFloat(0.0, "sentry_lifesteal_while_active", attackerCWeapon);
+			if(StrEqual("obj_sentrygun", inflictorClassname)){
+				float sentryLifesteal = 0.0;
+				int attackerCWeapon = GetEntPropEnt(attacker, Prop_Send, "m_hActiveWeapon");
+				if(IsValidWeapon(attackerCWeapon))
+					sentryLifesteal += TF2Attrib_HookValueFloat(0.0, "sentry_lifesteal_while_active", attackerCWeapon);
 
 				Address vampirePowerup = TF2Attrib_GetByName(attacker, "vampire powerup");//Vampire Powerup
 				if(vampirePowerup != Address_Null)
