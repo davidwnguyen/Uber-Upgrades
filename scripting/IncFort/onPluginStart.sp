@@ -30,7 +30,6 @@ public UberShopDefineUpgradeTabs()
 	int i = 0
 	while (i <= MaxClients)
 	{
-		client_respawn_checkpoint[i] = 0
 		up_menus[i] = INVALID_HANDLE
 		int j = 0
 		while (j < NB_SLOTS_UED)

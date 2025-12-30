@@ -1251,7 +1251,6 @@ public Event_mvm_wave_begin(Handle event, const char[] name, bool:dontBroadcast)
 	{
 		if(IsValidClient(client))
 		{
-			CancelClientMenu(client);
 			for (slot = 0; slot < NB_SLOTS_UED; slot++)
 			{
 				for(a = 0; a < MAX_ATTRIBUTES_ITEM; a++)

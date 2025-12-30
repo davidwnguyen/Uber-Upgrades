@@ -1373,7 +1373,6 @@ public Action ResetClientsTimer(Handle timer){
 }*/
 public Action MissionLoaded(Handle timer){
 	for(int i = 1;i<=MaxClients;++i){
-		client_respawn_checkpoint[i] = false;
 		if(IsValidClient(i)){
 			StartMoney = float(GetEntProp(i, Prop_Send, "m_nCurrency"));
 			CurrencyOwned[i] = (StartMoney + additionalstartmoney);
@@ -1574,7 +1573,6 @@ public Action:ChangeClassTimer(Handle timer, any:userid)
 	int client = GetClientOfUserId(userid);
 	if (IsValidClient(client) && IsPlayerAlive(client))
 	{
-		client_respawn_checkpoint[client] = 0;
 		if(AreClientCookiesCached(client))
 		{
 			char menuEnabled[64];

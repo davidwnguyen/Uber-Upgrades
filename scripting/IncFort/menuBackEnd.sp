@@ -363,20 +363,27 @@ public MenuHandler_Choosecat(Handle menu, MenuAction:action, client, param2)
 		char fstr2[100]
 		char fstr[40]
 		char fstr3[20]
-		int slot = current_slot_used[client]
-		int cat_id = currentitem_catidx[client][slot]
+		int slot = current_slot_used[client];
+		int cat_id = currentitem_catidx[client][slot];
+		int w_id = current_w_list_id[client];
 		if (slot != 4)
 		{
-			Format(fstr, sizeof(fstr), "%T", given_upgrd_classnames[cat_id][param2], client)
-			Format(fstr3, sizeof(fstr3), "%T", current_slot_name[slot], client)
-			Format(fstr2, sizeof(fstr2), "$%.0f [%s] - %s", CurrencyOwned[client],fstr3,fstr)
+			if(given_upgrd_list_nb[w_id] != param2){
+				Format(fstr, sizeof(fstr), "%T", given_upgrd_classnames[cat_id][param2], client)
+				Format(fstr3, sizeof(fstr3), "%T", current_slot_name[slot], client)
+				Format(fstr2, sizeof(fstr2), "$%.0f [%s] - %s", CurrencyOwned[client],fstr3,fstr)
+			}
 			if(given_upgrd_subcat[cat_id][param2] > 0)
 			{
 				Menu_ChooseSubcat(client, param2, fstr2)
 			}
 			else
 			{
-				if (param2 == given_upgrd_classnames_tweak_idx[cat_id])
+				if(given_upgrd_list_nb[w_id] == param2)
+				{
+					Menu_TweakUpgrades_slot(client, slot, 0);
+				}
+				else if (param2 == given_upgrd_classnames_tweak_idx[cat_id])
 				{
 					Menu_SpecialUpgradeChoice(client, param2, fstr2,0)
 				}
@@ -456,18 +463,14 @@ public MenuHandler_BuyUpgrade(Handle menu, MenuAction:action, client, param2)
 				}
 			}
 			case 5:
-			{//Upgrade Manager
-				Menu_TweakUpgrades(client);
-			}
-			case 6:
 			{//Use arcane
 				Menu_ShowArcane(client);
 			}
-			case 7:
+			case 6:
 			{//Show stats
 				Menu_ShowStats(client);
 			}
-			case 8:
+			case 7:
 			{//Change preferences menu
 				Menu_ChangePreferences(client);
 			}
@@ -547,7 +550,7 @@ public Action:Timer_giveactionslot(Handle timer, int client)
 
 public MenuHandler_AttributesTweak(Handle menu, MenuAction:action, client, param2)
 {
-	if (IsValidClient(client) && IsPlayerAlive(client) && !client_respawn_checkpoint[client])
+	if (IsValidClient(client) && IsPlayerAlive(client))
 	{
 		Menu_TweakUpgrades_slot(client, param2, 0)
 	}
@@ -561,78 +564,72 @@ public MenuHandler_AttributesTweak(Handle menu, MenuAction:action, client, param
 }
 public MenuHandler_AttributesTweak_action(Handle menu, MenuAction:action, client, param2)
 {
-	if (IsValidClient(client) && IsPlayerAlive(client) && !client_respawn_checkpoint[client])
-	{
-		int s = current_slot_used[client];
-		if (s >= 0 && s < 5 && param2 < MAX_ATTRIBUTES_ITEM)
+	if(action == MenuAction_Select){
+		if (IsValidClient(client) && IsPlayerAlive(client))
 		{
-			if (param2 >= 0)
+			int s = current_slot_used[client];
+			if (s < 0 || s > NB_SLOTS_UED)
+				return;
+
+			if (param2 < 0)
+				return;
+
+			int downsideCounter = 0;
+			int upgradeIndex = 0;
+			for (int i = 0; i < currentupgrades_number[client][s]; ++i)
 			{
-				int u = currentupgrades_idx[client][s][param2]
-				if (u != 20000)
+				int u = currentupgrades_idx[client][s][i]
+				if (upgrades[u].cost < -0.1)
 				{
-					if(upgrades[u].cost < -0.1)
+					int nb_time_upgraded = RoundToNearest((upgrades[u].i_val - currentupgrades_val[client][s][i]) / upgrades[u].ratio);
+					float up_cost = float(upgrades[u].cost*nb_time_upgraded);
+					if(up_cost > 200.0)
 					{
-						int nb_time_upgraded = RoundToNearest((upgrades[u].i_val - currentupgrades_val[client][s][param2]) / upgrades[u].ratio)
-						float up_cost = float(upgrades[u].cost * nb_time_upgraded);
-						if(up_cost > 200.0)
-						{
-							if (CurrencyOwned[client] >= up_cost)
-							{
-								remove_attribute(client, param2, s);
-								CurrencyOwned[client] -= up_cost;
-								client_spent_money[client][s] += up_cost;
-							}
-							else
-							{
-								PrintToChat(client, "You don't have enough money.");
-								EmitSoundToClient(client, SOUND_FAIL);
-							}
+						if(downsideCounter == param2){
+							upgradeIndex = i;
+							break;
 						}
+						downsideCounter++;
 					}
-					if (upgrades[u].cost > 1.0)
+				}
+			}
+			int u = currentupgrades_idx[client][s][upgradeIndex]
+			if (u != 20000)
+			{
+				if(upgrades[u].cost < -0.1)
+				{
+					int nb_time_upgraded = RoundToNearest((upgrades[u].i_val - currentupgrades_val[client][s][upgradeIndex]) / upgrades[u].ratio)
+					float up_cost = float(upgrades[u].cost * nb_time_upgraded);
+					if(up_cost > 200.0)
 					{
-						int nb_time_upgraded;
-						if(currentupgrades_i[client][s][param2] != 0.0)
+						if (CurrencyOwned[client] >= up_cost)
 						{
-							nb_time_upgraded = RoundToNearest((currentupgrades_i[client][s][param2] - currentupgrades_val[client][s][param2]) / upgrades[u].ratio)
+							remove_attribute(client, upgradeIndex, s);
+							CurrencyOwned[client] -= up_cost;
+							client_spent_money[client][s] += up_cost;
 						}
 						else
 						{
-							nb_time_upgraded = RoundToNearest((upgrades[u].i_val - currentupgrades_val[client][s][param2]) / upgrades[u].ratio)
-						}
-						nb_time_upgraded *= -1
-						float up_cost = ((upgrades[u].cost+((upgrades[u].cost_inc_ratio*upgrades[u].cost)*(nb_time_upgraded-1))/2)*nb_time_upgraded)
-						if(s == 1)
-							up_cost *= SecondaryCostReduction;
-							
-						if(up_cost > 200.0)
-						{
-							if(canBypassRestriction[client] || client_spent_money[client][s] - up_cost > client_tweak_highest_requirement[client][s] - 1.0)
-							{
-								remove_attribute(client, param2, s)
-								CurrencyOwned[client] += up_cost;
-								client_spent_money[client][s] -= up_cost
-								PrintToChat(client, "Attribute refunded.")
-							}
-							else
-							{
-								PrintToChat(client, "You cannot go below money spent of tweaks bought that have requirements. Highest Requirement is %.0f", client_tweak_highest_requirement[client][s]);
-								EmitSoundToClient(client, SOUND_FAIL);
-							}
+							PrintToChat(client, "You don't have enough money.");
+							EmitSoundToClient(client, SOUND_FAIL);
 						}
 					}
-					Menu_TweakUpgrades_slot(client, s, GetMenuSelectionPosition())
 				}
+				Menu_TweakUpgrades_slot(client, s, GetMenuSelectionPosition())
 			}
 		}
 	}
 	if(action == MenuAction_Cancel && param2 == MenuCancel_ExitBack)
 	{
-		Menu_TweakUpgrades(client);
+		char fstr[64], fstr2[64];
+		Format(fstr, sizeof(fstr), "%T", current_slot_name[current_slot_used[client]], client)
+		Format(fstr2, sizeof(fstr2), "$%.0f [ - Upgrade %s - ]", CurrencyOwned[client]
+															,fstr)
+		Menu_ChooseCategory(client, fstr2);
 	}
-	if(action == MenuAction_End)
+	if(action == MenuAction_End){
 		CloseHandle(menu);
+	}
 }
 public MenuHandler_SpecialUpgradeChoice(Handle menu, MenuAction:action, client, param2)
 {

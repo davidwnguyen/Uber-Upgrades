@@ -1,7 +1,7 @@
 //IF Front Menu
 public Action Menu_BuyUpgrade(client, args)
 {
-	if (IsValidClient(client) && IsPlayerAlive(client) && !client_respawn_checkpoint[client] )
+	if (IsValidClient(client) && IsPlayerAlive(client) )
 	{
 		menuBuy = CreateMenu(MenuHandler_BuyUpgrade);
 		SetMenuTitle(menuBuy, "Incremental Fortress - /buy or +SHOWSCORES");
@@ -22,7 +22,6 @@ public Action Menu_BuyUpgrade(client, args)
 		else
 			AddMenuItem(menuBuy, "upgrade_upgradeoneweap", "Upgrade Unique Weapon");
 
-		AddMenuItem(menuBuy, "upgrade_dispcurrups", "Upgrade Manager");
 		AddMenuItem(menuBuy, "use_arcane", "Use Arcane Spells");
 		
 		AddMenuItem(menuBuy, "upgrade_stats", "View Stats");
@@ -251,6 +250,24 @@ public Action:Menu_ChooseCategory(client, char[] TitleStr)
 			Format(buf, sizeof(buf), "%T", given_upgrd_classnames[w_id][i], client)
 			AddMenuItem(menu, "upgrade", buf);
 		}
+	
+		bool hasDownside = false;
+		for (int i = 0; i < currentupgrades_number[client][slot]; ++i)
+		{
+			int u = currentupgrades_idx[client][slot][i]
+			if (upgrades[u].cost < -0.1)
+			{
+				int nb_time_upgraded = RoundToNearest((upgrades[u].i_val - currentupgrades_val[client][slot][i]) / upgrades[u].ratio);
+				float up_cost = float(upgrades[u].cost*nb_time_upgraded);
+				if(up_cost > 200.0)
+				{
+					hasDownside = true;
+					break;
+				}
+			}
+		}
+		if(hasDownside)
+			AddMenuItem(menu, "remove_downgrades", "Remove Downsides");
 	}
 	SetMenuTitle(menu, TitleStr);
 	SetMenuExitBackButton(menu, true);
@@ -399,63 +416,36 @@ public	Menu_TweakUpgrades_slot(client, arg, page)
 		SetMenuExitBackButton(menu, true);
 		char buf[256]
 		char fstr[512]
-		if(currentupgrades_number[client][s] != 0)
+		int downsideCount = 0;
+
+		for (i = 0; i < currentupgrades_number[client][s]; ++i)
 		{
-			for (i = 0; i < currentupgrades_number[client][s]; ++i)
+			int u = currentupgrades_idx[client][s][i]
+			Format(buf, sizeof(buf), "%T", upgrades[u].name, client)
+			if (upgrades[u].cost < -0.1)
 			{
-				int u = currentupgrades_idx[client][s][i]
-				Format(buf, sizeof(buf), "%T", upgrades[u].name, client)
-				if (upgrades[u].cost < -0.1)
+				int nb_time_upgraded = RoundToNearest((upgrades[u].i_val - currentupgrades_val[client][s][i]) / upgrades[u].ratio);
+				float up_cost = float(upgrades[u].cost*nb_time_upgraded);
+				if(up_cost > 200.0)
 				{
-					int nb_time_upgraded = RoundToNearest((upgrades[u].i_val - currentupgrades_val[client][s][i]) / upgrades[u].ratio);
-					float up_cost = float(upgrades[u].cost*nb_time_upgraded);
-					if(up_cost > 200.0)
-					{
-						Format(fstr, sizeof(fstr), "[%s] :\n  %10.3f\n%.0f", buf, currentupgrades_val[client][s][i],up_cost)
-					}
-					else
-					{
-						Format(fstr, sizeof(fstr), "[%s] :\n  %10.3f", buf, currentupgrades_val[client][s][i])
-					}
+					Format(fstr, sizeof(fstr), "[%s] :\n  %10.3f\n%.0f", buf, currentupgrades_val[client][s][i],up_cost)
+					AddMenuItem(menu, "yep", fstr);
+					downsideCount++;
 				}
-				else if (upgrades[u].cost > 1.0)
-				{
-					int nb_time_upgraded;
-					if(currentupgrades_i[client][s][i] != 0.0)
-					{
-						nb_time_upgraded = RoundToNearest((currentupgrades_i[client][s][i] - currentupgrades_val[client][s][i]) / upgrades[u].ratio)
-					}
-					else
-					{
-						nb_time_upgraded = RoundToNearest((upgrades[u].i_val - currentupgrades_val[client][s][i]) / upgrades[u].ratio)
-					}
-					nb_time_upgraded *= -1
-					float up_cost = ((upgrades[u].cost+((upgrades[u].cost_inc_ratio*upgrades[u].cost)*(nb_time_upgraded-1))/2)*nb_time_upgraded)
-					if(s == 1)
-						up_cost *= SecondaryCostReduction;
-						
-					if(up_cost > 200.0)
-					{
-						Format(fstr, sizeof(fstr), "[%s] :\n  %10.3f\n+%.0f", buf, currentupgrades_val[client][s][i],up_cost)
-					}
-					else
-					{
-						Format(fstr, sizeof(fstr), "[%s] :\n  %10.3f", buf, currentupgrades_val[client][s][i])
-					}
-				}
-				else
-				{
-					Format(fstr, sizeof(fstr), "[%s] :\n  %10.3f", buf, currentupgrades_val[client][s][i])
-				}
-				AddMenuItem(menu, "yep", fstr);
 			}
+		}
+
+		if(downsideCount > 0){
 			DisplayMenuAtItem(menu, client, page, MENU_TIME_FOREVER);
 		}
-		else
-		{
+		else{
 			PrintToChat(client, "This weapon has no changeable attributes.");
 			CloseHandle(menu);
-			Menu_TweakUpgrades(client);
+
+			char fstr2[64];
+			Format(fstr, sizeof(fstr), "%T", current_slot_name[current_slot_used[client]], client)
+			Format(fstr2, sizeof(fstr2), "$%.0f [ - Upgrade %s - ]", CurrencyOwned[client], fstr)
+			Menu_ChooseCategory(client, fstr2);
 		}
 	}
 }

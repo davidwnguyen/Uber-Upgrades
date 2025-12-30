@@ -266,7 +266,6 @@ int _u_id;
 int UniqueWeaponRef[MAXPLAYERS+1]
 int client_last_up_slot[MAXPLAYERS+1]
 int client_last_up_idx[MAXPLAYERS+1]
-int client_respawn_checkpoint[MAXPLAYERS+1]
 int blankArray[MAXPLAYERS+1][16]
 int blankArray1[MAXPLAYERS+1][16][MAX_ATTRIBUTES_ITEM];
 int MadmilkInflictor[MAXPLAYERS+1];
