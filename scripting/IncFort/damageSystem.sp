@@ -1218,7 +1218,8 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 		}
 
 		//Healers of attacker
-		float medicDMGBonus = 1.0;
+		float medicBoost = 1.0;
+		float medicWeakness = 1.0;
 		int healers = GetEntProp(attacker, Prop_Send, "m_nNumHealers");
 		if(healers > 0)
 		{
@@ -1234,22 +1235,28 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 				if(IsOnDifferentTeams(attacker, healer)){
 					// Using exhaust on vaccinator decreases damage dealt by the average of the resistances.
 					float exhaustCoefficient = TF2Attrib_HookValueFloat(0.0, "vaccinator_exhaust_attribute", healingWeapon);
-					if(exhaustCoefficient > 0.0)
-						medicDMGBonus -= (TF2Attrib_HookValueFloat(0.0, "medigun_bullet_resist_deployed", healingWeapon)+
+					if(exhaustCoefficient > 0.0){
+						float appliedWeakness = 1.0-((TF2Attrib_HookValueFloat(0.0, "medigun_bullet_resist_deployed", healingWeapon)+
 							TF2Attrib_HookValueFloat(0.0, "medigun_blast_resist_deployed", healingWeapon)+
-							TF2Attrib_HookValueFloat(0.0, "medigun_fire_resist_deployed", healingWeapon))/3.0*exhaustCoefficient;
+							TF2Attrib_HookValueFloat(0.0, "medigun_fire_resist_deployed", healingWeapon))/3.0*exhaustCoefficient);
+
+						if(appliedWeakness < medicWeakness)
+							medicWeakness = appliedWeakness;
+					}
 				}
 				else{
-					medicDMGBonus += TF2Attrib_HookValueFloat(0.0, "patient_damage_bonus", healingWeapon);
+					float appliedBoost = 1.0 + TF2Attrib_HookValueFloat(0.0, "patient_damage_bonus", healingWeapon);
 
 					if(TF2_IsPlayerInCondition(attacker, TFCond_Kritzkrieged))
-						medicDMGBonus += GetAttribute(healingWeapon, "ubercharge effectiveness", 1.0)-1.0;
+						appliedBoost += GetAttribute(healingWeapon, "ubercharge effectiveness", 1.0)-1.0;
 
-					medicDMGBonus *= TF2Attrib_HookValueFloat(1.0, "healing_patient_power", healingWeapon);
+					appliedBoost *= TF2Attrib_HookValueFloat(1.0, "healing_patient_power", healingWeapon);
+					if(appliedBoost > medicBoost)
+						medicBoost = appliedBoost;
 				}
 			}
 		}
-		damage *= medicDMGBonus;
+		damage *= medicBoost * medicWeakness;
 		damage *= TF2Attrib_HookValueFloat(1.0, "dmg_outgoing_mult", weapon);
 
 		//Healers of victim

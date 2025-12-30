@@ -375,7 +375,7 @@ float applyMultSeverityMod(float val, float severity){
 	// 	eg: 0.8x movespeed (1.25x slow) with 2x severity would be 0.66x movespeed (1.5x slow)
 	//	eg: 1.25x damage with 2x severity would be 1.5x damage	
 	*/
-	if(val > 1.0)
+	if(val > 1.0 || val < 0.0) // why are we trying to flip values here :sob:
 		return 1.0+(val-1.0)*severity;
 	else if(val < 1.0)
 		return 1.0/(1.0+(1.0/val-1.0)*severity);
@@ -3288,7 +3288,7 @@ GivePowerupDescription(int client, char[] name, int amount){
 	}
 	else if(StrEqual("king powerup", name)){
 		if(amount == 2){
-			CPrintToChat(client, "{community}Tag-Team Powerup {default}| {lightcyan}Press RELOAD to link yourself to a teammate:\n Giving both of you 1.4x damage. Your healing is shared to your patient and attacking an enemy makes the patient deal 1.75x vs that victim.");
+			CPrintToChat(client, "{community}Tag-Team Powerup {default}| {lightcyan}Crouch+Mouse3 to link yourself to a teammate:\n Giving both of you 1.4x damage. Your healing is shared to your patient and attacking an enemy makes the patient deal 1.75x vs that victim.");
 		}else if(amount == 3){
 			CPrintToChat(client, "{community}Martyr Powerup {default}| {lightcyan}0.33x incoming healing. Sacrifice (15%% max health + dmg taken) to absorb fatal teammate damage and give uber for 0.5s.");
 		}else{
