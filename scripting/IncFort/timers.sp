@@ -573,6 +573,20 @@ public Action:Timer_Every100MS(Handle timer)
 				nullification.init("Nullification", "No status effects", Buff_Nullification, 1, client, 1.0);
 				insertBuff(client, nullification);
 			}
+			if(TF2Attrib_HookValueFloat(0.0, "agility_powerup", client) == 1.0){
+				int doubleJump = GetEntProp(client, Prop_Send, "m_iAirDash");
+				int jumpLimit = 1;
+				if(TF2_GetPlayerClass(client) == TFClass_Scout)
+					jumpLimit++;
+
+				if(doubleJump >= jumpLimit){
+					TF2_RemoveCondition(client, TFCond_HalloweenSpeedBoost);
+					TF2_AddCondition(client, TFCond_SpeedBuffAlly, 0.2);
+				}
+				else{
+					TF2_AddCondition(client, TFCond_HalloweenSpeedBoost, 0.2);
+				}
+			}
 
 			Buff leechDebuff;
 			leechDebuff.init("Leeched", "", Buff_Leech, 1, client, 1.0);

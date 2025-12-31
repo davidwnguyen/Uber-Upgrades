@@ -463,7 +463,7 @@ public void ManagePlayerBuffs(int i){
 			}
 		}
 	}
-	if(TF2_IsPlayerInCondition(i, TFCond_HalloweenSpeedBoost)){
+	if(TF2Attrib_HookValueFloat(0.0, "agility_powerup", i) == 1.0){
 		additiveAttackSpeedMultBuff += 0.5;
 	}
 	
@@ -1731,7 +1731,7 @@ refreshUpgrades(client, slot)
 
 			float strengthPowerup = GetAttribute(client, "strength powerup");
 			if(strengthPowerup == 2){
-				TF2Attrib_SetByName(client,"critical rating", 100.0);
+				TF2Attrib_SetByName(client,"critical rating", 200.0);
 				TF2Attrib_SetByName(client,"damage penetrates reductions", 0.5);
 			}
 
@@ -1782,7 +1782,6 @@ refreshUpgrades(client, slot)
 					TF2Attrib_SetByName(client,"major move speed bonus", 1.4);
 					TF2Attrib_SetByName(client,"self dmg push force increased", 1.75);
 					TF2Attrib_SetByName(client,"SET BONUS: chance of hunger decrease", 0.35);
-					TF2Attrib_SetByName(client,"has pipboy build interface", 72.0);
 				}
 
 				TF2Attrib_SetByName(client,"major increased jump height", TF2Attrib_GetValue(agilityPowerup) == 1 ? 1.3 : (TF2Attrib_GetValue(agilityPowerup) == 2 ? 2.0 : 1.0));
@@ -3216,7 +3215,7 @@ projGravity(entity)
 GivePowerupDescription(int client, char[] name, int amount){
 	if(StrEqual("strength powerup", name)){
 		if(amount == 2){
-			CPrintToChat(client, "{community}Dexterity Powerup {default}| {lightcyan}Grants +33%% chance to crit, +50%% crit damage, and increases conditional damage reduction penetration by +50%%.");
+			CPrintToChat(client, "{community}Dexterity Powerup {default}| {lightcyan}Grants +50%% chance to crit, +100%% crit damage, and increases conditional damage reduction penetration by +50%%.");
 		}else if(amount == 3){
 			CPrintToChat(client, "{community}Bruised Powerup {default}| {lightcyan}Tagged enemies will be finished off if they are below 25%% maxHP. Any single hit above 40%% victim's maxHP instantly kills.");
 		}else{
@@ -3274,7 +3273,7 @@ GivePowerupDescription(int client, char[] name, int amount){
 		}else if(amount == 3){
 			CPrintToChat(client, "{community}Warp Powerup {default}| {lightcyan}Shift middle-click will teleport you to crosshair, consuming 10%% focus. Deals 1200 base damage to all enemies through path of teleport. Applies +20 additive dmg taken to victims on teleport hit.");
 		}else{
-			CPrintToChat(client, "{community}Agility Powerup {default}| {lightcyan}+50%% reload & fire rate. infinite jumps, speed boost, 1.4x speed, 1.3x jump height, 1.75x self push force, immunity to crowd control effects, and 35%% dodge chance.");
+			CPrintToChat(client, "{community}Agility Powerup {default}| {lightcyan}+50%% reload & fire rate. double jumps, speed boost, 1.4x speed, 1.3x jump height, 1.75x self push force, immunity to crowd control effects, and 35%% dodge chance.");
 		}
 	}
 	else if(StrEqual("knockout powerup", name)){

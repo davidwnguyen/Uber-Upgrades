@@ -1,5 +1,8 @@
 "Phrases"
 {
+	"Shotgun Damage Bonus"{
+		"en"		"Shotgun Damage Bonus"
+	}
 	"sentry lifesteal while active"{
 		"en"		"Sentry Lifesteal While Active"
 	}

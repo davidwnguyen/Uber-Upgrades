@@ -2503,34 +2503,17 @@ public OnGameFrame()
 
 					if(flag)
 					{
-						float SecondaryROF = 1.0;
-
-						Address Firerate1 = TF2Attrib_GetByName(CWeapon, "fire rate penalty");
-						Address Firerate2 = TF2Attrib_GetByName(CWeapon, "fire rate bonus HIDDEN");
-						Address Firerate3 = TF2Attrib_GetByName(CWeapon, "fire rate penalty HIDDEN");
-						Address Firerate4 = TF2Attrib_GetByName(CWeapon, "fire rate bonus");
-
-						if(Firerate1 != Address_Null)
-							SecondaryROF =  SecondaryROF/TF2Attrib_GetValue(Firerate1);
-						if(Firerate2 != Address_Null)
-							SecondaryROF =  SecondaryROF/TF2Attrib_GetValue(Firerate2);
-						if(Firerate3 != Address_Null)
-							SecondaryROF =  SecondaryROF/TF2Attrib_GetValue(Firerate3);
-						if(Firerate4 != Address_Null)
-							SecondaryROF =  SecondaryROF/TF2Attrib_GetValue(Firerate4);
-
+						float SecondaryROF = 1.0/TF2Attrib_HookValueFloat(1.0, "mult_postfiredelay", CWeapon);
 						if(SecondaryROF != 1.0){
 							float m_flNextSecondaryAttack = GetEntPropFloat(CWeapon, Prop_Send, "m_flNextSecondaryAttack");
-							float SeTime = (m_flNextSecondaryAttack - GetGameTime()) - ((SecondaryROF - 1.0) * TICKINTERVAL);
-							float FinalS = SeTime+GetGameTime();
-
-							if(FinalS < GetGameTime())
-								FinalS = GetGameTime();
-							SetEntPropFloat(CWeapon, Prop_Send, "m_flNextSecondaryAttack", FinalS);
+							if(m_flNextSecondaryAttack > GetGameTime()){
+								float SeTime = (m_flNextSecondaryAttack - GetGameTime()) - ((SecondaryROF - 1.0) * TICKINTERVAL);
+								float FinalS = SeTime+GetGameTime();
+								SetEntPropFloat(CWeapon, Prop_Send, "m_flNextSecondaryAttack", FinalS);
+							}
 						}
 						//Remove fire rate bonuses for reload rate on no clip size weapons.
-						Address ModClip = TF2Attrib_GetByName(CWeapon, "mod max primary clip override");
-						if(ModClip != Address_Null && TF2Attrib_GetValue(ModClip) == -1.0)
+						if(TF2Attrib_HookValueFloat(0.0, "mod_max_primary_clip_override", CWeapon) == -1.0)
 						{
 							float PrimaryROF = 1.0;
 							Address ReloadRate = TF2Attrib_GetByName(CWeapon, "faster reload rate");
@@ -2552,7 +2535,6 @@ public OnGameFrame()
 							float Time = (m_flNextPrimaryAttack - GetGameTime()) - ((PrimaryROF - 1.0) * TICKINTERVAL);
 							float FinalROF = Time+GetGameTime();
 							SetEntPropFloat(CWeapon, Prop_Send, "m_flNextPrimaryAttack", FinalROF);
-							//PrintToChat(client, "%.1f NextPrimaryAttack", FinalROF);
 						}
 					}
 				}
@@ -3506,9 +3488,6 @@ public TF2Items_OnGiveNamedItem_Post(client, char[] classname, itemDefinitionInd
 						}
 						else if (StrEqual(classname, "tf_weapon_pipebomblauncher") && itemDefinitionIndex == 1150){
 							currentitem_catidx[client][slot] = GetUpgrade_CatList("tf_quickiebomb")
-						}
-						else if (StrEqual(classname, "tf_weapon_cannon")){
-							currentitem_catidx[client][slot] = GetUpgrade_CatList("tf_weapon_libertylauncher")
 						}
 						else{
 							currentitem_catidx[client][slot] = GetUpgrade_CatList(classname)

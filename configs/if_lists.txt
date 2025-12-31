@@ -35,6 +35,8 @@
 			"2"		"debuff block rating"
 			"3"		"Bleed Resistance"
 			"4"		"Slow immunity"
+			"5"		"reveal cloaked victim on hit"
+			"6"		"reveal disguised victim on hit"
 		}
 		"Arcane Upgrades"
 		{
@@ -130,6 +132,8 @@
 			"2"		"debuff block rating"
 			"3"		"Bleed Resistance"
 			"4"		"Slow Resistance"
+			"5"		"reveal cloaked victim on hit"
+			"6"		"reveal disguised victim on hit"
 		}
 		"Arcane Upgrades"
 		{
@@ -225,6 +229,8 @@
 			"2"		"debuff block rating"
 			"3"		"Bleed Resistance"
 			"4"		"Slow Resistance"
+			"5"		"reveal cloaked victim on hit"
+			"6"		"reveal disguised victim on hit"
 		}
 		"Arcane Upgrades"
 		{
@@ -320,6 +326,8 @@
 			"2"		"debuff block rating"
 			"3"		"Bleed Resistance"
 			"4"		"Slow Resistance"
+			"5"		"reveal cloaked victim on hit"
+			"6"		"reveal disguised victim on hit"
 		}
 		"Arcane Upgrades"
 		{
@@ -415,6 +423,8 @@
 			"2"		"debuff block rating"
 			"3"		"Bleed Resistance"
 			"4"		"Slow Resistance"
+			"5"		"reveal cloaked victim on hit"
+			"6"		"reveal disguised victim on hit"
 		}
 		"Arcane Upgrades"
 		{
@@ -510,6 +520,8 @@
 			"2"		"debuff block rating"
 			"3"		"Bleed Resistance"
 			"4"		"Slow Resistance"
+			"5"		"reveal cloaked victim on hit"
+			"6"		"reveal disguised victim on hit"
 		}
 		"Arcane Upgrades"
 		{
@@ -604,6 +616,8 @@
 			"2"		"debuff block rating"
 			"3"		"Bleed Resistance"
 			"4"		"Slow Resistance"
+			"5"		"reveal cloaked victim on hit"
+			"6"		"reveal disguised victim on hit"
 		}
 		"Arcane Upgrades"
 		{
@@ -701,6 +715,8 @@
 			"2"		"debuff block rating"
 			"3"		"Bleed Resistance"
 			"4"		"Slow Resistance"
+			"5"		"reveal cloaked victim on hit"
+			"6"		"reveal disguised victim on hit"
 		}
 		"Arcane Upgrades"
 		{
@@ -799,6 +815,8 @@
 			"2"		"debuff block rating"
 			"3"		"Bleed Resistance"
 			"4"		"Slow Resistance"
+			"5"		"reveal cloaked victim on hit"
+			"6"		"reveal disguised victim on hit"
 		}
 		"Arcane Upgrades"
 		{
@@ -870,8 +888,6 @@
 			"3"		"blast radius increased"
 			"4"		"dmg falloff decreased"
 			"5"		"lifesteal ability"
-			"6"		"reveal cloaked victim on hit"
-			"7"		"reveal disguised victim on hit"
 		}
 		"Mangler specific upgrades"
 		{
@@ -880,10 +896,7 @@
 			"2"		"faster reload rate"
 			"3"		"Projectile speed increased"
 			"4"		"self dmg push force increased"
-			"5"		"rocket jump damage reduction"
-			"6"		"air control when blast jumping"
-			"7"		"charge movespeed increased"
-			"8"		"Weapons Deals No Knockback"
+			"5"		"charge movespeed increased"
 		}
 		"Special Tweaks"
 		{
@@ -902,8 +915,6 @@
 			"3"		"blast radius increased"
 			"4"		"dmg falloff decreased"
 			"5"		"lifesteal ability"
-			"6"		"reveal cloaked victim on hit"
-			"7"		"reveal disguised victim on hit"
 		}
 		"Launcher specific upgrades"
 		{
@@ -913,9 +924,6 @@
 			"3"		"reload clip all at once"
 			"4"		"Projectile speed increased"
 			"5"		"self dmg push force increased"
-			"6"		"rocket jump damage reduction"
-			"7"		"air control when blast jumping"
-			"8"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
@@ -932,15 +940,12 @@
 			"1"		"ap (global)"
 			"2"		"Melee Damage Bonus"
 			"3"		"lifesteal ability"
-			"4"		"reveal cloaked victim on hit"
-			"5"		"reveal disguised victim on hit"
 		}
 		"Melee specific upgrades"
 		{
 			"0"		"melee attack rate bonus"
 			"1"		"melee range multiplier"
-			"2"	"increase player capture value"
-			"3"		"Weapons Deals No Knockback"
+			"2"		"increase player capture value"
 		}
 		"Special Tweaks"
 		{
@@ -955,10 +960,8 @@
 		{
 			"0"		"damage bonus"
 			"1"		"ap (global)"
-			"2"		"Increased Overall Damage"
+			"2"		"Shotgun Damage Bonus"
 			"3"		"lifesteal ability"
-			"4"		"reveal cloaked victim on hit"
-			"5"		"reveal disguised victim on hit"
 		}
 		"Weapon Specific upgrades"
 		{
@@ -968,7 +971,6 @@
 			"3"		"bullets per shot bonus"
 			"4"		"weapon spread bonus(H)"
 			"5"		"projectile penetration heavy"
-			"6"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
@@ -983,10 +985,8 @@
 		{
 			"0"		"damage bonus"
 			"1"		"ap (global)"
-			"2"		"Increased Overall Damage"
+			"2"		"Shotgun Damage Bonus"
 			"3"		"lifesteal ability"
-			"4"		"reveal cloaked victim on hit"
-			"5"		"reveal disguised victim on hit"
 		}
 		"Gun specific upgrades"
 		{
@@ -996,7 +996,6 @@
 			"3"		"bullets per shot bonus"
 			"4"		"weapon spread bonus(H)"
 			"5"		"projectile penetration heavy"
-			"6"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
@@ -1011,10 +1010,8 @@
 		{
 			"0"		"damage bonus"
 			"1"		"ap (global)"
-			"2"		"Accuracy Scales DMG Replacement"
+			"2"		"Increased Overall Damage"
 			"3"		"lifesteal ability"
-			"4"		"reveal cloaked victim on hit"
-			"5"		"reveal disguised victim on hit"
 		}
 		"Gun specific upgrades"
 		{
@@ -1024,7 +1021,6 @@
 			"3"		"bullets per shot bonus (single)"
 			"4"		"weapon spread bonus"
 			"5"		"projectile penetration heavy"
-			"6"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
@@ -1041,15 +1037,12 @@
 			"1"		"ap (global)"
 			"2"		"Increased Overall Damage"
 			"3"		"lifesteal ability"
-			"4"		"reveal cloaked victim on hit"
-			"5"		"reveal disguised victim on hit"	
 		}
 		"Laser specific upgrades"
 		{
 			"0"		"fire rate bonus(multshit)"
 			"1"		"faster reload rate"
 			"2"		"clip size bonus (E)"
-			"3"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
@@ -1067,14 +1060,11 @@
 			"1"		"ap (global)"
 			"2"		"Flare Damage Bonus"
 			"3"		"lifesteal ability"
-			"4"		"reveal cloaked victim on hit"
-			"5"		"reveal disguised victim on hit"
 		}
 		"Short circuit specific upgrades"
 		{
 			"0"		"fire rate bonus(multshit)"
 			"1"		"Increased Shock Range"
-			"2"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
@@ -1091,15 +1081,12 @@
 			"1"		"ap (global)"
 			"2"		"Melee Damage Bonus"
 			"3"		"lifesteal ability"
-			"4"		"reveal cloaked victim on hit"
-			"5"		"reveal disguised victim on hit"
 		}
 		"Melee specific upgrades"
 		{
 			"0"		"melee attack rate bonus"
 			"1"		"melee range multiplier"
 			"2"		"increase player capture value"
-			"3"		"Weapons Deals No Knockback"
 			"4"		"upgrade rate increase"
 			"5"		"Construction rate increased"
 		}
@@ -1147,10 +1134,8 @@
 		{
 			"0"		"damage bonus"
 			"1"		"ap (global)"
-			"2"		"Accuracy Scales DMG Replacement"
+			"2"		"Increased Overall Damage"
 			"3"		"lifesteal ability"
-			"4"		"reveal cloaked victim on hit"
-			"5"		"reveal disguised victim on hit"
 		}
 		"Minigun specific upgrades"
 		{
@@ -1161,10 +1146,6 @@
 			"4"		"projectile penetration heavy"
 			"5"		"minigun spinup time decreased"
 			"6"		"aiming movespeed increased"
-			"7"		"spunup_damage_resistance"
-			"8"		"spunup_push_force_immunity"
-			"9"		"generate rage on damage"
-			"10"	"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
@@ -1181,8 +1162,6 @@
 			"1"		"ap (global)"
 			"2"		"Accuracy Scales DMG Replacement"
 			"3"		"lifesteal ability"
-			"4"		"reveal cloaked victim on hit"
-			"5"		"reveal disguised victim on hit"
 		}
 		"Minigun specific upgrades"
 		{
@@ -1190,10 +1169,6 @@
 			"1"		"bullets per shot bonus (heavy)"
 			"2"		"minigun spinup time decreased"
 			"3"		"aiming movespeed increased"
-			"4"		"spunup_damage_resistance"
-			"5"		"spunup_push_force_immunity"
-			"6"		"generate rage on damage"
-			"7"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
@@ -1211,8 +1186,6 @@
 			"2"		"Syringe Damage Bonus"
 			"3"		"lifesteal ability"
 			"4"		"projectile penetration"
-			"5"		"reveal cloaked victim on hit"
-			"6"		"reveal disguised victim on hit"
 		}
 		"Syringegun specific upgrades"
 		{
@@ -1220,7 +1193,6 @@
 			"1"		"clip size bonus"
 			"2"		"faster reload rate"
 			"3"		"Mad Milk On Hit Duration"
-			"4"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
@@ -1238,16 +1210,14 @@
 			"2"		"Syringe Damage Bonus"
 			"3"		"Increased Overall Damage(F)"
 			"4"		"lifesteal ability"
-			"5"		"reveal cloaked victim on hit"
-			"6"		"reveal disguised victim on hit"
 		}
 		"Syringegun specific upgrades"
 		{
 			"0"		"fire rate bonus(old)"
 			"1"		"clip size bonus (B)"
-			"2"		"faster reload rate (U)"
-			"3"		"Homing Projectiles (crossbow)"
-			"4"		"Weapons Deals No Knockback"
+			"2"		"faster reload rate"
+			"3"		"reload clip all at once"
+			"4"		"Homing Projectiles (crossbow)"
 		}
 		"Special Tweaks"
 		{
@@ -1265,15 +1235,12 @@
 			"2"		"Extra Damage Bonus"
 			"3"		"Increased Overall Damage(F)"
 			"4"		"lifesteal ability"
-			"5"		"reveal cloaked victim on hit"
-			"6"		"reveal disguised victim on hit"
 		}
 		"Syringegun specific upgrades"
 		{
 			"0"		"fire rate bonus(old)"
 			"1"		"clip size bonus (B)"
 			"2"		"projectile penetration heavy"
-			"3"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
@@ -1291,8 +1258,6 @@
 			"2"		"Flame Damage Multiplier"
 			"3"		"Increased Overall Damage(T)"
 			"4"		"lifesteal ability"
-			"5"		"reveal cloaked victim on hit"
-			"6"		"reveal disguised victim on hit"
 		}
 		"Flamethrower specific upgrades"
 		{
@@ -1316,8 +1281,6 @@
 			"2"		"Flame Damage Multiplier"
 			"3"		"Increased Overall Damage(T)"
 			"4"		"lifesteal ability"
-			"5"		"reveal cloaked victim on hit"
-			"6"		"reveal disguised victim on hit"
 		}
 		"Flamethrower specific upgrades"
 		{
@@ -1341,14 +1304,11 @@
 			"1"		"ap (global)"
 			"2"		"Flare Damage Bonus"
 			"3"		"lifesteal ability"
-			"4"		"reveal cloaked victim on hit"
-			"5"		"reveal disguised victim on hit"
 		}
 		"Flaregun specific upgrades"
 		{
 			"0"		"fire rate bonus(fortified)"
 			"1"		"Projectile speed increased"
-			"2"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
@@ -1365,15 +1325,12 @@
 			"1"		"ap (global)"
 			"2"		"Flare Damage Bonus"
 			"3"		"lifesteal ability"
-			"4"		"reveal cloaked victim on hit"
-			"5"		"reveal disguised victim on hit"
 		}
 		"Flaregun specific upgrades"
 		{
 			"0"		"fire rate bonus(fortified)"
 			"1"		"blast radius increased"
 			"2"		"dmg falloff decreased"
-			"3"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
@@ -1390,14 +1347,11 @@
 			"1"		"ap (global)"
 			"2"		"Flare Damage Bonus"
 			"3"		"lifesteal ability"
-			"4"		"reveal cloaked victim on hit"
-			"5"		"reveal disguised victim on hit"
 		}
 		"Flaregun specific upgrades"
 		{
 			"0"		"fire rate bonus(fortified)"
 			"1"		"blast radius increased"
-			"2"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
@@ -1414,14 +1368,11 @@
 			"1"		"ap (global)"
 			"2"		"Increased Overall Damage"
 			"3"		"lifesteal ability"
-			"4"		"reveal cloaked victim on hit"
-			"5"		"reveal disguised victim on hit"
 		}
 		"Weapon specific upgrades"
 		{
 			"0"		"fire rate bonus(multshit)"
 			"1"		"Projectile speed increased"
-			"2"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
@@ -1436,10 +1387,8 @@
 		{
 			"0"		"damage bonus"
 			"1"		"ap (global)"
-			"2"		"Increased Overall Damage"
+			"2"		"Shotgun Damage Bonus"
 			"3"		"lifesteal ability"
-			"4"		"reveal cloaked victim on hit"
-			"5"		"reveal disguised victim on hit"
 		}
 		"Scattergun specific upgrades"
 		{
@@ -1449,7 +1398,6 @@
 			"3"		"bullets per shot bonus"
 			"4"		"weapon spread bonus(H)"
 			"5"		"projectile penetration heavy"
-			"6"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
@@ -1466,8 +1414,6 @@
 			"1"		"ap (global)"
 			"2"		"Increased Overall Damage"
 			"3"		"lifesteal ability"
-			"4"		"reveal cloaked victim on hit"
-			"5"		"reveal disguised victim on hit"
 		}
 		"Scattergun specific upgrades"
 		{
@@ -1477,7 +1423,6 @@
 			"3"		"bullets per shot bonus"
 			"4"		"weapon spread bonus(H)"
 			"5"		"projectile penetration heavy"
-			"6"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
@@ -1492,10 +1437,8 @@
 		{
 			"0"		"damage bonus"
 			"1"		"ap (global)"
-			"2"		"Accuracy Scales DMG Replacement"
+			"2"		"Increased Overall Damage"
 			"3"		"lifesteal ability"
-			"4"		"reveal cloaked victim on hit"
-			"5"		"reveal disguised victim on hit"	
 		}
 		"Scattergun specific upgrades"
 		{
@@ -1505,7 +1448,6 @@
 			"3"		"bullets per shot bonus"
 			"4"		"weapon spread bonus(H)"
 			"5"		"projectile penetration heavy"
-			"6"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
@@ -1521,17 +1463,14 @@
 			"0"		"damage bonus"
 			"1"		"ap (global)"
 			"2"		"Explosive Damage Bonus"
-			"3"		"blast radius increased"
-			"4"		"lifesteal ability"
-			"5"		"reveal cloaked victim on hit"
-			"6"		"reveal disguised victim on hit"
+			"3"		"lifesteal ability"
 		}
 		"Sniper specific upgrades"
 		{
 			"0"		"fire rate bonus(old)"
 			"1"		"faster reload rate"
-			"2"		"aiming movespeed increased"
-			"3"		"Weapons Deals No Knockback"
+			"2"		"blast radius increased"
+			"3"		"aiming movespeed increased"
 		}
 		"Special Tweaks"
 		{
@@ -1550,8 +1489,6 @@
 			"3"		"Increased Overall Damage"
 			"4"		"lifesteal ability"
 			"5"		"projectile penetration heavy"
-			"6"		"reveal cloaked victim on hit"
-			"7"		"reveal disguised victim on hit"
 		}
 		"Sniper specific upgrades"
 		{
@@ -1560,7 +1497,6 @@
 			"2"		"bullets per shot bonus (single)"
 			"3"		"Increased Charge percent"
 			"4"		"aiming movespeed increased"
-			"5"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
@@ -1578,15 +1514,12 @@
 			"2"		"Increased Overall Damage"
 			"3"		"lifesteal ability"
 			"4"		"projectile penetration heavy"
-			"5"		"reveal cloaked victim on hit"
-			"6"		"reveal disguised victim on hit"
 		}
 		"Sniper specific upgrades"
 		{
 			"0"		"fire rate bonus(old)"
 			"1"		"faster reload rate"
 			"2"		"aiming movespeed increased"
-			"3"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
@@ -1603,14 +1536,11 @@
 			"1"		"ap (global)"
 			"2"		"Extra Damage Bonus"
 			"3"		"lifesteal ability"
-			"4"		"reveal cloaked victim on hit"
-			"5"		"reveal disguised victim on hit"
 		}
 		"Weapon Specific upgrades"
 		{
 			"0"		"fire rate bonus(fortified)"
 			"1"		"Projectile speed increased(ARROW)"
-			"2"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
@@ -1625,12 +1555,10 @@
 		{
 			"0"		"damage bonus"
 			"1"		"ap (global)"
-			"2"		"Accuracy Scales DMG Replacement"
+			"2"		"Increased Overall Damage"
 			"3"		"lifesteal ability"
 			"4"		"add cloak on hit"
 			"5"		"sapper kills collect crits"
-			"6"		"reveal cloaked victim on hit"
-			"7"		"reveal disguised victim on hit"
 		}
 		"Weapon Specific upgrades"
 		{
@@ -1640,7 +1568,6 @@
 			"3"		"bullets per shot bonus (single)"
 			"4"		"weapon spread bonus"
 			"5"		"projectile penetration heavy"
-			"6"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
@@ -1676,15 +1603,12 @@
 			"1"		"ap (global)"
 			"2"		"Melee Damage Bonus"
 			"3"		"lifesteal ability"
-			"4"		"reveal cloaked victim on hit"
-			"5"		"reveal disguised victim on hit"
 		}
 		"Melee specific upgrades"
 		{
 			"0"		"melee attack rate bonus(spy)"
 			"1"		"melee range multiplier"
 			"2"		"increase player capture value"
-			"3"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
@@ -1745,10 +1669,8 @@
 			"0"		"damage bonus"
 			"1"		"ap (global)"
 			"2"		"Increased Overall Damage"
-			"3"		"lifesteal ability"
-			"4"		"blast radius increased"
-			"5"		"reveal cloaked victim on hit"
-			"6"		"reveal disguised victim on hit"
+			"3"		"blast radius increased"
+			"4"		"lifesteal ability"
 		}
 		"Pipebomb launcher specific upgrades"
 		{
@@ -1759,10 +1681,6 @@
 			"4"		"reload clip all at once"
 			"5"		"max pipebombs increased"
 			"6"		"sticky arm time bonus"
-			"7"		"rocket jump damage reduction"
-			"8"		"self dmg push force increased"
-			"9"		"air control when blast jumping"
-			"10"	"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
@@ -1778,10 +1696,8 @@
 			"0"		"damage bonus"
 			"1"		"ap (global)"
 			"2"		"Increased Overall Damage"
-			"3"		"lifesteal ability"
-			"4"		"blast radius increased"
-			"5"		"reveal cloaked victim on hit"
-			"6"		"reveal disguised victim on hit"
+			"3"		"blast radius increased"
+			"4"		"lifesteal ability"
 		}
 		"Pipebomb launcher specific upgrades"
 		{
@@ -1791,10 +1707,6 @@
 			"3"		"stickybomb charge rate"
 			"4"		"reload clip all at once"
 			"5"		"sticky arm time bonus"
-			"6"		"rocket jump damage reduction"
-			"7"		"self dmg push force increased"
-			"8"		"air control when blast jumping"
-			"9"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
@@ -1811,15 +1723,12 @@
 			"1"		"ap (global)"
 			"2"		"Melee Damage Bonus"
 			"3"		"lifesteal ability"
-			"4"		"reveal cloaked victim on hit"
-			"5"		"reveal disguised victim on hit"
 		}
 		"Melee specific upgrades"
 		{
 			"0"		"melee attack rate bonus"
 			"1"		"melee range multiplier"
 			"2"		"increase player capture value"
-			"3"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
@@ -1836,15 +1745,12 @@
 			"1"		"ap (global)"
 			"2"		"Melee Damage Bonus"
 			"3"		"lifesteal ability"
-			"4"		"reveal cloaked victim on hit"
-			"5"		"reveal disguised victim on hit"
 		}
 		"Melee specific upgrades"
 		{
 			"0"		"melee attack rate bonus"
 			"1"		"melee range multiplier"
 			"2"		"increase player capture value"
-			"3"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
@@ -1862,8 +1768,6 @@
 			"2"		"Overall Damage"
 			"3"		"Bleed Per Hit"
 			"4"		"lifesteal ability"
-			"5"		"reveal cloaked victim on hit"
-			"6"		"reveal disguised victim on hit"
 		}
 		"Cleaver specific upgrades"
 		{
@@ -1871,7 +1775,6 @@
 			"1"		"effect bar recharge rate increased"
 			"2"		"Homing Projectiles (cleaver)"
 			"3"		"No gravity projectile"
-			"4"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
@@ -1888,15 +1791,11 @@
 			"1"		"ap (global)"
 			"2"		"Overall Damage"
 			"3"		"lifesteal ability"
-			"4"		"Weapons Deals No Knockback"
-			"5"		"reveal cloaked victim on hit"
-			"6"		"reveal disguised victim on hit"
 		}
 		"Cleaver specific upgrades"
 		{
 			"0"		"fire rate bonus(multshit)"
 			"1"		"Increased Projectile Count"
-			"2"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
@@ -1941,8 +1840,6 @@
 			"1"		"ap (global)"
 			"2"		"Jar Damage Bonus"
 			"3"		"lifesteal ability"
-			"4"		"reveal cloaked victim on hit"
-			"5"		"reveal disguised victim on hit"
 		}
 		"Jarate specific upgrades"
 		{
@@ -1974,8 +1871,6 @@
 			"1"		"ap (global)"
 			"2"		"Extra Damage Bonus"
 			"3"		"lifesteal ability"
-			"4"		"reveal cloaked victim on hit"
-			"5"		"reveal disguised victim on hit"
 		}
 		"Jarate specific upgrades"
 		{
@@ -2009,8 +1904,6 @@
 			"1"		"ap (global)"
 			"2"		"Melee Damage Bonus"
 			"3"		"lifesteal ability"
-			"4"		"reveal cloaked victim on hit"
-			"5"		"reveal disguised victim on hit"
 		}
 		"Weapon Specific upgrades"
 		{
@@ -2018,7 +1911,6 @@
 			"1"		"melee range multiplier"
 			"2"		"blast radius increased"
 			"3"		"caber self damage reduction"
-			"4"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
@@ -2051,8 +1943,6 @@
 			"3"		"blast radius increased"
 			"4"		"dmg falloff decreased"
 			"5"		"lifesteal ability"
-			"6"		"reveal cloaked victim on hit"
-			"7"		"reveal disguised victim on hit"
 		}
 		"Grenade Launcher specific upgrades"
 		{
@@ -2061,12 +1951,8 @@
 			"2"		"faster reload rate"
 			"3"		"reload clip all at once"
 			"4"		"Projectile speed increased"
-			"5"		"self dmg push force increased"
-			"6"		"rocket jump damage reduction"
-			"7"		"fuse bonus"
-			"8"		"Iron Bomber Attribute"
-			"9"		"air control when blast jumping"
-			"10"	"Weapons Deals No Knockback"
+			"5"		"fuse bonus"
+			"6"		"Iron Bomber Attribute"
 		}
 		"Special Tweaks"
 		{
@@ -2084,8 +1970,6 @@
 			"2"		"Explosive Damage Bonus"
 			"3"		"lifesteal ability"
 			"4"		"blast radius increased"
-			"5"		"reveal cloaked victim on hit"
-			"6"		"reveal disguised victim on hit"
 		}
 		"Grenade Launcher specific upgrades"
 		{
@@ -2094,10 +1978,6 @@
 			"2"		"faster reload rate"
 			"3"		"reload clip all at once"
 			"4"		"Projectile speed increased"
-			"5"		"self dmg push force increased"
-			"6"		"rocket jump damage reduction"
-			"7"		"air control when blast jumping"
-			"8"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
@@ -2116,20 +1996,14 @@
 			"3"		"blast radius increased"
 			"4"		"dmg falloff decreased"
 			"5"		"lifesteal ability"
-			"6"		"reveal cloaked victim on hit"
-			"7"		"reveal disguised victim on hit"
 		}
 		"Grenade Launcher specific upgrades"
 		{
 			"0"		"fire rate bonus(multshit)"
-			"1"		"clip size bonus"
+			"1"		"clip size bonus (G)"
 			"2"		"faster reload rate"
-			"3"		"reload clip all at once"
-			"4"		"Projectile speed increased"
-			"5"		"self dmg push force increased"
-			"6"		"rocket jump damage reduction"
-			"7"		"air control when blast jumping"
-			"8"		"Weapons Deals No Knockback"
+			"3"		"Projectile speed increased"
+			"4"		"self dmg push force increased"
 		}
 		"Special Tweaks"
 		{
@@ -2177,15 +2051,12 @@
 			"1"		"ap (global)"
 			"2"		"Melee Damage Bonus"
 			"3"		"lifesteal ability"
-			"4"		"reveal cloaked victim on hit"
-			"5"		"reveal disguised victim on hit"
 		}
 		"Melee specific upgrades"
 		{
 			"0"		"melee attack rate bonus"
 			"1"		"melee range multiplier"
 			"2"		"increase player capture value"
-			"3"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
@@ -2202,8 +2073,6 @@
 			"1"		"ap (global)"
 			"2"		"Increased Overall Damage"
 			"3"		"lifesteal ability"
-			"4"		"reveal cloaked victim on hit"
-			"5"		"reveal disguised victim on hit"
 		}
 		"Gun specific upgrades"
 		{
@@ -2212,7 +2081,6 @@
 			"2"		"faster reload rate"
 			"3"		"projectile penetration"
 			"4"		"Projectile speed increased"
-			"5"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
@@ -2234,7 +2102,6 @@
 		{
 			"0"		"Fireball Recharge Rate"
 			"1"		"Projectile Distance Increased"
-			"2"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
@@ -2265,10 +2132,8 @@
 		{
 			"0"		"damage bonus"
 			"1"		"ap (global)"
-			"2"		"Increased Overall Damage"
+			"2"		"Shotgun Damage Bonus"
 			"3"		"lifesteal ability"
-			"4"		"reveal cloaked victim on hit"
-			"5"		"reveal disguised victim on hit"
 		}
 		"Weapon Specific upgrades"
 		{
@@ -2276,7 +2141,6 @@
 			"1"		"bullets per shot bonus"
 			"2"		"weapon spread bonus(H)"
 			"3"		"projectile penetration heavy"
-			"4"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
@@ -2293,8 +2157,6 @@
 			"1"		"ap (global)"
 			"2"		"Melee Damage Bonus"
 			"3"		"lifesteal ability"
-			"4"		"reveal cloaked victim on hit"
-			"5"		"reveal disguised victim on hit"
 		}
 		"Melee specific upgrades"
 		{
@@ -2302,7 +2164,6 @@
 			"1"		"effect bar recharge rate increased"
 			"2"		"melee range multiplier"
 			"3"		"increase player capture value"
-			"4"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
@@ -2393,8 +2254,6 @@
 			"2"		"Explosive Damage Bonus"
 			"3"		"dmg falloff decreased"
 			"4"		"lifesteal ability"
-			"5"		"reveal cloaked victim on hit"
-			"6"		"reveal disguised victim on hit"
 		}
 		"Launcher specific upgrades"
 		{
@@ -2404,9 +2263,6 @@
 			"3"		"reload clip all at once"
 			"4"		"Projectile speed increased"
 			"5"		"self dmg push force increased"
-			"6"		"rocket jump damage reduction"
-			"7"		"air control when blast jumping"
-			"8"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
@@ -2425,8 +2281,6 @@
 			"3"		"blast radius increased"
 			"4"		"dmg falloff decreased"
 			"5"		"lifesteal ability"
-			"6"		"reveal cloaked victim on hit"
-			"7"		"reveal disguised victim on hit"
 		}
 		"Launcher specific upgrades"
 		{
@@ -2436,9 +2290,6 @@
 			"3"		"reload clip all at once"
 			"4"		"Projectile speed increased"
 			"5"		"self dmg push force increased"
-			"6"		"rocket jump damage reduction"
-			"7"		"air control when blast jumping"
-			"8"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
@@ -2457,8 +2308,6 @@
 			"3"		"blast radius increased"
 			"4"		"dmg falloff decreased"
 			"5"		"lifesteal ability"
-			"6"		"reveal cloaked victim on hit"
-			"7"		"reveal disguised victim on hit"
 		}
 		"Launcher specific upgrades"
 		{
@@ -2468,8 +2317,6 @@
 			"3"		"Projectile speed increased"
 			"4"		"self dmg push force increased"
 			"5"		"rocket jump damage reduction"
-			"6"		"air control when blast jumping"
-			"7"		"Weapons Deals No Knockback"
 		}
 		"Special Tweaks"
 		{
@@ -2486,16 +2333,14 @@
 			"1"		"ap (global)"
 			"2"		"Extra Damage Bonus"
 			"3"		"lifesteal ability"
-			"4"		"reveal cloaked victim on hit"
-			"5"		"reveal disguised victim on hit"
 		}
 		"Autofire Bow specific upgrades"
 		{
 			"0"		"fire rate bonus(multshit)"
 			"1"		"clip size bonus (B)"
-			"2"		"faster reload rate (U)"
-			"3"		"Projectile speed increased"
-			"4"		"Weapons Deals No Knockback"
+			"2"		"faster reload rate"
+			"3"		"reload clip all at once"
+			"4"		"Projectile speed increased"
 		}
 		"Special Tweaks"
 		{

@@ -7,6 +7,13 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 	if(IsValidClient3(victim))
 	{
 		lastKBSource[victim] = attacker;
+		if(!(damagetype & DMG_PIERCING)){
+			float dmgMult = TF2Attrib_HookValueFloat(1.0, "dmg_incoming_mult", victim);
+			if(dmgMult < 1.0)
+				damage *= ConsumePierce(dmgMult, pierce);
+			else
+				damage *= dmgMult;
+		}
 		if(TF2Attrib_HookValueFloat(0.0, "resistance_powerup", victim) == 2.0){
 			if(frayNextTime[victim] <= GetGameTime()){
 				damage = 0.0;
@@ -165,43 +172,33 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 			}
 		}
 	}
+	if(damagetype & DMG_PIERCING){
+		return Plugin_Changed;
+	}
 
 	if(IsValidClient3(attacker) && IsValidClient3(victim))
 	{
 		applyDamageAffinities(victim, attacker, inflictor, damage, weapon, damagetype, damagecustom);
 
 		if(IsValidWeapon(weapon)){
-			char weaponClassName[64]; 
-			GetEntityClassname(weapon, weaponClassName, sizeof(weaponClassName));
-			if(StrContains(weaponClassName, "tf_weapon") != -1)
-			{
-				if(attacker != victim)
+			if(attacker != victim){
+				char weaponClassName[64]; 
+				GetEntityClassname(weapon, weaponClassName, sizeof(weaponClassName));
+				if(StrEqual(weaponClassName,"tf_weapon_jar_milk",false))
 				{
-					int itemIndex = GetEntProp(weapon, Prop_Send, "m_iItemDefinitionIndex");
-					if(StrEqual(weaponClassName,"tf_weapon_jar",false))
-					{
-						TF2_AddCondition(victim, TFCond_Jarated, 0.01);
+					float inverterPowerup = TF2Attrib_HookValueFloat(0.0, "inverter_powerup", victim);
+					if(inverterPowerup == 1.0){
+						MadmilkDuration[attacker] = GetGameTime()+6.0;
+						MadmilkInflictor[attacker] = victim;
 					}
-					if(itemIndex == 230)
-					{
-						TF2_AddCondition(victim, TFCond_Jarated, 0.01);
+					else if(inverterPowerup == 2.0){
+						MadmilkDuration[victim] = GetGameTime()+12.0;
+						MadmilkInflictor[victim] = victim;
 					}
-					if(StrEqual(weaponClassName,"tf_weapon_jar_milk",false))
+					else if(MadmilkDuration[victim] < GetGameTime()+6.0)
 					{
-						float inverterPowerup = TF2Attrib_HookValueFloat(0.0, "inverter_powerup", victim);
-						if(inverterPowerup == 1.0){
-							MadmilkDuration[attacker] = GetGameTime()+6.0;
-							MadmilkInflictor[attacker] = victim;
-						}
-						else if(inverterPowerup == 2.0){
-							MadmilkDuration[victim] = GetGameTime()+12.0;
-							MadmilkInflictor[victim] = victim;
-						}
-						else if(MadmilkDuration[victim] < GetGameTime()+6.0)
-						{
-							MadmilkDuration[victim] = GetGameTime()+6.0;
-							MadmilkInflictor[victim] = attacker;
-						}
+						MadmilkDuration[victim] = GetGameTime()+6.0;
+						MadmilkInflictor[victim] = attacker;
 					}
 				}
 				Address MadMilkOnhit = TF2Attrib_GetByName(weapon, "armor piercing");
@@ -379,14 +376,7 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 		{
 			float strengthPowerupValue = TF2Attrib_GetValue(strengthPowerup);
 			if(strengthPowerupValue == 1.0){
-				damagetype |= DMG_NOCLOSEDISTANCEMOD;
 				damage *= 2.0;
-			}
-			else if(strengthPowerupValue == 2.0 && IsValidWeapon(weapon)){
-				if(weaponFireRate[weapon] < TICKRATE)
-					damage *= 1+2*(weaponFireRate[weapon]/TICKRATE);
-				else
-					damage *= 3;
 			}
 			else if(strengthPowerupValue == 3.0 && victim != attacker){
 				Buff finisherDebuff; finisherDebuff.init("Bruised", "Marked-for-Finisher", Buff_Bruised, 1, attacker, 8.0);
@@ -516,7 +506,7 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 			}
 			if(IsValidClient3(guardian) && !(damagetype & DMG_IGNOREHOOK)){
 				SDKHooks_TakeDamage(guardian, attacker, attacker, damage*guardianPercentage,DMG_PREVENT_PHYSICS_FORCE|DMG_IGNOREHOOK,_,_,_,false);
-				damage *= (1-guardianPercentage);
+				damage *= ConsumePierce((1-guardianPercentage), pierce);
 			}
 		}
 		int VictimCWeapon = GetEntPropEnt(victim, Prop_Send, "m_hActiveWeapon");
@@ -846,11 +836,6 @@ public Action OnTakeDamage(victim, &attacker, &inflictor, float &damage, &damage
 		
 		if(!(damagetype & DMG_PIERCING) && attacker != victim){
 			float armorPenetration = TF2Attrib_HookValueFloat(0.0, "armor_penetration_buff", attacker);
-
-			float dmgReduction = TF2Attrib_HookValueFloat(1.0, "dmg_incoming_mult", victim);
-			if(dmgReduction != 1.0)
-				damage *= dmgReduction
-
 			float linearReduction = TF2Attrib_HookValueFloat(1.0, "dmg_taken_divided", victim);
 			if(linearReduction != 1.0)
 				damage /= linearReduction;
