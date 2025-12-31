@@ -1311,7 +1311,7 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 			damagetype |= DMG_CRIT;
 		}
 
-		if(damagetype & DMG_SLASH){
+		if(damagetype & DMG_SLASH && damagecustom == TF_CUSTOM_BLEEDING){
 			damage /= Pow(TF2Attrib_HookValueFloat(1.0, "mult_postfiredelay", weapon),  0.8);
 		}
 

@@ -2696,8 +2696,7 @@ public Action TF2_CalcIsAttackCritical(int client, int weapon, char[] weaponname
 			{
 				if(weaponFireRate[weapon] > 5.0)
 				{
-					Address override = TF2Attrib_GetByName(weapon, "override projectile type");
-					if(override == Address_Null)
+					if(TF2Attrib_HookValueFloat(0.0, "override_projectile_type", weapon) == 0.0)
 						SDKCall(g_SDKCallJar, weapon);
 				}
 			}
