@@ -423,7 +423,7 @@
 	{
 		"index"			"351"
 		"weapon_class"	"tf_weapon_flaregun"
-		"weapon_menu"	"tf_weapon_flaregun"
+		"weapon_menu"	"rainoffire"
 		"class"			"pyro"
 		"description"	"Base Weapon is Detonator\nDeals 0.1x damage.\nOn Explosion: fragments out 20 explosive frags,\ndealing 10 base damage each.\nApplies afterburn on hit.\nConverts fire rate into damage bonus."
 		"cost"			"7000.0"
@@ -433,8 +433,7 @@
 		"afterburn dmg increased"	"5.0"
 		"explosive fragment count"	"20"
 		"explosive_fragment_damage"	"10"
-		"blast radius increased"	"4"
-		"frag explosion radius mult"	"2"
+		"frag explosion radius mult"	"5"
 		"paintkit_proto_def_index"	"403"
 		"set_item_texture_wear"		"0.0"
 	}

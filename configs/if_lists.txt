@@ -1291,9 +1291,8 @@
 			"2"		"Flame Damage Multiplier"
 			"3"		"Increased Overall Damage(T)"
 			"4"		"lifesteal ability"
-			"5"		"Shoots extra projectile"
-			"6"		"reveal cloaked victim on hit"
-			"7"		"reveal disguised victim on hit"
+			"5"		"reveal cloaked victim on hit"
+			"6"		"reveal disguised victim on hit"
 		}
 		"Flamethrower specific upgrades"
 		{
@@ -1317,9 +1316,8 @@
 			"2"		"Flame Damage Multiplier"
 			"3"		"Increased Overall Damage(T)"
 			"4"		"lifesteal ability"
-			"5"		"Shoots extra projectile"
-			"6"		"reveal cloaked victim on hit"
-			"7"		"reveal disguised victim on hit"
+			"5"		"reveal cloaked victim on hit"
+			"6"		"reveal disguised victim on hit"
 		}
 		"Flamethrower specific upgrades"
 		{
@@ -1383,7 +1381,7 @@
 			"1"		"Scorchiest Shot"
 		}
 	}
-	"pyroflareg2"//manmelter
+	"rainoffire"
 	{
 		"special_tweaks_listid"		"2"
 		"Damage upgrades"
@@ -1398,12 +1396,12 @@
 		"Flaregun specific upgrades"
 		{
 			"0"		"fire rate bonus(fortified)"
-			"1"		"Projectile speed increased(DH)"
+			"1"		"blast radius increased"
 			"2"		"Weapons Deals No Knockback"
-		}		
+		}
 		"Special Tweaks"
 		{
-			"0"		"Multishot Flares"
+			"0"		"Fireworks"
 			"1"		"Scorchiest Shot"
 		}
 	}

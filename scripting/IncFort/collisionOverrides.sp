@@ -418,7 +418,7 @@ public Action:OnCollisionSentryBolt(entity, client)
 				int sentry = EntRefToEntIndex(jarateWeapon[entity]);
 				if(IsValidEntity(sentry))
 				{
-					SDKHooks_TakeDamage(client, sentry, owner, projectileDamage[entity], DMG_BULLET|DMG_IGNOREHOOK, _, _,_,false);
+					SDKHooks_TakeDamage(client, entity, owner, projectileDamage[entity], DMG_BULLET|DMG_IGNOREHOOK, _, _,_,false);
 					if(IsValidClient3(client)){
 						ShouldNotHome[entity][client] = true;
 						BleedBuildup[client] += 4.0;
