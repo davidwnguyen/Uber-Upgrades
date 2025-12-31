@@ -632,6 +632,8 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 					if(IsFakeClient(victim))
 						sentryLifesteal *= 0.3;
 
+					sentryLifesteal *= TF2Attrib_HookValueFloat(1.0, "lifesteal_effectiveness", weapon);
+
 					AddBuildingHealth(inflictor, RoundToCeil(sentryLifesteal), attacker);
 				}
 			}

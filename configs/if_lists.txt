@@ -1409,21 +1409,26 @@
 	}
 	"sacred_slayer"
 	{
-		"special_tweaks_listid"		"-1"
+		"special_tweaks_listid"		"2"
 		"Damage upgrades"
 		{
 			"0"		"damage bonus"
 			"1"		"ap (global)"
-			"2"		"Flare Damage Bonus"
+			"2"		"Increased Overall Damage"
 			"3"		"lifesteal ability"
 			"4"		"reveal cloaked victim on hit"
 			"5"		"reveal disguised victim on hit"
 		}
-		"Flaregun specific upgrades"
+		"Weapon specific upgrades"
 		{
-			"0"		"fire rate bonus(fortified)"
+			"0"		"fire rate bonus(multshit)"
 			"1"		"Projectile speed increased"
 			"2"		"Weapons Deals No Knockback"
+		}
+		"Special Tweaks"
+		{
+			"0"		"Scorching Napalm"
+			"1"		"Rockets' Red Glare"
 		}
 	}
 	"scoweap"

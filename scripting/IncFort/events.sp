@@ -173,7 +173,7 @@ public Event_Playerhurt(Handle event, const char[] name, bool:dontBroadcast)
 				if(IsFakeClient(client))
 					lifestealFactor = 0.3;
 
-				lifestealFactor *= GetAttribute(CWeapon, "lifesteal effectiveness", 1.0);
+				lifestealFactor *= TF2Attrib_HookValueFloat(1.0, "lifesteal_effectiveness", CWeapon);
 				
 
 				if(hasBuffIndex(attacker, Buff_Plunder)){
