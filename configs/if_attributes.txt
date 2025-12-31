@@ -1870,11 +1870,11 @@
 			"name"		"flame_drag"
 			"ref"		"flame_drag"
 			"display"		"%.1f"
-			"cost"		"0"
+			"cost"		"200"
 			"increase_ratio"	"0"
-			"value"		"-0.10"
-			"init"		"8.5"
-			"max"		"0.5"		
+			"value"		"1"
+			"init"		"0"
+			"max"		"0"		
 		}
 		"104"
 		{
@@ -3888,17 +3888,6 @@
 			"init"		"1"
 			"max"		"1000"
 		}
-		"328"
-		{
-			"name"		"flame size bonus"
-			"ref"		"Flame Size"
-			"display"		"%.0f%%"
-			"cost"		"160"
-			"increase_ratio"	"0.8"
-			"value"		"0.25"
-			"init"		"1"
-			"max"		"3.00"
-		}
 		"330"
 		{
 			"name"		"flame_speed"
@@ -4488,9 +4477,9 @@
 			"name"		"flame_spread_degree"
 			"ref"		"flame_spread_degree"
 			"display"		"%.1f"
-			"cost"		"250"
-			"value"		"-0.80"
-			"init"		"2.8"
+			"cost"		"-200"
+			"value"		"1.0"
+			"init"		"0"
 			"max"		"0"
 		}
 		"452"
@@ -4739,12 +4728,12 @@
 		"1336"
 		{
 			"name"		"holster_anim_time"
-			"ref"		"Switch Speed Increased"
+			"ref"		"holster_anim_time"
 			"display"		"%.0f%%"
-			"cost"		"250"
-			"value"		"-0.10"
-			"init"		"0.8"
-			"max"		"0.01"
+			"cost"		"-250"
+			"value"		"0.10"
+			"init"		"0"
+			"max"		"0"
 		}
 		"1338"
 		{

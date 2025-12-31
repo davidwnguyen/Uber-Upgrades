@@ -235,7 +235,7 @@
 		"36" //Blutsauger
 		{
 			"preserve_attributes"	"1"
-			"1"				"lifesteal ability;0.05"
+			"1"				"lifesteal effectiveness;1.1"
 		}
 		"312" //Brass Beast
 		{
@@ -485,6 +485,12 @@
 		{
 			"preserve_attributes"	"1"
 			"1"				"Converts Firerate to Damage;1.0"
+		}
+		"356"//Kunai
+		{
+			"preserve_attributes"	"1"
+			"1"				"sanguisuge;0"
+			"2"				"lifesteal effectiveness;1.5"
 		}
 	}
 }

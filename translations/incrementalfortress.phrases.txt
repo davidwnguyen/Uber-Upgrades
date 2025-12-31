@@ -1404,8 +1404,8 @@
 	"Damage is Multiplied by Bullets/shot"{
 		"en"		"Damage is Multiplied by Bullets/shot"
 	}
-	"Switch Speed Increased"{
-		"en"		"Switch Speed Increased"
+	"holster_anim_time"{
+		"en"		"Holster Animation Time"
 	}
 	"Explosive Bullets(S)"{
 		"en"		"Explosive Bullets"

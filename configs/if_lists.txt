@@ -1297,7 +1297,7 @@
 		"Flamethrower specific upgrades"
 		{
 			"0"		"flame_speed"
-			"1"		"Flame Size"
+			"1"		"flame size bonus"
 			"2"		"flame_reflect_on_collision"
 		}
 		"Special Tweaks"
@@ -1321,10 +1321,10 @@
 		}
 		"Flamethrower specific upgrades"
 		{
-			"0"		"increase buff duration"
-			"1"		"flame_speed"
-			"2"		"Flame Size"
-			"3"		"flame_reflect_on_collision"
+			"0"		"flame_speed"
+			"1"		"flame size bonus"
+			"2"		"flame_reflect_on_collision"
+			"3"		"increase buff duration"
 		}
 		"Special Tweaks"
 		{
@@ -2251,7 +2251,6 @@
 			"2"		"weapon self dmg push force increased"
 			"3"		"increased air control(S)"
 			"4"		"dmg from all reduced(wearable)"
-			"5"		"Switch Speed Increased"
 		}
 		"Special Tweaks"
 		{

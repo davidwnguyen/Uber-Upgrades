@@ -1335,7 +1335,7 @@ DisplayItemChange(client,itemidx)
 		//Medic Primaries
 		case 36:
 		{
-			ChangeString = "The Blutsauger | +5% life steal ability.";
+			ChangeString = "The Blutsauger | 1.1x lifesteal effectiveness.";
 		}
 		//Medic Secondaries
 		case 411:
@@ -1402,7 +1402,7 @@ DisplayItemChange(client,itemidx)
 		//Spy Melees
 		case 356:
 		{
-			ChangeString = "The Conniver's Kunai | Backstabs instead have a 50% lifesteal bonus.";
+			ChangeString = "The Conniver's Kunai | 1.5x lifesteal effectiveness.";
 		}
 		//Spy Misc
 		case 735,736,810,831,933,1080,1102:
