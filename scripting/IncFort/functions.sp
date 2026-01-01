@@ -3785,57 +3785,16 @@ stock float TF2_GetFireRate(client, weapon, float efficiency = 1.0)
 				float aps;
 				char Classname[64];
 				TF2Econ_GetItemClassName(GetEntProp(weapon, Prop_Send, "m_iItemDefinitionIndex"), Classname, sizeof(Classname));
-				if(StrEqual(Classname,"tf_weapon_scattergun",false) || StrEqual(Classname,"tf_weapon_soda_popper",false) || StrEqual(Classname,"tf_weapon_pep_brawler_blaster",false) || StrEqual(Classname,"tf_weapon_shotgun",false) || 
-				StrEqual(Classname,"tf_weapon_shotgun_primary",false) || StrEqual(Classname,"tf_weapon_sentry_revenge",false) || StrEqual(Classname,"tf_weapon_shotgun_building_rescue",false))
-					aps = 1.6;
-				else if(StrEqual(Classname,"tf_weapon_handgun_scout_primary",false))
-					aps = 2.857;
-				else if(StrEqual(Classname,"tf_weapon_pistol",false) || StrEqual(Classname,"tf_weapon_handgun_scout_secondary",false))
-					aps = 6.67;
-				else if(StrEqual(Classname,"tf_weapon_cleaver",false))
-					aps = 1.25;
-				else if(StrEqual(Classname,"tf_weapon_rocketlauncher",false) || StrEqual(Classname,"tf_weapon_rocketlauncher_directhit",false) || StrEqual(Classname,"tf_weapon_particle_cannon",false) || StrEqual(Classname,"tf_weapon_rocketlauncher_airstrike",false))
-					aps = 1.25;
-				else if(StrEqual(Classname,"tf_weapon_raygun",false) || StrEqual(Classname,"tf_weapon_drg_pomson",false))
-					aps = 1.25;
-				else if(StrEqual(Classname,"tf_weapon_shovel",false) || StrEqual(Classname,"saxxy",false) || StrEqual(Classname,"tf_weapon_fireaxe",false) || StrEqual(Classname,"tf_weapon_slap",false) || StrEqual(Classname,"tf_weapon_sword",false) ||
-				StrEqual(Classname,"tf_weapon_bottle",false) || StrEqual(Classname,"tf_weapon_stickbomb",false) || StrEqual(Classname,"tf_weapon_katana",false) || StrEqual(Classname,"tf_weapon_fists",false) || StrEqual(Classname,"tf_weapon_wrench",false) ||
-				StrEqual(Classname,"tf_weapon_robot_arm",false) || StrEqual(Classname,"tf_weapon_bonesaw",false) || StrEqual(Classname,"tf_weapon_club",false) || StrEqual(Classname,"tf_weapon_breakable_sign",false))
-					aps = 1.25;
-				else if(StrEqual(Classname,"tf_weapon_bat",false) || StrEqual(Classname,"tf_weapon_bat_wood",false) || StrEqual(Classname,"tf_weapon_bat_fish",false) || StrEqual(Classname,"tf_weapon_bat_giftwrap",false))
-					aps = 2.0;
-				else if(StrEqual(Classname,"tf_weapon_flamethrower",false))
-					aps = 25.0;
-				else if(StrEqual(Classname,"tf_weapon_rocketlauncher_fireball",false))
-					aps = 1.25;
-				else if(StrEqual(Classname,"tf_weapon_jar_gas",false) || StrEqual(Classname,"tf_weapon_jar",false) || StrEqual(Classname,"tf_weapon_jar_milk",false))
-					aps = 1.25;
-				else if(StrEqual(Classname,"tf_weapon_flaregun",false) || StrEqual(Classname,"tf_weapon_flaregun_revenge",false))
-					aps = 0.5;
-				else if(StrEqual(Classname,"tf_weapon_grenadelauncher",false) || StrEqual(Classname,"tf_weapon_cannon",false))
-					aps = 1.67;
-				else if(StrEqual(Classname,"tf_weapon_pipebomblauncher",false))
-					aps = 1.67;
-				else if(StrEqual(Classname,"tf_weapon_minigun",false))
-					aps = 10.0;
-				else if(StrEqual(Classname,"tf_weapon_syringegun_medic",false) || StrEqual(Classname,"tf_weapon_syringegun",false))
-					aps = 10.0;
-				else if(StrEqual(Classname,"tf_weapon_compound_bow",false))
-					aps = 0.5;
-				else if(StrEqual(Classname,"tf_weapon_crossbow",false))
-					aps = 4.35;
-				else if(StrEqual(Classname,"tf_weapon_sniperrifle",false) || StrEqual(Classname,"tf_weapon_sniperrifle_decap",false) || StrEqual(Classname,"tf_weapon_sniperrifle_classic",false))
-					aps = 0.67;
-				else if(StrEqual(Classname,"tf_weapon_smg",false) || StrEqual(Classname,"tf_weapon_charged_smg",false))
-					aps = 10.0;
-				else if(StrEqual(Classname,"tf_weapon_revolver",false))
-					aps = 2.0;
-				else if(StrEqual(Classname,"tf_weapon_mechanical_arm",false))
-					aps = 6.7;
-				else
+				bool success = weaponFireRateMap.GetValue(Classname, aps);
+				if(!success)
 					aps = 1.0;
 				
-				aps /= TF2Attrib_HookValueFloat(1.0, "mult_postfiredelay", weapon);
+				if(StrEqual(Classname, "tf_weapon_pda_engineer_build")){
+					aps /= TF2Attrib_HookValueFloat(1.0, "mult_sentry_firerate", weapon);
+				}
+				else{
+					aps /= TF2Attrib_HookValueFloat(1.0, "mult_postfiredelay", weapon);
+				}
 				Address apsMult5 = TF2Attrib_GetByName(weapon, "halloween fire rate bonus");
 				Address apsMult6 = TF2Attrib_GetByName(weapon, "mult_item_meter_charge_rate");
 				Address apsMod = TF2Attrib_GetByName(weapon, "energy weapon penetration");
@@ -4411,11 +4370,11 @@ ExplosionHookEffects(entity){
 
 	float chance = GetAttribute(CWeapon, "sticky recursive explosion chance", 0.0)
 	if(chance >= GetRandomFloat(0.0,1.0)){
-
 		DataPack hPack = CreateDataPack();
 		hPack.Reset();
 		WritePackCell(hPack, EntIndexToEntRef(owner));
 		WritePackCell(hPack, EntIndexToEntRef(CWeapon));
+		WritePackCell(hPack, entity);
 		WritePackFloat(hPack, position[0]);
 		WritePackFloat(hPack, position[1]);
 		WritePackFloat(hPack, position[2]);
@@ -4495,4 +4454,65 @@ ExplosionHookEffects(entity){
 		SetEntProp(iEntity, Prop_Data, "m_nSolidType", 6);
 		SetEntProp(iEntity, Prop_Send, "m_CollisionGroup", 13);
 	}
+}
+
+PopulateFireRateMap(){
+	weaponFireRateMap.SetValue("tf_weapon_scattergun", 1.6);
+	weaponFireRateMap.SetValue("tf_weapon_soda_popper", 1.6);
+	weaponFireRateMap.SetValue("tf_weapon_pep_brawler_blaster", 1.6);
+	weaponFireRateMap.SetValue("tf_weapon_shotgun", 1.6);
+	weaponFireRateMap.SetValue("tf_weapon_shotgun_primary", 1.6);
+	weaponFireRateMap.SetValue("tf_weapon_sentry_revenge", 1.6);
+	weaponFireRateMap.SetValue("tf_weapon_shotgun_building_rescue", 1.6);
+	weaponFireRateMap.SetValue("tf_weapon_handgun_scout_primary", 2.857);
+	weaponFireRateMap.SetValue("tf_weapon_pistol", 6.67);
+	weaponFireRateMap.SetValue("tf_weapon_handgun_scout_secondary", 6.67);
+	weaponFireRateMap.SetValue("tf_weapon_cleaver", 1.25);
+	weaponFireRateMap.SetValue("tf_weapon_rocketlauncher", 1.25);
+	weaponFireRateMap.SetValue("tf_weapon_rocketlauncher_directhit", 1.25);
+	weaponFireRateMap.SetValue("tf_weapon_particle_cannon", 1.25);
+	weaponFireRateMap.SetValue("tf_weapon_rocketlauncher_airstrike", 1.25);
+	weaponFireRateMap.SetValue("tf_weapon_raygun", 1.25);
+	weaponFireRateMap.SetValue("tf_weapon_drg_pomson", 1.25);
+	weaponFireRateMap.SetValue("tf_weapon_shovel", 1.25);
+	weaponFireRateMap.SetValue("saxxy", 1.25);
+	weaponFireRateMap.SetValue("tf_weapon_fireaxe", 1.25);
+	weaponFireRateMap.SetValue("tf_weapon_slap", 1.25);
+	weaponFireRateMap.SetValue("tf_weapon_sword", 1.25);
+	weaponFireRateMap.SetValue("tf_weapon_bottle", 1.25);
+	weaponFireRateMap.SetValue("tf_weapon_stickbomb", 1.25);
+	weaponFireRateMap.SetValue("tf_weapon_katana", 1.25);
+	weaponFireRateMap.SetValue("tf_weapon_fists", 1.25);
+	weaponFireRateMap.SetValue("tf_weapon_wrench", 1.25);
+	weaponFireRateMap.SetValue("tf_weapon_robot_arm", 1.25);
+	weaponFireRateMap.SetValue("tf_weapon_bonesaw", 1.25);
+	weaponFireRateMap.SetValue("tf_weapon_club", 1.25);
+	weaponFireRateMap.SetValue("tf_weapon_breakable_sign", 1.25);
+	weaponFireRateMap.SetValue("tf_weapon_bat", 2.0);
+	weaponFireRateMap.SetValue("tf_weapon_bat_wood", 2.0);
+	weaponFireRateMap.SetValue("tf_weapon_bat_fish", 2.0);
+	weaponFireRateMap.SetValue("tf_weapon_bat_giftwrap", 2.0);
+	weaponFireRateMap.SetValue("tf_weapon_flamethrower", 50.0);
+	weaponFireRateMap.SetValue("tf_weapon_rocketlauncher_fireball", 1.25);
+	weaponFireRateMap.SetValue("tf_weapon_jar", 1.25);
+	weaponFireRateMap.SetValue("tf_weapon_jar_gas", 1.25);
+	weaponFireRateMap.SetValue("tf_weapon_jar_milk", 1.25);
+	weaponFireRateMap.SetValue("tf_weapon_flaregun", 0.5);
+	weaponFireRateMap.SetValue("tf_weapon_flaregun_revenge", 0.5);
+	weaponFireRateMap.SetValue("tf_weapon_grenadelauncher", 1.67);
+	weaponFireRateMap.SetValue("tf_weapon_cannon", 1.67);
+	weaponFireRateMap.SetValue("tf_weapon_pipebomblauncher", 1.67);
+	weaponFireRateMap.SetValue("tf_weapon_minigun", 10.0);
+	weaponFireRateMap.SetValue("tf_weapon_syringegun_medic", 10.0);
+	weaponFireRateMap.SetValue("tf_weapon_syringegun", 10.0);
+	weaponFireRateMap.SetValue("tf_weapon_compound_bow", 0.5);
+	weaponFireRateMap.SetValue("tf_weapon_crossbow", 4.35);
+	weaponFireRateMap.SetValue("tf_weapon_sniperrifle", 0.67);
+	weaponFireRateMap.SetValue("tf_weapon_sniperrifle_decap", 0.67);
+	weaponFireRateMap.SetValue("tf_weapon_sniperrifle_classic", 0.67);
+	weaponFireRateMap.SetValue("tf_weapon_smg", 10.0);
+	weaponFireRateMap.SetValue("tf_weapon_charged_smg", 10.0);
+	weaponFireRateMap.SetValue("tf_weapon_revolver", 2.0);
+	weaponFireRateMap.SetValue("tf_weapon_mechanical_arm", 6.7);
+	weaponFireRateMap.SetValue("tf_weapon_pda_engineer_build", 10.0);
 }

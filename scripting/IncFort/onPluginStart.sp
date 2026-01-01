@@ -515,6 +515,9 @@ public void OnPluginStart()
 	while ((i = FindEntityByClassname(i, "obj_sentrygun")) != -1){
 		isEntitySentry[i] = true;
 	}
+
+	weaponFireRateMap = CreateTrie();
+	PopulateFireRateMap();
 }
 public OnPluginEnd()
 {

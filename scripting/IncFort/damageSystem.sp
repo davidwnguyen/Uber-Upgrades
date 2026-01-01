@@ -1179,21 +1179,6 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 		GetEdictClassname(weapon, classname, sizeof(classname)); 
 		if(StrEqual(classname, "tf_weapon_syringegun_medic"))
 			damage *= 1.8
-		else if(StrEqual(classname, "tf_weapon_scattergun") ||
-		StrEqual(classname, "tf_weapon_handgun_scout_primary") ||
-		StrEqual(classname, "tf_weapon_soda_popper") ||
-		StrEqual(classname, "tf_weapon_pep_brawler_blaster") ||
-		StrContains(classname, "shotgun") != -1){
-			float victimPosition[3];
-			GetEntPropVector(victim, Prop_Data, "m_vecAbsOrigin", victimPosition); 
-			float attackerPosition[3];
-			GetEntPropVector(attacker, Prop_Data, "m_vecAbsOrigin", attackerPosition); 
-			float distance = GetVectorDistance(victimPosition, attackerPosition);
-			if(distance > 400)
-				distance = 400.0;
-
-			damage *= 2+1.75*((400-distance)/400);
-		}
 		if(TF2Attrib_HookValueFloat(0.0, "precision_powerup", attacker) == 3){
 			if(! ( StrEqual(classname, "tf_weapon_flamethrower") || StrEqual(classname, "tf_weapon_rocketlauncher_fireball") ) ){
 				damage *= 4.0;

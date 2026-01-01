@@ -233,6 +233,7 @@ bool buffChange[MAXPLAYERS+1] = {false,...};
 Upgrade upgrades[MAX_ATTRIBUTES];
 Tweak tweaks[MAX_TWEAKS]
 AfterburnStack playerAfterburn[MAXPLAYERS+1][MAX_AFTERBURN_STACKS];
+StringMap weaponFireRateMap;
 
 //Integers
 int OwnerOffset;

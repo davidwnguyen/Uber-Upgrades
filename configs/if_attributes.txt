@@ -4947,17 +4947,29 @@
 			"optimizer_style" "1"
 			"max"		"15"
 		}
-		"1509.6"
+		"1509.8"
 		{
 			"name"		"damage mult 9"
 			"ref"		"Shotgun Damage Bonus"
 			"display"		"%.0f%%"
-			"cost"		"400"
+			"cost"		"250"
 			"increase_ratio"	"0.1"
-			"value"		"0.25"
+			"value"		"0.35"
 			"init"		"1"
 			"optimizer_style" "1"
-			"max"		"10"
+			"max"		"30"
+		}
+		"1509.9"
+		{
+			"name"		"damage mult 9"
+			"ref"		"Handgun Damage Bonus"
+			"display"		"%.0f%%"
+			"cost"		"400"
+			"increase_ratio"	"0.1"
+			"value"		"0.35"
+			"init"		"1"
+			"optimizer_style" "1"
+			"max"		"18"
 		}
 		"1510"
 		{

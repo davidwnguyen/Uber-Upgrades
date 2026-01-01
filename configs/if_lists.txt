@@ -1366,7 +1366,7 @@
 		{
 			"0"		"damage bonus"
 			"1"		"ap (global)"
-			"2"		"Increased Overall Damage"
+			"2"		"Shotgun Damage Bonus"
 			"3"		"lifesteal ability"
 		}
 		"Weapon specific upgrades"
@@ -1394,7 +1394,7 @@
 		{
 			"0"		"fire rate bonus(old)"
 			"1"		"clip size bonus"
-			"2"		"faster reload rate"
+			"2"		"faster reload rate (U)"
 			"3"		"bullets per shot bonus"
 			"4"		"weapon spread bonus(H)"
 			"5"		"projectile penetration heavy"
@@ -1412,14 +1412,14 @@
 		{
 			"0"		"damage bonus"
 			"1"		"ap (global)"
-			"2"		"Increased Overall Damage"
+			"2"		"Shotgun Damage Bonus"
 			"3"		"lifesteal ability"
 		}
 		"Scattergun specific upgrades"
 		{
 			"0"		"fire rate bonus(old)"
 			"1"		"clip size bonus"
-			"2"		"faster reload rate"
+			"2"		"faster reload rate (U)"
 			"3"		"bullets per shot bonus"
 			"4"		"weapon spread bonus(H)"
 			"5"		"projectile penetration heavy"
@@ -1437,7 +1437,7 @@
 		{
 			"0"		"damage bonus"
 			"1"		"ap (global)"
-			"2"		"Increased Overall Damage"
+			"2"		"Handgun Damage Bonus"
 			"3"		"lifesteal ability"
 		}
 		"Scattergun specific upgrades"

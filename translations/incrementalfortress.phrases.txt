@@ -1,5 +1,8 @@
 "Phrases"
 {
+	"Handgun Damage Bonus"{
+		"en"		"Handgun Damage Bonus"
+	}
 	"Shotgun Damage Bonus"{
 		"en"		"Shotgun Damage Bonus"
 	}
