@@ -1454,53 +1454,6 @@ public Action OnPlayerRunCmd(int client, int& buttons, int& impulse, float vel[3
 	int CWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
 	if(IsValidEdict(CWeapon))
 	{
-		if(!(lastFlag[client] & FL_ONGROUND) && flags & FL_ONGROUND)
-		{
-			Address bossType = TF2Attrib_GetByName(client, "damage force increase text");
-			if(bossType != Address_Null && TF2Attrib_GetValue(bossType) > 0.0)
-			{
-				float bossValue = TF2Attrib_GetValue(bossType);
-				switch(bossValue)
-				{
-					case 2.0:
-					{
-						miniCritStatusVictim[client] = GetGameTime()+10.0;
-						TF2Attrib_SetByName(CWeapon, "fire rate penalty", 1.0)
-						TF2Attrib_SetByName(CWeapon, "dmg taken increased", 2.0)
-						TF2Attrib_SetByName(CWeapon, "faster reload rate", 1.0)
-						TF2Attrib_SetByName(CWeapon, "Blast radius increased", 0.5)
-						TF2Attrib_SetByName(CWeapon, "cannot pick up intelligence", 1.0)
-						TF2Attrib_SetByName(CWeapon, "increased jump height", 2.5)
-						SetEntProp(CWeapon, Prop_Data, "m_bReloadsSingly", 1);
-					}
-				}
-				//PrintToChatAll("ground")
-			}
-			SetEntityGravity(client, 1.0);
-		}
-		else if((lastFlag[client] & FL_ONGROUND) && !(flags & FL_ONGROUND))
-		{
-			Address bossType = TF2Attrib_GetByName(client, "damage force increase text");
-			if(bossType != Address_Null && TF2Attrib_GetValue(bossType) > 0.0)
-			{
-				float bossValue = TF2Attrib_GetValue(bossType);
-				switch(bossValue)
-				{
-					case 2.0:
-					{
-						miniCritStatusVictim[client] = 0.0;
-						TF2Attrib_SetByName(CWeapon, "fire rate penalty", 0.1)
-						TF2Attrib_SetByName(CWeapon, "dmg taken increased", 0.1)
-						TF2Attrib_SetByName(CWeapon, "faster reload rate", 0.0)
-						TF2Attrib_SetByName(CWeapon, "Blast radius increased", 1.75)
-						SetEntityGravity(client, 0.2);
-						SetEntProp(CWeapon, Prop_Data, "m_bReloadsSingly", 0);
-						CreateParticleEx(client, "ExplosionCore_MidAir");
-					}
-				}
-				//PrintToChatAll("air")
-			}
-		}
 		if(powerupParticle[client] <= GetGameTime() && !TF2_IsPlayerInCondition(client, TFCond_Cloaked))
 		{
 			Address strengthPowerup = TF2Attrib_GetByName(client, "strength powerup");
@@ -1872,36 +1825,6 @@ public Action OnPlayerRunCmd(int client, int& buttons, int& impulse, float vel[3
 
 						fanOfKnivesCount[client] = 0;
 					}
-				}
-
-				if(!(flags & FL_ONGROUND))
-				{
-					if(TF2Attrib_HookValueFloat(0.0, "agility_powerup", client) == 2.0){
-						quakerTime[client]+=TICKINTERVAL;
-						if(quakerTime[client] >= 0.4){
-							Address weighDownAbility = TF2Attrib_GetByName(client, "noise maker");
-							if(weighDownAbility != Address_Null && TF2Attrib_GetValue(weighDownAbility) > 0.0)
-							{
-								SetEntityGravity(client, 1.5*TF2Attrib_GetValue(weighDownAbility) + 1.0);
-							}
-						}
-					}
-					else{
-						if(buttons & IN_DUCK)
-						{
-							Address weighDownAbility = TF2Attrib_GetByName(client, "noise maker");
-							if(weighDownAbility != Address_Null && TF2Attrib_GetValue(weighDownAbility) > 0.0)
-							{
-								SetEntityGravity(client, TF2Attrib_GetValue(weighDownAbility) + 1.0);
-							}
-						}
-						else
-						{
-							SetEntityGravity(client, 1.0);
-						}
-					}
-				}else{
-					quakerTime[client] = 0.0;
 				}
 				
 				GetEntPropVector(client, Prop_Data, "m_vecAbsVelocity", trueVel[client]);
@@ -2488,6 +2411,32 @@ public OnGameFrame()
 				int primary = GetPlayerWeaponSlot(client,0)
 				if(IsValidEdict(CWeapon))
 				{
+					float bossType = TF2Attrib_HookValueFloat(0.0, "player_boss_type", client);
+					if(bossType == 2.0){
+						if(GetEntityFlags(client) & FL_ONGROUND)
+						{
+							miniCritStatusVictim[client] = GetGameTime()+10.0;
+							TF2Attrib_SetByName(CWeapon, "fire rate penalty", 1.25)
+							TF2Attrib_SetByName(CWeapon, "damage taken mult 3", 2.0)
+							TF2Attrib_SetByName(CWeapon, "faster reload rate", 1.0)
+							TF2Attrib_SetByName(CWeapon, "Blast radius increased", 0.5)
+							TF2Attrib_SetByName(CWeapon, "cannot pick up intelligence", 1.0)
+							TF2Attrib_SetByName(CWeapon, "increased jump height", 2.5)
+							SetEntProp(CWeapon, Prop_Data, "m_bReloadsSingly", 1);
+							SetEntityGravity(client, 1.0);
+						}
+						else
+						{
+							miniCritStatusVictim[client] = 0.0;
+							TF2Attrib_SetByName(CWeapon, "fire rate penalty", 0.1)
+							TF2Attrib_SetByName(CWeapon, "damage taken mult 3", 0.25)
+							TF2Attrib_SetByName(CWeapon, "faster reload rate", 0.0)
+							TF2Attrib_SetByName(CWeapon, "Blast radius increased", 1.75)
+							SetEntityGravity(client, 0.5);
+							SetEntProp(CWeapon, Prop_Data, "m_bReloadsSingly", 0);
+						}
+					}
+
 					if(TF2Attrib_HookValueFloat(0.0, "regenerate_stickbomb", CWeapon)) {
 						if(HasEntProp(CWeapon, Prop_Send, "m_iDetonated"))
 							SetEntProp(CWeapon, Prop_Send, "m_iDetonated", 0);
@@ -2537,6 +2486,35 @@ public OnGameFrame()
 							SetEntPropFloat(CWeapon, Prop_Send, "m_flNextPrimaryAttack", FinalROF);
 						}
 					}
+				}
+				if(!(GetEntityFlags(client) & FL_ONGROUND))
+				{
+					if(TF2Attrib_HookValueFloat(0.0, "agility_powerup", client) == 2.0){
+						quakerTime[client]+=TICKINTERVAL;
+						if(quakerTime[client] >= 0.4){
+							Address weighDownAbility = TF2Attrib_GetByName(client, "noise maker");
+							if(weighDownAbility != Address_Null && TF2Attrib_GetValue(weighDownAbility) > 0.0)
+							{
+								SetEntityGravity(client, 1.5*TF2Attrib_GetValue(weighDownAbility) + 1.0);
+							}
+						}
+					}
+					else{
+						if(globalButtons[client] & IN_DUCK)
+						{
+							Address weighDownAbility = TF2Attrib_GetByName(client, "noise maker");
+							if(weighDownAbility != Address_Null && TF2Attrib_GetValue(weighDownAbility) > 0.0)
+							{
+								SetEntityGravity(client, TF2Attrib_GetValue(weighDownAbility) + 1.0);
+							}
+						}
+						else
+						{
+							SetEntityGravity(client, 1.0);
+						}
+					}
+				}else{
+					quakerTime[client] = 0.0;
 				}
 			}
 
@@ -2683,75 +2661,71 @@ public Action TF2_CalcIsAttackCritical(int client, int weapon, char[] weaponname
 				}
 			}
 		}
-		Address bossType = TF2Attrib_GetByName(client, "damage force increase text");
-		if(bossType != Address_Null && TF2Attrib_GetValue(bossType) > 0.0)
+		float bossValue = TF2Attrib_HookValueFloat(0.0, "player_boss_type", client);
+		switch(bossValue)
 		{
-			float bossValue = TF2Attrib_GetValue(bossType);
-			switch(bossValue)
+			case 1.0:
 			{
-				case 1.0:
+				if(meleeLimiter[client] > 20)
 				{
-					if(meleeLimiter[client] > 20)
+					meleeLimiter[client] = 0;
+					for(int i=-3;i<=3;i+=1)
 					{
-						meleeLimiter[client] = 0;
-						for(int i=-3;i<=3;i+=1)
+						char projName[32] = "tf_projectile_arrow";
+						int iEntity = CreateEntityByName(projName);
+						if (IsValidEdict(iEntity)) 
 						{
-							char projName[32] = "tf_projectile_arrow";
-							int iEntity = CreateEntityByName(projName);
-							if (IsValidEdict(iEntity)) 
-							{
-								int iTeam = GetClientTeam(client);
-								float fwd[3]
-								float right[3]
-								SetEntPropEnt(iEntity, Prop_Send, "m_hOwnerEntity", client);
+							int iTeam = GetClientTeam(client);
+							float fwd[3]
+							float right[3]
+							SetEntPropEnt(iEntity, Prop_Send, "m_hOwnerEntity", client);
 
-								//SetEntityRenderMode(iEntity, RENDER_TRANSCOLOR);
-								//SetEntityRenderColor(iEntity, 0, 0, 0, 0);
-					
-								SetEntProp(iEntity, Prop_Send, "m_iTeamNum", iTeam);
-								SetEntPropEnt(iEntity, Prop_Send, "m_hLauncher", client);
-								GetClientEyePosition(client, fOrigin);
-								GetClientEyeAngles(client, fAngles);
-								GetAngleVectors(fAngles, vBuffer, NULL_VECTOR, NULL_VECTOR);
-								GetAngleVectors(fAngles,fwd, NULL_VECTOR, NULL_VECTOR);
-								GetAngleVectors(fAngles, NULL_VECTOR, right, NULL_VECTOR);
-								ScaleVector(right, 8.0 * i);
-								ScaleVector(fwd, 50.0);
-								AddVectors(fOrigin, fwd, fOrigin);
-								AddVectors(fOrigin, right, fOrigin);
-								float velocity = 5000.0;
-								Address projspeed = TF2Attrib_GetByName(weapon, "Projectile speed increased");
-								Address projspeed1 = TF2Attrib_GetByName(weapon, "Projectile speed decreased");
-								if(projspeed != Address_Null){
-									velocity *= TF2Attrib_GetValue(projspeed)
-								}
-								if(projspeed1 != Address_Null){
-									velocity *= TF2Attrib_GetValue(projspeed1)
-								}
-								float vecAngImpulse[3];
-								GetCleaverAngularImpulse(vecAngImpulse);
-								fVelocity[0] = vBuffer[0]*velocity;
-								fVelocity[1] = vBuffer[1]*velocity;
-								fVelocity[2] = vBuffer[2]*velocity;
-								
-								TeleportEntity(iEntity, fOrigin, fAngles, fVelocity);
-								DispatchSpawn(iEntity);
-								//SDKCall(g_SDKCallInitGrenade, iEntity, fVelocity, vecAngImpulse, client, 0, 5.0);
-								SetEntPropVector(iEntity, Prop_Send, "m_vInitialVelocity", fVelocity );
-								if(HasEntProp(iEntity, Prop_Send, "m_hLauncher"))
-								{
-									SetEntPropEnt(iEntity, Prop_Send, "m_hLauncher", weapon);
-								}
-								SetEntPropEnt(iEntity, Prop_Send, "m_hOriginalLauncher", client);
-								SetEntProp(iEntity, Prop_Send, "m_usSolidFlags", 0x0008);
-								SetEntProp(iEntity, Prop_Data, "m_nSolidType", 6);
-								SetEntProp(iEntity, Prop_Send, "m_CollisionGroup", 13); 
-								SDKHook(iEntity, SDKHook_Touch, OnCollisionBossArrow);
-								if(iTeam == 2)
-									CreateSpriteTrail(iEntity, "0.33", "5.0", "1.0", "materials/effects/arrowtrail_red.vmt", "255 255 255");
-								else
-									CreateSpriteTrail(iEntity, "0.33", "5.0", "1.0", "materials/effects/arrowtrail_blu.vmt", "255 255 255");
+							//SetEntityRenderMode(iEntity, RENDER_TRANSCOLOR);
+							//SetEntityRenderColor(iEntity, 0, 0, 0, 0);
+				
+							SetEntProp(iEntity, Prop_Send, "m_iTeamNum", iTeam);
+							SetEntPropEnt(iEntity, Prop_Send, "m_hLauncher", client);
+							GetClientEyePosition(client, fOrigin);
+							GetClientEyeAngles(client, fAngles);
+							GetAngleVectors(fAngles, vBuffer, NULL_VECTOR, NULL_VECTOR);
+							GetAngleVectors(fAngles,fwd, NULL_VECTOR, NULL_VECTOR);
+							GetAngleVectors(fAngles, NULL_VECTOR, right, NULL_VECTOR);
+							ScaleVector(right, 8.0 * i);
+							ScaleVector(fwd, 50.0);
+							AddVectors(fOrigin, fwd, fOrigin);
+							AddVectors(fOrigin, right, fOrigin);
+							float velocity = 5000.0;
+							Address projspeed = TF2Attrib_GetByName(weapon, "Projectile speed increased");
+							Address projspeed1 = TF2Attrib_GetByName(weapon, "Projectile speed decreased");
+							if(projspeed != Address_Null){
+								velocity *= TF2Attrib_GetValue(projspeed)
 							}
+							if(projspeed1 != Address_Null){
+								velocity *= TF2Attrib_GetValue(projspeed1)
+							}
+							float vecAngImpulse[3];
+							GetCleaverAngularImpulse(vecAngImpulse);
+							fVelocity[0] = vBuffer[0]*velocity;
+							fVelocity[1] = vBuffer[1]*velocity;
+							fVelocity[2] = vBuffer[2]*velocity;
+							
+							TeleportEntity(iEntity, fOrigin, fAngles, fVelocity);
+							DispatchSpawn(iEntity);
+							//SDKCall(g_SDKCallInitGrenade, iEntity, fVelocity, vecAngImpulse, client, 0, 5.0);
+							SetEntPropVector(iEntity, Prop_Send, "m_vInitialVelocity", fVelocity );
+							if(HasEntProp(iEntity, Prop_Send, "m_hLauncher"))
+							{
+								SetEntPropEnt(iEntity, Prop_Send, "m_hLauncher", weapon);
+							}
+							SetEntPropEnt(iEntity, Prop_Send, "m_hOriginalLauncher", client);
+							SetEntProp(iEntity, Prop_Send, "m_usSolidFlags", 0x0008);
+							SetEntProp(iEntity, Prop_Data, "m_nSolidType", 6);
+							SetEntProp(iEntity, Prop_Send, "m_CollisionGroup", 13); 
+							SDKHook(iEntity, SDKHook_Touch, OnCollisionBossArrow);
+							if(iTeam == 2)
+								CreateSpriteTrail(iEntity, "0.33", "5.0", "1.0", "materials/effects/arrowtrail_red.vmt", "255 255 255");
+							else
+								CreateSpriteTrail(iEntity, "0.33", "5.0", "1.0", "materials/effects/arrowtrail_blu.vmt", "255 255 255");
 						}
 					}
 				}

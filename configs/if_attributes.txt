@@ -7396,6 +7396,17 @@
 			"staged_max"		"0.35,0.5,0.8"
 			"max"		"0.2"
 		}
+		"1728"
+		{
+			"name"		"player boss type"
+			"ref"		"player boss type"
+			"attr_class"	"player_boss_type"
+			"display"		"%.0f"
+			"cost"		"0"
+			"value"		"0.0"
+			"init"		"0.0"
+			"max"		"0.0"
+		}
 		//Filler
 		"1900.0"
 		{

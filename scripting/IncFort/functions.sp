@@ -3287,7 +3287,7 @@ GivePowerupDescription(int client, char[] name, int amount){
 	}
 	else if(StrEqual("king powerup", name)){
 		if(amount == 2){
-			CPrintToChat(client, "{community}Tag-Team Powerup {default}| {lightcyan}Crouch+Mouse3 to link yourself to a teammate:\n Giving both of you 1.4x damage. Your healing is shared to your patient and attacking an enemy makes the patient deal 1.75x vs that victim.");
+			CPrintToChat(client, "{community}Tag-Team Powerup {default}| {lightcyan}Crouch+Mouse3 to link yourself to a teammate:\n Giving both of you 1.2x damage. Your healing is shared to your patient and attacking an enemy makes the patient deal 1.75x vs that victim.");
 		}else if(amount == 3){
 			CPrintToChat(client, "{community}Martyr Powerup {default}| {lightcyan}0.33x incoming healing. Sacrifice (15%% max health + dmg taken) to absorb fatal teammate damage and give uber for 0.5s.");
 		}else{

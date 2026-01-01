@@ -95,79 +95,75 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 				}
 			}
 		}
-		Address bossType = TF2Attrib_GetByName(victim, "damage force increase text");
-		if(bossType != Address_Null && TF2Attrib_GetValue(bossType) > 0.0)
+		float bossValue = TF2Attrib_HookValueFloat(0.0, "player_boss_type", victim);
+		switch(bossValue)
 		{
-			float bossValue = TF2Attrib_GetValue(bossType);
-			switch(bossValue)
+			case 1.0:
 			{
-				case 1.0:
+				if (!TF2_IsPlayerInCondition(victim,TFCond_UberchargedHidden) && GetClientHealth(victim) - damage < TF2_GetMaxHealth(victim) - (TF2_GetMaxHealth(victim)*(0.125*(bossPhase[victim]+1))))//boss phases
 				{
-					if (!TF2_IsPlayerInCondition(victim,TFCond_UberchargedHidden) && GetClientHealth(victim) - damage < TF2_GetMaxHealth(victim) - (TF2_GetMaxHealth(victim)*(0.125*(bossPhase[victim]+1))))//boss phases
-					{
-						damage = GetClientHealth(victim) - (TF2_GetMaxHealth(victim) - (TF2_GetMaxHealth(victim)*(0.125*(bossPhase[victim]+1))));
-						TF2_AddCondition(victim, TFCond_MegaHeal, 1.5, victim);
-						TF2_AddCondition(victim, TFCond_UberchargedHidden, 0.5);
-						TF2_AddCondition(victim, TFCond_RuneHaste, 5.0);
-						TF2_AddCondition(victim, TFCond_KingAura, 5.0);
-						
-						bossPhase[victim]++;
-					}
+					damage = GetClientHealth(victim) - (TF2_GetMaxHealth(victim) - (TF2_GetMaxHealth(victim)*(0.125*(bossPhase[victim]+1))));
+					TF2_AddCondition(victim, TFCond_MegaHeal, 1.5, victim);
+					TF2_AddCondition(victim, TFCond_UberchargedHidden, 0.5);
+					TF2_AddCondition(victim, TFCond_RuneHaste, 5.0);
+					TF2_AddCondition(victim, TFCond_KingAura, 5.0);
+					
+					bossPhase[victim]++;
 				}
-				case 4.0:
+			}
+			case 4.0:
+			{
+				if (!TF2_IsPlayerInCondition(victim,TFCond_UberchargedHidden) && GetClientHealth(victim) - damage < TF2_GetMaxHealth(victim) - (TF2_GetMaxHealth(victim)*(0.2*(bossPhase[victim]+1))))//boss phases
 				{
-					if (!TF2_IsPlayerInCondition(victim,TFCond_UberchargedHidden) && GetClientHealth(victim) - damage < TF2_GetMaxHealth(victim) - (TF2_GetMaxHealth(victim)*(0.2*(bossPhase[victim]+1))))//boss phases
-					{
-						damage = GetClientHealth(victim) - (TF2_GetMaxHealth(victim) - (TF2_GetMaxHealth(victim)*(0.2*(bossPhase[victim]+1))));
-						TF2_AddCondition(victim, TFCond_MegaHeal, 5.0, victim);
-						TF2_AddCondition(victim, TFCond_UberchargedHidden, 0.5);
-						TF2_AddCondition(victim, TFCond_RuneAgility, 5.0);
-						
-						//eventually add the vortex tp back thing
-						bossPhase[victim]++;
-					}
+					damage = GetClientHealth(victim) - (TF2_GetMaxHealth(victim) - (TF2_GetMaxHealth(victim)*(0.2*(bossPhase[victim]+1))));
+					TF2_AddCondition(victim, TFCond_MegaHeal, 5.0, victim);
+					TF2_AddCondition(victim, TFCond_UberchargedHidden, 0.5);
+					TF2_AddCondition(victim, TFCond_RuneAgility, 5.0);
+					
+					//eventually add the vortex tp back thing
+					bossPhase[victim]++;
 				}
-				case 7.0:
+			}
+			case 7.0:
+			{
+				if (!TF2_IsPlayerInCondition(victim,TFCond_UberchargedHidden) && GetClientHealth(victim) - damage < TF2_GetMaxHealth(victim) - (TF2_GetMaxHealth(victim)*(0.5*(bossPhase[victim]+1))))//boss phases
 				{
-					if (!TF2_IsPlayerInCondition(victim,TFCond_UberchargedHidden) && GetClientHealth(victim) - damage < TF2_GetMaxHealth(victim) - (TF2_GetMaxHealth(victim)*(0.5*(bossPhase[victim]+1))))//boss phases
+					damage = GetClientHealth(victim) - (TF2_GetMaxHealth(victim) - (TF2_GetMaxHealth(victim)*(0.25*(bossPhase[victim]+1))));
+					TF2_AddCondition(victim, TFCond_MegaHeal, 15.0, victim);
+					TF2_AddCondition(victim, TFCond_UberchargedHidden, 1.0);
+					giveDefenseBuff(victim, 6.0);
+					for(int i=1;i<=MaxClients;++i)
 					{
-						damage = GetClientHealth(victim) - (TF2_GetMaxHealth(victim) - (TF2_GetMaxHealth(victim)*(0.25*(bossPhase[victim]+1))));
-						TF2_AddCondition(victim, TFCond_MegaHeal, 15.0, victim);
-						TF2_AddCondition(victim, TFCond_UberchargedHidden, 1.0);
-						giveDefenseBuff(victim, 6.0);
-						for(int i=1;i<=MaxClients;++i)
+						if(IsValidClient3(i) && IsOnDifferentTeams(victim,i) && !IsClientObserver(i) && IsPlayerAlive(i))
 						{
-							if(IsValidClient3(i) && IsOnDifferentTeams(victim,i) && !IsClientObserver(i) && IsPlayerAlive(i))
+							float fOrigin[3], fVictimPos[3];
+							GetClientAbsOrigin(i, fOrigin)
+							GetClientAbsOrigin(victim,fVictimPos);
+							if(GetVectorDistance(fOrigin,fVictimPos, true) <= 1000000.0)
 							{
-								float fOrigin[3], fVictimPos[3];
-								GetClientAbsOrigin(i, fOrigin)
-								GetClientAbsOrigin(victim,fVictimPos);
-								if(GetVectorDistance(fOrigin,fVictimPos, true) <= 1000000.0)
+								int iEntity = CreateEntityByName("tf_projectile_lightningorb");
+								if (IsValidEdict(iEntity)) 
 								{
-									int iEntity = CreateEntityByName("tf_projectile_lightningorb");
-									if (IsValidEdict(iEntity)) 
-									{
-										int iTeam = GetClientTeam(victim)
-										float fAngles[3]
-										SetEntPropEnt(iEntity, Prop_Send, "m_hOwnerEntity", victim);
+									int iTeam = GetClientTeam(victim)
+									float fAngles[3]
+									SetEntPropEnt(iEntity, Prop_Send, "m_hOwnerEntity", victim);
 
-										SetEntProp(iEntity, Prop_Send, "m_iTeamNum", iTeam, 1);
-										SetEntProp(iEntity, Prop_Send, "m_nSkin", (iTeam-2));
-										SetEntPropEnt(iEntity, Prop_Data, "m_hOwnerEntity", victim);
-										SetEntPropEnt(iEntity, Prop_Send, "m_hLauncher", victim);
+									SetEntProp(iEntity, Prop_Send, "m_iTeamNum", iTeam, 1);
+									SetEntProp(iEntity, Prop_Send, "m_nSkin", (iTeam-2));
+									SetEntPropEnt(iEntity, Prop_Data, "m_hOwnerEntity", victim);
+									SetEntPropEnt(iEntity, Prop_Send, "m_hLauncher", victim);
 
-										fOrigin[2] += 40.0
-										GetClientEyeAngles(victim,fAngles);
+									fOrigin[2] += 40.0
+									GetClientEyeAngles(victim,fAngles);
 
-										TeleportEntity(iEntity, fOrigin, fAngles, NULL_VECTOR);
-										DispatchSpawn(iEntity);
-										break;
-									}
+									TeleportEntity(iEntity, fOrigin, fAngles, NULL_VECTOR);
+									DispatchSpawn(iEntity);
+									break;
 								}
 							}
 						}
-						bossPhase[victim]++;
 					}
+					bossPhase[victim]++;
 				}
 			}
 		}

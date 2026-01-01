@@ -562,7 +562,7 @@ public Action:Timer_Every100MS(Handle timer)
 				if(IsValidClient3(tagTeamTarget[client]) && !IsOnDifferentTeams(client, tagTeamTarget[client]) && IsPlayerAlive(client)){
 					Buff tagteamBuff;
 					tagteamBuff.init("Tag-Team Linked", "", Buff_TagTeam, 1, client, 1.0);
-					tagteamBuff.additiveDamageMult = 0.4;
+					tagteamBuff.additiveDamageMult = 0.2;
 
 					insertBuff(client, tagteamBuff);
 					insertBuff(tagTeamTarget[client], tagteamBuff);
@@ -906,302 +906,298 @@ public Action:Timer_EveryTenSeconds(Handle timer)
 	{
 		if (IsValidClient3(client) && IsPlayerAlive(client))
 		{
-			Address bossType = TF2Attrib_GetByName(client, "damage force increase text");
-			if(bossType != Address_Null && TF2Attrib_GetValue(bossType) > 0.0)
+			float bossValue = TF2Attrib_HookValueFloat(0.0, "player_boss_type", client);
+			switch(bossValue)
 			{
-				float bossValue = TF2Attrib_GetValue(bossType);
-				switch(bossValue)
+				case 3.0:
 				{
-					case 3.0:
+					CreateParticleEx(client, "critgun_weaponmodel_red", 1, _, _, 10.0);
+					SetEntityRenderColor(client, 190,0,0,255);
+					int counter = 0;
+					bool clientList[MAXPLAYERS+1];
+					for(int i = 1; i<=MaxClients; ++i)
 					{
-						CreateParticleEx(client, "critgun_weaponmodel_red", 1, _, _, 10.0);
-						SetEntityRenderColor(client, 190,0,0,255);
-						int counter = 0;
-						bool clientList[MAXPLAYERS+1];
-						for(int i = 1; i<=MaxClients; ++i)
+						if (IsValidClient3(i) && IsPlayerAlive(i))
 						{
-							if (IsValidClient3(i) && IsPlayerAlive(i))
+							if(GetClientTeam(client) == GetClientTeam(i))
 							{
-								if(GetClientTeam(client) == GetClientTeam(i))
+								if(GetEntProp(i, Prop_Send, "m_bUseBossHealthBar") == 0 && !TF2_IsPlayerInCondition(i, TFCond_KingAura))
 								{
-									if(GetEntProp(i, Prop_Send, "m_bUseBossHealthBar") == 0 && !TF2_IsPlayerInCondition(i, TFCond_KingAura))
+									float clientpos[3], targetpos[3];
+									GetClientAbsOrigin(client, clientpos);
+									GetClientAbsOrigin(i, targetpos);
+									if(GetVectorDistance(clientpos, targetpos, true) <= 810000.0)
 									{
-										float clientpos[3], targetpos[3];
-										GetClientAbsOrigin(client, clientpos);
-										GetClientAbsOrigin(i, targetpos);
-										if(GetVectorDistance(clientpos, targetpos, true) <= 810000.0)
+										counter++;
+										clientList[i] = true;
+										if(counter == 5)
 										{
-											counter++;
-											clientList[i] = true;
-											if(counter == 5)
-											{
-												break;
-											}
+											break;
 										}
 									}
 								}
 							}
 						}
-						if(counter > 2)
-						{
-							TF2_AddCondition(client, TFCond_MVMBotRadiowave, 2.0);
-							
-							for(int buffed = 1; buffed<=MaxClients;buffed++)
-							{
-								if(clientList[buffed])
-								{
-									TF2_AddCondition(buffed, TFCond_MVMBotRadiowave, 1.0);
-									TF2_AddCondition(buffed, TFCond_KingAura, 1000.0);
-									TF2Attrib_SetByName(buffed, "damage bonus HIDDEN", 2.5);
-									TF2Attrib_SetByName(buffed, "crit mod disabled hidden", 0.5);
-									SetEntityRenderColor(buffed, 190,0,0,255);
-								}
-							}
-						}
 					}
-					case 5.0:
+					if(counter > 2)
 					{
-						int spellCasted = GetRandomInt(0,3);
-						if(spellCasted == 0)
+						TF2_AddCondition(client, TFCond_MVMBotRadiowave, 2.0);
+						
+						for(int buffed = 1; buffed<=MaxClients;buffed++)
 						{
-							int CWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
-							if(IsValidEdict(CWeapon))
+							if(clientList[buffed])
 							{
-								float ClientPos[3];
-								float flamePos[3];
-								GetClientAbsOrigin(client,ClientPos);
-								float sphereRadius = 700.0;
-								float tempdiameter;
-								for(int i=-9;i<=8;++i){
-									float rad=float(i*10)/360.0*(3.14159265*2);
-									tempdiameter=sphereRadius*Cosine(rad)*2;
-									float heightoffset=sphereRadius*Sine(rad);
-
-									float origin[3];
-									origin[0]=ClientPos[0];
-									origin[1]=ClientPos[1];
-									origin[2]=ClientPos[2]+heightoffset;
-									TE_SetupBeamRingPoint(origin, 0.0, tempdiameter, Laser, spriteIndex, 0, 0, 1.0, 2.0, 0.0, {255,200,0,122}, 1500, 0);
-									TE_SendToAll();
-								}
-								
-								//scripting god
-								flamePos = ClientPos;
-								flamePos[2] += 400.0;
-
-								//ohhhhh myyyyy god!!!!!!
-								CreateParticle(-1, "cinefx_goldrush_flames", _, _, _, flamePos);
-								//
-								flamePos[0] += 400.0;
-								CreateParticle(-1, "cinefx_goldrush_flames", _, _, _, flamePos);
-								//
-								flamePos[1] += 400.0;
-								CreateParticle(-1, "cinefx_goldrush_flames", _, _, _, flamePos);
-								//
-								flamePos[1] -= 800.0;
-								CreateParticle(-1, "cinefx_goldrush_flames", _, _, _, flamePos);
-								//
-								flamePos[0] -= 400.0;
-								CreateParticle(-1, "cinefx_goldrush_flames", _, _, _, flamePos);
-								//
-								flamePos[1] += 800.0;
-								CreateParticle(-1, "cinefx_goldrush_flames", _, _, _, flamePos);
-								//
-								flamePos[0] -= 400.0;
-								CreateParticle(-1, "cinefx_goldrush_flames", _, _, _, flamePos);
-								//
-								flamePos[1] -= 400.0;
-								CreateParticle(-1, "cinefx_goldrush_flames", _, _, _, flamePos);
-								//
-								flamePos[1] -= 400.0;
-								CreateParticle(-1, "cinefx_goldrush_flames", _, _, _, flamePos);
-								
-								
-								float DMGDealt = 7.5 * TF2_GetDPSModifiers(client,CWeapon);
-								int i = -1;
-								while ((i = FindEntityByClassname(i, "*")) != -1)
-								{
-									if(IsValidForDamage(i))
-									{
-										if(IsOnDifferentTeams(client,i))
-										{
-											float VictimPos[3];
-											GetEntPropVector(i, Prop_Data, "m_vecOrigin", VictimPos);
-											if(GetVectorDistance(ClientPos,VictimPos,true) <= 640000.0)
-											{
-												CreateParticle(i, "dragons_fury_effect_parent", true, _, 2.0);
-												CreateParticle(i, "utaunt_glowyplayer_orange_glow", true, _, 2.0);
-												DOTStock(i,client,DMGDealt,-1,DMG_BURN,20,1.0,0.12,true);
-											}
-										}
-									}
-								}
-							}
-						}
-						else if(spellCasted == 2)
-						{
-							BleedBuildup[client] = 0.0;
-							RadiationBuildup[client] = 0.0;
-							miniCritStatusAttacker[client] = GetGameTime()+10.0
-							TF2_AddCondition(client, TFCond_DodgeChance, 2.5);
-							TF2_AddCondition(client, TFCond_AfterburnImmune, 2.5);
-							TF2_AddCondition(client, TFCond_UberchargedHidden, 0.01);
-							EmitSoundToAll(SOUND_ADRENALINE, client, -1, 150, 0, 1.0);
-							CreateParticleEx(client, "utaunt_tarotcard_red_wind", 1, _, _, 10.0);
-						}
-						else if(spellCasted == 3 || spellCasted == 1)
-						{
-							int iTeam = GetClientTeam(client);
-							for(int i=0;i<3;++i)
-							{
-								int iEntity = CreateEntityByName("tf_projectile_flare");
-								if (IsValidEdict(iEntity)) 
-								{
-									float fAngles[3]
-									float fOrigin[3]
-									float vBuffer[3]
-									float vRight[3]
-									float fVelocity[3]
-									float fwd[3]
-									SetEntityRenderColor(iEntity, 255, 255, 255, 0);
-									SetEntPropEnt(iEntity, Prop_Send, "m_hOwnerEntity", client);
-
-									SetEntProp(iEntity, Prop_Send, "m_iTeamNum", iTeam, 1);
-									SetEntProp(iEntity, Prop_Send, "m_nSkin", (iTeam-2));
-									SetEntPropEnt(iEntity, Prop_Data, "m_hOwnerEntity", client);
-									SetEntPropEnt(iEntity, Prop_Send, "m_hLauncher", client);
-									SetEntProp(iEntity, Prop_Send, "m_usSolidFlags", 0x0008 + 0x0004);
-									SetEntProp(iEntity, Prop_Data, "m_nSolidType", 6);
-									SetEntProp(iEntity, Prop_Send, "m_CollisionGroup", 2);
-												
-									GetClientEyePosition(client, fOrigin);
-									GetClientEyeAngles(client,fAngles);
-									
-									GetAngleVectors(fAngles, vBuffer, vRight, NULL_VECTOR);
-									GetAngleVectors(fAngles,fwd, NULL_VECTOR, NULL_VECTOR);
-									ScaleVector(fwd, 60.0);
-									ScaleVector(vRight, 30.0*(i-1))
-									AddVectors(fOrigin, vRight, fOrigin);
-									AddVectors(fOrigin, fwd, fOrigin);
-									
-									float Speed = 1200.0;
-									fVelocity[0] = vBuffer[0]*Speed;
-									fVelocity[1] = vBuffer[1]*Speed;
-									fVelocity[2] = vBuffer[2]*Speed;
-									SetEntPropVector(iEntity, Prop_Send, "m_vInitialVelocity", fVelocity );
-									TeleportEntity(iEntity, fOrigin, fAngles, fVelocity);
-									DispatchSpawn(iEntity);
-									SetEntityGravity(iEntity,0.01);
-									
-									SDKHook(iEntity, SDKHook_Touch, OnCollisionPhotoViscerator);
-									homingRadius[iEntity] = 400.0;
-									CreateParticle(iEntity, "utaunt_auroraglow_green_parent", true, _, 5.0);
-									CreateTimer(5.0, SelfDestruct, EntIndexToEntRef(iEntity));
-								}
+								TF2_AddCondition(buffed, TFCond_MVMBotRadiowave, 1.0);
+								TF2_AddCondition(buffed, TFCond_KingAura, 1000.0);
+								TF2Attrib_SetByName(buffed, "damage bonus HIDDEN", 2.5);
+								TF2Attrib_SetByName(buffed, "crit mod disabled hidden", 0.5);
+								SetEntityRenderColor(buffed, 190,0,0,255);
 							}
 						}
 					}
-					case 6.0:
-					{
-						TF2Attrib_SetByName(client, "Attack not cancel charge", 1.0);
-						TF2Attrib_SetByName(client, "full charge turn control", 100.0);
-						TF2Attrib_SetByName(client, "charge time increased", 10000000.0);
-						TF2Attrib_SetByName(client, "charge recharge rate increased", 100.0);
-						TF2_AddCondition(client, TFCond_Charging, 15.0);
-						int iEntity = CreateEntityByName("eyeball_boss");
-						int iTeam = GetClientTeam(client);
-						if (IsValidEdict(iEntity)) 
-						{
-							float fOrigin[3]
-							SetEntPropEnt(iEntity, Prop_Send, "m_hOwnerEntity", client);
-
-							SetEntProp(iEntity, Prop_Send, "m_iTeamNum", iTeam, 1);
-							SetEntProp(iEntity, Prop_Send, "m_nSkin", (iTeam-2));
-							SetEntProp(iEntity, Prop_Send, "m_CollisionGroup", 1);
-										
-							GetClientEyePosition(client, fOrigin);
-							TeleportEntity(iEntity, fOrigin, NULL_VECTOR, NULL_VECTOR);
-							DispatchSpawn(iEntity);
-							
-							CreateTimer(9.0, SelfDestruct, EntIndexToEntRef(iEntity));
-							jarateWeapon[iEntity] = EntIndexToEntRef(client);
-						}
-					}
-					case 7.0:
+				}
+				case 5.0:
+				{
+					int spellCasted = GetRandomInt(0,3);
+					if(spellCasted == 0)
 					{
 						int CWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
 						if(IsValidEdict(CWeapon))
 						{
-							CreateParticleEx(CWeapon, "utaunt_auroraglow_orange_parent", 1, _, _, 10.0);
-								
-							float clientpos[3];
-							GetClientAbsOrigin(client,clientpos);
-							clientpos[0] += GetRandomFloat(-200.0,200.0);
-							clientpos[1] += GetRandomFloat(-200.0,200.0);
-							clientpos[2] = getLowestPosition(clientpos);
-							// define where the lightning strike starts
-							float startpos[3];
-							startpos[0] = clientpos[0];
-							startpos[1] = clientpos[1];
-							startpos[2] = clientpos[2] + 1600;
+							float ClientPos[3];
+							float flamePos[3];
+							GetClientAbsOrigin(client,ClientPos);
+							float sphereRadius = 700.0;
+							float tempdiameter;
+							for(int i=-9;i<=8;++i){
+								float rad=float(i*10)/360.0*(3.14159265*2);
+								tempdiameter=sphereRadius*Cosine(rad)*2;
+								float heightoffset=sphereRadius*Sine(rad);
+
+								float origin[3];
+								origin[0]=ClientPos[0];
+								origin[1]=ClientPos[1];
+								origin[2]=ClientPos[2]+heightoffset;
+								TE_SetupBeamRingPoint(origin, 0.0, tempdiameter, Laser, spriteIndex, 0, 0, 1.0, 2.0, 0.0, {255,200,0,122}, 1500, 0);
+								TE_SendToAll();
+							}
 							
-							int color[4];
-							color = {255,228,0,255};
+							//scripting god
+							flamePos = ClientPos;
+							flamePos[2] += 400.0;
+
+							//ohhhhh myyyyy god!!!!!!
+							CreateParticle(-1, "cinefx_goldrush_flames", _, _, _, flamePos);
+							//
+							flamePos[0] += 400.0;
+							CreateParticle(-1, "cinefx_goldrush_flames", _, _, _, flamePos);
+							//
+							flamePos[1] += 400.0;
+							CreateParticle(-1, "cinefx_goldrush_flames", _, _, _, flamePos);
+							//
+							flamePos[1] -= 800.0;
+							CreateParticle(-1, "cinefx_goldrush_flames", _, _, _, flamePos);
+							//
+							flamePos[0] -= 400.0;
+							CreateParticle(-1, "cinefx_goldrush_flames", _, _, _, flamePos);
+							//
+							flamePos[1] += 800.0;
+							CreateParticle(-1, "cinefx_goldrush_flames", _, _, _, flamePos);
+							//
+							flamePos[0] -= 400.0;
+							CreateParticle(-1, "cinefx_goldrush_flames", _, _, _, flamePos);
+							//
+							flamePos[1] -= 400.0;
+							CreateParticle(-1, "cinefx_goldrush_flames", _, _, _, flamePos);
+							//
+							flamePos[1] -= 400.0;
+							CreateParticle(-1, "cinefx_goldrush_flames", _, _, _, flamePos);
 							
-							// define the direction of the sparks
-							float dir[3] = {0.0, 0.0, 0.0};
 							
-							TE_SetupBeamPoints(startpos, clientpos, g_LightningSprite, 0, 0, 0, 0.2, 20.0, 10.0, 0, 1.0, color, 3);
-							TE_SendToAll();
-							
-							TE_SetupSparks(clientpos, dir, 5000, 1000);
-							TE_SendToAll();
-							
-							TE_SetupEnergySplash(clientpos, dir, false);
-							TE_SendToAll();
-							
-							TE_SetupSmoke(clientpos, g_SmokeSprite, 5.0, 10);
-							TE_SendToAll();
-							
-							TE_SetupBeamRingPoint(clientpos, 20.0, 650.0, g_LightningSprite, spriteIndex, 0, 5, 0.5, 10.0, 1.0, color, 200, 0);
-							TE_SendToAll();
-							
-							EmitAmbientSound("ambient/explosions/explode_9.wav", startpos, client, 50);
-							
-							float LightningDamage = 150.0*TF2_GetDPSModifiers(client,CWeapon);
-						
+							float DMGDealt = 7.5 * TF2_GetDPSModifiers(client,CWeapon);
 							int i = -1;
 							while ((i = FindEntityByClassname(i, "*")) != -1)
 							{
-								if(IsValidForDamage(i) && IsOnDifferentTeams(client,i))
+								if(IsValidForDamage(i))
 								{
-									float VictimPos[3];
-									GetEntPropVector(i, Prop_Data, "m_vecOrigin", VictimPos);
-									VictimPos[2] += 30.0;
-									if(GetVectorDistance(clientpos,VictimPos,true) <= 250000.0)
+									if(IsOnDifferentTeams(client,i))
 									{
-										if(IsPointVisible(clientpos,VictimPos))
+										float VictimPos[3];
+										GetEntPropVector(i, Prop_Data, "m_vecOrigin", VictimPos);
+										if(GetVectorDistance(ClientPos,VictimPos,true) <= 640000.0)
 										{
-											SDKHooks_TakeDamage(i,client,client, LightningDamage, DMG_IGNOREHOOK, _,_,_,false);
-											if(IsValidClient3(i))
-											{
-												float velocity[3];
-												velocity[0]=0.0;
-												velocity[1]=0.0;
-												velocity[2]=1800.0;
-												TeleportEntity(i, NULL_VECTOR, NULL_VECTOR, velocity);
-												Handle hPack = CreateDataPack();
-												WritePackCell(hPack, EntIndexToEntRef(i));
-												WritePackCell(hPack, EntIndexToEntRef(client));
-												CreateTimer(0.5,thunderClapPart2,hPack);
-											}
+											CreateParticle(i, "dragons_fury_effect_parent", true, _, 2.0);
+											CreateParticle(i, "utaunt_glowyplayer_orange_glow", true, _, 2.0);
+											DOTStock(i,client,DMGDealt,-1,DMG_BURN,20,1.0,0.12,true);
 										}
 									}
 								}
 							}
 						}
-						CreateParticleEx(client, "utaunt_arcane_yellow_parent", 1, _, _, 10.0);
 					}
+					else if(spellCasted == 2)
+					{
+						BleedBuildup[client] = 0.0;
+						RadiationBuildup[client] = 0.0;
+						miniCritStatusAttacker[client] = GetGameTime()+10.0
+						TF2_AddCondition(client, TFCond_DodgeChance, 2.5);
+						TF2_AddCondition(client, TFCond_AfterburnImmune, 2.5);
+						TF2_AddCondition(client, TFCond_UberchargedHidden, 0.01);
+						EmitSoundToAll(SOUND_ADRENALINE, client, -1, 150, 0, 1.0);
+						CreateParticleEx(client, "utaunt_tarotcard_red_wind", 1, _, _, 10.0);
+					}
+					else if(spellCasted == 3 || spellCasted == 1)
+					{
+						int iTeam = GetClientTeam(client);
+						for(int i=0;i<3;++i)
+						{
+							int iEntity = CreateEntityByName("tf_projectile_flare");
+							if (IsValidEdict(iEntity)) 
+							{
+								float fAngles[3]
+								float fOrigin[3]
+								float vBuffer[3]
+								float vRight[3]
+								float fVelocity[3]
+								float fwd[3]
+								SetEntityRenderColor(iEntity, 255, 255, 255, 0);
+								SetEntPropEnt(iEntity, Prop_Send, "m_hOwnerEntity", client);
+
+								SetEntProp(iEntity, Prop_Send, "m_iTeamNum", iTeam, 1);
+								SetEntProp(iEntity, Prop_Send, "m_nSkin", (iTeam-2));
+								SetEntPropEnt(iEntity, Prop_Data, "m_hOwnerEntity", client);
+								SetEntPropEnt(iEntity, Prop_Send, "m_hLauncher", client);
+								SetEntProp(iEntity, Prop_Send, "m_usSolidFlags", 0x0008 + 0x0004);
+								SetEntProp(iEntity, Prop_Data, "m_nSolidType", 6);
+								SetEntProp(iEntity, Prop_Send, "m_CollisionGroup", 2);
+											
+								GetClientEyePosition(client, fOrigin);
+								GetClientEyeAngles(client,fAngles);
+								
+								GetAngleVectors(fAngles, vBuffer, vRight, NULL_VECTOR);
+								GetAngleVectors(fAngles,fwd, NULL_VECTOR, NULL_VECTOR);
+								ScaleVector(fwd, 60.0);
+								ScaleVector(vRight, 30.0*(i-1))
+								AddVectors(fOrigin, vRight, fOrigin);
+								AddVectors(fOrigin, fwd, fOrigin);
+								
+								float Speed = 1200.0;
+								fVelocity[0] = vBuffer[0]*Speed;
+								fVelocity[1] = vBuffer[1]*Speed;
+								fVelocity[2] = vBuffer[2]*Speed;
+								SetEntPropVector(iEntity, Prop_Send, "m_vInitialVelocity", fVelocity );
+								TeleportEntity(iEntity, fOrigin, fAngles, fVelocity);
+								DispatchSpawn(iEntity);
+								SetEntityGravity(iEntity,0.01);
+								
+								SDKHook(iEntity, SDKHook_Touch, OnCollisionPhotoViscerator);
+								homingRadius[iEntity] = 400.0;
+								CreateParticle(iEntity, "utaunt_auroraglow_green_parent", true, _, 5.0);
+								CreateTimer(5.0, SelfDestruct, EntIndexToEntRef(iEntity));
+							}
+						}
+					}
+				}
+				case 6.0:
+				{
+					TF2Attrib_SetByName(client, "Attack not cancel charge", 1.0);
+					TF2Attrib_SetByName(client, "full charge turn control", 100.0);
+					TF2Attrib_SetByName(client, "charge time increased", 10000000.0);
+					TF2Attrib_SetByName(client, "charge recharge rate increased", 100.0);
+					TF2_AddCondition(client, TFCond_Charging, 15.0);
+					int iEntity = CreateEntityByName("eyeball_boss");
+					int iTeam = GetClientTeam(client);
+					if (IsValidEdict(iEntity)) 
+					{
+						float fOrigin[3]
+						SetEntPropEnt(iEntity, Prop_Send, "m_hOwnerEntity", client);
+
+						SetEntProp(iEntity, Prop_Send, "m_iTeamNum", iTeam, 1);
+						SetEntProp(iEntity, Prop_Send, "m_nSkin", (iTeam-2));
+						SetEntProp(iEntity, Prop_Send, "m_CollisionGroup", 1);
+									
+						GetClientEyePosition(client, fOrigin);
+						TeleportEntity(iEntity, fOrigin, NULL_VECTOR, NULL_VECTOR);
+						DispatchSpawn(iEntity);
+						
+						CreateTimer(9.0, SelfDestruct, EntIndexToEntRef(iEntity));
+						jarateWeapon[iEntity] = EntIndexToEntRef(client);
+					}
+				}
+				case 7.0:
+				{
+					int CWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
+					if(IsValidEdict(CWeapon))
+					{
+						CreateParticleEx(CWeapon, "utaunt_auroraglow_orange_parent", 1, _, _, 10.0);
+							
+						float clientpos[3];
+						GetClientAbsOrigin(client,clientpos);
+						clientpos[0] += GetRandomFloat(-200.0,200.0);
+						clientpos[1] += GetRandomFloat(-200.0,200.0);
+						clientpos[2] = getLowestPosition(clientpos);
+						// define where the lightning strike starts
+						float startpos[3];
+						startpos[0] = clientpos[0];
+						startpos[1] = clientpos[1];
+						startpos[2] = clientpos[2] + 1600;
+						
+						int color[4];
+						color = {255,228,0,255};
+						
+						// define the direction of the sparks
+						float dir[3] = {0.0, 0.0, 0.0};
+						
+						TE_SetupBeamPoints(startpos, clientpos, g_LightningSprite, 0, 0, 0, 0.2, 20.0, 10.0, 0, 1.0, color, 3);
+						TE_SendToAll();
+						
+						TE_SetupSparks(clientpos, dir, 5000, 1000);
+						TE_SendToAll();
+						
+						TE_SetupEnergySplash(clientpos, dir, false);
+						TE_SendToAll();
+						
+						TE_SetupSmoke(clientpos, g_SmokeSprite, 5.0, 10);
+						TE_SendToAll();
+						
+						TE_SetupBeamRingPoint(clientpos, 20.0, 650.0, g_LightningSprite, spriteIndex, 0, 5, 0.5, 10.0, 1.0, color, 200, 0);
+						TE_SendToAll();
+						
+						EmitAmbientSound("ambient/explosions/explode_9.wav", startpos, client, 50);
+						
+						float LightningDamage = 150.0*TF2_GetDPSModifiers(client,CWeapon);
+					
+						int i = -1;
+						while ((i = FindEntityByClassname(i, "*")) != -1)
+						{
+							if(IsValidForDamage(i) && IsOnDifferentTeams(client,i))
+							{
+								float VictimPos[3];
+								GetEntPropVector(i, Prop_Data, "m_vecOrigin", VictimPos);
+								VictimPos[2] += 30.0;
+								if(GetVectorDistance(clientpos,VictimPos,true) <= 250000.0)
+								{
+									if(IsPointVisible(clientpos,VictimPos))
+									{
+										SDKHooks_TakeDamage(i,client,client, LightningDamage, DMG_IGNOREHOOK, _,_,_,false);
+										if(IsValidClient3(i))
+										{
+											float velocity[3];
+											velocity[0]=0.0;
+											velocity[1]=0.0;
+											velocity[2]=1800.0;
+											TeleportEntity(i, NULL_VECTOR, NULL_VECTOR, velocity);
+											Handle hPack = CreateDataPack();
+											WritePackCell(hPack, EntIndexToEntRef(i));
+											WritePackCell(hPack, EntIndexToEntRef(client));
+											CreateTimer(0.5,thunderClapPart2,hPack);
+										}
+									}
+								}
+							}
+						}
+					}
+					CreateParticleEx(client, "utaunt_arcane_yellow_parent", 1, _, _, 10.0);
 				}
 			}
 		}
