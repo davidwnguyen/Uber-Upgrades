@@ -1974,7 +1974,7 @@
 			"name"		"deploy time decreased"
 			"ref"		"deploy time decreased"
 			"display"		"%.0f%%"
-			"cost"		"350"
+			"cost"		"150"
 			"increase_ratio"	"0.1"
 			"value"		"-0.1"
 			"init"		"1.00"
