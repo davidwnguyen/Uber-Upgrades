@@ -379,7 +379,6 @@
 			"restriction"					"1"
 			"buff damage taken"				"3.0"
 			"buff fire rate"				"3.5"
-			"enraged meter filled when eaten"	"15"
 			"convert health to damage reduction"	"0.25"
 		}
 		"Lightning Affinity"

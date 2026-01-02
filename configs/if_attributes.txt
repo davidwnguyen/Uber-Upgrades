@@ -5041,8 +5041,8 @@
 			"value"		"0.01"
 			"init"		"0.0"
 			"description"	"[{VALUE}*100]% of dealt damage is given as health to you.\nLifesteal on bots is 0.3x effective."
-			"staged_max"		"0.3,0.6,0.9"
-			"max"		"0.1"
+			"staged_max"		"0.5,0.8,0.8"
+			"max"		"0.2"
 		}
 		"1521"
 		{
@@ -6783,17 +6783,6 @@
 			"attr_type"		"value_is_additive"
 			"cost"		"0"
 			"value"		"0.1"
-			"init"		"0.00"
-			"max"		"0.00"
-		}
-		"1673"
-		{
-			"name"		"enraged meter filled when eaten"
-			"ref"		"enraged meter filled when eaten"
-			"attr_class"	"enraged_meter_filled_when_eaten"
-			"display"		"%.0f"
-			"cost"		"0"
-			"value"		"1"
 			"init"		"0.00"
 			"max"		"0.00"
 		}

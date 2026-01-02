@@ -3262,7 +3262,7 @@ GivePowerupDescription(int client, char[] name, int amount){
 		if(amount == 2){
 			CPrintToChat(client, "{community}Berserk Powerup {default}| {lightcyan}Revenge instead becomes passive that drains by -7%%/s. Up to 1.5x healing effectiveness when meter is at 100%%. Effects are scaled to %%.");
 		}else if(amount == 3){
-			CPrintToChat(client, "{community}Enraged Powerup {default}| {lightcyan}Every kill gives +6%% HP heal. Every 10 kills, you can turn enraged, which gives:\n+100%% fire rate, full crits, and 0.4x damage taken.");
+			CPrintToChat(client, "{community}Ruthless Powerup {default}| {lightcyan}While constantly firing, your Berserk meter increases gradually and drains up to -25%%/s max health based on meter.");
 		}else{
 			CPrintToChat(client, "{community}Revenge Powerup {default}| {lightcyan}66%% of damage taken is filled to revenge meter. 0.8x incoming damage. On activation: 1.5x damage dealt, 100%% crits, +33%% fire rate, and 35%% defense buff.");
 		}
@@ -4288,7 +4288,6 @@ cleanSlateClient(int client){
 	RageBuildup[client] = 0.0;
 	fanOfKnivesCount[client] = 0;
 	maelstromChargeCount[client] = 0;
-	enragedKills[client] = 0;
 	TeamTacticsBuildup[client] = 0.0;
 	karmicJusticeScaling[client] = 0.0;
 	pylonCooldown[client] = 0.0;

@@ -428,7 +428,7 @@ public Action:Timer_Every100MS(Handle timer)
 					giveDefenseBuff(client, 1.0);
 				}
 			}
-			else if(TF2Attrib_HookValueFloat(0.0, "revenge_powerup", client) == 2)
+			else if(TF2Attrib_HookValueFloat(0.0, "revenge_powerup", client) == 2 || TF2Attrib_HookValueFloat(0.0, "revenge_powerup", client) == 3)
 			{
 				Format(StatusEffectText, sizeof(StatusEffectText),"Berserk: %.0f%", RageBuildup[client]*100.0);
 				
@@ -444,16 +444,20 @@ public Action:Timer_Every100MS(Handle timer)
 					giveDefenseBuff(client, 1.0);
 				}
 
-				RageBuildup[client] -= 0.007
-				if(RageBuildup[client] < 0)
-					RageBuildup[client] = 0.0;
-			}
-			else if(TF2Attrib_HookValueFloat(0.0, "revenge_powerup", client) == 3)
-			{
-				if(enragedKills[client] < 10)
-					Format(StatusEffectText, sizeof(StatusEffectText),"Enraged: %d kills remaining", 10-enragedKills[client]);
+				if((TF2Attrib_HookValueFloat(0.0, "revenge_powerup", client) == 3 && !(globalButtons[client] & IN_ATTACK))
+					||	TF2Attrib_HookValueFloat(0.0, "revenge_powerup", client) == 2){
+					RageBuildup[client] -= 0.007;
+					if(RageBuildup[client] < 0)
+						RageBuildup[client] = 0.0;
+				}
 				else
-					Format(StatusEffectText, sizeof(StatusEffectText),"Enraged: READY (Crouch + Mouse3)");
+				{
+					if(TF2Attrib_HookValueFloat(0.0, "revenge_powerup", client) == 3 && globalButtons[client] & IN_ATTACK){
+						RageBuildup[client] += 0.007;
+						if(RageBuildup[client] > 1)
+							RageBuildup[client] = 1.0;
+					}
+				}
 			}
 			else if(TF2Attrib_HookValueFloat(0.0, "supernova_powerup", client) == 1)
 			{

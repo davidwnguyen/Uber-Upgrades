@@ -309,7 +309,6 @@ int DarkmoonBladeLevel[MAXPLAYERS+1];
 int InfernalEnchantmentLevel[MAXPLAYERS+1];
 int snowstormParticle[MAXPLAYERS+1];
 int tagTeamTarget[MAXPLAYERS+1];
-int enragedKills[MAXPLAYERS+1];
 int stickiesDetonated[MAXPLAYERS+1];
 int AttunedSpells[MAXPLAYERS+1][Max_Attunement_Slots];
 int recursiveExplosionCount[MAXENTITIES];

@@ -451,10 +451,6 @@ public MRESReturn OnCondApply(Address pPlayerShared, Handle hParams) {
 					if(lunchboxChange.additiveMoveSpeedMult != 0.0 || lunchboxChange.multiplicativeAttackSpeedMult != 1.0 || lunchboxChange.multiplicativeDamageTaken != 1.0){
 						insertBuff(client, lunchboxChange);
 					}
-					float enrageBonus = GetAttribute(CWeapon, "enraged meter filled when eaten");
-					if(enrageBonus){
-						enragedKills[client] += RoundFloat(enrageBonus);
-					}
 				}
 			}
 			case TFCond_Milked:
@@ -1293,7 +1289,6 @@ public Action:Event_PlayerDeath(Handle event, const char[] name, bool:dontBroadc
 
 	isBotScrambled[client] = false;
 	isDeathTick[client] = true;
-	enragedKills[attack]++;
 	
 	CancelClientMenu(client);
 
@@ -1673,14 +1668,8 @@ public Action OnPlayerRunCmd(int client, int& buttons, int& impulse, float vel[3
 						powerupParticle[client] = GetGameTime()+1.1;
 					}
 				}
-				case 2.0: {
+				case 2.0, 3.0: {
 					if(RageBuildup[client] > 0.65){
-						CreateParticleEx(client, "utaunt_poweraura_teamcolor_red", 1, _, _, 1.0);
-						powerupParticle[client] = GetGameTime()+1.1;
-					}
-				}
-				case 3.0: {
-					if(enragedKills[client] >= 10){
 						CreateParticleEx(client, "utaunt_poweraura_teamcolor_red", 1, _, _, 1.0);
 						powerupParticle[client] = GetGameTime()+1.1;
 					}
@@ -2142,19 +2131,6 @@ public Action OnPlayerRunCmd(int client, int& buttons, int& impulse, float vel[3
 						TF2_AddCondition(client, TFCond_UberchargedHidden, 1.0);
 						TF2_AddCondition(client, TFCond_KingAura, 1.0);
 					}
-					if(TF2Attrib_HookValueFloat(0.0, "revenge_powerup", client) == 3 && enragedKills[client] >= 10){
-						EmitSoundToAll(SOUND_REVENGE, client, -1, 150, 0, 1.0);
-						EmitSoundToAll(SOUND_REVENGE, client, -1, 150, 0, 1.0);
-						enragedKills[client] = 0;
-						TF2_AddCondition(client, TFCond_CritCanteen, 16.0);
-						TF2_AddCondition(client, TFCond_SpeedBuffAlly, 16.0);
-						Buff enraged;
-						enraged.init("Enraged", "", Buff_Enraged, 1, client, 16.0);
-						enraged.additiveAttackSpeedMult = 1.0;
-						enraged.multiplicativeDamageTaken = 0.4;
-
-						insertBuff(client, enraged);
-					}
 					if(duplicationCooldown[client] <= GetGameTime()){
 						if(TF2Attrib_HookValueFloat(0.0, "regeneration_powerup", client) == 2.0){
 							duplicationCooldown[client] = GetGameTime()+10.0;
@@ -2359,6 +2335,10 @@ public OnGameFrame()
 					RegenPerTick *= GetPlayerHealingMultiplier(client);
 				}
 				
+				if(TF2Attrib_HookValueFloat(0.0, "revenge_powerup", client) == 3){
+					RegenPerTick -= TF2_GetMaxHealth(client)*TICKINTERVAL*0.25*RageBuildup[client];
+				}
+
 				if(TF2_IsPlayerInCondition(client, TFCond_Plague))
 					RegenPerTick *= 0.0;
 
@@ -2387,7 +2367,11 @@ public OnGameFrame()
 				//drain
 				else if(remainderHealthRegeneration[client] < -1.0){
 					int heal = RoundToFloor(remainderHealthRegeneration[client]);
-					SetEntProp(client, Prop_Data, "m_iHealth", clientHealth+heal);
+					if(clientHealth+heal > 0){
+						SetEntProp(client, Prop_Data, "m_iHealth", clientHealth+heal);
+					}else{
+						ForcePlayerSuicide(client);
+					}
 
 					remainderHealthRegeneration[client] -= heal;
 				}
