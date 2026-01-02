@@ -1330,7 +1330,7 @@ DisplayItemChange(client,itemidx)
 		}
 		case 142:
 		{
-			ChangeString = "The Gunslinger | Throw out instant-built minisentries. Up to 5 sentries placed in total, and upon destroying, deal 70 base DPS.";
+			ChangeString = "The Gunslinger | Throw out instant-built minisentries. Up to 5 sentries placed in total, and upon destroying, deal 70 base DPS. All buildings have 0.5x max health.";
 		}
 		//Medic Primaries
 		case 36:
