@@ -1117,7 +1117,7 @@ DisplayItemChange(client,itemidx)
 		}
 		case 448:
 		{
-			ChangeString = "The Soda Popper | You drain your maximum health down to 100 while held. Slows you down by -20% but increases speed by 80% when held.";
+			ChangeString = "The Soda Popper | While held, converts 25% of health to damage reduction. 0.5x fire rate, but 0.55x damage. Converts fire rate into damage bonus.";
 		}
 		//scout secondaries
 		case 46:
@@ -1799,18 +1799,18 @@ refreshUpgrades(client, slot)
 			if(explosiveBullets!=Address_Null)
 				TF2Attrib_SetFromStringValue(slotItem, "explosion particle", "ExplosionCore_sapperdestroyed");
 
-			Address firerateActive = TF2Attrib_GetByName(slotItem, "disguise speed penalty");
+			float fireRateMod = TF2Attrib_HookValueFloat(1.0, "attack_speed_upgrade", slotItem);
 			float convFireRateToDamage = TF2Attrib_HookValueFloat(0.0, "convert_firerate_to_damage", slotItem);
+			float damageModifier = 1.0;
 			if(convFireRateToDamage != 0.0)
 			{
 				//Sadly yeah, this old fuckass way of dealing it seems to be the best way right now.
 				Address firerateActive2 = TF2Attrib_GetByName(slotItem, "fire rate bonus HIDDEN");
 				Address firerateActive3 = TF2Attrib_GetByName(slotItem, "fire rate penalty HIDDEN");
 				Address firerateActive4 = TF2Attrib_GetByName(slotItem, "mult_item_meter_charge_rate");
-				float damageModifier = 1.0;
-				if(firerateActive != Address_Null)
+				if(fireRateMod != 1.0)
 				{
-					damageModifier *= TF2Attrib_GetValue(firerateActive);
+					damageModifier *= fireRateMod
 					TF2Attrib_RemoveByName(slotItem, "fire rate bonus");
 				}
 				if(firerateActive2 != Address_Null)
@@ -1853,14 +1853,14 @@ refreshUpgrades(client, slot)
 						TF2Attrib_RemoveByName(slotItem, "reload time increased hidden");
 					}
 				}
-				TF2Attrib_SetByName(slotItem,"damage mult 15", damageModifier);
 			}
-			else if(firerateActive != Address_Null)
+			else
 			{
-				TF2Attrib_SetByName(slotItem,"fire rate bonus", 1.0/TF2Attrib_GetValue(firerateActive));
+				TF2Attrib_SetByName(slotItem,"fire rate bonus", 1.0/fireRateMod);
 				if(TF2Util_IsEntityWeapon(slotItem) && TF2Util_GetWeaponSlot(slotItem) == TFWeaponSlot_Melee)
-					TF2Attrib_SetByName(slotItem,"mult smack time", 1.0/TF2Attrib_GetValue(firerateActive));
+					TF2Attrib_SetByName(slotItem,"mult smack time", 1.0/fireRateMod);
 			}
+			TF2Attrib_SetByName(slotItem,"damage mult 16", damageModifier);
 		}
 
 		for(int i = 0;i < NB_SLOTS_UED; i++) {
@@ -3296,7 +3296,7 @@ GivePowerupDescription(int client, char[] name, int amount){
 	}
 	else if(StrEqual("plague powerup", name)){
 		if(amount == 2){
-			CPrintToChat(client, "{community}Decay Powerup {default}| {lightcyan}Deals 100 + 8%% victim's currentHP piercing DPS & inflicts +90/s radiation to nearby enemies. Applies 0.25x healing to victims of decay. 0.75x damage taken.");
+			CPrintToChat(client, "{community}Decay Powerup {default}| {lightcyan}Deals 100 + 8%% victim's currentHP piercing DPS to nearby enemies. Applies 0.25x healing to victims of decay. 0.75x damage taken.");
 		}else if(amount == 3){
 			CPrintToChat(client, "{community}Life Link Powerup {default}| {lightcyan}Hitting an enemy will proc Life Link: Deals 30%% currentHP%% to you, but drains 35%% currentHP%% of enemy over time. At end of duration, your team is healed by damage dealt to yourself.");
 		}else{

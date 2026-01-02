@@ -411,10 +411,11 @@
 		"448" //Soda Popper
 		{
 			"preserve_attributes"	"1"
-			"1"				"fixed_shot_pattern;1.0"
-			"2"				"mult_player_movespeed_active;1.8"
-			"3"				"move speed penalty;0.8"
-			"4"				"mod_maxhealth_drain_rate;25"
+			"1"				"provide on active;1.0"
+			"2"				"Converts Firerate to Damage; 1.0"
+			"3"				"damage mult 13; 0.55"
+			"4"				"weapon fire rate;0.5"
+			"5"				"convert health to damage reduction;0.25"
 		}
 		"349" //Sun on a Stick
 		{

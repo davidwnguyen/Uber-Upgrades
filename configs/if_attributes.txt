@@ -593,8 +593,9 @@
 		}
 		"12"
 		{
-			"name"		"disguise speed penalty"
+			"name"		"attack speed upgrade"
 			"ref"		"fire rate bonus(multshit)"
+			"attr_class"	"attack_speed_upgrade"
 			"display"		"%.0f%%"
 			"cost"		"400"
 			"increase_ratio" 	"0.035"
@@ -606,7 +607,7 @@
 		}
 		"12.1"
 		{
-			"name"		"disguise speed penalty"
+			"name"		"attack speed upgrade"
 			"ref"		"fire rate bonus(old)"
 			"display"		"%.0f%%"
 			"cost"		"400"
@@ -619,7 +620,7 @@
 		}
 		"12.2"
 		{
-			"name"		"disguise speed penalty"
+			"name"		"attack speed upgrade"
 			"ref"		"fire rate bonus(fortified)"
 			"display"		"%.0f%%"
 			"cost"		"400"
@@ -2706,7 +2707,7 @@
 		}
 		"197"
 		{
-			"name"		"disguise speed penalty"
+			"name"		"attack speed upgrade"
 			"ref"		"melee attack rate bonus"
 			"display"		"%.0f%%"
 			"cost"		"300"
@@ -2714,11 +2715,11 @@
 			"value"		"0.334"
 			"init"		"1.00"
 			"optimizer_style"		"1"
-			"max"		"27.0"
+			"max"		"28.0"
 		}
 		"197.5"
 		{
-			"name"		"disguise speed penalty"
+			"name"		"attack speed upgrade"
 			"ref"		"melee attack rate bonus(spy)"
 			"display"		"%.0f%%"
 			"cost"		"300"
@@ -2726,7 +2727,7 @@
 			"value"		"0.334"
 			"init"		"1.00"
 			"optimizer_style"		"1"
-			"max"		"27.0"
+			"max"		"28.0"
 		}
 		"198"
 		{
@@ -2935,7 +2936,7 @@
 		}
 		"215"
 		{
-			"name"		"disguise speed penalty"
+			"name"		"attack speed upgrade"
 			"ref"		"melee attack rate bonus (spy)"
 			"display"		"%.0f%%"
 			"cost"		"300"
@@ -3782,7 +3783,7 @@
 		}
 		"309.5"
 		{
-			"name"		"disguise speed penalty"
+			"name"		"attack speed upgrade"
 			"ref"		"fire rate bonus(shrtcrt)"
 			"display"		"%.0f%%"
 			"cost"		"350"
@@ -7556,6 +7557,17 @@
 		{
 			"name"		"damage mult 15"
 			"ref"		"damage mult 15"
+			"attr_class"	"dmg_outgoing_mult"
+			"display"		"%.0f%%"
+			"cost"		"0"
+			"value"		"0.1"
+			"init"		"0.00"
+			"max"		"0.00"
+		}
+		"1900.2"
+		{
+			"name"		"damage mult 16" //Reserved for Heavy Weapon usage.
+			"ref"		"damage mult 16"
 			"attr_class"	"dmg_outgoing_mult"
 			"display"		"%.0f%%"
 			"cost"		"0"

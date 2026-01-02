@@ -88,7 +88,7 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 					Buff infernalDOT; infernalDOT.init("Infernal Flames", "", Buff_InfernalDOT, 1, attacker, 8.0);
 					insertBuff(victim, infernalDOT);
 				}
-				if(damagetype & DMG_SLASH){
+				if(damagetype & DMG_SLASH && damagecustom == TF_CUSTOM_BLEEDING){
 					if(TF2Attrib_HookValueFloat(0.0, "knockout_powerup", attacker) == 2 && TF2Util_GetWeaponSlot(weapon) == TFWeaponSlot_Melee){
 						damage *= 5;
 					}
