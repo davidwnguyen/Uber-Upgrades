@@ -2891,8 +2891,8 @@ public getProjOrigin(entity)
 			return;
 
 		if(TF2Attrib_HookValueInt(0, "sunburst_projectile", CWeapon)){
-			CreateParticleEx(entity, "raygun_projectile_red_crit", 1);
-			CreateParticleEx(entity, "raygun_projectile_red", 1);
+			CreateParticleEx(entity, "raygun_projectile_red_crit", 6);
+			CreateParticleEx(entity, "raygun_projectile_red", 6);
 		}
 
 		float constantTime = TF2Attrib_HookValueFloat(0.0, "constant_time_projectile", CWeapon);

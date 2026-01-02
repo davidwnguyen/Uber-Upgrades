@@ -1238,6 +1238,13 @@ public Event_mvm_wave_failed(Handle event, const char[] name, bool:dontBroadcast
 		PrintToServer("Mission Loaded");
 		CreateTimer(0.5, MissionLoaded);
 	}
+
+	for(int i = 0;i<MAXENTITIES;i++){
+		if(IsValidEntity(i)){
+			SetVariantString("ParticleEffectStop");
+			AcceptEntityInput(i, "DispatchEffect");
+		}
+	}
 }
 public Event_mvm_wave_begin(Handle event, const char[] name, bool:dontBroadcast)
 {
@@ -1269,6 +1276,13 @@ public Event_mvm_wave_begin(Handle event, const char[] name, bool:dontBroadcast)
 		}
 	}
 	StartMoneySaved = StartMoney + additionalstartmoney;
+
+	for(int i = 0;i<MAXENTITIES;i++){
+		if(IsValidEntity(i)){
+			SetVariantString("ParticleEffectStop");
+			AcceptEntityInput(i, "DispatchEffect");
+		}
+	}
 }
 public Action:Event_PlayerDeath(Handle event, const char[] name, bool:dontBroadcast)
 {
