@@ -2071,7 +2071,7 @@
 		{
 			"0"		"damage bonus"
 			"1"		"ap (global)"
-			"2"		"Increased Overall Damage"
+			"2"		"Shotgun Damage Bonus"
 			"3"		"lifesteal ability"
 		}
 		"Gun specific upgrades"

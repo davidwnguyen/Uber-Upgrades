@@ -1485,6 +1485,7 @@ public Action WaveFailed(Handle timer)
 				float moneyReduction = 0.0;
 				if (IsValidClient(client))
 				{
+					TF2_RemoveAllWeapons(client);
 					for (slot = 0; slot < NB_SLOTS_UED; slot++)
 					{
 						for(i = 0; i < MAX_ATTRIBUTES_ITEM; ++i)
@@ -1508,6 +1509,7 @@ public Action WaveFailed(Handle timer)
 						}
 					}
 					UniqueWeaponRef[client] = UniqueWeaponRef_mvm_checkpoint[client];
+					TF2_RegeneratePlayer(client);
 					CreateTimer(2.0, ChangeClassTimer, GetClientUserId(client));
 					CreateTimer(0.25, MvMFailTimer, GetClientUserId(client));
 				}
