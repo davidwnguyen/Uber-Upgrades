@@ -924,9 +924,6 @@
 	"Reload Time Decrease"{
 		"en"		"Reload Time Decrease"
 	}
-	"Armor Recharge Rate When Eaten"{
-		"en"		"Armor Recharge Rate When Eaten"
-	}
 	"Armor Refilled When Eaten"{
 		"en"		"Armor Refilled When Eaten"
 	}
@@ -1319,12 +1316,6 @@
 	}
 	"Extra Damage Bonus"{
 		"en"		"Weapon Damage Bonus"
-	}
-	"Armor Recharge Rate Multiplier"{
-		"en"		"Armor Recharge Rate Multiplier"
-	}
-	"Armor Recharge Delay Multiplier"{
-		"en"		"Armor Recharge Delay Multiplier"
 	}
 	"Ubercharge gives bonus damage"{
 		"en"		"Ubercharge gives bonus damage"

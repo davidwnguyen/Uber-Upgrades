@@ -546,7 +546,7 @@ public Menu_ShowStatsSlot(client, param2)
 			DelayAmount /= TF2Attrib_GetValue(armorDelay) + 1.0;
 		}
 
-		Format(Description, sizeof(Description), "Body Health = %s\nBody Total Resistance = %s\nArmor Recharge Delay = %.2f\nMovespeed = %sHU/S\nFocus Regeneration = %s/S",
+		Format(Description, sizeof(Description), "Body Health = %s\nBody Total Resistance = %s\nMovespeed = %sHU/S\nFocus Regeneration = %s/S",
 		GetAlphabetForm(float(TF2_GetMaxHealth(client))),
 		GetAlphabetForm(GetResistance(client, true)),
 		DelayAmount,
@@ -702,7 +702,7 @@ public Menu_ShowStatsSlot(client, param2)
 				armorRateMult *= TF2Attrib_GetValue(overhealBonus);
 			}
 			
-			Format(Description, sizeof(Description), "Medigun Base Heal Rate = %s/S\nMedigun Armor Recharge Bonus For Patient = %sx\nMedigun Range = 2k HU",
+			Format(Description, sizeof(Description), "Medigun Base Heal Rate = %s/S\nMedigun Range = 2k HU",
 			GetAlphabetForm(healRateMult*24.0),
 			GetAlphabetForm(armorRateMult)); 
 			AddMenuItem(menu, "secondary_description", Description, ITEMDRAW_DISABLED);
