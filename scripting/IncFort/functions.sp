@@ -484,6 +484,12 @@ public void ManagePlayerBuffs(int i){
 		Format(details, sizeof(details), "%s\n%s - %.1f٪", details, "Team Tactics", teamTacticsBonus*100);
 	}
 
+	float reactiveAirblastRes = 1.0;
+	if(hasBuffIndex(i, Buff_Airblasted)){
+		reactiveAirblastRes -= 0.25*(playerBuffs[i][getBuffInArray(i, Buff_Airblasted)].duration-GetGameTime());
+		PrintToServer("%.2f airblastRes", reactiveAirblastRes);
+	}
+
 	TF2Attrib_SetByName(i, "additive damage bonus", additiveDamageRawBuff);
 	TF2Attrib_SetByName(i, "damage mult 1", additiveDamageMultBuff*multiplicativeDamageBuff);
 	TF2Attrib_SetByName(i, "firerate player buff", 1.0/(additiveAttackSpeedMultBuff*multiplicativeAttackSpeedMultBuff));
@@ -493,6 +499,7 @@ public void ManagePlayerBuffs(int i){
 	TF2Attrib_SetByName(i, "movespeed player buff", additiveMoveSpeedMultBuff*multiplicativeMoveSpeedMult);
 	TF2Attrib_SetByName(i, "damage taken mult 4", additiveDamageTakenBuff*multiplicativeDamageTakenBuff);
 	TF2Attrib_SetByName(i, "armor penetration buff", additiveArmorPenetration);
+	TF2Attrib_SetByName(i, "airblast vulnerability multiplier hidden", reactiveAirblastRes);
 	TF2Attrib_ClearCache(i);
 	int CWeapon = GetEntPropEnt(i, Prop_Send, "m_hActiveWeapon");
 	if(IsValidWeapon(CWeapon)){
@@ -2407,7 +2414,11 @@ checkRadiation(victim,attacker)
 	if(RadiationBuildup[victim] >= RadiationMaximum[victim])
 	{
 		RadiationBuildup[victim] = 0.0;
-		SDKHooks_TakeDamage(victim, attacker, attacker, GetClientHealth(victim)*0.35, DMG_PREVENT_PHYSICS_FORCE|DMG_IGNOREHOOK|DMG_PIERCING);
+		float pctHP = float(GetClientHealth(victim))/float(TF2_GetMaxHealth(victim));
+		if(pctHP > 1)
+			pctHP = 1.0;
+
+		SDKHooks_TakeDamage(victim, attacker, attacker, pctHP*GetClientHealth(victim)*0.35, DMG_PREVENT_PHYSICS_FORCE|DMG_IGNOREHOOK|DMG_PIERCING);
 
 		Buff radiation;
 		radiation.init("Radiation", "", Buff_Radiation, 1, attacker, 8.0);

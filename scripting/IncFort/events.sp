@@ -620,8 +620,8 @@ public MRESReturn OnAirblast(int weapon, Handle hParams){
 		float ConeRadius = 40.0 * GetAttribute(weapon, "melee bounds multiplier");
 
 		Buff airblasted;
-		airblasted.init("Airblasted", "", Buff_Airblasted, 1, owner, 1.25 * GetAttribute(weapon, "melee range multiplier"));
-		airblasted.multiplicativeMoveSpeedMult = 0.667 / GetAttribute(weapon, "airblast vertical pushback scale");
+		airblasted.init("Airblasted", "", Buff_Airblasted, 1, owner, 4.0 * GetAttribute(weapon, "melee range multiplier"));
+		airblasted.multiplicativeMoveSpeedMult = 0.7 / GetAttribute(weapon, "airblast vertical pushback scale");
 		Buff dragonDance;
 		dragonDance.init("Combo Starter", "", Buff_DragonDance, weapon, owner, 2.0);
 		for(int i=1; i<=MaxClients; ++i)
@@ -650,7 +650,7 @@ public MRESReturn OnAirblast(int weapon, Handle hParams){
 							if(TF2_IsPlayerInCondition(i,TFCond_MegaHeal))
 								continue;
 							
-							
+							insertBuff(i, airblasted);
 						}
 						else
 						{
