@@ -106,7 +106,7 @@ public Event_Playerhurt(Handle event, const char[] name, bool:dontBroadcast)
 			}
 			if(GetAttribute(attacker, "vampire powerup", 0.0) == 2.0){
 				Buff leechDebuff;
-				leechDebuff.init("Leeched", "", Buff_Leech, 1, client, 4.0);
+				leechDebuff.init("Leeched", "", Buff_Leech, 1, attacker, 4.0);
 				insertBuff(client, leechDebuff);
 			}
 
