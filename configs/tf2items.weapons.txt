@@ -317,6 +317,7 @@
 			"1"				"override projectile type;8.0"
 			"2"				"weapon fire rate;2.0"
 			"3"				"slow enemy on hit major;1.0"
+			"4"				"maxammo primary increased;3.0"
 		}
 		"811,832" //Huo-long Heater
 		{

@@ -1366,7 +1366,7 @@ DisplayItemChange(client,itemidx)
 		}
 		case 56,1005:
 		{
-			ChangeString = "The Huntsman | Has no drawspeed, Arrows fly straight. Slows enemy by -40% for 1s on hit.";
+			ChangeString = "The Huntsman | Has no drawspeed, Arrows fly straight. Slows enemy by -40% for 1s on hit. Has 36 base ammo.";
 		}
 		case 1092:
 		{

@@ -1134,18 +1134,17 @@
 		{
 			"0"		"damage bonus"
 			"1"		"ap (global)"
-			"2"		"Increased Overall Damage"
+			"2"		"Minigun Damage Bonus"
 			"3"		"lifesteal ability"
 		}
 		"Minigun specific upgrades"
 		{
 			"0"		"fire rate bonus(old)"
-			"1"		"bullets per shot bonus (heavy)"	
-			"2"		"Shoots extra projectile"
-			"3"		"weapon spread bonus(H)"
-			"4"		"projectile penetration heavy"
-			"5"		"minigun spinup time decreased"
-			"6"		"aiming movespeed increased"
+			"1"		"Shoots extra projectile"
+			"2"		"weapon spread bonus(H)"
+			"3"		"projectile penetration heavy"
+			"4"		"minigun spinup time decreased"
+			"5"		"aiming movespeed increased"
 		}
 		"Special Tweaks"
 		{
@@ -1160,15 +1159,14 @@
 		{
 			"0"		"damage bonus"
 			"1"		"ap (global)"
-			"2"		"Accuracy Scales DMG Replacement"
+			"2"		"Minigun Damage Bonus"
 			"3"		"lifesteal ability"
 		}
 		"Minigun specific upgrades"
 		{
 			"0"		"fire rate bonus(old)"
-			"1"		"bullets per shot bonus (heavy)"
-			"2"		"minigun spinup time decreased"
-			"3"		"aiming movespeed increased"
+			"1"		"minigun spinup time decreased"
+			"2"		"aiming movespeed increased"
 		}
 		"Special Tweaks"
 		{
