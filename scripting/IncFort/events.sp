@@ -973,6 +973,7 @@ public OnEntityCreated(entity, const char[] classname)
 			RequestFrame(PrecisionHoming, reference);
 			RequestFrame(meteorCollisionCheck, reference);
 			RequestFrame(FragmentProperties, reference);
+			RequestFrame(projGravity, reference);
 			SDKHook(entity, SDKHook_Touch, FixProjectileCollision);
 		}
 		if(StrEqual(classname, "tf_projectile_stun_ball") || StrEqual(classname, "tf_projectile_ball_ornament") || StrEqual(classname, "tf_projectile_cleaver"))
