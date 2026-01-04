@@ -930,7 +930,7 @@ public Action:Timer_EveryTenSeconds(Handle timer)
 									float clientpos[3], targetpos[3];
 									GetClientAbsOrigin(client, clientpos);
 									GetClientAbsOrigin(i, targetpos);
-									if(GetVectorDistance(clientpos, targetpos, true) <= 810000.0)
+									if(GetVectorDistance(clientpos, targetpos, true) <= 4000000.0)
 									{
 										counter++;
 										clientList[i] = true;
@@ -943,7 +943,7 @@ public Action:Timer_EveryTenSeconds(Handle timer)
 							}
 						}
 					}
-					if(counter > 2)
+					if(counter > 0)
 					{
 						TF2_AddCondition(client, TFCond_MVMBotRadiowave, 2.0);
 						
@@ -953,8 +953,8 @@ public Action:Timer_EveryTenSeconds(Handle timer)
 							{
 								TF2_AddCondition(buffed, TFCond_MVMBotRadiowave, 1.0);
 								TF2_AddCondition(buffed, TFCond_KingAura, 1000.0);
+								TF2_AddCondition(buffed, TFCond_CritCanteen, 1000.0);
 								TF2Attrib_SetByName(buffed, "damage bonus HIDDEN", 2.5);
-								TF2Attrib_SetByName(buffed, "crit mod disabled hidden", 0.5);
 								SetEntityRenderColor(buffed, 190,0,0,255);
 							}
 						}
