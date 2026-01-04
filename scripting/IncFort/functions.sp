@@ -1708,7 +1708,6 @@ refreshUpgrades(client, slot)
 		if(slot == 4)
 		{
 			UpdatePlayerSpellSlots(client);
-			UpdatePlayerMaxHealth(client);
 			
 			TF2Attrib_RemoveByName(client,"ubercharge rate bonus");
 			TF2Attrib_RemoveByName(client,"heal rate bonus");
@@ -1880,6 +1879,7 @@ refreshUpgrades(client, slot)
 		if(IsValidEntity(uniqueWeaponID)) {
 			TF2Attrib_SetByName(uniqueWeaponID, "projectile spread multiplier", TF2Attrib_HookValueFloat(1.0, "mult_spread_scale", uniqueWeaponID));
 		}
+		UpdatePlayerMaxHealth(client);
 	}
 }
 stock int getUpgradeRate(client)
@@ -4099,7 +4099,7 @@ stock float TF2_GetDamageModifiers(client,weapon,bool status=true, bool bullets_
 				dpsMult *= medicDMGBonus;
 				if(TF2_IsPlayerCritBuffed(client))
 				{
-					dpsMult *= 3.0;
+					dpsMult *= 2.0;
 				}
 				else if(TF2_IsPlayerMinicritBuffed(client))
 				{

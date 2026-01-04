@@ -2754,7 +2754,7 @@ public Action TF2_CalcIsAttackCritical(int client, int weapon, char[] weaponname
 
 						SetEntProp(iEntity, Prop_Send, "m_iTeamNum", iTeam, 1);
 						SetEntProp(iEntity, Prop_Send, "m_nSkin", (iTeam-2));
-						
+						SetEntProp(iEntity, Prop_Send, "m_bCritical", result);
 						
 						SetEntPropEnt(iEntity, Prop_Data, "m_hOwnerEntity", client);
 						SetEntPropEnt(iEntity, Prop_Send, "m_hLauncher", client);
@@ -2871,7 +2871,8 @@ public Action TF2_CalcIsAttackCritical(int client, int weapon, char[] weaponname
 							SetEntPropEnt(iEntity, Prop_Send, "m_hOriginalLauncher", client);
 							SetEntProp(iEntity, Prop_Send, "m_usSolidFlags", 0x0008);
 							SetEntProp(iEntity, Prop_Data, "m_nSolidType", 6);
-							SetEntProp(iEntity, Prop_Send, "m_CollisionGroup", 13); 
+							SetEntProp(iEntity, Prop_Send, "m_CollisionGroup", 13);
+							SetEntProp(iEntity, Prop_Send, "m_bCritical", result);
 							SDKHook(iEntity, SDKHook_StartTouch, OnStartTouchWarriorArrow);
 								CreateSpriteTrail(iEntity, "0.33", "5.0", "1.0",
 								iTeam == 2 ? "materials/effects/arrowtrail_red.vmt":"materials/effects/arrowtrail_blu.vmt", "255 255 255");
@@ -2933,6 +2934,7 @@ public Action TF2_CalcIsAttackCritical(int client, int weapon, char[] weaponname
 			
 						SetEntProp(iEntity, Prop_Send, "m_iTeamNum", iTeam);
 						SetEntPropEnt(iEntity, Prop_Send, "m_hLauncher", client);
+						SetEntProp(iEntity, Prop_Send, "m_bCritical", result);
 						GetClientEyePosition(client, fOrigin);
 						GetClientEyeAngles(client, fAngles);
 						GetAngleVectors(fAngles, vBuffer, NULL_VECTOR, NULL_VECTOR);
@@ -2985,6 +2987,7 @@ public Action TF2_CalcIsAttackCritical(int client, int weapon, char[] weaponname
 							float fwd[3]
 							SetEntPropEnt(iEntity, Prop_Send, "m_hOwnerEntity", client);
 							SetEntProp(iEntity, Prop_Send, "m_iTeamNum", iTeam);
+							SetEntProp(iEntity, Prop_Send, "m_bCritical", result);
 							GetClientEyePosition(client, fOrigin);
 
 							GetAngleVectors(fAngles,fwd, NULL_VECTOR, NULL_VECTOR);
@@ -3021,6 +3024,7 @@ public Action TF2_CalcIsAttackCritical(int client, int weapon, char[] weaponname
 			
 						SetEntProp(iEntity, Prop_Send, "m_iTeamNum", iTeam);
 						SetEntPropEnt(iEntity, Prop_Send, "m_hLauncher", client);
+						SetEntProp(iEntity, Prop_Send, "m_bCritical", result);
 						GetClientEyePosition(client, fOrigin);
 						GetClientEyeAngles(client, fAngles);
 						GetAngleVectors(fAngles, vBuffer, NULL_VECTOR, NULL_VECTOR);
@@ -3107,6 +3111,7 @@ public Action TF2_CalcIsAttackCritical(int client, int weapon, char[] weaponname
 
 					SetEntProp(iEntity, Prop_Send, "m_iTeamNum", iTeam);
 					SetEntProp(iEntity, Prop_Send, "m_nSkin", (iTeam-2));
+					SetEntProp(iEntity, Prop_Send, "m_bCritical", result);
 					
 					SetEntPropEnt(iEntity, Prop_Data, "m_hOwnerEntity", client);
 					DispatchSpawn(iEntity);

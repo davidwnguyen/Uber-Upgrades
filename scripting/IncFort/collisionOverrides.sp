@@ -363,13 +363,9 @@ public Action:OnCollisionWarriorArrow(entity, client)
 		int CWeapon = GetEntPropEnt(owner, Prop_Send, "m_hActiveWeapon");
 		if(IsValidEdict(CWeapon))
 		{
-			float damageDealt = 30.0;
-			Address multiHitActive = TF2Attrib_GetByName(CWeapon, "taunt move acceleration time");
-			if(multiHitActive != Address_Null)
-			{
-				damageDealt *= TF2Attrib_GetValue(multiHitActive) + 1.0;
-			}
-			SDKHooks_TakeDamage(client, owner, owner, damageDealt*TF2_GetDamageModifiers(owner, CWeapon, false), DMG_BULLET|DMG_IGNOREHOOK, CWeapon, _,_,false);
+			float damageDealt = 30.0*TF2_GetDamageModifiers(owner, CWeapon, false);
+			int damageType = GetEntProp(entity, Prop_Send, "m_bCritical") ? DMG_BULLET|DMG_IGNOREHOOK|DMG_CRIT : DMG_BULLET|DMG_IGNOREHOOK;
+			SDKHooks_TakeDamage(client, owner, owner, damageDealt, damageType, CWeapon, _,_,false);
 		}
 		RemoveEntity(entity);
 	}
@@ -659,8 +655,9 @@ public Action:OnCollisionPiercingRocket(entity, client)
 				int CWeapon = GetEntPropEnt(owner, Prop_Send, "m_hActiveWeapon");
 				if(IsValidEdict(CWeapon))
 				{
+					int damageType = GetEntProp(entity, Prop_Send, "m_bCritical") ? DMG_BLAST|DMG_CRIT : DMG_BLAST;
 					float damageDealt = 70.0 * TF2_GetDamageModifiers(owner, CWeapon);
-					EntityExplosion(owner, damageDealt, 200.0, origin, 0, true, entity, _, _,_,_,_,_,_,_,true);
+					EntityExplosion(owner, damageDealt, 200.0, origin, 0, true, entity, _, damageType,_,_,_,_,_,_,true);
 				}
 				if(IsValidClient3(client))
 					ShouldNotHome[entity][client] = true;
@@ -1096,7 +1093,8 @@ public Action:OnTouchChaos(entity, other)
 			GetEntPropVector(entity, Prop_Data, "m_vecOrigin", vOrigin);
 			CreateParticleEx(entity, "heavy_ring_of_fire", 0, 0, vOrigin);
 			vOrigin[2]+= 30.0;
-			EntityExplosion(owner, TF2_GetDamageModifiers(owner,CWeapon) * 25.0, 500.0, vOrigin, 0,_,entity,1.0,DMG_GENERIC,CWeapon,0.75);
+			int damageType = GetEntProp(entity, Prop_Send, "m_bCritical") ? DMG_BURN|DMG_CRIT : DMG_BURN;
+			EntityExplosion(owner, TF2_GetDamageModifiers(owner,CWeapon,false) * 25.0, 500.0, vOrigin, 0,_,entity,1.0,damageType,CWeapon,0.75);
 			RemoveEntity(entity);
 		}
 	}

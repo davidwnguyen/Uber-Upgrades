@@ -1376,6 +1376,7 @@ stock int GetClientBaseHP(client){
 
 	HP += RoundToCeil(GetAttribute(client, "max health additive bonus", 0.0));
 	HP += RoundToCeil(GetAttribute(client, "max health additive penalty", 0.0));
+	HP += RoundToCeil(GetAttribute(client, "hidden maxhealth non buffed", 0.0));
 
 	return HP;
 }
