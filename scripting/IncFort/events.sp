@@ -2343,7 +2343,6 @@ public OnGameFrame()
 					TeamTacticsBuildup[client] = 0.0;
 
 				int clientHealth = GetEntProp(client, Prop_Data, "m_iHealth");
-				int clientMaxHealth = TF2_GetMaxHealth(client);
 				stickiesDetonated[client] = 0;
 				isDeathTick[client] = false;
 				hasSupernovaSplashed[client] = false;
@@ -2401,11 +2400,7 @@ public OnGameFrame()
 
 				if(remainderHealthRegeneration[client] > 1.0){
 					int heal = RoundToFloor(remainderHealthRegeneration[client]);
-					if(float(clientHealth) + heal < clientMaxHealth)
-						SetEntProp(client, Prop_Data, "m_iHealth", clientHealth+heal);
-					else if(clientHealth < clientMaxHealth)
-						SetEntProp(client, Prop_Data, "m_iHealth", clientMaxHealth);
-					
+					AddPlayerHealth(client, heal, 1.0);
 					remainderHealthRegeneration[client] -= heal;
 				}
 				//drain

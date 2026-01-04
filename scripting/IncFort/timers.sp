@@ -295,7 +295,7 @@ public Action:Timer_FixedVariables(Handle timer)
 					float range = GetAttribute(CWeapon, "healing aoe radius", 0.0);
 					range *= range;
 					float healRate = 1.5 * TF2Attrib_HookValueFloat(1.0, "mult_medigun_healrate", CWeapon);
-					float overheal = 1.5 * TF2Attrib_HookValueFloat(1.0, "mult_medigun_overheal_amount", CWeapon);
+					float overheal = 0.5 + TF2Attrib_HookValueFloat(1.0, "mult_medigun_overheal_amount", CWeapon);
 					float position[3], patientPosition[3];
 					GetEntPropVector(client, Prop_Data, "m_vecOrigin", position);
 					for(int i = 1; i <= MaxClients;++i){

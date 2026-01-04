@@ -108,8 +108,9 @@ void AddPlayerHealth(client, iAdd, float flOverheal = 1.5, bool bEvent = false, 
 			AddPlayerHealth(leechInfo.inflictor, RoundToCeil(iAdd*0.5));
 		}
 	}
-	flOverheal *= TF2Attrib_HookValueFloat(1.0, "mult_patient_overheal_penalty", client);
-	
+	if(flOverheal > 1)
+		flOverheal += TF2Attrib_HookValueFloat(1.0, "mult_patient_overheal_penalty", client)-1.0;
+		
 	iAdd = RoundToCeil(iAdd * GetPlayerHealingMultiplier(client));
     int iHealth = GetClientHealth(client);
     int iNewHealth = iHealth + iAdd;
