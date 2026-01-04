@@ -2579,6 +2579,7 @@ public bool applyArcaneRestrictions(int client, int attuneSlot, float focusCost,
 
 	if(fl_CurrentFocus[client] < focusCost)
 	{
+		SpellCooldowns[client][AttunedSpells[client][attuneSlot]-1] = GetGameTime()+0.2;
 		PrintHintText(client, "Not enough focus! Requires %.2f focus.",focusCost);
 		EmitSoundToClient(client, SOUND_FAIL);
 		return true;
@@ -2890,6 +2891,7 @@ public getProjOrigin(entity)
 {
 	entity = EntRefToEntIndex(entity);
 	if(IsValidEdict(entity)){
+		SetEntProp(entity, Prop_Send, "m_CollisionGroup", 27);
 		GetEntPropVector(entity, Prop_Data, "m_vecOrigin", entitySpawnPositions[entity]);
 
 		int owner = getOwner(entity);
@@ -4319,7 +4321,7 @@ cleanSlateClient(int client){
 		if(IsValidEntity(particleEffect)){
 			SetVariantString("ParticleEffectStop");
 			AcceptEntityInput(particleEffect, "DispatchEffect");
-			RemoveEdict(particleEffect);
+			RemoveEntity(particleEffect);
 		}
 		snowstormActive[client] = false;
 	}

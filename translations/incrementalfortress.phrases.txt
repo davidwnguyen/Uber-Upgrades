@@ -1,5 +1,8 @@
 "Phrases"
 {
+	"autocast arcanes"{
+		"en"		"Autocast Fast Arcanes while Attacking"
+	}
 	"no primary ammo from dispensers while active"{
 		"en"		"Cannot Gain Ammo from Dispensers"
 	}

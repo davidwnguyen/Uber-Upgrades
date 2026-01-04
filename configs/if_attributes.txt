@@ -22,12 +22,12 @@
 			"ref"		"Focus Regeneration"
 			"attr_class"	"arcane_focus_regeneration"
 			"display"		"%.0f%%"
-			"cost"		"1500"
-			"increase_ratio"	"0.3"
-			"value"		"0.2"
+			"cost"		"350"
+			"increase_ratio"	"0.5"
+			"value"		"0.1"
 			"init"		"1"
 			"description"	"Multiplies focus gained per second."
-			"max"		"3"
+			"max"		"1.5"
 		}
 		"1541"
 		{
@@ -39,7 +39,7 @@
 			"increase_ratio"	"0.6"
 			"value"		"0.15"
 			"init"		"1"
-			"description"	"Multiplies focus capacity.\nMultiplies arcane damage by ^3.\nDecreases cooldowns by ^1/2x.\nDecreases focus costs by x value.\nThis is your main arcane scaler! Please upgrade it."
+			"description"	"Multiplies focus capacity.\nMultiplies arcane damage by ^3.\nDecreases cooldowns by ^1/2x.\nDecreases focus costs by x value."
 			"optimizer_style"	"5"
 			"max"		"5.5"
 		}
@@ -65,10 +65,10 @@
 			"display"		"%.0f%%"
 			"cost"		"3000"
 			"increase_ratio"	"0.4"
-			"value"		"-0.1"
-			"staged_max"		"0.7,0.6,0.5"
+			"value"		"-0.02"
+			"staged_max"		"0.85,0.8,0.8"
 			"init"		"1"
-			"max"		"0.8"
+			"max"		"0.9"
 		}
 		"1541.4"
 		{
@@ -7431,6 +7431,17 @@
 			"value"		"1.0"
 			"init"		"0.0"
 			"max"		"1.0"
+		}
+		"1730"
+		{
+			"name"		"autocast arcanes"
+			"ref"		"autocast arcanes"
+			"attr_class"	"autocast_arcanes"
+			"display"		"%.2fs"
+			"cost"		"1500"
+			"value"		"0.5"
+			"init"		"0.0"
+			"max"		"0.5"
 		}
 		//Filler
 		"1900.0"

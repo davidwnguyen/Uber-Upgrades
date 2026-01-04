@@ -1328,7 +1328,6 @@ CastBlackskyEye(client, attuneSlot)
 		SetEntProp(iEntity, Prop_Send, "m_nSkin", (iTeam-2));
 		SetEntPropEnt(iEntity, Prop_Data, "m_hOwnerEntity", client);
 		SetEntPropEnt(iEntity, Prop_Send, "m_hLauncher", client);
-					
 		GetClientEyePosition(client, fOrigin);
 		GetClientEyeAngles(client,fAngles);
 
@@ -1360,7 +1359,6 @@ CastBlackskyEye(client, attuneSlot)
 		SetEntPropVector(iEntity, Prop_Send, "m_vInitialVelocity", fVelocity );
 		TeleportEntity(iEntity, fOrigin, fAngles, fVelocity);
 		DispatchSpawn(iEntity);
-
 		CreateParticleEx(iEntity, "drg_cow_rockettrail_normal_blue", 1);
 		
 		SDKHook(iEntity, SDKHook_StartTouchPost, BlackskyEyeCollision);
@@ -1459,6 +1457,7 @@ CastZap(client, attuneSlot)
 	float focusCost = 5.0/ArcanePower[client];
 	if(fl_CurrentFocus[client] < focusCost)
 	{
+		SpellCooldowns[client][AttunedSpells[client][attuneSlot]-1] = GetGameTime()+0.2;
 		PrintHintText(client, "Not enough focus! Requires %.2f focus.",focusCost);
 		EmitSoundToClient(client, SOUND_FAIL);
 		return;
@@ -1510,7 +1509,7 @@ CastZap(client, attuneSlot)
 	}
 	else
 	{
-		PrintHintText(client, "Zap found no valid targets!");
+		SpellCooldowns[client][attuneSlot] = GetGameTime()+0.2;
 	}
 }
 DoZap(client,victim,spellLevel)
@@ -1525,10 +1524,6 @@ DoZap(client,victim,spellLevel)
 	GetEntPropVector(victim, Prop_Data, "m_vecOrigin", VictimPosition);
 	VictimPosition[2] += 15.0;
 	
-	float range[] = {0.0,600.0,800.0,1000.0};
-	
-	TE_SetupBeamRingPoint(clientpos, 20.0, range[spellLevel]*1.25, g_LightningSprite, spriteIndex, 0, 5, 0.5, 10.0, 1.0, {255,0,255,133}, 140, 0);
-	TE_SendToAll();
 	TE_SetupBeamPoints(clientpos,VictimPosition,g_LightningSprite,spriteIndex,0,35,0.15,6.0,5.0,0,1.0,{255,000,255,255},20);
 	TE_SendToAll();
 	EmitSoundToAll(SOUND_ZAP, 0, _, SNDLEVEL_CONVO, _, 1.0, _,_,clientpos);

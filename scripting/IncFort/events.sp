@@ -948,7 +948,6 @@ public OnEntityCreated(entity, const char[] classname)
 			RequestFrame(ProjSpeedDelay, reference);
 			RequestFrame(PrecisionHoming, reference);
 			RequestFrame(FragmentProperties, reference);
-			SDKHook(entity, SDKHook_Touch, FixProjectileCollision);
 		}
 		else if(StrEqual(classname, "tf_projectile_arrow") || StrEqual(classname, "tf_projectile_healing_bolt"))
 		{
@@ -960,7 +959,6 @@ public OnEntityCreated(entity, const char[] classname)
 			RequestFrame(FragmentProperties, reference);
 			CreateTimer(6.0, SelfDestruct, reference);
 			CreateTimer(0.1, ArrowThink, reference, TIMER_REPEAT|TIMER_FLAG_NO_MAPCHANGE);
-			SDKHook(entity, SDKHook_Touch, FixProjectileCollision);
 		}
 		if(StrEqual(classname, "tf_projectile_flare"))
 		{
@@ -974,7 +972,6 @@ public OnEntityCreated(entity, const char[] classname)
 			RequestFrame(meteorCollisionCheck, reference);
 			RequestFrame(FragmentProperties, reference);
 			RequestFrame(projGravity, reference);
-			SDKHook(entity, SDKHook_Touch, FixProjectileCollision);
 		}
 		if(StrEqual(classname, "tf_projectile_stun_ball") || StrEqual(classname, "tf_projectile_ball_ornament") || StrEqual(classname, "tf_projectile_cleaver"))
 		{
@@ -1733,6 +1730,39 @@ public Action OnPlayerRunCmd(int client, int& buttons, int& impulse, float vel[3
 				GetEntityClassname(CWeapon, strName, 32)
 				if(StrEqual(strName, "tf_weapon_minigun", false)){
 					SetEntPropFloat(CWeapon, Prop_Send, "m_flNextSecondaryAttack", GetEntPropFloat(CWeapon, Prop_Send, "m_flNextPrimaryAttack"));
+				}
+
+				float autoCastArcanes = TF2Attrib_HookValueFloat(0.0, "autocast_arcanes", client);
+				if(autoCastArcanes > 0.0 && CheckForAttunement(client))
+				{
+					for(int i = 0;i<Max_Attunement_Slots;++i)
+					{
+						if(AttunedSpells[client][i] != 0)
+						{
+							int spellID = RoundToNearest(AttunedSpells[client][i]-1.0)
+							float timeLeft = SpellCooldowns[client][spellID]-GetGameTime();
+							if(timeLeft < 0.0)
+								timeLeft = 0.0;
+
+							if(timeLeft == 0.0){
+								switch(AttunedSpells[client][i])
+								{
+									case 1:
+									{
+										CastZap(client, i);
+									}
+									case 5:
+									{
+										CastBlackskyEye(client, i);
+									}
+									case 6:
+									{
+										CastSunlightSpear(client, i);
+									}
+								}
+							}
+						}
+					}
 				}
 			}
 			if(HasEntProp(CWeapon, Prop_Send, "m_flChargedDamage"))

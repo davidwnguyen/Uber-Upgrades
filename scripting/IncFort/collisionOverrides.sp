@@ -61,24 +61,6 @@ public Action:OnStartTouchStomp(client, other)
 	}
 }
 
-public Action FixProjectileCollision(entity, client)
-{
-	char strName[32];
-	GetEntityClassname(client, strName, 32)
-
-	if(StrContains(strName,"tf_projectile") != -1)
-	{
-		float origin[3];
-		GetEntPropVector(entity, Prop_Data, "m_vecOrigin", origin);
-		origin[0] += GetRandomFloat(-1.0,1.0)
-		origin[1] += GetRandomFloat(-1.0,1.0)
-		TeleportEntity(entity, origin,NULL_VECTOR,NULL_VECTOR);
-		return Plugin_Stop;
-	}
-
-	return Plugin_Continue;
-}
-
 public Action:AddArrowCollisionFunction(entity, client)
 {
 	char strName[32];
@@ -140,29 +122,17 @@ public Action:OnSunlightSpearCollision(entity, client)
 
 				float scaling[] = {0.0, 100.0, 125.0, 160.0};
 				float ProjectileDamage = scaling[spellLevel]*ArcaneDamage[owner];
-				SDKHooks_TakeDamage(client, owner, owner, ProjectileDamage, DMG_SHOCK|DMG_IGNOREHOOK,_,_,_,false);
+				SDKHooks_TakeDamage(client, entity, owner, ProjectileDamage, DMG_SHOCK|DMG_IGNOREHOOK,_,_,_,false);
 				CreateParticleEx(client, "dragons_fury_effect_parent", 1);
 			}
 		}
 	}
 
-	if(StrEqual(strName,"tf_projectile_arrow",false))
-	{
-		float origin[3];
-		GetEntPropVector(entity, Prop_Data, "m_vecOrigin", origin);
-		origin[0] += GetRandomFloat(-4.0,4.0)
-		origin[1] += GetRandomFloat(-4.0,4.0)
-		TeleportEntity(entity, origin,NULL_VECTOR,NULL_VECTOR);
-	}
-	else if(entitySpawnTime[entity] + 0.1 < GetGameTime())
-	{
-		float origin[3];
-		GetEntPropVector(entity, Prop_Data, "m_vecOrigin", origin);
-		CreateParticleEx(entity, "drg_cow_explosioncore_charged", -1, -1, origin);
-		RemoveEdict(entity);
-	}
-
-	SDKUnhook(entity, SDKHook_Touch, OnSunlightSpearCollision);
+	float origin[3];
+	GetEntPropVector(entity, Prop_Data, "m_vecOrigin", origin);
+	PrintToServer("%s collision", strName);	
+	CreateParticleEx(entity, "drg_cow_explosioncore_charged", -1, -1, origin);
+	RemoveEntity(entity);
 	return Plugin_Stop;
 }
 public Action:BlackskyEyeCollision(entity, client)
@@ -927,9 +897,6 @@ public Action:OnTouchExplodeJar(entity, other)
 			SDKHook(iEntity, SDKHook_Touch, OnCollisionExplosiveFrag);
 			jarateWeapon[iEntity] = EntIndexToEntRef(CWeapon);
 			CreateTimer(1.0,SelfDestruct,EntIndexToEntRef(iEntity));
-			SetEntProp(iEntity, Prop_Send, "m_usSolidFlags", 0x0008);
-			SetEntProp(iEntity, Prop_Data, "m_nSolidType", 6);
-			SetEntProp(iEntity, Prop_Send, "m_CollisionGroup", 13);
 		}
 	}
 	switch(mode){
