@@ -1395,7 +1395,7 @@ DisplayItemChange(client,itemidx)
 		//Spy Primaries
 		case 61,1006:
 		{
-			ChangeString = "The Ambassador | Converts fire rate to damage. Can constantly headshot. 2x slower fire rate.";
+			ChangeString = "The Ambassador | Converts fire rate to damage. Can headshot for 4x damage. 2x slower fire rate.";
 		}
 		case 460:
 		{
