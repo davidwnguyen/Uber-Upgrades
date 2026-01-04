@@ -614,7 +614,7 @@ public Action:Timer_Every100MS(Handle timer)
 				if(corrosiveDOT[client][i][0] != 0.0 && corrosiveDOT[client][i][1] >= GetGameTime())
 				{
 					if(IsValidClient3(i)){
-						SDKHooks_TakeDamage(client,i,i,corrosiveDOT[client][i][0],DMG_IGNOREHOOK,i,_,_,false);
+						SDKHooks_TakeDamage(client,i,i,corrosiveDOT[client][i][0],DMG_IGNOREHOOK,_,_,_,false);
 					}
 				}
 				if(IsOnDifferentTeams(client,i)){
