@@ -1757,7 +1757,8 @@ public void applyDamageAffinities(&victim, &attacker, &inflictor, float &damage,
 		if(TF2Attrib_HookValueFloat(0.0, "supernova_powerup", attacker) == 2){
 			damage *= 1.5;
 
-			int team = GetClientTeam(attacker);
+			//No more piercing flames!!!!!
+			/*int team = GetClientTeam(attacker);
 
 			Buff infernalDOTBuff;
 			infernalDOTBuff.init("Piercing Flames", "", Buff_PowerupBurning, 1, attacker, 5.0);
@@ -1779,7 +1780,7 @@ public void applyDamageAffinities(&victim, &attacker, &inflictor, float &damage,
 					continue;
 				
 				insertBuff(i, infernalDOTBuff);
-			}
+			}*/
 		}
 	}
 	if(damagetype & DMG_SHOCK || damagetype & DMG_ENERGYBEAM)

@@ -466,6 +466,13 @@ public Action:Timer_Every100MS(Handle timer)
 				else
 					Format(StatusEffectText, sizeof(StatusEffectText),"Supernova: READY (Crouch + Mouse3)");
 			}
+			else if(TF2Attrib_HookValueFloat(0.0, "supernova_powerup", client) == 2)
+			{
+				if(infernalDetonationCooldown[client]-GetGameTime() > 0)
+					Format(StatusEffectText, sizeof(StatusEffectText),"Detonate Afterburn: %.2fs", infernalDetonationCooldown[client]-GetGameTime());
+				else
+					Format(StatusEffectText, sizeof(StatusEffectText),"Detonate Afterburn: READY (Crouch + Mouse3)");
+			}
 			else if(TF2Attrib_HookValueFloat(0.0, "regeneration_powerup", client) == 2.0)
 			{
 				if(duplicationCooldown[client] > GetGameTime())

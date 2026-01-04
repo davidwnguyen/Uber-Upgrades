@@ -2234,7 +2234,36 @@ public Action OnPlayerRunCmd(int client, int& buttons, int& impulse, float vel[3
 								}
 							}
 						}
-						
+					}
+
+					if(infernalDetonationCooldown[client]-GetGameTime() < 0){
+						if(TF2Attrib_HookValueFloat(0.0, "supernova_powerup", client) == 2){
+							infernalDetonationCooldown[client] = GetGameTime()+10.0;
+							for(int victim = 1; victim <= MaxClients; victim++){
+								if(!IsValidClient3(victim))
+									continue;
+								if(!IsPlayerAlive(victim))
+									continue;
+								if(!IsOnDifferentTeams(client, victim))
+									continue;
+
+								float detonateAccumulation = 0.0;
+								for(int i = 0;i<MAX_AFTERBURN_STACKS;++i){
+									if(playerAfterburn[victim][i].remainingTicks <= 0)
+										continue;
+
+									if(playerAfterburn[victim][i].owner != client)
+										continue;
+
+									detonateAccumulation += playerAfterburn[victim][i].damage * playerAfterburn[victim][i].remainingTicks;
+									playerAfterburn[victim][i].remainingTicks = 0;
+								}
+								if(detonateAccumulation > 0){
+									SDKHooks_TakeDamage(victim, client, client, detonateAccumulation, DMG_BURN|DMG_PREVENT_PHYSICS_FORCE|DMG_IGNOREHOOK, _, _, _, false);
+									CreateParticleEx(victim, "bombinomicon_burningdebris");
+								}
+							}
+						}
 					}
 				}
 				

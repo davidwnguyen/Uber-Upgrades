@@ -1,5 +1,8 @@
 "Phrases"
 {
+	"no primary ammo from dispensers while active"{
+		"en"		"Cannot Gain Ammo from Dispensers"
+	}
 	"Minigun Damage Bonus"{
 		"en"		"Minigun Damage Bonus"
 	}

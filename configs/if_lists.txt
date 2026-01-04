@@ -1668,7 +1668,8 @@
 			"1"		"ap (global)"
 			"2"		"Increased Overall Damage"
 			"3"		"blast radius increased"
-			"4"		"lifesteal ability"
+			"4"		"dmg falloff decreased"
+			"5"		"lifesteal ability"
 		}
 		"Pipebomb launcher specific upgrades"
 		{
@@ -1695,7 +1696,8 @@
 			"1"		"ap (global)"
 			"2"		"Increased Overall Damage"
 			"3"		"blast radius increased"
-			"4"		"lifesteal ability"
+			"4"		"dmg falloff decreased"
+			"5"		"lifesteal ability"
 		}
 		"Pipebomb launcher specific upgrades"
 		{
