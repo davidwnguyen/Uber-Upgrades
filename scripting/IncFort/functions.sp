@@ -1283,7 +1283,7 @@ DisplayItemChange(client,itemidx)
 		}
 		case 312:
 		{
-			ChangeString = "The Brass Beast | Shoots rockets that have 90 base damage and 200HU blast radius and can penetrate enemies. Cannot hit enemies multiple times. 3x slower fire rate.";
+			ChangeString = "The Brass Beast | Shoots rockets that have 90 base damage and 200HU blast radius and can penetrate enemies. Cannot hit enemies multiple times. 4x slower fire rate.";
 		}
 		case 811,832:
 		{

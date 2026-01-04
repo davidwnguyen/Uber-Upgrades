@@ -626,7 +626,7 @@ public Action:OnCollisionPiercingRocket(entity, client)
 				if(IsValidEdict(CWeapon))
 				{
 					int damageType = GetEntProp(entity, Prop_Send, "m_bCritical") ? DMG_BLAST|DMG_CRIT : DMG_BLAST;
-					float damageDealt = 70.0 * TF2_GetDamageModifiers(owner, CWeapon);
+					float damageDealt = 90.0 * TF2_GetDamageModifiers(owner, CWeapon);
 					EntityExplosion(owner, damageDealt, 200.0, origin, 0, true, entity, _, damageType,_,_,_,_,_,_,true);
 				}
 				if(IsValidClient3(client))

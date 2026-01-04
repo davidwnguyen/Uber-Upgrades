@@ -241,8 +241,9 @@
 		{
 			"preserve_attributes"	"1"
 			"1"				"override projectile type;42.0"
-			"2"				"weapon fire rate;3.0"
+			"2"				"weapon fire rate;4.0"
 			"3"				"mini rockets;1.0"
+			"4"				"damage bonus;1.0"
 		}
 		"232" //Bushwacka
 		{
