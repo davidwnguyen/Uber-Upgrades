@@ -2514,6 +2514,7 @@ public OnGameFrame()
 					}
 				}else{
 					quakerTime[client] = 0.0;
+					SetEntityGravity(client, 1.0);
 				}
 			}
 

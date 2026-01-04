@@ -487,7 +487,6 @@ public void ManagePlayerBuffs(int i){
 	float reactiveAirblastRes = 1.0;
 	if(hasBuffIndex(i, Buff_Airblasted)){
 		reactiveAirblastRes -= 0.25*(playerBuffs[i][getBuffInArray(i, Buff_Airblasted)].duration-GetGameTime());
-		PrintToServer("%.2f airblastRes", reactiveAirblastRes);
 	}
 
 	TF2Attrib_SetByName(i, "additive damage bonus", additiveDamageRawBuff);
