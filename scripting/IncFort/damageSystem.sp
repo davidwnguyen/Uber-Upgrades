@@ -1,16 +1,12 @@
 public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &damagetype, &weapon, float damageForce[3], float damagePosition[3], damagecustom)
 {
-	float pierce = 0.0;
-	if(IsValidWeapon(weapon))
-		pierce = TF2Attrib_HookValueFloat(0.0, "dmg_dr_penetration", weapon);
-
 	if(IsValidClient3(victim))
 	{
 		lastKBSource[victim] = attacker;
 		if(!(damagetype & DMG_PIERCING)){
 			float dmgMult = TF2Attrib_HookValueFloat(1.0, "dmg_incoming_mult", victim);
 			if(dmgMult < 1.0)
-				damage *= ConsumePierce(dmgMult, pierce);
+				damage *= ConsumePierce(dmgMult, damageForce[0]);
 			else
 				damage *= dmgMult;
 		}
@@ -60,7 +56,7 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 		if(attacker == victim){
 			float dmgReduction = TF2Attrib_HookValueFloat(1.0, "dmg_incoming_mult", victim);
 			if(dmgReduction < 1.0)
-				damage *= ConsumePierce(dmgReduction, pierce);
+				damage *= ConsumePierce(dmgReduction, damageForce[0]);
 			else
 				damage *= dmgReduction
 
@@ -327,42 +323,42 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 		}
 
 		if(TF2_IsPlayerInCondition(victim, TFCond_DefenseBuffed) && TF2_IsPlayerInCondition(victim, TFCond_DefenseBuffNoCritBlock))
-			damage *= ConsumePierce(0.65, pierce);
+			damage *= ConsumePierce(0.65, damageForce[0]);
 
-		ApplyVaccinatorDamageReduction(victim, damagetype, damage, pierce);
+		ApplyVaccinatorDamageReduction(victim, damagetype, damage, damageForce[0]);
 
 		if(TF2Attrib_HookValueFloat(0.0, "resistance_powerup", victim) == 1 || TF2Attrib_HookValueFloat(0.0, "resistance_powerup", victim) == 3)
-			damage *= ConsumePierce(0.5, pierce);
+			damage *= ConsumePierce(0.5, damageForce[0]);
 
 		//Just in case in the future I ever want multiple powerups...
 		if(TF2Attrib_HookValueFloat(0.0, "revenge_powerup", victim) == 1)
-			damage *= ConsumePierce(0.8, pierce);
+			damage *= ConsumePierce(0.8, damageForce[0]);
 
 		if(TF2Attrib_HookValueFloat(0.0, "knockout_powerup", victim) == 1)
-			damage *= ConsumePierce(0.8, pierce);
+			damage *= ConsumePierce(0.8, damageForce[0]);
 		else if(TF2Attrib_HookValueFloat(0.0, "knockout_powerup", victim) == 2)
-			damage *= ConsumePierce(0.66, pierce);
+			damage *= ConsumePierce(0.66, damageForce[0]);
 
 		if(TF2Attrib_HookValueFloat(0.0, "king_powerup", victim) == 1)
-			damage *= ConsumePierce(0.8, pierce);
+			damage *= ConsumePierce(0.8, damageForce[0]);
 		
 		if(TF2Attrib_HookValueFloat(0.0, "supernova_powerup", victim) == 1)
-			damage *= ConsumePierce(0.8, pierce);
+			damage *= ConsumePierce(0.8, damageForce[0]);
 
 		if(TF2Attrib_HookValueFloat(0.0, "inverter_powerup", victim) == 1)
-			damage *= ConsumePierce(0.8, pierce);
+			damage *= ConsumePierce(0.8, damageForce[0]);
 		else if(TF2Attrib_HookValueFloat(0.0, "inverter_powerup", victim) == 2)
-			damage *= ConsumePierce(0.66, pierce);
+			damage *= ConsumePierce(0.66, damageForce[0]);
 
 		if(TF2Attrib_HookValueFloat(0.0, "regeneration_powerup", victim) == 1)
-			damage *= ConsumePierce(0.75, pierce);
+			damage *= ConsumePierce(0.75, damageForce[0]);
 
 		if(TF2Attrib_HookValueFloat(0.0, "vampire_powerup", victim) == 1 || TF2Attrib_HookValueFloat(0.0, "vampire_powerup", victim) == 3)
-			damage *= ConsumePierce(0.75, pierce);
+			damage *= ConsumePierce(0.75, damageForce[0]);
 
 		//This is actually valid.
 		if(1 <= TF2Attrib_HookValueFloat(0.0, "plague_powerup", victim) <= 2)
-			damage *= ConsumePierce(0.75, pierce);
+			damage *= ConsumePierce(0.75, damageForce[0]);
 
 		if(hasBuffIndex(attacker, Buff_Plagued))
 			damage *= 0.5;
@@ -456,55 +452,7 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 			}
 		}
 
-		float victimPos[3];
-		GetClientEyePosition(victim,victimPos);
-
 		//Prevent piercing damage from being guardian'd
-		if(!(damagetype & DMG_PIERCING)){
-			//Only guardian from the highest source.
-			int guardian = -1;
-			float guardianPercentage;
-			for(int i = 1; i <= MaxClients; ++i)
-			{
-				if(!IsValidClient3(i))
-					continue;
-				if(!IsPlayerAlive(i))
-					continue;
-				if(GetClientTeam(i) != GetClientTeam(victim))
-					continue;
-				if(i == victim)
-					continue;
-
-				float guardianPos[3];
-				GetClientEyePosition(i,guardianPos);
-				// 1400 HU Radius
-				if(GetVectorDistance(victimPos,guardianPos, true) < 1960000)
-				{
-					int guardianWeapon = GetEntPropEnt(i, Prop_Send, "m_hActiveWeapon");
-					if(IsValidWeapon(guardianWeapon)){
-						float redirect = TF2Attrib_HookValueFloat(0.0, "redirect_teammate_damage_taken", i);
-						if(redirect > 0.0){
-							if(redirect > guardianPercentage){
-								guardian = i;
-								guardianPercentage = redirect;
-							}
-						}
-					}
-					if(damage > GetClientHealth(victim) && TF2Attrib_HookValueFloat(0.0, "king_powerup", i) == 3.0){
-						SDKHooks_TakeDamage(i, attacker, attacker, damage, DMG_PREVENT_PHYSICS_FORCE|DMG_ENERGYBEAM|DMG_IGNOREHOOK,_,_,_,false);
-						SDKHooks_TakeDamage(i, attacker, attacker, GetClientHealth(i) * 0.15, DMG_PREVENT_PHYSICS_FORCE|DMG_IGNOREHOOK|DMG_PIERCING);
-						damage *= 0.0;
-						TF2_AddCondition(victim, TFCond_UberchargedCanteen, 0.5, i);
-						TF2_AddCondition(i, TFCond_UberchargedCanteen, 0.1, i);
-						break;
-					}
-				}
-			}
-			if(IsValidClient3(guardian) && !(damagetype & DMG_IGNOREHOOK)){
-				SDKHooks_TakeDamage(guardian, attacker, attacker, damage*guardianPercentage,DMG_PREVENT_PHYSICS_FORCE|DMG_IGNOREHOOK,_,_,_,false);
-				damage *= ConsumePierce((1-guardianPercentage), pierce);
-			}
-		}
 		int VictimCWeapon = GetEntPropEnt(victim, Prop_Send, "m_hActiveWeapon");
 		if(IsValidWeapon(VictimCWeapon)){
 			if(HasEntProp(VictimCWeapon, Prop_Send, "m_hHealingTarget") && miniCritStatusVictim[victim] < GetGameTime()){
@@ -802,7 +750,13 @@ public Action TF2_OnTakeDamageModifyRules(int victim, int &attacker, int &inflic
 
 public Action OnTakeDamage(victim, &attacker, &inflictor, float &damage, &damagetype, &weapon, float damageForce[3], float damagePosition[3], damagecustom)
 {
+	//Lets do a sneaky & replace one of the variables with ours.
+	damageForce = {0.0, 0.0, 0.0};
+
 	if(0 < attacker <= MaxClients){
+		if(IsValidWeapon(weapon))
+			damageForce[0] = TF2Attrib_HookValueFloat(0.0, "dmg_dr_penetration", weapon);
+
 		if(!(damagetype & DMG_IGNOREHOOK)){
 			baseDamage[attacker] = damage;
 
@@ -831,6 +785,52 @@ public Action OnTakeDamage(victim, &attacker, &inflictor, float &damage, &damage
 		}
 		
 		if(!(damagetype & DMG_PIERCING) && attacker != victim){
+			//Only guardian from the highest source.
+			int guardian = -1;
+			float guardianPercentage;
+			float victimPos[3];
+			GetClientAbsOrigin(victim, victimPos);
+			for(int i = 1; i <= MaxClients; ++i)
+			{
+				if(!IsValidClient3(i))
+					continue;
+				if(!IsPlayerAlive(i))
+					continue;
+				if(GetClientTeam(i) != GetClientTeam(victim))
+					continue;
+				if(i == victim)
+					continue;
+
+				float guardianPos[3];
+				GetClientEyePosition(i,guardianPos);
+				// 1400 HU Radius
+				if(GetVectorDistance(victimPos,guardianPos, true) < 1960000)
+				{
+					int guardianWeapon = GetEntPropEnt(i, Prop_Send, "m_hActiveWeapon");
+					if(IsValidWeapon(guardianWeapon)){
+						float redirect = TF2Attrib_HookValueFloat(0.0, "redirect_teammate_damage_taken", i);
+						if(redirect > 0.0){
+							if(redirect > guardianPercentage){
+								guardian = i;
+								guardianPercentage = redirect;
+							}
+						}
+					}
+					if(damage > GetClientHealth(victim) && TF2Attrib_HookValueFloat(0.0, "king_powerup", i) == 3.0){
+						SDKHooks_TakeDamage(i, attacker, attacker, damage, DMG_PREVENT_PHYSICS_FORCE|DMG_ENERGYBEAM|DMG_IGNOREHOOK,_,_,_,false);
+						SDKHooks_TakeDamage(i, attacker, attacker, GetClientHealth(i) * 0.15, DMG_PREVENT_PHYSICS_FORCE|DMG_IGNOREHOOK|DMG_PIERCING);
+						damage *= 0.0;
+						TF2_AddCondition(victim, TFCond_UberchargedCanteen, 0.5, i);
+						TF2_AddCondition(i, TFCond_UberchargedCanteen, 0.1, i);
+						break;
+					}
+				}
+			}
+			if(IsValidClient3(guardian) && !(damagetype & DMG_ENERGYBEAM)){
+				SDKHooks_TakeDamage(guardian, attacker, attacker, damage*guardianPercentage,DMG_PREVENT_PHYSICS_FORCE|DMG_ENERGYBEAM|DMG_IGNOREHOOK,_,_,_,false);
+				damage *= ConsumePierce((1-guardianPercentage), damageForce[0]);
+			}
+
 			float armorPenetration = TF2Attrib_HookValueFloat(0.0, "armor_penetration_buff", attacker);
 			float linearReduction = TF2Attrib_HookValueFloat(1.0, "dmg_taken_divided", victim);
 			if(linearReduction != 1.0)
@@ -925,6 +925,10 @@ public Action:OnTakeDamagePre_Sapper(victim, &attacker, &inflictor, float &damag
 
 public Action:OnTakeDamagePre_Sentry(victim, &attacker, &inflictor, float &damage, &damagetype, &weapon, float damageForce[3], float damagePosition[3], damagecustom) 
 {
+	damageForce = {0.0, 0.0, 0.0};
+	if(IsValidWeapon(weapon))
+		damageForce[0] = TF2Attrib_HookValueFloat(0.0, "dmg_dr_penetration", weapon);
+
 	int owner = GetEntPropEnt(victim, Prop_Send, "m_hBuilder");
 	char SapperObject[128];
 	GetEdictClassname(attacker, SapperObject, sizeof(SapperObject));
@@ -1007,11 +1011,6 @@ public Action:OnTakeDamagePre_Sentry(victim, &attacker, &inflictor, float &damag
 	{
 		if(!(damagetype & DMG_PIERCING) && attacker != owner){
 			float armorPenetration = TF2Attrib_HookValueFloat(0.0, "armor_penetration_buff", attacker);
-
-			float dmgReduction = TF2Attrib_HookValueFloat(1.0, "dmg_incoming_mult", owner);
-			if(dmgReduction != 1.0)
-				damage *= dmgReduction
-
 			float linearReduction = TF2Attrib_HookValueFloat(1.0, "dmg_taken_divided", owner);
 			if(linearReduction != 1.0)
 				damage /= linearReduction;
@@ -1030,6 +1029,10 @@ public Action:OnTakeDamagePre_Sentry(victim, &attacker, &inflictor, float &damag
 }
 public Action OnTakeDamage_MedicShield(victim, &attacker, &inflictor, float &damage, &damagetype, &weapon, float damageForce[3], float damagePosition[3], damagecustom)
 {
+	damageForce = {0.0, 0.0, 0.0};
+	if(IsValidWeapon(weapon))
+		damageForce[0] = TF2Attrib_HookValueFloat(0.0, "dmg_dr_penetration", weapon);
+
 	if(0 < attacker <= MaxClients){
 		int owner = getOwner(victim);
 		if(!IsValidClient3(owner))
@@ -1052,11 +1055,6 @@ public Action OnTakeDamage_MedicShield(victim, &attacker, &inflictor, float &dam
 		
 		if(!(damagetype & DMG_PIERCING) && attacker != owner){
 			float armorPenetration = TF2Attrib_HookValueFloat(0.0, "armor_penetration_buff", attacker);
-
-			float dmgReduction = TF2Attrib_HookValueFloat(1.0, "dmg_incoming_mult", owner);
-			if(dmgReduction != 1.0)
-				damage *= dmgReduction
-
 			float linearReduction = TF2Attrib_HookValueFloat(1.0, "dmg_taken_divided", owner);
 			if(linearReduction != 1.0)
 				damage /= linearReduction;

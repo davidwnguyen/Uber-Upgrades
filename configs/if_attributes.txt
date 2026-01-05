@@ -5406,6 +5406,7 @@
 			"ref"		"Teammate Damage Redirection"
 			"attr_class"	"redirect_teammate_damage_taken"
 			"display"		"%.0f%%"
+			"attr_type"		"value_is_additive"
 			"increase_ratio" "0"
 			"cost"		"0"
 			"value"		"0.1"

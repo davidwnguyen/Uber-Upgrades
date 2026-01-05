@@ -363,7 +363,7 @@
 		{
 			"gamestage"						"1"
 			"restriction"					"1"
-			"Teammate Damage Redirection"	"6.5"
+			"Teammate Damage Redirection"	"4.0"
 			"savior sacrifice attribute"	"1.5"
 		}
 		"Divine Bloodline"
