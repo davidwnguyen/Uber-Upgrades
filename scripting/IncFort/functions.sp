@@ -1951,25 +1951,26 @@ public Action:GiveBotUpgrades(Handle timer, any:userid)
 
 		TF2Attrib_SetByName(client,"increased jump height", 2.0);
 		TF2Attrib_SetByName(client,"weapon spread bonus", 0.4);
+		float drMulti = 1.0;
 		//TF2Attrib_SetByName(client,"rage giving scale",(500.0/(additionalstartmoney+StartMoney)) / OverAllMultiplier);
 		if((additionalstartmoney+StartMoney) >= 500000)
 		{
 			TF2Attrib_SetByName(client,"damage bonus HIDDEN",(2.0));
-			TF2Attrib_SetByName(client,"damage taken mult 2",(0.5));
+			drMulti = 2.0;
 		}
 		if((additionalstartmoney+StartMoney) >= 1500000)
 		{
 			TF2Attrib_SetByName(client,"damage bonus HIDDEN",(3.0));
-			TF2Attrib_SetByName(client,"damage taken mult 2",(0.33));
+			drMulti = 3.0;
 		}
 		if((additionalstartmoney+StartMoney) <= 750000)
 		{
-			TF2Attrib_SetByName(client,"damage taken mult 1",Pow(7600.0/(additionalstartmoney+StartMoney)/ OverAllMultiplier, 1.6));
+			TF2Attrib_SetByName(client,"dmg taken divided",Pow((additionalstartmoney+StartMoney) / 7600.0 * OverAllMultiplier, 1.6) * drMulti);
 			TF2Attrib_SetByName(client,"damage force increase",1/(additionalstartmoney+StartMoney)/9000.0);
 		}
 		if((additionalstartmoney+StartMoney) > 750000)
 		{
-			TF2Attrib_SetByName(client,"damage taken mult 1",Pow(7400.0/(additionalstartmoney+StartMoney)/ OverAllMultiplier, 1.78));
+			TF2Attrib_SetByName(client,"dmg taken divided",Pow((additionalstartmoney+StartMoney) / 7400.0 * OverAllMultiplier, 1.78) * drMulti);
 			TF2Attrib_SetByName(client,"damage force increase",1/(additionalstartmoney+StartMoney)/6000.0);
 		}
 		if((additionalstartmoney+StartMoney) >= 1000000){

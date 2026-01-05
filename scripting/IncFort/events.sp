@@ -3273,9 +3273,7 @@ public Event_PlayerRespawn(Handle event, const char[] name, bool:dontBroadcast)
 					RequestFrame(RespawnPlayer,EntIndexToEntRef(client));
 					isBotScrambled[client] = true;
 				}
-				else{
-					CreateTimer(0.4, GiveBotUpgrades, GetClientUserId(client));
-				}
+				CreateTimer(0.4, GiveBotUpgrades, GetClientUserId(client));
 			}
 		}
 	}
