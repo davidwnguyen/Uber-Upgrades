@@ -221,7 +221,7 @@ stock int CreateParticle(iEntity, char[] strParticle, bool bAttach = false, char
 	}
 	return true
 }
-void CreateParticleEx(iEntity, char[] strParticle, m_iAttachType = 0, m_iAttachmentPointIndex = 0, float fOffset[3]=NULL_VECTOR, float time = 0.0)
+void CreateParticleEx(iEntity, char[] strParticle, m_iAttachType = 0, m_iAttachmentPointIndex = 0, float fOffset[3]={0.0,0.0,0.0}, float time = 0.0)
 {
 	static int table = INVALID_STRING_TABLE;
 	if (table == INVALID_STRING_TABLE){
@@ -244,11 +244,10 @@ void CreateParticleEx(iEntity, char[] strParticle, m_iAttachType = 0, m_iAttachm
 		if(time > 0.0){
 			CreateTimer(time, Timer_KillTEParticle, EntIndexToEntRef(iEntity))
 		}
-		if(m_iAttachType < 1 && IsNullVector(fOffset)){
+		if(m_iAttachType < 1 && GetVectorLength(fOffset)){
 			GetEntPropVector(iEntity, Prop_Data, "m_vecOrigin", fOffset);
 		}
 	}
-	
 	TE_WriteFloat("m_vecOrigin[0]", fOffset[0]);
 	TE_WriteFloat("m_vecOrigin[1]", fOffset[1]);
 	TE_WriteFloat("m_vecOrigin[2]", fOffset[2]);
@@ -2903,8 +2902,8 @@ public getProjOrigin(entity)
 			return;
 
 		if(TF2Attrib_HookValueInt(0, "sunburst_projectile", CWeapon)){
-			CreateParticleEx(entity, "raygun_projectile_red_crit", 6);
-			CreateParticleEx(entity, "raygun_projectile_red", 6);
+			CreateParticle(entity, "raygun_projectile_red_crit", true, _, 10.0, _, true);
+			CreateParticle(entity, "raygun_projectile_red", true, _, 10.0, _, true);
 		}
 
 		float constantTime = TF2Attrib_HookValueFloat(0.0, "constant_time_projectile", CWeapon);

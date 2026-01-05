@@ -1236,13 +1236,6 @@ public Event_mvm_wave_failed(Handle event, const char[] name, bool:dontBroadcast
 		PrintToServer("Mission Loaded");
 		CreateTimer(0.5, MissionLoaded);
 	}
-
-	for(int i = 0;i<MAXENTITIES;i++){
-		if(IsValidEntity(i)){
-			SetVariantString("ParticleEffectStop");
-			AcceptEntityInput(i, "DispatchEffect");
-		}
-	}
 }
 public Event_mvm_wave_begin(Handle event, const char[] name, bool:dontBroadcast)
 {
@@ -1274,13 +1267,6 @@ public Event_mvm_wave_begin(Handle event, const char[] name, bool:dontBroadcast)
 		}
 	}
 	StartMoneySaved = StartMoney + additionalstartmoney;
-
-	for(int i = 0;i<MAXENTITIES;i++){
-		if(IsValidEntity(i)){
-			SetVariantString("ParticleEffectStop");
-			AcceptEntityInput(i, "DispatchEffect");
-		}
-	}
 }
 public Action:Event_PlayerDeath(Handle event, const char[] name, bool:dontBroadcast)
 {
@@ -2139,9 +2125,6 @@ public Action OnPlayerRunCmd(int client, int& buttons, int& impulse, float vel[3
 										SetEntPropVector(iEntity, Prop_Send, "m_vInitialVelocity", fVelocity );
 										TeleportEntity(iEntity, fOrigin, fAngles, fVelocity);
 										DispatchSpawn(iEntity);
-
-										TE_SetupKillPlayerAttachments(iEntity);
-										TE_SendToAll();
 
 										int color[4] = {255, 255, 255, 100};
 

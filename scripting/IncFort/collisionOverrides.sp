@@ -130,7 +130,6 @@ public Action:OnSunlightSpearCollision(entity, client)
 
 	float origin[3];
 	GetEntPropVector(entity, Prop_Data, "m_vecOrigin", origin);
-	PrintToServer("%s collision", strName);	
 	CreateParticleEx(entity, "drg_cow_explosioncore_charged", -1, -1, origin);
 	RemoveEntity(entity);
 	return Plugin_Stop;

@@ -327,14 +327,11 @@ CastSunlightSpear(client, attuneSlot)
 		SDKHook(iEntity, SDKHook_StartTouch, OnStartTouchSunlightSpear);
 		SDKHook(iEntity, SDKHook_Touch, AddArrowCollisionFunction);
 
-		
-		TE_SetupKillPlayerAttachments(iEntity);
-		TE_SendToAll();
 		int color[4]={255, 200, 0,225};
 		TE_SetupBeamFollow(iEntity,Laser,0,0.2,3.0,3.0,1,color);
 		TE_SendToAll();
-		CreateParticleEx(iEntity, "raygun_projectile_red_crit", 1);
-		CreateParticleEx(iEntity, "raygun_projectile_red", 1);
+		CreateParticle(iEntity, "raygun_projectile_red_crit", true, _, 10.0, _, true);
+		CreateParticle(iEntity, "raygun_projectile_red", true, _, 10.0, _, true);
 	}
 }
 CastLightningEnchantment(client, attuneSlot)
@@ -564,14 +561,11 @@ FinishCastSplittingThunder(int client, int spellLevel)
 			SDKHook(iEntity, SDKHook_StartTouch, OnStartTouchSplittingThunder);
 			SDKHook(iEntity, SDKHook_Touch, AddArrowCollisionFunction);
 			
-			CreateParticleEx(iEntity, "raygun_projectile_red_crit", 1);
-			CreateParticleEx(iEntity, "raygun_projectile_red", 1);
-			
-			TE_SetupKillPlayerAttachments(iEntity);
-			TE_SendToAll();
 			int color[4]={255, 200, 0,225};
 			TE_SetupBeamFollow(iEntity,Laser,0,0.2,3.0,3.0,1,color);
 			TE_SendToAll();
+			CreateParticle(iEntity, "raygun_projectile_red_crit", true, _, 10.0, _, true);
+			CreateParticle(iEntity, "raygun_projectile_red", true, _, 10.0, _, true);
 
 			CreateTimer(GetRandomFloat(0.3,0.5), Timer_SplittingThunderThink, EntIndexToEntRef(iEntity), TIMER_REPEAT);
 		}
@@ -1359,7 +1353,7 @@ CastBlackskyEye(client, attuneSlot)
 		SetEntPropVector(iEntity, Prop_Send, "m_vInitialVelocity", fVelocity );
 		TeleportEntity(iEntity, fOrigin, fAngles, fVelocity);
 		DispatchSpawn(iEntity);
-		CreateParticleEx(iEntity, "drg_cow_rockettrail_normal_blue", 1);
+		CreateParticle(iEntity, "drg_cow_rockettrail_normal_blue", true, _, 10.0, _, true);
 		
 		SDKHook(iEntity, SDKHook_StartTouchPost, BlackskyEyeCollision);
 		SDKHook(iEntity, SDKHook_Touch, AddArrowCollisionFunction);
@@ -1436,7 +1430,7 @@ public Action:ACallBeyond(Handle timer, client)
 		DispatchSpawn(iEntity);
 		SetEntityRenderMode(iEntity, RENDER_NONE);
 
-		CreateParticleEx(iEntity, "drg_cow_rockettrail_charged_blue", 1);
+		CreateParticle(iEntity, "drg_cow_rockettrail_charged_blue", true, _, 10.0, _, true);
 		
 		SDKHook(iEntity, SDKHook_StartTouchPost, CallBeyondCollision);
 		SDKHook(iEntity, SDKHook_Touch, AddArrowCollisionFunction);
@@ -1678,8 +1672,6 @@ CastHealing(client, attuneSlot)//Projected Healing
 		TeleportEntity(iEntity, fOrigin, fAngles, fVelocity);
 		DispatchSpawn(iEntity);
 
-		TE_SetupKillPlayerAttachments(iEntity);
-		TE_SendToAll();
 
 		int color[4] = {255, 220, 0, 255};
 

@@ -1343,12 +1343,13 @@ public Action:GiveMaxHealth(Handle timer, any:userid)
 	if(IsValidClient3(client) && TF2Util_GetEntityMaxHealth(client) >= GetClientHealth(client))
 		SetEntityHealth(client, TF2Util_GetEntityMaxHealth(client))
 }
-public Action:SelfDestruct(Handle timer, any:ref) 
+public Action SelfDestruct(Handle timer, any:ref) 
 { 
     int entity = EntRefToEntIndex(ref); 
-    if(IsValidEdict(entity)) 
+    if(IsValidEntity(entity)) {
 		RemoveEntity(entity);
-	KillTimer(timer)
+	}
+	return Plugin_Stop;
 }
 public Action:DisableSlowdown(Handle timer, int entity)
 {
@@ -1359,12 +1360,7 @@ public Action:DisableSlowdown(Handle timer, int entity)
 		TF2Attrib_SetByName(entity,"major increased jump height", 1.0);
 	}
 }
-public Action:Timer_KillLaser(Handle timer, int entity)
-{
-	TE_SetupKillPlayerAttachments(entity);
-	TE_SendToAll();
-	return Plugin_Stop;
-}
+
 public Action ResetClientsTimer(Handle timer){
 	replenishStatus = false;
 	for (int client = 1; client <= MaxClients; client++)

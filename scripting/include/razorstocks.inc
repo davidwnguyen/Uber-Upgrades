@@ -1485,10 +1485,7 @@ stock DelayedTeleportEntity(Handle pack)
 	}
 	delete pack
 }
-stock TE_SetupKillPlayerAttachments(client) {
-  TE_Start("KillPlayerAttachments");
-  TE_WriteNum("m_nPlayer", client);
-}
+
 stock bool IsStringBlank(const char[] input)
 {
 	int len = strlen(input);
