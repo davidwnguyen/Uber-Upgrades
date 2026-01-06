@@ -2413,20 +2413,16 @@ checkRadiation(victim,attacker)
 	if(RadiationBuildup[victim] >= RadiationMaximum[victim])
 	{
 		RadiationBuildup[victim] = 0.0;
-		float pctHP = float(GetClientHealth(victim))/float(TF2_GetMaxHealth(victim));
-		if(pctHP > 1)
-			pctHP = 1.0;
-
-		SDKHooks_TakeDamage(victim, attacker, attacker, pctHP*GetClientHealth(victim)*0.35, DMG_PREVENT_PHYSICS_FORCE|DMG_IGNOREHOOK|DMG_PIERCING);
-
 		Buff radiation;
-		radiation.init("Radiation", "", Buff_Radiation, 1, attacker, 8.0);
-		radiation.multiplicativeDamageTaken = 2.0;
-		radiation.multiplicativeAttackSpeedMult = 0.66;
+		radiation.init("Radiation", "", Buff_Radiation, 1, attacker, 12.0);
+		Buff critMark;
+		critMark.init("Marked for Crits", "All hits taken are critical", Buff_CritMarkedForDeath, 1, attacker, 12.0);
+		radiation.multiplicativeDamageTaken = 1.5;
 		insertBuff(victim, radiation);
+		insertBuff(victim, critMark);
 		
 		float particleOffset[3] = {0.0,0.0,10.0};
-		CreateParticle(victim, "utaunt_electricity_cloud_electricity_WY", true, _, 8.0, particleOffset);
+		CreateParticle(victim, "utaunt_electricity_cloud_electricity_WY", true, _, 12.0, particleOffset);
 		CreateParticle(victim, "merasmus_blood", true, _, 4.0, particleOffset);
 	}
 }

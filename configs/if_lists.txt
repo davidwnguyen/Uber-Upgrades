@@ -946,7 +946,7 @@
 		"Special Tweaks"
 		{
 			"0"		"Scorching Napalm"
-			"1"		"Rockets' Red Glare"
+			"1"		"Armor Piercing Shells"
 		}
 	}
 	"scomelweap"
@@ -1393,7 +1393,7 @@
 		"Special Tweaks"
 		{
 			"0"		"Scorching Napalm"
-			"1"		"Rockets' Red Glare"
+			"1"		"Armor Piercing Shells"
 		}
 	}
 	"scoweap"
@@ -2285,7 +2285,7 @@
 		"Special Tweaks"
 		{
 			"0"		"Scorching Napalm"
-			"1"		"Rockets' Red Glare"
+			"1"		"Armor Piercing Shells"
 		}
 	}
 	"rlauncher"
@@ -2312,7 +2312,7 @@
 		"Special Tweaks"
 		{
 			"0"		"Scorching Napalm"
-			"1"		"Rockets' Red Glare"
+			"1"		"Armor Piercing Shells"
 		}
 	}
 	"liberty"
@@ -2339,7 +2339,7 @@
 		"Special Tweaks"
 		{
 			"0"		"Scorching Napalm"
-			"1"		"Rockets' Red Glare"
+			"1"		"Armor Piercing Shells"
 		}
 	}
 	"autofirebow"
