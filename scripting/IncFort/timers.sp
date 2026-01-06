@@ -1191,18 +1191,6 @@ public Action:Timer_EveryTenSeconds(Handle timer)
 									if(IsPointVisible(clientpos,VictimPos))
 									{
 										SDKHooks_TakeDamage(i,client,client, LightningDamage, DMG_IGNOREHOOK, _,_,_,false);
-										if(IsValidClient3(i))
-										{
-											float velocity[3];
-											velocity[0]=0.0;
-											velocity[1]=0.0;
-											velocity[2]=1800.0;
-											TeleportEntity(i, NULL_VECTOR, NULL_VECTOR, velocity);
-											Handle hPack = CreateDataPack();
-											WritePackCell(hPack, EntIndexToEntRef(i));
-											WritePackCell(hPack, EntIndexToEntRef(client));
-											CreateTimer(0.5,thunderClapPart2,hPack);
-										}
 									}
 								}
 							}
