@@ -468,8 +468,8 @@
 	"mult crit when health is below percent"{
 		"en"		"100%% Crits when Below %%HP"
 	}
-	"Armor Piercing Shells"{
-		"en"		"Armor Piercing Shells"
+	"Rockets' Red Glare"{
+		"en"		"Rockets' Red Glare"
 	}
 	"Scorching Napalm"{
 		"en"		"Scorching Napalm"

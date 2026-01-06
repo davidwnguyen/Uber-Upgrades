@@ -1803,6 +1803,10 @@ refreshUpgrades(client, slot)
 			if(explosiveBullets!=Address_Null)
 				TF2Attrib_SetFromStringValue(slotItem, "explosion particle", "ExplosionCore_sapperdestroyed");
 
+			Address flameSize = TF2Attrib_GetByName(slotItem, "flame size bonus");
+			if(flameSize!=Address_Null)
+				TF2Attrib_SetByName(slotItem, "mult_end_flame_size", TF2Attrib_GetValue(flameSize));
+
 			float fireRateMod = TF2Attrib_HookValueFloat(1.0, "attack_speed_upgrade", slotItem);
 			float convFireRateToDamage = TF2Attrib_HookValueFloat(0.0, "convert_firerate_to_damage", slotItem);
 			float damageModifier = 1.0;

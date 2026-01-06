@@ -1863,9 +1863,19 @@
 			"display"		"%.0f%%"
 			"cost"		"400"
 			"increase_ratio" "0.30"
-			"value"		"1.00"
+			"value"		"0.5"
 			"init"		"1.00"
-			"max"		"4.50"
+			"max"		"2.5"
+		}
+		"103"
+		{
+			"name"		"flame_lifetime"
+			"ref"		"flame_lifetime"
+			"display"		"%.0f"
+			"cost"		"0"
+			"value"		"0"
+			"init"		"0"
+			"max"		"0"
 		}
 		"400"
 		{
@@ -3907,7 +3917,7 @@
 			"ref"		"flame_speed"
 			"display"		"%.0f"
 			"cost"		"500"
-			"increase_ratio"	"0.2"
+			"increase_ratio"	"0.05"
 			"value"		"450"
 			"init"		"0"
 			"max"		"14000"
