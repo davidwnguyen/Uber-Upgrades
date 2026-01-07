@@ -538,40 +538,6 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 			}
 		}
 
-		if(IsValidEntity(inflictor)){
-			char inflictorClassname[32];
-			GetEdictClassname(inflictor, inflictorClassname, sizeof(inflictorClassname));
-			if(StrEqual("tf_projectile_sentryrocket", inflictorClassname)){
-				inflictor = getOwner(inflictor);
-				GetEdictClassname(inflictor, inflictorClassname, sizeof(inflictorClassname));
-			}
-			if(StrEqual("obj_sentrygun", inflictorClassname)){
-				float sentryLifesteal = 0.0;
-				int attackerCWeapon = GetEntPropEnt(attacker, Prop_Send, "m_hActiveWeapon");
-				if(IsValidWeapon(attackerCWeapon))
-					sentryLifesteal += TF2Attrib_HookValueFloat(0.0, "sentry_lifesteal_while_active", attackerCWeapon);
-
-				Address vampirePowerup = TF2Attrib_GetByName(attacker, "vampire powerup");//Vampire Powerup
-				if(vampirePowerup != Address_Null)
-					if(TF2Attrib_GetValue(vampirePowerup) == 1)
-						sentryLifesteal += 0.4;
-					else if(TF2Attrib_GetValue(vampirePowerup) == 2)
-						sentryLifesteal += 0.25;
-				
-				if(TF2_IsPlayerInCondition(attacker, TFCond_MedigunDebuff))// Conch
-					sentryLifesteal += 0.15;
-
-				if(sentryLifesteal > 0){
-					sentryLifesteal *= damage;
-					if(IsFakeClient(victim))
-						sentryLifesteal *= 0.3;
-
-					sentryLifesteal *= TF2Attrib_HookValueFloat(1.0, "lifesteal_effectiveness", weapon);
-
-					AddBuildingHealth(inflictor, RoundToCeil(sentryLifesteal), attacker);
-				}
-			}
-		}
 		if(hasBuffIndex(victim, Buff_Bruised) && !(damagetype & DMG_PIERCING) && !(damagetype & DMG_IGNOREHOOK)){
 			int bruisedInflictor = playerBuffs[victim][getBuffInArray(victim, Buff_Bruised)].inflictor;
 			if(IsValidClient3(bruisedInflictor)){
@@ -785,50 +751,130 @@ public Action OnTakeDamage(victim, &attacker, &inflictor, float &damage, &damage
 		}
 		
 		if(!(damagetype & DMG_PIERCING) && attacker != victim){
-			//Only guardian from the highest source.
-			int guardian = -1;
-			float guardianPercentage;
-			float victimPos[3];
-			GetClientAbsOrigin(victim, victimPos);
-			for(int i = 1; i <= MaxClients; ++i)
-			{
-				if(!IsValidClient3(i))
-					continue;
-				if(!IsPlayerAlive(i))
-					continue;
-				if(GetClientTeam(i) != GetClientTeam(victim))
-					continue;
-				if(i == victim)
-					continue;
-
-				float guardianPos[3];
-				GetClientEyePosition(i,guardianPos);
-				// 1400 HU Radius
-				if(GetVectorDistance(victimPos,guardianPos, true) < 1960000)
+			//Guardian
+			if(!(damagetype & DMG_ENERGYBEAM)){
+				int guardian = -1;
+				float guardianPercentage;
+				float victimPos[3];
+				GetClientAbsOrigin(victim, victimPos);
+				for(int i = 1; i <= MaxClients; ++i)
 				{
-					int guardianWeapon = GetEntPropEnt(i, Prop_Send, "m_hActiveWeapon");
-					if(IsValidWeapon(guardianWeapon)){
-						float redirect = TF2Attrib_HookValueFloat(0.0, "redirect_teammate_damage_taken", i);
-						if(redirect > 0.0){
-							if(redirect > guardianPercentage){
-								guardian = i;
-								guardianPercentage = redirect;
+					if(!IsValidClient3(i))
+						continue;
+					if(!IsPlayerAlive(i))
+						continue;
+					if(GetClientTeam(i) != GetClientTeam(victim))
+						continue;
+					if(i == victim)
+						continue;
+
+					float guardianPos[3];
+					GetClientEyePosition(i,guardianPos);
+					// 1400 HU Radius
+					if(GetVectorDistance(victimPos,guardianPos, true) < 1960000)
+					{
+						int guardianWeapon = GetEntPropEnt(i, Prop_Send, "m_hActiveWeapon");
+						if(IsValidWeapon(guardianWeapon)){
+							float redirect = TF2Attrib_HookValueFloat(0.0, "redirect_teammate_damage_taken", i);
+							if(redirect > 0.0){
+								if(redirect > guardianPercentage){
+									guardian = i;
+									guardianPercentage = redirect;
+								}
 							}
 						}
-					}
-					if(damage > GetClientHealth(victim) && TF2Attrib_HookValueFloat(0.0, "king_powerup", i) == 3.0){
-						SDKHooks_TakeDamage(i, attacker, attacker, damage, DMG_PREVENT_PHYSICS_FORCE|DMG_ENERGYBEAM|DMG_IGNOREHOOK,_,_,_,false);
-						SDKHooks_TakeDamage(i, attacker, attacker, GetClientHealth(i) * 0.15, DMG_PREVENT_PHYSICS_FORCE|DMG_IGNOREHOOK|DMG_PIERCING);
-						damage *= 0.0;
-						TF2_AddCondition(victim, TFCond_UberchargedCanteen, 0.5, i);
-						TF2_AddCondition(i, TFCond_UberchargedCanteen, 0.1, i);
-						break;
+						if(damage > GetClientHealth(victim) && TF2Attrib_HookValueFloat(0.0, "king_powerup", i) == 3.0){
+							SDKHooks_TakeDamage(i, attacker, attacker, damage, DMG_PREVENT_PHYSICS_FORCE|DMG_ENERGYBEAM|DMG_IGNOREHOOK,_,_,_,false);
+							SDKHooks_TakeDamage(i, attacker, attacker, GetClientHealth(i) * 0.15, DMG_PREVENT_PHYSICS_FORCE|DMG_IGNOREHOOK|DMG_PIERCING);
+							damage *= 0.0;
+							TF2_AddCondition(victim, TFCond_UberchargedCanteen, 0.5, i);
+							TF2_AddCondition(i, TFCond_UberchargedCanteen, 0.1, i);
+							break;
+						}
 					}
 				}
+				if(IsValidClient3(guardian)){
+					SDKHooks_TakeDamage(guardian, attacker, attacker, damage*guardianPercentage,DMG_PREVENT_PHYSICS_FORCE|DMG_ENERGYBEAM|DMG_IGNOREHOOK,_,_,_,false);
+					damage *= ConsumePierce((1-guardianPercentage), damageForce[0]);
+				}
 			}
-			if(IsValidClient3(guardian) && !(damagetype & DMG_ENERGYBEAM)){
-				SDKHooks_TakeDamage(guardian, attacker, attacker, damage*guardianPercentage,DMG_PREVENT_PHYSICS_FORCE|DMG_ENERGYBEAM|DMG_IGNOREHOOK,_,_,_,false);
-				damage *= ConsumePierce((1-guardianPercentage), damageForce[0]);
+
+			//Lifesteal
+			float lifestealFactor = 0.0;
+			float lsCap = 0.5;
+			//Additive sources first
+			if(IsValidWeapon(weapon))
+				lifestealFactor += TF2Attrib_HookValueFloat(0.0, "lifesteal_ability", weapon);//Lifesteal attribute
+			else
+				lifestealFactor += GetAttribute(attacker, "lifesteal ability", 0.0);//Lifesteal attribute
+
+			if(MadmilkDuration[victim] > GetGameTime()) // Madmilk
+				lifestealFactor += (MadmilkDuration[victim]-GetGameTime()) * 1.66 / 100.0;
+
+			if(TF2_IsPlayerInCondition(attacker, TFCond_MedigunDebuff))// Conch
+				lifestealFactor += 0.15;
+			
+			//Then multiplicative sources
+			float vampirePowerup = TF2Attrib_HookValueFloat(0.0, "vampire_powerup", attacker);//Vampire Powerup
+			if(vampirePowerup == 1){
+				lifestealFactor *= 3.0;
+				lsCap *= 3.0;
+			}
+			else if(vampirePowerup == 3){
+				lifestealFactor *= 1.5;
+			}
+			
+			if(IsValidWeapon(weapon))
+				lifestealFactor *= TF2Attrib_HookValueFloat(1.0, "lifesteal_effectiveness", weapon);
+
+			if(hasBuffIndex(attacker, Buff_Plunder)){
+				Buff plunderBuff;
+				plunderBuff = playerBuffs[attacker][getBuffInArray(attacker, Buff_Plunder)]
+				lifestealFactor *= plunderBuff.severity;
+			}
+			if(lifestealFactor > 0){
+				float addedLSPool = lifestealFactor * damage / GetResistance(attacker, true);
+				if(TF2Attrib_HookValueFloat(0.0, "vampire_powerup", attacker) == 3) {
+					if(GetClientHealth(attacker) >= TF2Util_GetEntityMaxHealth(attacker)) {
+						if(Overleech[attacker] < TF2Util_GetEntityMaxHealth(attacker) * 9){
+							Overleech[attacker] += addedLSPool;
+							addedLSPool = 0.0;
+						}
+					}
+				}
+				LSPool[attacker] += addedLSPool;
+				if(LSPool[attacker] > lsCap*TF2Util_GetEntityMaxHealth(attacker)) {
+					LSPool[attacker] = lsCap*TF2Util_GetEntityMaxHealth(attacker);
+				}
+				float spreadRatio = GetAttribute(weapon, "lifesteal to team", 0.0);
+				if(spreadRatio > 0){
+					for(int i = 1; i<= MaxClients; ++i){
+						if(!IsValidClient3(i))
+							continue;
+						if(!IsPlayerAlive(i))
+							continue;
+						if(IsOnDifferentTeams(attacker, i))
+							continue;
+						if(i == attacker)
+							continue;
+
+						LSPool[i] += addedLSPool;
+						if(LSPool[i] > lsCap*TF2Util_GetEntityMaxHealth(i)) {
+							LSPool[i] = lsCap*TF2Util_GetEntityMaxHealth(i);
+						}
+					}
+				}
+				if(IsValidEntity(inflictor)){
+					char inflictorClassname[32];
+					GetEdictClassname(inflictor, inflictorClassname, sizeof(inflictorClassname));
+					if(StrEqual("tf_projectile_sentryrocket", inflictorClassname)){
+						inflictor = getOwner(inflictor);
+						GetEdictClassname(inflictor, inflictorClassname, sizeof(inflictorClassname));
+					}
+					if(StrEqual("obj_sentrygun", inflictorClassname)){
+						AddBuildingHealth(inflictor, RoundToCeil(addedLSPool), attacker);
+					}
+				}
 			}
 
 			float armorPenetration = TF2Attrib_HookValueFloat(0.0, "armor_penetration_buff", attacker);

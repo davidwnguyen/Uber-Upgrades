@@ -166,71 +166,6 @@ public Event_Playerhurt(Handle event, const char[] name, bool:dontBroadcast)
 						}
 					}
 				}
-
-				//Lifesteal
-				float lifestealFactor = 1.0;
-				int healthHealed;
-				if(IsFakeClient(client))
-					lifestealFactor = 0.3;
-
-				lifestealFactor *= TF2Attrib_HookValueFloat(1.0, "lifesteal_effectiveness", CWeapon);
-				
-
-				if(hasBuffIndex(attacker, Buff_Plunder)){
-					Buff plunderBuff;
-					plunderBuff = playerBuffs[attacker][getBuffInArray(attacker, Buff_Plunder)]
-					lifestealFactor *= plunderBuff.severity;
-				}
-				
-				Address LifestealActive = TF2Attrib_GetByName(CWeapon, "lifesteal ability");//Lifesteal attribute
-				if(LifestealActive != Address_Null)
-					healthHealed += RoundToCeil(damage * TF2Attrib_GetValue(LifestealActive) * lifestealFactor);
-				
-				Address vampirePowerup = TF2Attrib_GetByName(attacker, "vampire powerup");//Vampire Powerup
-				if(vampirePowerup != Address_Null)
-					if(TF2Attrib_GetValue(vampirePowerup) == 1)
-						healthHealed += RoundToCeil(0.4 * damage * lifestealFactor);
-					else if(TF2Attrib_GetValue(vampirePowerup) == 2)
-						healthHealed += RoundToCeil(0.25 * damage * lifestealFactor);
-				
-				if(TF2_IsPlayerInCondition(attacker, TFCond_MedigunDebuff))// Conch
-					healthHealed += RoundToCeil(damage * 0.15 * lifestealFactor);
-				
-				if(GetEventInt(event, "custom") == 2)//backstab
-				{
-					Address BackstabLifestealActive = TF2Attrib_GetByName(CWeapon, "sanguisuge"); //Kunai
-					if(BackstabLifestealActive != Address_Null && TF2Attrib_GetValue(BackstabLifestealActive) > 0.0)
-						healthHealed += RoundToCeil(lifestealFactor * damage * 0.5 * TF2Attrib_GetValue(BackstabLifestealActive));
-				}
-				if(MadmilkDuration[client] > GetGameTime())
-					healthHealed += RoundToCeil(lifestealFactor * damage * (MadmilkDuration[client]-GetGameTime()) * 1.66 / 100.0);
-				
-				if(healthHealed > 0){
-					if(TF2Attrib_HookValueFloat(0.0, "vampire_powerup", attacker) == 3) {
-						if(GetClientHealth(attacker) >= TF2Util_GetEntityMaxHealth(attacker)) {
-							if(Overleech[attacker] < TF2Util_GetEntityMaxHealth(attacker) * 9){
-								Overleech[attacker] += healthHealed;
-								healthHealed = 0;
-							}
-						}
-					}
-					AddPlayerHealth(attacker, healthHealed, 1.5, true, attacker);
-					float spreadRatio = GetAttribute(CWeapon, "lifesteal to team", 0.0);
-					if(spreadRatio > 0){
-						for(int i = 1; i<= MaxClients; ++i){
-							if(!IsValidClient3(i))
-								continue;
-							if(!IsPlayerAlive(i))
-								continue;
-							if(IsOnDifferentTeams(attacker, i))
-								continue;
-							if(i == attacker)
-								continue;
-
-							AddPlayerHealth(i, RoundToFloor(healthHealed*spreadRatio), 1.5, true, attacker);
-						}
-					}
-				}
 			}
 		}
 	}
@@ -2426,6 +2361,16 @@ public OnGameFrame()
 					}
 
 					remainderHealthRegeneration[client] -= heal;
+				}
+				
+				if(LSPool[client] > 0){
+					int healthGained = RoundToCeil(TICKINTERVAL * TF2Util_GetEntityMaxHealth(client) * 0.1);
+					if(TF2Attrib_HookValueFloat(0.0, "vampire_powerup", client) == 1){
+						healthGained *= 2;
+					}
+					
+					LSPool[client] -= float(healthGained);
+					AddPlayerHealth(client, healthGained, 1.5);
 				}
 
 				if(RageActive[client])

@@ -382,6 +382,7 @@ float weaponSavedAttackTime[MAXENTITIES];
 float Overleech[MAXPLAYERS+1];
 float pylonCooldown[MAXPLAYERS+1];
 float infernalDetonationCooldown[MAXPLAYERS+1];
+float LSPool[MAXPLAYERS+1];
 
 //String
 char given_upgrd_classnames[LISTS][LISTS_CATEGORIES][128]

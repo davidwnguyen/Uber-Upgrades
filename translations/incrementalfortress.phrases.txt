@@ -1,5 +1,8 @@
 "Phrases"
 {
+	"Arcane - Arc"{
+		"en"		"Arcane - Arc"
+	}
 	"autocast arcanes"{
 		"en"		"Autocast Fast Arcanes while Attacking"
 	}

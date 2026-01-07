@@ -269,13 +269,13 @@ public void insertBuff(int client, Buff newBuff){
 public bool hasBuffIndex(int client, int index){
 	if(isBonus[index]){
 		for(int i = 0; i < MAXBUFFS; ++i){
-			if(playerBuffs[client][i].id == Buff_Nullification)
+			if(playerBuffs[client][i].id == Buff_Nullification && playerBuffs[client][i].duration > GetGameTime())
 				return false;
 		}
 	}
 
 	for(int i = 0; i < MAXBUFFS; ++i){
-		if(playerBuffs[client][i].id == index)
+		if(playerBuffs[client][i].id == index && playerBuffs[client][i].duration > GetGameTime())
 			return true;
 	}
 	return false;
@@ -386,50 +386,52 @@ public void ManagePlayerBuffs(int i){
 
 	char details[255] = "Statuses Active:"
 
-	for(int buff = 0;buff < MAXBUFFS; buff++)
-	{
-		if(playerBuffs[i][buff].id == 0)
-			continue;
-
-		//Clear out any non-active buffs.
-		if(playerBuffs[i][buff].duration != 0.0 && playerBuffs[i][buff].duration < GetGameTime()){
-			playerBuffs[i][buff].clear();
-			buffChange[i]=true;
-			continue;
-		}
-
-		bool flag;
-		
-		for(int buffCheck = 0; buffCheck < MAXBUFFS; buffCheck++)
+	if(!hasBuffIndex(i, Buff_Nullification)) {
+		for(int buff = 0;buff < MAXBUFFS; buff++)
 		{
-			if(playerBuffs[i][buffCheck].duration == 0.0)
+			if(playerBuffs[i][buff].id == 0)
 				continue;
-			if(buffCheck == buff)
+
+			//Clear out any non-active buffs.
+			if(playerBuffs[i][buff].duration != 0.0 && playerBuffs[i][buff].duration < GetGameTime()){
+				playerBuffs[i][buff].clear();
+				buffChange[i]=true;
 				continue;
-			if(playerBuffs[i][buffCheck].id == playerBuffs[i][buff].id &&
-				playerBuffs[i][buffCheck].priority > playerBuffs[i][buff].priority)
-				{flag = true;break;}
+			}
+
+			bool flag;
+			
+			for(int buffCheck = 0; buffCheck < MAXBUFFS; buffCheck++)
+			{
+				if(playerBuffs[i][buffCheck].duration == 0.0)
+					continue;
+				if(buffCheck == buff)
+					continue;
+				if(playerBuffs[i][buffCheck].id == playerBuffs[i][buff].id &&
+					playerBuffs[i][buffCheck].priority > playerBuffs[i][buff].priority)
+					{flag = true;break;}
+			}
+
+			if(flag)
+				continue;
+
+			additiveDamageRawBuff += playerBuffs[i][buff].additiveDamageRaw * playerBuffs[i][buff].severity;
+			additiveDamageMultBuff += playerBuffs[i][buff].additiveDamageMult * playerBuffs[i][buff].severity;
+			additiveAttackSpeedMultBuff += playerBuffs[i][buff].additiveAttackSpeedMult * playerBuffs[i][buff].severity;
+			additiveMoveSpeedMultBuff += playerBuffs[i][buff].additiveMoveSpeedMult * playerBuffs[i][buff].severity;
+			additiveDamageTakenBuff += playerBuffs[i][buff].additiveDamageTaken * playerBuffs[i][buff].severity;
+			additiveArmorPenetration += playerBuffs[i][buff].additiveArmorPenetration * playerBuffs[i][buff].severity;
+
+			multiplicativeDamageBuff *= applyMultSeverityMod(playerBuffs[i][buff].multiplicativeDamage, playerBuffs[i][buff].severity);
+			multiplicativeDamageTakenBuff *= applyMultSeverityMod(playerBuffs[i][buff].multiplicativeDamageTaken, playerBuffs[i][buff].severity);
+			multiplicativeAttackSpeedMultBuff *= applyMultSeverityMod(playerBuffs[i][buff].multiplicativeAttackSpeedMult, playerBuffs[i][buff].severity);
+			multiplicativeMoveSpeedMult *= applyMultSeverityMod(playerBuffs[i][buff].multiplicativeMoveSpeedMult, playerBuffs[i][buff].severity);
+
+			if(playerBuffs[i][buff].description[0] != '\0')
+				Format(details, sizeof(details), "%s\n%s: - %.1fs\n  %s", details, playerBuffs[i][buff].name, playerBuffs[i][buff].duration - GetGameTime(), playerBuffs[i][buff].description);
+			else
+				Format(details, sizeof(details), "%s\n%s - %.1fs", details, playerBuffs[i][buff].name, playerBuffs[i][buff].duration - GetGameTime());
 		}
-
-		if(flag)
-			continue;
-
-		additiveDamageRawBuff += playerBuffs[i][buff].additiveDamageRaw * playerBuffs[i][buff].severity;
-		additiveDamageMultBuff += playerBuffs[i][buff].additiveDamageMult * playerBuffs[i][buff].severity;
-		additiveAttackSpeedMultBuff += playerBuffs[i][buff].additiveAttackSpeedMult * playerBuffs[i][buff].severity;
-		additiveMoveSpeedMultBuff += playerBuffs[i][buff].additiveMoveSpeedMult * playerBuffs[i][buff].severity;
-		additiveDamageTakenBuff += playerBuffs[i][buff].additiveDamageTaken * playerBuffs[i][buff].severity;
-		additiveArmorPenetration += playerBuffs[i][buff].additiveArmorPenetration * playerBuffs[i][buff].severity;
-
-		multiplicativeDamageBuff *= applyMultSeverityMod(playerBuffs[i][buff].multiplicativeDamage, playerBuffs[i][buff].severity);
-		multiplicativeDamageTakenBuff *= applyMultSeverityMod(playerBuffs[i][buff].multiplicativeDamageTaken, playerBuffs[i][buff].severity);
-		multiplicativeAttackSpeedMultBuff *= applyMultSeverityMod(playerBuffs[i][buff].multiplicativeAttackSpeedMult, playerBuffs[i][buff].severity);
-		multiplicativeMoveSpeedMult *= applyMultSeverityMod(playerBuffs[i][buff].multiplicativeMoveSpeedMult, playerBuffs[i][buff].severity);
-
-		if(playerBuffs[i][buff].description[0] != '\0')
-			Format(details, sizeof(details), "%s\n%s: - %.1fs\n  %s", details, playerBuffs[i][buff].name, playerBuffs[i][buff].duration - GetGameTime(), playerBuffs[i][buff].description);
-		else
-			Format(details, sizeof(details), "%s\n%s - %.1fs", details, playerBuffs[i][buff].name, playerBuffs[i][buff].duration - GetGameTime());
 	}
 
 	Address relentlessPowerup = TF2Attrib_GetByName(i, "relentless powerup");
@@ -3245,11 +3247,11 @@ GivePowerupDescription(int client, char[] name, int amount){
 	}
 	else if(StrEqual("vampire powerup", name)){
 		if(amount == 2){
-			CPrintToChat(client, "{community}Leech Powerup {default}| {lightcyan}+25%% lifesteal, drains healing of enemies by 50%% if nearby. Also applies on hitting an enemy.");
+			CPrintToChat(client, "{community}Leech Powerup {default}| {lightcyan}+25%% incoming healing, drains healing of enemies by 50%% if nearby. Also applies on hitting an enemy.");
 		}else if(amount == 3){
-			CPrintToChat(client, "{community}Bloodbound Powerup {default}| {lightcyan}Lifesteal at maximum health instead fills Overleech, consumed to heal at 1.5x effectiveness while below 100%% HP. 0.75x incoming damage.");
+			CPrintToChat(client, "{community}Bloodbound Powerup {default}| {lightcyan}1.5x lifesteal effectiveness, lifesteal at maximum health instead fills Overleech, consumed to heal at 1.5x effectiveness while below 100%% HP. 0.75x incoming damage.");
 		}else{
-			CPrintToChat(client, "{community}Vampire Powerup {default}| {lightcyan}+40%% lifesteal, 1.25x bleed damage, and 0.75x incoming damage.");
+			CPrintToChat(client, "{community}Vampire Powerup {default}| {lightcyan}3x lifesteal effectiveness, 1.25x bleed damage, and 0.75x incoming damage.");
 		}
 	}
 	else if(StrEqual("precision powerup", name)){
@@ -4202,15 +4204,16 @@ void applyAfterburn(int victim, int attacker, int weapon, float damage){
 
 	float burndmgMult = 0.1
 	float burnTime = 6.0;
-	burndmgMult *= TF2Attrib_HookValueFloat(1.0, "mult_wpn_burndmg", weapon)*TF2Attrib_HookValueFloat(1.0, "debuff_magnitude_mult", weapon);
-	burnTime += TF2Attrib_HookValueFloat(0.0, "afterburn_rating", weapon);
-	burnTime *= TF2Attrib_HookValueFloat(1.0, "mult_wpn_burntime", weapon);
-
-	if(TF2Attrib_HookValueFloat(0.0, "supernova_powerup", attacker)) {
-		burndmgMult *= 2.0;
+	if(IsValidWeapon(weapon)){
+		burndmgMult *= TF2Attrib_HookValueFloat(1.0, "mult_wpn_burndmg", weapon)*TF2Attrib_HookValueFloat(1.0, "debuff_magnitude_mult", weapon);
+		burnTime += TF2Attrib_HookValueFloat(0.0, "afterburn_rating", weapon);
+		burnTime *= TF2Attrib_HookValueFloat(1.0, "mult_wpn_burntime", weapon);
+		if(TF2Attrib_HookValueFloat(0.0, "knockout_powerup", attacker) == 2 && TF2Util_GetWeaponSlot(weapon) == TFWeaponSlot_Melee){
+			burndmgMult *= 5;
+		}
 	}
-	if(GetAttribute(attacker, "knockout powerup", 0.0) == 2 && TF2Util_GetWeaponSlot(weapon) == TFWeaponSlot_Melee){
-		burndmgMult *= 5;
+	if(TF2Attrib_HookValueFloat(0.0, "supernova_powerup", attacker) == 2) {
+		burndmgMult *= 2.0;
 	}
 	
 	AfterburnStack stack;
@@ -4304,6 +4307,7 @@ cleanSlateClient(int client){
 	karmicJusticeScaling[client] = 0.0;
 	pylonCooldown[client] = 0.0;
 	infernalDetonationCooldown[client] = 0.0;
+	LSPool[client] = 0.0;
 	clearAllBuffs(client);
 	removeAfterburn(client);
 
