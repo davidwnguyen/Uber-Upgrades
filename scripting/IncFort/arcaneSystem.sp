@@ -1388,18 +1388,14 @@ public Action:ACallBeyond(Handle timer, client)
 
 	int projCount[] = {0,15,25,40};
 	float radius[] = {0.0,1500.0,2500.0,2500.0};
-	int tickRate[] = {0,5,2,0};
+	int tickRate[] = {0,3,2,0};
 	for(int i = 0;i<projCount[spellLevel];++i)
 	{
 		int iEntity = CreateEntityByName("tf_projectile_arrow");
 		if (!IsValidEdict(iEntity)) 
 			continue;
 
-		float fAngles[3]
-		float fOrigin[3]
-		float vBuffer[3]
-		float fVelocity[3]
-		float fwd[3]
+		float fAngles[3], fOrigin[3], vBuffer[3], fVelocity[3],fwd[3]
 		int iTeam = GetClientTeam(client);
 		SetEntityRenderColor(iEntity, 255, 255, 255, 0);
 		SetEntPropEnt(iEntity, Prop_Send, "m_hOwnerEntity", client);
@@ -1412,7 +1408,7 @@ public Action:ACallBeyond(Handle timer, client)
 		GetClientEyePosition(client, fOrigin);
 		GetClientEyeAngles(client,fAngles);
 		
-		fAngles[0] = -90.0 + GetRandomFloat(-120.0,120.0);
+		fAngles[0] = -90.0 + GetRandomFloat(-90.0,90.0);
 		fAngles[1] += GetRandomFloat(-60.0,60.0);
 
 		GetAngleVectors(fAngles, vBuffer, NULL_VECTOR, NULL_VECTOR);
@@ -1437,7 +1433,7 @@ public Action:ACallBeyond(Handle timer, client)
 		
 		homingRadius[iEntity] = radius[spellLevel];
 		homingTickRate[iEntity] = tickRate[spellLevel];
-		homingDelay[iEntity] = 0.15;
+		homingDelay[iEntity] = 0.1;
 	}
 
 	float clientpos[3];
