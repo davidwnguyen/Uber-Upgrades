@@ -1,5 +1,8 @@
 "Phrases"
 {
+	"Armor Piercing Shells"{
+		"en"		"Armor Piercing Shells"
+	}
 	"Arcane - Arc"{
 		"en"		"Arcane - Arc"
 	}
