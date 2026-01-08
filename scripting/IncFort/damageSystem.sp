@@ -1201,8 +1201,8 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 				damage *= 1.3;
 			}
 		}
-		char classname[32]; 
-		GetEdictClassname(weapon, classname, sizeof(classname)); 
+		char classname[64]; 
+		GetEdictClassname(weapon, classname, sizeof(classname));
 		if(StrEqual(classname, "tf_weapon_syringegun_medic"))
 			damage *= 1.8
 		if(TF2Attrib_HookValueFloat(0.0, "precision_powerup", attacker) == 3){

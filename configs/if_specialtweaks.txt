@@ -147,7 +147,7 @@
 		{
 			"gamestage"						"1"
 			"restriction"					"1"
-			"Charge Rate Multiplier"		"0.6"
+			"Charge Rate Multiplier"		"-0.6"
 			"Ability : Fireball Volley"		"1"
 			"afterburn time increased(N)"	"1.0"
 		}

@@ -3923,8 +3923,8 @@ stock float TF2_GetDPSModifiers(client,weapon, bool CountReloadModifiers = true,
 		{
 			float dpsMult = onlyModifiers ? 1.0 : TF2_GetDamageModifiers(client,weapon,critMod);
 			dpsMult /= TF2Attrib_HookValueFloat(1.0, "mult_postfiredelay", weapon);
+			dpsMult /= TF2Attrib_HookValueFloat(1.0, "mult_item_meter_charge_rate", weapon);
 			dpsMult /= GetAttribute(weapon, "halloween fire rate bonus");
-			dpsMult /= GetAttribute(weapon, "mult_item_meter_charge_rate");
 			dpsMult *= GetAttribute(weapon, "mult projectile count");
 			//If their weapon doesn't have a clip, reload rate also affects fire rate.
 			if(CountReloadModifiers)
