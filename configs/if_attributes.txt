@@ -6594,6 +6594,7 @@
 			"ref"		"lifesteal to team"
 			"attr_class"	"lifesteal_to_team"
 			"display"		"%.0f%%"
+			"attr_type"		"value_is_additive"
 			"cost"		"0"
 			"increase_ratio"	"0"
 			"value"		"0.1"

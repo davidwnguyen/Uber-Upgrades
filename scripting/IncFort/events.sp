@@ -2371,6 +2371,21 @@ public OnGameFrame()
 					
 					LSPool[client] -= float(healthGained);
 					AddPlayerHealth(client, healthGained, 1.5);
+					float spreadRatio = TF2Attrib_HookValueFloat(0.0, "lifesteal_to_team", client);
+					if(spreadRatio > 0){
+						for(int patient = 1; patient<= MaxClients; ++patient){
+							if(!IsValidClient3(patient))
+								continue;
+							if(!IsPlayerAlive(patient))
+								continue;
+							if(IsOnDifferentTeams(client, patient))
+								continue;
+							if(patient == client)
+								continue;
+
+							AddPlayerHealth(patient, healthGained, 1.5, true, client);
+						}
+					}
 				}
 
 				if(RageActive[client])

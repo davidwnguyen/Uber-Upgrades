@@ -846,24 +846,6 @@ public Action OnTakeDamage(victim, &attacker, &inflictor, float &damage, &damage
 				if(LSPool[attacker] > lsCap*TF2Util_GetEntityMaxHealth(attacker)) {
 					LSPool[attacker] = lsCap*TF2Util_GetEntityMaxHealth(attacker);
 				}
-				float spreadRatio = GetAttribute(weapon, "lifesteal to team", 0.0);
-				if(spreadRatio > 0){
-					for(int i = 1; i<= MaxClients; ++i){
-						if(!IsValidClient3(i))
-							continue;
-						if(!IsPlayerAlive(i))
-							continue;
-						if(IsOnDifferentTeams(attacker, i))
-							continue;
-						if(i == attacker)
-							continue;
-
-						LSPool[i] += addedLSPool;
-						if(LSPool[i] > lsCap*TF2Util_GetEntityMaxHealth(i)) {
-							LSPool[i] = lsCap*TF2Util_GetEntityMaxHealth(i);
-						}
-					}
-				}
 				if(IsValidEntity(inflictor)){
 					char inflictorClassname[32];
 					GetEdictClassname(inflictor, inflictorClassname, sizeof(inflictorClassname));
