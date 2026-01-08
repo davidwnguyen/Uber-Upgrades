@@ -2115,7 +2115,7 @@ public Action OnPlayerRunCmd(int client, int& buttons, int& impulse, float vel[3
 							if(IsOnDifferentTeams(client,i))
 								continue;
 							
-							if(!IsTargetInSightRange(client, i, 10.0, 2000.0, true, false))
+							if(!IsTargetInSightRange(client, i, 30.0, 2000.0, true, false))
 								continue;
 
 							if(!IsAbleToSee(client,i, false))
