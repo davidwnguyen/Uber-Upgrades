@@ -1184,7 +1184,7 @@ DisplayItemChange(client,itemidx)
 		}
 		case 354:
 		{
-			ChangeString = "The Concheror | Gives a 15% lifesteal effect to teammates when active. Can overheal to 150%. Rage scales off of firerate of weapon.";
+			ChangeString = "The Concheror | Gives a +25% lifesteal effect to teammates when active. Can overheal to 150%. Rage scales off of firerate of weapon.";
 		}
 		case 133:
 		{
@@ -1342,7 +1342,7 @@ DisplayItemChange(client,itemidx)
 		//Medic Primaries
 		case 36:
 		{
-			ChangeString = "The Blutsauger | 1.1x lifesteal effectiveness.";
+			ChangeString = "The Blutsauger | +15% lifesteal.";
 		}
 		//Medic Secondaries
 		case 411:
@@ -1409,7 +1409,7 @@ DisplayItemChange(client,itemidx)
 		//Spy Melees
 		case 356:
 		{
-			ChangeString = "The Conniver's Kunai | 1.5x lifesteal effectiveness.";
+			ChangeString = "The Conniver's Kunai | +35% lifesteal.";
 		}
 		//Spy Misc
 		case 735,736,810,831,933,1080,1102:
@@ -3249,9 +3249,9 @@ GivePowerupDescription(int client, char[] name, int amount){
 		if(amount == 2){
 			CPrintToChat(client, "{community}Leech Powerup {default}| {lightcyan}+25%% incoming healing, drains healing of enemies by 50%% if nearby. Also applies on hitting an enemy.");
 		}else if(amount == 3){
-			CPrintToChat(client, "{community}Bloodbound Powerup {default}| {lightcyan}1.5x lifesteal effectiveness, lifesteal at maximum health instead fills Overleech, consumed to heal at 1.5x effectiveness while below 100%% HP. 0.75x incoming damage.");
+			CPrintToChat(client, "{community}Bloodbound Powerup {default}| {lightcyan}+50%% lifesteal, lifesteal at maximum health instead fills Overleech, consumed to heal at 1.5x effectiveness while below 100%% HP. 0.75x incoming damage.");
 		}else{
-			CPrintToChat(client, "{community}Vampire Powerup {default}| {lightcyan}3x lifesteal effectiveness, 1.25x bleed damage, and 0.75x incoming damage.");
+			CPrintToChat(client, "{community}Vampire Powerup {default}| {lightcyan}+75%% lifesteal, 1.25x bleed damage, and 0.75x incoming damage.");
 		}
 	}
 	else if(StrEqual("precision powerup", name)){

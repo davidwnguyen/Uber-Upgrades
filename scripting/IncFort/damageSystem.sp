@@ -812,16 +812,16 @@ public Action OnTakeDamage(victim, &attacker, &inflictor, float &damage, &damage
 				lifestealFactor += (MadmilkDuration[victim]-GetGameTime()) * 1.66 / 100.0;
 
 			if(TF2_IsPlayerInCondition(attacker, TFCond_MedigunDebuff))// Conch
-				lifestealFactor += 0.15;
+				lifestealFactor += 0.25;
 			
 			//Then multiplicative sources
 			float vampirePowerup = TF2Attrib_HookValueFloat(0.0, "vampire_powerup", attacker);//Vampire Powerup
 			if(vampirePowerup == 1){
-				lifestealFactor *= 3.0;
+				lifestealFactor += 0.75;
 				lsCap *= 3.0;
 			}
 			else if(vampirePowerup == 3){
-				lifestealFactor *= 1.5;
+				lifestealFactor += 0.5;
 			}
 			
 			if(IsValidWeapon(weapon))
@@ -834,7 +834,7 @@ public Action OnTakeDamage(victim, &attacker, &inflictor, float &damage, &damage
 			}
 			if(lifestealFactor > 0){
 				float addedLSPool = lifestealFactor * damage / GetResistance(attacker, true);
-				if(TF2Attrib_HookValueFloat(0.0, "vampire_powerup", attacker) == 3) {
+				if(vampirePowerup == 3) {
 					if(GetClientHealth(attacker) >= TF2Util_GetEntityMaxHealth(attacker)) {
 						if(Overleech[attacker] < TF2Util_GetEntityMaxHealth(attacker) * 9){
 							Overleech[attacker] += addedLSPool;

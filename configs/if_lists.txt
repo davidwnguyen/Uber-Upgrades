@@ -7,10 +7,9 @@
 		{
 			"0"		"Health Bonus"
 			"1"		"health regen"
-			"2"		"lifesteal ability"
-			"3"		"Quadratic Damage Reduction"
-			"4"		"patient overheal bonus"
-			"5"		"critical block rating"
+			"2"		"Quadratic Damage Reduction"
+			"3"		"patient overheal bonus"
+			"4"		"critical block rating"
 		}
 		"Physical upgrades"
 		{
@@ -107,10 +106,9 @@
 		{
 			"0"		"Health Bonus"
 			"1"		"health regen"
-			"2"		"lifesteal ability"
-			"3"		"Quadratic Damage Reduction"
-			"4"		"patient overheal bonus"
-			"5"		"critical block rating"
+			"2"		"Quadratic Damage Reduction"
+			"3"		"patient overheal bonus"
+			"4"		"critical block rating"
 		}
 		"Physical upgrades"
 		{
@@ -207,10 +205,9 @@
 		{
 			"0"		"Health Bonus"
 			"1"		"health regen"
-			"2"		"lifesteal ability"
-			"3"		"Quadratic Damage Reduction"
-			"4"		"patient overheal bonus"
-			"5"		"critical block rating"
+			"2"		"Quadratic Damage Reduction"
+			"3"		"patient overheal bonus"
+			"4"		"critical block rating"
 		}
 		"Physical upgrades"
 		{
@@ -307,10 +304,9 @@
 		{
 			"0"		"Health Bonus"
 			"1"		"health regen"
-			"2"		"lifesteal ability"
-			"3"		"Quadratic Damage Reduction"
-			"4"		"patient overheal bonus"
-			"5"		"critical block rating"
+			"2"		"Quadratic Damage Reduction"
+			"3"		"patient overheal bonus"
+			"4"		"critical block rating"
 		}
 		"Physical upgrades"
 		{
@@ -407,10 +403,9 @@
 		{
 			"0"		"Health Bonus"
 			"1"		"health regen"
-			"2"		"lifesteal ability"
-			"3"		"Quadratic Damage Reduction"
-			"4"		"patient overheal bonus"
-			"5"		"critical block rating"
+			"2"		"Quadratic Damage Reduction"
+			"3"		"patient overheal bonus"
+			"4"		"critical block rating"
 		}
 		"Physical upgrades"
 		{
@@ -507,10 +502,9 @@
 		{
 			"0"		"Health Bonus"
 			"1"		"health regen"
-			"2"		"lifesteal ability"
-			"3"		"Quadratic Damage Reduction"
-			"4"		"patient overheal bonus"
-			"5"		"critical block rating"
+			"2"		"Quadratic Damage Reduction"
+			"3"		"patient overheal bonus"
+			"4"		"critical block rating"
 		}
 		"Physical upgrades"
 		{
@@ -607,10 +601,9 @@
 		{
 			"0"		"Health Bonus"
 			"1"		"health regen"
-			"2"		"lifesteal ability"
-			"3"		"Quadratic Damage Reduction"
-			"4"		"patient overheal bonus"
-			"5"		"critical block rating"
+			"2"		"Quadratic Damage Reduction"
+			"3"		"patient overheal bonus"
+			"4"		"critical block rating"
 		}
 		"Physical upgrades"
 		{
@@ -706,10 +699,9 @@
 		{
 			"0"		"Health Bonus"
 			"1"		"health regen"
-			"2"		"lifesteal ability"
-			"3"		"Quadratic Damage Reduction"
-			"4"		"patient overheal bonus"
-			"5"		"critical block rating"
+			"2"		"Quadratic Damage Reduction"
+			"3"		"patient overheal bonus"
+			"4"		"critical block rating"
 		}
 		"Physical upgrades"
 		{
@@ -808,10 +800,9 @@
 		{
 			"0"		"Health Bonus"
 			"1"		"health regen"
-			"2"		"lifesteal ability"
-			"3"		"Quadratic Damage Reduction"
-			"4"		"patient overheal bonus"
-			"5"		"critical block rating"
+			"2"		"Quadratic Damage Reduction"
+			"3"		"patient overheal bonus"
+			"4"		"critical block rating"
 		}
 		"Physical upgrades"
 		{
