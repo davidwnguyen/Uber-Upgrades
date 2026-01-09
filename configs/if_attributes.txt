@@ -5074,13 +5074,12 @@
 			"attr_class"	"lifesteal_ability"
 			"display"		"%.0f%%"
 			"attr_type"		"value_is_additive"
-			"cost"		"650"
+			"cost"		"700"
 			"increase_ratio"	"0.1"
 			"value"		"0.01"
 			"init"		"0.0"
 			"description"	"[{VALUE}*100]% of pre-mitigation damage is given as effective health to you."
-			"staged_max"		"0.2,0.3,0.3"
-			"max"		"0.1"
+			"max"		"0.4"
 		}
 		"1521"
 		{
