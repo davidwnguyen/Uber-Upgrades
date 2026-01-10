@@ -155,7 +155,7 @@ CastSunlightSpear(client, attuneSlot)
 
 	float clientpos[3];
 	GetClientEyePosition(client,clientpos);
-	EmitSoundToAll(SOUND_CALLBEYOND_CAST, 0, client, SNDLEVEL_NORMAL, _, 0.8, _,_,clientpos);
+	EmitSoundToAll(SOUND_CALLBEYOND_CAST, 0, client, SNDLEVEL_NORMAL, _, 0.6, _,_,clientpos);
 	int projectileAmount[] = {0,1,2,5};
 	float projectileSpeed[] = {0.0,2500.0,4000.0,6000.0};
 	for(int i=0;i<projectileAmount[spellLevel];++i){
@@ -503,7 +503,7 @@ CastArcanePrison(client, attuneSlot)
 	GetClientEyeAngles(client,ClientAngle);
 	int iTeam = GetClientTeam(client)
 	ClientPos[2] -= 20.0;
-	EmitSoundToAll(SOUND_CALLBEYOND_ACTIVE, 0, client, SNDLEVEL_RAIDSIREN, _, 1.0, _,_,ClientPos);
+	EmitSoundToAll(SOUND_CALLBEYOND_ACTIVE, 0, client, SNDLEVEL_NORMAL, _, 0.8, _,_,ClientPos);
 	
 	float fAngles[3]
 	float fOrigin[3]
@@ -1090,7 +1090,7 @@ public Action:ArcaneHunter(Handle timer, client)
 	
 	GetClientEyePosition(client, soundPos);
 	GetClientEyeAngles(client, clientAng);
-	EmitSoundToAll(SOUND_ARCANESHOOT, 0, _, SNDLEVEL_RAIDSIREN, _, 1.0, _,_,soundPos);
+	EmitSoundToAll(SOUND_ARCANESHOOT, 0, _, SNDLEVEL_NORMAL, _, 1.0, _,_,soundPos);
 	// define the direction of the sparks
 	float dir[3] = {0.0, 0.0, 0.0};
 	
@@ -1161,7 +1161,7 @@ CastBlackskyEye(client, attuneSlot)
 
 	float clientpos[3];
 	GetClientEyePosition(client,clientpos);
-	EmitSoundToAll(SOUND_CALLBEYOND_CAST, 0, _, SNDLEVEL_NORMAL, _, 0.7, _,_,clientpos);
+	EmitSoundToAll(SOUND_CALLBEYOND_CAST, 0, _, SNDLEVEL_NORMAL, _, 0.5, _,_,clientpos);
 	//Properties
 	int maxCount[] = {0,1,2,3};
 	float projSpeed[] = {0.0,1200.0,2000.0,3000.0};
@@ -1231,9 +1231,7 @@ CastACallBeyond(client, attuneSlot)
 	if(applyArcaneRestrictions(client, attuneSlot))
 		return; 
 
-
 	TF2_StunPlayer(client,1.5,0.0,TF_STUNFLAGS_BIGBONK,0);
-	TF2_AddCondition(client, TFCond_FreezeInput, 1.5);
 	CreateTimer(1.5, ACallBeyond, EntIndexToEntRef(client));
 	
 	float clientpos[3];
@@ -1241,7 +1239,6 @@ CastACallBeyond(client, attuneSlot)
 	EmitSoundToAll(SOUND_CALLBEYOND_CAST, 0, _, SNDLEVEL_RAIDSIREN, _, 1.0, _,_,clientpos);
 	CreateParticleEx(client, "merasmus_tp_bits", 1, _, _, 2.0);
 	CreateParticleEx(client, "spellbook_major_burning", 1);
-	CreateParticle(client, "unusual_meteor_cast_wheel_purple", true);
 }
 public Action:ACallBeyond(Handle timer, client) 
 {
@@ -1371,6 +1368,7 @@ DoZap(client,victim,spellLevel)
 	GetClientEyePosition(client,clientpos);
 	GetEntPropVector(victim, Prop_Data, "m_vecOrigin", VictimPosition);
 	VictimPosition[2] += 15.0;
+	clientpos[2] -= 15.0;
 	
 	TE_SetupBeamPoints(clientpos,VictimPosition,g_LightningSprite,spriteIndex,0,35,0.15,6.0,5.0,0,1.0,{255,000,255,255},20);
 	TE_SendToAll();
@@ -1860,7 +1858,7 @@ CastArc(client, attuneSlot)
 		float clientPosition[3];
 		GetClientEyePosition(client, clientPosition)
 
-		EmitSoundToAll(SOUND_ARCANESHOOTREADY, 0, _, SNDLEVEL_RAIDSIREN, _, 0.6, _, _, clientPosition);
+		EmitSoundToAll(SOUND_ARCANESHOOTREADY, 0, _, SNDLEVEL_NORMAL, _, 1.0, _, _, clientPosition);
 
 		for(int i=1;i<=MaxClients;++i){
 			hasForked[i][currentArcCast % 10] = false;

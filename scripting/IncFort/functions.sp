@@ -1159,7 +1159,7 @@ DisplayItemChange(client,itemidx)
 		}
 		case 414:
 		{
-			ChangeString = "The Liberty Launcher | Fires clip all at once. Reload time -60% and damage is reduced by 50%. Shots have a huge delay in-between.";
+			ChangeString = "The Liberty Launcher | Fires clip all at once. 0.4x reload time. Shots have a large delay in-between.";
 		}
 		case 441:
 		{
@@ -1241,7 +1241,7 @@ DisplayItemChange(client,itemidx)
 		}
 		case 996:
 		{
-			ChangeString = "The Loose Cannon | Fires clip all at once. Reload time -60% and damage is reduced by 50%. Shots have a huge delay in-between.";
+			ChangeString = "The Loose Cannon | Fires clip all at once. 0.4x reload time. Shots have a large delay in-between.";
 		}
 		case 1151:
 		{
@@ -1821,22 +1821,22 @@ refreshUpgrades(client, slot)
 				if(fireRateMod != 1.0)
 				{
 					damageModifier *= fireRateMod
-					TF2Attrib_RemoveByName(slotItem, "fire rate bonus");
+					TF2Attrib_SetByName(slotItem, "fire rate bonus", 1.0);
 				}
 				if(firerateActive2 != Address_Null)
 				{
 					damageModifier /= TF2Attrib_GetValue(firerateActive2);
-					TF2Attrib_RemoveByName(slotItem, "fire rate bonus HIDDEN");
+					TF2Attrib_SetByName(slotItem, "fire rate bonus HIDDEN", 1.0);
 				}
 				if(firerateActive3 != Address_Null)
 				{
 					damageModifier /= TF2Attrib_GetValue(firerateActive3);
-					TF2Attrib_RemoveByName(slotItem, "fire rate penalty HIDDEN");
+					TF2Attrib_SetByName(slotItem, "fire rate penalty HIDDEN", 1.0);
 				}
 				if(firerateActive4 != Address_Null)
 				{
 					damageModifier /= TF2Attrib_GetValue(firerateActive4);
-					TF2Attrib_RemoveByName(slotItem, "mult_item_meter_charge_rate");
+					TF2Attrib_SetByName(slotItem, "mult_item_meter_charge_rate", 1.0);
 				}
 				//If their weapon doesn't have a clip, reload rate also affects fire rate.
 				if(TF2Util_GetWeaponMaxClip(slotItem) == -1)
@@ -2579,6 +2579,9 @@ public bool applyArcaneRestrictions(int client, int attuneSlot)
 	float focusCost = arcaneMap[AttunedSpells[client][attuneSlot]-1].baseCost / ArcanePower[client];
 	float cooldown = arcaneMap[AttunedSpells[client][attuneSlot]-1].cooldown * TF2Attrib_HookValueFloat(1.0, "arcane_cooldown_rate", client) / SquareRoot(ArcanePower[client]);
 
+	if(SpellCooldowns[client][AttunedSpells[client][attuneSlot]-1] > GetGameTime())
+		return true;
+
 	if(fl_CurrentFocus[client] < focusCost)
 	{
 		SpellCooldowns[client][AttunedSpells[client][attuneSlot]-1] = GetGameTime()+0.2;
@@ -2586,8 +2589,6 @@ public bool applyArcaneRestrictions(int client, int attuneSlot)
 		EmitSoundToClient(client, SOUND_FAIL);
 		return true;
 	}
-	if(SpellCooldowns[client][AttunedSpells[client][attuneSlot]-1] > GetGameTime())
-		return true;
 
 	PrintHintText(client, "Used %s! -%.2f focus.",arcaneMap[AttunedSpells[client][attuneSlot]-1].name,focusCost);
 	fl_CurrentFocus[client] -= focusCost;
@@ -2893,7 +2894,9 @@ public getProjOrigin(entity)
 {
 	entity = EntRefToEntIndex(entity);
 	if(IsValidEdict(entity)){
-		SetEntProp(entity, Prop_Send, "m_CollisionGroup", 27);
+		if(GetEntityMoveType(entity) != MOVETYPE_VPHYSICS){
+			SetEntProp(entity, Prop_Send, "m_CollisionGroup", 27);
+		}
 		GetEntPropVector(entity, Prop_Data, "m_vecOrigin", entitySpawnPositions[entity]);
 
 		int owner = getOwner(entity);
@@ -4532,9 +4535,9 @@ PopulateFireRateMap(){
 
 PopulateArcaneMap(){
 	CreateArcaneSpell("Zap", "arcane zap", 5.0, 35.0, 0.5, CastZap);
-	CreateArcaneSpell("Lightning Strike", "arcane lightning strike", 50.0, 35.0, 11.0, CastLightning);
+	CreateArcaneSpell("Lightning Strike", "arcane lightning strike", 50.0, 200.0, 6.0, CastLightning);
 	CreateArcaneSpell("Projected Healing", "arcane projected healing", 65.0, 0.2, 15.0, CastHealing);
-	CreateArcaneSpell("A Call Beyond", "arcane a call beyond", 50.0, 90.0, 50.0, CastACallBeyond);
+	CreateArcaneSpell("A Call Beyond", "arcane a call beyond", 50.0, 90.0, 25.0, CastACallBeyond);
 	CreateArcaneSpell("Blacksky Eye", "arcane blacksky eye", 8.0, 15.0, 0.5, CastBlackskyEye);
 	CreateArcaneSpell("Sunlight Spear", "arcane sunlight spear", 50.0, 100.0, 0.5, CastSunlightSpear);
 	CreateArcaneSpell("Lightning Enchantment", "arcane lightning enchantment", 150.0, 80.0, 30.0, CastLightningEnchantment);
@@ -4542,16 +4545,16 @@ PopulateArcaneMap(){
 	CreateArcaneSpell("Arcane Prison", "arcane prison", 85.0, 10.0, 75.0, CastArcanePrison);
 	CreateArcaneSpell("Darkmoon Blade", "arcane darkmoon blade", 120.0, 15.0, 25.0, CastDarkmoonBlade);
 	CreateArcaneSpell("Speed Aura", "arcane speed aura", 40.0, 0.0, 40.0, CastSpeedAura);
-	CreateArcaneSpell("Aerial Strike", "arcane aerial strike", 95.0, 60.0, 50.0, CastAerialStrike);
-	CreateArcaneSpell("Inferno", "arcane inferno", 95.0, 15.0, 20.0, CastInferno);
+	CreateArcaneSpell("Aerial Strike", "arcane aerial strike", 95.0, 60.0, 25.0, CastAerialStrike);
+	CreateArcaneSpell("Inferno", "arcane inferno", 95.0, 15.0, 10.0, CastInferno);
 	CreateArcaneSpell("Mine Field", "arcane mine field", 70.0, 10.0, 50.0, CastMineField);
 	CreateArcaneSpell("Shockwave", "arcane shockwave", 50.0, 100.0, 20.0, CastShockwave);
 	CreateArcaneSpell("Auto-Sentry", "arcane autosentry", 150.0, 0.0, 80.0, CastAutoSentry);
 	CreateArcaneSpell("Soothing Sunlight", "arcane soothing sunlight", 150.0, 1.0, 180.0, CastSoothingSunlight);
-	CreateArcaneSpell("Arcane Hunter", "arcane hunter", 200.0, 100.0, 40.0, CastArcaneHunter);
+	CreateArcaneSpell("Arcane Hunter", "arcane hunter", 200.0, 100.0, 15.0, CastArcaneHunter);
 	CreateArcaneSpell("Sabotage", "arcane mark for death", 50.0, 0.0, 25.0, CastMarkForDeath);
 	CreateArcaneSpell("Infernal Enchantment", "arcane infernal enchantment", 250.0, 80.0, 60.0, CastInfernalEnchantment);
-	CreateArcaneSpell("Splitting Thunder", "arcane splitting thunder", 250.0, 135.0, 50.0, CastSplittingThunder);
+	CreateArcaneSpell("Splitting Thunder", "arcane splitting thunder", 250.0, 135.0, 25.0, CastSplittingThunder);
 	CreateArcaneSpell("Antiseptic Blast", "arcane antiseptic blast", 200.0, 300.0, 50.0, CastAntisepticBlast);
 	CreateArcaneSpell("Karmic Justice", "arcane karmic justice", 60.0, 8.0, 15.0, CastKarmicJustice);
 	CreateArcaneSpell("Snowstorm", "arcane snowstorm", 0.0, 90.0, 3.0, CastSnowstorm);

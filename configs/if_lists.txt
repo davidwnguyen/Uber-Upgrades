@@ -44,9 +44,9 @@
 			{
 				"0"		"damage bonus"
 				"1"		"ap (global)"
-				"2"		"Arcane Power"
-				"3"		"Focus Regeneration"
-				"4"		"autocast arcanes"
+				"2"		"Arcane Damage"
+				"3"		"Max Focus"
+				"4"		"Arcane Power"
 				"5"		"Arcane Cooldown Reduction"
 			}
 			"!Tier 1 Arcane Spells"
@@ -144,9 +144,9 @@
 			{
 				"0"		"damage bonus"
 				"1"		"ap (global)"
-				"2"		"Arcane Power"
-				"3"		"Focus Regeneration"
-				"4"		"autocast arcanes"
+				"2"		"Arcane Damage"
+				"3"		"Max Focus"
+				"4"		"Arcane Power"
 				"5"		"Arcane Cooldown Reduction"
 			}
 			"!Tier 1 Arcane Spells"
@@ -244,9 +244,9 @@
 			{
 				"0"		"damage bonus"
 				"1"		"ap (global)"
-				"2"		"Arcane Power"
-				"3"		"Focus Regeneration"
-				"4"		"autocast arcanes"
+				"2"		"Arcane Damage"
+				"3"		"Max Focus"
+				"4"		"Arcane Power"
 				"5"		"Arcane Cooldown Reduction"
 			}
 			"!Tier 1 Arcane Spells"
@@ -344,9 +344,9 @@
 			{
 				"0"		"damage bonus"
 				"1"		"ap (global)"
-				"2"		"Arcane Power"
-				"3"		"Focus Regeneration"
-				"4"		"autocast arcanes"
+				"2"		"Arcane Damage"
+				"3"		"Max Focus"
+				"4"		"Arcane Power"
 				"5"		"Arcane Cooldown Reduction"
 			}
 			"!Tier 1 Arcane Spells"
@@ -444,9 +444,9 @@
 			{
 				"0"		"damage bonus"
 				"1"		"ap (global)"
-				"2"		"Arcane Power"
-				"3"		"Focus Regeneration"
-				"4"		"autocast arcanes"
+				"2"		"Arcane Damage"
+				"3"		"Max Focus"
+				"4"		"Arcane Power"
 				"5"		"Arcane Cooldown Reduction"
 			}
 			"!Tier 1 Arcane Spells"
@@ -544,9 +544,9 @@
 			{
 				"0"		"damage bonus"
 				"1"		"ap (global)"
-				"2"		"Arcane Power"
-				"3"		"Focus Regeneration"
-				"4"		"autocast arcanes"
+				"2"		"Arcane Damage"
+				"3"		"Max Focus"
+				"4"		"Arcane Power"
 				"5"		"Arcane Cooldown Reduction"
 			}
 			"!Tier 1 Arcane Spells"
@@ -643,9 +643,9 @@
 			{
 				"0"		"damage bonus"
 				"1"		"ap (global)"
-				"2"		"Arcane Power"
-				"3"		"Focus Regeneration"
-				"4"		"autocast arcanes"
+				"2"		"Arcane Damage"
+				"3"		"Max Focus"
+				"4"		"Arcane Power"
 				"5"		"Arcane Cooldown Reduction"
 			}
 			"!Tier 1 Arcane Spells"
@@ -745,9 +745,9 @@
 			{
 				"0"		"damage bonus"
 				"1"		"ap (global)"
-				"2"		"Arcane Power"
-				"3"		"Focus Regeneration"
-				"4"		"autocast arcanes"
+				"2"		"Arcane Damage"
+				"3"		"Max Focus"
+				"4"		"Arcane Power"
 				"5"		"Arcane Cooldown Reduction"
 			}
 			"!Tier 1 Arcane Spells"
@@ -848,9 +848,9 @@
 			{
 				"0"		"damage bonus"
 				"1"		"ap (global)"
-				"2"		"Arcane Power"
-				"3"		"Focus Regeneration"
-				"4"		"autocast arcanes"
+				"2"		"Arcane Damage"
+				"3"		"Max Focus"
+				"4"		"Arcane Power"
 				"5"		"Arcane Cooldown Reduction"
 			}
 			"!Tier 1 Arcane Spells"

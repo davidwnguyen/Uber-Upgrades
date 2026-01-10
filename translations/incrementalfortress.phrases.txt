@@ -744,7 +744,7 @@
 	"Fan of Knives"{
 		"en"		"Fan of Knives"
 	}
-	"mult crit dmg"{
+	"crit damage mod"{
 		"en"		"Crit Damage Bonus"
 	}
 	"!Offensive Powerups"{

@@ -14,7 +14,7 @@
 			"value"		"50"
 			"init"		"0"
 			"description"	"Increases maximum capacity for focus.\nFocus regeneration is based off of maximum."
-			"max"		"100000"
+			"max"		"3000"
 		}
 		"1540"
 		{
@@ -35,13 +35,13 @@
 			"ref"		"Arcane Power"
 			"attr_class"	"arcane_power"
 			"display"		"%.0f%%"
-			"cost"		"700"
-			"increase_ratio"	"0.6"
-			"value"		"0.15"
+			"cost"		"400"
+			"increase_ratio"	"0.3"
+			"value"		"0.03"
 			"init"		"1"
 			"description"	"Multiplies focus capacity.\nMultiplies arcane damage by ^3.\nDecreases cooldowns by ^1/2x.\nDecreases focus costs by x value."
 			"optimizer_style"	"5"
-			"max"		"5.5"
+			"max"		"1.6"
 		}
 		"1541.2"
 		{
@@ -49,13 +49,12 @@
 			"ref"		"Arcane Damage"
 			"attr_class"	"arcane_damage"
 			"display"		"%.0f%%"
-			"cost"		"5000"
-			"value"		"2.5"
+			"cost"		"235"
+			"increase_ratio"	"0.02"
+			"value"		"0.4"
 			"init"		"1"
-			"increase_ratio"	"0.0"
-			"description"	"Multiplies arcane damage."
-			"optimizer_style"	"4"
-			"max"		"10001.0"
+			"optimizer_style" "1"
+			"max"		"41"
 		}
 		"1541.3"
 		{
@@ -63,12 +62,11 @@
 			"ref"		"Arcane Cooldown Reduction"
 			"attr_class"	"arcane_cooldown_rate"
 			"display"		"%.0f%%"
-			"cost"		"3000"
-			"increase_ratio"	"0.4"
-			"value"		"-0.02"
-			"staged_max"		"0.85,0.8,0.8"
+			"cost"		"1200"
+			"increase_ratio"	"0.8"
+			"value"		"-0.05"
 			"init"		"1"
-			"max"		"0.9"
+			"max"		"0.5"
 		}
 		"1541.4"
 		{
@@ -94,8 +92,8 @@
 			"increase_ratio"	"0"
 			"value"		"1"
 			"init"		"0"
-			"description"	"Zaps closest enemy for 35 base damage.\n30% chance to zap another time.\n0.5s CD"
-			"max"		"1"
+			"description"	"Zaps closest enemy for 35 base damage.\n30% chance to zap another time.\n0.5s cooldown.\nBuying a second time gives autocast while firing."
+			"max"		"2"
 		}
 		"1542.1"
 		{
@@ -107,8 +105,8 @@
 			"increase_ratio"	"0"
 			"value"		"1"
 			"init"		"0"
-			"description"	"Smites in an AOE at crosshair.\n200 base damage.\nApplies 2 seconds of heavy afterburn.\n11s CD"
-			"max"		"1"
+			"description"	"Smites in an AOE at crosshair.\n200 base damage.\nApplies 2 seconds of heavy afterburn.\n6s CD\nBuying a second time gives autocast while firing."
+			"max"		"2"
 		}
 		"1542.2"
 		{
@@ -133,8 +131,8 @@
 			"increase_ratio"	"0"
 			"value"		"1"
 			"init"		"0"
-			"description"	"Shoots 25 homing bolts that deal\n90 base damage on collision.\n50s CD"
-			"max"		"1"
+			"description"	"Shoots 25 homing bolts that deal\n90 base damage on collision.\n25s CD\nBuying a second time gives autocast while firing."
+			"max"		"2"
 		}
 		"1542.4"
 		{
@@ -146,8 +144,8 @@
 			"increase_ratio"	"0"
 			"value"		"1"
 			"init"		"0"
-			"description"	"Shoots a homing bolt that deals\n15 base damage on collision.\n0.5s CD"
-			"max"		"1"
+			"description"	"Shoots a homing bolt that deals\n15 base damage on collision.\n0.5s CD\nBuying a second time gives autocast while firing."
+			"max"		"2"
 		}
 		"1542.5"
 		{
@@ -159,8 +157,8 @@
 			"increase_ratio"	"0"
 			"value"		"1"
 			"init"		"0"
-			"description"	"Shoots a spear that deals 100 base damage.\n0.5s CD"
-			"max"		"1"
+			"description"	"Shoots a spear that deals 100 base damage.\n0.5s CD\nBuying a second time gives autocast while firing."
+			"max"		"2"
 		}
 		"1542.6"
 		{
@@ -185,8 +183,8 @@
 			"increase_ratio"	"0"
 			"value"		"1"
 			"init"		"0"
-			"description"	"Deals 100 base damage in an AOE around you.\nStuns targets for 0.4s and shortly massively increases dodge chance.\n18s CD."
-			"max"		"1"
+			"description"	"Deals 100 base damage in an AOE around you.\nStuns targets for 0.4s and shortly massively increases dodge chance.\n18s CD.\nBuying a second time gives autocast while firing."
+			"max"		"2"
 		}
 		"1542.8"
 		{
@@ -238,8 +236,8 @@
 			"increase_ratio"	"0"
 			"value"		"1"
 			"init"		"0"
-			"description"	"Summons 30 rockets to fall at crosshair,\neach dealing 60 base damage.\n50s CD."
-			"max"		"1"
+			"description"	"Summons 30 rockets to fall at crosshair,\neach dealing 60 base damage.\n25s CD.\nBuying a second time gives autocast while firing."
+			"max"		"2"
 		}
 		"1542.9"
 		{
@@ -251,8 +249,8 @@
 			"increase_ratio"	"0"
 			"value"		"1"
 			"init"		"0"
-			"description"	"Applies a deadly DOT in an AOE around you.\nDeals 15 base damage\nper tick. Applies 20 ticks.\n20s CD."
-			"max"		"1"
+			"description"	"Applies a deadly DOT in an AOE around you.\nDeals 15 base damage\nper tick. Applies 20 ticks.\n10s CD.\nBuying a second time gives autocast while firing."
+			"max"		"2"
 		}
 		"1542.9"
 		{
@@ -264,8 +262,8 @@
 			"increase_ratio"	"0"
 			"value"		"1"
 			"init"		"0"
-			"description"	"Summons 20 automatically detonating grenades.\nEach deals 10 base damage.\nFor every second alive, the grenades gain +35% damage.\n50s CD."
-			"max"		"1"
+			"description"	"Summons 20 automatically detonating grenades.\nEach deals 10 base damage.\nFor every second alive, the grenades gain +35% damage.\n25s CD.\nBuying a second time gives autocast while firing."
+			"max"		"2"
 		}
 		"1542.9"
 		{
@@ -316,8 +314,8 @@
 			"increase_ratio"	"0"
 			"value"		"1"
 			"init"		"0"
-			"description"	"Shoots 5 rays that deal 100 base damage.\nAutomatically homes in witihn 10 degrees and also splashes.\n40s CD."
-			"max"		"1"
+			"description"	"Shoots 5 rays that deal 100 base damage.\nAutomatically homes in witihn 10 degrees and also splashes.\n15s CD.\nBuying a second time gives autocast while firing."
+			"max"		"2"
 		}
 		"1542.9"
 		{
@@ -355,8 +353,8 @@
 			"increase_ratio"	"0"
 			"value"		"1"
 			"init"		"0"
-			"description"	"Casts for 3s and shoots 5 angularly separated sunlight spears.\nEach creating lines of lightning, dealing 135 base damage and applying +150 radiation.\n50s CD."
-			"max"		"1"
+			"description"	"Casts for 3s and shoots 5 sunlight spears.\nEach creating lines of lightning, dealing 135 base damage and applying +150 radiation.\n25s CD.\nBuying a second time gives autocast while firing."
+			"max"		"2"
 		}
 		"1543.3"
 		{
@@ -381,8 +379,8 @@
 			"increase_ratio"	"0"
 			"value"		"1"
 			"init"		"0"
-			"description"	"For every 1% damage received during a 8s period:\n+8 base damage to spell. Automatically procs upon\nhitting 400 base damage.\n15s CD."
-			"max"		"1"
+			"description"	"For every 1% damage received during a 8s period:\n+8 base damage to spell. Automatically procs upon\nhitting 400 base damage.\n15s CD.\nBuying a second time gives autocast while firing."
+			"max"		"2"
 		}
 		"1543.5"
 		{
@@ -407,8 +405,8 @@
 			"increase_ratio"	"0"
 			"value"		"1"
 			"init"		"0"
-			"description"	"."
-			"max"		"1"
+			"description"	"Sends a lightning bolt towards an aimed enemy.\nDeals 65 base damage and forks to nearby enemies twice.\n3s cd, 15 cost.\nBuying a second time gives autocast while firing."
+			"max"		"2"
 		}
 		"3"
 		{
@@ -3241,7 +3239,7 @@
 			"increase_ratio" "0.3"
 			"value"		"0.25"
 			"init"		"1.00"
-			"max"		"26.00"
+			"max"		"10.00"
 		}
 		"251"
 		{
@@ -5819,8 +5817,9 @@
 		}
 		"1582"
 		{
-			"name"		"mult crit dmg"
-			"ref"		"mult crit dmg"
+			"name"		"crit damage mod"
+			"ref"		"crit damage mod"
+			"attr_class"	"crit_damage_mod"
 			"display"		"%.0f%%"
 			"cost"		"0"
 			"value"		"0.1"
@@ -6629,13 +6628,14 @@
 		}
 		"1657"
 		{
-			"name"		"override projectile type"
+			"name"		"maelstrom charge" //Holy jank!
 			"ref"		"Maelstrom Charge"
+			"attr_class"	"override_projectile_type"
 			"display"		"%.0f"
 			"cost"		"0"
-			"value"		"48.00"
+			"value"		"40.00"
 			"init"		"0.00"
-			"max"		"48.00"
+			"max"		"40.00"
 		}
 		"1658"
 		{
@@ -7445,17 +7445,6 @@
 			"value"		"1.0"
 			"init"		"0.0"
 			"max"		"1.0"
-		}
-		"1730"
-		{
-			"name"		"autocast arcanes"
-			"ref"		"autocast arcanes"
-			"attr_class"	"autocast_arcanes"
-			"display"		"%.2fs"
-			"cost"		"1500"
-			"value"		"0.5"
-			"init"		"0.0"
-			"max"		"0.5"
 		}
 		//Filler
 		"1900.0"

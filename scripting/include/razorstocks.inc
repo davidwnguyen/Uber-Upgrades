@@ -501,7 +501,7 @@ stock bool TraceDirAim(const float origin[3], const float dir[3], float vec[3]) 
 	
 	AddVectors(origin, fwd, vecorigin);
 
-    Handle traceray = TR_TraceRayEx(vecorigin, vecangles, MASK_SHOT_HULL, RayType_Infinite);
+    Handle traceray = TR_TraceRayEx(vecorigin, vecangles, MASK_SHOT, RayType_Infinite);
     if (TR_DidHit(traceray)) {
         TR_GetEndPosition(vec, traceray);
         delete traceray;
@@ -523,7 +523,7 @@ stock bool TracePlayerAim(int client, float vec[3]) {
 	
 	AddVectors(vecorigin, fwd, vecorigin);
 
-    Handle traceray = TR_TraceRayFilterEx(vecorigin, vecangles, MASK_SHOT_HULL, RayType_Infinite,TEF_ExcludeEntity, client);
+    Handle traceray = TR_TraceRayFilterEx(vecorigin, vecangles, MASK_SHOT, RayType_Infinite,TEF_ExcludeEntity, client);
     if (TR_DidHit(traceray)) {
         TR_GetEndPosition(vec, traceray);
         delete traceray;
@@ -546,7 +546,7 @@ stock bool TracePlayerAimRanged(int client, float dist, float vec[3]) {
 	ScaleVector(fwd, dist/30.0);
 	AddVectors(vecorigin, fwd, vecEnd);
 
-    Handle traceray = TR_TraceRayFilterEx(vecorigin, vecEnd, MASK_SHOT_HULL, RayType_EndPoint,TEF_ExcludeEntity, client);
+    Handle traceray = TR_TraceRayFilterEx(vecorigin, vecEnd, MASK_SHOT, RayType_EndPoint,TEF_ExcludeEntity, client);
 	TR_GetEndPosition(vec, traceray);
     if (TR_DidHit(traceray)) {
         delete traceray;
@@ -561,7 +561,7 @@ stock float getLowestPosition(float vec[3], int entity = -1) {
 	vecangles[0] = 89.0;
 	vecangles[1] = 0.0;
 	vecangles[2] = 0.0;
-    Handle traceray = TR_TraceRayFilterEx(vec, vecangles, MASK_SHOT_HULL, RayType_Infinite, TraceEntityFilterOnlyWorld, entity);
+    Handle traceray = TR_TraceRayFilterEx(vec, vecangles, MASK_SHOT, RayType_Infinite, TraceEntityFilterOnlyWorld, entity);
     if (TR_DidHit(traceray)) {
 		float lastVec[3];
         TR_GetEndPosition(lastVec, traceray);
@@ -578,7 +578,7 @@ stock float getHighestPosition(float vec[3]) {
 	vecangles[0] = -89.0;
 	vecangles[1] = 0.0;
 	vecangles[2] = 0.0;
-    Handle traceray = TR_TraceRayFilterEx(vec, vecangles, MASK_SHOT_HULL, RayType_Infinite, TraceEntityFilterOnlyWorld);
+    Handle traceray = TR_TraceRayFilterEx(vec, vecangles, MASK_SHOT, RayType_Infinite, TraceEntityFilterOnlyWorld);
     if (TR_DidHit(traceray)) {
 		float lastVec[3];
         TR_GetEndPosition(lastVec, traceray);
@@ -591,7 +591,7 @@ stock float getHighestPosition(float vec[3]) {
 }
 public bool TEF_ExcludeEntity(entity, contentsMask, any:data)
 {
-	return (entity != data);
+	return (entity != data && entity <= MaxClients);
 }
 
 stock int GetHealingTarget(const int client)

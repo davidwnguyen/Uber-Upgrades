@@ -727,6 +727,7 @@ public Action:OnTouchExplodeJar(entity, other)
 		}
 		float damageBoost = TF2_GetDamageModifiers(owner, CWeapon);
 		if(entityMaelstromChargeCount[entity] > 0){
+			Radius *= 1.35;
 			float startpos[3];
 			startpos[0] = clientvec[0];
 			startpos[1] = clientvec[1];
@@ -744,10 +745,8 @@ public Action:OnTouchExplodeJar(entity, other)
 			TE_SendToAll();
 			TE_SetupSmoke(clientvec, g_SmokeSprite, 5.0, 10);
 			TE_SendToAll();
-			TE_SetupBeamRingPoint(clientvec, 20.0, Radius*(1+0.01*entityMaelstromChargeCount[entity]), g_LightningSprite, spriteIndex, 0, 5, 0.5, 10.0, 1.0, color, 200, 0);
-			TE_SendToAll();
 			
-			EmitSoundToAll(SOUND_THUNDER, entity, _, SNDLEVEL_RAIDSIREN, _, 1.0, _,_,clientvec);
+			EmitSoundToAll(SOUND_THUNDER, entity, _, SNDLEVEL_NORMAL, _, 1.0, _,_,clientvec);
 			
 			float LightningDamage = 70.0 * damageBoost * entityMaelstromChargeCount[entity];
 			float squaredRadius = Radius*Radius*(1+0.01*entityMaelstromChargeCount[entity])*(1+0.01*entityMaelstromChargeCount[entity]);
@@ -762,7 +761,7 @@ public Action:OnTouchExplodeJar(entity, other)
 					VictimPos[2] += 30.0;
 					if(GetVectorDistance(clientvec,VictimPos,true) <= squaredRadius)
 						if(IsPointVisible(clientvec,VictimPos)){
-							SDKHooks_TakeDamage(i,owner,owner, LightningDamage, DMG_IGNOREHOOK, _,_,_,false);
+							SDKHooks_TakeDamage(i,owner,owner, LightningDamage, DMG_IGNOREHOOK, CWeapon,_,_,false);
 						}
 				}
 			}

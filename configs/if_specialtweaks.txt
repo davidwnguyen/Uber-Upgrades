@@ -57,7 +57,7 @@
 			"gamestage"						"1"
 			"restriction"					"1"
 			"fire rate bonus HIDDEN"		"5.0"
-			"mult crit dmg"				"4.0"
+			"crit damage mod"				"4.0"
 			"Crit on Kill Duration"			"4.0"
 		}
 		"Fan of Knives"
@@ -76,14 +76,14 @@
 			"projectile spread angle penalty"		"2"
 			"fire rate penalty(unremoveable)"		"50.0"
 			"damage bonus HIDDEN(b)"		"1.0"
-			"mult crit dmg"				"3.5"
+			"crit damage mod"				"3.5"
 		}
 		"Homing Flares"
 		{
 			"gamestage"						"1"
 			"restriction"					"1"
 			"projectile homing radius"		"200.0"
-			"mult crit dmg"					"2.5"
+			"crit damage mod"					"2.5"
 			"Ability : Homing Flares"		"1"
 		}
 		"Explosive Bullets(P)"
@@ -110,7 +110,7 @@
 			"restriction"					"1"
 			"bleeding duration"				"6"
 			"Bleed Per Hit"					"2"
-			"mult crit dmg"				"5.0"
+			"crit damage mod"				"5.0"
 		}
 		"Frostborn Wrath"
 		{
@@ -119,7 +119,7 @@
 			"accuracy scales damage"		"1"
 			"ammo conservation"				"5"
 			"damage causes freeze"			"120"
-			"mult crit dmg"					"3.0"
+			"crit damage mod"					"3.0"
 		}
 		"Scorchiest Shot"
 		{
@@ -141,7 +141,7 @@
 			"restriction"					"1"
 			"additive piercing damage"		"30"
 			"damage causes freeze"			"120"
-			"mult crit dmg"				"5.0"
+			"crit damage mod"				"5.0"
 		}
 		"Fireball Volley"
 		{
@@ -166,7 +166,7 @@
 			"restriction"					"1"
 			"additive piercing damage"		"10"
 			"damage causes freeze"			"140"
-			"mult crit dmg"				"5.0"
+			"crit damage mod"				"5.0"
 			"projectile penetration"		"1"
 		}
 		"Toxic Infusion"
@@ -272,7 +272,7 @@
 			"Maelstrom Charge"				"1"
 			"weapon fire rate 2"			"1"
 			"damage bonus HIDDEN(b)"		"7"
-			"mult crit dmg"				"3"
+			"crit damage mod"				"3"
 		}
 		"Alchemist's Concoction"
 		{
@@ -326,7 +326,7 @@
 			"gamestage"						"1"
 			"restriction"					"1"
 			"fireworks chance"				"3.5"
-			"mult crit dmg"				"3"
+			"crit damage mod"				"3"
 			"damage bonus HIDDEN(b)"		"3"
 		}
 		"Splintering Wasps"
@@ -335,7 +335,7 @@
 			"restriction"					"1"
 			"explosion wasps"				"3"
 			"mult dmg direct hit"			"5"
-			"mult crit dmg"				"2"
+			"crit damage mod"				"2"
 			"Bleed Per Hit"					"2"
 		}
 		"Cluster Bomb"

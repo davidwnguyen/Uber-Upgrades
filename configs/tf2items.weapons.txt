@@ -353,14 +353,13 @@
 		{	
 			"preserve_attributes"	"1"
 			"classname"		"tf_weapon_grenadelauncher"
-			"1"				"damage mult 13; 0.67"
-			"2"				"auto fires full clip all at once;1.0"
-			"3"				"override projectile type;2.0"
-			"4"				"projectile spread angle penalty;2.0"
-			"5"				"reload time increased hidden;0.4"
-			"6"				"weapon fire rate;6.0"
-			"7"				"explosive bullets;0.0"
-			"8"				"projectile speed multiplier;1.5"
+			"1"				"auto fires full clip all at once;1.0"
+			"2"				"override projectile type;2.0"
+			"3"				"projectile spread angle penalty;2.0"
+			"4"				"reload time increased hidden;0.4"
+			"5"				"weapon fire rate;4.0"
+			"6"				"explosive bullets;0.0"
+			"7"				"projectile speed multiplier;1.5"
 		}
 		"308" //Loch-n-Load
 		{
@@ -373,12 +372,11 @@
 		"996" //Loose Cannon
 		{
 			"preserve_attributes"	"1"
-			"1"				"damage mult 13; 0.67"
-			"2"				"auto fires full clip all at once;1.0"
-			"3"				"override projectile type;17.0"
-			"4"				"projectile spread angle penalty;2.0"
-			"5"				"reload time increased hidden;0.4"
-			"6"				"weapon fire rate;6.0"
+			"1"				"auto fires full clip all at once;1.0"
+			"2"				"override projectile type;17.0"
+			"3"				"projectile spread angle penalty;2.0"
+			"4"				"reload time increased hidden;0.4"
+			"5"				"weapon fire rate;4.0"
 		}
 		"416" //Market Gardener
 		{

@@ -679,14 +679,25 @@ public Action TF2_OnTakeDamage(int victim, int &attacker, int &inflictor, float 
 
 public Action TF2_OnTakeDamageModifyRules(int victim, int &attacker, int &inflictor, float &damage, int &damagetype, int &weapon, float damageForce[3], float damagePosition[3], int damagecustom, CritType &critType){
 	if(0 < victim <= MaxClients && 0 < attacker <= MaxClients){
+		float critNullify = TF2Attrib_HookValueFloat(0.0, "critical_block_rating", victim);
+		float critRating = 0.0; 
+		float critMod = 1.0;
+		if(IsValidWeapon(weapon)) {
+			critRating = TF2Attrib_HookValueFloat(0.0, "critical_rating", weapon);
+			critMod = TF2Attrib_HookValueFloat(1.0, "crit_damage_mod", weapon);
+		}
+		else {
+			critRating = TF2Attrib_HookValueFloat(0.0, "critical_rating", attacker);
+			critMod = TF2Attrib_HookValueFloat(1.0, "crit_damage_mod", attacker);
+		}
+
 		if(critType == CritType_Crit){
 			damage /= 3.0;
-			float critNullify = TF2Attrib_HookValueFloat(0.0, "critical_block_rating", victim);
-			float critRating = TF2Attrib_HookValueFloat(0.0, "critical_rating", attacker);
+
 			if(critNullify/(critNullify+800) >= GetRandomFloat()){
 				critType = CritType_None;
 			}else{
-				damage += damage*((1+critRating/200.0)/(1+critNullify/200));
+				damage += damage*((critMod+critRating/200.0)/(1+critNullify/200));
 			}
 			return Plugin_Changed;
 		}
@@ -696,12 +707,10 @@ public Action TF2_OnTakeDamageModifyRules(int victim, int &attacker, int &inflic
 			else
 				critType = CritType_MiniCrit
 
-			float critNullify = TF2Attrib_HookValueFloat(0.0, "critical_block_rating", victim);
-			float critRating = TF2Attrib_HookValueFloat(0.0, "critical_rating", attacker);
 			if(critNullify/(critNullify+800) >= GetRandomFloat()){
 				critType = CritType_None;
 			}else{
-				float bonusDamage = damage*0.35*(1+(critRating-critNullify)/200);
+				float bonusDamage = damage*0.35*(critMod+(critRating-critNullify)/200);
 				if(bonusDamage < 0)
 					bonusDamage = 0.0;
 				damage += bonusDamage;

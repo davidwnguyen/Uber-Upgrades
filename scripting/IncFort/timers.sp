@@ -1854,7 +1854,7 @@ public Action Timer_SplittingThunderThink(Handle timer, int entityRef){
 	float ProjectileDamage = ArcaneDamage[owner] * scaling[spellLevel];
 
 	EntityExplosion(owner, ProjectileDamage, 300.0, endpos, -1, false, entity);
-	EmitSoundToAll(SOUND_THUNDER, entity, _, SNDLEVEL_RAIDSIREN, _, 1.0, _,_,endpos);
+	EmitSoundToAll(SOUND_THUNDER, entity, _, SNDLEVEL_NORMAL, _, 1.0, _,_,endpos);
 
 	return Plugin_Continue;
 }
