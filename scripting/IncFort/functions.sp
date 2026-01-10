@@ -244,7 +244,7 @@ void CreateParticleEx(iEntity, char[] strParticle, m_iAttachType = 0, m_iAttachm
 		if(time > 0.0){
 			CreateTimer(time, Timer_KillTEParticle, EntIndexToEntRef(iEntity))
 		}
-		if(m_iAttachType < 1 && GetVectorLength(fOffset)){
+		if(m_iAttachType < 1 && !GetVectorLength(fOffset)){
 			GetEntPropVector(iEntity, Prop_Data, "m_vecOrigin", fOffset);
 		}
 	}
