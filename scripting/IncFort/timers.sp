@@ -1362,7 +1362,7 @@ public Action ResetClientsTimer(Handle timer){
 			TF2_RegeneratePlayer(client);
 		}
 		CurrencyOwned[client] = (StartMoney + additionalstartmoney);
-		for(int j = 0; j < Max_Attunement_Slots;j++){
+		for(int j = 0; j < MAX_ARCANESPELLS;j++){
 			SpellCooldowns[client][j] = 0.0;
 		}
 	}
@@ -1509,7 +1509,7 @@ public Action WaveFailed(Handle timer)
 					CreateTimer(0.25, MvMFailTimer, GetClientUserId(client));
 				}
 				CurrencyOwned[client] = StartMoney + additionalstartmoney - moneyReduction
-				for(int j = 0; j < Max_Attunement_Slots;j++)
+				for(int j = 0; j < MAX_ARCANESPELLS;j++)
 				{
 					SpellCooldowns[client][j] = 0.0;
 				}

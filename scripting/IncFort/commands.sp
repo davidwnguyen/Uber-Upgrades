@@ -666,7 +666,7 @@ public OnCvarChanged(Handle cvar, const char[] oldVal, const char[] newVal)
 		for(int client=1;client<=MaxClients;client++){
 			if(IsValidClient(client)){
 				if(CheckForAttunement(client)){
-					for(int i = 0; i < Max_Attunement_Slots;++i){
+					for(int i = 0; i < MAX_ARCANESPELLS;++i){
 						SpellCooldowns[client][i] = 0.0;
 					}
 				}

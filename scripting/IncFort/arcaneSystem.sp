@@ -1309,7 +1309,7 @@ CastZap(client, attuneSlot)
 {
 	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
-	if(SpellCooldowns[client][attuneSlot] > GetGameTime())
+	if(SpellCooldowns[client][AttunedSpells[client][attuneSlot]-1] > GetGameTime())
 		return;
 
 	//zap yeah?
@@ -1357,7 +1357,7 @@ CastZap(client, attuneSlot)
 	}
 	else
 	{
-		SpellCooldowns[client][attuneSlot] = GetGameTime()+0.2;
+		SpellCooldowns[client][AttunedSpells[client][attuneSlot]-1] = GetGameTime()+0.2;
 	}
 }
 DoZap(client,victim,spellLevel)
@@ -1825,13 +1825,8 @@ bool hasForked[MAXPLAYERS][10];
 int currentArcCast = 0;
 CastArc(client, attuneSlot)
 {
-	if(SpellCooldowns[client][attuneSlot] > GetGameTime())
+	if(SpellCooldowns[client][AttunedSpells[client][attuneSlot]-1] > GetGameTime())
 		return;
-
-	float clientPosition[3];
-	GetClientEyePosition(client, clientPosition)
-
-	EmitSoundToAll(SOUND_ARCANESHOOTREADY, 0, _, SNDLEVEL_RAIDSIREN, _, 1.0, _, _, clientPosition);
 
 	int target = -1;
 	for(int i=1;i<=MaxClients;++i)
@@ -1862,6 +1857,11 @@ CastArc(client, attuneSlot)
 		if(applyArcaneRestrictions(client, attuneSlot))
 			return;
 
+		float clientPosition[3];
+		GetClientEyePosition(client, clientPosition)
+
+		EmitSoundToAll(SOUND_ARCANESHOOTREADY, 0, _, SNDLEVEL_RAIDSIREN, _, 0.6, _, _, clientPosition);
+
 		for(int i=1;i<=MaxClients;++i){
 			hasForked[i][currentArcCast % 10] = false;
 		}
@@ -1869,7 +1869,7 @@ CastArc(client, attuneSlot)
 		currentArcCast++;
 	}
 	else{
-		SpellCooldowns[client][attuneSlot] = GetGameTime()+0.2;
+		SpellCooldowns[client][AttunedSpells[client][attuneSlot]-1] = GetGameTime()+0.2;
 	}
 }
 
