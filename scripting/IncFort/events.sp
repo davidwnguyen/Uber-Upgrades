@@ -1660,14 +1660,14 @@ public Action OnPlayerRunCmd(int client, int& buttons, int& impulse, float vel[3
 					{
 						if(AttunedSpells[client][i] != 0)
 						{
-							int spellID = RoundToNearest(AttunedSpells[client][i]-1.0)
+							int spellID = AttunedSpells[client][i]-1
 							if(SpellCooldowns[client][spellID]-GetGameTime() > 0.0)
 								continue;
 
-							if(arcaneMap[AttunedSpells[client][i]-1].cooldown > autoCastArcanes)
+							if(arcaneMap[spellID].cooldown > autoCastArcanes)
 								continue;
 							
-							Call_StartFunction(INVALID_HANDLE, arcaneMap[AttunedSpells[client][i]-1].callback);
+							Call_StartFunction(INVALID_HANDLE, arcaneMap[spellID].callback);
 							Call_PushCell(client);
 							Call_PushCell(i);
 							Call_Finish();

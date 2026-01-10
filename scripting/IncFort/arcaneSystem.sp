@@ -1349,7 +1349,7 @@ CastZap(client, attuneSlot)
 
 	if(validCount > 0)
 	{
-		if(applyArcaneRestrictions(client, attuneSlot)){
+		if(!applyArcaneRestrictions(client, attuneSlot)){
 			for (int victim = 0;victim < validCount;victim++){
 				DoZap(client,closestClient[victim], spellLevel);
 			}
