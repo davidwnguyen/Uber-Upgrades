@@ -1498,3 +1498,35 @@ stock bool IsStringBlank(const char[] input)
 	}
 	return true;
 }
+
+stock InsertionSortFloatIndices(const float[] values, int[] indices, int size)
+{
+    for (int i = 0; i < size; i++)
+    {
+        indices[i] = -1;
+    }
+
+    int count = 0;
+
+    for (int i = 0; i < size; i++)
+    {
+        if (values[i] > 0.0)
+        {
+            indices[count++] = i;
+        }
+    }
+
+    for (int i = 1; i < count; i++)
+    {
+        int key = indices[i];
+        int j = i - 1;
+
+        while (j >= 0 && values[indices[j]] > values[key])
+        {
+            indices[j + 1] = indices[j];
+            j--;
+        }
+
+        indices[j + 1] = key;
+    }
+}

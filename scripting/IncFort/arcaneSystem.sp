@@ -1821,22 +1821,134 @@ CastHomingFlares(int client, int attuneSlot){
 	}
 }
 
+bool hasForked[MAXPLAYERS][10];
+int currentArcCast = 0;
 CastArc(client, attuneSlot)
 {
-	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
+	if(SpellCooldowns[client][attuneSlot] > GetGameTime())
+		return;
 
-	if(applyArcaneRestrictions(client, attuneSlot))
-		return; 
+	float clientPosition[3];
+	GetClientEyePosition(client, clientPosition)
 
-	float CPOS[3];
-	GetClientEyePosition(client,CPOS)
-	
-	EmitSoundToAll(SOUND_ARCANESHOOTREADY, 0, _, SNDLEVEL_RAIDSIREN, _, 1.0, _,_,CPOS);
-	
-	int MaxUses[] = {0, 5,10,30}
-	float duration[] = {0.0,0.4,0.3,0.1}
-	for(int i = 1;i<=MaxUses[spellLevel];++i)
+	EmitSoundToAll(SOUND_ARCANESHOOTREADY, 0, _, SNDLEVEL_RAIDSIREN, _, 1.0, _, _, clientPosition);
+
+	int target = -1;
+	for(int i=1;i<=MaxClients;++i)
 	{
-		CreateTimer(duration[spellLevel]*i,ArcaneHunter,client);
+		if(!IsValidClient3(i))
+			continue;
+			
+		if(!IsPlayerAlive(i))
+			continue;
+
+		if(!IsOnDifferentTeams(client,i))
+			continue;
+		
+		if(TF2_IsPlayerInCondition(i, TFCond_Ubercharged) || TF2_IsPlayerInCondition(i, TFCond_UberchargedHidden))
+			continue;
+
+		if(!IsTargetInSightRange(client, i, 10.0, 6000.0, true, false))
+			continue;
+
+		if(!IsAbleToSee(client,i, false))
+			continue;
+			
+		target = i;
+		break;
 	}
+
+	if(IsValidClient3(target)) {
+		if(applyArcaneRestrictions(client, attuneSlot))
+			return;
+
+		for(int i=1;i<=MaxClients;++i){
+			hasForked[i][currentArcCast % 10] = false;
+		}
+		DoArc(client, target, currentArcCast % 10);
+		currentArcCast++;
+	}
+	else{
+		SpellCooldowns[client][attuneSlot] = GetGameTime()+0.2;
+	}
+}
+
+DoArc(int client, int victim, int currentForkInstance, int previousTarget = -1, int forkCount = 0)
+{
+	if(!IsValidForDamage(victim))
+		return;
+
+	float clientpos[3], VictimPosition[3];
+
+	GetClientEyePosition(client,clientpos);
+	if(IsValidClient3(previousTarget))
+		GetClientEyePosition(previousTarget, clientpos);
+
+	GetEntPropVector(victim, Prop_Data, "m_vecOrigin", VictimPosition);
+	VictimPosition[2] += 15.0;
+	clientpos[2] -= 15.0;
+	
+	TE_SetupBeamPoints(clientpos,VictimPosition,g_LightningSprite,spriteIndex,0,35,0.45,6.0,5.0,0,1.0,{255,000,255,255},20);
+	TE_SendToAll();
+	EmitSoundToAll(SOUND_ZAP, 0, _, SNDLEVEL_CONVO, _, 1.0, _,_,clientpos);
+	
+	float LightningDamage = 65.0 * ArcaneDamage[client];
+	SDKHooks_TakeDamage(victim,client,client, LightningDamage, DMG_SHOCK|DMG_IGNOREHOOK, -1, NULL_VECTOR, NULL_VECTOR, false);
+	hasForked[victim][currentForkInstance] = true;
+		
+	if(forkCount > 2)
+		return;
+	
+	Handle hPack = CreateDataPack();
+	WritePackCell(hPack, EntIndexToEntRef(client));
+	WritePackCell(hPack, EntIndexToEntRef(victim));
+	WritePackCell(hPack, currentForkInstance);
+	WritePackCell(hPack, forkCount);
+	CreateTimer(0.15,arcForkAgain,hPack);
+}
+public Action arcForkAgain(Handle timer, DataPack data)
+{
+	ResetPack(data);
+	int client = EntRefToEntIndex(ReadPackCell(data));
+	int previousTarget = EntRefToEntIndex(ReadPackCell(data));
+	int forkInstance = ReadPackCell(data);
+	int forkCount = ReadPackCell(data);
+
+	if(!IsValidClient3(client) || !IsValidClient3(previousTarget)){
+		delete data;
+		return Plugin_Stop;
+	}
+
+	float distanceArray[MAXPLAYERS];
+	for(int i = 1; i<=MaxClients; i++) {
+		if(!IsClientInGame(i))
+			continue;
+		if(!IsPlayerAlive(i))
+			continue;
+		if(!IsOnDifferentTeams(client, i))
+			continue;
+		if(hasForked[i][forkInstance])
+			continue;
+
+		float chainPosition[3], victimPosition[3], distance;
+		GetClientEyePosition(i, victimPosition);
+		GetClientEyePosition(previousTarget, chainPosition);
+		distance = GetVectorDistance(chainPosition, victimPosition, true);
+		if(distance > 250000.0)
+			continue;
+
+		distanceArray[i] = distance;
+	}
+
+	int closestTargets[MAXPLAYERS];
+	InsertionSortFloatIndices(distanceArray, closestTargets, sizeof(closestTargets));
+
+	for(int i=0;i<2;i++){
+		if(IsValidClient3(closestTargets[i])){
+			DoArc(client, closestTargets[i], forkInstance, previousTarget, forkCount+1);
+		}
+	}
+
+	delete data;
+	return Plugin_Stop;
 }
