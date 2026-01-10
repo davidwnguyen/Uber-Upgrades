@@ -1661,27 +1661,16 @@ public Action OnPlayerRunCmd(int client, int& buttons, int& impulse, float vel[3
 						if(AttunedSpells[client][i] != 0)
 						{
 							int spellID = RoundToNearest(AttunedSpells[client][i]-1.0)
-							float timeLeft = SpellCooldowns[client][spellID]-GetGameTime();
-							if(timeLeft < 0.0)
-								timeLeft = 0.0;
+							if(SpellCooldowns[client][spellID]-GetGameTime() > 0.0)
+								continue;
 
-							if(timeLeft == 0.0){
-								switch(AttunedSpells[client][i])
-								{
-									case 1:
-									{
-										CastZap(client, i);
-									}
-									case 5:
-									{
-										CastBlackskyEye(client, i);
-									}
-									case 6:
-									{
-										CastSunlightSpear(client, i);
-									}
-								}
-							}
+							if(arcaneMap[AttunedSpells[client][i]-1].cooldown > autoCastArcanes)
+								continue;
+							
+							Call_StartFunction(INVALID_HANDLE, arcaneMap[AttunedSpells[client][i]-1].callback);
+							Call_PushCell(client);
+							Call_PushCell(i);
+							Call_Finish();
 						}
 					}
 				}

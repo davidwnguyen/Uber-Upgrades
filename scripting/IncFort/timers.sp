@@ -338,7 +338,7 @@ public Action:Timer_FixedVariables(Handle timer)
 						if(timeLeft < 0.0)
 							timeLeft = 0.0;
 
-						Format(spellnum, sizeof(spellnum),"%i - %s | %.1fs\n", i+1, ArcaneSpellList[spellID], timeLeft);
+						Format(spellnum, sizeof(spellnum),"%i - %s | %.1fs\n", i+1, arcaneMap[spellID].name, timeLeft);
 						StrCat(spellHUD,sizeof(spellHUD),spellnum);
 					}
 				}

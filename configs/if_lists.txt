@@ -57,6 +57,7 @@
 				"3"		"Arcane - Healing Aura"
 				"4"		"Arcane - Darkmoon Blade"
 				"5"		"Arcane - Speed Aura"
+				"6"		"Arcane - Arc"
 			}
 			"!Tier 2 Arcane Spells"
 			{
@@ -155,6 +156,7 @@
 				"2"		"Arcane - Lightning Strike"
 				"3"		"Arcane - Healing Aura"
 				"4"		"Arcane - Darkmoon Blade"
+				"5"		"Arcane - Arc"
 			}
 			"!Tier 2 Arcane Spells"
 			{
@@ -244,7 +246,7 @@
 				"1"		"ap (global)"
 				"2"		"Arcane Power"
 				"3"		"Focus Regeneration"
-								"4"		"autocast arcanes"
+				"4"		"autocast arcanes"
 				"5"		"Arcane Cooldown Reduction"
 			}
 			"!Tier 1 Arcane Spells"
@@ -254,6 +256,7 @@
 				"2"		"Arcane - Lightning Strike"
 				"3"		"Arcane - Healing Aura"
 				"4"		"Arcane - Darkmoon Blade"
+				"5"		"Arcane - Arc"
 			}
 			"!Tier 2 Arcane Spells"
 			{
@@ -343,7 +346,7 @@
 				"1"		"ap (global)"
 				"2"		"Arcane Power"
 				"3"		"Focus Regeneration"
-								"4"		"autocast arcanes"
+				"4"		"autocast arcanes"
 				"5"		"Arcane Cooldown Reduction"
 			}
 			"!Tier 1 Arcane Spells"
@@ -353,6 +356,7 @@
 				"2"		"Arcane - Lightning Strike"
 				"3"		"Arcane - Healing Aura"
 				"4"		"Arcane - Darkmoon Blade"
+				"5"		"Arcane - Arc"
 			}
 			"!Tier 2 Arcane Spells"
 			{
@@ -442,7 +446,7 @@
 				"1"		"ap (global)"
 				"2"		"Arcane Power"
 				"3"		"Focus Regeneration"
-								"4"		"autocast arcanes"
+				"4"		"autocast arcanes"
 				"5"		"Arcane Cooldown Reduction"
 			}
 			"!Tier 1 Arcane Spells"
@@ -453,6 +457,7 @@
 				"3"		"Arcane - Healing Aura"
 				"4"		"Arcane - Darkmoon Blade"
 				"5"		"Arcane - Shockwave"
+				"6"		"Arcane - Arc"
 			}
 			"!Tier 2 Arcane Spells"
 			{
@@ -541,7 +546,7 @@
 				"1"		"ap (global)"
 				"2"		"Arcane Power"
 				"3"		"Focus Regeneration"
-								"4"		"autocast arcanes"
+				"4"		"autocast arcanes"
 				"5"		"Arcane Cooldown Reduction"
 			}
 			"!Tier 1 Arcane Spells"
@@ -551,6 +556,7 @@
 				"2"		"Arcane - Lightning Strike"
 				"3"		"Arcane - Healing Aura"
 				"4"		"Arcane - Darkmoon Blade"
+				"6"		"Arcane - Arc"
 			}
 			"!Tier 2 Arcane Spells"
 			{
@@ -639,7 +645,7 @@
 				"1"		"ap (global)"
 				"2"		"Arcane Power"
 				"3"		"Focus Regeneration"
-								"4"		"autocast arcanes"
+				"4"		"autocast arcanes"
 				"5"		"Arcane Cooldown Reduction"
 			}
 			"!Tier 1 Arcane Spells"
@@ -649,6 +655,7 @@
 				"2"		"Arcane - Lightning Strike"
 				"3"		"Arcane - Healing Aura"
 				"4"		"Arcane - Darkmoon Blade"
+				"5"		"Arcane - Arc"
 			}
 			"!Tier 2 Arcane Spells"
 			{
@@ -664,7 +671,7 @@
 				"0"		"Arcane - A Call Beyond"
 				"1"		"Arcane - Infernal Enchantment"
 				"2"		"Arcane - Splitting Thunder"
-				"Attr3"		"Arcane - Soothing Sunlight"
+				"3"		"Arcane - Soothing Sunlight"
 			}
 		}
 		"Powerup Upgrades"
@@ -740,17 +747,18 @@
 				"1"		"ap (global)"
 				"2"		"Arcane Power"
 				"3"		"Focus Regeneration"
-								"4"		"autocast arcanes"
+				"4"		"autocast arcanes"
 				"5"		"Arcane Cooldown Reduction"
 			}
 			"!Tier 1 Arcane Spells"
 			{
-				"Attr1"		"Arcane - Zap"
-				"Attr2"		"Arcane - Lightning Strike"
-				"Attr3"		"Arcane - Healing Aura"
-				"Attr4"		"Arcane - Blacksky Eye"
-				"Attr5"		"Arcane - Darkmoon Blade"
-				"Attr6"		"Arcane - Mark-For-Death"
+				"0"		"Arcane - Zap"
+				"1"		"Arcane - Lightning Strike"
+				"2"		"Arcane - Healing Aura"
+				"3"		"Arcane - Blacksky Eye"
+				"4"		"Arcane - Darkmoon Blade"
+				"5"		"Arcane - Mark-For-Death"
+				"6"		"Arcane - Arc"
 			}
 			"!Tier 2 Arcane Spells"
 			{
@@ -842,7 +850,7 @@
 				"1"		"ap (global)"
 				"2"		"Arcane Power"
 				"3"		"Focus Regeneration"
-								"4"		"autocast arcanes"
+				"4"		"autocast arcanes"
 				"5"		"Arcane Cooldown Reduction"
 			}
 			"!Tier 1 Arcane Spells"
@@ -852,6 +860,7 @@
 				"2"		"Arcane - Lightning Strike"
 				"3"		"Arcane - Healing Aura"
 				"4"		"Arcane - Darkmoon Blade"
+				"5"		"Arcane - Arc"
 			}
 			"!Tier 2 Arcane Spells"
 			{

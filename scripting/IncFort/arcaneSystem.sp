@@ -1,136 +1,8 @@
 public void CastSpell(int client, int param2){
-	//waiting for there to be a way to map functions
-	switch(AttunedSpells[client][param2])
-	{
-		case 1:
-		{
-			CastZap(client, param2);
-		}
-		case 2:
-		{
-			CastLightning(client, param2);
-		}
-		case 3:
-		{
-			CastHealing(client, param2);
-		}
-		case 4:
-		{
-			CastACallBeyond(client, param2);
-		}
-		case 5:
-		{
-			CastBlackskyEye(client, param2);
-		}
-		case 6:
-		{
-			CastSunlightSpear(client, param2);
-		}
-		case 7:
-		{
-			CastLightningEnchantment(client, param2);
-		}
-		case 8:
-		{
-			CastSnapFreeze(client, param2);
-		}
-		case 9:
-		{
-			CastArcanePrison(client, param2);
-		}
-		case 10:
-		{
-			CastDarkmoonBlade(client, param2);
-		}
-		case 11:
-		{
-			CastSpeedAura(client, param2);
-		}
-		case 12:
-		{
-			CastAerialStrike(client, param2);
-		}
-		case 13:
-		{
-			CastInferno(client, param2);
-		}
-		case 14:
-		{
-			CastMineField(client, param2);
-		}
-		case 15:
-		{
-			CastShockwave(client, param2);
-		}
-		case 16:
-		{
-			CastAutoSentry(client, param2);
-		}						
-		case 17:
-		{
-			CastSoothingSunlight(client, param2);
-		}
-		case 18:
-		{
-			CastArcaneHunter(client, param2);
-		}
-		case 19:
-		{
-			CastMarkForDeath(client, param2);
-		}
-		case 20:
-		{
-			CastInfernalEnchantment(client, param2);
-		}
-		case 21:
-		{
-			CastSplittingThunder(client, param2);
-		}
-		case 22:
-		{
-			CastAntisepticBlast(client, param2);
-		}
-		case 23:
-		{
-			CastKarmicJustice(client, param2);
-		}
-		case 24:
-		{
-			CastSnowstorm(client, param2);
-		}
-		case 25:
-		{
-			CastStunShot(client, param2);
-		}
-		case 26:
-		{
-			CastFireballVolley(client, param2);
-		}
-		case 27:
-		{
-			CastDash(client, param2);
-		}
-		case 28:
-		{
-			CastTransientMoonlight(client, param2);
-		}
-		case 29:
-		{
-			CastCorpsePiler(client, param2);
-		}
-		case 30:
-		{
-			CastHomingFlares(client, param2);
-		}
-		case 31:
-		{
-			CastSilentDash(client, param2);
-		}
-		default:
-		{
-			PrintHintText(client, "Sorry, we havent implemented this yet!");
-		}
-	}
+	Call_StartFunction(INVALID_HANDLE, arcaneMap[AttunedSpells[client][param2]-1].callback);
+	Call_PushCell(client);
+	Call_PushCell(param2);
+	Call_Finish();
 }
 
 //Arcane Menu
@@ -148,7 +20,7 @@ public Menu_ShowArcane(client)
 				continue;
 
 			char fstr[32]
-			Format(fstr, sizeof(fstr), "Use %s", ArcaneSpellList[AttunedSpells[client][s]-1]);
+			Format(fstr, sizeof(fstr), "Use %s", arcaneMap[AttunedSpells[client][s]-1].name);
 			AddMenuItem(menu, "spell", fstr);
 		}
 		if (IsValidClient(client) && IsPlayerAlive(client))
@@ -209,7 +81,7 @@ public Action:Command_UseArcane(client, args)
 			if(id < 0)
 				continue;
 			
-			if(StrContains(ArcaneSpellList[id], arg1, false) != -1) {
+			if(StrContains(arcaneMap[id].name, arg1, false) != -1) {
 				param2 = i;
 				break;
 			}
@@ -236,7 +108,7 @@ public Action:Command_UseArcane(client, args)
 //Arcane Spells
 CastMarkForDeath(client, attuneSlot)
 {
-	if(applyArcaneRestrictions(client, attuneSlot, fl_MaxFocus[client]*0.5, 25.0))
+	if(applyArcaneRestrictions(client, attuneSlot))
 		return; 
 
 	float clientpos[3];
@@ -278,7 +150,7 @@ CastSunlightSpear(client, attuneSlot)
 {
 	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
-	if(applyArcaneRestrictions(client, attuneSlot, 30.0 + (20.0 * TF2Attrib_HookValueFloat(1.0, "arcane_damage", client)), 0.5))
+	if(applyArcaneRestrictions(client, attuneSlot))
 		return; 
 
 	float clientpos[3];
@@ -337,7 +209,7 @@ CastSunlightSpear(client, attuneSlot)
 CastLightningEnchantment(client, attuneSlot)
 {
 	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
-	if(applyArcaneRestrictions(client, attuneSlot, 150.0 + (40.0 * TF2Attrib_HookValueFloat(1.0, "arcane_damage", client)), 30.0))
+	if(applyArcaneRestrictions(client, attuneSlot))
 		return;
 		
 	LightningEnchantment[client] = ArcaneDamage[client] * 80.0;
@@ -347,7 +219,7 @@ CastLightningEnchantment(client, attuneSlot)
 CastDarkmoonBlade(client, attuneSlot)
 {
 	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
-	if(applyArcaneRestrictions(client, attuneSlot, 100.0 + (20.0 * TF2Attrib_HookValueFloat(1.0, "arcane_damage", client)), 25.0))
+	if(applyArcaneRestrictions(client, attuneSlot))
 		return; 
 	
 	DarkmoonBlade[client] = ArcaneDamage[client] * 15.0;
@@ -358,7 +230,7 @@ CastAntisepticBlast(client, attuneSlot)
 {
 	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
-	if(applyArcaneRestrictions(client, attuneSlot, 400.0 + (120.0 * TF2Attrib_HookValueFloat(1.0, "arcane_damage", client)), 120.0))
+	if(applyArcaneRestrictions(client, attuneSlot))
 		return; 
 	
 	float clientpos[3], soundPos[3], clientAng[3];
@@ -422,7 +294,7 @@ CastAntisepticBlast(client, attuneSlot)
 	}
 }
 CastSnowstorm(client, attuneSlot){
-	if(applyArcaneRestrictions(client, attuneSlot, 0.0, 1.0))
+	if(applyArcaneRestrictions(client, attuneSlot))
 		return;
 
 	if(snowstormActive[client]){
@@ -438,7 +310,7 @@ CastSnowstorm(client, attuneSlot){
 }
 CastKarmicJustice(client, attuneSlot){
 
-	if(applyArcaneRestrictions(client, attuneSlot, 60.0 + (40.0 * TF2Attrib_HookValueFloat(1.0, "arcane_damage", client)), 15.0))
+	if(applyArcaneRestrictions(client, attuneSlot))
 		return;
 
 	karmicJusticeScaling[client] = 8.0;
@@ -483,7 +355,7 @@ CastInfernalEnchantment(client, attuneSlot)
 {
 	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
-	if(applyArcaneRestrictions(client, attuneSlot, 400.0 + (120.0 * TF2Attrib_HookValueFloat(1.0, "arcane_damage", client)), 60.0))
+	if(applyArcaneRestrictions(client, attuneSlot))
 		return; 
 	
 	int args[2];args[0] = EntIndexToEntRef(client);args[1] = spellLevel;
@@ -507,7 +379,7 @@ CastSplittingThunder(client, attuneSlot)
 {
 	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
-	if(applyArcaneRestrictions(client, attuneSlot, 400.0 + (120.0 * TF2Attrib_HookValueFloat(1.0, "arcane_damage", client)), 50.0))
+	if(applyArcaneRestrictions(client, attuneSlot))
 		return; 
 	
 	float clientpos[3];
@@ -580,7 +452,7 @@ CastSnapFreeze(client, attuneSlot)
 {
 	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
-	if(applyArcaneRestrictions(client, attuneSlot, 50.0 + (20.0 * TF2Attrib_HookValueFloat(1.0, "arcane_damage", client)), 18.0))
+	if(applyArcaneRestrictions(client, attuneSlot))
 		return; 
 
 	float clientpos[3];
@@ -622,7 +494,7 @@ CastArcanePrison(client, attuneSlot)
 {
 	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
-	if(applyArcaneRestrictions(client, attuneSlot, 50.0 + (35.0 * TF2Attrib_HookValueFloat(1.0, "arcane_damage", client)), 75.0))
+	if(applyArcaneRestrictions(client, attuneSlot))
 		return; 
 
 	float ClientPos[3];
@@ -706,7 +578,7 @@ CastSpeedAura(client, attuneSlot)
 {
 	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
-	if(applyArcaneRestrictions(client, attuneSlot, fl_MaxFocus[client]*0.4, 40.0))
+	if(applyArcaneRestrictions(client, attuneSlot))
 		return; 
 
 	float ClientPos[3];
@@ -739,8 +611,7 @@ CastAerialStrike(client, attuneSlot)
 {
 	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
-	float cooldown[] = {0.0,50.0,30.0,10.0}
-	if(applyArcaneRestrictions(client, attuneSlot, 50.0 + (45.0 * TF2Attrib_HookValueFloat(1.0, "arcane_damage", client)), cooldown[spellLevel]))
+	if(applyArcaneRestrictions(client, attuneSlot))
 		return; 
 
 	float delay[] = {0.0,1.0,0.6,0.2}
@@ -829,8 +700,7 @@ CastInferno(client, attuneSlot)
 {
 	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
-	float cooldown[] = {0.0,20.0,15.0,10.0}
-	if(applyArcaneRestrictions(client, attuneSlot, 50.0 + (45.0 * TF2Attrib_HookValueFloat(1.0, "arcane_damage", client)), cooldown[spellLevel]))
+	if(applyArcaneRestrictions(client, attuneSlot))
 		return;
 
 	float ClientPos[3];
@@ -895,7 +765,7 @@ CastMineField(client, attuneSlot)
 {
 	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
-	if(applyArcaneRestrictions(client, attuneSlot, 50.0 + (45.0 * TF2Attrib_HookValueFloat(1.0, "arcane_damage", client)), 50.0))
+	if(applyArcaneRestrictions(client, attuneSlot))
 		return;
 		
 	float ClientPos[3];
@@ -1019,7 +889,7 @@ CastShockwave(client, attuneSlot)
 {
 	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
-	if(applyArcaneRestrictions(client, attuneSlot, 50.0, 20.0))
+	if(applyArcaneRestrictions(client, attuneSlot))
 		return; 
 
 	float ClientPos[3];
@@ -1059,7 +929,7 @@ CastShockwave(client, attuneSlot)
 }
 CastAutoSentry(client, attuneSlot)
 {
-	if(applyArcaneRestrictions(client, attuneSlot, fl_MaxFocus[client], 80.0))
+	if(applyArcaneRestrictions(client, attuneSlot))
 		return; 
 	int iTeam = GetClientTeam(client)
 		
@@ -1111,9 +981,7 @@ CastSoothingSunlight(client, attuneSlot)
 {
 	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
-	float cooldown[] = {0.0,180.0,120.0,60.0}
-
-	if(applyArcaneRestrictions(client, attuneSlot, fl_MaxFocus[client], cooldown[spellLevel]))
+	if(applyArcaneRestrictions(client, attuneSlot))
 		return; 
 
 	float ClientPos[3];
@@ -1169,16 +1037,13 @@ CastArcaneHunter(client, attuneSlot)
 {
 	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
-	if(applyArcaneRestrictions(client, attuneSlot, 200.0, 40.0))
+	if(applyArcaneRestrictions(client, attuneSlot))
 		return; 
 
 	float CPOS[3];
 	GetClientEyePosition(client,CPOS)
 	
-	for(int i=0;i<30;++i)
-	{
-		EmitSoundToAll(SOUND_ARCANESHOOTREADY, 0, _, SNDLEVEL_RAIDSIREN, _, 1.0, _,_,CPOS);
-	}
+	EmitSoundToAll(SOUND_ARCANESHOOTREADY, 0, _, SNDLEVEL_RAIDSIREN, _, 1.0, _,_,CPOS);
 	
 	int MaxUses[] = {0, 5,10,30}
 	float duration[] = {0.0,0.4,0.3,0.1}
@@ -1291,7 +1156,7 @@ CastBlackskyEye(client, attuneSlot)
 {
 	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
-	if(applyArcaneRestrictions(client, attuneSlot, 8.0, 0.5))
+	if(applyArcaneRestrictions(client, attuneSlot))
 		return; 
 
 	float clientpos[3];
@@ -1363,7 +1228,7 @@ CastBlackskyEye(client, attuneSlot)
 }
 CastACallBeyond(client, attuneSlot)
 {
-	if(applyArcaneRestrictions(client, attuneSlot, 50.0, 50.0))
+	if(applyArcaneRestrictions(client, attuneSlot))
 		return; 
 
 
@@ -1444,14 +1309,6 @@ CastZap(client, attuneSlot)
 {
 	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
-	float focusCost = 5.0/ArcanePower[client];
-	if(fl_CurrentFocus[client] < focusCost)
-	{
-		SpellCooldowns[client][AttunedSpells[client][attuneSlot]-1] = GetGameTime()+0.2;
-		PrintHintText(client, "Not enough focus! Requires %.2f focus.",focusCost);
-		EmitSoundToClient(client, SOUND_FAIL);
-		return;
-	}
 	if(SpellCooldowns[client][attuneSlot] > GetGameTime())
 		return;
 
@@ -1492,9 +1349,10 @@ CastZap(client, attuneSlot)
 
 	if(validCount > 0)
 	{
-		applyArcaneRestrictions(client, attuneSlot, focusCost*ArcanePower[client], 0.5);
-		for (int victim = 0;victim < validCount;victim++){
-			DoZap(client,closestClient[victim], spellLevel);
+		if(applyArcaneRestrictions(client, attuneSlot)){
+			for (int victim = 0;victim < validCount;victim++){
+				DoZap(client,closestClient[victim], spellLevel);
+			}
 		}
 	}
 	else
@@ -1544,7 +1402,7 @@ CastLightning(client, attuneSlot)
 {
 	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
-	if(applyArcaneRestrictions(client, attuneSlot, 50.0, 11.0))
+	if(applyArcaneRestrictions(client, attuneSlot))
 		return; 
 
 	float clientpos[3];
@@ -1625,7 +1483,7 @@ CastHealing(client, attuneSlot)//Projected Healing
 {
 	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
-	if(applyArcaneRestrictions(client, attuneSlot, fl_MaxFocus[client]*0.65, 15.0))
+	if(applyArcaneRestrictions(client, attuneSlot))
 		return; 
 
 	float clientpos[3];
@@ -1751,7 +1609,7 @@ CastWarp(client){
 }
 
 CastStunShot(int client, int attuneSlot){
-	if(applyArcaneRestrictions(client, attuneSlot, fl_MaxFocus[client]*0.1, 15.0))
+	if(applyArcaneRestrictions(client, attuneSlot))
 		return;
 	
 	int CWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
@@ -1768,7 +1626,7 @@ CastStunShot(int client, int attuneSlot){
 }
 
 CastFireballVolley(int client, int attuneSlot){
-	if(applyArcaneRestrictions(client, attuneSlot, fl_MaxFocus[client]*0.1, 5.0))
+	if(applyArcaneRestrictions(client, attuneSlot))
 		return;
 	
 	int CWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
@@ -1815,25 +1673,8 @@ CastFireballVolley(int client, int attuneSlot){
 	}
 }
 
-CastDash(int client, int attuneSlot){
-	if(applyArcaneRestrictions(client, attuneSlot, 0.0, 1.0))
-		return;
-	
-	float flSpeed = GetEntPropFloat(client, Prop_Data, "m_flMaxspeed") * 2.0;
-	float flVel[3],flAng[3], vBuffer[3]
-	GetClientEyeAngles(client,flAng)
-	GetAngleVectors(flAng, vBuffer, NULL_VECTOR, NULL_VECTOR)
-	flVel[0] = flSpeed * vBuffer[0] * 1.5;
-	flVel[1] = flSpeed * vBuffer[1] * 1.5;
-	flVel[2] = 100.0 + (flSpeed * (vBuffer[2] * 0.75));
-	if(GetEntityFlags(client) & FL_ONGROUND)
-		flVel[2] += 200;
-	TeleportEntity(client, NULL_VECTOR,NULL_VECTOR, flVel)
-	EmitSoundToAll(SOUND_DASH, client, -1, 80, 0, 1.0);
-}
-
 CastTransientMoonlight(int client, int attuneSlot){
-	if(applyArcaneRestrictions(client, attuneSlot, fl_MaxFocus[client]*0.1, 5.0))
+	if(applyArcaneRestrictions(client, attuneSlot))
 		return;
 	
 	int CWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
@@ -1908,7 +1749,7 @@ CastTransientMoonlight(int client, int attuneSlot){
 }
 
 CastCorpsePiler(int client, int attuneSlot){
-	if(applyArcaneRestrictions(client, attuneSlot, 0.0, 30.0))
+	if(applyArcaneRestrictions(client, attuneSlot))
 		return;
 	
 	int CWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
@@ -1928,7 +1769,7 @@ CastCorpsePiler(int client, int attuneSlot){
 }
 
 CastHomingFlares(int client, int attuneSlot){
-	if(applyArcaneRestrictions(client, attuneSlot, 0.0, 7.0))
+	if(applyArcaneRestrictions(client, attuneSlot))
 		return;
 	
 	int CWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
@@ -1980,23 +1821,22 @@ CastHomingFlares(int client, int attuneSlot){
 	}
 }
 
-CastSilentDash(int client, int attuneSlot){
-	if(applyArcaneRestrictions(client, attuneSlot, 0.0, 1.0))
-		return;
+CastArc(client, attuneSlot)
+{
+	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
 
-	float flSpeed = GetEntPropFloat(client, Prop_Data, "m_flMaxspeed") * 2.0
-	float flVel[3],flAng[3],vBuffer[3]
-	GetClientEyeAngles(client,flAng)
-	GetAngleVectors(flAng, vBuffer, NULL_VECTOR, NULL_VECTOR)
-	flVel[0] = flSpeed * vBuffer[0] * 1.5;
-	flVel[1] = flSpeed * vBuffer[1] * 1.5;
-	flVel[2] = 100.0 + (flSpeed * vBuffer[2]);
+	if(applyArcaneRestrictions(client, attuneSlot))
+		return; 
+
+	float CPOS[3];
+	GetClientEyePosition(client,CPOS)
 	
-	if(flVel[2] < -100.0)
-		flVel[2] *= 2.5;
-
-	if(GetEntityFlags(client) & FL_ONGROUND)
-		flVel[2] += 200;
-
-	TeleportEntity(client, NULL_VECTOR,NULL_VECTOR, flVel)
+	EmitSoundToAll(SOUND_ARCANESHOOTREADY, 0, _, SNDLEVEL_RAIDSIREN, _, 1.0, _,_,CPOS);
+	
+	int MaxUses[] = {0, 5,10,30}
+	float duration[] = {0.0,0.4,0.3,0.1}
+	for(int i = 1;i<=MaxUses[spellLevel];++i)
+	{
+		CreateTimer(duration[spellLevel]*i,ArcaneHunter,client);
+	}
 }

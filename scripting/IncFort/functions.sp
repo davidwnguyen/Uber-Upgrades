@@ -2574,10 +2574,10 @@ wrenchBonus(DataPack pack)
 setNoMetal(int client){
 	SetEntProp(client, Prop_Data, "m_iAmmo", 0, 4, 3);
 }
-public bool applyArcaneRestrictions(int client, int attuneSlot, float focusCost, float cooldown)
+public bool applyArcaneRestrictions(int client, int attuneSlot)
 {
-	focusCost /= ArcanePower[client];
-	cooldown *= TF2Attrib_HookValueFloat(1.0, "arcane_cooldown_rate", client)/SquareRoot(ArcanePower[client]);
+	float focusCost = arcaneMap[AttunedSpells[client][attuneSlot]-1].baseCost / ArcanePower[client];
+	float cooldown = arcaneMap[AttunedSpells[client][attuneSlot]-1].cooldown * TF2Attrib_HookValueFloat(1.0, "arcane_cooldown_rate", client) / SquareRoot(ArcanePower[client]);
 
 	if(fl_CurrentFocus[client] < focusCost)
 	{
@@ -2589,7 +2589,7 @@ public bool applyArcaneRestrictions(int client, int attuneSlot, float focusCost,
 	if(SpellCooldowns[client][AttunedSpells[client][attuneSlot]-1] > GetGameTime())
 		return true;
 
-	PrintHintText(client, "Used %s! -%.2f focus.",ArcaneSpellList[AttunedSpells[client][attuneSlot]-1],focusCost);
+	PrintHintText(client, "Used %s! -%.2f focus.",arcaneMap[AttunedSpells[client][attuneSlot]-1].name,focusCost);
 	fl_CurrentFocus[client] -= focusCost;
 
 	if(DisableCooldowns != 1)
@@ -3599,7 +3599,7 @@ ResetVariables(){
 		for(int buffID = 0; buffID<MAXBUFFS; buffID++){
 			playerBuffs[client][buffID].clear();
 		}
-		for(int spellID = 0; spellID <= sizeof(ArcaneSpellList); spellID++) {
+		for(int spellID = 0; spellID < MAX_ARCANESPELLS; spellID++) {
 			SpellCooldowns[client][spellID] = 0.0;
 		}
 	}
@@ -4145,7 +4145,6 @@ void UpdatePlayerSpellSlots(int client){
 	if(!IsValidClient3(client))
 		return;
 
-	int arcaneBitwise = TF2Attrib_HookValueInt(0, "arcane_spells_1", client) | TF2Attrib_HookValueInt(0, "weapon_spell_id", client);
 	int arcaneSlot = 0;
 
 	//Clear out attuned spells
@@ -4154,13 +4153,11 @@ void UpdatePlayerSpellSlots(int client){
 		AttunedSpells[client][i] = 0;
 	}
 
-	//Bit slop
-	for(int i = 0; i<sizeof(ArcaneSpellList);++i)
-	{
-		if(arcaneSlot == Max_Attunement_Slots)
+	for(int i = 0; i<MAX_ARCANESPELLS;i++){
+		if(arcaneSlot >= Max_Attunement_Slots)
 			break;
-			
-		if(arcaneBitwise & 1 << i){
+		
+		if(TF2Attrib_HookValueInt(0, arcaneMap[i].attribute, client)){
 			AttunedSpells[client][arcaneSlot] = i+1;
 			arcaneSlot++;
 		}
@@ -4531,4 +4528,44 @@ PopulateFireRateMap(){
 	weaponFireRateMap.SetValue("tf_weapon_revolver", 2.0);
 	weaponFireRateMap.SetValue("tf_weapon_mechanical_arm", 6.7);
 	weaponFireRateMap.SetValue("tf_weapon_pda_engineer_build", 10.0);
+}
+
+PopulateArcaneMap(){
+	CreateArcaneSpell("Zap", "arcane zap", 5.0, 35.0, 0.5, CastZap);
+	CreateArcaneSpell("Lightning Strike", "arcane lightning strike", 50.0, 35.0, 11.0, CastLightning);
+	CreateArcaneSpell("Projected Healing", "arcane projected healing", 65.0, 0.2, 15.0, CastHealing);
+	CreateArcaneSpell("A Call Beyond", "arcane a call beyond", 50.0, 90.0, 50.0, CastACallBeyond);
+	CreateArcaneSpell("Blacksky Eye", "arcane blacksky eye", 8.0, 15.0, 0.5, CastBlackskyEye);
+	CreateArcaneSpell("Sunlight Spear", "arcane sunlight spear", 50.0, 100.0, 0.5, CastSunlightSpear);
+	CreateArcaneSpell("Lightning Enchantment", "arcane lightning enchantment", 150.0, 80.0, 30.0, CastLightningEnchantment);
+	CreateArcaneSpell("Snap Freeze", "arcane snap freeze", 70.0, 100.0, 18.0, CastSnapFreeze);
+	CreateArcaneSpell("Arcane Prison", "arcane prison", 85.0, 10.0, 75.0, CastArcanePrison);
+	CreateArcaneSpell("Darkmoon Blade", "arcane darkmoon blade", 120.0, 15.0, 25.0, CastDarkmoonBlade);
+	CreateArcaneSpell("Speed Aura", "arcane speed aura", 40.0, 0.0, 40.0, CastSpeedAura);
+	CreateArcaneSpell("Aerial Strike", "arcane aerial strike", 95.0, 60.0, 50.0, CastAerialStrike);
+	CreateArcaneSpell("Inferno", "arcane inferno", 95.0, 15.0, 20.0, CastInferno);
+	CreateArcaneSpell("Mine Field", "arcane mine field", 70.0, 10.0, 50.0, CastMineField);
+	CreateArcaneSpell("Shockwave", "arcane shockwave", 50.0, 100.0, 20.0, CastShockwave);
+	CreateArcaneSpell("Auto-Sentry", "arcane autosentry", 150.0, 0.0, 80.0, CastAutoSentry);
+	CreateArcaneSpell("Soothing Sunlight", "arcane soothing sunlight", 150.0, 1.0, 180.0, CastSoothingSunlight);
+	CreateArcaneSpell("Arcane Hunter", "arcane hunter", 200.0, 100.0, 40.0, CastArcaneHunter);
+	CreateArcaneSpell("Sabotage", "arcane mark for death", 50.0, 0.0, 25.0, CastMarkForDeath);
+	CreateArcaneSpell("Infernal Enchantment", "arcane infernal enchantment", 250.0, 80.0, 60.0, CastInfernalEnchantment);
+	CreateArcaneSpell("Splitting Thunder", "arcane splitting thunder", 250.0, 135.0, 50.0, CastSplittingThunder);
+	CreateArcaneSpell("Antiseptic Blast", "arcane antiseptic blast", 200.0, 300.0, 50.0, CastAntisepticBlast);
+	CreateArcaneSpell("Karmic Justice", "arcane karmic justice", 60.0, 8.0, 15.0, CastKarmicJustice);
+	CreateArcaneSpell("Snowstorm", "arcane snowstorm", 0.0, 90.0, 3.0, CastSnowstorm);
+	CreateArcaneSpell("Stun Shot", "arcane stun shot", 15.0, 0.0, 15.0, CastStunShot);
+	CreateArcaneSpell("Fireball Volley", "arcane fireball volley", 15.0, 0.0, 5.0, CastFireballVolley);
+	CreateArcaneSpell("Transient Moonlight", "arcane transient moonlight", 15.0, 150.0, 5.0, CastTransientMoonlight);
+	CreateArcaneSpell("Corpse Piler", "arcane corpse piler", 0.0, 10.0, 30.0, CastCorpsePiler);
+	CreateArcaneSpell("Homing Flares", "arcane homing flares", 0.0, 25.0, 7.0, CastHomingFlares);
+	CreateArcaneSpell("Arc", "arcane arc", 15.0, 65.0, 3.0, CastArc);
+}
+
+CreateArcaneSpell(const char[] name, const char[] attribute, const float cost, const float damage, const float cooldown, Function callback){
+	ArcaneSpell tempSpell;
+	tempSpell.init(name, attribute, cost, damage, cooldown, callback);
+	arcaneMap[arcaneSpellCount] = tempSpell;
+	arcaneSpellCount++;
 }

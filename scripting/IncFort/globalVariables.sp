@@ -227,6 +227,24 @@ enum {
 	HomingStyle_Fast
 }
 
+enum struct ArcaneSpell{
+	char name[32];
+	char attribute[32];
+	float baseCost;
+	float baseDamage;
+	float cooldown;
+	Function callback;
+
+	void init(const char sName[32], const char sAttribute[32], float fCost, float fDamage, float fCooldown, Function fCall){
+		this.name = sName;
+		this.attribute = sAttribute;
+		this.baseCost = fCost;
+		this.baseDamage = fDamage;
+		this.cooldown = fCooldown;
+		this.callback = fCall;
+	}
+}
+
 Buff playerBuffs[MAXPLAYERS+1][MAXBUFFS+1];
 bool buffChange[MAXPLAYERS+1] = {false,...};
 //oh boy
@@ -234,6 +252,7 @@ Upgrade upgrades[MAX_ATTRIBUTES];
 Tweak tweaks[MAX_TWEAKS]
 AfterburnStack playerAfterburn[MAXPLAYERS+1][MAX_AFTERBURN_STACKS];
 StringMap weaponFireRateMap;
+ArcaneSpell arcaneMap[MAX_ARCANESPELLS];
 
 //Integers
 int OwnerOffset;
@@ -312,6 +331,7 @@ int tagTeamTarget[MAXPLAYERS+1];
 int stickiesDetonated[MAXPLAYERS+1];
 int AttunedSpells[MAXPLAYERS+1][Max_Attunement_Slots];
 int recursiveExplosionCount[MAXENTITIES];
+int arcaneSpellCount;
 
 //Floats
 float MoneyBonusKill
@@ -399,11 +419,7 @@ char upgrades_weapon[NB_WEAPONS][128];
 char ArmorXPos[MAXPLAYERS+1][64];
 char ArmorYPos[MAXPLAYERS+1][64];
 char missionName[512];
-char ArcaneSpellList[][] = {"Zap","Lightning Strike","Projected Healing","A Call Beyond","Blacksky Eye","Sunlight Spear",
-"Lightning Enchantment","Snap Freeze","Arcane Prison","Darkmoon Blade","Speed Aura","Aerial Strike","Inferno",
-"Mine Field","Shockwave","Auto-Sentry","Soothing Sunlight","Arcane Hunter","Sabotage","Infernal Enchantment",
-"Splitting Thunder", "Antiseptic Blast", "Karmic Justice", "Snowstorm", "Stun Shot", "Fireball Volley", "Dash", "Transient Moonlight", "Corpse Piler", "Homing Flares", "Silent Dash"};
-float SpellCooldowns[MAXPLAYERS+1][sizeof(ArcaneSpellList)+1];
+float SpellCooldowns[MAXPLAYERS+1][MAX_ARCANESPELLS];
 
 //Bools
 bool inScore[MAXPLAYERS+1];
