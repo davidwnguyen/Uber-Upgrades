@@ -102,6 +102,7 @@ enum {
 	Buff_PowerupBurning=28, 
 	Buff_Plagued=29,
 	Buff_Airblasted=30,
+	Buff_HealingBuff=31,
 	BuffAmt
 };
 bool isBonus[BuffAmt] = {
@@ -135,6 +136,7 @@ bool isBonus[BuffAmt] = {
 	true,
 	false,
 	false,
+	true,
 	false
 }
 

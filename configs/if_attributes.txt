@@ -2108,6 +2108,17 @@
 			"init"		"1.00"
 			"max"		"10.0"
 		}
+		"121.5"
+		{
+			"name"		"gesture speed increase"
+			"ref"		"gesture speed increase (consu)"
+			"display"		"%.0f%%"
+			"cost"		"300"
+			"value"		"0.1"
+			"increase_ratio"	"0.2"
+			"init"		"1.00"
+			"max"		"1.3"
+		}
 		"122"
 		{
 			"name"		"charge time increased"
@@ -3979,11 +3990,11 @@
 			"name"		"mult_item_meter_charge_rate"
 			"ref"		"mult_item_meter_charge_rate"
 			"display"		"%.0f%%"
-			"cost"		"135"
-			"increase_ratio"	"3"
+			"cost"		"300"
+			"increase_ratio"	"0.4"
 			"value"		"-0.10"
 			"init"		"1"
-			"max"		"0.03"
+			"max"		"0.01"
 		}
 		"339.1"
 		{
@@ -7445,6 +7456,31 @@
 			"value"		"1.0"
 			"init"		"0.0"
 			"max"		"1.0"
+		}
+		"1730"
+		{
+			"name"		"health regen buff"
+			"ref"		"health regen buff"
+			"attr_class"	"consu_heal_buff"
+			"display"		"%.0f"
+			"description"	"Heals you by +[{VALUE}]/s for 4s.\nAffected by incoming heal multipliers."
+			"cost"		"600"
+			"increase_ratio"	"0.03"
+			"value"		"30.00"
+			"init"		"0.00"
+			"max"		"50000.00"
+		}
+		"1730"
+		{
+			"name"		"afterburn immunity buff"
+			"ref"		"afterburn immunity buff"
+			"attr_class"	"consu_afterburn_immunity"
+			"display"		"%.0f"
+			"description"	"Cleanses all afterburn stacks and grants immunity for [{VALUE}]s."
+			"cost"		"1200"
+			"value"		"1.00"
+			"init"		"0.00"
+			"max"		"10.00"
 		}
 		//Filler
 		"1900.0"

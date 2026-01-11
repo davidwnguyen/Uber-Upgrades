@@ -1,5 +1,14 @@
 "Phrases"
 {
+	"afterburn immunity buff"{
+		"en"		"Afterburn Immunity Consumable Buff"
+	}
+	"gesture speed increase (consu)"{
+		"en"		"Action Speed Bonus"
+	}
+	"health regen buff"{
+		"en"		"Health Regen Consumable Buff"
+	}
 	"Armor Piercing Shells"{
 		"en"		"Armor Piercing Shells"
 	}
@@ -1956,8 +1965,8 @@
 	"Sapper upgrades"{
 		"en"		"Sapper Upgrades"
 	}
-	"Buff banner specific upgrades"{
-		"en"		"Buff Banner Specific Upgrades"
+	"Banner specific upgrades"{
+		"en"		"Banner specific upgrades"
 	}
 	"Parachute Upgrades"{
 		"en"		"Parachute Upgrades"

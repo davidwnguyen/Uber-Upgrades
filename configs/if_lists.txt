@@ -1797,7 +1797,7 @@
 	"buffban"
 	{
 		"special_tweaks_listid"		"1"
-		"Buff banner specific upgrades"
+		"Banner specific upgrades"
 		{
 			"0"		"increase buff duration"
 			"1"		"increase buff radius"
@@ -1807,20 +1807,6 @@
 		{
 			"0"		"Plunder"
 			"1"		"Barrage"
-		}
-	}
-	"lunchbox"
-	{
-		"special_tweaks_listid"		"1"
-		"Lunchbox specific upgrades"
-		{
-			"0"		"mult_item_meter_charge_rate"
-			"1"		"lunchbox healing decreased"
-		}
-		"Special Tweaks"
-		{
-			"0"		"Berserker's Fury"
-			"1"		"Weapon Inheritance"
 		}
 	}
 	"jarat"
@@ -2330,11 +2316,31 @@
 		{
 			"0"		"dmg from all reduced(wearable)"
 			"1"		"effect bar recharge rate increased"
+			"2"		"health regen buff"
+			"3"		"afterburn immunity buff"
+			"4"		"gesture speed increase (consu)"
 		}
 		"Special Tweaks"
 		{
 			"0"		"Berserker's Fury"
 			"1"		"Weapon Inheritance"
 		}
-	}	
+	}
+	"lunchbox"
+	{
+		"special_tweaks_listid"		"1"
+		"Lunchbox specific upgrades"
+		{
+			"0"		"dmg from all reduced(wearable)"
+			"1"		"mult_item_meter_charge_rate"
+			"2"		"health regen buff"
+			"3"		"afterburn immunity buff"
+			"4"		"gesture speed increase (consu)"
+		}
+		"Special Tweaks"
+		{
+			"0"		"Berserker's Fury"
+			"1"		"Weapon Inheritance"
+		}
+	}
 }

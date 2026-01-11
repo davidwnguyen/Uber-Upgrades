@@ -377,8 +377,9 @@
 		{
 			"gamestage"						"1"
 			"restriction"					"1"
-			"buff damage taken"				"3.0"
+			"buff damage taken"				"2.0"
 			"buff fire rate"				"3.5"
+			"buff movement speed"			"1"
 			"convert health to damage reduction"	"0.25"
 		}
 		"Lightning Affinity"

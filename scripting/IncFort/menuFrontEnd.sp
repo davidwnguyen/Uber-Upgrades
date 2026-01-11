@@ -539,17 +539,10 @@ public Menu_ShowStatsSlot(client, param2)
 	{
 		SetMenuTitle(menu, "Displaying Body Stats");
 		char Description[512];
-		float DelayAmount = 1.0;
-		Address armorDelay = TF2Attrib_GetByName(client, "tmp dmgbuff on hit");
-		if(armorDelay != Address_Null)
-		{
-			DelayAmount /= TF2Attrib_GetValue(armorDelay) + 1.0;
-		}
 
 		Format(Description, sizeof(Description), "Body Health = %s\nBody Total Resistance = %s\nMovespeed = %sHU/S\nFocus Regeneration = %s/S",
-		GetAlphabetForm(float(TF2_GetMaxHealth(client))),
+		GetAlphabetForm(float(TF2Util_GetEntityMaxHealth(client))),
 		GetAlphabetForm(GetResistance(client, true)),
-		DelayAmount,
 		GetAlphabetForm(GetEntPropFloat(client, Prop_Data, "m_flMaxspeed")),
 		GetAlphabetForm(fl_RegenFocus[client]*TICKRATE)); 
 		

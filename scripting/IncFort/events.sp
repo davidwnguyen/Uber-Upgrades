@@ -367,27 +367,6 @@ public MRESReturn OnCondApply(Address pPlayerShared, Handle hParams) {
 					return MRES_Supercede;
 				}
 			}
-			case TFCond_Taunting:
-			{
-				int CWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
-				if(IsValidEdict(CWeapon))
-				{
-					char classname[64];
-					GetEdictClassname(CWeapon, classname, sizeof(classname)); 
-					float damageReduction = GetAttribute(CWeapon, "energy buff dmg taken multiplier", 1.0);
-					if(damageReduction != 1.0)
-						TF2Attrib_AddCustomPlayerAttribute(client, "damage taken mult 3", damageReduction, 12.0);
-					
-					Buff lunchboxChange;
-					lunchboxChange.init("Eating Buffs", "", Buff_LunchboxChange, 1, client, 12.0);
-					lunchboxChange.additiveMoveSpeedMult = GetAttribute(CWeapon, "buff movement speed", 0.0);
-					lunchboxChange.multiplicativeAttackSpeedMult = GetAttribute(CWeapon, "buff fire rate", 1.0);
-					lunchboxChange.multiplicativeDamageTaken = GetAttribute(CWeapon, "buff damage taken", 1.0);
-					if(lunchboxChange.additiveMoveSpeedMult != 0.0 || lunchboxChange.multiplicativeAttackSpeedMult != 1.0 || lunchboxChange.multiplicativeDamageTaken != 1.0){
-						insertBuff(client, lunchboxChange);
-					}
-				}
-			}
 			case TFCond_Milked:
 			{
 				return MRES_Supercede;
@@ -479,6 +458,24 @@ public MRESReturn OnCondApply(Address pPlayerShared, Handle hParams) {
 				int canRedeploy = RoundToNearest(GetAttributeAccumulateAdditive(client, "powerup max charges", 0.0));
 				if(canRedeploy > 0)
 					return MRES_Supercede;
+			}
+			case TFCond_Taunting:
+			{
+				int CWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
+				if(IsValidEdict(CWeapon))
+				{
+					float healSeverity = TF2Attrib_HookValueFloat(0.0, "consu_heal_buff", CWeapon);
+					if(healSeverity > 0){
+						Buff healingBuff;
+						healingBuff.init("Health Regeneration Boost", "", Buff_HealingBuff, 1, client, 4.0, healSeverity);
+						insertBuff(client, healingBuff);
+					}
+
+					float afterburnImmunityDuration = TF2Attrib_HookValueFloat(0.0, "consu_afterburn_immunity", CWeapon);
+					if(afterburnImmunityDuration > 0){
+						TF2_AddCondition(client, TFCond_AfterburnImmune, afterburnImmunityDuration, client);
+					}
+				}
 			}
 		}
 	}
@@ -822,6 +819,25 @@ public void TF2_OnConditionRemoved(client, TFCond:cond)
 		}
 		case TFCond_Sapped:{
 			buffChange[client] = true;
+		}
+		case TFCond_Taunting:
+		{
+			int CWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
+			if(IsValidEdict(CWeapon))
+			{
+				float damageReduction = GetAttribute(CWeapon, "energy buff dmg taken multiplier", 1.0);
+				if(damageReduction != 1.0)
+					TF2Attrib_AddCustomPlayerAttribute(client, "damage taken mult 3", damageReduction, 12.0);
+				
+				Buff lunchboxChange;
+				lunchboxChange.init("Eating Buffs", "", Buff_LunchboxChange, 1, client, 12.0);
+				lunchboxChange.additiveMoveSpeedMult = GetAttribute(CWeapon, "buff movement speed", 0.0);
+				lunchboxChange.multiplicativeAttackSpeedMult = GetAttribute(CWeapon, "buff fire rate", 1.0);
+				lunchboxChange.multiplicativeDamageTaken = GetAttribute(CWeapon, "buff damage taken", 1.0);
+				if(lunchboxChange.additiveMoveSpeedMult != 0.0 || lunchboxChange.multiplicativeAttackSpeedMult != 1.0 || lunchboxChange.multiplicativeDamageTaken != 1.0){
+					insertBuff(client, lunchboxChange);
+				}
+			}
 		}
 	}
 	TF2Util_UpdatePlayerSpeed(client);
@@ -2293,6 +2309,10 @@ public OnGameFrame()
 				Address RegenActive = TF2Attrib_GetByName(client, "disguise on backstab");
 				if(RegenActive != Address_Null)
 					RegenPerTick += TF2Attrib_GetValue(RegenActive)*TICKINTERVAL;
+
+				if(hasBuffIndex(client, Buff_HealingBuff)){
+					RegenPerTick += playerBuffs[client][getBuffInArray(client, Buff_HealingBuff)].severity*TICKINTERVAL;
+				}
 
 				Address HealingReductionActive = TF2Attrib_GetByName(client, "health from healers reduced");
 				if(HealingReductionActive != Address_Null)

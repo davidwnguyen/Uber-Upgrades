@@ -3322,7 +3322,7 @@ GivePowerupDescription(int client, char[] name, int amount){
 	}
 	else if(StrEqual("supernova powerup", name)){
 		if(amount == 2){
-			CPrintToChat(client, "{community}Infernal Powerup {default}| {lightcyan}1.5x fire damage. 2.0x afterburn stack damage. All attacks ignite. Shift+Middle-Click to detonate all of your afterburn stacks, 10s cd.");
+			CPrintToChat(client, "{community}Infernal Powerup {default}| {lightcyan}1.5x fire damage. 2.0x afterburn stack damage. All attacks ignite. Crouch+Middle-Click to detonate all of your afterburn stacks, 10s cd.");
 		}else if(amount == 3){
 			CPrintToChat(client, "{community}Thunderstorm Powerup {default}| {lightcyan}All damage is converted into electric damage (hit enemies recieve splash to other hit enemies). For every enemy tagged: +8%% damage.");
 		}else{
