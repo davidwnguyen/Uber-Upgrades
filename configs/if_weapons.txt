@@ -22,6 +22,7 @@
 		"tf_weapon_lunchbox"					"lunchbox"		//heavy lunchbox
 		"tf_weapon_fists"						"demomel"		//fists
 		"tf_weapon_syringegun_medic"			"medweap"		//syringe guns
+		"tf_weapon_syringegun_medic_menu"		"medweap_menu"	//HellFire
 		"tf_weapon_crossbow"					"medweap_c"		//crusaders crossbow
 		"tf_weapon_medigun"						"medi"			//mediguns
 		"tf_weapon_flamethrower"				"pyroweap"		//flamethrower

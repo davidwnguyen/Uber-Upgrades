@@ -1213,6 +1213,28 @@
 			"1"		"Needlestorm"
 		}
 	}
+	"medweap_menu"
+	{
+		"special_tweaks_listid"		"2"
+		"Damage upgrades"
+		{
+			"0"		"damage bonus"
+			"1"		"ap (global)"
+			"2"		"Syringe Damage Bonus"
+			"4"		"projectile penetration"
+		}
+		"Syringegun specific upgrades"
+		{
+			"0"		"fire rate bonus(multshit)"
+			"1"		"clip size bonus"
+			"2"		"faster reload rate"
+			"3"		"Mad Milk On Hit Duration"
+		}
+		"Special Tweaks"
+		{
+			"0"		"Needlestorm"
+		}
+	}
 	"medweap_c"
 	{
 		"special_tweaks_listid"		"2"

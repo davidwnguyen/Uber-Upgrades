@@ -286,7 +286,7 @@
 	{
 		"index"			"204"
 		"weapon_class"	"tf_weapon_syringegun_medic"
-		"weapon_menu"	"tf_weapon_syringegun_medic"
+		"weapon_menu"	"tf_weapon_syringegun_medic_menu"
 		"class"			"medic"
 		"description"	"Base Weapon is Syringe Gun\nFires 4 igniting arrows at very high velocity.\n2x slower fire rate and 0.25x damage dealt.\nIgnites for 1.5x damage and converts fire rate into damage."
 		"cost"			"10000.0"
