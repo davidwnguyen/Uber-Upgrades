@@ -119,18 +119,18 @@ Action:Menu_UpgradeChoice(client, subcat_choice, cat_choice, char[] TitleStr, in
 					{
 						float nextcost = t_up_cost + up_cost + up_cost * (idx_currentupgrades_val * upgrades[tmp_up_idx].cost_inc_ratio)
 						if(nextcost < CurrencyOwned[client] && upgrades[tmp_up_idx].ratio > 0.0 && 
-						(canBypassRestriction[client] == true || RoundFloat(upgrades_val*100.0)/100.0 < m_val))
+						(canBypassRestriction[client] == true || RoundFloat(upgrades_val*100.0)/100.0 < upgrades[tmp_up_idx].m_val))
 						{
-							t_up_cost += up_cost + RoundFloat(up_cost * (idx_currentupgrades_val* upgrades[tmp_up_idx].cost_inc_ratio))
-							++idx_currentupgrades_val		
-							upgrades_val += upgrades[tmp_up_idx].ratio
+							t_up_cost += up_cost + RoundFloat(up_cost * (idx_currentupgrades_val* upgrades[tmp_up_idx].cost_inc_ratio));
+							++idx_currentupgrades_val;
+							upgrades_val += upgrades[tmp_up_idx].ratio;
 						}
 						else if(nextcost < CurrencyOwned[client] && upgrades[tmp_up_idx].ratio < 0.0 && 
 						(canBypassRestriction[client] == true || RoundFloat(upgrades_val*100.0)/100.0 > upgrades[tmp_up_idx].m_val))
 						{
-							t_up_cost += up_cost + RoundFloat(up_cost * (idx_currentupgrades_val * upgrades[tmp_up_idx].cost_inc_ratio))
-							++idx_currentupgrades_val	
-							upgrades_val += upgrades[tmp_up_idx].ratio
+							t_up_cost += up_cost + RoundFloat(up_cost * (idx_currentupgrades_val * upgrades[tmp_up_idx].cost_inc_ratio));
+							++idx_currentupgrades_val;
+							upgrades_val += upgrades[tmp_up_idx].ratio;
 						}
 						else{
 							break;
@@ -139,9 +139,9 @@ Action:Menu_UpgradeChoice(client, subcat_choice, cat_choice, char[] TitleStr, in
 				}
 				else
 				{
-					if(upgrades_val == m_val)
+					if(upgrades_val == upgrades[tmp_up_idx].m_val)
 					{
-						idx_currentupgrades_val--
+						idx_currentupgrades_val--;
 						float temp = currentupgrades_i[client][slot][tmp_ref_idx] != 0.0 ? currentupgrades_i[client][slot][tmp_ref_idx] : upgrades[tmp_up_idx].i_val;
 						t_up_cost -= up_cost + RoundFloat(up_cost * (idx_currentupgrades_val* upgrades[tmp_up_idx].cost_inc_ratio));
 						upgrades_val = temp+(idx_currentupgrades_val * upgrades[tmp_up_idx].ratio);
@@ -150,7 +150,7 @@ Action:Menu_UpgradeChoice(client, subcat_choice, cat_choice, char[] TitleStr, in
 					for (; times > rate;)
 					{
 						if(idx_currentupgrades_val > 0 && upgrades[tmp_up_idx].ratio > 0.0 && 
-						(canBypassRestriction[client] == true || (RoundFloat(upgrades_val*100.0)/100.0 <= m_val
+						(canBypassRestriction[client] == true || (RoundFloat(upgrades_val*100.0)/100.0 <= upgrades[tmp_up_idx].m_val
 						&& client_spent_money[client][slot] + t_up_cost > client_tweak_highest_requirement[client][slot] - 1.0)))
 						{
 							idx_currentupgrades_val--
@@ -158,7 +158,7 @@ Action:Menu_UpgradeChoice(client, subcat_choice, cat_choice, char[] TitleStr, in
 							upgrades_val -= upgrades[tmp_up_idx].ratio
 						}
 						else if(idx_currentupgrades_val > 0 && upgrades[tmp_up_idx].ratio < 0.0 && 
-						(canBypassRestriction[client] == true || (RoundFloat(upgrades_val*100.0)/100.0 >= m_val
+						(canBypassRestriction[client] == true || (RoundFloat(upgrades_val*100.0)/100.0 >= upgrades[tmp_up_idx].m_val
 						&& client_spent_money[client][slot] + t_up_cost > client_tweak_highest_requirement[client][slot] - 1.0)))
 						{
 							idx_currentupgrades_val--

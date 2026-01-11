@@ -7,7 +7,7 @@
 		"en"		"Action Speed Bonus"
 	}
 	"health regen buff"{
-		"en"		"Health Regen Consumable Buff"
+		"en"		"Incoming Healing Consumable Buff"
 	}
 	"Armor Piercing Shells"{
 		"en"		"Armor Piercing Shells"

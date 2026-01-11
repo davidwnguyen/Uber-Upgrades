@@ -464,10 +464,10 @@ public MRESReturn OnCondApply(Address pPlayerShared, Handle hParams) {
 				int CWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
 				if(IsValidEdict(CWeapon))
 				{
-					float healSeverity = TF2Attrib_HookValueFloat(0.0, "consu_heal_buff", CWeapon);
-					if(healSeverity > 0){
+					float healSeverity = TF2Attrib_HookValueFloat(1.0, "consu_heal_buff", CWeapon);
+					if(healSeverity > 1){
 						Buff healingBuff;
-						healingBuff.init("Health Regeneration Boost", "", Buff_HealingBuff, 1, client, 4.0, healSeverity);
+						healingBuff.init("Incoming Healing Boost", "", Buff_HealingBuff, 1, client, 8.0, healSeverity);
 						insertBuff(client, healingBuff);
 					}
 
