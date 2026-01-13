@@ -4197,6 +4197,11 @@ void applyAfterburn(int victim, int attacker, int weapon, float damage){
 		burndmgMult *= 2.0;
 	}
 	
+	float afterburnResistance = TF2Attrib_HookValueFloat(0.0, "afterburn_immunity", victim);
+	if(afterburnResistance){
+		burnTime -= afterburnResistance;
+	}
+	
 	AfterburnStack stack;
 	stack.owner = attacker;
 	stack.damage = damage*burndmgMult;

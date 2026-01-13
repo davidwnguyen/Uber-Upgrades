@@ -772,113 +772,7 @@ public Action OnTakeDamage(victim, &attacker, &inflictor, float &damage, &damage
 		}
 		
 		if(!(damagetype & DMG_PIERCING) && attacker != victim){
-			//Guardian
-			if(!(damagetype & DMG_ENERGYBEAM)){
-				int guardian = -1;
-				float guardianPercentage;
-				float victimPos[3];
-				GetClientAbsOrigin(victim, victimPos);
-				for(int i = 1; i <= MaxClients; ++i)
-				{
-					if(!IsValidClient3(i))
-						continue;
-					if(!IsPlayerAlive(i))
-						continue;
-					if(GetClientTeam(i) != GetClientTeam(victim))
-						continue;
-					if(i == victim)
-						continue;
-
-					float guardianPos[3];
-					GetClientEyePosition(i,guardianPos);
-					// 1400 HU Radius
-					if(GetVectorDistance(victimPos,guardianPos, true) < 1960000)
-					{
-						int guardianWeapon = GetEntPropEnt(i, Prop_Send, "m_hActiveWeapon");
-						if(IsValidWeapon(guardianWeapon)){
-							float redirect = TF2Attrib_HookValueFloat(0.0, "redirect_teammate_damage_taken", i);
-							if(redirect > 0.0){
-								if(redirect > guardianPercentage){
-									guardian = i;
-									guardianPercentage = redirect;
-								}
-							}
-						}
-						if(damage > GetClientHealth(victim) && TF2Attrib_HookValueFloat(0.0, "king_powerup", i) == 3.0){
-							SDKHooks_TakeDamage(i, attacker, attacker, damage, DMG_PREVENT_PHYSICS_FORCE|DMG_ENERGYBEAM|DMG_IGNOREHOOK,_,_,_,false);
-							SDKHooks_TakeDamage(i, attacker, attacker, GetClientHealth(i) * 0.15, DMG_PREVENT_PHYSICS_FORCE|DMG_IGNOREHOOK|DMG_PIERCING);
-							damage *= 0.0;
-							TF2_AddCondition(victim, TFCond_UberchargedCanteen, 0.5, i);
-							TF2_AddCondition(i, TFCond_UberchargedCanteen, 0.1, i);
-							break;
-						}
-					}
-				}
-				if(IsValidClient3(guardian)){
-					SDKHooks_TakeDamage(guardian, attacker, attacker, damage*guardianPercentage,DMG_PREVENT_PHYSICS_FORCE|DMG_ENERGYBEAM|DMG_IGNOREHOOK,_,_,_,false);
-					damage *= ConsumePierce((1-guardianPercentage), damageForce[0]);
-				}
-			}
-
-			//Lifesteal
-			float lifestealFactor = 0.0;
-			float lsCap = 0.5;
-			//Additive sources first
-			if(IsValidWeapon(weapon))
-				lifestealFactor += TF2Attrib_HookValueFloat(0.0, "lifesteal_ability", weapon);//Lifesteal attribute
-			else
-				lifestealFactor += GetAttribute(attacker, "lifesteal ability", 0.0);//Lifesteal attribute
-
-			if(MadmilkDuration[victim] > GetGameTime()) // Madmilk
-				lifestealFactor += (MadmilkDuration[victim]-GetGameTime()) * 1.66 / 100.0;
-
-			if(TF2_IsPlayerInCondition(attacker, TFCond_MedigunDebuff))// Conch
-				lifestealFactor += 0.25;
-			
-			//Then multiplicative sources
-			float vampirePowerup = TF2Attrib_HookValueFloat(0.0, "vampire_powerup", attacker);//Vampire Powerup
-			if(vampirePowerup == 1){
-				lifestealFactor += 0.75;
-				lsCap *= 3.0;
-			}
-			else if(vampirePowerup == 3){
-				lifestealFactor += 0.5;
-			}
-			
-			if(IsValidWeapon(weapon))
-				lifestealFactor *= TF2Attrib_HookValueFloat(1.0, "lifesteal_effectiveness", weapon);
-
-			if(hasBuffIndex(attacker, Buff_Plunder)){
-				Buff plunderBuff;
-				plunderBuff = playerBuffs[attacker][getBuffInArray(attacker, Buff_Plunder)]
-				lifestealFactor *= plunderBuff.severity;
-			}
-			if(lifestealFactor > 0){
-				float addedLSPool = lifestealFactor * damage / GetResistance(attacker, true);
-				if(vampirePowerup == 3) {
-					if(GetClientHealth(attacker) >= TF2Util_GetEntityMaxHealth(attacker)) {
-						if(Overleech[attacker] < TF2Util_GetEntityMaxHealth(attacker) * 9){
-							Overleech[attacker] += addedLSPool;
-							addedLSPool = 0.0;
-						}
-					}
-				}
-				LSPool[attacker] += addedLSPool;
-				if(LSPool[attacker] > lsCap*TF2Util_GetEntityMaxHealth(attacker)) {
-					LSPool[attacker] = lsCap*TF2Util_GetEntityMaxHealth(attacker);
-				}
-				if(IsValidEntity(inflictor)){
-					char inflictorClassname[32];
-					GetEdictClassname(inflictor, inflictorClassname, sizeof(inflictorClassname));
-					if(StrEqual("tf_projectile_sentryrocket", inflictorClassname)){
-						inflictor = getOwner(inflictor);
-						GetEdictClassname(inflictor, inflictorClassname, sizeof(inflictorClassname));
-					}
-					if(StrEqual("obj_sentrygun", inflictorClassname)){
-						AddBuildingHealth(inflictor, RoundToCeil(addedLSPool), attacker);
-					}
-				}
-			}
+			preDamageMitigationCalcs(victim, attacker, inflictor, damage, weapon, damageForce, damagetype, damagecustom);
 
 			float armorPenetration = TF2Attrib_HookValueFloat(0.0, "armor_penetration_buff", attacker);
 			float linearReduction = TF2Attrib_HookValueFloat(1.0, "dmg_taken_divided", victim);
@@ -1124,7 +1018,184 @@ public Action OnTakeDamage_MedicShield(victim, &attacker, &inflictor, float &dam
 	}
 	return Plugin_Changed;
 }
+public void preDamageMitigationCalcs(victim, attacker, inflictor, float& damage, weapon, float damageForce[3], damagetype, damagecustom){
+	//Guardian
+	if(!(damagetype & DMG_ENERGYBEAM)){
+		int guardian = -1;
+		float guardianPercentage;
+		float victimPos[3];
+		GetClientAbsOrigin(victim, victimPos);
+		for(int i = 1; i <= MaxClients; ++i)
+		{
+			if(!IsValidClient3(i))
+				continue;
+			if(!IsPlayerAlive(i))
+				continue;
+			if(GetClientTeam(i) != GetClientTeam(victim))
+				continue;
+			if(i == victim)
+				continue;
 
+			float guardianPos[3];
+			GetClientEyePosition(i,guardianPos);
+			// 1400 HU Radius
+			if(GetVectorDistance(victimPos,guardianPos, true) < 1960000)
+			{
+				int guardianWeapon = GetEntPropEnt(i, Prop_Send, "m_hActiveWeapon");
+				if(IsValidWeapon(guardianWeapon)){
+					float redirect = TF2Attrib_HookValueFloat(0.0, "redirect_teammate_damage_taken", i);
+					if(redirect > 0.0){
+						if(redirect > guardianPercentage){
+							guardian = i;
+							guardianPercentage = redirect;
+						}
+					}
+				}
+				if(damage > GetClientHealth(victim) && TF2Attrib_HookValueFloat(0.0, "king_powerup", i) == 3.0){
+					SDKHooks_TakeDamage(i, attacker, attacker, damage, DMG_PREVENT_PHYSICS_FORCE|DMG_ENERGYBEAM|DMG_IGNOREHOOK,_,_,_,false);
+					SDKHooks_TakeDamage(i, attacker, attacker, GetClientHealth(i) * 0.15, DMG_PREVENT_PHYSICS_FORCE|DMG_IGNOREHOOK|DMG_PIERCING);
+					damage *= 0.0;
+					TF2_AddCondition(victim, TFCond_UberchargedCanteen, 0.5, i);
+					TF2_AddCondition(i, TFCond_UberchargedCanteen, 0.1, i);
+					break;
+				}
+			}
+		}
+		if(IsValidClient3(guardian)){
+			SDKHooks_TakeDamage(guardian, attacker, attacker, damage*guardianPercentage,DMG_PREVENT_PHYSICS_FORCE|DMG_ENERGYBEAM|DMG_IGNOREHOOK,_,_,_,false);
+			damage *= ConsumePierce((1-guardianPercentage), damageForce[0]);
+		}
+
+		if(TF2Attrib_HookValueFloat(0.0, "supernova_powerup", attacker) == 1.0)
+		{
+			if(damagetype & DMG_BLAST || hasSupernovaSplashed[attacker])
+			{
+				damage *= 1.8;
+			}
+			else
+			{
+				damage *= 1.35;
+				float victimPosition[3];
+				GetEntPropVector(victim, Prop_Data, "m_vecAbsOrigin", victimPosition); 
+				
+				EntityExplosion(attacker, damage, 300.0,victimPosition,_,weaponArtParticle[attacker] <= GetGameTime() ? true : false, victim, weaponArtParticle[attacker] <= GetGameTime() ? 0.8 : 0.0, DMG_BLAST|DMG_ENERGYBEAM,weapon, 0.5);
+				hasSupernovaSplashed[attacker] = true;
+				//PARTICLES
+				if(weaponArtParticle[attacker] <= GetGameTime())
+				{
+					int iPart1 = CreateEntityByName("info_particle_system");
+					int iPart2 = CreateEntityByName("info_particle_system");
+
+					if (IsValidEdict(iPart1) && IsValidEdict(iPart2))
+					{
+						char particleName[32];
+						particleName = GetClientTeam(attacker) == 2 ? "powerup_supernova_strike_red" : "powerup_supernova_strike_blue";
+						
+						float clientPos[3], clientAng[3];
+						GetClientEyePosition(attacker, clientPos);
+						GetClientEyeAngles(attacker,clientAng);
+						
+						char szCtrlParti[32];
+						Format(szCtrlParti, sizeof(szCtrlParti), "tf2ctrlpart%i", iPart2);
+						DispatchKeyValue(iPart2, "targetname", szCtrlParti);
+						DispatchKeyValue(iPart1, "effect_name", particleName);
+						DispatchKeyValue(iPart1, "cpoint1", szCtrlParti);
+						DispatchSpawn(iPart1);
+						TeleportEntity(iPart1, clientPos, clientAng, NULL_VECTOR);
+						TeleportEntity(iPart2, victimPosition, NULL_VECTOR, NULL_VECTOR);
+						ActivateEntity(iPart1);
+						AcceptEntityInput(iPart1, "Start");
+						
+						CreateTimer(1.0, Timer_KillParticle, EntIndexToEntRef(iPart1));
+						CreateTimer(1.0, Timer_KillParticle, EntIndexToEntRef(iPart2));
+					}
+					weaponArtParticle[attacker] = GetGameTime()+1.0;
+				}
+			}
+		}
+		if((TF2Attrib_HookValueFloat(0.0, "supernova_powerup", attacker) == 3 || damagetype & DMG_SHOCK) && !hasSupernovaSplashed[attacker]){
+			int team = GetClientTeam(attacker);
+			float arcDamage = damage * 0.75;
+			for(int i = 1;i<=MaxClients;++i){
+				if(!IsValidClient3(i))
+					continue;
+				if(!IsPlayerAlive(i))
+					continue;
+				if(!isTagged[attacker][i])
+					continue;
+				if(victim == i)
+					continue;
+				if(GetClientTeam(i) == team)
+					continue;
+				if(IsPlayerInSpawn(i))
+					continue;
+
+				SDKHooks_TakeDamage(i, attacker, attacker, arcDamage, DMG_SHOCK|DMG_IGNOREHOOK|DMG_ENERGYBEAM, _,_,_,false);
+			}
+			hasSupernovaSplashed[attacker] = true;
+		}
+	}
+
+	//Lifesteal
+	float lifestealFactor = 0.0;
+	float lsCap = 0.5;
+	//Additive sources first
+	if(IsValidWeapon(weapon))
+		lifestealFactor += TF2Attrib_HookValueFloat(0.0, "lifesteal_ability", weapon);//Lifesteal attribute
+	else
+		lifestealFactor += GetAttribute(attacker, "lifesteal ability", 0.0);//Lifesteal attribute
+
+	if(MadmilkDuration[victim] > GetGameTime()) // Madmilk
+		lifestealFactor += (MadmilkDuration[victim]-GetGameTime()) * 1.66 / 100.0;
+
+	if(TF2_IsPlayerInCondition(attacker, TFCond_MedigunDebuff))// Conch
+		lifestealFactor += 0.25;
+	
+	//Then multiplicative sources
+	float vampirePowerup = TF2Attrib_HookValueFloat(0.0, "vampire_powerup", attacker);//Vampire Powerup
+	if(vampirePowerup == 1){
+		lifestealFactor += 0.75;
+		lsCap *= 3.0;
+	}
+	else if(vampirePowerup == 3){
+		lifestealFactor += 0.5;
+	}
+	
+	if(IsValidWeapon(weapon))
+		lifestealFactor *= TF2Attrib_HookValueFloat(1.0, "lifesteal_effectiveness", weapon);
+
+	if(hasBuffIndex(attacker, Buff_Plunder)){
+		Buff plunderBuff;
+		plunderBuff = playerBuffs[attacker][getBuffInArray(attacker, Buff_Plunder)]
+		lifestealFactor *= plunderBuff.severity;
+	}
+	if(lifestealFactor > 0){
+		float addedLSPool = lifestealFactor * damage / GetResistance(attacker, true);
+		if(vampirePowerup == 3) {
+			if(GetClientHealth(attacker) >= TF2Util_GetEntityMaxHealth(attacker)) {
+				if(Overleech[attacker] < TF2Util_GetEntityMaxHealth(attacker) * 9){
+					Overleech[attacker] += addedLSPool;
+					addedLSPool = 0.0;
+				}
+			}
+		}
+		LSPool[attacker] += addedLSPool;
+		if(LSPool[attacker] > lsCap*TF2Util_GetEntityMaxHealth(attacker)) {
+			LSPool[attacker] = lsCap*TF2Util_GetEntityMaxHealth(attacker);
+		}
+		if(IsValidEntity(inflictor)){
+			char inflictorClassname[32];
+			GetEdictClassname(inflictor, inflictorClassname, sizeof(inflictorClassname));
+			if(StrEqual("tf_projectile_sentryrocket", inflictorClassname)){
+				inflictor = getOwner(inflictor);
+				GetEdictClassname(inflictor, inflictorClassname, sizeof(inflictorClassname));
+			}
+			if(StrEqual("obj_sentrygun", inflictorClassname)){
+				AddBuildingHealth(inflictor, RoundToCeil(addedLSPool), attacker);
+			}
+		}
+	}
+}
 public float genericPlayerDamageModification(victim, attacker, inflictor, float damage, weapon, damagetype, damagecustom)
 {
 	bool isVictimPlayer = IsValidClient3(victim);
@@ -1487,77 +1558,6 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 					}
 				}
 			}
-		}
-		if(TF2Attrib_HookValueFloat(0.0, "supernova_powerup", attacker) == 1.0)
-		{
-			if(damagetype & DMG_BLAST || hasSupernovaSplashed[attacker])
-			{
-				damage *= 1.8;
-			}
-			else
-			{
-				damage *= 1.35;
-				float victimPosition[3];
-				GetEntPropVector(victim, Prop_Data, "m_vecAbsOrigin", victimPosition); 
-				
-				EntityExplosion(attacker, damage, 300.0,victimPosition,_,weaponArtParticle[attacker] <= GetGameTime() ? true : false, victim, weaponArtParticle[attacker] <= GetGameTime() ? 0.8 : 0.0,_,weapon, 0.5);
-				hasSupernovaSplashed[attacker] = true;
-				//PARTICLES
-				if(weaponArtParticle[attacker] <= GetGameTime())
-				{
-					int iPart1 = CreateEntityByName("info_particle_system");
-					int iPart2 = CreateEntityByName("info_particle_system");
-
-					if (IsValidEdict(iPart1) && IsValidEdict(iPart2))
-					{
-						char particleName[32];
-						particleName = GetClientTeam(attacker) == 2 ? "powerup_supernova_strike_red" : "powerup_supernova_strike_blue";
-						
-						float clientPos[3], clientAng[3];
-						GetClientEyePosition(attacker, clientPos);
-						GetClientEyeAngles(attacker,clientAng);
-						
-						char szCtrlParti[32];
-						Format(szCtrlParti, sizeof(szCtrlParti), "tf2ctrlpart%i", iPart2);
-						DispatchKeyValue(iPart2, "targetname", szCtrlParti);
-						DispatchKeyValue(iPart1, "effect_name", particleName);
-						DispatchKeyValue(iPart1, "cpoint1", szCtrlParti);
-						DispatchSpawn(iPart1);
-						TeleportEntity(iPart1, clientPos, clientAng, NULL_VECTOR);
-						TeleportEntity(iPart2, victimPosition, NULL_VECTOR, NULL_VECTOR);
-						ActivateEntity(iPart1);
-						AcceptEntityInput(iPart1, "Start");
-						
-						CreateTimer(1.0, Timer_KillParticle, EntIndexToEntRef(iPart1));
-						CreateTimer(1.0, Timer_KillParticle, EntIndexToEntRef(iPart2));
-					}
-					weaponArtParticle[attacker] = GetGameTime()+1.0;
-				}
-			}
-		}
-		if(TF2Attrib_HookValueFloat(0.0, "supernova_powerup", attacker) == 3){
-			damagetype |= DMG_SHOCK;
-		}
-		if(isVictimPlayer && damagetype & DMG_SHOCK && !hasSupernovaSplashed[attacker]){
-			int team = GetClientTeam(attacker);
-			float arcDamage = baseDamage[attacker] * TF2_GetDamageModifiers(attacker, weapon, true) * 0.5;
-			for(int i = 1;i<=MaxClients;++i){
-				if(!IsValidClient3(i))
-					continue;
-				if(!IsPlayerAlive(i))
-					continue;
-				if(!isTagged[attacker][i])
-					continue;
-				if(victim == i)
-					continue;
-				if(GetClientTeam(i) == team)
-					continue;
-				if(IsPlayerInSpawn(i))
-					continue;
-
-				SDKHooks_TakeDamage(i, attacker, attacker, arcDamage, DMG_SHOCK|DMG_IGNOREHOOK, _,_,_,false);
-			}
-			hasSupernovaSplashed[attacker] = true;
 		}
 
 		if(LightningEnchantmentDuration[attacker] > GetGameTime() && !(damagetype & DMG_VEHICLE)){
