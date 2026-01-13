@@ -1339,15 +1339,6 @@ public Action SelfDestruct(Handle timer, any:ref)
 	}
 	return Plugin_Stop;
 }
-public Action:DisableSlowdown(Handle timer, int entity)
-{
-	entity = EntRefToEntIndex(entity);
-	if(IsValidClient3(entity))
-	{
-		TF2Attrib_SetByName(entity,"move speed penalty", 1.0);
-		TF2Attrib_SetByName(entity,"major increased jump height", 1.0);
-	}
-}
 
 public Action ResetClientsTimer(Handle timer){
 	replenishStatus = false;

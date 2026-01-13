@@ -134,9 +134,7 @@ CastMarkForDeath(client, attuneSlot)
 		if(IsValidClient3(i))
 		{
 			TF2_AddCondition(i, TFCond_Sapped, 10.0, client);
-			TF2Attrib_SetByName(i,"CARD: move speed bonus", 0.5);
-			TF2Attrib_SetByName(i,"major increased jump height", 0.5);
-			CreateTimer(10.0, DisableSlowdown, EntIndexToEntRef(i));
+			TF2_StunPlayer(i, 10.0, 0.5, TF_STUNFLAG_SLOWDOWN, client);
 		}
 		else if(HasEntProp(i,Prop_Send,"m_hBuilder"))
 		{
