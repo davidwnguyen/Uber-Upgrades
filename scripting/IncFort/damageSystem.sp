@@ -656,7 +656,14 @@ public Action TF2_OnTakeDamage(int victim, int &attacker, int &inflictor, float 
 
 			if(StrEqual("obj_sentrygun", classname)){
 				if(TF2_IsPlayerCritBuffed(attacker)){
-					critType = CritType_Crit;
+					int CWeapon = GetEntPropEnt(attacker, Prop_Send, "m_hActiveWeapon");
+					if(IsValidWeapon(CWeapon)){
+						int weaponIndex = GetEntProp(CWeapon, Prop_Send, "m_iItemDefinitionIndex");
+						if(weaponIndex != 141 && weaponIndex != 1004)
+						{
+							critType = CritType_Crit;
+						}
+					}
 				}
 				float critRating = TF2Attrib_HookValueFloat(0.0, "critical_rating", weapon);
 				if(critRating > 0){
@@ -732,7 +739,7 @@ public Action OnTakeDamage(victim, &attacker, &inflictor, float &damage, &damage
 		if(IsValidWeapon(weapon)){
 			damageForce[0] += TF2Attrib_HookValueFloat(0.0, "dmg_dr_penetration", weapon);
 		}
-		
+
 		if(hasBuffIndex(attacker, Buff_PiercingBuff)){
 			damageForce[0] += playerBuffs[attacker][getBuffInArray(attacker, Buff_PiercingBuff)].severity;
 		}

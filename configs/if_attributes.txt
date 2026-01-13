@@ -5583,7 +5583,7 @@
 			"cost"		"10000"
 			"increase_ratio"	"0"
 			"value"		"0.15"
-			"init"		"1"
+			"init"		"0"
 			"description"	"Banner will occasionally strike down lightning that deals 10*X*DPSMod damage.\nReach and radius of lightning strike is multiplied by banner range."
 			"max"		"4.0"
 		}

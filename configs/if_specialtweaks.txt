@@ -295,13 +295,13 @@
 			"gamestage"						"1"
 			"restriction"					"1"
 			"buff plunder multiplier"		"3.5"
-			"Banner Summons Lightning"		"10"
+			"Banner Summons Lightning"		"15"
 		}
 		"Barrage"
 		{
 			"gamestage"						"1"
 			"restriction"					"1"
-			"buff barrage"					"5"
+			"buff barrage"					"7"
 			"Ability : Silent Dash"			"1"
 		}
 		"Infernal Lunge"
