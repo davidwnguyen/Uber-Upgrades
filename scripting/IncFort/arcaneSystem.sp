@@ -979,20 +979,15 @@ public Action:RemoveAutoSentryID(Handle timer, any:ref)
 }
 CastSoothingSunlight(client, attuneSlot)
 {
-	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
-
 	if(applyArcaneRestrictions(client, attuneSlot))
 		return; 
 
 	float ClientPos[3];
 	GetClientEyePosition(client,ClientPos);
 	ClientPos[2] -= 40.0;
-		
-	float duration[] = {0.0,4.0,3.0,1.0}
 
-	CreateTimer(duration[spellLevel],SoothingSunlight,EntIndexToEntRef(client));
-	TF2_StunPlayer(client,duration[spellLevel],0.0,TF_STUNFLAGS_BIGBONK,0);
-	TE_SetupBeamRingPoint(ClientPos, 20.0, 800.0, g_LightningSprite, spriteIndex, 0, 5, duration[spellLevel], 10.0, 1.0, {255,255,0,180}, 400, 0);
+	CreateTimer(1.0,SoothingSunlight,EntIndexToEntRef(client));
+	TE_SetupBeamRingPoint(ClientPos, 20.0, 800.0, g_LightningSprite, spriteIndex, 0, 5, 1.0, 10.0, 1.0, {255,255,0,180}, 400, 0);
 	TE_SendToAll();
 }
 public Action:SoothingSunlight(Handle timer, client) 
@@ -1004,14 +999,15 @@ public Action:SoothingSunlight(Handle timer, client)
 	if(!IsPlayerAlive(client))
 		return;
 
-	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
-
 	int iTeam = GetClientTeam(client)
 	float ClientPos[3];
 	GetClientEyePosition(client,ClientPos);
-	float radius[] = {0.0,900.0,1500.0,5000.0}
-	float incHealDuration[] = {0.0,6.5,15.0,30.0}
-	float overhealMax[] = {0.0,3.0,5.0,10.0}
+	float overhealMax = 1.5;
+	int secondary = TF2Util_GetPlayerLoadoutEntity(client, TFWeaponSlot_Secondary);
+	if(IsValidWeapon(secondary)){
+		overhealMax += TF2Attrib_HookValueFloat(1.0, "mult_medigun_overheal_amount", secondary)-1.0;
+	}
+	
 	for(int i = 1; i<=MaxClients;++i)
 	{
 		if(!IsValidClient3(i))
@@ -1022,14 +1018,14 @@ public Action:SoothingSunlight(Handle timer, client)
 
 		float VictimPos[3];
 		GetClientEyePosition(i,VictimPos);
-		if(GetVectorDistance(ClientPos,VictimPos,true) > radius[spellLevel]*radius[spellLevel])
+		if(GetVectorDistance(ClientPos,VictimPos,true) > 1440000)
 			continue;
 
-		float AmountHealing = TF2_GetMaxHealth(i) * ArcanePower[client];
-		AddPlayerHealth(i, RoundToCeil(AmountHealing), overhealMax[spellLevel] * ArcanePower[client], true, client);
-		TF2_AddCondition(i,TFCond_MegaHeal,incHealDuration[spellLevel], client);
+		float AmountHealing = overhealMax * TF2Util_GetEntityMaxHealth(i);
+		AddPlayerHealth(i, RoundToCeil(AmountHealing), overhealMax, true, client);
+		TF2_AddCondition(i,TFCond_MegaHeal,18.0, client);
 
-		CreateParticleEx(i, "utaunt_glitter_parent_gold", 1, _, _, incHealDuration[spellLevel]);
+		CreateParticleEx(i, "utaunt_glitter_parent_gold", 1, _, _, 18.0);
 	}
 	EmitSoundToAll(SOUND_HEAL, 0, _, SNDLEVEL_RAIDSIREN, _, 1.0, _,_,ClientPos);
 }

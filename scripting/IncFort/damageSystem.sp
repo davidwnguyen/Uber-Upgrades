@@ -729,9 +729,14 @@ public Action OnTakeDamage(victim, &attacker, &inflictor, float &damage, &damage
 	damageForce = {0.0, 0.0, 0.0};
 
 	if(0 < attacker <= MaxClients){
-		if(IsValidWeapon(weapon))
-			damageForce[0] = TF2Attrib_HookValueFloat(0.0, "dmg_dr_penetration", weapon);
-
+		if(IsValidWeapon(weapon)){
+			damageForce[0] += TF2Attrib_HookValueFloat(0.0, "dmg_dr_penetration", weapon);
+		}
+		
+		if(hasBuffIndex(attacker, Buff_PiercingBuff)){
+			damageForce[0] += playerBuffs[attacker][getBuffInArray(attacker, Buff_PiercingBuff)].severity;
+		}
+		
 		if(!(damagetype & DMG_IGNOREHOOK)){
 			baseDamage[attacker] = damage;
 

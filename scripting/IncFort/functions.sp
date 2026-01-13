@@ -905,32 +905,18 @@ stock is_client_got_req(client, upgrade_choice, slot, inum, float rate = 1.0)
 	{
 		if(upgrades[upgrade_choice].restriction_category != 0)
 		{
-			if(inum == 20000)//havent upgraded
+			if(inum == 20000 || currentupgrades_val[client][slot][inum] - upgrades[upgrade_choice].i_val == 0.0)
 			{
-				//PrintToChat(client, "E");
-				for(int i = 1;i<5;++i)
-				{
-					if(currentupgrades_restriction[client][slot][i] == upgrades[upgrade_choice].restriction_category)
-					{
-						PrintToChat(client, "You already have something that fits this restriction category.");
-						EmitSoundToClient(client, SOUND_FAIL);
-						return 0;
-					}
+				int cap = 1;
+				if(gameStage >= 2 && slot == 4){
+					cap++;
 				}
-				currentupgrades_restriction[client][slot][upgrades[upgrade_choice].restriction_category] = upgrades[upgrade_choice].restriction_category;
-			}
-			else if(currentupgrades_val[client][slot][inum] - upgrades[upgrade_choice].i_val == 0.0)
-			{
-				for(int i = 1;i<5;++i)
-				{
-					if(currentupgrades_restriction[client][slot][i] == upgrades[upgrade_choice].restriction_category)
-					{
-						PrintToChat(client, "You already have something that fits this restriction category.");
-						EmitSoundToClient(client, SOUND_FAIL);
-						return 0;
-					}
+				if(currentupgrades_restriction[client][slot][upgrades[upgrade_choice].restriction_category] >= cap){
+					PrintToChat(client, "You already have something that fits this restriction category.");
+					EmitSoundToClient(client, SOUND_FAIL);
+					return 0;
 				}
-				currentupgrades_restriction[client][slot][upgrades[upgrade_choice].restriction_category] = upgrades[upgrade_choice].restriction_category;
+				currentupgrades_restriction[client][slot][upgrades[upgrade_choice].restriction_category]++;
 			}
 		}
 		
@@ -1445,26 +1431,21 @@ UpgradeItem(client, upgrade_choice, int &inum, float ratio, slot, bool bypassMax
 }
 public remove_attribute(client, inum, slot)
 {
-	if(currentupgrades_i[client][slot][inum] != 0.0 && upgrades[currentupgrades_idx[client][slot][inum]].cost > 1.0)
-	{
-		currentupgrades_val[client][slot][inum] = currentupgrades_i[client][slot][inum];
-	}
-	else
-	{
-		currentupgrades_val[client][slot][inum] = upgrades[currentupgrades_idx[client][slot][inum]].i_val;
-	}
-	int u = currentupgrades_idx[client][slot][inum]
+	int u = currentupgrades_idx[client][slot][inum];
 	if (u != 20000)
 	{
+		if(currentupgrades_i[client][slot][inum] != 0.0 && upgrades[u].cost > 1.0)
+		{
+			currentupgrades_val[client][slot][inum] = currentupgrades_i[client][slot][inum];
+		}
+		else
+		{
+			currentupgrades_val[client][slot][inum] = upgrades[u].i_val;
+		}
+
 		if(upgrades[u].restriction_category != 0)
 		{
-			for(int i = 1;i<5;++i)
-			{
-				if(i == upgrades[u].restriction_category)
-				{
-					currentupgrades_restriction[client][slot][i] = 0;
-				}
-			}
+			currentupgrades_restriction[client][slot][upgrades[u].restriction_category]--;
 		}
 	}
 	GiveNewUpgradedWeapon_(client, slot)
@@ -3616,7 +3597,7 @@ public void CheckForGamestage(){
 			gameStage = 1; UpdateMaxValuesStage(gameStage); success = true;
 		}
 		else if(gameStage == 1 && (StartMoney + additionalstartmoney) >= STAGETWO){
-			CPrintToChatAll("{valve}Incremental Fortress {white}| You have reached the 2nd stage! New upgrades unlocked.");
+			CPrintToChatAll("{valve}Incremental Fortress {white}| You have reached the 2nd stage! You can now use two powerups.");
 			gameStage = 2; UpdateMaxValuesStage(gameStage); success = true;
 		}
 		else if(gameStage == 2 && (StartMoney + additionalstartmoney) >= STAGETHREE){
@@ -4550,7 +4531,7 @@ PopulateArcaneMap(){
 	CreateArcaneSpell("Mine Field", "arcane mine field", 70.0, 10.0, 50.0, CastMineField);
 	CreateArcaneSpell("Shockwave", "arcane shockwave", 50.0, 100.0, 20.0, CastShockwave);
 	CreateArcaneSpell("Auto-Sentry", "arcane autosentry", 150.0, 0.0, 80.0, CastAutoSentry);
-	CreateArcaneSpell("Soothing Sunlight", "arcane soothing sunlight", 150.0, 1.0, 180.0, CastSoothingSunlight);
+	CreateArcaneSpell("Soothing Sunlight", "arcane soothing sunlight", 150.0, 1.0, 90.0, CastSoothingSunlight);
 	CreateArcaneSpell("Arcane Hunter", "arcane hunter", 200.0, 100.0, 15.0, CastArcaneHunter);
 	CreateArcaneSpell("Sabotage", "arcane mark for death", 50.0, 0.0, 25.0, CastMarkForDeath);
 	CreateArcaneSpell("Infernal Enchantment", "arcane infernal enchantment", 250.0, 80.0, 60.0, CastInfernalEnchantment);

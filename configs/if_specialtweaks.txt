@@ -155,7 +155,7 @@
 		{
 			"gamestage"						"1"
 			"restriction"					"1"
-			"Arrow Ignition Chance"			"20.0"
+			"Arrow Ignition Chance"			"40.0"
 			"Ignited Arrows Explode"		"6.0"
 			"Ignited Arrows Explosion Radius"	"2.0"
 			"afterburn time increased(N)"	"1.0"
@@ -221,8 +221,8 @@
 			"gamestage"						"1"
 			"restriction"					"1"
 			"magnify patient damage"		"1"
-			"max health additive bonus"		"4.286"
-			"ubercharge effectiveness"		"5.0"
+			"max health additive bonus"		"4.0"
+			"ubercharge effectiveness"		"2.5"
 			"healing patient power"			"1.0"
 		}
 		"Blossom of Life"
@@ -231,7 +231,7 @@
 			"restriction"					"1"
 			"patient overheal to damage mult"	"2"
 			"escape plan healing"			"1"
-			"healing aoe radius"			"500"
+			"healing aoe radius"			"400"
 			"patient damage taken to uber"		"2"
 			"patient damage taken to self heal"	"4"
 		}

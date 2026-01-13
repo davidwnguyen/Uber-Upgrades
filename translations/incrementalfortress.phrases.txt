@@ -385,7 +385,7 @@
 		"en"		"Buff Movement Speed"
 	}
 	"jar gives armor penetration"{
-		"en"		"Applies Armor Penetration to Teammates"
+		"en"		"Applies DR Penetration to Teammates"
 	}
 	"jar applies armor decay"{
 		"en"		"Decays Armor Over Time"

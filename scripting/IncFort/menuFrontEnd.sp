@@ -187,7 +187,6 @@ Action:Menu_UpgradeChoice(client, subcat_choice, cat_choice, char[] TitleStr, in
 				t_up_cost = float(up_cost);
 			}
 
-
 			char Buffer[128];
 			char DisplayBuffer[64];
 			char TotalDisplayBuffer[64];
@@ -206,11 +205,12 @@ Action:Menu_UpgradeChoice(client, subcat_choice, cat_choice, char[] TitleStr, in
 				isEnabled = false;
 
 			if(canBypassRestriction[client] == false && (tmp_ref_idx == 20000 || upgrades[tmp_up_idx].i_val == currentupgrades_val[client][slot][tmp_ref_idx]) && upgrades[tmp_up_idx].restriction_category != 0){
-				for(int req = 1;req<5;++req){
-					if(currentupgrades_restriction[client][slot][req] == upgrades[tmp_up_idx].restriction_category){
-						isEnabled = false;
-						break;
-					}
+				int cap = 1;
+				if(gameStage >= 2 && slot == 4){
+					cap++;
+				}
+				if(currentupgrades_restriction[client][slot][upgrades[tmp_up_idx].restriction_category] >= cap){
+					isEnabled = false;
 				}
 			}
 

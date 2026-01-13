@@ -301,7 +301,7 @@
 			"increase_ratio"	"0"
 			"value"		"1"
 			"init"		"0"
-			"description"	"Heals in an AOE for 100% your health.\nApplies a +100% incoming healing buff for 6.5s.\n180s CD. Arcane Power increases healing."
+			"description"	"Heals in an AOE for 100% max health.\nApplies a +100% incoming healing buff for 18s.\n120s CD. Arcane Power increases healing."
 			"max"		"1"
 		}
 		"1542.9"
@@ -648,12 +648,12 @@
 			"ref"		"heal rate mult"
 			"attr_class"	"mult_medigun_healrate"
 			"display"		"%.0f%%"
-			"cost"		"250"
+			"cost"		"350"
 			"value"		"0.25"
 			"increase_ratio" 	"0.35"
 			"init"		"1.00"
 			"optimizer_style" "1"
-			"max"		"500.00"
+			"max"		"100.00"
 		}
 		"15"
 		{
@@ -3635,12 +3635,12 @@
 			"name"		"heal rate penalty"
 			"ref"		"heal rate bonus(A)"
 			"display"		"%.0f%%"
-			"cost"		"350"
-			"value"		"0.2"
-			"increase_ratio"	"0.60"
+			"cost"		"500"
+			"value"		"0.25"
+			"increase_ratio"	"0.4"
 			"init"		"1"
 			"optimizer_style" "1"
-			"max"		"10"
+			"max"		"8"
 		}
 		"298"
 		{
@@ -6664,9 +6664,10 @@
 			"name"		"jar gives armor penetration"
 			"ref"		"jar gives armor penetration"
 			"attr_class"	"jar_gives_armor_penetration"
-			"display"		"%.0f"
+			"display"		"%.0f%%"
+			"attr_type"		"value_is_additive"
 			"cost"		"0"
-			"value"		"1.00"
+			"value"		"0.10"
 			"init"		"0.00"
 			"max"		"0.00"
 		}

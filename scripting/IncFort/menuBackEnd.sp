@@ -75,8 +75,10 @@ public MenuHandler_UpgradeChoice(Handle menu, MenuAction:action, client, param2)
 		}
 		else if(rate > 1)
 		{
+			bool firstTimeBuying = false;
 			if (inum == 20000)
 			{
+				firstTimeBuying = true;
 				inum = currentupgrades_number[client][slot]
 				currentupgrades_number[client][slot]++
 				upgrades_ref_to_idx[client][slot][upgrade_choice] = inum;
@@ -130,21 +132,22 @@ public MenuHandler_UpgradeChoice(Handle menu, MenuAction:action, client, param2)
 				}
 				if(canBypassRestriction[client] == false && upgrades[upgrade_choice].restriction_category != 0)
 				{
-					for(int i = 1;i<5;++i)
+					int cap = 1;
+					if(gameStage >= 2 && slot == 4){
+						cap++;
+					}
+					if(currentupgrades_restriction[client][slot][upgrades[upgrade_choice].restriction_category] >= cap)
 					{
-						if(currentupgrades_restriction[client][slot][i] == upgrades[upgrade_choice].restriction_category)
-						{
-							PrintToChat(client, "You already have something that fits this restriction category.");
-							EmitSoundToClient(client, SOUND_FAIL);
-							times = 0;
-							break;
-						}
+						PrintToChat(client, "You already have something that fits this restriction category.");
+						EmitSoundToClient(client, SOUND_FAIL);
+						times = 0;
 					}
 				}
 				if(times > 0)
 				{
-					if(canBypassRestriction[client] == false && upgrades[upgrade_choice].restriction_category != 0){
-						currentupgrades_restriction[client][slot][upgrades[upgrade_choice].restriction_category] = upgrades[upgrade_choice].restriction_category;
+					if(canBypassRestriction[client] == false && upgrades[upgrade_choice].restriction_category != 0
+						&& (firstTimeBuying || currentupgrades_val[client][slot][inum] - upgrades[upgrade_choice].i_val == 0.0)){
+						currentupgrades_restriction[client][slot][upgrades[upgrade_choice].restriction_category]++;
 					}
 					if(notEnough == true)
 					{
