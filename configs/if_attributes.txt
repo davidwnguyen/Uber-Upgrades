@@ -7208,6 +7208,17 @@
 			"init"		"0.00"
 			"max"		"200.00"
 		}
+		"1705"
+		{
+			"name"		"critical block rating buff"
+			"ref"		"critical block rating buff"
+			"display"		"%.0f"
+			"attr_class"	"critical_block_rating"
+			"cost"		"0"
+			"value"		"0.0"
+			"init"		"0.00"
+			"max"		"0.00"
+		}
 		"1707"
 		{
 			"name"		"damage bonus vs non health"
@@ -7470,7 +7481,7 @@
 			"init"		"1.00"
 			"max"		"3.00"
 		}
-		"1730"
+		"1731"
 		{
 			"name"		"afterburn immunity buff"
 			"ref"		"afterburn immunity buff"
@@ -7481,6 +7492,53 @@
 			"value"		"1.00"
 			"init"		"0.00"
 			"max"		"10.00"
+		}
+		"1732"
+		{
+			"name"		"firerate buff banner"
+			"ref"		"firerate buff banner"
+			"attr_class"	"firerate_buff_banner"
+			"display"		"%.0f%%"
+			"attr_type"		"value_is_additive"
+			"cost"		"1200"
+			"value"		"0.03"
+			"init"		"0.00"
+			"max"		"0.18"
+		}
+		"1733"
+		{
+			"name"		"healing buff banner"
+			"ref"		"healing buff banner"
+			"attr_class"	"healing_buff_banner"
+			"display"		"%.0f%%"
+			"cost"		"1200"
+			"value"		"0.03"
+			"init"		"1.00"
+			"max"		"1.15"
+		}
+		"1734"
+		{
+			"name"		"speed buff banner"
+			"ref"		"speed buff banner"
+			"attr_class"	"speed_buff_banner"
+			"display"		"%.0f%%"
+			"attr_type"		"value_is_additive"
+			"cost"		"1200"
+			"value"		"0.02"
+			"init"		"0.00"
+			"max"		"0.14"
+		}
+		"1735"
+		{
+			"name"		"critblock buff banner"
+			"ref"		"critblock buff banner"
+			"attr_class"	"critblock_buff_banner"
+			"display"		"%.0f"
+			"attr_type"		"value_is_additive"
+			"cost"		"1200"
+			"value"		"10.0"
+			"init"		"0.00"
+			"max"		"100.0"
 		}
 		//Filler
 		"1900.0"

@@ -382,7 +382,7 @@ float applyMultSeverityMod(float val, float severity){
 }
 
 public void ManagePlayerBuffs(int i){
-	float additiveDamageRawBuff,additiveDamageMultBuff = 1.0,multiplicativeDamageBuff = 1.0,additiveAttackSpeedMultBuff = 1.0,multiplicativeAttackSpeedMultBuff = 1.0,additiveMoveSpeedMultBuff = 1.0,additiveDamageTakenBuff = 1.0,multiplicativeDamageTakenBuff = 1.0, additiveArmorPenetration = 0.0, multiplicativeMoveSpeedMult = 1.0;
+	float additiveDamageRawBuff,additiveDamageMultBuff = 1.0,multiplicativeDamageBuff = 1.0,additiveAttackSpeedMultBuff = 1.0,multiplicativeAttackSpeedMultBuff = 1.0,additiveMoveSpeedMultBuff = 1.0,additiveDamageTakenBuff = 1.0,multiplicativeDamageTakenBuff = 1.0, additiveArmorPenetration = 0.0, multiplicativeMoveSpeedMult = 1.0, additiveCritBlock = 0.0;
 
 	char details[255] = "Statuses Active:"
 
@@ -408,7 +408,7 @@ public void ManagePlayerBuffs(int i){
 				if(buffCheck == buff)
 					continue;
 				if(playerBuffs[i][buffCheck].id == playerBuffs[i][buff].id &&
-					playerBuffs[i][buffCheck].priority > playerBuffs[i][buff].priority)
+					(playerBuffs[i][buffCheck].severity > playerBuffs[i][buff].severity || playerBuffs[i][buffCheck].priority > playerBuffs[i][buff].priority))
 					{flag = true;break;}
 			}
 
@@ -421,6 +421,7 @@ public void ManagePlayerBuffs(int i){
 			additiveMoveSpeedMultBuff += playerBuffs[i][buff].additiveMoveSpeedMult * playerBuffs[i][buff].severity;
 			additiveDamageTakenBuff += playerBuffs[i][buff].additiveDamageTaken * playerBuffs[i][buff].severity;
 			additiveArmorPenetration += playerBuffs[i][buff].additiveArmorPenetration * playerBuffs[i][buff].severity;
+			additiveCritBlock += playerBuffs[i][buff].additiveCritBlock * playerBuffs[i][buff].severity;
 
 			multiplicativeDamageBuff *= applyMultSeverityMod(playerBuffs[i][buff].multiplicativeDamage, playerBuffs[i][buff].severity);
 			multiplicativeDamageTakenBuff *= applyMultSeverityMod(playerBuffs[i][buff].multiplicativeDamageTaken, playerBuffs[i][buff].severity);
@@ -500,6 +501,7 @@ public void ManagePlayerBuffs(int i){
 	TF2Attrib_SetByName(i, "damage taken mult 4", additiveDamageTakenBuff*multiplicativeDamageTakenBuff);
 	TF2Attrib_SetByName(i, "armor penetration buff", additiveArmorPenetration);
 	TF2Attrib_SetByName(i, "airblast vulnerability multiplier hidden", reactiveAirblastRes);
+	TF2Attrib_SetByName(i, "critical block rating buff", additiveCritBlock);
 	TF2Attrib_ClearCache(i);
 	int CWeapon = GetEntPropEnt(i, Prop_Send, "m_hActiveWeapon");
 	if(IsValidWeapon(CWeapon)){
@@ -575,6 +577,11 @@ public void ManagePlayerBuffs(int i){
 		Format(details, sizeof(details), "%s\n+%i٪ Healing Received", details, RoundToNearest((healingMult - 1.0) * 100.0) );
 	else if (healingMult < 1.0)
 		Format(details, sizeof(details), "%s\n-%i٪ Healing Received", details, RoundToNearest((1.0-healingMult) * 100.0) );
+
+	if(additiveCritBlock > 0.0)
+		Format(details, sizeof(details), "%s\n+%.0f Critical Block Rating", details, additiveCritBlock);
+	else if (additiveCritBlock < 0.0)
+		Format(details, sizeof(details), "%s\n%.0f Critical Block Rating", details, additiveCritBlock);
 
 	SendItemInfo(i, details);
 }

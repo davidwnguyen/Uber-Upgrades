@@ -1823,7 +1823,11 @@
 		{
 			"0"		"increase buff duration"
 			"1"		"increase buff radius"
-			"2"		"blast dmg to self decreased"
+			"2"		"firerate buff banner"
+			"3"		"healing buff banner"
+			"4"		"speed buff banner"
+			"5"		"critblock buff banner"
+			"6"		"blast dmg to self decreased"
 		}
 		"Special Tweaks"
 		{

@@ -1,5 +1,17 @@
 "Phrases"
 {
+	"firerate buff banner"{
+		"en"		"Banner Grants Fire Rate Buff"
+	}
+	"healing buff banner"{
+		"en"		"Banner Grants Incoming Heal Buff"
+	}
+	"speed buff banner"{
+		"en"		"Banner Grants Movespeed Buff"
+	}
+	"critblock buff banner"{
+		"en"		"Banner Grants Critical Block Buff"
+	}
 	"afterburn immunity buff"{
 		"en"		"Afterburn Immunity Consumable Buff"
 	}

@@ -99,6 +99,12 @@ float GetPlayerHealingMultiplier(client){
 	if(hasBuffIndex(client, Buff_Decay)){
 		multiplier /= 1 + 3.0*playerBuffs[client][getBuffInArray(client, Buff_Decay)].severity;
 	}
+	for(int i = 0; i<MAXBUFFS;i++){
+		if(playerBuffs[client][i].duration < GetGameTime())
+			continue;
+			
+		multiplier *= applyMultSeverityMod(playerBuffs[client][i].multiplicativeIncomingHeal, playerBuffs[client][i].severity);
+	}
 	if(TF2Attrib_HookValueFloat(0.0, "revenge_powerup", client) == 2.0 || TF2Attrib_HookValueFloat(0.0, "revenge_powerup", client) == 3.0)
 		multiplier *= 1.0 + RageBuildup[client]*0.5;
 	

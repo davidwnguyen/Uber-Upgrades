@@ -794,24 +794,56 @@ public Action:Timer_Every100MS(Handle timer)
 							}
 						}
 					}
-					{
-						float plunderBonus = GetAttribute(secondary, "buff plunder multiplier", 1.0)
-						if(plunderBonus > 1.0){
-							Buff plunderBuff;
-							plunderBuff.init("Plunder Bonus", "Increased Hit or Kill Effects", Buff_Plunder, RoundFloat(plunderBonus*100), client, 0.5, plunderBonus);
+					float plunderBonus = GetAttribute(secondary, "buff plunder multiplier", 1.0)
+					if(plunderBonus > 1.0){
+						Buff plunderBuff;
+						plunderBuff.init("Plunder Bonus", "Increased Hit or Kill Effects", Buff_Plunder, RoundFloat(plunderBonus*100), client, 0.5, plunderBonus);
 
-							float VictimPos[3];
-							for(int i=1;i<=MaxClients;++i)
+						float VictimPos[3];
+						for(int i=1;i<=MaxClients;++i)
+						{
+							if(IsValidClient(i) && IsPlayerAlive(i) && GetClientTeam(client) == GetClientTeam(i))
 							{
-								if(IsValidClient(i) && IsPlayerAlive(i) && GetClientTeam(client) == GetClientTeam(i))
-								{
-									GetClientAbsOrigin(i, VictimPos);
-									if(GetVectorDistance(ClientPos,VictimPos,true ) <= range*range)
-										insertBuff(i, plunderBuff);
-								}
+								GetClientAbsOrigin(i, VictimPos);
+								if(GetVectorDistance(ClientPos,VictimPos,true ) <= range*range)
+									insertBuff(i, plunderBuff);
 							}
 						}
 					}
+					bool hasBuff = false;
+					Buff bannerBuff;
+					bannerBuff.init("Banner Buff", "", Buff_BannerBuffs, 1, client, 0.5);
+
+					float fireRateBuff = TF2Attrib_HookValueFloat(0.0, "firerate_buff_banner", secondary);
+					if(fireRateBuff){
+						bannerBuff.additiveAttackSpeedMult = fireRateBuff; hasBuff = true;
+					}
+					float healingBuff = TF2Attrib_HookValueFloat(1.0, "healing_buff_banner", secondary);
+					if(healingBuff != 1.0){
+						bannerBuff.multiplicativeIncomingHeal = healingBuff; hasBuff = true;
+					}
+					float speedBuff = TF2Attrib_HookValueFloat(0.0, "speed_buff_banner", secondary);
+					if(speedBuff){
+						bannerBuff.additiveMoveSpeedMult = speedBuff; hasBuff = true;
+					}
+					float critBlockBuff = TF2Attrib_HookValueFloat(0.0, "critblock_buff_banner", secondary);
+					if(critBlockBuff){
+						bannerBuff.additiveCritBlock = critBlockBuff; hasBuff = true;
+					}
+
+					if(hasBuff){
+						float VictimPos[3];
+						for(int i=1;i<=MaxClients;++i)
+						{
+							if(IsValidClient(i) && IsPlayerAlive(i) && GetClientTeam(client) == GetClientTeam(i))
+							{
+								GetClientAbsOrigin(i, VictimPos);
+								if(GetVectorDistance(ClientPos,VictimPos,true ) <= range*range)
+									insertBuff(i, bannerBuff);
+							}
+						}
+					}
+
 					//Custom Buff Effects
 					//Lightning Strike banner : lightningCounter : "has pipboy build interface"
 					if(IsValidWeapon(CWeapon)){
