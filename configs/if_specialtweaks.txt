@@ -355,9 +355,10 @@
 		}
 		"Pain Train"
 		{
-			"gamestage"						"1"
-			"restriction"					"1"
-			"chain charge on kill"			"1"
+			"gamestage"							"1"
+			"restriction"						"1"
+			"chain charge on kill"				"1"
+			"charge impact damage increased"	"1"
 		}
 		"Team Tactics"
 		{

@@ -137,9 +137,9 @@ bool isBonus[BuffAmt] = {
 	true,
 	false,
 	false,
+	false,
 	true,
-	true,
-	false
+	true
 }
 
 //Temp buffs for players

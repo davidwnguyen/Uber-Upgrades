@@ -705,7 +705,7 @@ stock EntityExplosion(owner, float damage, float radius, float pos[3], soundType
 
 					if(IsValidEdict(weapon) && IsValidClient3(i))
 					{
-						SDKHooks_TakeDamage(i,owner,owner,damage,damagetype|DMG_IGNOREHOOK,weapon,_,_,false)
+						SDKHooks_TakeDamage(i,entity,owner,damage,damagetype|DMG_IGNOREHOOK,weapon,_,_,false)
 						if(knockback > 0.0)
 							PushEntity(i, owner, knockback, 200.0);
 						
@@ -714,7 +714,7 @@ stock EntityExplosion(owner, float damage, float radius, float pos[3], soundType
 					}
 					else
 					{
-						SDKHooks_TakeDamage(i,owner,owner,damage,damagetype|DMG_IGNOREHOOK,_,_,_, false);
+						SDKHooks_TakeDamage(i,entity,owner,damage,damagetype|DMG_IGNOREHOOK,_,_,_, false);
 					}
 					if(noMultihit)
 						ShouldNotHit[entity][i] = true;

@@ -785,18 +785,12 @@ public void TF2_OnConditionRemoved(client, TFCond:cond)
 			float grenadevec[3];
 			GetClientEyePosition(client, grenadevec);
 			int CWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
-			if(IsValidEdict(CWeapon))
+			int secondary = TF2Util_GetPlayerLoadoutEntity(client,1);
+			if(IsValidWeapon(CWeapon) && IsValidEntity(secondary))
 			{
 				float damage = TF2_GetDPSModifiers(client,CWeapon,false,false) * 70.0;
-				int secondary = TF2Util_GetPlayerLoadoutEntity(client,1);
-				if(IsValidEdict(secondary))
-				{
-					Address bashBonusActive = TF2Attrib_GetByName(secondary, "charge impact damage increased")
-					if(bashBonusActive != Address_Null)
-					{
-						damage *= TF2Attrib_GetValue(bashBonusActive);
-					}
-				}
+				damage *= TF2Attrib_HookValueFloat(1.0, "charge_impact_damage", secondary);
+				
 				if(GetAttribute(CWeapon, "charge explosion ignites instead", 0.0)){
 					float targetVec[3];
 					for(int i = 1; i <= MaxClients; ++i){
@@ -813,7 +807,7 @@ public void TF2_OnConditionRemoved(client, TFCond:cond)
 						applyAfterburn(i, client, CWeapon, damage);
 					}
 				}else{
-					EntityExplosion(client, damage, 500.0, grenadevec, 1, _, _, _, DMG_ALWAYSGIB | DMG_DISSOLVE, secondary);
+					EntityExplosion(client, damage, 500.0, grenadevec, 1, _, secondary, _, DMG_ALWAYSGIB | DMG_DISSOLVE, CWeapon);
 				}
 			}
 		}
@@ -1251,9 +1245,9 @@ public Action:Event_PlayerDeath(Handle event, const char[] name, bool:dontBroadc
 				EntityExplosion(attack, 100.0*TF2_GetDPSModifiers(attack, weapon)*fireworksChance, 400.0, position, _, _, client);
 			}
 		}
-		int damagetype = GetEventInt(event, "damagebits");
-		if(damagetype & DMG_ALWAYSGIB | DMG_DISSOLVE){
-			float painTrainActive = TF2Attrib_HookValueFloat(0.0, "chain_charge_on_kill", attack);
+		int inflictor = GetEventInt(event, "inflictor_entindex");
+		if(IsValidEntity(inflictor)){
+			float painTrainActive = TF2Attrib_HookValueFloat(0.0, "chain_charge_on_kill", inflictor);
 			if(painTrainActive){
 				SetEntPropFloat(attack, Prop_Send, "m_flChargeMeter", 100.0);
 				TF2_AddCondition(attack, TFCond_Charging);
