@@ -680,79 +680,17 @@ public OnCvarChanged(Handle cvar, const char[] oldVal, const char[] newVal)
 		infiniteMoney = view_as<bool>(GetConVarInt(cvar_InfiniteMoney));
 	}
 }
-public Action Command_DealDamage(client, args)
-{
-	if(args != 2)
+
+public Action Command_SetGameStage(int client, int args){
+	if(args != 1)
 	{
-		ReplyToCommand(client, "[SM] Usage: sm_damage \"target\" \"amount\"");
-		return Plugin_Handled;
-	}
-	char strTarget[MAX_TARGET_LENGTH], target_name[MAX_TARGET_LENGTH], strDmg[64];
-	int target_list[MAXPLAYERS], target_count;
-	bool tn_is_ml;
-	float Damage;
-	GetCmdArg(1, strTarget, sizeof(strTarget));
-	if((target_count = ProcessTargetString(strTarget, client, target_list, MAXPLAYERS, COMMAND_FILTER_NO_BOTS, target_name, sizeof(target_name), tn_is_ml)) <= 0)
-	{
-		ReplyToTargetError(client, target_count);
+		ReplyToCommand(client, "[SM] Usage: sm_setifgamestage \"gamestage\"");
 		return Plugin_Handled;
 	}
 
-	GetCmdArg(2, strDmg, sizeof(strDmg));
-	Damage = StringToFloat(strDmg);	
-	for(int i = 0; i < target_count; ++i)
-	{
-		if(IsValidClient3(target_list[i]))
-		{
-			RadiationBuildup[target_list[i]] += Damage;
-		}
-	}
-	return Plugin_Handled;
-}
-public Action:Command_GiveKills(client, args)
-{
-	char args3[128];
-	int kills;
-	int victim;
-	
-	char strTarget[MAX_TARGET_LENGTH], target_name[MAX_TARGET_LENGTH]
-	int target_list[MAXPLAYERS], target_count;
-	bool tn_is_ml;
-	GetCmdArg(1, strTarget, sizeof(strTarget));
-	if((target_count = ProcessTargetString(strTarget, client, target_list, MAXPLAYERS, 0, target_name, sizeof(target_name), tn_is_ml)) <= 0)
-	{
-		ReplyToTargetError(client, target_count);
-		return Plugin_Handled;
-	}
-	
-	char strTarget2[MAX_TARGET_LENGTH], target_name2[MAX_TARGET_LENGTH];
-	int target_list2[MAXPLAYERS], target_count2;
-	bool tn_is_ml2;
-	GetCmdArg(2, strTarget2, sizeof(strTarget2));
-	if((target_count2 = ProcessTargetString(strTarget2, client, target_list2, MAXPLAYERS, 0, target_name2, sizeof(target_name2), tn_is_ml2)) <= 0)
-	{
-		ReplyToTargetError(client, target_count2);
-		return Plugin_Handled;
-	}
-	
-	PrintToServer("Attempting to give kills.");
-	for(int i = 0; i < target_count; ++i)
-	{
-		if(GetCmdArg(3, args3, sizeof(args3)) && IsValidClient3(target_list[i]) && IsValidClient3(target_list2[i]))
-		{
-			victim = target_list2[i];
-			kills = StringToInt(args3);
-			PrintToServer("Attempting to give %i kills to %N. %N is the victim.",kills,target_list[i],target_list2[i]);
-			if(IsValidClient3(target_list[i]) && IsPlayerAlive(target_list[i]) && IsValidClient3(victim) && IsPlayerAlive(victim))
-			{
-				Handle datapack = CreateDataPack();
-				WritePackCell(datapack,EntIndexToEntRef(victim));
-				WritePackCell(datapack,EntIndexToEntRef(target_list[i]));
-				CreateTimer(0.1,Timer_KillPlayer,datapack);
-				StrangeFarming[victim][target_list[i]] = kills;
-				PrintToServer("Giving %i kills to %N. %N is the victim.",kills,target_list[i],victim);
-			}
-		}
-	}
+	char input[32];
+	GetCmdArg(1, input, sizeof(input));
+	gameStage = StringToInt(input);
+	UpdateMaxValuesStage(gameStage);
 	return Plugin_Handled;
 }

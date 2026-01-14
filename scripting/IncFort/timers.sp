@@ -2180,28 +2180,6 @@ public Action:Timer_PlayerGrenadeMines(Handle timer, any:ref)
 		KillTimer(timer);
 	}
 }
-public Action:Timer_KillPlayer(Handle timer,Handle datapack)
-{
-	ResetPack(datapack);
-	int victim = EntRefToEntIndex(ReadPackCell(datapack));
-	int attacker = EntRefToEntIndex(ReadPackCell(datapack));
-	if(IsValidClient3(victim) && IsValidClient3(attacker) && StrangeFarming[victim][attacker] > 0)
-	{
-		int currentWeapon = GetEntPropEnt(attacker, Prop_Send, "m_hActiveWeapon");
-		if(IsValidEdict(currentWeapon))
-		{
-			SDKHooks_TakeDamage(victim,attacker,attacker,100000000.0, DMG_GENERIC,currentWeapon,NULL_VECTOR,NULL_VECTOR)
-			TF2_RespawnPlayer(victim);
-			
-			Handle Newdatapack = CreateDataPack();
-			WritePackCell(Newdatapack,EntIndexToEntRef(victim));
-			WritePackCell(Newdatapack,EntIndexToEntRef(attacker));
-			CreateTimer(0.1,Timer_KillPlayer,Newdatapack);
-			StrangeFarming[victim][attacker]--;
-		}
-	}
-	CloseHandle(datapack);
-}
 
 public Action Timer_SmokeBomb(Handle timer, DataPack pack){
 	pack.Reset();
