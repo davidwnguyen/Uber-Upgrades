@@ -960,8 +960,7 @@ public Action:Timer_EveryTenSeconds(Handle timer)
 							{
 								TF2_AddCondition(buffed, TFCond_MVMBotRadiowave, 1.0);
 								TF2_AddCondition(buffed, TFCond_KingAura, 1000.0);
-								TF2_AddCondition(buffed, TFCond_CritCanteen, 1000.0);
-								TF2Attrib_SetByName(buffed, "damage bonus HIDDEN", 2.5);
+								TF2Attrib_SetByName(buffed, "damage mult 10", 1.5);
 								SetEntityRenderColor(buffed, 190,0,0,255);
 							}
 						}
