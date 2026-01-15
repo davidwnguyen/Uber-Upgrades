@@ -470,11 +470,6 @@ public MRESReturn OnCondApply(Address pPlayerShared, Handle hParams) {
 						healingBuff.init("Incoming Healing Boost", "", Buff_HealingBuff, 1, client, 8.0, healSeverity);
 						insertBuff(client, healingBuff);
 					}
-
-					float afterburnImmunityDuration = TF2Attrib_HookValueFloat(0.0, "consu_afterburn_immunity", CWeapon);
-					if(afterburnImmunityDuration > 0){
-						TF2_AddCondition(client, TFCond_AfterburnImmune, afterburnImmunityDuration, client);
-					}
 				}
 			}
 		}
@@ -830,6 +825,11 @@ public void TF2_OnConditionRemoved(client, TFCond:cond)
 				lunchboxChange.multiplicativeDamageTaken = GetAttribute(CWeapon, "buff damage taken", 1.0);
 				if(lunchboxChange.additiveMoveSpeedMult != 0.0 || lunchboxChange.multiplicativeAttackSpeedMult != 1.0 || lunchboxChange.multiplicativeDamageTaken != 1.0){
 					insertBuff(client, lunchboxChange);
+				}
+
+				float afterburnImmunityDuration = TF2Attrib_HookValueFloat(0.0, "consu_afterburn_immunity", CWeapon);
+				if(afterburnImmunityDuration > 0){
+					TF2_AddCondition(client, TFCond_AfterburnImmune, afterburnImmunityDuration, client);
 				}
 			}
 		}

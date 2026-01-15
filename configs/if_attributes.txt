@@ -118,8 +118,8 @@
 			"increase_ratio"	"0"
 			"value"		"1"
 			"init"		"0"
-			"description"	"Heals for 20% max health in an AOE at collision.\n15s CD"
-			"max"		"1"
+			"description"	"Heals for 20% max health in an AOE at collision. 15s CD.\nBuying a second time gives autocast while firing."
+			"max"		"2"
 		}
 		"1542.3"
 		{
