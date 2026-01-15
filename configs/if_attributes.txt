@@ -5469,7 +5469,7 @@
 			"cost"		"700"
 			"value"		"5"
 			"init"		"0"
-			"description"	"Every hit with this weapon applies +X bleed status buildup.\nUpon reaching 100 bleed buildup: victim takes 100 base damage."
+			"description"	"Every hit with this weapon applies +[{VALUE}] bleed status buildup.\nUpon reaching 100 bleed buildup, victim takes 100 base damage."
 			"max"		"50"
 		}
 		"1549.5"
@@ -5481,7 +5481,7 @@
 			"cost"		"700"
 			"value"		"5"
 			"init"		"0"
-			"description"	"Every hit with this weapon applies +X bleed status buildup.\nUpon reaching 100 bleed buildup: victim takes 100 base damage."
+			"description"	"Every hit with this weapon applies +[{VALUE}] bleed status buildup.\nUpon reaching 100 bleed buildup, victim takes 100 base damage."
 			"max"		"40"
 		}
 		"1550"
@@ -5549,6 +5549,7 @@
 			"increase_ratio"	"0.8"
 			"value"		"1.0"
 			"init"		"0"
+			"description"	"Adds up to [{VALUE}*1.66]% life steal against victims.\n(scaling with duration left)"
 			"max"		"8"
 		}
 		"1555.5"
@@ -5560,6 +5561,7 @@
 			"increase_ratio"	"0.5"
 			"value"		"1.0"
 			"init"		"6"
+			"description"	"Adds up to [{VALUE}*1.66]% life steal against victims.\n(scaling with duration left)"
 			"max"		"12"
 		}
 		"1556"

@@ -1862,7 +1862,7 @@
 	}
 	"jarmilk"
 	{
-		"special_tweaks_listid"		"3"
+		"special_tweaks_listid"		"2"
 		"Damage upgrades"
 		{
 			"0"		"damage bonus"
