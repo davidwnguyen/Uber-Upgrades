@@ -3606,7 +3606,6 @@ Buff OnStatusEffectApplied(int victim, Buff newBuff){
 			}
 		}
 	}
-	
 	return inserted;
 }
 

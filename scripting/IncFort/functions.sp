@@ -472,6 +472,9 @@ public void ManagePlayerBuffs(int i){
 	if(TF2Attrib_HookValueFloat(0.0, "agility_powerup", i) == 1.0){
 		additiveAttackSpeedMultBuff += 0.5;
 	}
+	if(TF2Attrib_HookValueFloat(0.0, "king_powerup", i) == 1.0){
+		additiveDamageMultBuff += 0.2;
+	}
 	
 	float teamTacticsBonus = 0.0;
 	for(int savior = 1;savior<=MaxClients;++savior){
@@ -3304,7 +3307,7 @@ GivePowerupDescription(int client, char[] name, int amount){
 		}else if(amount == 3){
 			CPrintToChat(client, "{community}Martyr Powerup {default}| {lightcyan}0.33x incoming healing. Sacrifice (15%% max health + dmg taken) to absorb fatal teammate damage and give uber for 0.5s.");
 		}else{
-			CPrintToChat(client, "{community}King Powerup {default}| {lightcyan}+33%% reload and fire rate, 1.5x uber and heal rate, and 1.2x dmg for teammates and you. 0.8x damage taken.");
+			CPrintToChat(client, "{community}King Powerup {default}| {lightcyan}+33%% reload and fire rate for nearby teammates and you. 0.8x incoming damage. 1.5x uber and heal rate. +20%% damage dealt.");
 		}
 	}
 	else if(StrEqual("plague powerup", name)){

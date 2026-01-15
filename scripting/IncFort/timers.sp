@@ -608,7 +608,6 @@ public Action:Timer_Every100MS(Handle timer)
 			Buff kingBuff;
 			kingBuff.init("King Aura", "", Buff_KingAura, 1, client, 1.0);
 			kingBuff.additiveAttackSpeedMult = 0.33;
-			kingBuff.additiveDamageMult = 0.2;
 
 			float kingValue = TF2Attrib_HookValueFloat(0.0, "king_powerup", client);
 
