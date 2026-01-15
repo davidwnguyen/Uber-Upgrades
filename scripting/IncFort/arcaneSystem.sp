@@ -1402,7 +1402,7 @@ DoZap(client,victim,spellLevel)
 	EmitSoundToAll(SOUND_ZAP, 0, _, SNDLEVEL_CONVO, _, 1.0, _,_,clientpos);
 	
 	float LightningDamage = 35.0 * ArcaneDamage[client];
-	SDKHooks_TakeDamage(victim,client,client, LightningDamage, DMG_IGNOREHOOK, -1, NULL_VECTOR, NULL_VECTOR, false);
+	SDKHooks_TakeDamage(victim,client,client, LightningDamage, DMG_SHOCK|DMG_IGNOREHOOK, -1, NULL_VECTOR, NULL_VECTOR, false);
 	float chance[] = {0.0,0.3,0.4,0.5};
 		
 	if(chance[spellLevel] >= GetRandomFloat(0.0, 1.0))
