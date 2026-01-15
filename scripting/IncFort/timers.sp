@@ -2299,6 +2299,7 @@ public Action Timer_LocusMine(Handle timer, int ref)
 			Call_PushCell(client);
 			Call_PushArray(grenadevec, sizeof(grenadevec));
 			Call_PushArray(fAngles, sizeof(fAngles));
+			Call_PushCell(1);
 			Call_Finish();
 			fAngles[1] += 360.0/locusMinesProjCount[entity];
 		}

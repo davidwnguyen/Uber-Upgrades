@@ -111,12 +111,14 @@ public Action:OnSunlightSpearCollision(entity, client)
 	char strName[32];
 	GetEntityClassname(client, strName, 32)
 
+	bool dealtDamage = false;
+
 	if(IsValidForDamage(client))
 	{
 		if(HasEntProp(entity, Prop_Send, "m_hOwnerEntity"))
 		{
 			int owner = GetEntPropEnt(entity, Prop_Send, "m_hOwnerEntity")
-			if(IsOnDifferentTeams(owner,client))
+			if(IsValidClient3(owner) && IsOnDifferentTeams(owner,client))
 			{
 				int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", owner)) + 1;
 
@@ -124,14 +126,17 @@ public Action:OnSunlightSpearCollision(entity, client)
 				float ProjectileDamage = scaling[spellLevel]*ArcaneDamage[owner];
 				SDKHooks_TakeDamage(client, entity, owner, ProjectileDamage, DMG_BURN|DMG_IGNOREHOOK,_,_,_,false);
 				CreateParticleEx(client, "dragons_fury_effect_parent", 1);
+				dealtDamage = true;
 			}
 		}
 	}
-
-	float origin[3];
-	GetEntPropVector(entity, Prop_Data, "m_vecOrigin", origin);
-	CreateParticleEx(entity, "drg_cow_explosioncore_charged", -1, -1, origin);
-	RemoveEntity(entity);
+	
+	if(g_nBounces[entity] >= projectileMaxBounces[entity] || dealtDamage){
+		float origin[3];
+		GetEntPropVector(entity, Prop_Data, "m_vecOrigin", origin);
+		CreateParticleEx(entity, "drg_cow_explosioncore_charged", -1, -1, origin);
+		RemoveEntity(entity);
+	}
 	return Plugin_Stop;
 }
 public Action:BlackskyEyeCollision(entity, client)
@@ -1007,22 +1012,8 @@ public Action:OnStartTouch(entity, other)
 	int owner = GetEntPropEnt(entity, Prop_Send, "m_hOwnerEntity")
 	if(!IsValidClient(owner))
 		return Plugin_Continue;
-	int maxBounces = 0;
 	
-	if(HasEntProp(entity, Prop_Data, "m_vecOrigin"))
-	{
-		int CWeapon = GetEntPropEnt(owner, Prop_Send, "m_hActiveWeapon");
-		if(IsValidEdict(CWeapon))
-		{
-			Address bounceActive = TF2Attrib_GetByName(CWeapon, "ReducedCloakFromAmmo")
-			if(bounceActive != Address_Null)
-			{
-				maxBounces = RoundToNearest(TF2Attrib_GetValue(bounceActive));
-			}
-		}
-	}
-	
-	if (g_nBounces[entity] >= maxBounces)
+	if (g_nBounces[entity] >= projectileMaxBounces[entity])
 		return Plugin_Continue;
 
 	SDKHook(entity, SDKHook_Touch, OnTouch);
@@ -1139,8 +1130,7 @@ public Action:OnTouch(entity, other)
 	}
 	
 	RequestFrame(DelayedTeleportEntity,datapack);
-	
-	CloseHandle(trace);
+
 	g_nBounces[entity]++;
 	SDKUnhook(entity, SDKHook_Touch, OnTouch);
 	return Plugin_Handled;

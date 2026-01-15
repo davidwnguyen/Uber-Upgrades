@@ -904,6 +904,7 @@ public OnEntityCreated(entity, const char[] classname)
 			RequestFrame(FragmentProperties, reference);
 			CreateTimer(6.0, SelfDestruct, reference);
 			CreateTimer(0.1, ArrowThink, reference, TIMER_REPEAT|TIMER_FLAG_NO_MAPCHANGE);
+			SDKHook(entity, SDKHook_StartTouch, OnStartTouch);
 		}
 		if(StrEqual(classname, "tf_projectile_flare"))
 		{
@@ -996,7 +997,8 @@ public OnEntityDestroyed(entity)
 	projectileFragCount[entity] = 0;
 	locusMinesFunction[entity] = null;
 	locusMinesRadius[entity] = 0.0;
-	locusMinesProjCount[entity] = 0;\
+	locusMinesProjCount[entity] = 0;
+	projectileMaxBounces[entity] = 0;
 	
 	//isProjectileSlash[entity][0] = 0.0;
 	//isProjectileSlash[entity][1] = 0.0;

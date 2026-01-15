@@ -165,6 +165,7 @@ CastSunlightSpear(client, attuneSlot)
 		float fAngles[3], fVelocity[3], vImpulse[3] = {0.0, 1500.0, 0.0};
 
 		SetEntPropEnt(iEntity, Prop_Send, "m_hOwnerEntity", client);
+		SetEntProp(iEntity, Prop_Send, "m_iType", 1);
 		SetEntProp(iEntity, Prop_Send, "m_iTeamNum", GetClientTeam(client), 1);
 		SetEntProp(iEntity, Prop_Send, "m_nSkin", GetClientTeam(client)-2);
 		SetEntPropEnt(iEntity, Prop_Data, "m_hOwnerEntity", client);
@@ -177,7 +178,6 @@ CastSunlightSpear(client, attuneSlot)
 		fVelocity[2] += 100.0;
 		TeleportEntity(iEntity, fOrigin, fAngles, fVelocity);
 		DispatchSpawn(iEntity);
-
 		SDKCall(g_SDKCallInitGrenade, iEntity, fVelocity, vImpulse, client, 50, 146.0);
 
 		CreateTimer(0.1,Timer_LocusMine,  EntIndexToEntRef(iEntity), TIMER_REPEAT);
@@ -187,10 +187,9 @@ CastSunlightSpear(client, attuneSlot)
 		locusMinesRadius[iEntity] = 200.0*200.0;
 		locusMinesProjCount[iEntity] = 3;
 		SetEntProp(iEntity, Prop_Data, "m_nNextThinkTick", -1);
-		SetEntityModel(iEntity, "models/weapons/w_models/w_stickybomb3.mdl");
 	}
 }
-SpawnSunlightSpear(int client, float overridePosition[3] = {0.0, 0.0, 0.0}, float overrideAngles[3] = {0.0, 0.0, 0.0}){
+SpawnSunlightSpear(int client, float overridePosition[3] = {0.0, 0.0, 0.0}, float overrideAngles[3] = {0.0, 0.0, 0.0}, bool locusMines = false){
 	int iEntity = CreateEntityByName("tf_projectile_arrow");
 	if (!IsValidEntity(iEntity)) 
 		return;
@@ -234,7 +233,11 @@ SpawnSunlightSpear(int client, float overridePosition[3] = {0.0, 0.0, 0.0}, floa
 	TE_SendToAll();
 	CreateParticle(iEntity, "raygun_projectile_red_crit", true, _, 10.0, _, true);
 	CreateParticle(iEntity, "raygun_projectile_red", true, _, 10.0, _, true);
-	homingDelay[iEntity] = 0.2;
+
+	if(locusMines){
+		homingDelay[iEntity] = 0.2;
+		projectileMaxBounces[iEntity] = 3;
+	}
 }
 
 CastLightningEnchantment(client, attuneSlot)
