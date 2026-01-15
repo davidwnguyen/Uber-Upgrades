@@ -1379,6 +1379,10 @@ public Action:Event_PlayerDeath(Handle event, const char[] name, bool:dontBroadc
 	}
 }
 
+public Action Event_ArrowImpact(Handle event, const char[] name, bool dontBroadcast){
+	return Plugin_Stop;
+}
+
 //Called on player CMD (~almost every tick, but varies based on response rate)
 
 public Action OnPlayerRunCmd(int client, int& buttons, int& impulse, float vel[3], float angles[3], int& weapon, int& subtype, int& cmdnum, int& tickcount, int& seed, int mouse[2])
