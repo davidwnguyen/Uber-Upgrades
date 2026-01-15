@@ -5549,7 +5549,7 @@
 			"increase_ratio"	"0.8"
 			"value"		"1.0"
 			"init"		"0"
-			"description"	"Adds up to [{VALUE}*1.66]% life steal against victims.\n(scaling with duration left)"
+			"description"	"Adds up to [{VALUE}*1.6667]% life steal against victims.\n(scaling with duration left)"
 			"max"		"8"
 		}
 		"1555.5"
@@ -5561,7 +5561,7 @@
 			"increase_ratio"	"0.5"
 			"value"		"1.0"
 			"init"		"6"
-			"description"	"Adds up to [{VALUE}*1.66]% life steal against victims.\n(scaling with duration left)"
+			"description"	"Adds up to [{VALUE}*1.6667]% life steal against victims.\n(scaling with duration left)"
 			"max"		"12"
 		}
 		"1556"

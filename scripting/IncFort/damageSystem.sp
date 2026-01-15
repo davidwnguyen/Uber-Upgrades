@@ -1146,7 +1146,7 @@ public void preDamageMitigationCalcs(victim, attacker, inflictor, float& damage,
 		lifestealFactor += GetAttribute(attacker, "lifesteal ability", 0.0);//Lifesteal attribute
 
 	if(MadmilkDuration[victim] > GetGameTime()) // Madmilk
-		lifestealFactor += (MadmilkDuration[victim]-GetGameTime()) * 1.66 / 100.0;
+		lifestealFactor += (MadmilkDuration[victim]-GetGameTime()) * 1.6667 / 100.0;
 
 	if(TF2_IsPlayerInCondition(attacker, TFCond_MedigunDebuff))// Conch
 		lifestealFactor += 0.25;
