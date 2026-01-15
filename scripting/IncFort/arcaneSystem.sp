@@ -146,64 +146,97 @@ CastMarkForDeath(client, attuneSlot)
 }
 CastSunlightSpear(client, attuneSlot)
 {
-	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;
+	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane sunlight spear", client));
 
 	if(applyArcaneRestrictions(client, attuneSlot))
 		return; 
 
-	float clientpos[3];
-	GetClientEyePosition(client,clientpos);
-	EmitSoundToAll(SOUND_CALLBEYOND_CAST, 0, client, SNDLEVEL_NORMAL, _, 0.6, _,_,clientpos);
-	int projectileAmount[] = {0,1,2,5};
-	float projectileSpeed[] = {0.0,2500.0,4000.0,6000.0};
-	for(int i=0;i<projectileAmount[spellLevel];++i){
-		int iEntity = CreateEntityByName("tf_projectile_arrow");
-		if (!IsValidEntity(iEntity)) 
-			continue;
+	float fOrigin[3];
+	GetClientEyePosition(client, fOrigin);
 
-		float fAngles[3],fOrigin[3], vBuffer[3],fVelocity[3],fwd[3],right[3];
-		int iTeam = GetClientTeam(client);
+	EmitSoundToAll(SOUND_CALLBEYOND_CAST, 0, client, SNDLEVEL_NORMAL, _, 0.6, _, _, fOrigin);
+	if(spellLevel != 3){
+		SpawnSunlightSpear(client);
+	}
+	else{
+		int iEntity = CreateEntityByName("tf_projectile_pipe_remote");
+		if (!IsValidEdict(iEntity)) 
+			return;
+		float fAngles[3], fVelocity[3], vImpulse[3] = {0.0, 1500.0, 0.0};
+
 		SetEntPropEnt(iEntity, Prop_Send, "m_hOwnerEntity", client);
-
-		SetEntProp(iEntity, Prop_Send, "m_iTeamNum", iTeam, 1);
-		SetEntProp(iEntity, Prop_Send, "m_nSkin", (iTeam-2));
+		SetEntProp(iEntity, Prop_Send, "m_iTeamNum", GetClientTeam(client), 1);
+		SetEntProp(iEntity, Prop_Send, "m_nSkin", GetClientTeam(client)-2);
 		SetEntPropEnt(iEntity, Prop_Data, "m_hOwnerEntity", client);
 		SetEntPropEnt(iEntity, Prop_Send, "m_hLauncher", client);
-		//SetEntProp(iEntity, Prop_Send, "m_bCritical", 1);
-					
-		GetClientEyePosition(client, fOrigin);
-		GetClientEyeAngles(client,fAngles);
-		
-		GetAngleVectors(fAngles, vBuffer, NULL_VECTOR, NULL_VECTOR);
-		GetAngleVectors(fAngles,fwd, right, NULL_VECTOR);
+		SetEntPropEnt(iEntity, Prop_Data, "m_hThrower", client);
 
-		ScaleVector(fwd, 30.0);
-		AddVectors(fOrigin, fwd, fOrigin);
-
-		if(projectileAmount[spellLevel] > 2){
-			ScaleVector(right, (-10.0*(projectileAmount[spellLevel]-1)) + (20.0*i));
-			AddVectors(fOrigin, right, fOrigin);
-		}else if(projectileAmount[spellLevel] == 2){
-			ScaleVector(right, i == 0 ? -10.0 : 10.0);
-			AddVectors(fOrigin, right, fOrigin);
-		}
-
-		fVelocity[0] = vBuffer[0]*projectileSpeed[spellLevel];
-		fVelocity[1] = vBuffer[1]*projectileSpeed[spellLevel];
-		fVelocity[2] = vBuffer[2]*projectileSpeed[spellLevel];
-		SetEntPropVector(iEntity, Prop_Send, "m_vInitialVelocity", fVelocity );
+		GetClientEyeAngles(client, fAngles);
+		GetAngleVectors(fAngles, fVelocity, NULL_VECTOR, NULL_VECTOR);
+		ScaleVector(fVelocity, 1000.0);
+		fVelocity[2] += 100.0;
 		TeleportEntity(iEntity, fOrigin, fAngles, fVelocity);
 		DispatchSpawn(iEntity);
-		SDKHook(iEntity, SDKHook_StartTouch, OnStartTouchSunlightSpear);
-		SDKHook(iEntity, SDKHook_Touch, AddArrowCollisionFunction);
 
-		int color[4]={255, 200, 0,225};
-		TE_SetupBeamFollow(iEntity,Laser,0,0.2,3.0,3.0,1,color);
-		TE_SendToAll();
-		CreateParticle(iEntity, "raygun_projectile_red_crit", true, _, 10.0, _, true);
-		CreateParticle(iEntity, "raygun_projectile_red", true, _, 10.0, _, true);
+		SDKCall(g_SDKCallInitGrenade, iEntity, fVelocity, vImpulse, client, 50, 146.0);
+
+		CreateTimer(0.1,Timer_LocusMine,  EntIndexToEntRef(iEntity), TIMER_REPEAT);
+		CreateTimer(4.0,SelfDestruct,  EntIndexToEntRef(iEntity));
+
+		locusMinesFunction[iEntity] = SpawnSunlightSpear;
+		locusMinesRadius[iEntity] = 200.0*200.0;
+		locusMinesProjCount[iEntity] = 3;
+		SetEntProp(iEntity, Prop_Data, "m_nNextThinkTick", -1);
+		SetEntityModel(iEntity, "models/weapons/w_models/w_stickybomb3.mdl");
 	}
 }
+SpawnSunlightSpear(int client, float overridePosition[3] = {0.0, 0.0, 0.0}, float overrideAngles[3] = {0.0, 0.0, 0.0}){
+	int iEntity = CreateEntityByName("tf_projectile_arrow");
+	if (!IsValidEntity(iEntity)) 
+		return;
+
+	float fAngles[3],fOrigin[3], vBuffer[3],fVelocity[3],fwd[3],right[3];
+	int iTeam = GetClientTeam(client);
+	SetEntPropEnt(iEntity, Prop_Send, "m_hOwnerEntity", client);
+
+	SetEntProp(iEntity, Prop_Send, "m_iTeamNum", iTeam, 1);
+	SetEntProp(iEntity, Prop_Send, "m_nSkin", (iTeam-2));
+	SetEntPropEnt(iEntity, Prop_Data, "m_hOwnerEntity", client);
+	SetEntPropEnt(iEntity, Prop_Send, "m_hLauncher", client);
+	//SetEntProp(iEntity, Prop_Send, "m_bCritical", 1);
+				
+	if(!GetVectorLength(overridePosition))
+		GetClientEyePosition(client,fOrigin);
+	else
+		fOrigin = overridePosition;
+	if(!GetVectorLength(overrideAngles))
+		GetClientEyeAngles(client,fAngles);
+	else
+		fAngles = overrideAngles;
+	
+	GetAngleVectors(fAngles, vBuffer, NULL_VECTOR, NULL_VECTOR);
+	GetAngleVectors(fAngles,fwd, right, NULL_VECTOR);
+
+	ScaleVector(fwd, 30.0);
+	AddVectors(fOrigin, fwd, fOrigin);
+
+	fVelocity[0] = vBuffer[0]*2500.0;
+	fVelocity[1] = vBuffer[1]*2500.0;
+	fVelocity[2] = vBuffer[2]*2500.0;
+	SetEntPropVector(iEntity, Prop_Send, "m_vInitialVelocity", fVelocity );
+	TeleportEntity(iEntity, fOrigin, fAngles, fVelocity);
+	DispatchSpawn(iEntity);
+	SDKHook(iEntity, SDKHook_StartTouch, OnStartTouchSunlightSpear);
+	SDKHook(iEntity, SDKHook_Touch, AddArrowCollisionFunction);
+
+	int color[4]={255, 200, 0,225};
+	TE_SetupBeamFollow(iEntity,Laser,0,0.2,3.0,3.0,1,color);
+	TE_SendToAll();
+	CreateParticle(iEntity, "raygun_projectile_red_crit", true, _, 10.0, _, true);
+	CreateParticle(iEntity, "raygun_projectile_red", true, _, 10.0, _, true);
+	homingDelay[iEntity] = 0.2;
+}
+
 CastLightningEnchantment(client, attuneSlot)
 {
 	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", client)) + 1;

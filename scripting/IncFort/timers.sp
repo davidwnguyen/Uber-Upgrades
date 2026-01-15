@@ -2257,3 +2257,55 @@ public Action Timer_SmokeBomb(Handle timer, DataPack pack){
 	delete pack;
 	return Plugin_Stop;
 }
+
+public Action Timer_LocusMine(Handle timer, int ref) 
+{
+    int entity = EntRefToEntIndex(ref);
+	if(!IsValidEdict(entity))
+		return Plugin_Stop;
+
+	int client = GetEntPropEnt(entity, Prop_Data, "m_hThrower"); 
+	if(!IsValidClient3(client))
+		return Plugin_Stop;
+
+	float grenadevec[3], targetvec[3];
+	GetEntPropVector(entity, Prop_Data, "m_vecOrigin", grenadevec);
+	
+	for(int i=1; i<=MaxClients; ++i)
+	{
+		if(!IsValidClient3(i))
+			continue;
+		if(IsClientObserver(i))
+			continue;
+		if(GetClientTeam(i) == GetClientTeam(client))
+			continue;
+
+		GetClientAbsOrigin(i, targetvec);
+		if(GetVectorDistance(grenadevec, targetvec, true) > locusMinesRadius[entity])
+			continue;
+		if(IsPlayerInSpawn(i))
+			continue;
+		if(!IsAbleToSee(client,i))
+			continue;
+
+		//Detonate our locus mine!
+		float fAngles[3];
+		fAngles[0] = 0.2;
+		fAngles[1] = GetRandomFloat(-180.0, 180.0);
+		fAngles[2] = 0.0;
+		grenadevec[2] += 20.0;
+		for(int j = 0; j < locusMinesProjCount[entity]; j++){
+			Call_StartFunction(INVALID_HANDLE, locusMinesFunction[entity]);
+			Call_PushCell(client);
+			Call_PushArray(grenadevec, sizeof(grenadevec));
+			Call_PushArray(fAngles, sizeof(fAngles));
+			Call_Finish();
+			fAngles[1] += 360.0/locusMinesProjCount[entity];
+		}
+
+		CreateParticleEx(client, "ExplosionCore_sapperdestroyed", -1, -1, grenadevec);
+		RemoveEntity(entity);
+		return Plugin_Stop;
+	}
+	return Plugin_Continue;
+}

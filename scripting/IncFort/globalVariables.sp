@@ -481,3 +481,7 @@ float homingDelay[MAXENTITIES];
 int homingTickRate[MAXENTITIES];
 int homingAimStyle[MAXENTITIES];
 int homingTicks[MAXENTITIES];
+//Locus Mines
+Function locusMinesFunction[MAXENTITIES];
+float locusMinesRadius[MAXENTITIES]; //Make sure this is ^2
+int locusMinesProjCount[MAXENTITIES];

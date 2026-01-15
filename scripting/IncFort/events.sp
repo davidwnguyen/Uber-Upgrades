@@ -994,6 +994,9 @@ public OnEntityDestroyed(entity)
 	homingAimStyle[entity] = -1;
 	projectileDamage[entity] = 0.0;
 	projectileFragCount[entity] = 0;
+	locusMinesFunction[entity] = null;
+	locusMinesRadius[entity] = 0.0;
+	locusMinesProjCount[entity] = 0;\
 	
 	//isProjectileSlash[entity][0] = 0.0;
 	//isProjectileSlash[entity][1] = 0.0;
