@@ -296,8 +296,12 @@ public int getNextBuff(int client){
 }
 public void clearAllBuffs(int client){
 	for(int i = 0; i < MAXBUFFS; ++i){
-		playerBuffs[client][i].clear();
+		clearBuff(client, i);
 	}
+}
+public void clearBuff(int client, int index){
+	OnStatusEffectRemoved(client, playerBuffs[client][index]);
+	playerBuffs[client][index].clear();
 }
 public void giveDefenseBuff(int client, float duration){
 	Buff defenseBuff;
@@ -394,7 +398,7 @@ public void ManagePlayerBuffs(int i){
 
 			//Clear out any non-active buffs.
 			if(playerBuffs[i][buff].duration != 0.0 && playerBuffs[i][buff].duration < GetGameTime()){
-				playerBuffs[i][buff].clear();
+				clearBuff(i, buff);
 				buffChange[i]=true;
 				continue;
 			}

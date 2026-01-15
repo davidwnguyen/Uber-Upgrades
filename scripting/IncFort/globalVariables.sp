@@ -166,23 +166,6 @@ enum struct Buff{
 	float additiveCritBlock;
 
 	void clear(){
-		switch(this.id){
-			case Buff_LifeLink:{
-				if(IsValidClient3(this.inflictor)){
-					for(int i=1;i<=MaxClients;++i){
-						if(!IsValidClient3(i)) continue;
-						if(!IsPlayerAlive(i)) continue;
-						if(!IsOnDifferentTeams(this.inflictor,i))
-							AddPlayerHealth(i, this.priority, 2.0, true, this.inflictor);
-					}
-				}
-			}
-			case Buff_Frozen:{
-				SetEntityRenderColor(this.priority, 255, 255, 255, 255);
-				SetEntityMoveType(this.priority, MOVETYPE_WALK);
-			}
-		}
-
 		this.name = "";
 		this.description = "";
 		this.id = 0;
@@ -339,6 +322,7 @@ int stickiesDetonated[MAXPLAYERS+1];
 int AttunedSpells[MAXPLAYERS+1][Max_Attunement_Slots];
 int recursiveExplosionCount[MAXENTITIES];
 int arcaneSpellCount;
+int kingParticle[MAXPLAYERS+1];
 
 //Floats
 float MoneyBonusKill

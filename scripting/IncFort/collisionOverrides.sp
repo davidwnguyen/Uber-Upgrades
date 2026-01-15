@@ -57,7 +57,7 @@ public Action:OnStartTouchStomp(client, other)
 				strongestDPS = currentDPS;
 		}
 		EntityExplosion(client, playerBuffs[client][getBuffInArray(client, Buff_InfernalLunge)].severity*strongestDPS, 500.0, ClientPos, 0,_,_,_,DMG_BLAST|DMG_BURN,CWeapon,0.25,_,_,_,300.0);
-		playerBuffs[client][getBuffInArray(client, Buff_InfernalLunge)].clear();
+		clearBuff(client, getBuffInArray(client, Buff_InfernalLunge));
 	}
 }
 

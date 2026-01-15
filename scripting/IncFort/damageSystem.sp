@@ -1226,7 +1226,7 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 			int temp = getBuffInArray(victim, Buff_DragonDance);
 			if(playerBuffs[victim][temp].priority != weapon){
 				SDKHooks_TakeDamage(victim,attacker,playerBuffs[victim][temp].inflictor,TF2_GetWeaponclassDPS(attacker, playerBuffs[victim][temp].priority) * TF2_GetDPSModifiers(attacker, playerBuffs[victim][temp].priority) * 2.5,DMG_DISSOLVE|DMG_IGNOREHOOK,_,_,_,false);
-				playerBuffs[victim][temp].clear();
+				clearBuff(victim, temp);
 				buffChange[victim]=true;
 			}
 		}

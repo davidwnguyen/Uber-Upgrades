@@ -1518,39 +1518,7 @@ public Action OnPlayerRunCmd(int client, int& buttons, int& impulse, float vel[3
 			Address kingPowerup = TF2Attrib_GetByName(client, "king powerup");
 			if(kingPowerup != Address_Null)
 			{
-				if(TF2Attrib_GetValue(kingPowerup) == 1){
-					int clientTeam = GetClientTeam(client);
-					float clientPos[3];
-					GetEntPropVector(client, Prop_Data, "m_vecOrigin", clientPos);
-					Buff kingBuff;
-					kingBuff.init("King Aura", "", Buff_KingAura, 1, client, 3.0);
-					kingBuff.additiveAttackSpeedMult = 0.33;
-					kingBuff.additiveDamageMult = 0.2;
-					for(int i = 1;i<=MaxClients;++i)
-					{
-						if(IsValidClient3(i) && IsPlayerAlive(i))
-						{
-							int iTeam = GetClientTeam(i);
-							if(clientTeam == iTeam)
-							{
-								float VictimPos[3];
-								GetEntPropVector(i, Prop_Data, "m_vecOrigin", VictimPos);
-								VictimPos[2] += 30.0;
-								if(GetVectorDistance(clientPos,VictimPos,true) <= 360000.0)
-								{
-									if(iTeam == 2)
-										CreateParticle(i, "powerup_king_red", true, _, 2.0);
-									else
-										CreateParticle(i, "powerup_king_blue", true, _, 2.0);
-									
-									insertBuff(i, kingBuff);
-								}
-							}
-						}
-					}
-					powerupParticle[client] = GetGameTime()+2.1;
-				}
-				else if(TF2Attrib_GetValue(kingPowerup) == 2){
+				if(TF2Attrib_GetValue(kingPowerup) == 2){
 					if(IsValidClient3(tagTeamTarget[client])){
 						CreateParticleEx(client, "utaunt_lavalamp_green_particles", 1, _, _, 4.0);
 						CreateParticleEx(tagTeamTarget[client], "utaunt_lavalamp_green_particles", 1, _, _, 4.0);
@@ -3628,7 +3596,42 @@ Buff OnStatusEffectApplied(int victim, Buff newBuff){
 			inserted.severity /= 1 + 0.05*block_rating;
 			inserted.duration = GetGameTime() + ((inserted.duration-GetGameTime()) / (1 + 0.05*block_rating));
 		}
+		if(inserted.id == Buff_KingAura){
+			int index = EntRefToEntIndex(kingParticle[victim]);
+			if(!IsValidEntity(index) || index == 0){
+				if(GetClientTeam(victim) == 2)
+					kingParticle[victim] = EntIndexToEntRef(CreateParticle(victim, "powerup_king_red", true, _, 0.0));
+				else
+					kingParticle[victim] = EntIndexToEntRef(CreateParticle(victim, "powerup_king_blue", true, _, 0.0));
+			}
+		}
 	}
 	
 	return inserted;
+}
+
+void OnStatusEffectRemoved(int client, Buff currentbuff){
+	switch(currentbuff.id){
+		case Buff_LifeLink:{
+			if(IsValidClient3(currentbuff.inflictor)){
+				for(int i=1;i<=MaxClients;++i){
+					if(!IsValidClient3(i)) continue;
+					if(!IsPlayerAlive(i)) continue;
+					if(!IsOnDifferentTeams(currentbuff.inflictor,i))
+						AddPlayerHealth(i, currentbuff.priority, 2.0, true, currentbuff.inflictor);
+				}
+			}
+		}
+		case Buff_Frozen:{
+			SetEntityRenderColor(client, 255, 255, 255, 255);
+			SetEntityMoveType(client, MOVETYPE_WALK);
+		}
+		case Buff_KingAura:{
+			int index = EntRefToEntIndex(kingParticle[client]);
+			if(IsValidEntity(index) && index > 0){
+				RemoveEntity(index);
+				kingParticle[client] = -1;
+			}
+		}
+	}
 }

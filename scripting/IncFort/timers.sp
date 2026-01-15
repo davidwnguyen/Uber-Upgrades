@@ -417,9 +417,9 @@ public Action:Timer_Every100MS(Handle timer)
 			if(TF2Attrib_HookValueFloat(0.0, "revenge_powerup", client) == 1)
 			{
 				if(RageBuildup[client] < 1.0)
-					Format(StatusEffectText, sizeof(StatusEffectText),"Revenge: %.0f%", RageBuildup[client]*100.0);
+					Format(StatusEffectText, sizeof(StatusEffectText),"%sRevenge: %.0f%%%%\n", StatusEffectText, RageBuildup[client]*100.0);
 				else
-					Format(StatusEffectText, sizeof(StatusEffectText),"Revenge: READY (Crouch + Mouse3)", RageBuildup[client]*100.0);
+					Format(StatusEffectText, sizeof(StatusEffectText),"%sRevenge: READY (Crouch + Mouse3)\n", StatusEffectText, RageBuildup[client]*100.0);
 				
 				if(RageActive[client] == true){
 					TF2_AddCondition(client, TFCond_CritCanteen, 1.0);
@@ -430,7 +430,7 @@ public Action:Timer_Every100MS(Handle timer)
 			}
 			else if(TF2Attrib_HookValueFloat(0.0, "revenge_powerup", client) == 2 || TF2Attrib_HookValueFloat(0.0, "revenge_powerup", client) == 3)
 			{
-				Format(StatusEffectText, sizeof(StatusEffectText),"Berserk: %.0f%", RageBuildup[client]*100.0);
+				Format(StatusEffectText, sizeof(StatusEffectText),"%sBerserk: %.0f%%%%\n", StatusEffectText, RageBuildup[client]*100.0);
 				
 				miniCritStatusAttacker[client] = GetGameTime() + 1.0;
 				TF2_AddCondition(client, TFCond_SpeedBuffAlly, 1.0);
@@ -459,54 +459,54 @@ public Action:Timer_Every100MS(Handle timer)
 					}
 				}
 			}
-			else if(TF2Attrib_HookValueFloat(0.0, "supernova_powerup", client) == 1)
+			if(TF2Attrib_HookValueFloat(0.0, "supernova_powerup", client) == 1)
 			{
 				if(SupernovaBuildup[client] < 1.0)
-					Format(StatusEffectText, sizeof(StatusEffectText),"Supernova: %.0f%", SupernovaBuildup[client]*100.0);
+					Format(StatusEffectText, sizeof(StatusEffectText),"%sSupernova: %.0f%%%%\n", StatusEffectText, SupernovaBuildup[client]*100.0);
 				else
-					Format(StatusEffectText, sizeof(StatusEffectText),"Supernova: READY (Crouch + Mouse3)");
+					Format(StatusEffectText, sizeof(StatusEffectText),"%sSupernova: READY (Crouch + Mouse3)\n", StatusEffectText);
 			}
 			else if(TF2Attrib_HookValueFloat(0.0, "supernova_powerup", client) == 2)
 			{
 				if(infernalDetonationCooldown[client]-GetGameTime() > 0)
-					Format(StatusEffectText, sizeof(StatusEffectText),"Detonate Afterburn: %.2fs", infernalDetonationCooldown[client]-GetGameTime());
+					Format(StatusEffectText, sizeof(StatusEffectText),"%sDetonate: %.2fs\n", StatusEffectText, infernalDetonationCooldown[client]-GetGameTime());
 				else
-					Format(StatusEffectText, sizeof(StatusEffectText),"Detonate Afterburn: READY (Crouch + Mouse3)");
+					Format(StatusEffectText, sizeof(StatusEffectText),"%sDetonate: READY (Crouch + Mouse3)\n", StatusEffectText);
 			}
-			else if(TF2Attrib_HookValueFloat(0.0, "regeneration_powerup", client) == 2.0)
+			if(TF2Attrib_HookValueFloat(0.0, "regeneration_powerup", client) == 2.0)
 			{
 				if(duplicationCooldown[client] > GetGameTime())
-					Format(StatusEffectText, sizeof(StatusEffectText),"Duplication: %.2fs", duplicationCooldown[client] - GetGameTime());
+					Format(StatusEffectText, sizeof(StatusEffectText),"%sDuplication: %.2fs\n", StatusEffectText, duplicationCooldown[client] - GetGameTime());
 				else
-					Format(StatusEffectText, sizeof(StatusEffectText),"Duplication: READY (Crouch + Mouse3)");
+					Format(StatusEffectText, sizeof(StatusEffectText),"%sDuplication: READY (Crouch + Mouse3)\n", StatusEffectText);
 			}
-			else if(TF2Attrib_HookValueFloat(0.0, "agility_powerup", client) == 3.0)
+			if(TF2Attrib_HookValueFloat(0.0, "agility_powerup", client) == 3.0)
 			{
 				if(warpCooldown[client] > GetGameTime())
-					Format(StatusEffectText, sizeof(StatusEffectText),"Warp: %.2fs", warpCooldown[client] - GetGameTime());
+					Format(StatusEffectText, sizeof(StatusEffectText),"%sWarp: %.2fs\n", StatusEffectText, warpCooldown[client] - GetGameTime());
 				else
-					Format(StatusEffectText, sizeof(StatusEffectText),"Warp: READY (Crouch + Mouse3)");
+					Format(StatusEffectText, sizeof(StatusEffectText),"%sWarp: READY (Crouch + Mouse3)\n", StatusEffectText);
 			}
-			else if(TF2Attrib_HookValueFloat(0.0, "resistance_powerup", client) == 2.0)
+			if(TF2Attrib_HookValueFloat(0.0, "resistance_powerup", client) == 2.0)
 			{
 				if(frayNextTime[client] > GetGameTime())
-					Format(StatusEffectText, sizeof(StatusEffectText),"Fray: %.2fs", frayNextTime[client] - GetGameTime());
+					Format(StatusEffectText, sizeof(StatusEffectText),"%sFray: %.2fs\n", StatusEffectText, frayNextTime[client] - GetGameTime());
 				else
-					Format(StatusEffectText, sizeof(StatusEffectText),"Fray: READY");
+					Format(StatusEffectText, sizeof(StatusEffectText),"%sFray: READY\n", StatusEffectText);
 			}
 			else if(TF2Attrib_HookValueFloat(0.0, "resistance_powerup", client) == 3.0)
 			{
 				if(!strongholdEnabled[client])
-					Format(StatusEffectText, sizeof(StatusEffectText),"Stronghold: INACTIVE (Crouch + Mouse3)");
+					Format(StatusEffectText, sizeof(StatusEffectText),"%sStronghold: INACTIVE (Crouch + Mouse3)\n", StatusEffectText);
 				else
-					Format(StatusEffectText, sizeof(StatusEffectText),"Stronghold: ACTIVE (Crouch + Mouse3)");
+					Format(StatusEffectText, sizeof(StatusEffectText),"%sStronghold: ACTIVE (Crouch + Mouse3)\n", StatusEffectText);
 			}
-			else if(TF2Attrib_HookValueFloat(0.0, "king_powerup", client) == 2.0)
+			if(TF2Attrib_HookValueFloat(0.0, "king_powerup", client) == 2.0)
 			{
 				if(!IsValidClient3(tagTeamTarget[client]))
-					Format(StatusEffectText, sizeof(StatusEffectText),"Tag-Team: INACTIVE (Crouch + Mouse3)");
+					Format(StatusEffectText, sizeof(StatusEffectText),"%sTag-Team: INACTIVE (Crouch + Mouse3)\n", StatusEffectText);
 				else
-					Format(StatusEffectText, sizeof(StatusEffectText),"Tag-Team: %N", tagTeamTarget[client]);
+					Format(StatusEffectText, sizeof(StatusEffectText),"%sTag-Team: %N\n", StatusEffectText, tagTeamTarget[client]);
 			}
 
 			if(StatusEffectText[0] != '\0'){
@@ -605,6 +605,12 @@ public Action:Timer_Every100MS(Handle timer)
 			decayDebuff.init("Decay", "", Buff_Decay, 1, client, 1.0);
 			Buff plaguedCond;
 			plaguedCond.init("Plagued", "", Buff_Plagued, 1, client, 10.0);
+			Buff kingBuff;
+			kingBuff.init("King Aura", "", Buff_KingAura, 1, client, 1.0);
+			kingBuff.additiveAttackSpeedMult = 0.33;
+			kingBuff.additiveDamageMult = 0.2;
+
+			float kingValue = TF2Attrib_HookValueFloat(0.0, "king_powerup", client);
 
 			for(int i=1;i<=MaxClients;++i)
 			{
@@ -640,6 +646,16 @@ public Action:Timer_Every100MS(Handle timer)
 						if(GetVectorDistance(clientPos,VictimPos, true) <= 90000.0){
 							insertBuff(i, plaguedCond);
 							EmitSoundToAll(SOUND_PLAGUEPROC, i);
+						}
+					}
+				}
+				else{
+					if(kingValue == 1.0){
+						float VictimPos[3];
+						GetEntPropVector(i, Prop_Data, "m_vecOrigin", VictimPos);
+						if(GetVectorDistance(clientPos,VictimPos,true) <= 360000.0)
+						{
+							insertBuff(i, kingBuff);
 						}
 					}
 				}
