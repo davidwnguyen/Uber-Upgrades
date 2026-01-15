@@ -1850,7 +1850,7 @@
 		{
 			"0"		"fire rate bonus(old)"
 			"1"		"effect bar recharge rate increased"
-			"2"		"Blast radius increased (Throwable)"
+			"2"		"blast radius increased"
 			"3"		"Projectile speed increased"
 			"4"		"Afterburn Immunity Duration"
 		}
@@ -1876,7 +1876,7 @@
 		{
 			"0"		"fire rate bonus(old)"
 			"1"		"effect bar recharge rate increased"
-			"2"		"Blast radius increased (Throwable)"
+			"2"		"blast radius increased"
 			"3"		"Projectile speed increased"
 			"4"		"Mad Milk On Hit Duration (MadMilk)"
 			"5"		"Afterburn Immunity Duration"

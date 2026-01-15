@@ -4007,17 +4007,6 @@
 			"init"		"1"
 			"max"		"0.03"
 		}
-		"340.2"
-		{
-			"name"		"Blast radius increased"
-			"ref"		"Blast radius increased (Throwable)"
-			"display"		"%.0f%%"
-			"cost"		"500"
-			"increase_ratio" "0.5"
-			"value"		"0.1"
-			"init"		"1.00"
-			"max"		"2.0"
-		}
 		"151"
 		{
 			"name"		"melee range multiplier"
