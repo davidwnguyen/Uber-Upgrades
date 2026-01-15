@@ -1377,9 +1377,13 @@ DisplayItemChange(client,itemidx)
 		{
 			ChangeString = "The Cleaner's Carbine | Crikey now applies mark for death. Close ranged backattacks do minicrits. Converts fire rate to damage.";
 		}
-		case 58	:
+		case 58:
 		{
 			ChangeString = "Jarate | Jarate effect now applies +5 damage (based on your scaling) to every hit taken.";
+		}
+		case 231:
+		{
+			ChangeString = "Darwin's Danger Shield | Reduces afterburn duration by -1 tick of damage. Does not reduce incoming fire damage.";
 		}
 		//Sniper Melees
 		case 232:
