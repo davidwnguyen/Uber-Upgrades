@@ -1932,6 +1932,9 @@
 	"Cleaver specific upgrades"{
 		"en"		"Cleaver Specific Upgrades"
 	}
+	"Mad Milk specific upgrades"{
+		"en"		"Mad Milk Specific Upgrades"
+	}
 	"Jarate specific upgrades"{
 		"en"		"Jarate Specific Upgrades"
 	}
