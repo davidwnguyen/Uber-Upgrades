@@ -4448,7 +4448,7 @@ ExplosionHookEffects(entity){
 		AddVectors(fOrigin, fwd, fOrigin);
 		GetAngleVectors(fAngles, vBuffer, NULL_VECTOR, NULL_VECTOR);
 
-		float velocity = 2000.0;
+		float velocity = 1500.0;
 		fVelocity[0] = vBuffer[0]*velocity;
 		fVelocity[1] = vBuffer[1]*velocity;
 		fVelocity[2] = vBuffer[2]*velocity;

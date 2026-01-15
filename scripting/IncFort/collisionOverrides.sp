@@ -884,7 +884,7 @@ public Action:OnTouchExplodeJar(entity, other)
 			AddVectors(fOrigin, fwd, fOrigin);
 			GetAngleVectors(fAngles, vBuffer, NULL_VECTOR, NULL_VECTOR);
 			
-			float velocity = 2000.0;
+			float velocity = 1500.0;
 			fVelocity[0] = vBuffer[0]*velocity;
 			fVelocity[1] = vBuffer[1]*velocity;
 			fVelocity[2] = vBuffer[2]*velocity;
@@ -895,6 +895,9 @@ public Action:OnTouchExplodeJar(entity, other)
 			SDKHook(iEntity, SDKHook_Touch, OnCollisionExplosiveFrag);
 			jarateWeapon[iEntity] = EntIndexToEntRef(CWeapon);
 			CreateTimer(1.0,SelfDestruct,EntIndexToEntRef(iEntity));
+			SetEntProp(iEntity, Prop_Send, "m_usSolidFlags", 0x0008);
+			SetEntProp(iEntity, Prop_Data, "m_nSolidType", 6);
+			SetEntProp(iEntity, Prop_Send, "m_CollisionGroup", 13);
 		}
 	}
 	switch(mode){
