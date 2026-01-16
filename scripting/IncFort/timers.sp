@@ -314,18 +314,19 @@ public Action:Timer_FixedVariables(Handle timer)
 					}
 				}
 			}
-			char ArmorLeft[64]
-			Format(ArmorLeft, sizeof(ArmorLeft), "Effective Health | %s", GetAlphabetForm(GetResistance(client, true)*GetClientHealth(client))); 
+			char EHPString[128];
+			Format(EHPString, sizeof(EHPString), "Effective Health | %s", GetAlphabetForm(GetResistance(client, true)*GetClientHealth(client))); 
 
 			if(TF2Attrib_HookValueFloat(0.0, "regeneration_powerup", client) == 3.0){
-				Format(ArmorLeft, sizeof(ArmorLeft), "%s\nBlood Pool | %.0f", ArmorLeft, bloodAcolyteBloodPool[client]); 
+				Format(EHPString, sizeof(EHPString), "%s\nBlood Pool | %s", EHPString, GetAlphabetForm(bloodAcolyteBloodPool[client])); 
 			}
 			if(TF2Attrib_HookValueFloat(0.0, "vampire_powerup", client) == 3.0){
-				Format(ArmorLeft, sizeof(ArmorLeft), "%s\nOverleech | %.0f", ArmorLeft, Overleech[client]); 
+				Format(EHPString, sizeof(EHPString), "%s\nOverleech | %s", EHPString, GetAlphabetForm(Overleech[client])); 
 			}
 			if(CheckForAttunement(client))
 			{
-				Format(ArmorLeft, sizeof(ArmorLeft), "%s\nFocus | %.0f / %.0f", ArmorLeft, fl_CurrentFocus[client],fl_MaxFocus[client]); 
+				Format(EHPString, sizeof(EHPString), "%s\nFocus | %.0f / %.0f", EHPString, GetAlphabetForm(fl_CurrentFocus[client]),GetAlphabetForm(fl_MaxFocus[client]));
+				
 				char spellHUD[1024]
 				Format(spellHUD, sizeof(spellHUD), "Current Spells: \n");
 				for(int i = 0;i<Max_Attunement_Slots;++i)
@@ -347,15 +348,15 @@ public Action:Timer_FixedVariables(Handle timer)
 			}
 			if(TF2_GetPlayerClass(client) == TFClass_Medic && GetEntProp(client, Prop_Send, "m_bRageDraining") && GetEntPropFloat(client, Prop_Send, "m_flRageMeter") > 0)
 			{
-				Format(ArmorLeft, sizeof(ArmorLeft), "%s\nShield | %s", ArmorLeft, GetAlphabetForm(GetResistance(client, true)*GetClientHealth(client)*3*GetEntPropFloat(client, Prop_Send, "m_flRageMeter")/100.0)); 
+				Format(EHPString, sizeof(EHPString), "%s\nShield | %s", EHPString, GetAlphabetForm(GetResistance(client, true)*GetClientHealth(client)*3*GetEntPropFloat(client, Prop_Send, "m_flRageMeter")/100.0)); 
 			}
 
 			if (AreClientCookiesCached(client)){
 				SetHudTextParams(StringToFloat(ArmorXPos[client]), StringToFloat(ArmorYPos[client]), 0.5, 255, 187, 0, 255, 0, 0.0, 0.0, 0.0);
-				ShowSyncHudText(client, hudSync, ArmorLeft);
+				ShowSyncHudText(client, hudSync, EHPString);
 			}else{
 				SetHudTextParams(-0.75, -0.2, 0.5, 255, 187, 0, 255, 0, 0.0, 0.0, 0.0);
-				ShowSyncHudText(client, hudSync, ArmorLeft);
+				ShowSyncHudText(client, hudSync, EHPString);
 			}
 		}
 		oldPlayerButtons[client] = globalButtons[client];
