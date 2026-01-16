@@ -186,6 +186,7 @@ public OnMapStart()
 	PrecacheSound(SOUND_SLASHHIT3);
 	PrecacheSound(OrnamentExplosionSound);
 	PrecacheSound(SOUND_PLAGUEPROC);
+	PrecacheSound(SOUND_COWMANGLER_SHOT, true);
 	PrecacheModel("models/weapons/c_models/c_madmilk/c_madmilk.mdl");
 	PrecacheModel("models/weapons/c_models/urinejar.mdl");
 	PrecacheModel("models/weapons/c_models/c_breadmonster/c_breadmonster.mdl");

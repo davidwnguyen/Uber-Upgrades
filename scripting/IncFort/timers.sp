@@ -2160,8 +2160,7 @@ public Action ElectricBallThink(Handle timer, any ref){
     { 
 		int client = getOwner(entity);
 		int weapon = GetEntPropEnt(entity, Prop_Send, "m_hLauncher");
-		float damage = 7.0*TF2_GetDamageModifiers(client, weapon);
-		float radius = 240.0*GetAttribute(weapon, "Blast radius increased");
+		float radius = 250.0*GetAttribute(weapon, "Blast radius increased");
 		float position[3];
 		GetEntPropVector(entity, Prop_Data, "m_vecOrigin", position);
 
@@ -2179,7 +2178,7 @@ public Action ElectricBallThink(Handle timer, any ref){
 			if(GetVectorDistance(position, victimPosition, true) > radius*radius)
 				continue;
 			
-			SDKHooks_TakeDamage(i, entity, client, damage, DMG_BURN|DMG_IGNOREHOOK, weapon,_,_,false);
+			SDKHooks_TakeDamage(i, entity, client, 9.0, DMG_BURN, weapon,_,_,false);
 		}
 		return Plugin_Continue;
     }

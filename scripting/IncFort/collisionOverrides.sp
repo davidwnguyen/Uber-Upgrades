@@ -109,7 +109,7 @@ public Action:OnStartTouchSunlightSpear(entity, other)
 public Action:OnSunlightSpearCollision(entity, client)
 {
 	char strName[32];
-	GetEntityClassname(client, strName, 32)
+	GetEntityClassname(client, strName, 32);
 
 	bool dealtDamage = false;
 

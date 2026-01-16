@@ -3054,13 +3054,13 @@ public Action TF2_CalcIsAttackCritical(int client, int weapon, char[] weaponname
 					velocity *= GetAttribute(weapon, "Projectile speed increased");
 					velocity *= GetAttribute(weapon, "Projectile speed decreased");
 					ScaleVector(vBuffer,velocity);
-				
 					DispatchSpawn(iEntity);
 					TeleportEntity(iEntity, fOrigin, fAngles, vBuffer);
-
+					SetEntProp(iEntity, Prop_Send, "m_usSolidFlags", 0x0004);
 					SetEntPropEnt(iEntity, Prop_Send, "m_hLauncher", weapon);
 					SetEntPropEnt(iEntity, Prop_Send, "m_hOriginalLauncher", client);
 					CreateTimer(0.1, ElectricBallThink, EntIndexToEntRef(iEntity), TIMER_REPEAT|TIMER_FLAG_NO_MAPCHANGE);
+					EmitSoundToAll(SOUND_COWMANGLER_SHOT, 0, client, SNDLEVEL_NORMAL, _, 1.0, _, _, fOrigin);
 				}
 			}
 			case 48.0:
