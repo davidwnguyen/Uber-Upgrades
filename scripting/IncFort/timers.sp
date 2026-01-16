@@ -2263,10 +2263,12 @@ public Action Timer_LocusMine(Handle timer, int ref)
     int entity = EntRefToEntIndex(ref);
 	if(!IsValidEdict(entity))
 		return Plugin_Stop;
-
 	int client = GetEntPropEnt(entity, Prop_Data, "m_hThrower"); 
 	if(!IsValidClient3(client))
 		return Plugin_Stop;
+
+	if(!GetEntProp(entity, Prop_Send, "m_bTouched"))
+		return Plugin_Continue;
 
 	float grenadevec[3], targetvec[3];
 	GetEntPropVector(entity, Prop_Data, "m_vecOrigin", grenadevec);

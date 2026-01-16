@@ -339,7 +339,7 @@ public Action:OnCollisionWarriorArrow(entity, client)
 		{
 			float damageDealt = 30.0*TF2_GetDamageModifiers(owner, CWeapon, false);
 			int damageType = GetEntProp(entity, Prop_Send, "m_bCritical") ? DMG_BULLET|DMG_IGNOREHOOK|DMG_CRIT : DMG_BULLET|DMG_IGNOREHOOK;
-			SDKHooks_TakeDamage(client, owner, owner, damageDealt, damageType, CWeapon, _,_,false);
+			SDKHooks_TakeDamage(client, entity, owner, damageDealt, damageType, CWeapon, _,_,false);
 		}
 		RemoveEntity(entity);
 	}
@@ -432,7 +432,7 @@ public Action:OnCollisionBossArrow(entity, client)
 				if(IsValidEdict(CWeapon))
 				{
 					float damageDealt = 240.0*TF2_GetDamageModifiers(owner, CWeapon, false);
-					SDKHooks_TakeDamage(client, owner, owner, damageDealt, DMG_BULLET|DMG_IGNOREHOOK, CWeapon, _,_,false);
+					SDKHooks_TakeDamage(client, entity, owner, damageDealt, DMG_BULLET|DMG_IGNOREHOOK, CWeapon, _,_,false);
 					if(IsValidClient3(client))
 					{
 						RadiationBuildup[client] += 100.0;
@@ -496,7 +496,7 @@ public Action:OnCollisionPhotoViscerator(entity, client)
 						damage /= TF2Attrib_GetValue(lameMult);
 					}
 					DOTStock(client,owner,damage*0.1,CWeapon,DMG_BURN + DMG_PREVENT_PHYSICS_FORCE,20,0.5,0.2,true);
-					SDKHooks_TakeDamage(client,owner,owner,damage,DMG_BURN|DMG_IGNOREHOOK,CWeapon,_,_,false);
+					SDKHooks_TakeDamage(client,entity,owner,damage,DMG_BURN|DMG_IGNOREHOOK,CWeapon,_,_,false);
 				}
 				float pos[3]
 				GetEntPropVector(entity, Prop_Data, "m_vecOrigin", pos);
@@ -543,7 +543,7 @@ public Action:OnCollisionMoonveil(entity, client)
 						damage *= GetAttribute(CWeapon, "damage mult 15");
 					}
 					damage *= ArcaneDamage[owner];
-					SDKHooks_TakeDamage(client,owner,owner,damage,DMG_GENERIC|DMG_IGNOREHOOK,CWeapon, _,_,false);
+					SDKHooks_TakeDamage(client,entity,owner,damage,DMG_GENERIC|DMG_IGNOREHOOK,CWeapon, _,_,false);
 				}
 				RemoveEntity(entity);
 			}
@@ -572,7 +572,7 @@ public Action:OnCollisionBoomerang(entity, client)
 			if(IsValidEdict(CWeapon))
 			{
 				float damageDealt = 180.0 * TF2_GetDamageModifiers(owner, CWeapon);
-				SDKHooks_TakeDamage(client, owner, owner, damageDealt, DMG_SLASH|DMG_IGNOREHOOK, CWeapon,_,_,false);
+				SDKHooks_TakeDamage(client, entity, owner, damageDealt, DMG_SLASH|DMG_IGNOREHOOK, CWeapon,_,_,false);
 			}
 		}
 		float origin[3],ProjAngle[3], vBuffer[3], ProjVelocity[3];
@@ -766,7 +766,7 @@ public Action:OnTouchExplodeJar(entity, other)
 					VictimPos[2] += 30.0;
 					if(GetVectorDistance(clientvec,VictimPos,true) <= squaredRadius)
 						if(IsPointVisible(clientvec,VictimPos)){
-							SDKHooks_TakeDamage(i,owner,owner, LightningDamage, DMG_IGNOREHOOK, CWeapon,_,_,false);
+							SDKHooks_TakeDamage(i,entity,owner, LightningDamage, DMG_IGNOREHOOK, CWeapon,_,_,false);
 						}
 				}
 			}
@@ -794,7 +794,7 @@ public Action:OnTouchExplodeJar(entity, other)
 							{
 								case 0:
 								{
-									SDKHooks_TakeDamage(i,owner,owner,30.0*damageBoost,DMG_BULLET|DMG_IGNOREHOOK,CWeapon,_,_,false);
+									SDKHooks_TakeDamage(i,entity,owner,30.0*damageBoost,DMG_BULLET|DMG_IGNOREHOOK,CWeapon,_,_,false);
 									if(isPlayer){
 										miniCritStatusVictim[i] = GetGameTime()+8.0;
 										Buff jarateDebuff;
@@ -807,7 +807,7 @@ public Action:OnTouchExplodeJar(entity, other)
 									if(isPlayer)
 										TF2_AddCondition(i,TFCond_Milked,0.01);
 										
-									SDKHooks_TakeDamage(i,owner,owner,30.0*damageBoost,DMG_BULLET|DMG_IGNOREHOOK,CWeapon,_,_,false);
+									SDKHooks_TakeDamage(i,entity,owner,30.0*damageBoost,DMG_BULLET|DMG_IGNOREHOOK,CWeapon,_,_,false);
 								}
 							}//corrosiveDOT
 							if(isPlayer)
@@ -932,7 +932,7 @@ public Action:OnCollisionExplosiveFrag(entity, client)
 				if(IsOnDifferentTeams(owner,client))
 				{
 					float damageDealt = 15.0*TF2_GetDamageModifiers(owner, CWeapon, false);
-					SDKHooks_TakeDamage(client, owner, owner, damageDealt, DMG_BULLET|DMG_IGNOREHOOK, CWeapon, _,_,false);
+					SDKHooks_TakeDamage(client, entity, owner, damageDealt, DMG_BULLET|DMG_IGNOREHOOK, CWeapon, _,_,false);
 				}
 			}
 			float fragExplosionDamage = TF2Attrib_HookValueFloat(0.0, "explosive_frag_damage", CWeapon);
@@ -960,7 +960,7 @@ public Action:CollisionFrozenFrag(entity, client)
 				if(IsOnDifferentTeams(owner,client))
 				{
 					float damageDealt = 0.5*TF2Util_GetEntityMaxHealth(jarateWeapon[entity]);
-					SDKHooks_TakeDamage(client, owner, owner, damageDealt, DMG_PREVENT_PHYSICS_FORCE|DMG_IGNOREHOOK|DMG_PIERCING, CWeapon, _,_,false);
+					SDKHooks_TakeDamage(client, entity, owner, damageDealt, DMG_PREVENT_PHYSICS_FORCE|DMG_IGNOREHOOK|DMG_PIERCING, CWeapon, _,_,false);
 					RemoveEntity(entity);
 				}
 			}
@@ -1142,4 +1142,43 @@ public Action OnSmokeStartTouch(entity, other){
 	CreateSmokeBombEffect(position, 8.0, GetEntProp(entity, Prop_Send, "m_iTeamNum"));
 	RemoveEntity(entity);
 	return Plugin_Continue;
+}
+
+public Action:OnStartTouchEtherealKnife(entity, other)
+{
+	if(!other)
+		return Plugin_Stop;
+
+	if(!IsValidForDamage(other))
+		return Plugin_Stop;
+
+	SDKHook(entity, SDKHook_Touch, OnCollisionEtherealKnife);
+	return Plugin_Handled;
+}
+public Action:OnCollisionEtherealKnife(entity, client)
+{
+	int owner = GetEntPropEnt(entity, Prop_Send, "m_hOwnerEntity");
+	if(!IsValidClient3(owner) || client == 0)
+		return Plugin_Continue;
+		
+	if(IsOnDifferentTeams(owner,client) && !hasHit[client][projectileAttackCounter[entity] % 30])
+	{
+		int CWeapon = GetEntPropEnt(owner, Prop_Send, "m_hActiveWeapon");
+		if(IsValidEdict(CWeapon))
+		{
+			float damageDealt = 45.0*TF2_GetDamageModifiers(owner, CWeapon, false);
+			int damageType = GetEntProp(entity, Prop_Send, "m_bCritical") ? DMG_BULLET|DMG_IGNOREHOOK|DMG_CRIT : DMG_BULLET|DMG_IGNOREHOOK;
+			SDKHooks_TakeDamage(client, entity, owner, damageDealt, damageType, CWeapon, _,_,false);
+			hasHit[client][projectileAttackCounter[entity] % 30] = true;
+		}
+	}
+	float origin[3], ProjAngle[3], vBuffer[3];
+	GetEntPropVector(entity, Prop_Data, "m_vecOrigin", origin);
+	GetEntPropVector(entity, Prop_Data, "m_angRotation", ProjAngle);
+	GetAngleVectors(ProjAngle, vBuffer, NULL_VECTOR, NULL_VECTOR);
+	ScaleVector(vBuffer, 30.0);
+	AddVectors(origin,vBuffer,origin);
+	TeleportEntity(entity, origin,NULL_VECTOR,NULL_VECTOR);
+	RequestFrame(fixPiercingVelocity,EntIndexToEntRef(entity))
+	return Plugin_Stop;
 }

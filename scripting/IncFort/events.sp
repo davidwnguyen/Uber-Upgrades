@@ -999,7 +999,8 @@ public OnEntityDestroyed(entity)
 	locusMinesRadius[entity] = 0.0;
 	locusMinesProjCount[entity] = 0;
 	projectileMaxBounces[entity] = 0;
-	
+	projectileAttackCounter[entity] = -1;
+
 	//isProjectileSlash[entity][0] = 0.0;
 	//isProjectileSlash[entity][1] = 0.0;
 	jarateWeapon[entity] = -1;
@@ -2382,8 +2383,6 @@ public OnGameFrame()
 				}
 				//Firerate for Secondary Fire
 				int CWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
-				int melee = GetPlayerWeaponSlot(client,2)
-				int primary = GetPlayerWeaponSlot(client,0)
 				if(IsValidEdict(CWeapon))
 				{
 					float bossType = TF2Attrib_HookValueFloat(0.0, "player_boss_type", client);
@@ -2417,11 +2416,11 @@ public OnGameFrame()
 							SetEntProp(CWeapon, Prop_Send, "m_iDetonated", 0);
 					}
 					bool flag = true;
-					if(IsValidEntity(melee) && CWeapon == melee)
+					if(TF2Util_GetWeaponSlot(CWeapon) == TFWeaponSlot_Melee)
 						if(TF2_GetPlayerClass(client) == TFClass_Heavy)
 							flag = false;
 
-					if(IsValidEdict(primary) && CWeapon == primary )
+					if(TF2Util_GetWeaponSlot(CWeapon) == TFWeaponSlot_Primary)
 						if(TF2_GetPlayerClass(client) == TFClass_Heavy || TF2_GetPlayerClass(client) == TFClass_Sniper)
 							flag=false;
 
@@ -3068,6 +3067,55 @@ public Action TF2_CalcIsAttackCritical(int client, int weapon, char[] weaponname
 			{
 				if(maelstromChargeCount[client] < 25)
 					maelstromChargeCount[client]++;
+			}
+			case 49.0:
+			{
+				GetClientEyePosition(client, fOrigin);
+				GetClientEyeAngles(client, fAngles);
+				
+				for(int i=0;i<15;i++)
+				{
+					int iEntity = CreateEntityByName("tf_projectile_arrow");
+					if (!IsValidEntity(iEntity)) 
+						continue;
+
+					int iTeam = GetClientTeam(client);
+					float fwd[3], cloneAngle[3], cloneOrigin[3];
+					cloneAngle = fAngles;
+					SetEntPropEnt(iEntity, Prop_Send, "m_hOwnerEntity", client);
+		
+					SetEntProp(iEntity, Prop_Send, "m_iTeamNum", iTeam);
+					SetEntPropEnt(iEntity, Prop_Send, "m_hLauncher", client);
+					cloneAngle[0] += GetRandomFloat(-1.0, 1.0);
+					cloneAngle[1] += GetRandomFloat(-8.0, 8.0);
+					GetAngleVectors(cloneAngle,fwd, NULL_VECTOR, NULL_VECTOR);
+					fVelocity[0] = fwd[0]*4000.0;
+					fVelocity[1] = fwd[1]*4000.0;
+					fVelocity[2] = fwd[2]*4000.0;
+
+					ScaleVector(fwd, 50.0);
+					AddVectors(fOrigin, fwd, cloneOrigin);
+					
+					TeleportEntity(iEntity, cloneOrigin, cloneAngle, fVelocity);
+					DispatchSpawn(iEntity);
+					SetEntPropVector(iEntity, Prop_Send, "m_vInitialVelocity", fVelocity );
+
+					SetEntPropEnt(iEntity, Prop_Send, "m_hLauncher", weapon);
+					SetEntPropEnt(iEntity, Prop_Send, "m_hOriginalLauncher", client);
+					SetEntProp(iEntity, Prop_Send, "m_usSolidFlags", 0x0008);
+					SetEntProp(iEntity, Prop_Data, "m_nSolidType", 6);
+					SetEntProp(iEntity, Prop_Send, "m_CollisionGroup", 13);
+					SetEntProp(iEntity, Prop_Send, "m_bCritical", result);
+					SDKHook(iEntity, SDKHook_StartTouch, OnStartTouchEtherealKnife);
+					TE_SetupBeamFollow(iEntity,Laser,0,0.2,3.0,3.0,1,{0, 255, 150,225});
+					TE_SendToAll();
+					projectileAttackCounter[iEntity] = currentAttackCounter;
+					homingDelay[iEntity] = 9999.0; //please do not let this home... it can't hit properly
+				}
+				currentAttackCounter++;
+				for(int i = 0; i<MAXENTITIES;i++){
+					hasHit[i][currentAttackCounter % 30] = false;
+				}
 			}
 		}
 		if(projActive != Address_Null && TF2Attrib_GetValue(projActive) == 2.0)

@@ -486,3 +486,7 @@ int homingTicks[MAXENTITIES];
 Function locusMinesFunction[MAXENTITIES];
 float locusMinesRadius[MAXENTITIES]; //Make sure this is ^2
 int locusMinesProjCount[MAXENTITIES];
+//Attack Counter for anti-shotgun, max queue of 30.
+bool hasHit[MAXENTITIES][30];
+int currentAttackCounter;
+int projectileAttackCounter[MAXENTITIES];

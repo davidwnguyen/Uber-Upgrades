@@ -78,6 +78,7 @@
 		"lifesteal ability"			"0.2"
 		"paintkit_proto_def_index"	"255"
 		"set_item_texture_wear"		"0.0"
+		"attach particle effect"	"147"
 	}
 	"Cast Fireball"
 	{
@@ -91,6 +92,7 @@
 		"Converts Firerate to Damage"	"1"
 		"override projectile type"	"43.0"
 		"Infinite Ammo Count"	"1.0"
+		"attach particle effect"	"148"
 	}
 	"Shredder"
 	{
@@ -178,6 +180,7 @@
 		"Sniper Rifle Charge Rate Penalty"	"0"
 		"paintkit_proto_def_index"	"390"
 		"set_item_texture_wear"		"0.0"
+		"attach particle effect"	"701"
 	}
 	"Sacred Slayer"
 	{
@@ -199,6 +202,7 @@
 		"Minimal Explosion Particle"	"0"
 		"paintkit_proto_def_index"	"403"
 		"set_item_texture_wear"		"0.0"
+		"attach particle effect"	"701"
 	}
 	"Momentum"
 	{
@@ -281,6 +285,7 @@
 		"afterburn dmg increased"	"5.0"
 		"paintkit_proto_def_index"	"390"
 		"set_item_texture_wear"		"0.0"
+		"attach particle effect"	"701"
 	}
 	"HellFire"
 	{
@@ -422,5 +427,19 @@
 		"frag explosion radius mult"	"5"
 		"paintkit_proto_def_index"	"403"
 		"set_item_texture_wear"		"0.0"
+		"attach particle effect"	"701"
+	}
+	"Ethereal Knives"
+	{
+		"index"			"727"
+		"weapon_class"	"tf_weapon_fists"
+		"weapon_menu"	"tf_weapon_fists"
+		"class"			"spy"
+		"description"	"Shoots out a spray of 15 piercing knives that deal 45 damage.\nCannot hit the same target with multiple knives."
+		"cost"			"5000.0"
+		"provide on active"	"1"
+		"Converts Firerate to Damage"	"1"
+		"override projectile type" "49"
+		"attach particle effect"	"246"
 	}
 }

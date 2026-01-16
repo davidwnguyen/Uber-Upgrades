@@ -180,8 +180,8 @@ CastSunlightSpear(client, attuneSlot)
 		DispatchSpawn(iEntity);
 		SDKCall(g_SDKCallInitGrenade, iEntity, fVelocity, vImpulse, client, 50, 146.0);
 
-		CreateTimer(0.1,Timer_LocusMine,  EntIndexToEntRef(iEntity), TIMER_REPEAT);
-		CreateTimer(4.0,SelfDestruct,  EntIndexToEntRef(iEntity));
+		CreateTimer(0.2,Timer_LocusMine,  EntIndexToEntRef(iEntity), TIMER_REPEAT);
+		CreateTimer(8.0,SelfDestruct,  EntIndexToEntRef(iEntity));
 
 		locusMinesFunction[iEntity] = SpawnSunlightSpear;
 		locusMinesRadius[iEntity] = 200.0*200.0;
