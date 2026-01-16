@@ -362,76 +362,6 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 
 		if(hasBuffIndex(attacker, Buff_Plagued))
 			damage *= 0.5;
-		
-		Address strengthPowerup = TF2Attrib_GetByName(attacker, "strength powerup");
-		if(strengthPowerup != Address_Null)
-		{
-			float strengthPowerupValue = TF2Attrib_GetValue(strengthPowerup);
-			if(strengthPowerupValue == 1.0){
-				damage *= 2.0;
-			}
-			else if(strengthPowerupValue == 3.0 && victim != attacker){
-				Buff finisherDebuff; finisherDebuff.init("Bruised", "Marked-for-Finisher", Buff_Bruised, 1, attacker, 8.0);
-				insertBuff(victim, finisherDebuff);
-			}
-		}
-		
-		if(RageActive[attacker] == true && TF2Attrib_HookValueFloat(0.0, "revenge_powerup", attacker) == 1)
-		{
-			damage *= 1.5;
-			if(powerupParticle[attacker] <= GetGameTime())
-			{
-				CreateParticleEx(victim, "critgun_weaponmodel_red", 1, 0, damagePosition, 0.5);
-				powerupParticle[attacker] = GetGameTime()+0.6;
-			}
-		}
-		if(TF2Attrib_HookValueFloat(0.0, "revenge_powerup", attacker) == 2)
-			damage *= 1 + RageBuildup[attacker]*0.5;
-		
-		if(TF2Attrib_HookValueFloat(0.0, "precision_powerup", attacker) == 1)
-			damage *= 1.35;
-		else if(TF2Attrib_HookValueFloat(0.0, "precision_powerup", attacker) == 2){
-			if(IsValidEntity(inflictor) && isAimlessProjectile[inflictor]){
-				float victimPosition[3];
-				GetEntPropVector(victim, Prop_Data, "m_vecAbsOrigin", victimPosition); 
-				float projectilePosition[3];
-				GetEntPropVector(inflictor, Prop_Data, "m_vecAbsOrigin", projectilePosition); 
-				float distance = GetVectorDistance(victimPosition, projectilePosition);
-				if(distance <= 200){
-					damage *= 1+3*((200-distance)/200);
-				}
-			}
-		}
-
-		if(IsValidClient3(tagTeamTarget[attacker])){
-			if(isTagged[tagTeamTarget[attacker]][victim]){
-				if(TF2Attrib_HookValueFloat(0.0, "king_powerup", attacker) == 2)
-					damage *= 1.75
-			}
-		}
-		else if(hasBuffIndex(attacker, Buff_TagTeam)) {
-			Buff tagTeamBuff;
-			tagTeamBuff = playerBuffs[attacker][getBuffInArray(attacker, Buff_TagTeam)]
-			if(isTagged[tagTeamBuff.inflictor][victim]){
-				if(TF2Attrib_HookValueFloat(0.0, "king_powerup", tagTeamBuff.inflictor) == 2)
-					damage *= 1.75
-			}
-		}
-
-		float velocity[3];
-		GetEntPropVector(attacker, Prop_Data, "m_vecAbsVelocity", velocity);
-
-		if(velocity[2] < -400.0){
-			if(TF2Attrib_HookValueFloat(0.0, "agility_powerup", attacker) == 2){
-				damage *= 1.0 + (-velocity[2]-400.0)*0.001;
-			}
-			if(IsValidWeapon(weapon)){
-				float fallingBonus = TF2Attrib_HookValueFloat(0.0, "falling_velocity_to_damage_mult", weapon);
-				if(fallingBonus != 0.0){
-					damage *= 1.0 + (-velocity[2]-400.0)*0.001*fallingBonus;
-				}
-			}
-		}
 
 		if(StunShotStun[attacker])
 		{
@@ -1019,6 +949,67 @@ public Action OnTakeDamage_MedicShield(victim, &attacker, &inflictor, float &dam
 	return Plugin_Changed;
 }
 public void preDamageMitigationCalcs(victim, attacker, inflictor, float& damage, weapon, float damageForce[3], damagetype, damagecustom){
+	float strengthPowerupValue = TF2Attrib_HookValueFloat(0.0, "strength_powerup", attacker);
+	if(strengthPowerupValue == 1.0){
+		damage *= 2.0;
+	}
+	else if(strengthPowerupValue == 3.0 && victim != attacker){
+		Buff finisherDebuff; finisherDebuff.init("Bruised", "Marked-for-Finisher", Buff_Bruised, 1, attacker, 8.0);
+		insertBuff(victim, finisherDebuff);
+	}
+
+	if(RageActive[attacker] == true && TF2Attrib_HookValueFloat(0.0, "revenge_powerup", attacker) == 1)
+		damage *= 1.5;
+	if(TF2Attrib_HookValueFloat(0.0, "revenge_powerup", attacker) == 2)
+		damage *= 1 + RageBuildup[attacker]*0.5;
+	
+	if(TF2Attrib_HookValueFloat(0.0, "precision_powerup", attacker) == 1)
+		damage *= 1.35;
+		
+	if(IsValidEntity(inflictor) && isAimlessProjectile[inflictor]){
+		float victimPosition[3];
+		GetEntPropVector(victim, Prop_Data, "m_vecAbsOrigin", victimPosition); 
+		float projectilePosition[3];
+		GetEntPropVector(inflictor, Prop_Data, "m_vecAbsOrigin", projectilePosition); 
+		float distance = GetVectorDistance(victimPosition, projectilePosition);
+		if(distance <= 60)
+			distance = 0.0;
+		
+		if(distance <= 250){
+			damage *= 1+3*((250-distance)/250);
+		}
+	}
+
+	if(IsValidClient3(tagTeamTarget[attacker])){
+		if(isTagged[tagTeamTarget[attacker]][victim]){
+			if(TF2Attrib_HookValueFloat(0.0, "king_powerup", attacker) == 2)
+				damage *= 1.75
+		}
+	}
+	else if(hasBuffIndex(attacker, Buff_TagTeam)) {
+		Buff tagTeamBuff;
+		tagTeamBuff = playerBuffs[attacker][getBuffInArray(attacker, Buff_TagTeam)]
+		if(isTagged[tagTeamBuff.inflictor][victim]){
+			if(TF2Attrib_HookValueFloat(0.0, "king_powerup", tagTeamBuff.inflictor) == 2)
+				damage *= 1.75
+		}
+	}
+
+	float velocity[3];
+	GetEntPropVector(attacker, Prop_Data, "m_vecAbsVelocity", velocity);
+
+	if(velocity[2] < -400.0){
+		if(TF2Attrib_HookValueFloat(0.0, "agility_powerup", attacker) == 2){
+			damage *= 1.0 + (-velocity[2]-400.0)*0.001;
+		}
+		if(IsValidWeapon(weapon)){
+			float fallingBonus = TF2Attrib_HookValueFloat(0.0, "falling_velocity_to_damage_mult", weapon);
+			if(fallingBonus != 0.0){
+				damage *= 1.0 + (-velocity[2]-400.0)*0.001*fallingBonus;
+			}
+		}
+	}
+
 	//Guardian
 	if(!(damagetype & DMG_ENERGYBEAM)){
 		int guardian = -1;

@@ -157,7 +157,7 @@
 			"increase_ratio"	"0"
 			"value"		"1"
 			"init"		"0"
-			"description"	"Shoots a spear that deals 100 base damage.\n0.5s CD\nSecond tier gives autocast while firing.\nThird tier gives locus mines."
+			"description"	"Shoots a spear that deals 100 base damage.\n0.5s CD\nSecond tier gives autocast while firing.\nThird tier makes locus mines, detonating into 3 sprayed spears."
 			"max"		"3"
 		}
 		"1542.6"

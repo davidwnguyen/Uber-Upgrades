@@ -695,6 +695,7 @@ stock EntityExplosion(owner, float damage, float radius, float pos[3], soundType
 			{
 				if(IsPointVisible(pos,targetvec))
 				{
+					float baseExplosionDamage = damage;
 					if(falloff != 0.0)
 					{
 						float ratio = (1.0-(distance/radius)*falloff);
@@ -702,17 +703,12 @@ stock EntityExplosion(owner, float damage, float radius, float pos[3], soundType
 							ratio = 0.5;
 						if(ratio >= 0.95)
 							ratio = 1.0;
-						damage *= ratio
-					}
-					if(isAimlessProjectile[entity]){
-						if(distance <= 200){
-							damage *= 1+3*((200-distance)/200);
-						}
+						baseExplosionDamage *= ratio
 					}
 
 					if(IsValidEdict(weapon) && IsValidClient3(i))
 					{
-						SDKHooks_TakeDamage(i,entity,owner,damage,damagetype|DMG_IGNOREHOOK,weapon,_,_,false)
+						SDKHooks_TakeDamage(i,entity,owner,baseExplosionDamage,damagetype|DMG_IGNOREHOOK,weapon,_,_,false)
 						if(knockback > 0.0)
 							PushEntity(i, owner, knockback, 200.0);
 						
@@ -721,7 +717,7 @@ stock EntityExplosion(owner, float damage, float radius, float pos[3], soundType
 					}
 					else
 					{
-						SDKHooks_TakeDamage(i,entity,owner,damage,damagetype|DMG_IGNOREHOOK,_,_,_, false);
+						SDKHooks_TakeDamage(i,entity,owner,baseExplosionDamage,damagetype|DMG_IGNOREHOOK,_,_,_, false);
 					}
 					if(noMultihit)
 						ShouldNotHit[entity][i] = true;
