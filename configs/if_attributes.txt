@@ -6901,10 +6901,21 @@
 			"init"		"0.00"
 			"max"		"0.00"
 		}
-		"1679.5"
+		"1679.1"
 		{
 			"name"		"dmg taken divided"
 			"ref"		"dmg taken divided"
+			"attr_class"	"dmg_taken_divided"
+			"display"		"%.0f%%"
+			"cost"		"0"
+			"value"		"0.1"
+			"init"		"0.00"
+			"max"		"0.00"
+		}
+		"1679.2"
+		{
+			"name"		"dmg taken divided converted"
+			"ref"		"dmg taken divided converted"
 			"attr_class"	"dmg_taken_divided"
 			"display"		"%.0f%%"
 			"cost"		"0"

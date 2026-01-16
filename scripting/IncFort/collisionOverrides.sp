@@ -337,9 +337,8 @@ public Action:OnCollisionWarriorArrow(entity, client)
 		int CWeapon = GetEntPropEnt(owner, Prop_Send, "m_hActiveWeapon");
 		if(IsValidEdict(CWeapon))
 		{
-			float damageDealt = 30.0*TF2_GetDamageModifiers(owner, CWeapon, false);
-			int damageType = GetEntProp(entity, Prop_Send, "m_bCritical") ? DMG_BULLET|DMG_IGNOREHOOK|DMG_CRIT : DMG_BULLET|DMG_IGNOREHOOK;
-			SDKHooks_TakeDamage(client, entity, owner, damageDealt, damageType, CWeapon, _,_,false);
+			int damageType = GetEntProp(entity, Prop_Send, "m_bCritical") ? DMG_BULLET|DMG_CRIT : DMG_BULLET;
+			SDKHooks_TakeDamage(client, entity, owner, 25.0, damageType, CWeapon, _,_,false);
 		}
 		RemoveEntity(entity);
 	}
@@ -489,14 +488,7 @@ public Action:OnCollisionPhotoViscerator(entity, client)
 				int CWeapon = GetEntPropEnt(owner, Prop_Send, "m_hActiveWeapon");
 				if(IsValidEdict(CWeapon))
 				{
-					float damage = TF2_GetDPSModifiers(owner,CWeapon)*25.0;
-					Address lameMult = TF2Attrib_GetByName(CWeapon, "dmg penalty vs players");
-					if(lameMult != Address_Null)//lame. AP applies twice.
-					{
-						damage /= TF2Attrib_GetValue(lameMult);
-					}
-					DOTStock(client,owner,damage*0.1,CWeapon,DMG_BURN + DMG_PREVENT_PHYSICS_FORCE,20,0.5,0.2,true);
-					SDKHooks_TakeDamage(client,entity,owner,damage,DMG_BURN|DMG_IGNOREHOOK,CWeapon,_,_,false);
+					SDKHooks_TakeDamage(client,entity,owner,60.0,DMG_BURN|DMG_IGNITE,CWeapon,_,_,false);
 				}
 				float pos[3]
 				GetEntPropVector(entity, Prop_Data, "m_vecOrigin", pos);
@@ -1166,9 +1158,8 @@ public Action:OnCollisionEtherealKnife(entity, client)
 		int CWeapon = GetEntPropEnt(owner, Prop_Send, "m_hActiveWeapon");
 		if(IsValidEdict(CWeapon))
 		{
-			float damageDealt = 45.0*TF2_GetDamageModifiers(owner, CWeapon, false);
-			int damageType = GetEntProp(entity, Prop_Send, "m_bCritical") ? DMG_BULLET|DMG_IGNOREHOOK|DMG_CRIT : DMG_BULLET|DMG_IGNOREHOOK;
-			SDKHooks_TakeDamage(client, entity, owner, damageDealt, damageType, CWeapon, _,_,false);
+			int damageType = GetEntProp(entity, Prop_Send, "m_bCritical") ? DMG_CLUB|DMG_CRIT : DMG_CLUB;
+			SDKHooks_TakeDamage(client, entity, owner, 45.0, damageType, CWeapon, _,_,false);
 			hasHit[client][projectileAttackCounter[entity] % 30] = true;
 		}
 	}

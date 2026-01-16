@@ -157,7 +157,7 @@
 		"en"		"Chromatic Weakness on Crit"
 	}
 	"convert health to damage reduction"{
-		"en"		"Convert Health Bonus to Damage Reduction"
+		"en"		"Convert Health to Damage Reduction"
 	}
 	"flame_reflect_on_collision"{
 		"en"		"Flames Reflect on Walls"

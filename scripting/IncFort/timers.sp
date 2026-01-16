@@ -325,8 +325,8 @@ public Action:Timer_FixedVariables(Handle timer)
 			}
 			if(CheckForAttunement(client))
 			{
-				Format(EHPString, sizeof(EHPString), "%s\nFocus | %.0f / %.0f", EHPString, GetAlphabetForm(fl_CurrentFocus[client]),GetAlphabetForm(fl_MaxFocus[client]));
-				
+				Format(EHPString, sizeof(EHPString), "%s\nFocus | %s / %s", EHPString, GetAlphabetForm(fl_CurrentFocus[client]),GetAlphabetForm(fl_MaxFocus[client]));
+
 				char spellHUD[1024]
 				Format(spellHUD, sizeof(spellHUD), "Current Spells: \n");
 				for(int i = 0;i<Max_Attunement_Slots;++i)

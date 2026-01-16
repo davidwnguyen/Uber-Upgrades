@@ -1298,7 +1298,7 @@ DisplayItemChange(client,itemidx)
 		//Heavy Melee
 		case 310:
 		{
-			ChangeString = "The Warrior's Spirit | Deals -40% damage. Shoots an additional 2 arrows per attack that deal 30 base damage.";
+			ChangeString = "The Warrior's Spirit | Deals -40% damage. Shoots an additional 2 arrows per attack that deal 25 base damage.";
 		}
 		case 43:
 		{
@@ -2452,11 +2452,8 @@ checkFreeze(int victim,int attacker)
 }
 checkBleed(int victim,int attacker, int weapon = -1, float overrideDamage = 0.0){
 	float bleedBonus = 1.0;
-	Address vampirePowerupAttacker = TF2Attrib_GetByName(attacker, "unlimited quantity");
-	if(vampirePowerupAttacker != Address_Null && TF2Attrib_GetValue(vampirePowerupAttacker) > 0.0)
-	{
-		bleedBonus += 0.25;
-	}
+	if(TF2Attrib_HookValueFloat(0.0, "vampire_powerup", attacker) == 1)
+		bleedBonus += 0.6;
 
 	float damage = 100.0*bleedBonus;
 	if(overrideDamage != 0.0){
@@ -3253,7 +3250,7 @@ GivePowerupDescription(int client, char[] name, int amount){
 		}else if(amount == 3){
 			CPrintToChat(client, "{community}Bloodbound Powerup {default}| {lightcyan}+50%% lifesteal, lifesteal at maximum health instead fills Overleech, consumed to heal at 1.5x effectiveness while below 100%% HP. 0.75x incoming damage.");
 		}else{
-			CPrintToChat(client, "{community}Vampire Powerup {default}| {lightcyan}+75%% lifesteal, 1.25x bleed damage, and 0.75x incoming damage.");
+			CPrintToChat(client, "{community}Vampire Powerup {default}| {lightcyan}+75%% lifesteal, 1.6x bleed buildup damage, and 0.75x incoming damage.");
 		}
 	}
 	else if(StrEqual("precision powerup", name)){
@@ -4173,23 +4170,19 @@ void UpdatePlayerMaxHealth(int client){
 	//thanks sourcepawn :3
 	float percentageHealth = float(GetClientHealth(client))/float(TF2Util_GetEntityMaxHealth(client));
 
-	Address healthActive = TF2Attrib_GetByName(client, "max health multiplier");
-	if(healthActive != Address_Null)
-	{
-		float mult = TF2Attrib_GetValue(healthActive);
-		float drConversion = TF2Attrib_HookValueFloat(0.0, "health_to_damage_reduction", client);
-		if(drConversion > 0 && mult > 0){
-			float dr = 1.0/(1-drConversion);
-			TF2Attrib_SetByName(client, "dmg taken divided", dr);
-			mult *= 1-drConversion;
-		}else{
-			TF2Attrib_SetByName(client, "dmg taken divided", 1.0);
-		}
-
-		TF2Attrib_SetByName(client,"add health bonus", float(RoundToCeil(GetClientBaseHP(client)* (mult-1)) ) );
-		if(current_class[client] == TFClass_Engineer)
-			TF2Attrib_SetByName(client,"building health mult", TF2Attrib_GetValue(healthActive));
+	float mult = TF2Attrib_HookValueFloat(1.0, "max_health_multiplier", client);
+	float drConversion = TF2Attrib_HookValueFloat(0.0, "health_to_damage_reduction", client);
+	if(drConversion > 0 && mult > 1){
+		float dr = 1.0/(1-drConversion);
+		TF2Attrib_SetByName(client, "dmg taken divided converted", dr);
+		mult *= 1-drConversion;
+	}else{
+		TF2Attrib_SetByName(client, "dmg taken divided converted", 1.0);
 	}
+
+	TF2Attrib_SetByName(client,"add health bonus", float(RoundToCeil(GetClientBaseHP(client) * (mult-1)) ) );
+	if(current_class[client] == TFClass_Engineer)
+		TF2Attrib_SetByName(client,"building health mult", mult);
 
 	SetEntityHealth(client, RoundFloat(percentageHealth*TF2Util_GetEntityMaxHealth(client)));
 }
