@@ -162,7 +162,7 @@ enum struct Buff{
 	float severity;
 	float additiveArmorPenetration;
 	float multiplicativeMoveSpeedMult;
-	float multiplicativeIncomingHeal;
+	float additiveIncomingHeal;
 	float additiveCritBlock;
 
 	void clear(){
@@ -183,7 +183,7 @@ enum struct Buff{
 		this.severity = 1.0;
 		this.additiveArmorPenetration = 0.0;
 		this.multiplicativeMoveSpeedMult = 1.0;
-		this.multiplicativeIncomingHeal = 1.0;
+		this.additiveIncomingHeal = 0.0;
 		this.additiveCritBlock = 0.0;
 	}
 	void init(const char sName[32], const char sDescription[64], int iID, int iPriority, int iInflictor, float fDuration, float fSeverity = 1.0)
@@ -443,6 +443,7 @@ bool DOTStacked[MAXENTITIES][MAXENTITIES];
 bool isBotScrambled[MAXPLAYERS+1];
 bool isMvM;
 bool hasSupernovaSplashed[MAXPLAYERS+1];
+bool isWarpFlagged[MAXPLAYERS+1];
 //bool isHitForMelee[MAXPLAYERS+1][MAXENTITIES];
 //Other Datatypes
 TFClassType current_class[MAXPLAYERS+1]

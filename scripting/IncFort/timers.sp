@@ -834,9 +834,9 @@ public Action:Timer_Every100MS(Handle timer)
 					if(fireRateBuff){
 						bannerBuff.additiveAttackSpeedMult = fireRateBuff; hasBuff = true;
 					}
-					float healingBuff = TF2Attrib_HookValueFloat(1.0, "healing_buff_banner", secondary);
-					if(healingBuff != 1.0){
-						bannerBuff.multiplicativeIncomingHeal = healingBuff; hasBuff = true;
+					float healingBuff = TF2Attrib_HookValueFloat(0.0, "healing_buff_banner", secondary);
+					if(healingBuff != 0.0){
+						bannerBuff.additiveIncomingHeal = healingBuff; hasBuff = true;
 					}
 					float speedBuff = TF2Attrib_HookValueFloat(0.0, "speed_buff_banner", secondary);
 					if(speedBuff){

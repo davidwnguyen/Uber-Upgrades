@@ -1565,7 +1565,43 @@ CastHealing(client, attuneSlot)//Projected Healing
 }
 
 CastWarp(client){
-	warpCooldown[client] = GetGameTime()+(0.5/ArcanePower[client]);
+	warpCooldown[client] = GetGameTime()+0.4;
+
+    float vec[3], telepos[3], vecangles[3], vecorigin[3], fwd[3], mins[3], maxs[3];
+    GetClientEyeAngles(client, vecangles);
+    GetClientEyePosition(client, vecorigin);
+	//do the teleportslop!!!!
+
+	GetAngleVectors(vecangles,fwd, NULL_VECTOR, NULL_VECTOR);
+	ScaleVector(fwd, 2000.0);
+	AddVectors(vecorigin, fwd, telepos);
+
+	for(int i = 1; i<=MaxClients; ++i){
+		isWarpFlagged[i] = false;
+	}
+
+    TR_TraceHullFilter(vecorigin, telepos, mins, maxs, MASK_PLAYERSOLID,TraceEntityWarp, client);
+    TR_GetEndPosition(vec);
+
+	if(TR_StartSolid()){
+		return;
+	}
+
+    GetClientMins(client, mins);
+    GetClientMaxs(client, maxs);
+
+	float endpos[3];
+	ScaleVector(fwd, -0.05);
+	
+	AddVectors(vec, fwd, endpos);
+
+    TR_TraceHullFilter(endpos, vec, mins, maxs, MASK_PLAYERSOLID, TraceEntityFilterPlayers, client);
+    TR_GetEndPosition(endpos);
+
+	if(TR_StartSolid()){
+		return;
+	}
+
 	float focusCost = fl_MaxFocus[client]*0.1/ArcanePower[client];
 	if(fl_CurrentFocus[client] < focusCost)
 	{
@@ -1573,43 +1609,11 @@ CastWarp(client){
 		return;
 	}
 
+	EmitSoundToAll(SOUND_TELEPORT, 0, client, _, _, 1.0, _,_,vecorigin);
 	PrintHintText(client, "Used Warp! -%.2f focus.",focusCost);
 	fl_CurrentFocus[client] -= focusCost;
 
-    float vec[3], telepos[3], vecangles[3], vecorigin[3], fwd[3], mins[3], maxs[3];
-    GetClientEyeAngles(client, vecangles);
-    GetClientEyePosition(client, vecorigin);
-	EmitSoundToAll(SOUND_TELEPORT, 0, client, _, _, 1.0, _,_,vecorigin);
 	CreateParticle(client, "teleported_red");
-
-	GetAngleVectors(vecangles,fwd, NULL_VECTOR, NULL_VECTOR);
-
-	ScaleVector(fwd, 2000.0);
-	AddVectors(vecorigin, fwd, telepos);
-
-    for (int i = 0; i < 3; ++i){
-        mins[i] -= 6;
-        maxs[i] += 6;
-    }
-
-    TR_TraceHullFilter(vecorigin, telepos, mins, maxs, MASK_PLAYERSOLID,TraceEntityWarp, client);
-    TR_GetEndPosition(vec);
-
-    GetClientMins(client, mins);
-    GetClientMaxs(client, maxs);
-    
-    for (int i = 0; i < 3; ++i){
-        mins[i] -= 30;
-        maxs[i] += 30;
-    }
-
-	float endpos[3];
-	ScaleVector(fwd, -0.1);
-	
-	AddVectors(vec, fwd, endpos);
-
-    TR_TraceHullFilter(endpos, vec, mins, maxs, MASK_PLAYERSOLID, TraceEntityFilterPlayers, client);
-    TR_GetEndPosition(endpos);
 
 	TeleportEntity(client, endpos, _, {0.0,0.0,0.0});
 
@@ -1634,6 +1638,21 @@ CastWarp(client){
 		CreateTimer(1.0, Timer_KillParticle, EntIndexToEntRef(iPart2));
 	}
 	CreateParticle(client, "teleportedin_red");
+
+	TF2_AddCondition(client, TFCond_SpeedBuffAlly, 2.0);
+	giveDefenseBuff(client, 2.0);
+	if(miniCritStatusAttacker[client] < GetGameTime() + 2.0)
+		miniCritStatusAttacker[client] = GetGameTime() + 2.0;
+
+	int weapon  = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
+	if(IsValidWeapon(weapon)){
+		float damageBoost = TF2_GetDPSModifiers(client, weapon, true, true, false);
+		for(int i = 1; i<=MaxClients; ++i){
+			if(isWarpFlagged[i]){
+				SDKHooks_TakeDamage(i,client,client,damageBoost*600.0,DMG_CLUB|DMG_CRUSH|DMG_IGNOREHOOK, weapon,_,_,false);
+			}
+		}
+	}
 }
 
 CastStunShot(int client, int attuneSlot){

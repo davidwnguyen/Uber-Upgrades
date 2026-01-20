@@ -20,25 +20,26 @@ public Action TF2_OnTakeHealthPre(int client, float &flAmount, int &flags){
 }
 
 float GetPlayerHealingMultiplier(client){
-	float multiplier = 1.0;
+	float debuffMagnitude = 1.0;
+	float buffMagnitude = 0.0;
 	float playerOrigin[3];
 
 	GetClientAbsOrigin(client, playerOrigin);
 
 	if(TF2_IsPlayerInCondition(client, TFCond_Bleeding)){
 		if(TF2Attrib_HookValueFloat(0.0, "inverter_powerup", client) == 1.0){
-			multiplier *= 2.0;
+			buffMagnitude += 1.0;
 		}
 		else{
 			int inflictor = TF2Util_GetPlayerConditionProvider(client, TFCond_Bleeding);
 			if(IsValidClient3(inflictor)){
 				if(TF2Attrib_HookValueFloat(0.0, "knockout_powerup", client) == 2)
-					multiplier /= 1+5*TF2Attrib_HookValueFloat(1.0, "debuff_magnitude_mult", inflictor);
+					debuffMagnitude /= 1+5*TF2Attrib_HookValueFloat(1.0, "debuff_magnitude_mult", inflictor);
 				else
-					multiplier /= 1+1*TF2Attrib_HookValueFloat(1.0, "debuff_magnitude_mult", inflictor);
+					debuffMagnitude /= 1+1*TF2Attrib_HookValueFloat(1.0, "debuff_magnitude_mult", inflictor);
 			}
 			else{
-				multiplier *= 0.5;
+				debuffMagnitude *= 0.5;
 			}
 		}
 	}
@@ -61,7 +62,7 @@ float GetPlayerHealingMultiplier(client){
 		if(IsValidClient3(inflictor)) {
 			effectMult += TF2Attrib_HookValueFloat(1.0, "buff_magnitude_mult", inflictor)-1.0;
 		}
-		multiplier *= 1.0 + effectMult;
+		buffMagnitude += effectMult;
 	}
 
 	int healers = GetEntProp(client, Prop_Send, "m_nNumHealers");
@@ -76,39 +77,39 @@ float GetPlayerHealingMultiplier(client){
 
 		if(TF2Util_GetEntityMaxHealth(client) > GetClientHealth(client)){
 			float bonusPerHealthMissing = (TF2Attrib_HookValueFloat(1.0, "low_health_heal_mult", healingWeapon)-1)/TF2Util_GetEntityMaxHealth(client);
-			multiplier *= bonusPerHealthMissing * (TF2Util_GetEntityMaxHealth(client) - GetClientHealth(client)) + 1;
+			buffMagnitude += bonusPerHealthMissing * (TF2Util_GetEntityMaxHealth(client) - GetClientHealth(client));
 		}
 	}
 	
 	if(TF2Attrib_HookValueFloat(0.0, "regeneration_powerup", client) == 3.0)
-		multiplier *= 1.6;
+		buffMagnitude += 0.6;
 	if(TF2Attrib_HookValueFloat(0.0, "vampire_powerup", client) == 2.0)
-		multiplier *= 1.25;
+		buffMagnitude += 1.33;
 	if(TF2Attrib_HookValueFloat(0.0, "king_powerup", client) == 3.0)
-		multiplier *= 0.35;
+		debuffMagnitude *= 0.35;
 	
 	if(hasBuffIndex(client, Buff_HealingBuff)){
-		multiplier *= playerBuffs[client][getBuffInArray(client, Buff_HealingBuff)].severity;
+		buffMagnitude += playerBuffs[client][getBuffInArray(client, Buff_HealingBuff)].severity - 1.0;
 	}
 	if(hasBuffIndex(client, Buff_Stronghold)){
-		multiplier *= 1 + 0.33 * playerBuffs[client][getBuffInArray(client, Buff_Stronghold)].severity;
+		buffMagnitude += 0.33 * playerBuffs[client][getBuffInArray(client, Buff_Stronghold)].severity;
 	}
 	if(hasBuffIndex(client, Buff_Leech)){
-		multiplier /= 1 + playerBuffs[client][getBuffInArray(client, Buff_Leech)].severity;
+		debuffMagnitude /= 1 + playerBuffs[client][getBuffInArray(client, Buff_Leech)].severity;
 	}
 	if(hasBuffIndex(client, Buff_Decay)){
-		multiplier /= 1 + 3.0*playerBuffs[client][getBuffInArray(client, Buff_Decay)].severity;
+		debuffMagnitude /= 1 + 3.0*playerBuffs[client][getBuffInArray(client, Buff_Decay)].severity;
 	}
 	for(int i = 0; i<MAXBUFFS;i++){
 		if(playerBuffs[client][i].duration < GetGameTime())
 			continue;
 			
-		multiplier *= applyMultSeverityMod(playerBuffs[client][i].multiplicativeIncomingHeal, playerBuffs[client][i].severity);
+		buffMagnitude += playerBuffs[client][i].additiveIncomingHeal * playerBuffs[client][i].severity;
 	}
 	if(TF2Attrib_HookValueFloat(0.0, "revenge_powerup", client) == 2.0 || TF2Attrib_HookValueFloat(0.0, "revenge_powerup", client) == 3.0)
-		multiplier *= 1.0 + RageBuildup[client]*0.5;
+		buffMagnitude += RageBuildup[client]*0.5;
 	
-	return multiplier;
+	return debuffMagnitude * (1+buffMagnitude);
 }
 void AddPlayerHealth(client, iAdd, float flOverheal = 1.5, bool bEvent = false, healer = -1)
 {

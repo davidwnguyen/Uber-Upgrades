@@ -3280,7 +3280,7 @@ GivePowerupDescription(int client, char[] name, int amount){
 		if(amount == 2){
 			CPrintToChat(client, "{community}Quaker Powerup {default}| {lightcyan}Weighdown is automatically activated after jumping. Stomp damage is splashed to 2 other targets. 2x jump height. All damage dealt is increased by +0.1%% times downward velocity.");
 		}else if(amount == 3){
-			CPrintToChat(client, "{community}Warp Powerup {default}| {lightcyan}Shift middle-click will teleport you to crosshair, consuming 10%% focus. Deals 1200 base damage to all enemies through path of teleport. Applies +20 additive dmg taken to victims on teleport hit.");
+			CPrintToChat(client, "{community}Warp Powerup {default}| {lightcyan}Shift middle-click will teleport you to crosshair, consuming 10%% focus. Deals 600 base DPS to all enemies through path of teleport. After a teleport, you are given 2s of speed boost, 35%% damage reduction, and minicrits.");
 		}else{
 			CPrintToChat(client, "{community}Agility Powerup {default}| {lightcyan}+50%% reload & fire rate. double jumps, speed boost, 1.4x speed, 1.3x jump height, 1.75x self push force, immunity to crowd control effects, and 35%% dodge chance.");
 		}
@@ -3642,12 +3642,8 @@ public bool TraceWorldOnly(int entity, int contentsMask) {
 }
 public bool TraceEntityWarp(int entity, int contentsMask, any data) {
     if (0 < entity <= MaxClients){
-		if(IsValidClient3(entity) && IsPlayerAlive(entity) && IsOnDifferentTeams(entity, data)){
-			float damageBoost = TF2_GetDamageModifiers(data, GetEntPropEnt(data, Prop_Send, "m_hActiveWeapon"), true, true, false);
-			SDKHooks_TakeDamage(entity,data,data,damageBoost*1200.0,DMG_CLUB|DMG_CRUSH|DMG_IGNOREHOOK,GetEntPropEnt(data, Prop_Send, "m_hActiveWeapon"),_,_,false);
-
-			Buff jarateDebuff; jarateDebuff.init("Jarated", "", Buff_Jarated, 2*RoundToNearest(damageBoost), data, 8.0);
-			insertBuff(entity, jarateDebuff);
+		if(IsClientInGame(entity) && IsPlayerAlive(entity) && IsOnDifferentTeams(entity, data)){
+			isWarpFlagged[entity] = true;
 		}
 		return false;
 	}
