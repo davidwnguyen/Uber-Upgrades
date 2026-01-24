@@ -43,6 +43,7 @@
 #define MAX_STAGES 5
 #define MAX_AFTERBURN_STACKS 100
 #define MAX_ARCANESPELLS 64
+#define MAX_RECOUP_STACKS 300
 
 //Change to tickrate of how your server operates
 #define TICKINTERVAL 0.015

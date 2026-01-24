@@ -1,9 +1,27 @@
-public void insertAfterburn(int client, AfterburnStack newStack){
+void removeRecoup(int client){
+	RecoupStack empty;
+	for(int i = 0;i < MAX_RECOUP_STACKS; i++){
+		playerRecoup[client][i] = empty;
+	}
+}
+void insertRecoup(int client, RecoupStack newStack){
+	int replacementID = getNextRecoupStack(client);
+	playerRecoup[client][replacementID] = newStack;
+}
+int getNextRecoupStack(int client){
+	for(int i = 0; i < MAX_RECOUP_STACKS; ++i){
+		if(playerRecoup[client][i].expireTime < GetGameTime()){
+			return i;
+		}
+	}
+	return 0;
+}
+
+void insertAfterburn(int client, AfterburnStack newStack){
 	int replacementID = getNextAfterburnStack(client);
-		
 	playerAfterburn[client][replacementID] = newStack;
 }
-public int getNextAfterburnStack(int client){
+int getNextAfterburnStack(int client){
 	int lowest = 99999999;
 	int id = 0;
 	for(int i = 0; i < MAX_AFTERBURN_STACKS; ++i){
@@ -14,7 +32,7 @@ public int getNextAfterburnStack(int client){
 	}
 	return id;
 }
-public void removeAfterburn(int client){
+void removeAfterburn(int client){
 	AfterburnStack empty;
 	for(int i = 0;i < MAX_AFTERBURN_STACKS; i++){
 		playerAfterburn[client][i] = empty;
@@ -77,7 +95,8 @@ float GetResistance(int client, bool includeReduction = false, float penetration
 		if(TF2Attrib_HookValueFloat(0.0, "regeneration_powerup", client) == 1 || TF2Attrib_HookValueFloat(0.0, "vampire_powerup", client) == 1 || TF2Attrib_HookValueFloat(0.0, "vampire_powerup", client) == 3 || 1 <= TF2Attrib_HookValueFloat(0.0, "plague_powerup", client) <= 2)
 			TotalResistance *= 1.333;
 		
-		if(TF2Attrib_HookValueFloat(0.0, "knockout_powerup", client) == 2 || TF2Attrib_HookValueFloat(0.0, "inverter_powerup", client) == 2)
+		if(TF2Attrib_HookValueFloat(0.0, "knockout_powerup", client) == 2 || TF2Attrib_HookValueFloat(0.0, "inverter_powerup", client) == 2
+		|| TF2Attrib_HookValueFloat(0.0, "king_powerup", client) == 3)
 			TotalResistance *= 1.5;
 	}
 
@@ -2887,7 +2906,7 @@ public getProjOrigin(entity)
 	entity = EntRefToEntIndex(entity);
 	if(IsValidEdict(entity)){
 		if(GetEntityMoveType(entity) != MOVETYPE_VPHYSICS){
-			SetEntProp(entity, Prop_Send, "m_CollisionGroup", 27);
+			SetEntityCollisionGroup(entity, 27);
 		}
 		GetEntPropVector(entity, Prop_Data, "m_vecOrigin", entitySpawnPositions[entity]);
 
@@ -2902,6 +2921,10 @@ public getProjOrigin(entity)
 		if(TF2Attrib_HookValueInt(0, "sunburst_projectile", CWeapon)){
 			CreateParticle(entity, "raygun_projectile_red_crit", true, _, 10.0, _, true);
 			CreateParticle(entity, "raygun_projectile_red", true, _, 10.0, _, true);
+		}
+		if(TF2Attrib_HookValueInt(0, "highlight_projectile", CWeapon)){
+			CreateParticle(entity, "raygun_projectile_blue_crit", true, _, 10.0, _, true);
+			CreateParticle(entity, "raygun_projectile_blue", true, _, 10.0, _, true);
 		}
 
 		float constantTime = TF2Attrib_HookValueFloat(0.0, "constant_time_projectile", CWeapon);
@@ -3246,7 +3269,7 @@ GivePowerupDescription(int client, char[] name, int amount){
 		}else if(amount == 3){
 			CPrintToChat(client, "{community}Bloodbound Powerup {default}| {lightcyan}+50%% lifesteal, lifesteal at maximum health instead fills Overleech, consumed to heal at 1.5x effectiveness while below 100%% HP. 0.75x incoming damage.");
 		}else{
-			CPrintToChat(client, "{community}Vampire Powerup {default}| {lightcyan}+75%% lifesteal, 1.6x bleed buildup damage, and 0.75x incoming damage.");
+			CPrintToChat(client, "{community}Vampire Powerup {default}| {lightcyan}+85%% lifesteal, 1.6x bleed buildup damage, and 0.75x incoming damage.");
 		}
 	}
 	else if(StrEqual("precision powerup", name)){
@@ -3298,7 +3321,7 @@ GivePowerupDescription(int client, char[] name, int amount){
 		if(amount == 2){
 			CPrintToChat(client, "{community}Tag-Team Powerup {default}| {lightcyan}Crouch+Mouse3 to link yourself to a teammate:\n Giving both of you 1.2x damage. Your healing is shared to your patient and attacking an enemy makes the patient deal 1.75x vs that victim.");
 		}else if(amount == 3){
-			CPrintToChat(client, "{community}Martyr Powerup {default}| {lightcyan}0.33x incoming healing. Sacrifice (15%% max health + dmg taken) to absorb fatal teammate damage and give uber for 0.5s.");
+			CPrintToChat(client, "{community}Champion Powerup {default}| {lightcyan}Hitting enemies makes them take 1.2x incoming damage and makes them take 3 DPS (from your weapon) every time they are hit for 30s.\n0.66x incoming damage.");
 		}else{
 			CPrintToChat(client, "{community}King Powerup {default}| {lightcyan}+33%% reload and fire rate for nearby teammates and you. 0.8x incoming damage. 1.5x uber and heal rate. +20%% damage dealt.");
 		}
@@ -3330,59 +3353,13 @@ GivePowerupDescription(int client, char[] name, int amount){
 			CPrintToChat(client, "{community}Inverter Powerup {default}| {lightcyan}0.8x incoming damage taken. Flips the effects of incoming ailments (eg: jarate -> battalion's backup)");
 		}
 	}
-	else if(StrEqual("glass powerup", name)){
-		if(amount == 2){
-			CPrintToChat(client, "{community}Shrike Powerup {default}| {lightcyan}Enter Shrike for 15s upon using the given ability. While in Shrike:");
-			CPrintToChat(client, "{lightcyan}Deal unhealable damage & fully pierce conditional damage reductions. For every 30%% of HP you deal to a victim, attack another time. Every attack decreases your duration by 1s.");
-			CPrintToChat(client, "{lightcyan}Decreases your max health by 40%% every time you leave, triggering a 5s cooldown.");
-		}else if(amount == 3){
-			CPrintToChat(client, "{community}Chaotic Powerup {default}| {lightcyan}Deal 0.33x to 3x dmg randomly on a gaussian dist.");
-			CPrintToChat(client, "{lightcyan}Every 5 hits, guarantee a min or max roll on damage.");
-			CPrintToChat(client, "{lightcyan}Every 7 hits, deal an additional attack.");
-			CPrintToChat(client, "{lightcyan}Every 11 hits, deal self damage & deal 13%% of the missing health of the victim.");
-		}else{
-			CPrintToChat(client, "{community}Glass Powerup {default}| {lightcyan}2x incoming damage taken. Full conditional damage reduction pierce. 80%% of HP Bonus -> DR. +50%% damage.");
-		}
-	}
-	else if(StrEqual("diffusion powerup", name)){
-		if(amount == 2){
-			CPrintToChat(client, "{community}Chromatic Powerup {default}| {lightcyan}Converts damage taken to your highest resistance type.");
-			CPrintToChat(client, "{lightcyan}Fire grants afterburn immunity, blast grants damage spreading, & bullet gives double crit block.");
-		}else if(amount == 3){
-			CPrintToChat(client, "{community}Adaptive Powerup {default}| {lightcyan}Upon taking damage from a damage type, swap to that resistance");
-			CPrintToChat(client, "{lightcyan}and grant +3%% resistance per hit, stacking up to -90%% damage taken.");
-		}else{
-			CPrintToChat(client, "{community}Diffusion Powerup {default}| {lightcyan}Turns all damage into damage taken over 20s. 1.75x health regen.");
-		}
-	}
-	else if(StrEqual("balance powerup", name)){
-		if(amount == 2){
-			CPrintToChat(client, "{community}Counterweight Powerup {default}| {lightcyan}The complimentary stat of your highest invested stat is also equal magnitude.");
-		}else if(amount == 3){
-			CPrintToChat(client, "{community}Fortune Powerup {default}| {lightcyan}Rolls chance related mechanics twice, favoring the more advantageous outcome.");
-		}else{
-			CPrintToChat(client, "{community}Balance Powerup {default}| {lightcyan}+20%% fire rate, reload rate, damage, ammo, health, defense, move speed, focus, and health sustain.");
-		}
-	}
-	else if(StrEqual("catalyst powerup", name)){
-		if(amount == 2){
-			CPrintToChat(client, "{community}Conduit Powerup {default}| {lightcyan}Every buff applied to you is also applied to the entire team. 0.66x dmg taken.");
-		}else{
-			CPrintToChat(client, "{community}Catalyst Powerup {default}| {lightcyan}Grants 1%% focus & health leech on hit, which spread to nearby teammates. 0.66x dmg taken.");
-		}
-	}
 	else if(StrEqual("juggernaut powerup", name)){
 		if(amount == 2){
-			CPrintToChat(client, "{community}Unyielding Powerup {default}| {lightcyan}Gain up to 0.25x damage taken from sources as they get closer to 100% damage dealt as max health.");
+			CPrintToChat(client, "{community}Vitality Powerup {default}| {lightcyan}+150 base health. +100%% incoming healing.");
+		}else if(amount == 3){
+			CPrintToChat(client, "{community}Undying Powerup {default}| {lightcyan}Every time you are hit, heal back 3%% of your missing health. This healing is multiplied by +5%% per 10%% health the hit deals.");
 		}else{
-			CPrintToChat(client, "{community}Juggernaut Powerup {default}| {lightcyan}Gain up to 0.25x damage taken from sources as they get closer to 0 damage dealt.");
-		}
-	}
-	else if(StrEqual("sanctuary powerup", name)){
-		if(amount == 2){
-			CPrintToChat(client, "{community}Wellspring Powerup {default}| {lightcyan}In a 800 HU radius, 50%% of lost health and focus is recouped for teammates over 5s. 0.66x damage taken.");
-		}else{
-			CPrintToChat(client, "{community}Sanctuary Powerup {default}| {lightcyan}???");
+			CPrintToChat(client, "{community}Juggernaut Powerup {default}| {lightcyan}35%% of damage taken in healed back over 5s. Gain immunity against all crowd control effects. All incoming hits above 50%% of your current health are reduced by 0.66x.");
 		}
 	}
 }
@@ -4162,7 +4139,10 @@ void UpdatePlayerMaxHealth(int client){
 	//thanks sourcepawn :3
 	float percentageHealth = float(GetClientHealth(client))/float(TF2Util_GetEntityMaxHealth(client));
 
+	float flatHP = 0.0;
 	float mult = TF2Attrib_HookValueFloat(1.0, "max_health_multiplier", client);
+
+	//DR conversion attribute
 	float drConversion = TF2Attrib_HookValueFloat(0.0, "health_to_damage_reduction", client);
 	if(drConversion > 0 && mult > 1){
 		float dr = 1.0/(1-drConversion);
@@ -4171,8 +4151,12 @@ void UpdatePlayerMaxHealth(int client){
 	}else{
 		TF2Attrib_SetByName(client, "dmg taken divided converted", 1.0);
 	}
-
-	TF2Attrib_SetByName(client,"add health bonus", float(RoundToCeil(GetClientBaseHP(client) * (mult-1)) ) );
+	//Sources of flat
+	if(TF2Attrib_HookValueFloat(0.0, "juggernaut_powerup", client) == 2.0){
+		flatHP += 150.0;
+	}
+	
+	TF2Attrib_SetByName(client,"add health bonus", flatHP + float(RoundToCeil((GetClientBaseHP(client) + flatHP) * (mult-1)) ) );
 	if(current_class[client] == TFClass_Engineer)
 		TF2Attrib_SetByName(client,"building health mult", mult);
 
@@ -4299,6 +4283,7 @@ cleanSlateClient(int client){
 	LSPool[client] = 0.0;
 	clearAllBuffs(client);
 	removeAfterburn(client);
+	removeRecoup(client);
 
 	for(int i=1;i<=MaxClients;++i)
 	{

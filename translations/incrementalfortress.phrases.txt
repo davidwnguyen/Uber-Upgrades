@@ -1,5 +1,8 @@
 "Phrases"
 {
+	"projectile blue highlight effect"{
+		"en"		"Projectiles are Highlighted"
+	}
 	"firerate buff banner"{
 		"en"		"Banner Grants Fire Rate Buff"
 	}

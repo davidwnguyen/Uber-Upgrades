@@ -104,6 +104,7 @@ enum {
 	Buff_Airblasted=30,
 	Buff_HealingBuff=31,
 	Buff_BannerBuffs=32,
+	Buff_ChampionMark=33,
 	BuffAmt
 };
 bool isBonus[BuffAmt] = {
@@ -139,7 +140,8 @@ bool isBonus[BuffAmt] = {
 	false,
 	false,
 	true,
-	true
+	true,
+	false
 }
 
 //Temp buffs for players
@@ -236,6 +238,11 @@ enum struct ArcaneSpell{
 	}
 }
 
+enum struct RecoupStack{
+	float hpPerTick;
+	float expireTime;
+}
+
 Buff playerBuffs[MAXPLAYERS+1][MAXBUFFS+1];
 bool buffChange[MAXPLAYERS+1] = {false,...};
 //oh boy
@@ -244,6 +251,7 @@ Tweak tweaks[MAX_TWEAKS]
 AfterburnStack playerAfterburn[MAXPLAYERS+1][MAX_AFTERBURN_STACKS];
 StringMap weaponFireRateMap;
 ArcaneSpell arcaneMap[MAX_ARCANESPELLS];
+RecoupStack playerRecoup[MAXPLAYERS+1][MAX_RECOUP_STACKS];
 
 //Integers
 int OwnerOffset;

@@ -81,12 +81,15 @@ float GetPlayerHealingMultiplier(client){
 		}
 	}
 	
-	if(TF2Attrib_HookValueFloat(0.0, "regeneration_powerup", client) == 3.0)
+	if(TF2Attrib_HookValueFloat(0.0, "regeneration_powerup", client) == 3.0){
 		buffMagnitude += 0.6;
-	if(TF2Attrib_HookValueFloat(0.0, "vampire_powerup", client) == 2.0)
-		buffMagnitude += 1.33;
-	if(TF2Attrib_HookValueFloat(0.0, "king_powerup", client) == 3.0)
-		debuffMagnitude *= 0.35;
+	}
+	if(TF2Attrib_HookValueFloat(0.0, "vampire_powerup", client) == 2.0){
+		buffMagnitude += 0.25;
+	}
+	if(TF2Attrib_HookValueFloat(0.0, "juggernaut_powerup", client) == 2.0){
+		buffMagnitude += 1.0;
+	}
 	
 	if(hasBuffIndex(client, Buff_HealingBuff)){
 		buffMagnitude += playerBuffs[client][getBuffInArray(client, Buff_HealingBuff)].severity - 1.0;

@@ -330,7 +330,6 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 		if(TF2Attrib_HookValueFloat(0.0, "resistance_powerup", victim) == 1 || TF2Attrib_HookValueFloat(0.0, "resistance_powerup", victim) == 3)
 			damage *= ConsumePierce(0.5, damageForce[0]);
 
-		//Just in case in the future I ever want multiple powerups...
 		if(TF2Attrib_HookValueFloat(0.0, "revenge_powerup", victim) == 1)
 			damage *= ConsumePierce(0.8, damageForce[0]);
 
@@ -341,6 +340,8 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 
 		if(TF2Attrib_HookValueFloat(0.0, "king_powerup", victim) == 1)
 			damage *= ConsumePierce(0.8, damageForce[0]);
+		else if(TF2Attrib_HookValueFloat(0.0, "king_powerup", victim) == 3)
+			damage *= ConsumePierce(0.66, damageForce[0]);
 		
 		if(TF2Attrib_HookValueFloat(0.0, "supernova_powerup", victim) == 1)
 			damage *= ConsumePierce(0.8, damageForce[0]);
@@ -362,6 +363,27 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 
 		if(hasBuffIndex(attacker, Buff_Plagued))
 			damage *= 0.5;
+
+		if(TF2Attrib_HookValueFloat(0.0, "juggernaut_powerup", victim) == 1){
+			if(damage >= GetClientHealth(victim) * 0.5){
+				damage *= ConsumePierce(0.66, damageForce[0]);
+			}
+			RecoupStack newStack;
+			newStack.expireTime = GetGameTime() + 5.0;
+			newStack.hpPerTick = damage*TICKINTERVAL*0.35*0.2;
+			insertRecoup(victim, newStack);
+		}
+		else if(TF2Attrib_HookValueFloat(0.0, "juggernaut_powerup", victim) == 3){
+			float missingHealth = float(TF2Util_GetEntityMaxHealth(victim) - GetClientHealth(victim));
+			if(missingHealth > 0){
+				float damageRatio = damage/float(TF2Util_GetEntityMaxHealth(victim))
+				float defianceHeal = 0.03 * missingHealth;
+				if(damageRatio > 0){
+					defianceHeal *= 1.0 + damageRatio * 0.5;
+				}
+				AddPlayerHealth(victim, RoundToCeil(defianceHeal), 1.0, true, victim);
+			}
+		}
 
 		if(StunShotStun[attacker])
 		{
@@ -466,6 +488,13 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 					}
 				}
 			}
+		}
+
+		if(TF2Attrib_HookValueFloat(0.0, "king_powerup", attacker) == 3){
+			Buff championAffliction;
+			championAffliction.init("Champion's Mark", "You take +3 DPS per hit", Buff_ChampionMark, 1, attacker, 30.0, 3.0*TF2_GetDPSModifiers(attacker, weapon));
+			championAffliction.additiveDamageTaken += 0.2;
+			insertBuff(victim, championAffliction);
 		}
 
 		if(hasBuffIndex(victim, Buff_Bruised) && !(damagetype & DMG_PIERCING) && !(damagetype & DMG_IGNOREHOOK)){
@@ -1042,14 +1071,6 @@ public void preDamageMitigationCalcs(victim, attacker, inflictor, float& damage,
 						}
 					}
 				}
-				if(damage > GetClientHealth(victim) && TF2Attrib_HookValueFloat(0.0, "king_powerup", i) == 3.0){
-					SDKHooks_TakeDamage(i, attacker, attacker, damage, DMG_PREVENT_PHYSICS_FORCE|DMG_ENERGYBEAM|DMG_IGNOREHOOK,_,_,_,false);
-					SDKHooks_TakeDamage(i, attacker, attacker, GetClientHealth(i) * 0.15, DMG_PREVENT_PHYSICS_FORCE|DMG_IGNOREHOOK|DMG_PIERCING);
-					damage *= 0.0;
-					TF2_AddCondition(victim, TFCond_UberchargedCanteen, 0.5, i);
-					TF2_AddCondition(i, TFCond_UberchargedCanteen, 0.1, i);
-					break;
-				}
 			}
 		}
 		if(IsValidClient3(guardian)){
@@ -1145,7 +1166,7 @@ public void preDamageMitigationCalcs(victim, attacker, inflictor, float& damage,
 	//Then multiplicative sources
 	float vampirePowerup = TF2Attrib_HookValueFloat(0.0, "vampire_powerup", attacker);//Vampire Powerup
 	if(vampirePowerup == 1){
-		lifestealFactor += 0.75;
+		lifestealFactor += 0.85;
 		lsCap *= 3.0;
 	}
 	else if(vampirePowerup == 3){
@@ -1213,6 +1234,11 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 		if(jaratedIndex != -1 && IsValidClient3(playerBuffs[victim][jaratedIndex].inflictor)){
 			SDKHooks_TakeDamage(victim,playerBuffs[victim][jaratedIndex].inflictor,playerBuffs[victim][jaratedIndex].inflictor,5.0*playerBuffs[victim][jaratedIndex].priority,DMG_DISSOLVE|DMG_IGNOREHOOK,_,_,_,false);
 		}
+		int championIndex = getBuffInArray(victim, Buff_ChampionMark);
+		if(championIndex != -1 && IsValidClient3(playerBuffs[victim][championIndex].inflictor)){
+			SDKHooks_TakeDamage(victim,playerBuffs[victim][championIndex].inflictor,playerBuffs[victim][championIndex].inflictor,playerBuffs[victim][championIndex].severity,DMG_IGNOREHOOK,_,_,_,false);
+		}
+
 		if(hasBuffIndex(victim, Buff_DragonDance) && playerBuffs[victim][getBuffInArray(victim, Buff_DragonDance)].inflictor == attacker){
 			int temp = getBuffInArray(victim, Buff_DragonDance);
 			if(playerBuffs[victim][temp].priority != weapon){

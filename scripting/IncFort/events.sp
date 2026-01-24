@@ -302,42 +302,15 @@ public MRESReturn OnCondApply(Address pPlayerShared, Handle hParams) {
 	TFCond cond = view_as<TFCond>(DHookGetParam(hParams, 1));
 	if(IsValidClient3(client))
 	{
-		Address agilityPowerup = TF2Attrib_GetByName(client, "agility powerup");		
-		if(agilityPowerup != Address_Null)
-		{
-			float agilityPowerupValue = TF2Attrib_GetValue(agilityPowerup);
-			if(agilityPowerupValue == 1.0)
+		float agilityPowerup = TF2Attrib_HookValueFloat(0.0, "agility_powerup", client);
+		float juggernautPowerup = TF2Attrib_HookValueFloat(0.0, "juggernaut_powerup", client);
+
+		if(agilityPowerup == 1 || juggernautPowerup == 1){
+			switch(cond)
 			{
-				switch(cond)
+				case TFCond_Slowed, TFCond_TeleportedGlow, TFCond_Dazed, TFCond_FreezeInput, TFCond_GrappledToPlayer, TFCond_LostFooting, TFCond_AirCurrent:
 				{
-					case TFCond_Slowed:
-					{
-						return MRES_Supercede;
-					}
-					case TFCond_TeleportedGlow:
-					{
-						return MRES_Supercede;
-					}
-					case TFCond_Dazed:
-					{
-						return MRES_Supercede;
-					}
-					case TFCond_FreezeInput:
-					{
-						return MRES_Supercede;
-					}
-					case TFCond_GrappledToPlayer:
-					{
-						return MRES_Supercede;
-					}
-					case TFCond_LostFooting:
-					{
-						return MRES_Supercede;
-					}
-					case TFCond_AirCurrent:
-					{
-						return MRES_Supercede;
-					}
+					return MRES_Supercede;
 				}
 			}
 		}
@@ -353,18 +326,6 @@ public MRESReturn OnCondApply(Address pPlayerShared, Handle hParams) {
 					{
 						return MRES_Supercede;
 					}
-				}
-			}
-			case TFCond_Slowed, TFCond_Dazed://doesn't work for stuns lol
-			{
-				Address slowResistance = TF2Attrib_GetByName(client, "slow resistance");
-				if(slowResistance != Address_Null)
-				{
-					DHookSetParam(hParams, 2, duration * TF2Attrib_GetValue(slowResistance));
-					return MRES_ChangedHandled;
-				}
-				if(GetAttribute(client, "jarate description", 0.0)){
-					return MRES_Supercede;
 				}
 			}
 			case TFCond_Milked:
@@ -888,7 +849,7 @@ public OnEntityCreated(entity, const char[] classname)
 		RequestFrame(getProjOrigin, reference);
 
 		if(StrEqual(classname, "tf_projectile_energy_ball") || StrEqual(classname, "tf_projectile_energy_ring")
-		|| StrEqual(classname, "tf_projectile_balloffire"))
+		|| StrEqual(classname, "tf_projectile_balloffire") || StrEqual(classname, "tf_projectile_mechanicalarmorb"))
 		{
 			RequestFrame(ProjSpeedDelay, reference);
 			RequestFrame(PrecisionHoming, reference);
@@ -1581,8 +1542,7 @@ public Action OnPlayerRunCmd(int client, int& buttons, int& impulse, float vel[3
 					powerupParticle[client] = GetGameTime()+5.1;
 				}
 			}
-			float revengePowerup = TF2Attrib_HookValueFloat(0.0, "revenge_powerup", client);
-			switch(revengePowerup) {
+			switch(TF2Attrib_HookValueFloat(0.0, "revenge_powerup", client)) {
 				case 1.0: {
 					if(RageActive[client]){
 						CreateParticleEx(client, "utaunt_poweraura_teamcolor_red", 1, _, _, 1.0);
@@ -1594,6 +1554,28 @@ public Action OnPlayerRunCmd(int client, int& buttons, int& impulse, float vel[3
 						CreateParticleEx(client, "utaunt_poweraura_teamcolor_red", 1, _, _, 1.0);
 						powerupParticle[client] = GetGameTime()+1.1;
 					}
+				}
+			}
+			switch(TF2Attrib_HookValueFloat(0.0, "juggernaut_powerup", client)) {
+				case 1.0: {
+					CreateParticleEx(client, "medic_resist_fire", 1, _, _, 5.0);
+					powerupParticle[client] = GetGameTime()+5.1;
+				}
+				case 2.0:{
+					CreateParticleEx(client, "medic_resist_fire", 1);
+					int iTeam = GetClientTeam(client);
+					if(iTeam == 2)
+						CreateParticleEx(client, "medic_megaheal_red", 1, _, _, 5.0);
+					else
+						CreateParticleEx(client, "medic_megaheal_blue", 1, _, _, 5.0);
+
+					powerupParticle[client] = GetGameTime()+5.1;
+				}
+				case 3.0: {
+					CreateParticleEx(client, "medic_resist_fire", 1, _, _, 5.0);
+					CreateParticleEx(client, "utaunt_iconicoutline_orange_sparkles", 1);
+					CreateParticleEx(client, "utaunt_iconicoutline_cyan_sparkles", 1);
+					powerupParticle[client] = GetGameTime()+5.1;
 				}
 			}
 		}
@@ -2282,10 +2264,6 @@ public OnGameFrame()
 				if(RegenActive != Address_Null)
 					RegenPerTick += TF2Attrib_GetValue(RegenActive)*TICKINTERVAL;
 
-				if(hasBuffIndex(client, Buff_HealingBuff)){
-					RegenPerTick += playerBuffs[client][getBuffInArray(client, Buff_HealingBuff)].severity*TICKINTERVAL;
-				}
-
 				Address HealingReductionActive = TF2Attrib_GetByName(client, "health from healers reduced");
 				if(HealingReductionActive != Address_Null)
 					RegenPerTick *= TF2Attrib_GetValue(HealingReductionActive);
@@ -2301,9 +2279,13 @@ public OnGameFrame()
 						}
 					}
 				}
+				if(TF2Attrib_HookValueFloat(0.0, "juggernaut_powerup", client) == 1){
+					for(int stack = 0;stack < MAX_RECOUP_STACKS; stack++){
+						if(playerRecoup[client][stack].expireTime < GetGameTime())
+							continue;
 
-				if(RegenPerTick > 0){
-					RegenPerTick *= GetPlayerHealingMultiplier(client);
+						RegenPerTick += playerRecoup[client][stack].hpPerTick;
+					}
 				}
 				
 				if(TF2Attrib_HookValueFloat(0.0, "revenge_powerup", client) == 3){
@@ -2345,9 +2327,6 @@ public OnGameFrame()
 				
 				if(LSPool[client] > 0){
 					int healthGained = RoundToCeil(TICKINTERVAL * TF2Util_GetEntityMaxHealth(client) * 0.1);
-					if(TF2Attrib_HookValueFloat(0.0, "vampire_powerup", client) == 1){
-						healthGained *= 2;
-					}
 					
 					LSPool[client] -= float(healthGained);
 					AddPlayerHealth(client, healthGained, 1.5);
@@ -3049,13 +3028,10 @@ public Action TF2_CalcIsAttackCritical(int client, int weapon, char[] weaponname
 					GetAngleVectors(fAngles,fwd, NULL_VECTOR, NULL_VECTOR);
 					ScaleVector(fwd, 30.0);
 					AddVectors(fOrigin, fwd, fOrigin);
-					
-					float velocity = 700.0;
-					velocity *= GetAttribute(weapon, "Projectile speed increased");
-					velocity *= GetAttribute(weapon, "Projectile speed decreased");
-					ScaleVector(vBuffer,velocity);
+					ScaleVector(vBuffer,700.0);
 					DispatchSpawn(iEntity);
 					TeleportEntity(iEntity, fOrigin, fAngles, vBuffer);
+					
 					SetEntProp(iEntity, Prop_Send, "m_usSolidFlags", 0x0004);
 					SetEntPropEnt(iEntity, Prop_Send, "m_hLauncher", weapon);
 					SetEntPropEnt(iEntity, Prop_Send, "m_hOriginalLauncher", client);

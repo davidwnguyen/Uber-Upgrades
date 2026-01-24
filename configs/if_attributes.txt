@@ -7255,6 +7255,17 @@
 			"init"		"0.00"
 			"max"		"1.00"
 		}
+		"1709.5"
+		{
+			"name"		"projectile blue highlight effect"
+			"ref"		"projectile blue highlight effect"
+			"display"	"%.0f"
+			"attr_class"	"highlight_projectile"
+			"cost"		"0"
+			"value"		"1.0"
+			"init"		"0.00"
+			"max"		"1.00"
+		}
 		"1710"
 		{
 			"name"		"grenade bounce speed"

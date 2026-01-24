@@ -336,6 +336,7 @@
 		{
 			"preserve_attributes"	"1"
 			"1"				"Converts Firerate to Damage; 1.0"
+			"2"				"projectile blue highlight effect; 1.0"
 		}
 		"329" //Jag
 		{
