@@ -518,8 +518,10 @@ public void OnPluginStart()
 	}
 
 	weaponFireRateMap = CreateTrie();
+	projectilePropertyMap = CreateTrie();
 	PopulateFireRateMap();
 	PopulateArcaneMap();
+	PopulateProjectilePropertyMap();
 }
 public OnPluginEnd()
 {

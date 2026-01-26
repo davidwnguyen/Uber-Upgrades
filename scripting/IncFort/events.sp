@@ -852,64 +852,38 @@ public OnEntityCreated(entity, const char[] classname)
 		entitySpawnTime[entity] = GetGameTime();
 		g_nBounces[entity] = 0;
 		RequestFrame(getProjOrigin, reference);
+		int flags;
+		bool success = projectilePropertyMap.GetValue(classname, flags);
+		if(success){
+			if(flags & PROJ_SPEEDUPGRADE){
+				RequestFrame(ProjSpeedDelay, reference);
+			}
+			if(flags & PROJ_BOUNCE){
+				SDKHook(entity, SDKHook_StartTouch, OnStartTouch);
+			}
+			if(flags & PROJ_GRAVITY){
+				RequestFrame(projGravity, reference);
+				RequestFrame(meteorCollisionCheck, reference);
+			}
+			if(flags & PROJ_NOGRAVITY){
+				RequestFrame(SetZeroGravity, reference);
+			}
+			if(flags & PROJ_FRAGMENT){
+				RequestFrame(FragmentProperties, reference);
+			}
+			if(flags & PROJ_JAR){
+				RequestFrame(ChangeProjModel, reference);
+			}
+			if(flags & PROJ_HOMING){
+				RequestFrame(PrecisionHoming, reference);
+			}
+		}
 
-		if(StrEqual(classname, "tf_projectile_energy_ball") || StrEqual(classname, "tf_projectile_energy_ring")
-		|| StrEqual(classname, "tf_projectile_balloffire") || StrEqual(classname, "tf_projectile_mechanicalarmorb"))
-		{
-			RequestFrame(ProjSpeedDelay, reference);
-			RequestFrame(PrecisionHoming, reference);
-			RequestFrame(FragmentProperties, reference);
-		}
-		else if(StrEqual(classname, "tf_projectile_arrow") || StrEqual(classname, "tf_projectile_healing_bolt"))
-		{
-			RequestFrame(ProjSpeedDelay, reference);
-			RequestFrame(SetZeroGravity, reference);
-			RequestFrame(ExplosiveArrow, reference);
-			RequestFrame(ChangeProjModel, reference);
-			RequestFrame(PrecisionHoming, reference);
-			RequestFrame(FragmentProperties, reference);
-			CreateTimer(6.0, SelfDestruct, reference);
-			CreateTimer(0.1, ArrowThink, reference, TIMER_REPEAT|TIMER_FLAG_NO_MAPCHANGE);
-			SDKHook(entity, SDKHook_StartTouch, OnStartTouch);
-		}
 		if(StrEqual(classname, "tf_projectile_flare"))
 		{
 			DHookEntity(g_DHookFlareExplosion, true, entity);
 		}
-		if(StrEqual(classname, "tf_projectile_syringe") || StrEqual(classname, "tf_projectile_rocket") || StrEqual(classname, "tf_projectile_flare") || StrEqual(classname, "tf_projectile_sentryrocket"))
-		{
-			RequestFrame(instantProjectile, reference);
-			RequestFrame(monoculusBonus, reference);
-			RequestFrame(PrecisionHoming, reference);
-			RequestFrame(meteorCollisionCheck, reference);
-			RequestFrame(FragmentProperties, reference);
-			RequestFrame(projGravity, reference);
-			SDKHook(entity, SDKHook_StartTouch, OnStartTouch);
-		}
-		if(StrEqual(classname, "tf_projectile_stun_ball") || StrEqual(classname, "tf_projectile_ball_ornament") || StrEqual(classname, "tf_projectile_cleaver"))
-		{
-			RequestFrame(projGravity, reference);
-			RequestFrame(ResizeProjectile, reference);
-			RequestFrame(PrecisionHoming, reference);
-			RequestFrame(SetWeaponOwner, reference);
-			RequestFrame(ChangeProjModel, reference);
-			RequestFrame(FragmentProperties, reference);
-			CreateTimer(1.5, SelfDestruct, reference);
-		}
-		if(StrEqual(classname, "tf_projectile_pipe"))
-		{
-			RequestFrame(projGravity, reference);
-			RequestFrame(ChangeProjModel, reference);
-			RequestFrame(PrecisionHoming, reference);
-			RequestFrame(FragmentProperties, reference);
-		}
-		if(StrEqual(classname, "tf_projectile_pipe_remote"))
-		{
-			RequestFrame(projGravity, reference);
-			RequestFrame(ChangeProjModel, reference);
-			RequestFrame(FragmentProperties, reference);
-		}
-		if(StrEqual(classname, "tf_projectile_sentryrocket"))
+		else if(StrEqual(classname, "tf_projectile_sentryrocket"))
 		{
 			CreateTimer(5.0, SelfDestruct, reference);
 			RequestFrame(SentryMultishot, reference);
@@ -917,9 +891,13 @@ public OnEntityCreated(entity, const char[] classname)
 			homingTickRate[entity] = 1;
 			RequestFrame(SentryDelay, reference);
 		}
-		if(StrEqual(classname, "tf_projectile_energy_ring"))
+		else if(StrEqual(classname, "tf_projectile_arrow"))
 		{
-			CreateTimer(1.0, SelfDestruct, reference);
+			RequestFrame(ExplosiveArrow, reference);
+		}
+		else if(StrEqual(classname, "tf_projectile_rocket"))
+		{
+			RequestFrame(monoculusBonus, reference);
 		}
 	}
 	else if(StrContains(classname, "tf_weapon", false) == 0)

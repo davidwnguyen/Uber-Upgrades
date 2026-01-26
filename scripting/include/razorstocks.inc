@@ -30,6 +30,15 @@ Yeah.
 #define UBER_DEFENSE 1 << 4
 #define UBER_SPEED 1 << 5
 
+//Projectile Properties
+#define PROJ_SPEEDUPGRADE (1 << 0) // Determines whether or not a projectile should be boosted by projectile speed attribute.
+#define PROJ_HOMING (1 << 1) // Determines whether or not a projectile can receive homing or aimless.
+#define PROJ_FRAGMENT (1 << 2) // Determines whether or not to add fragment stat carrying.
+#define PROJ_GRAVITY (1 << 3) // Determines whether or not to set gravity properties.
+#define PROJ_JAR (1 << 4) // Determines whether or not projectile can be overriden by jar type.
+#define PROJ_BOUNCE (1 << 5) // Determines whether or not a projectile has bouncing capability.
+#define PROJ_NOGRAVITY (1 << 6) // Determines whether or not a projectile automatically has homing properties.
+
 bool ShouldNotHome[MAXENTITIES][MAXPLAYERS+1];
 bool ShouldNotHit[MAXENTITIES][MAXENTITIES];
 

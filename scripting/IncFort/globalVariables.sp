@@ -252,6 +252,7 @@ AfterburnStack playerAfterburn[MAXPLAYERS+1][MAX_AFTERBURN_STACKS];
 StringMap weaponFireRateMap;
 ArcaneSpell arcaneMap[MAX_ARCANESPELLS];
 RecoupStack playerRecoup[MAXPLAYERS+1][MAX_RECOUP_STACKS];
+StringMap projectilePropertyMap;
 
 //Integers
 int OwnerOffset;

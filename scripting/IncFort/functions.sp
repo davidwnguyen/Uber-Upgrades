@@ -2889,18 +2889,6 @@ public OnAimlessThink(entity){
 	TeleportEntity(entity, NULL_VECTOR, ProjAngle, ProjVector ); 
 }
 
-public SetWeaponOwner(entity){
-	entity = EntRefToEntIndex(entity);
-	if(!IsValidEdict(entity))
-		return;
-	int owner = getOwner(entity);
-	if(!IsValidClient3(owner))
-		return;
-	int CWeapon = GetEntPropEnt(owner, Prop_Send, "m_hActiveWeapon");
-	if(!IsValidWeapon(CWeapon))
-		return;
-	jarateWeapon[entity] = CWeapon;
-}
 public getProjOrigin(entity)
 {
 	entity = EntRefToEntIndex(entity);
@@ -3336,71 +3324,7 @@ setProjGravity(entity, float gravity)
 		SetEntityGravity(entity, gravity);
     } 
 }
-instantProjectile(entity) 
-{
-    if(IsValidEdict(entity)) 
-    { 
-		int client = GetEntPropEnt(entity, Prop_Data, "m_hOwnerEntity");
-		if(IsValidClient(client))
-		{
-			int ClientWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
-			if(IsValidEdict(ClientWeapon))
-			{
-				Address projspeed = TF2Attrib_GetByName(ClientWeapon, "Projectile speed increased");
-				if(projspeed != Address_Null && TF2Attrib_GetValue(projspeed) >= 100.0)
-				{
-					float vAngles[3],vPosition[3],vBuffer[3],vVelocity[3],vel[3];
-					GetEntPropVector(entity, Prop_Data, "m_vecOrigin", vPosition);
-					GetEntPropVector(entity, Prop_Data, "m_angRotation", vAngles);
-					GetEntPropVector(entity, Prop_Data, "m_vecAbsVelocity", vel);
-					GetAngleVectors(vAngles, vBuffer, NULL_VECTOR, NULL_VECTOR);
-					float projspd = 500.0;
-					vVelocity[0] = vBuffer[0]*projspd*GetVectorLength(vel);
-					vVelocity[1] = vBuffer[1]*projspd*GetVectorLength(vel);
-					vVelocity[2] = vBuffer[2]*projspd*GetVectorLength(vel);
-					TeleportEntity(entity, NULL_VECTOR, NULL_VECTOR, vVelocity);
-				}
-			}
-		}
-    } 
-}
-stock void ResizeHitbox(int entity, float fScale)
-{
-	float vecBossMin[3], vecBossMax[3];
-	GetEntPropVector(entity, Prop_Send, "m_vecMins", vecBossMin);
-	GetEntPropVector(entity, Prop_Send, "m_vecMaxs", vecBossMax);
-	
-	float vecScaledBossMin[3], vecScaledBossMax[3];
-	
-	vecScaledBossMin = vecBossMin;
-	vecScaledBossMax = vecBossMax;
-	
-	ScaleVector(vecScaledBossMin, fScale);
-	ScaleVector(vecScaledBossMax, fScale);
-	
-	SetEntPropVector(entity, Prop_Send, "m_vecMins", vecScaledBossMin);
-	SetEntPropVector(entity, Prop_Send, "m_vecMaxs", vecScaledBossMax);
-}
-stock ResizeProjectile(entity)
-{
-	entity = EntRefToEntIndex(entity);
-	if(IsValidEdict(entity))
-	{
-		int client = GetEntPropEnt(entity, Prop_Data, "m_hOwnerEntity");
-		if(IsValidClient3(client))
-		{
-			int CWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
-			if(IsValidEdict(CWeapon))
-			{
-				Address sizeActive = TF2Attrib_GetByName(CWeapon, "SET BONUS: no death from headshots")
-				if(sizeActive != Address_Null)
-				{				
-					ResizeHitbox(entity, TF2Attrib_GetValue(sizeActive));
-				}
-			}
-		}
-	}
-}
+
 stock SentryMultishot(entity)
 {
 	entity = EntRefToEntIndex(entity);
@@ -4510,4 +4434,22 @@ CreateArcaneSpell(const char[] name, const char[] attribute, const float cost, c
 	tempSpell.init(name, attribute, cost, damage, cooldown, callback);
 	arcaneMap[arcaneSpellCount] = tempSpell;
 	arcaneSpellCount++;
+}
+
+PopulateProjectilePropertyMap(){
+	projectilePropertyMap.SetValue("tf_projectile_rocket", PROJ_FRAGMENT|PROJ_BOUNCE|PROJ_GRAVITY|PROJ_HOMING);
+	projectilePropertyMap.SetValue("tf_projectile_arrow", PROJ_BOUNCE|PROJ_NOGRAVITY|PROJ_HOMING|PROJ_SPEEDUPGRADE);
+	projectilePropertyMap.SetValue("tf_projectile_healing_bolt", PROJ_BOUNCE|PROJ_NOGRAVITY|PROJ_HOMING|PROJ_SPEEDUPGRADE);
+	projectilePropertyMap.SetValue("tf_projectile_mechanicalarmorb", PROJ_HOMING|PROJ_SPEEDUPGRADE);
+	projectilePropertyMap.SetValue("tf_projectile_energy_ball", PROJ_HOMING|PROJ_SPEEDUPGRADE);
+	projectilePropertyMap.SetValue("tf_projectile_energy_ring", PROJ_HOMING|PROJ_SPEEDUPGRADE);
+	projectilePropertyMap.SetValue("tf_projectile_balloffire", PROJ_HOMING|PROJ_SPEEDUPGRADE);
+	projectilePropertyMap.SetValue("tf_projectile_flare", PROJ_BOUNCE|PROJ_FRAGMENT|PROJ_GRAVITY);
+	projectilePropertyMap.SetValue("tf_projectile_sentryrocket", PROJ_BOUNCE|PROJ_FRAGMENT|PROJ_HOMING);
+	projectilePropertyMap.SetValue("tf_projectile_syringe", PROJ_HOMING);
+	projectilePropertyMap.SetValue("tf_projectile_stun_ball", PROJ_HOMING|PROJ_GRAVITY);
+	projectilePropertyMap.SetValue("tf_projectile_ball_ornament", PROJ_HOMING|PROJ_GRAVITY);
+	projectilePropertyMap.SetValue("tf_projectile_cleaver", PROJ_HOMING|PROJ_GRAVITY);
+	projectilePropertyMap.SetValue("tf_projectile_pipe", PROJ_HOMING|PROJ_GRAVITY|PROJ_FRAGMENT);
+	projectilePropertyMap.SetValue("tf_projectile_pipe_remote", PROJ_GRAVITY|PROJ_FRAGMENT);
 }
