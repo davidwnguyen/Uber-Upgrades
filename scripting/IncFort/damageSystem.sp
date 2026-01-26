@@ -370,18 +370,21 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 			}
 			RecoupStack newStack;
 			newStack.expireTime = GetGameTime() + 5.0;
-			newStack.hpPerTick = damage*TICKINTERVAL*0.35*0.2;
+			newStack.hpPerTick = damage*TICKINTERVAL*0.5*0.2;
 			insertRecoup(victim, newStack);
 		}
 		else if(TF2Attrib_HookValueFloat(0.0, "juggernaut_powerup", victim) == 3){
 			float missingHealth = float(TF2Util_GetEntityMaxHealth(victim) - GetClientHealth(victim));
 			if(missingHealth > 0){
 				float damageRatio = damage/float(TF2Util_GetEntityMaxHealth(victim))
-				float defianceHeal = 0.03 * missingHealth;
+				float defianceHeal = 0.12 * missingHealth;
 				if(damageRatio > 0){
 					defianceHeal *= 1.0 + damageRatio * 0.5;
 				}
-				AddPlayerHealth(victim, RoundToCeil(defianceHeal), 1.0, true, victim);
+				RecoupStack newStack;
+				newStack.expireTime = GetGameTime() + 5.0;
+				newStack.hpPerTick = defianceHeal*TICKINTERVAL*0.2;
+				insertRecoup(victim, newStack);
 			}
 		}
 

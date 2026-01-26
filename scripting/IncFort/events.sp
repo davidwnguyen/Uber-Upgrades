@@ -219,17 +219,13 @@ public MRESReturn OnMakeBleed(Address pPlayerShared, Handle hParams) {
 public MRESReturn OnPlayerStunned(Address pPlayerShared, Handle hParams){
 	int client = GetEntityFromAddress((DereferencePointer(pPlayerShared + g_offset_CTFPlayerShared_pOuter)));
 	float duration = DHookGetParam(hParams, 1);
-	if(!IsValidClient(client))
+	if(!IsValidClient3(client))
 		return MRES_Ignored;
-
-	if(TF2Attrib_HookValueFloat(0.0, "agility_powerup", client) == 1){
-		return MRES_Supercede;
-	}
 
 	Address slowResistance = TF2Attrib_GetByName(client, "slow resistance");
 	if(slowResistance != Address_Null)
 	{
-		DHookSetParam(hParams, 2, duration * TF2Attrib_GetValue(slowResistance));
+		DHookSetParam(hParams, 1, duration * TF2Attrib_GetValue(slowResistance));
 		return MRES_ChangedHandled;
 	}
 	if(GetAttribute(client, "jarate description", 0.0)){
@@ -2279,13 +2275,11 @@ public OnGameFrame()
 						}
 					}
 				}
-				if(TF2Attrib_HookValueFloat(0.0, "juggernaut_powerup", client) == 1){
-					for(int stack = 0;stack < MAX_RECOUP_STACKS; stack++){
-						if(playerRecoup[client][stack].expireTime < GetGameTime())
-							continue;
+				for(int stack = 0;stack < MAX_RECOUP_STACKS; stack++){
+					if(playerRecoup[client][stack].expireTime < GetGameTime())
+						continue;
 
-						RegenPerTick += playerRecoup[client][stack].hpPerTick;
-					}
+					RegenPerTick += playerRecoup[client][stack].hpPerTick;
 				}
 				
 				if(TF2Attrib_HookValueFloat(0.0, "revenge_powerup", client) == 3){

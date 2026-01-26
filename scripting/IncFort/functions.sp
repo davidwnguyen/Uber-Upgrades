@@ -3357,9 +3357,9 @@ GivePowerupDescription(int client, char[] name, int amount){
 		if(amount == 2){
 			CPrintToChat(client, "{community}Vitality Powerup {default}| {lightcyan}+150 base health. +100%% incoming healing.");
 		}else if(amount == 3){
-			CPrintToChat(client, "{community}Undying Powerup {default}| {lightcyan}Every time you are hit, heal back 3%% of your missing health. This healing is multiplied by +5%% per 10%% health the hit deals.");
+			CPrintToChat(client, "{community}Undying Powerup {default}| {lightcyan}Every time you are hit, heal back 12%% of your missing health over 5s. This healing is multiplied by +5%% per 10%% health the hit deals.");
 		}else{
-			CPrintToChat(client, "{community}Juggernaut Powerup {default}| {lightcyan}35%% of damage taken in healed back over 5s. Gain immunity against all crowd control effects. All incoming hits above 50%% of your current health are reduced by 0.66x.");
+			CPrintToChat(client, "{community}Juggernaut Powerup {default}| {lightcyan}50%% of damage taken in healed back over 5s. Gain immunity against all crowd control effects. All incoming hits above 50%% of your current health are reduced by 0.66x.");
 		}
 	}
 }
