@@ -670,11 +670,20 @@ public MRESReturn OnCurrencySpawn(int entity, Handle hParams)  {
 }
 public Event_PlayerHealed(Handle event, const char[] name, bool:dontBroadcast)
 {
-	//int client = GetClientOfUserId(GetEventInt(event, "patient"));
+	int client = GetClientOfUserId(GetEventInt(event, "patient"));
 	int healer = GetClientOfUserId(GetEventInt(event, "healer"));
 	int amount = GetEventInt(event, "amount");
 	
 	Healed[healer] += float(amount);
+
+	if(hasBuffIndex(client, Buff_Leech)){ //This is post healing modifiers, so this should be after all reductions.
+		AddPlayerHealth(playerBuffs[client][getBuffInArray(client, Buff_Leech)].inflictor, amount);
+	}
+	if(TF2Attrib_HookValueFloat(0.0, "king_powerup", client) == 2.0){
+		if(IsValidClient3(tagTeamTarget[client]) && IsPlayerAlive(tagTeamTarget[client]) && !IsOnDifferentTeams(client, tagTeamTarget[client]) ){
+			AddPlayerHealth(tagTeamTarget[client], amount);
+		}
+	}
 }
 public TF2Spawn_EnterSpawn(int client, int spawn)
 {

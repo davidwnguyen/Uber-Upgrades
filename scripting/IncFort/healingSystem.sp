@@ -7,18 +7,6 @@ public Action TF2_OnTakeHealthGetMultiplier(int client, float &flMultiplier){
 	return Plugin_Continue;
 }
 
-public Action TF2_OnTakeHealthPre(int client, float &flAmount, int &flags){
-	if(hasBuffIndex(client, Buff_Leech)){
-		AddPlayerHealth(playerBuffs[client][getBuffInArray(client, Buff_Leech)].inflictor, RoundToCeil(flAmount*0.334));
-	}
-	if(TF2Attrib_HookValueFloat(0.0, "king_powerup", client) == 2.0){
-		if(IsValidClient3(tagTeamTarget[client]) && IsPlayerAlive(tagTeamTarget[client]) && !IsOnDifferentTeams(client, tagTeamTarget[client]) ){
-			AddPlayerHealth(tagTeamTarget[client], RoundToCeil(flAmount), _, true, client);
-		}
-	}
-	return Plugin_Continue;
-}
-
 float GetPlayerHealingMultiplier(client){
 	float debuffMagnitude = 1.0;
 	float buffMagnitude = 0.0;
@@ -116,7 +104,7 @@ float GetPlayerHealingMultiplier(client){
 }
 void AddPlayerHealth(client, iAdd, float flOverheal = 1.5, bool bEvent = false, healer = -1)
 {
-	if(hasBuffIndex(client, Buff_Leech)){
+	if(!bEvent && hasBuffIndex(client, Buff_Leech)){
 		Buff leechInfo; leechInfo = playerBuffs[client][getBuffInArray(client, Buff_Leech)];
 		//You cant leech off yourself! dumb idiot infinite loop
 		if(client != leechInfo.inflictor){

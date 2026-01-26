@@ -4160,7 +4160,7 @@ void UpdatePlayerMaxHealth(int client){
 	if(current_class[client] == TFClass_Engineer)
 		TF2Attrib_SetByName(client,"building health mult", mult);
 
-	SetEntityHealth(client, RoundFloat(percentageHealth*TF2Util_GetEntityMaxHealth(client)));
+	SetEntityHealth(client, RoundToCeil(percentageHealth*TF2Util_GetEntityMaxHealth(client)));
 }
 
 void applyAfterburn(int victim, int attacker, int weapon, float damage){
