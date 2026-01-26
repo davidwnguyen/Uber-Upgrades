@@ -3041,42 +3041,7 @@ public OnEntityHomingThink(entity)
 	}
 	homingTicks[entity]++;
 }
-CheckGrenadeMines(ref)
-{
-	int entity = EntRefToEntIndex(ref); 
-	if(IsValidEdict(entity) && HasEntProp(entity, Prop_Data, "m_hThrower"))
-    {
-        int client = GetEntPropEnt(entity, Prop_Data, "m_hThrower"); 
-        if (IsValidClient3(client) && IsPlayerAlive(client))
-		{
-			int CWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
-			if(IsValidEdict(CWeapon))
-			{
-				Address minesActive = TF2Attrib_GetByName(CWeapon, "enables aoe heal");
-				if(minesActive != Address_Null && TF2Attrib_GetValue(minesActive) < 0)
-				{
-					float damage = 90.0 * TF2_GetDamageModifiers(client,CWeapon);
-					float radius = 100.8;
-					CreateTimer(0.04,Timer_PlayerGrenadeMines, ref, TIMER_REPEAT);
-					CreateTimer(TF2Attrib_GetValue(minesActive) * -3.0,SelfDestruct, ref);
-					
-					Address blastRadius1 = TF2Attrib_GetByName(CWeapon, "Blast radius increased");
-					Address blastRadius2 = TF2Attrib_GetByName(CWeapon, "Blast radius decreased");
-					if(blastRadius1 != Address_Null){
-						radius *= TF2Attrib_GetValue(blastRadius1)
-					}
-					if(blastRadius2 != Address_Null){
-						radius *= TF2Attrib_GetValue(blastRadius2)
-					}
-					SetEntPropFloat(entity, Prop_Send, "m_DmgRadius", radius);
-					SetEntPropFloat(entity, Prop_Send, "m_flDamage", damage);
-					if(TF2Attrib_GetValue(minesActive) > -4.0)
-						SetEntProp(entity, Prop_Data, "m_nNextThinkTick", -1);
-				}
-			}
-		}
-	}
-}
+
 PrecisionHoming(entity) 
 {
 	entity = EntRefToEntIndex(entity);

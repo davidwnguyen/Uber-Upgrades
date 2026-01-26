@@ -899,7 +899,6 @@ public OnEntityCreated(entity, const char[] classname)
 		if(StrEqual(classname, "tf_projectile_pipe"))
 		{
 			RequestFrame(projGravity, reference);
-			RequestFrame(CheckGrenadeMines, reference);
 			RequestFrame(ChangeProjModel, reference);
 			RequestFrame(PrecisionHoming, reference);
 			RequestFrame(FragmentProperties, reference);
@@ -907,7 +906,6 @@ public OnEntityCreated(entity, const char[] classname)
 		if(StrEqual(classname, "tf_projectile_pipe_remote"))
 		{
 			RequestFrame(projGravity, reference);
-			RequestFrame(CheckGrenadeMines, reference);
 			RequestFrame(ChangeProjModel, reference);
 			RequestFrame(FragmentProperties, reference);
 		}

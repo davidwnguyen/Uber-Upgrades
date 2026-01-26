@@ -2184,49 +2184,6 @@ public Action ElectricBallThink(Handle timer, any ref){
     }
 	return Plugin_Stop;
 }
-public Action:Timer_PlayerGrenadeMines(Handle timer, any:ref) 
-{
-    int entity = EntRefToEntIndex(ref);
-	bool flag = false;
-	if(IsValidEdict(entity))
-	{
-		int client = GetEntPropEnt(entity, Prop_Data, "m_hThrower"); 
-		if(IsValidClient3(client))
-		{
-			float distance = GetEntPropFloat(entity, Prop_Send, "m_DmgRadius")
-			float damage = GetEntPropFloat(entity, Prop_Send, "m_flDamage")
-			float grenadevec[3], targetvec[3];
-			GetEntPropVector(entity, Prop_Data, "m_vecOrigin", grenadevec);
-			for(int i=0; i<=MaxClients; ++i)
-			{
-				if(!IsValidClient3(i)){continue;}
-				GetClientAbsOrigin(i, targetvec);
-				if(!IsClientObserver(i) && GetClientTeam(i) != GetClientTeam(client) && GetVectorDistance(grenadevec, targetvec, true) < distance*distance)
-				{
-					if(!IsPlayerInSpawn(i) && client != i && IsAbleToSee(client,i))
-					{
-						EntityExplosion(client, damage, distance, grenadevec, 0,_,entity);
-						RemoveEntity(entity);
-						flag = true;
-						break;
-					}
-				}
-			}
-		}
-		else
-		{
-			flag = true;
-		}
-	}
-	else
-	{
-		flag = true;
-	}
-	if(flag == true)
-	{
-		KillTimer(timer);
-	}
-}
 
 public Action Timer_SmokeBomb(Handle timer, DataPack pack){
 	pack.Reset();
