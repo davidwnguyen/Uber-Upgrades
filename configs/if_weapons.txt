@@ -98,8 +98,9 @@
 		"menuKatana"							"menuKatana"	//Rivers of Blood & Moonveil
 		"menuFireball"							"menuFireball"	//Chaos Bed Vestige
 		"chargelessRifle"						"chargelessRifle"	//Dragon Sniper Rifle
-		"tf_weapon_pda_engineer_build"			"pda"
-		"smoke_bomb"							"smoke_bomb"
-		"proj_scattergun"						"proj_scattergun"
+		"tf_weapon_pda_engineer_build"			"pda"			//Engineer Building PDA
+		"smoke_bomb"							"smoke_bomb"	//Spy smoke bomb custom weapon
+		"proj_scattergun"						"proj_scattergun" //Projectile scatterguns
+		"proj_singleshot"						"proj_singleshot" //Projectile single shot weapons, eg: smg
 	}
 }

@@ -444,4 +444,26 @@
 		"override projectile type" "49"
 		"attach particle effect"	"246"
 	}
+	"Tangletremor"
+	{
+		"index"			"203"
+		"weapon_class"	"tf_weapon_smg"
+		"weapon_menu"	"proj_singleshot"
+		"class"			"sniper"
+		"description"	"Base Weapon is SMG\nConverts fire rate into damage bonus. Shoots rockets.\nRockets can bounce up to 10 times and are 4x faster.\nEach bounce causes a 2.5 damage explosion.\n2x slower fire rate, but 2x damage dealt."
+		"cost"			"12000.0"
+		"Converts Firerate to Damage"			"1"
+		"Minimal Explosion Particle"			"0"
+		"override projectile type"				"2"
+		"mini rockets"							"1"
+		"projectile blue highlight effect"		"1"
+		"projectile bounce count"				"10"
+		"projectile speed multiplier"			"4"
+		"projectile bounce explosion"			"2.5"
+		"projectile spread angle penalty"		"1"
+		"weapon fire rate"						"2"
+		"weapon damage mult"					"2"
+		"paintkit_proto_def_index"				"403"
+		"set_item_texture_wear"					"0.0"
+	}
 }

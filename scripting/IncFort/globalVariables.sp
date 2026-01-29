@@ -482,10 +482,13 @@ float FreezeBuildup[MAXPLAYERS+1];
 bool isProjectileBoomerang[MAXENTITIES];
 bool isProjectileFireball[MAXENTITIES];
 bool isAimlessProjectile[MAXENTITIES];
+bool isProjectileParented[MAXENTITIES];
 float projectileDamage[MAXENTITIES];
 float entitySpawnTime[MAXENTITIES];
 int projectileFragCount[MAXENTITIES];
 int projectileMaxBounces[MAXENTITIES];
+float projectileExplosionBounceDamage[MAXENTITIES];
+float projectileExplosionBounceRadius[MAXENTITIES];
 /*-- homing shit --*/
 float homingRadius[MAXENTITIES];
 float homingDelay[MAXENTITIES];

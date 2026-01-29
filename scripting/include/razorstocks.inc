@@ -38,6 +38,7 @@ Yeah.
 #define PROJ_JAR (1 << 4) // Determines whether or not projectile can be overriden by jar type.
 #define PROJ_BOUNCE (1 << 5) // Determines whether or not a projectile has bouncing capability.
 #define PROJ_NOGRAVITY (1 << 6) // Determines whether or not a projectile automatically has homing properties.
+#define PROJ_PARENTING (1 << 7) // Determines whether or not a projectile can be parented by other projectiles.
 
 bool ShouldNotHome[MAXENTITIES][MAXPLAYERS+1];
 bool ShouldNotHit[MAXENTITIES][MAXENTITIES];
@@ -213,7 +214,7 @@ stock PushEntity(int entity, int client, float strength=10.0, float heightOverri
         // get positions of both entity and client 
         float pos1[3], pos2[3];
         GetClientAbsOrigin(client, pos1);
-        GetEntPropVector(entity, Prop_Data, "m_vecAbsOrigin", pos2);
+        GetEntPropVector(entity, Prop_Data, "m_vecOrigin", pos2);
 		pos2[2]+=heightOverride;	
 		
         // create push velocity
@@ -369,7 +370,7 @@ stock int GetClosestTarget(entity, owner, bool isFriendly = false, float &Target
 
 	int ClosestTarget = 0;
 	float EntityPosition[3], TargetPosition[3], OwnerPosition[3];
-	GetEntPropVector(entity, Prop_Data, "m_vecAbsOrigin", EntityPosition);
+	GetEntPropVector(entity, Prop_Data, "m_vecOrigin", EntityPosition);
 	GetClientEyePosition(owner, OwnerPosition);
 	for(int i = 1; i <= MaxClients; ++i) 
 	{
@@ -1463,36 +1464,6 @@ stock SetAmmo_Weapon(weapon, newAmmo)
 	int iOffset = GetEntProp(weapon, Prop_Send, "m_iPrimaryAmmoType", 1)*4;
 	int iAmmoTable = FindSendPropInfo("CTFPlayer", "m_iAmmo");
 	SetEntData(owner, iAmmoTable+iOffset, newAmmo, 4, true);
-}
-stock DelayedTeleportEntity(Handle pack)
-{
-	ResetPack(pack);	
-	int entity = EntRefToEntIndex(ReadPackCell(pack));
-	float origin[3]
-	float angles[3] 
-	float velocity[3]
-	for(int i=0;i<3;++i)
-	{
-		origin[i] = ReadPackFloat(pack);
-		angles[i] = ReadPackFloat(pack);
-		velocity[i] = ReadPackFloat(pack);
-	}
-	if (IsValidEdict(entity))
-	{
-		if(GetVectorLength(origin) == 0.0)
-		{
-			TeleportEntity(entity, NULL_VECTOR, angles, velocity);
-		}
-		else if (GetVectorLength(origin) == 0.0 && GetVectorLength(angles) == 0.0)
-		{
-			TeleportEntity(entity, NULL_VECTOR, NULL_VECTOR, velocity);
-		}
-		else if (GetVectorLength(angles) == 0.0)
-		{
-			TeleportEntity(entity, origin, NULL_VECTOR, velocity);
-		}
-	}
-	delete pack
 }
 
 stock bool IsStringBlank(const char[] input)

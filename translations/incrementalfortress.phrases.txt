@@ -1,5 +1,20 @@
 "Phrases"
 {
+	"projectile bounce count"{
+		"en"		"Projectile Bounce Count"
+	}
+	"projectile bounce explosion"{
+		"en"		"Projectile Bounce Causes Explosion"
+	}
+	"mini rockets"{
+		"en"		"Air Strike Rocket Skin"
+	}
+	"Arc Flash"{
+		"en"		"Arc Flash"
+	}
+	"electric orb child"{
+		"en"		"Projectiles have Electric Orb"
+	}
 	"projectile blue highlight effect"{
 		"en"		"Projectiles are Highlighted"
 	}

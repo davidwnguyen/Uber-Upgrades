@@ -148,7 +148,7 @@
 			"gamestage"						"1"
 			"restriction"					"1"
 			"Charge Rate Multiplier"		"-0.6"
-			"Ability : Fireball Volley"		"1"
+			"Ability : Fireball Volley"		"2"
 			"afterburn time increased(N)"	"1.0"
 		}
 		"Fire Infusion"
@@ -417,6 +417,15 @@
 			"restriction"					"1"
 			"vaccinator exhaust attribute"	"1"
 			"medigun attack enemy"			"1"
+		}
+		"Arc Flash"
+		{
+			"gamestage"						"1"
+			"restriction"					"1"
+			"electric orb child"			"1"
+			"blast radius increased"		"3"
+			"chain lightning meter on hit"	"35"
+			"additive piercing damage"		"20"
 		}
 	}
 }

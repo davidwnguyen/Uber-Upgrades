@@ -2160,9 +2160,9 @@ public Action ElectricBallThink(Handle timer, any ref){
     { 
 		int client = getOwner(entity);
 		int weapon = GetEntPropEnt(entity, Prop_Send, "m_hLauncher");
-		float radius = 250.0*GetAttribute(weapon, "Blast radius increased");
+		float radius = 250.0*TF2Attrib_HookValueFloat(1.0, "mult_explosion_radius", weapon);
 		float position[3];
-		GetEntPropVector(entity, Prop_Data, "m_vecOrigin", position);
+		GetEntPropVector(entity, Prop_Data, "m_vecAbsOrigin", position);
 
 		for(int i = 1; i<=MaxClients; ++i){
 			if(!IsValidClient3(i))

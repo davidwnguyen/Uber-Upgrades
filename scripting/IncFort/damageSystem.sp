@@ -1000,9 +1000,9 @@ public void preDamageMitigationCalcs(victim, attacker, inflictor, float& damage,
 		
 	if(IsValidEntity(inflictor) && isAimlessProjectile[inflictor]){
 		float victimPosition[3];
-		GetEntPropVector(victim, Prop_Data, "m_vecAbsOrigin", victimPosition); 
+		GetEntPropVector(victim, Prop_Data, "m_vecOrigin", victimPosition); 
 		float projectilePosition[3];
-		GetEntPropVector(inflictor, Prop_Data, "m_vecAbsOrigin", projectilePosition); 
+		GetEntPropVector(inflictor, Prop_Data, "m_vecOrigin", projectilePosition); 
 		float distance = GetVectorDistance(victimPosition, projectilePosition);
 		if(distance <= 60)
 			distance = 0.0;
@@ -1091,7 +1091,7 @@ public void preDamageMitigationCalcs(victim, attacker, inflictor, float& damage,
 			{
 				damage *= 1.35;
 				float victimPosition[3];
-				GetEntPropVector(victim, Prop_Data, "m_vecAbsOrigin", victimPosition); 
+				GetEntPropVector(victim, Prop_Data, "m_vecOrigin", victimPosition); 
 				
 				EntityExplosion(attacker, damage, 300.0,victimPosition,_,weaponArtParticle[attacker] <= GetGameTime() ? true : false, victim, weaponArtParticle[attacker] <= GetGameTime() ? 0.8 : 0.0, DMG_BLAST|DMG_ENERGYBEAM,weapon, 0.5);
 				hasSupernovaSplashed[attacker] = true;

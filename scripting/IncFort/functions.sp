@@ -2705,7 +2705,6 @@ ChangeProjModel(entity)
 		}
 		if(IsValidClient3(client) && canOverride[client])
 		{
-			canOverride[client] = false;
 			int CWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
 			if(IsValidEdict(CWeapon))
 			{
@@ -2804,40 +2803,7 @@ SentryDelay(entity)
 		}
     } 
 }
-/*TeleportToNearestPlayer(entity)
-{
-	entity = EntRefToEntIndex(entity);
-	if(IsValidEdict(entity))
-	{
-		float EntityPos[3];
-		float distance = 30000.0;
-		float ClientPosition[3];
-		int ClosestClient = -1;
-		GetEntPropVector(entity, Prop_Data, "m_vecAbsOrigin", EntityPos); 
-		for(int client = 1; client <= MaxClients; client++ )
-		{
-			if(IsValidClient(client) && !IsClientObserver(client) && IsPlayerAlive(client))
-			{ 
-				GetClientAbsOrigin(client, ClientPosition);
-				if(TF2_GetPlayerClass(client) == TFClass_Scout)
-				{
-					ClosestClient = client;
-					break;
-				}
-				float CalcDistance = GetVectorDistance(EntityPos,ClientPosition); 
-				if(distance > CalcDistance)
-				{
-					distance = CalcDistance;
-					ClosestClient = client;
-				}
-			}
-		}
-		if(IsValidClient(ClosestClient))
-		{
-			TeleportEntity(entity, ClientPosition, NULL_VECTOR, NULL_VECTOR);
-		}
-	}
-}*/
+
 public int getClientParticleStatus(int array[MAXPLAYERS+1], int client){
 	bool particleEnabler = false;
 	if(AreClientCookiesCached(client)){
@@ -2889,7 +2855,7 @@ public OnAimlessThink(entity){
 	TeleportEntity(entity, NULL_VECTOR, ProjAngle, ProjVector ); 
 }
 
-public getProjOrigin(entity)
+public onProjectileSpawned(entity)
 {
 	entity = EntRefToEntIndex(entity);
 	if(IsValidEdict(entity)){
@@ -2906,6 +2872,9 @@ public getProjOrigin(entity)
 		if(!IsValidWeapon(CWeapon))
 			return;
 
+		if(!canOverride[owner])
+			return;
+
 		if(TF2Attrib_HookValueInt(0, "sunburst_projectile", CWeapon)){
 			CreateParticle(entity, "raygun_projectile_red_crit", true, _, 10.0, _, true);
 			CreateParticle(entity, "raygun_projectile_red", true, _, 10.0, _, true);
@@ -2914,6 +2883,10 @@ public getProjOrigin(entity)
 			CreateParticle(entity, "raygun_projectile_blue_crit", true, _, 10.0, _, true);
 			CreateParticle(entity, "raygun_projectile_blue", true, _, 10.0, _, true);
 		}
+		
+		projectileMaxBounces[entity] = TF2Attrib_HookValueInt(0, "projectile_bounce_count", CWeapon);
+		projectileExplosionBounceDamage[entity] = TF2_GetDamageModifiers(owner, CWeapon)*TF2Attrib_HookValueFloat(0.0, "projectile_bounce_explosion", CWeapon);
+		projectileExplosionBounceRadius[entity] = 120.0*TF2Attrib_HookValueFloat(1.0, "mult_explosion_radius", CWeapon);
 
 		float constantTime = TF2Attrib_HookValueFloat(0.0, "constant_time_projectile", CWeapon);
 		if(constantTime){
@@ -2939,6 +2912,49 @@ public getProjOrigin(entity)
 		}
 	}
 }
+
+void ProjParenting(int ref){
+	int entity = EntRefToEntIndex(ref);
+	if(IsValidEntity(entity)){
+		int client = getOwner(entity);
+		if(!IsValidClient3(client))
+			return;
+
+		int CWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
+		if(!IsValidWeapon(CWeapon))
+			return;
+
+		if(!isProjectileParented[entity]){
+			if(TF2Attrib_HookValueInt(0, "electric_orb_child", CWeapon)){
+				int iEntity = CreateEntityByName("tf_projectile_mechanicalarmorb");
+				if (IsValidEdict(iEntity)) 
+				{
+					float fwd[3], fOrigin[3], fAngles[3];
+					SetEntPropEnt(iEntity, Prop_Send, "m_hOwnerEntity", client);
+					SetEntProp(iEntity, Prop_Send, "m_iTeamNum", GetClientTeam(client));
+					GetClientEyePosition(client, fOrigin);
+					GetClientEyeAngles(client, fAngles);
+					GetAngleVectors(fAngles, fwd, NULL_VECTOR, NULL_VECTOR);
+					ScaleVector(fwd, 30.0);
+					AddVectors(fOrigin, fwd, fOrigin);
+					DispatchSpawn(iEntity);
+					TeleportEntity(iEntity, fOrigin, fAngles);
+					SetVariantString("!activator");
+					AcceptEntityInput(iEntity, "SetParent", entity);
+					SetEntityMoveType(iEntity, MOVETYPE_NOCLIP)
+					
+					SetEntProp(iEntity, Prop_Send, "m_usSolidFlags", 0x0004);
+					SetEntPropEnt(iEntity, Prop_Send, "m_hLauncher", CWeapon);
+					SetEntPropEnt(iEntity, Prop_Send, "m_hOriginalLauncher", client);
+					CreateTimer(0.1, ElectricBallThink, EntIndexToEntRef(iEntity), TIMER_REPEAT|TIMER_FLAG_NO_MAPCHANGE);
+					EmitSoundToAll(SOUND_COWMANGLER_SHOT, 0, client, SNDLEVEL_NORMAL, _, 1.0, _, _, fOrigin);
+					isProjectileParented[iEntity] = true;
+				}
+			}
+		}
+	}
+}
+
 public OnFireballThink(entity)
 {
 	if(IsValidEdict(entity))
@@ -2992,7 +3008,7 @@ public OnEntityHomingThink(entity)
 			GetEntPropVector(entity, Prop_Data, "m_vecAbsVelocity", InitialSpeed ); 
 		NewSpeed = GetVectorLength(InitialSpeed );
 		
-		GetEntPropVector(entity, Prop_Data, "m_vecAbsOrigin", ProjLocation ); 
+		GetEntPropVector(entity, Prop_Data, "m_vecOrigin", ProjLocation ); 
 		switch(homingAimStyle[entity])
 		{
 			case HomingStyle_Headshot:
@@ -4335,6 +4351,18 @@ ExplosionHookEffects(entity){
 	}
 }
 
+finishProjectileSpawning(int ref){
+	int entity = EntRefToEntIndex(ref);
+	if(!IsValidEntity(entity))
+		return;
+
+	int owner = getOwner(entity);
+	if(!IsValidClient3(owner))
+		return;
+
+	canOverride[owner] = false;
+}
+
 PopulateFireRateMap(){
 	weaponFireRateMap.SetValue("tf_weapon_scattergun", 1.6);
 	weaponFireRateMap.SetValue("tf_weapon_soda_popper", 1.6);
@@ -4437,13 +4465,13 @@ CreateArcaneSpell(const char[] name, const char[] attribute, const float cost, c
 }
 
 PopulateProjectilePropertyMap(){
-	projectilePropertyMap.SetValue("tf_projectile_rocket", PROJ_FRAGMENT|PROJ_BOUNCE|PROJ_GRAVITY|PROJ_HOMING);
-	projectilePropertyMap.SetValue("tf_projectile_arrow", PROJ_BOUNCE|PROJ_NOGRAVITY|PROJ_HOMING|PROJ_SPEEDUPGRADE);
+	projectilePropertyMap.SetValue("tf_projectile_rocket", PROJ_FRAGMENT|PROJ_BOUNCE|PROJ_GRAVITY|PROJ_HOMING|PROJ_PARENTING);
+	projectilePropertyMap.SetValue("tf_projectile_arrow", PROJ_BOUNCE|PROJ_NOGRAVITY|PROJ_HOMING|PROJ_SPEEDUPGRADE|PROJ_JAR);
 	projectilePropertyMap.SetValue("tf_projectile_healing_bolt", PROJ_BOUNCE|PROJ_NOGRAVITY|PROJ_HOMING|PROJ_SPEEDUPGRADE);
 	projectilePropertyMap.SetValue("tf_projectile_mechanicalarmorb", PROJ_HOMING|PROJ_SPEEDUPGRADE);
 	projectilePropertyMap.SetValue("tf_projectile_energy_ball", PROJ_HOMING|PROJ_SPEEDUPGRADE);
 	projectilePropertyMap.SetValue("tf_projectile_energy_ring", PROJ_HOMING|PROJ_SPEEDUPGRADE);
-	projectilePropertyMap.SetValue("tf_projectile_balloffire", PROJ_HOMING|PROJ_SPEEDUPGRADE);
+	projectilePropertyMap.SetValue("tf_projectile_balloffire", PROJ_HOMING|PROJ_SPEEDUPGRADE|PROJ_PARENTING);
 	projectilePropertyMap.SetValue("tf_projectile_flare", PROJ_BOUNCE|PROJ_FRAGMENT|PROJ_GRAVITY);
 	projectilePropertyMap.SetValue("tf_projectile_sentryrocket", PROJ_BOUNCE|PROJ_FRAGMENT|PROJ_HOMING);
 	projectilePropertyMap.SetValue("tf_projectile_syringe", PROJ_HOMING);

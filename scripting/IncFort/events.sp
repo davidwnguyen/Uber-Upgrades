@@ -851,7 +851,7 @@ public OnEntityCreated(entity, const char[] classname)
 	{
 		entitySpawnTime[entity] = GetGameTime();
 		g_nBounces[entity] = 0;
-		RequestFrame(getProjOrigin, reference);
+		RequestFrame(onProjectileSpawned, reference);
 		int flags;
 		bool success = projectilePropertyMap.GetValue(classname, flags);
 		if(success){
@@ -877,6 +877,9 @@ public OnEntityCreated(entity, const char[] classname)
 			if(flags & PROJ_HOMING){
 				RequestFrame(PrecisionHoming, reference);
 			}
+			if(flags & PROJ_PARENTING){
+				RequestFrame(ProjParenting, reference);
+			}
 		}
 
 		if(StrEqual(classname, "tf_projectile_flare"))
@@ -899,6 +902,7 @@ public OnEntityCreated(entity, const char[] classname)
 		{
 			RequestFrame(monoculusBonus, reference);
 		}
+		RequestFrame(finishProjectileSpawning, reference);
 	}
 	else if(StrContains(classname, "tf_weapon", false) == 0)
 	{
@@ -942,6 +946,9 @@ public OnEntityDestroyed(entity)
 	locusMinesProjCount[entity] = 0;
 	projectileMaxBounces[entity] = 0;
 	projectileAttackCounter[entity] = -1;
+	isProjectileParented[entity] = false;
+	projectileExplosionBounceDamage[entity] = 0.0;
+	projectileExplosionBounceRadius[entity] = 0.0;
 
 	//isProjectileSlash[entity][0] = 0.0;
 	//isProjectileSlash[entity][1] = 0.0;
@@ -968,7 +975,7 @@ public OnEntityDestroyed(entity)
 		if(isPrimed[entity]){
 			isPrimed[entity] = false;
 			float vec[3];
-			GetEntPropVector(entity, Prop_Data, "m_vecOrigin", vec);
+			GetEntPropVector(entity, Prop_Data, "m_vecAbsOrigin", vec);
 			vec[2] += 15.0;
 
 			int owner = GetEntPropEnt(entity, Prop_Send, "m_hBuilder");
