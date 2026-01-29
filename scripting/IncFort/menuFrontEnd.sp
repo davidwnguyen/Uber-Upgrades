@@ -421,13 +421,13 @@ public	Menu_TweakUpgrades_slot(client, arg, page)
 		for (i = 0; i < currentupgrades_number[client][s]; ++i)
 		{
 			int u = currentupgrades_idx[client][s][i]
-			Format(buf, sizeof(buf), "%T", upgrades[u].name, client)
 			if (upgrades[u].cost < -0.1)
 			{
 				int nb_time_upgraded = RoundToNearest((upgrades[u].i_val - currentupgrades_val[client][s][i]) / upgrades[u].ratio);
 				float up_cost = float(upgrades[u].cost*nb_time_upgraded);
 				if(up_cost > 200.0)
 				{
+					Format(buf, sizeof(buf), "%T", upgrades[u].name, client);
 					Format(fstr, sizeof(fstr), "[%s] :\n  %10.3f\n%.0f", buf, currentupgrades_val[client][s][i],up_cost)
 					AddMenuItem(menu, "yep", fstr);
 					downsideCount++;
