@@ -253,6 +253,7 @@ StringMap weaponFireRateMap;
 ArcaneSpell arcaneMap[MAX_ARCANESPELLS];
 RecoupStack playerRecoup[MAXPLAYERS+1][MAX_RECOUP_STACKS];
 StringMap projectilePropertyMap;
+StringMap projectileLifespanMap;
 
 //Integers
 int OwnerOffset;

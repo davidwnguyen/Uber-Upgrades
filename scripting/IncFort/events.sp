@@ -881,6 +881,12 @@ public OnEntityCreated(entity, const char[] classname)
 				RequestFrame(ProjParenting, reference);
 			}
 		}
+		
+		float lifespan;
+		success = projectileLifespanMap.GetValue(classname, lifespan);
+		if(success){
+			CreateTimer(lifespan, SelfDestruct, reference);
+		}
 
 		if(StrEqual(classname, "tf_projectile_flare"))
 		{
@@ -888,7 +894,6 @@ public OnEntityCreated(entity, const char[] classname)
 		}
 		else if(StrEqual(classname, "tf_projectile_sentryrocket"))
 		{
-			CreateTimer(5.0, SelfDestruct, reference);
 			RequestFrame(SentryMultishot, reference);
 			homingRadius[entity] = 900.0;
 			homingTickRate[entity] = 1;

@@ -4481,3 +4481,11 @@ PopulateProjectilePropertyMap(){
 	projectilePropertyMap.SetValue("tf_projectile_pipe", PROJ_HOMING|PROJ_GRAVITY|PROJ_FRAGMENT);
 	projectilePropertyMap.SetValue("tf_projectile_pipe_remote", PROJ_GRAVITY|PROJ_FRAGMENT);
 }
+
+PopulateProjectileLifespanMap(){
+	projectileLifespanMap.SetValue("tf_projectile_arrow", 8.0);
+	projectileLifespanMap.SetValue("tf_projectile_healing_bolt", 8.0);
+	projectileLifespanMap.SetValue("tf_projectile_sentryrocket", 5.0);
+	projectileLifespanMap.SetValue("tf_projectile_stun_ball", 2.0);
+	projectileLifespanMap.SetValue("tf_projectile_ball_ornament", 2.0);
+}
