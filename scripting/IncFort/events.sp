@@ -499,53 +499,90 @@ public MRESReturn OnAirblast(int weapon, Handle hParams){
 	if(IsValidWeapon(weapon)){
 		int owner = getOwner(weapon);
 
-		float AirblastDamage = 25.0 * GetAttribute(weapon, "airblast pushback scale") * TF2_GetDamageModifiers(owner, weapon);
-		float TotalRange = 600.0 * GetAttribute(weapon, "deflection size multiplier");
-		float ConeRadius = 40.0 * GetAttribute(weapon, "melee bounds multiplier");
+		if(TF2Attrib_HookValueFloat(0.0, "disable_custom_airblast", weapon) == 0.0){
+			float AirblastDamage = 25.0 * GetAttribute(weapon, "airblast pushback scale") * TF2_GetDamageModifiers(owner, weapon);
+			float TotalRange = 600.0 * GetAttribute(weapon, "deflection size multiplier");
+			float ConeRadius = 40.0 * GetAttribute(weapon, "melee bounds multiplier");
 
-		Buff airblasted;
-		airblasted.init("Airblasted", "", Buff_Airblasted, 1, owner, 4.0 * GetAttribute(weapon, "melee range multiplier"));
-		airblasted.multiplicativeMoveSpeedMult = 0.7 / GetAttribute(weapon, "airblast vertical pushback scale");
-		Buff dragonDance;
-		dragonDance.init("Combo Starter", "", Buff_DragonDance, weapon, owner, 2.0);
-		for(int i=1; i<=MaxClients; ++i)
-		{
-			if(IsValidClient3(i) && IsClientInGame(i) && IsPlayerAlive(i))
+			Buff airblasted;
+			airblasted.init("Airblasted", "", Buff_Airblasted, 1, owner, 4.0 * GetAttribute(weapon, "melee range multiplier"));
+			airblasted.multiplicativeMoveSpeedMult = 0.7 / GetAttribute(weapon, "airblast vertical pushback scale");
+			Buff dragonDance;
+			dragonDance.init("Combo Starter", "", Buff_DragonDance, weapon, owner, 2.0);
+			for(int i=1; i<=MaxClients; ++i)
 			{
-				if(IsTargetInSightRange(owner, i, ConeRadius, TotalRange, true, false))
+				if(IsValidClient3(i) && IsClientInGame(i) && IsPlayerAlive(i))
 				{
-					if(IsAbleToSee(owner,i, false) == true)
+					if(IsTargetInSightRange(owner, i, ConeRadius, TotalRange, true, false))
 					{
-						if(GetClientTeam(i) != GetClientTeam(owner))
+						if(IsAbleToSee(owner,i, false) == true)
 						{
-							SDKHooks_TakeDamage(i,owner,owner,AirblastDamage,DMG_BLAST|DMG_IGNOREHOOK,weapon,_,_,false);
-							
-							float dDanceAttr = TF2Attrib_HookValueFloat(0.0, "airblast_flings_enemy", weapon);
-							if(dDanceAttr){
-								float flingVelocity[3];
-								flingVelocity[2] = dDanceAttr;
-								TeleportEntity(i, NULL_VECTOR, NULL_VECTOR, flingVelocity);
-								insertBuff(i, dragonDance);
-							}
+							if(GetClientTeam(i) != GetClientTeam(owner))
+							{
+								SDKHooks_TakeDamage(i,owner,owner,AirblastDamage,DMG_BLAST|DMG_IGNOREHOOK,weapon,_,_,false);
+								
+								float dDanceAttr = TF2Attrib_HookValueFloat(0.0, "airblast_flings_enemy", weapon);
+								if(dDanceAttr){
+									float flingVelocity[3];
+									flingVelocity[2] = dDanceAttr;
+									TeleportEntity(i, NULL_VECTOR, NULL_VECTOR, flingVelocity);
+									insertBuff(i, dragonDance);
+								}
 
-							if(TF2Attrib_HookValueFloat(0.0, "agility_powerup", owner) == 1.0)
-								continue;
-							
-							if(TF2_IsPlayerInCondition(i,TFCond_MegaHeal))
-								continue;
-							
-							insertBuff(i, airblasted);
-						}
-						else
-						{
-							TF2_AddCondition(i, TFCond_AfterburnImmune, 6.0, owner);
-							TF2_AddCondition(i, TFCond_SpeedBuffAlly, 6.0);
-							TF2_AddCondition(i, TFCond_DodgeChance, 0.2);
+								if(TF2Attrib_HookValueFloat(0.0, "agility_powerup", owner) == 1.0)
+									continue;
+								
+								if(TF2_IsPlayerInCondition(i,TFCond_MegaHeal))
+									continue;
+								
+								insertBuff(i, airblasted);
+							}
+							else
+							{
+								TF2_AddCondition(i, TFCond_AfterburnImmune, 6.0, owner);
+								TF2_AddCondition(i, TFCond_SpeedBuffAlly, 6.0);
+								TF2_AddCondition(i, TFCond_DodgeChance, 0.2);
+							}
 						}
 					}
 				}
 			}
 		}
+
+		if(TF2Attrib_HookValueFloat(0.0, "airblast_fires_arrows", weapon)){
+			int iEntity = CreateEntityByName("tf_projectile_arrow");
+			if (IsValidEntity(iEntity)){
+				float fAngles[3],fOrigin[3], vBuffer[3],fVelocity[3],fwd[3],right[3];
+				int iTeam = GetClientTeam(owner);
+				SetEntPropEnt(iEntity, Prop_Send, "m_hOwnerEntity", owner);
+
+				SetEntProp(iEntity, Prop_Send, "m_iTeamNum", iTeam, 1);
+				SetEntProp(iEntity, Prop_Send, "m_nSkin", (iTeam-2));
+				SetEntPropEnt(iEntity, Prop_Data, "m_hOwnerEntity", owner);
+				SetEntPropEnt(iEntity, Prop_Send, "m_hLauncher", owner);
+				GetClientEyePosition(owner, fOrigin);
+				GetClientEyeAngles(owner,fAngles);
+				GetAngleVectors(fAngles, vBuffer, NULL_VECTOR, NULL_VECTOR);
+				GetAngleVectors(fAngles,fwd, right, NULL_VECTOR);
+
+				ScaleVector(fwd, 30.0);
+				AddVectors(fOrigin, fwd, fOrigin);
+
+				fVelocity[0] = vBuffer[0]*2500.0;
+				fVelocity[1] = vBuffer[1]*2500.0;
+				fVelocity[2] = vBuffer[2]*2500.0;
+				SetEntPropVector(iEntity, Prop_Send, "m_vInitialVelocity", fVelocity );
+				TeleportEntity(iEntity, fOrigin, fAngles, fVelocity);
+				DispatchSpawn(iEntity);
+				SDKHook(iEntity, SDKHook_StartTouch, OnStartTouchAirblastArrow);
+				SDKHook(iEntity, SDKHook_Touch, AddArrowCollisionFunction);
+				projectileDamage[iEntity] = 50.0 * TF2_GetDamageModifiers(owner, weapon);
+				int color[4]={255, 200, 0,225};
+				TE_SetupBeamFollow(iEntity,Laser,0,0.2,3.0,3.0,1,color);
+				TE_SendToAll();
+			}
+		}
+
 		SetEntPropFloat(weapon, Prop_Send, "m_flNextPrimaryAttack", GetGameTime());
 	}
 	return MRES_Ignored;

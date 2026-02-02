@@ -108,9 +108,6 @@ public Action:OnStartTouchSunlightSpear(entity, other)
 }
 public Action:OnSunlightSpearCollision(entity, client)
 {
-	char strName[32];
-	GetEntityClassname(client, strName, 32);
-
 	bool dealtDamage = false;
 
 	if(IsValidForDamage(client))
@@ -153,11 +150,6 @@ public Action:BlackskyEyeCollision(entity, client)
 		
 	if(owner == entity || entity == client)
 		return Plugin_Continue;
-		
-	char strName[32];
-	GetEntityClassname(client, strName, 32);
-	if(StrEqual(strName,"tf_projectile_arrow",false))
-		return Plugin_Continue;
 
 	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", owner)) + 1;
 
@@ -193,11 +185,6 @@ public Action:CallBeyondCollision(entity, client)
 	if(owner == entity || entity == client)
 		return Plugin_Continue;
 		
-	char strName[32];
-	GetEntityClassname(client, strName, 32);
-	if(StrEqual(strName,"tf_projectile_arrow",false))
-		return Plugin_Continue;
-		
 	float projvec[3];
 	int spellLevel = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arcane_spell_level", owner)) + 1;
 	float scaling[] = {0.0, 90.0, 125.0, 200.0};
@@ -221,11 +208,6 @@ public Action:ProjectedHealingCollision(entity, client)
 		return Plugin_Continue;
 	
 	if(owner == entity || entity == client)
-		return Plugin_Continue;
-		
-	char strName[32];
-	GetEntityClassname(client, strName, 32);
-	if(StrEqual(strName,"tf_projectile_arrow",false))
 		return Plugin_Continue;
 		
 	float projvec[3];
@@ -356,26 +338,17 @@ public Action:OnStartTouchSentryBolt(entity, other)
 public Action:OnCollisionSentryBolt(entity, client)
 {
 	int owner = GetEntPropEnt(entity, Prop_Send, "m_hOwnerEntity")
-
-	char strName[32];
-	GetEntityClassname(client, strName, 32)
-	char strName1[32];
-	GetEntityClassname(entity, strName1, 32)
-
 	if(IsValidForDamage(client))
 	{
 		if(IsOnDifferentTeams(owner,client)){
-			if(!StrEqual(strName, strName1))
+			int sentry = EntRefToEntIndex(jarateWeapon[entity]);
+			if(IsValidEntity(sentry))
 			{
-				int sentry = EntRefToEntIndex(jarateWeapon[entity]);
-				if(IsValidEntity(sentry))
-				{
-					SDKHooks_TakeDamage(client, entity, owner, projectileDamage[entity], DMG_BULLET|DMG_IGNOREHOOK, _, _,_,false);
-					if(IsValidClient3(client)){
-						ShouldNotHome[entity][client] = true;
-						BleedBuildup[client] += 4.0;
-						checkBleed(client, owner, _, projectileDamage[entity]*3.0);
-					}
+				SDKHooks_TakeDamage(client, entity, owner, projectileDamage[entity], DMG_BULLET|DMG_IGNOREHOOK, _, _,_,false);
+				if(IsValidClient3(client)){
+					ShouldNotHome[entity][client] = true;
+					BleedBuildup[client] += 4.0;
+					checkBleed(client, owner, _, projectileDamage[entity]*3.0);
 				}
 			}
 		}
@@ -1152,5 +1125,28 @@ public Action:OnCollisionEtherealKnife(entity, client)
 	AddVectors(origin,vBuffer,origin);
 	TeleportEntity(entity, origin,NULL_VECTOR,NULL_VECTOR);
 	RequestFrame(fixPiercingVelocity,EntIndexToEntRef(entity))
+	return Plugin_Stop;
+}
+
+public Action:OnStartTouchAirblastArrow(entity, other)
+{
+	SDKHook(entity, SDKHook_Touch, OnAirblastArrowCollision);
+	return Plugin_Handled;
+}
+public Action:OnAirblastArrowCollision(entity, client)
+{
+	if(IsValidForDamage(client))
+	{
+		if(HasEntProp(entity, Prop_Send, "m_hOwnerEntity"))
+		{
+			int owner = GetEntPropEnt(entity, Prop_Send, "m_hOwnerEntity")
+			if(IsValidClient3(owner) && IsOnDifferentTeams(owner,client))
+			{
+				SDKHooks_TakeDamage(client, entity, owner, projectileDamage[entity], DMG_BULLET|DMG_IGNOREHOOK,_,_,_,false);
+			}
+		}
+	}
+
+	RemoveEntity(entity);
 	return Plugin_Stop;
 }

@@ -1219,6 +1219,10 @@ DisplayItemChange(client,itemidx)
 			ChangeString = "The Market Gardener | 3x slower fire rate, gains +0.05% damage bonus per downward velocity in hammer units/s, splashes in a 300HU radius on hit. Converts fire rate to damage bonus.";
 		}
 		//Pyro Primary
+		case 40,1146:
+		{
+			ChangeString = "The Backburner | Airblast damage and slowdown is disabled and instead fires an arrow that deals 50 base damage.";
+		}
 		case 215:
 		{
 			ChangeString = "The Degreaser | You deal 20% less damage. Airblast has 25% more radius and 1.4x damage.";

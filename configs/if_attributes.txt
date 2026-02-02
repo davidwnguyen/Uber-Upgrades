@@ -7596,6 +7596,28 @@
 			"init"		"0.00"
 			"max"		"1.0"
 		}
+		"1740"
+		{
+			"name"		"airblast fires arrows"
+			"ref"		"airblast fires arrows"
+			"attr_class"	"airblast_fires_arrows"
+			"display"		"%.0f"
+			"cost"		"1"
+			"value"		"1.0"
+			"init"		"0.00"
+			"max"		"1.0"
+		}
+		"1741"
+		{
+			"name"		"disable custom airblast"
+			"ref"		"disable custom airblast"
+			"attr_class"	"disable_custom_airblast"
+			"display"		"%.0f"
+			"cost"		"1"
+			"value"		"1.0"
+			"init"		"0.00"
+			"max"		"1.0"
+		}
 		//Filler
 		"1900.0"
 		{

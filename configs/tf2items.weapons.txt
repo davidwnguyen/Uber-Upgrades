@@ -494,5 +494,11 @@
 			"1"				"sanguisuge;0"
 			"2"				"lifesteal ability;0.35"
 		}
+		"40,1146"//Backburner
+		{
+			"preserve_attributes"	"1"
+			"1"				"airblast fires arrows;1"
+			"2"				"disable custom airblast;1"
+		}
 	}
 }

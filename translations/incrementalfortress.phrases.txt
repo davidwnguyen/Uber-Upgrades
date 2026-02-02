@@ -1,5 +1,11 @@
 "Phrases"
 {
+	"airblast fires arrows"{
+		"en"		"Airblast Fires Arrows"
+	}
+	"disable custom airblast"{
+		"en"		"Disables Airblast Extras"
+	}
 	"projectile bounce count"{
 		"en"		"Projectile Bounce Count"
 	}
