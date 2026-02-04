@@ -3294,7 +3294,7 @@ GivePowerupDescription(int client, char[] name, int amount){
 		if(amount == 2){
 			CPrintToChat(client, "{community}Tag-Team Powerup {default}| {lightcyan}Crouch+Mouse3 to link yourself to a teammate:\n Giving both of you 1.2x damage. Your healing is shared to your patient and attacking an enemy makes the patient deal 1.75x vs that victim.");
 		}else if(amount == 3){
-			CPrintToChat(client, "{community}Champion Powerup {default}| {lightcyan}Hitting enemies makes them take 1.2x incoming damage and makes them take 3 DPS (from your weapon) every time they are hit for 30s.\n0.66x incoming damage.");
+			CPrintToChat(client, "{community}Champion Powerup {default}| {lightcyan}Hitting enemies makes them deal 0.66x damage against targets that aren't you, and take an additional +20 base DPS.\n0.66x incoming damage.");
 		}else{
 			CPrintToChat(client, "{community}King Powerup {default}| {lightcyan}+33%% reload and fire rate for nearby teammates and you. 0.8x incoming damage. 1.5x uber and heal rate. +20%% damage dealt.");
 		}
@@ -3838,7 +3838,7 @@ stock float TF2_GetDamageModifiers(client,weapon,bool status=true, bool bullets_
 {
 	if(IsValidClient3(client))
     {
-		if(IsValidEdict(weapon))
+		if(IsValidWeapon(weapon))
 		{
 			//Normal Attributes
 			float dpsMult = 1.0;

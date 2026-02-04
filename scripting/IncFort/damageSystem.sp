@@ -363,6 +363,11 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 
 		if(hasBuffIndex(attacker, Buff_Plagued))
 			damage *= 0.5;
+		
+		int championIndex = getBuffInArray(attacker, Buff_ChampionMark);
+		if(championIndex != -1 && playerBuffs[attacker][championIndex].inflictor != victim){
+			damage *= ConsumePierce(0.66, damageForce[0]);
+		}
 
 		if(TF2Attrib_HookValueFloat(0.0, "juggernaut_powerup", victim) == 1){
 			if(damage >= GetClientHealth(victim) * 0.5){
@@ -491,13 +496,12 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 					}
 				}
 			}
-		}
 
-		if(TF2Attrib_HookValueFloat(0.0, "king_powerup", attacker) == 3){
-			Buff championAffliction;
-			championAffliction.init("Champion's Mark", "You take +3 DPS per hit", Buff_ChampionMark, 1, attacker, 30.0, 3.0*TF2_GetDPSModifiers(attacker, weapon));
-			championAffliction.additiveDamageTaken += 0.2;
-			insertBuff(victim, championAffliction);
+			if(TF2Attrib_HookValueFloat(0.0, "king_powerup", attacker) == 3){
+				Buff championAffliction;
+				championAffliction.init("Champion's Mark", "You take +20 DPS", Buff_ChampionMark, 1, attacker, 10.0, 20.0*TF2_GetDPSModifiers(attacker, weapon));
+				insertBuff(victim, championAffliction);
+			}
 		}
 
 		if(hasBuffIndex(victim, Buff_Bruised) && !(damagetype & DMG_PIERCING) && !(damagetype & DMG_IGNOREHOOK)){
@@ -1149,6 +1153,18 @@ public void preDamageMitigationCalcs(victim, attacker, inflictor, float& damage,
 			}
 			hasSupernovaSplashed[attacker] = true;
 		}
+
+		int jaratedIndex = getBuffInArray(victim, Buff_Jarated);
+		if(jaratedIndex != -1 && IsValidClient3(playerBuffs[victim][jaratedIndex].inflictor)){
+			SDKHooks_TakeDamage(victim,playerBuffs[victim][jaratedIndex].inflictor,playerBuffs[victim][jaratedIndex].inflictor,5.0*playerBuffs[victim][jaratedIndex].priority,DMG_ENERGYBEAM|DMG_DISSOLVE|DMG_IGNOREHOOK,_,_,_,false);
+		}
+		
+		if(IsValidWeapon(weapon)){
+			int championIndex = getBuffInArray(victim, Buff_ChampionMark);
+			if(championIndex != -1 && IsValidClient3(playerBuffs[victim][championIndex].inflictor)){
+				SDKHooks_TakeDamage(victim,playerBuffs[victim][championIndex].inflictor,playerBuffs[victim][championIndex].inflictor,playerBuffs[victim][championIndex].severity / TF2_GetFireRate(attacker,weapon,0.8),DMG_ENERGYBEAM|DMG_DISSOLVE|DMG_IGNOREHOOK,_,_,_,false);
+			}
+		}
 	}
 
 	//Lifesteal
@@ -1232,14 +1248,6 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 	{
 		if(IsFakeClient(attacker) && IsPlayerInSpawn(attacker)){
 			return 0.0;
-		}
-		int jaratedIndex = getBuffInArray(victim, Buff_Jarated);
-		if(jaratedIndex != -1 && IsValidClient3(playerBuffs[victim][jaratedIndex].inflictor)){
-			SDKHooks_TakeDamage(victim,playerBuffs[victim][jaratedIndex].inflictor,playerBuffs[victim][jaratedIndex].inflictor,5.0*playerBuffs[victim][jaratedIndex].priority,DMG_DISSOLVE|DMG_IGNOREHOOK,_,_,_,false);
-		}
-		int championIndex = getBuffInArray(victim, Buff_ChampionMark);
-		if(championIndex != -1 && IsValidClient3(playerBuffs[victim][championIndex].inflictor)){
-			SDKHooks_TakeDamage(victim,playerBuffs[victim][championIndex].inflictor,playerBuffs[victim][championIndex].inflictor,playerBuffs[victim][championIndex].severity,DMG_IGNOREHOOK,_,_,_,false);
 		}
 
 		if(hasBuffIndex(victim, Buff_DragonDance) && playerBuffs[victim][getBuffInArray(victim, Buff_DragonDance)].inflictor == attacker){
