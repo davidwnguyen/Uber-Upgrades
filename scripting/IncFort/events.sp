@@ -2497,6 +2497,28 @@ public OnGameFrame()
 				}else{
 					quakerTime[client] = 0.0;
 					SetEntityGravity(client, 1.0);
+
+					if(hasBuffIndex(client, Buff_InfernalLunge)){
+						float clientPosition[3];
+						GetClientAbsOrigin(client, clientPosition);
+
+						CreateParticleEx(client, "heavy_ring_of_fire", 0, 0, clientPosition);
+						CreateParticleEx(client, "bombinomicon_burningdebris");
+
+						float strongestDPS = 0.0;
+						for(int e = 0;e<3;++e){
+							int tempWeapon = TF2Util_GetPlayerLoadoutEntity(client, e);
+							if(!IsValidWeapon(tempWeapon))
+								continue;
+
+							float currentDPS = TF2_GetWeaponclassDPS(client, tempWeapon) * TF2_GetDPSModifiers(client, tempWeapon);
+							if(currentDPS > strongestDPS)
+								strongestDPS = currentDPS;
+						}
+						
+						EntityExplosion(client, playerBuffs[client][getBuffInArray(client, Buff_InfernalLunge)].severity*strongestDPS, 500.0, clientPosition, 0,_,_,_,DMG_BLAST|DMG_BURN,CWeapon,0.25,_,_,_,300.0);
+						clearBuff(client, getBuffInArray(client, Buff_InfernalLunge));
+					}
 				}
 			}
 
