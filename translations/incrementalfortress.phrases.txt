@@ -1,5 +1,8 @@
 "Phrases"
 {
+	"scattergun no reload single"{
+		"en"		"Reload Whole Clip At Once"
+	}
 	"airblast fires arrows"{
 		"en"		"Airblast Fires Arrows"
 	}

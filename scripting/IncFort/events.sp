@@ -2547,6 +2547,10 @@ public OnGameFrame()
 		}
 	}
 }
+public MRESReturn OnScattergunFinishReload(int weapon){
+	SDKCall(g_SDKCallScattergunReload, weapon);
+	return MRES_Supercede;
+}
 public MRESReturn OnBlastExplosion(int entity, Handle hReturn){
 	ExplosionHookEffects(entity);
 	return MRES_Ignored;

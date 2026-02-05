@@ -293,6 +293,12 @@ public void OnPluginStart()
 	g_SDKFastBuild = EndPrepSDKCall();
 	if(g_SDKFastBuild == null)
 		PrintToServer("CustomAttrs | Fastbuild signature not found.");
+
+	StartPrepSDKCall(SDKCall_Entity);
+	PrepSDKCall_SetFromConf(hConf, SDKConf_Signature, "CTFWeaponBase::FinishReload()");
+	g_SDKCallScattergunReload = EndPrepSDKCall();
+	if(g_SDKCallScattergunReload == null)
+		PrintToServer("CustomAttrs | Weapon reload signature not found.");
 	
 	//Post finish reload
 	Handle g_DHookFinishReload = DHookCreateFromConf(hConf, "CTFWeaponBase::FinishReload()");
@@ -455,11 +461,17 @@ public void OnPluginStart()
 
 	//Bleed Changes
 	Handle g_DHookOnMakeBleed = DHookCreateFromConf(hConf, "CTFPlayerShared::MakeBleed()");
-	
 	if(g_DHookOnMakeBleed == null)
 		PrintToServer("CustomAttrs | OnMakeBleed fucked up.");
 	else
 		DHookEnableDetour(g_DHookOnMakeBleed, false, OnMakeBleed);
+
+	//Scattergun Reload Changes
+	Handle g_DHookOnScattergunFinishReload = DHookCreateFromConf(hConf, "CTFScatterGun::FinishReload()");
+	if(g_DHookOnScattergunFinishReload == null)
+		PrintToServer("CustomAttrs | OnScattergunFinishReload fucked up.");
+	else
+		DHookEnableDetour(g_DHookOnScattergunFinishReload, false, OnScattergunFinishReload);
 
 	g_offset_CTFPlayerShared_pOuter = view_as<Address>(GameConfGetOffset(hConf, "CTFPlayerShared::m_pOuter"));
 	delete hConf;

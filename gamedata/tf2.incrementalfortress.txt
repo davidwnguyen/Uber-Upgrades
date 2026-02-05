@@ -281,6 +281,13 @@
 					}
 				}
 			}
+			"CTFScatterGun::FinishReload()"
+			{
+				"signature"		"CTFScatterGun::FinishReload()"
+				"callconv"		"thiscall"
+				"return"		"void"
+				"this"			"entity"
+			}
 		}
 		"Signatures"
 		{
@@ -427,6 +434,16 @@
 			{
 				"library"		"server"
 				"linux"			"@_ZN15CTFPlayerShared9MakeBleedEP9CTFPlayerP13CTFWeaponBasefibi"
+			}
+			"CTFScatterGun::FinishReload()"
+			{
+				"library"		"server"
+				"linux"			"@_ZN13CTFScatterGun12FinishReloadEv"
+			}
+			"CTFWeaponBase::FinishReload()"
+			{
+				"library"		"server"
+				"linux"			"@_ZN13CTFWeaponBase12FinishReloadEv"
 			}
 		}
 	}

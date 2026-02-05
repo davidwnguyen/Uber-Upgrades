@@ -7618,6 +7618,16 @@
 			"init"		"0.00"
 			"max"		"1.0"
 		}
+		"1742"
+		{
+			"name"		"scattergun no reload single"
+			"ref"		"scattergun no reload single"
+			"display"	"%.0f"
+			"cost"		"1000"
+			"value"		"1"
+			"init"		"0"
+			"max"		"1"
+		}
 		//Filler
 		"1900.0"
 		{

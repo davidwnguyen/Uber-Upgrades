@@ -1000,9 +1000,10 @@
 			"0"		"fire rate bonus(old)"
 			"1"		"clip size bonus"
 			"2"		"faster reload rate"
-			"3"		"bullets per shot bonus"
-			"4"		"weapon spread bonus(H)"
-			"5"		"projectile penetration heavy"
+			"3"		"reload clip all at once"
+			"4"		"bullets per shot bonus"
+			"5"		"weapon spread bonus(H)"
+			"6"		"projectile penetration heavy"
 		}
 		"Special Tweaks"
 		{
@@ -1024,9 +1025,10 @@
 			"0"		"fire rate bonus(old)"
 			"1"		"clip size bonus"
 			"2"		"faster reload rate"
-			"3"		"bullets per shot bonus"
-			"4"		"weapon spread bonus(H)"
-			"5"		"projectile penetration heavy"
+			"3"		"reload clip all at once"
+			"4"		"bullets per shot bonus"
+			"5"		"weapon spread bonus(H)"
+			"6"		"projectile penetration heavy"
 		}
 		"Special Tweaks"
 		{
@@ -1430,10 +1432,11 @@
 		{
 			"0"		"fire rate bonus(old)"
 			"1"		"clip size bonus"
-			"2"		"faster reload rate (U)"
-			"3"		"bullets per shot bonus"
-			"4"		"weapon spread bonus(H)"
-			"5"		"projectile penetration heavy"
+			"2"		"faster reload rate"
+			"3"		"scattergun no reload single"
+			"4"		"bullets per shot bonus"
+			"5"		"weapon spread bonus(H)"
+			"6"		"projectile penetration heavy"
 		}
 		"Special Tweaks"
 		{
@@ -1454,10 +1457,11 @@
 		{
 			"0"		"fire rate bonus(old)"
 			"1"		"clip size bonus"
-			"2"		"faster reload rate (U)"
-			"3"		"bullets per shot bonus"
-			"4"		"weapon spread bonus(H)"
-			"5"		"projectile penetration heavy"
+			"2"		"faster reload rate"
+			"3"		"scattergun no reload single"
+			"4"		"bullets per shot bonus"
+			"5"		"weapon spread bonus(H)"
+			"6"		"projectile penetration heavy"
 		}
 		"Special Tweaks"
 		{
@@ -2074,8 +2078,9 @@
 			"0"		"fire rate bonus(multshit)"
 			"1"		"clip size bonus"
 			"2"		"faster reload rate"
-			"3"		"projectile penetration"
-			"4"		"Projectile speed increased"
+			"3"		"reload clip all at once"
+			"4"		"projectile penetration"
+			"5"		"Projectile speed increased"
 		}
 		"Special Tweaks"
 		{

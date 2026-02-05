@@ -21,6 +21,7 @@ Handle g_SDKCallLaunchBall;
 Handle g_SDKCallInitGrenade;
 Handle g_SDKCallJar;
 Handle g_SDKCallSentryThink;
+Handle g_SDKCallScattergunReload;
 Handle g_SDKFastBuild;
 Handle g_DHookPrimaryAttack;
 Handle g_DHookFlareExplosion;
