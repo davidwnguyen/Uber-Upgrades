@@ -25,7 +25,7 @@
 		"cost"			"5000.0"
 		"provide on active"	"1"
 		"Arcane Weapon Scaling"	"35"
-		"Ability : Transient Moonlight"	"1"
+		"Ability : Transient Moonlight"	"2"
 		"weapon fire rate"	"1.33"
 		"Converts Firerate to Damage"	"1"
 		"restore health on kill"	"5"
