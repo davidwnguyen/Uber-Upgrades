@@ -1,11 +1,36 @@
 public Action:OnStartTouchStomp(client, other)
 {
 	//Borrowed from goomba stomp, so don't blame me if it's shit. (jk lel)
-    if(!IsValidClient3(other) || !IsValidClient3(client))
+    if(!IsValidClient3(client))
 		return Plugin_Continue;
 
 	int CWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
 	if (!IsValidWeapon(CWeapon))
+		return Plugin_Continue;
+
+	if(hasBuffIndex(client, Buff_InfernalLunge)){
+		float clientPosition[3];
+		GetClientAbsOrigin(client, clientPosition);
+
+		CreateParticleEx(client, "heavy_ring_of_fire", 0, 0, clientPosition);
+		CreateParticleEx(client, "bombinomicon_burningdebris");
+
+		float strongestDPS = 0.0;
+		for(int e = 0;e<3;++e){
+			int tempWeapon = TF2Util_GetPlayerLoadoutEntity(client, e);
+			if(!IsValidWeapon(tempWeapon))
+				continue;
+
+			float currentDPS = TF2_GetWeaponclassDPS(client, tempWeapon) * TF2_GetDPSModifiers(client, tempWeapon);
+			if(currentDPS > strongestDPS)
+				strongestDPS = currentDPS;
+		}
+
+		EntityExplosion(client, playerBuffs[client][getBuffInArray(client, Buff_InfernalLunge)].severity*strongestDPS, 500.0, clientPosition, 0,_,_,_,DMG_BLAST|DMG_BURN,CWeapon,0.25,_,_,_,300.0);
+		clearBuff(client, getBuffInArray(client, Buff_InfernalLunge));
+	}
+
+	if(!IsValidClient3(other))
 		return Plugin_Continue;
 
 	float ClientPos[3], VictimPos[3], VictimVecMaxs[3], vec[3];
@@ -41,23 +66,6 @@ public Action:OnStartTouchStomp(client, other)
 			
 			SDKHooks_TakeDamage(other,client,client,stompDamage,DMG_CLUB|DMG_CRUSH|DMG_IGNOREHOOK,CWeapon,_,_,false);
 		}
-	}
-	if(hasBuffIndex(client, Buff_InfernalLunge)){
-		CreateParticleEx(client, "heavy_ring_of_fire", 0, 0, ClientPos);
-		CreateParticleEx(client, "bombinomicon_burningdebris");
-
-		float strongestDPS = 0.0;
-		for(int e = 0;e<3;++e){
-			int tempWeapon = TF2Util_GetPlayerLoadoutEntity(client, e);
-			if(!IsValidWeapon(tempWeapon))
-				continue;
-
-			float currentDPS = TF2_GetWeaponclassDPS(client, tempWeapon) * TF2_GetDPSModifiers(client, tempWeapon);
-			if(currentDPS > strongestDPS)
-				strongestDPS = currentDPS;
-		}
-		EntityExplosion(client, playerBuffs[client][getBuffInArray(client, Buff_InfernalLunge)].severity*strongestDPS, 500.0, ClientPos, 0,_,_,_,DMG_BLAST|DMG_BURN,CWeapon,0.25,_,_,_,300.0);
-		clearBuff(client, getBuffInArray(client, Buff_InfernalLunge));
 	}
 }
 
