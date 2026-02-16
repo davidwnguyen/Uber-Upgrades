@@ -73,6 +73,78 @@ public Action:Timer_Second(Handle timer)
 
 			if(!isOnFire)
 				TF2_RemoveCondition(client, TFCond_OnFire);
+
+			switch(TF2Attrib_HookValueFloat(0.0, "player_boss_type", client))
+			{
+				case 7.0:
+				{
+					CreateParticleEx(client, "utaunt_arcane_yellow_parent", 1, _, _, 10.0);
+					int CWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
+					if(IsValidEdict(CWeapon))
+					{
+						CreateParticleEx(CWeapon, "utaunt_auroraglow_orange_parent", 1, _, _, 10.0);
+							
+						float clientpos[3];
+						GetClientAbsOrigin(client,clientpos);
+						clientpos[0] += GetRandomFloat(-200.0,200.0);
+						clientpos[1] += GetRandomFloat(-200.0,200.0);
+						clientpos[2] = getLowestPosition(clientpos);
+						// define where the lightning strike starts
+						float startpos[3];
+						startpos[0] = clientpos[0];
+						startpos[1] = clientpos[1];
+						startpos[2] = clientpos[2] + 1600;
+						
+						int color[4];
+						color = {255,228,0,255};
+						
+						// define the direction of the sparks
+						float dir[3] = {0.0, 0.0, 0.0};
+						
+						TE_SetupBeamPoints(startpos, clientpos, g_LightningSprite, 0, 0, 0, 0.2, 20.0, 10.0, 0, 1.0, color, 3);
+						TE_SendToAll();
+						
+						TE_SetupSparks(clientpos, dir, 5000, 1000);
+						TE_SendToAll();
+						
+						TE_SetupEnergySplash(clientpos, dir, false);
+						TE_SendToAll();
+						
+						TE_SetupSmoke(clientpos, g_SmokeSprite, 5.0, 10);
+						TE_SendToAll();
+						
+						TE_SetupBeamRingPoint(clientpos, 20.0, 650.0, g_LightningSprite, spriteIndex, 0, 5, 0.5, 10.0, 1.0, color, 200, 0);
+						TE_SendToAll();
+						
+						EmitAmbientSound("ambient/explosions/explode_9.wav", startpos, client, 50);
+						
+						float LightningDamage = 10.0*TF2_GetDPSModifiers(client,CWeapon);
+						int i = -1;
+						while ((i = FindEntityByClassname(i, "*")) != -1)
+						{
+							if(!IsValidForDamage(i))
+								continue;
+							if(!IsOnDifferentTeams(client,i))
+								continue;
+							
+							float VictimPos[3];
+							GetEntPropVector(i, Prop_Data, "m_vecOrigin", VictimPos);
+							VictimPos[2] += 30.0;
+							if(GetVectorDistance(clientpos,VictimPos,true) > 422500.0) //650HU
+								continue;
+							if(!IsPointVisible(clientpos,VictimPos))
+								continue;
+								
+							SDKHooks_TakeDamage(i,client,client, LightningDamage, DMG_IGNOREHOOK, _,_,_,false);
+
+							if(i <= MaxClients){
+								RadiationBuildup[i] += 150.0;
+								checkRadiation(i,client);
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 	if(isMvM)
@@ -1181,69 +1253,6 @@ public Action:Timer_EveryTenSeconds(Handle timer)
 						CreateTimer(9.0, SelfDestruct, EntIndexToEntRef(iEntity));
 						jarateWeapon[iEntity] = EntIndexToEntRef(client);
 					}
-				}
-				case 7.0:
-				{
-					int CWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
-					if(IsValidEdict(CWeapon))
-					{
-						CreateParticleEx(CWeapon, "utaunt_auroraglow_orange_parent", 1, _, _, 10.0);
-							
-						float clientpos[3];
-						GetClientAbsOrigin(client,clientpos);
-						clientpos[0] += GetRandomFloat(-200.0,200.0);
-						clientpos[1] += GetRandomFloat(-200.0,200.0);
-						clientpos[2] = getLowestPosition(clientpos);
-						// define where the lightning strike starts
-						float startpos[3];
-						startpos[0] = clientpos[0];
-						startpos[1] = clientpos[1];
-						startpos[2] = clientpos[2] + 1600;
-						
-						int color[4];
-						color = {255,228,0,255};
-						
-						// define the direction of the sparks
-						float dir[3] = {0.0, 0.0, 0.0};
-						
-						TE_SetupBeamPoints(startpos, clientpos, g_LightningSprite, 0, 0, 0, 0.2, 20.0, 10.0, 0, 1.0, color, 3);
-						TE_SendToAll();
-						
-						TE_SetupSparks(clientpos, dir, 5000, 1000);
-						TE_SendToAll();
-						
-						TE_SetupEnergySplash(clientpos, dir, false);
-						TE_SendToAll();
-						
-						TE_SetupSmoke(clientpos, g_SmokeSprite, 5.0, 10);
-						TE_SendToAll();
-						
-						TE_SetupBeamRingPoint(clientpos, 20.0, 650.0, g_LightningSprite, spriteIndex, 0, 5, 0.5, 10.0, 1.0, color, 200, 0);
-						TE_SendToAll();
-						
-						EmitAmbientSound("ambient/explosions/explode_9.wav", startpos, client, 50);
-						
-						float LightningDamage = 150.0*TF2_GetDPSModifiers(client,CWeapon);
-					
-						int i = -1;
-						while ((i = FindEntityByClassname(i, "*")) != -1)
-						{
-							if(IsValidForDamage(i) && IsOnDifferentTeams(client,i))
-							{
-								float VictimPos[3];
-								GetEntPropVector(i, Prop_Data, "m_vecOrigin", VictimPos);
-								VictimPos[2] += 30.0;
-								if(GetVectorDistance(clientpos,VictimPos,true) <= 250000.0)
-								{
-									if(IsPointVisible(clientpos,VictimPos))
-									{
-										SDKHooks_TakeDamage(i,client,client, LightningDamage, DMG_IGNOREHOOK, _,_,_,false);
-									}
-								}
-							}
-						}
-					}
-					CreateParticleEx(client, "utaunt_arcane_yellow_parent", 1, _, _, 10.0);
 				}
 			}
 		}
