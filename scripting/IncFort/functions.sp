@@ -3423,8 +3423,11 @@ stock SentryMultishot(entity)
 	}
 }
 stock bool PenetrationCallTrace(int entity, int contentsMask, any data) {
-	if(entity != 0 && IsValidEntity(entity) && IsValidForDamage(entity) && IsOnDifferentTeams(entity,data)){
-		isPenetrated[entity] = true;
+	if(entity != 0 && IsValidEntity(entity) && IsValidForDamage(entity)){
+		if(IsOnDifferentTeams(entity,data)){
+			isPenetrated[entity] = true;
+			return false;
+		}
 		return false;
 	}
     return true;

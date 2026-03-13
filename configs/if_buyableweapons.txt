@@ -487,4 +487,17 @@
 		"paintkit_proto_def_index"	"423"
 		"set_item_texture_wear"		"0.0"
 	}
+	"Fan of Bullets"
+	{
+		"index"			"36"
+		"weapon_class"	"tf_weapon_syringegun_medic"
+		"weapon_menu"	"tf_weapon_syringegun_medic"
+		"class"			"medic"
+		"description"	"Base weapon is the Blutsauger\nShoots a fan of 10 pellets, each dealing 3 damage."
+		"cost"			"6000.0"
+		"Converts Firerate to Damage"	"1"
+		"override projectile type"	"50.0"
+		"fan of bullets count"		"9"
+		"weapon damage mult"		"0.075"
+	}
 }

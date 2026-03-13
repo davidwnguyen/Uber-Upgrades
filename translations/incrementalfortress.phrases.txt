@@ -1,5 +1,8 @@
 "Phrases"
 {
+	"fan of bullets count"{
+		"en"		"Bullets per Shot"
+	}
 	"conference call tracer count"{
 		"en"		"Tracer Count"
 	}

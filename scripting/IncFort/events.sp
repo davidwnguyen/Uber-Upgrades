@@ -3123,6 +3123,36 @@ public Action TF2_CalcIsAttackCritical(int client, int weapon, char[] weaponname
 					hasHit[i][currentAttackCounter % 30] = false;
 				}
 			}
+			case 50.0:
+			{
+				int bulletCount = RoundToCeil(TF2Attrib_HookValueFloat(1.0, "fan_of_bullets_count", weapon));
+				GetClientEyePosition(client, fOrigin);
+				GetClientEyeAngles(client, fAngles);
+
+				const float spread = 8.0;
+				fAngles[1] -= spread + spread/bulletCount;
+				fOrigin[2] -= 10.0;
+
+				for(int j = 0; j < bulletCount; ++j){
+					fAngles[1] += (spread*2)/bulletCount;
+					float endpos[3];
+
+					Handle traceray = TR_TraceRayFilterEx(fOrigin, fAngles, MASK_SHOT_HULL, RayType_Infinite, PenetrationCallTrace, client);
+					if (TR_DidHit(traceray)) {
+						TR_GetEndPosition(endpos, traceray);
+					}
+					delete traceray;
+					
+					SpawnBulletTracer(fOrigin, endpos, "bullet_pistol_tracer01_red");
+					
+					for(int i = 1; i< MAXENTITIES; ++i){
+						if(isPenetrated[i]){
+							SDKHooks_TakeDamage(i,client,client,25.0,DMG_BULLET,weapon,_,_,false);
+							isPenetrated[i] = false;
+						}
+					}
+				}
+			}
 		}
 		if(projActive != Address_Null && TF2Attrib_GetValue(projActive) == 2.0)
 		{
