@@ -3695,3 +3695,17 @@ void OnStatusEffectRemoved(int client, Buff currentbuff){
 		}
 	}
 }
+
+public Event_PickupItem(Handle event, const char[] name, bool dontBroadcast)
+{
+	int client = GetClientOfUserId(GetEventInt(event, "userid"));
+	if(!IsValidClient3(client))
+		return;
+
+	char itemName[32];
+	GetEventString(event, "item", itemName, sizeof(itemName));
+	
+	if(StrContains(itemName, "medkit") != -1) {
+		removeDebuffs(client);
+	}
+}

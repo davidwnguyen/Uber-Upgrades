@@ -39,6 +39,7 @@ void removeAfterburn(int client){
 	}
 }
 
+
 float GetResistance(int client, bool includeReduction = false, float penetration = 0.0)
 {
 	float TotalResistance = TF2Attrib_HookValueFloat(0.0, "quadratic_damage_reduction", client);
@@ -321,6 +322,17 @@ public void clearAllBuffs(int client){
 public void clearBuff(int client, int index){
 	OnStatusEffectRemoved(client, playerBuffs[client][index]);
 	playerBuffs[client][index].clear();
+}
+void removeDebuffs(int client){
+	removeAfterburn(client);
+	BleedBuildup[client] = 0.0;
+	ConcussionBuildup[client] = 0.0;
+
+	for(int i = 0; i < MAXBUFFS; i++){
+		if(isBonus[playerBuffs[client][i].id])
+			continue;
+		clearBuff(client, i);
+	}
 }
 public void giveDefenseBuff(int client, float duration){
 	Buff defenseBuff;

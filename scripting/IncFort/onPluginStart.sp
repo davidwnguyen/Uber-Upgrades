@@ -142,6 +142,7 @@ public UberShopinitMenusHandlers()
 	HookEvent("mvm_wave_failed",Event_mvm_wave_failed);
 	HookEvent("player_builtobject", Event_ObjectBuilt);
 	HookEvent("arrow_impact", Event_ArrowImpact, EventHookMode_Pre);
+	HookEvent("item_pickup", Event_PickupItem);
 	
 	AddCommandListener(jointeam_callback, "jointeam");
 	AddCommandListener(removeAllBuildings, "destroy");
