@@ -493,7 +493,7 @@
 		"weapon_class"	"tf_weapon_syringegun_medic"
 		"weapon_menu"	"tf_weapon_syringegun_medic"
 		"class"			"medic"
-		"description"	"Base weapon is the Blutsauger\nShoots a fan of 10 pellets, each dealing 3 damage."
+		"description"	"Base weapon is the Blutsauger\nShoots a fan of 10 pellets, each dealing 3 damage.\nEach pellet can penetrate.\nConverts fire rate bonus into damage bonus."
 		"cost"			"6000.0"
 		"Converts Firerate to Damage"	"1"
 		"override projectile type"	"50.0"
