@@ -1529,17 +1529,16 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 			{
 				float victimPos[3];
 				GetClientEyePosition(victim, victimPos);
+				int tracerCount = RoundToCeil(TF2Attrib_HookValueFloat(1.0, "conference_call_tracer_count", weapon));
 
-				for(int i = 0; i < 3; ++i){
+				for(int i = 0; i < 2; ++i){
 					float pos1[3],pos2[3];
 
 					float vecangles[3];
 					if(i == 0){
-						vecangles = {90.0,0.0,0.0};
+						vecangles = {0.0,90.0,0.0};
 					}else if(i == 1){
 						vecangles = {0.0,0.0,0.0};
-					}else{
-						vecangles = {0.0,90.0,0.0};
 					}
 
 					Handle traceray = TR_TraceRayFilterEx(victimPos, vecangles, MASK_SHOT_HULL, RayType_Infinite, PenetrationCallTrace, attacker);
@@ -1557,29 +1556,18 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 						TR_GetEndPosition(pos2, traceray2);
 						delete traceray2;
 					}
+
 					delete traceray2;
+					for(int t = 0; t < tracerCount;t++){
+						float offset[3];offset[0] = GetRandomFloat(-10.0, 10.0);offset[1] = GetRandomFloat(-10.0, 10.0);offset[2] = GetRandomFloat(-10.0, 10.0);
+						float endpos1[3], endpos2[3];
+						AddVectors(pos1, offset, endpos1);
+						AddVectors(pos2, offset, endpos2);
 
-					int iPart1 = CreateEntityByName("info_particle_system");
-					int iPart2 = CreateEntityByName("info_particle_system");
-
-					if (IsValidEdict(iPart1) && IsValidEdict(iPart2))
-					{
-						char szCtrlParti[32];
-						char particleName[32];
-						particleName = GetClientTeam(attacker) == 2 ? "dxhr_sniper_rail_red" : "dxhr_sniper_rail_blue";
-						Format(szCtrlParti, sizeof(szCtrlParti), "tf2ctrlpart%i", iPart2);
-						DispatchKeyValue(iPart2, "targetname", szCtrlParti);
-
-						DispatchKeyValue(iPart1, "effect_name", particleName);
-						DispatchKeyValue(iPart1, "cpoint1", szCtrlParti);
-						DispatchSpawn(iPart1);
-						TeleportEntity(iPart1, pos1, NULL_VECTOR, NULL_VECTOR);
-						TeleportEntity(iPart2, pos2, NULL_VECTOR, NULL_VECTOR);
-						ActivateEntity(iPart1);
-						AcceptEntityInput(iPart1, "Start");
-						
-						CreateTimer(1.0, Timer_KillParticle, EntIndexToEntRef(iPart1));
-						CreateTimer(1.0, Timer_KillParticle, EntIndexToEntRef(iPart2));
+						if(GetRandomInt(0,1))
+							SpawnBulletTracer(endpos1, endpos2, "bullet_tracer02_blue");
+						else
+							SpawnBulletTracer(endpos2, endpos1, "bullet_tracer02_blue");
 					}
 				}
 				for(int i = 1; i< MAXENTITIES; ++i){

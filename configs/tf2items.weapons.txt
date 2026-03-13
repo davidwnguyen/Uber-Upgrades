@@ -168,6 +168,7 @@
 			"2"				"firerate player buff; 0.25"
 			"3"				"conference call damage;1.25"
 			"4"				"override projectile type;1"
+			"5"				"conference call tracer count;3"
 		}
 		"441"//Cow Mangler 5000
 		{

@@ -274,6 +274,41 @@ void CreateParticleEx(iEntity, char[] strParticle, m_iAttachType = 0, m_iAttachm
 	
 	TE_SendToAll();
 }
+void SpawnBulletTracer(float startPos[3], float endPos[3], char[] tracerName)
+{
+    static int effectTable = INVALID_STRING_TABLE;
+    static int particleTable = INVALID_STRING_TABLE;
+
+    if (effectTable == INVALID_STRING_TABLE)
+        effectTable = FindStringTable("EffectDispatch");
+
+    if (particleTable == INVALID_STRING_TABLE)
+        particleTable = FindStringTable("ParticleEffectNames");
+
+    int effectIndex = FindStringIndex(effectTable, "ParticleTracer");
+    if (effectIndex == INVALID_STRING_INDEX)
+    {
+        bool save = LockStringTables(false);
+		AddToStringTable(effectTable, "ParticleTracer");
+        LockStringTables(save);
+    }
+
+    int particleIndex = FindStringIndex(particleTable, tracerName);
+
+    TE_Start("EffectDispatch");
+    TE_WriteFloat("m_vStart[0]", startPos[0]);
+    TE_WriteFloat("m_vStart[1]", startPos[1]);
+    TE_WriteFloat("m_vStart[2]", startPos[2]);
+    TE_WriteFloat("m_vOrigin[0]", endPos[0]);
+    TE_WriteFloat("m_vOrigin[1]", endPos[1]);
+    TE_WriteFloat("m_vOrigin[2]", endPos[2]);
+    TE_WriteFloat("m_flScale", 0.0);
+    TE_WriteNum("m_fFlags", 1);
+    TE_WriteNum("m_iEffectName", effectIndex);
+    TE_WriteNum("m_nHitBox", particleIndex);
+    TE_WriteNum("entindex", -1);
+    TE_SendToAll();
+}
 //Replaces any old buff with same details, else inserts a new one.
 public void insertBuff(int client, Buff newBuff){
 	int replacementID = getNextBuff(client);

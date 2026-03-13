@@ -1,5 +1,11 @@
 "Phrases"
 {
+	"conference call tracer count"{
+		"en"		"Tracer Count"
+	}
+	"grenade explode on impact"{
+		"en"		"Grenades Explode on Impact"
+	}
 	"scattergun no reload single"{
 		"en"		"Reload Whole Clip At Once"
 	}

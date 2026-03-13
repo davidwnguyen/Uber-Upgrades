@@ -466,4 +466,25 @@
 		"paintkit_proto_def_index"				"403"
 		"set_item_texture_wear"					"0.0"
 	}
+	"Bullet Proliferator"
+	{
+		"index"			"425"
+		"weapon_class"	"tf_weapon_shotgun_soldier"
+		"weapon_menu"	"proj_scattergun"
+		"class"			"soldier"
+		"description"	"Base weapon is The Family Business\nConverts fire rate into damage bonus. Shoots 8 grenades.\nGrenades explode on impact and splash crossfire bullets.\nCrossfire bullets deal 35% of initial hit damage.\nGrenades have 1.5x blast radius."
+		"cost"			"6000.0"
+		"Converts Firerate to Damage"	"1"
+		"Blast radius increased"		"1.5"
+		"conference call damage"		"0.35"
+		"Projectile speed increased"		"2"
+		"projectile spread angle penalty"	"4"
+		"Increased Projectile Count" "8"
+		"grenade explode on impact"	"1"
+		"override projectile type"	"3.0"
+		"reload clip all at once"	"1"
+		"Minimal Explosion Particle"	"0"
+		"paintkit_proto_def_index"	"423"
+		"set_item_texture_wear"		"0.0"
+	}
 }
