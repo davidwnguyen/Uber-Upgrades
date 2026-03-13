@@ -2719,42 +2719,42 @@ ChangeProjModel(entity)
 		{
 			client = GetEntPropEnt(entity, Prop_Data, "m_hOwnerEntity");
 		}
-		if(IsValidClient3(client) && canOverride[client])
+		if(IsValidClient3(client))
 		{
-			int CWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
-			if(IsValidEdict(CWeapon))
+			int launcher = GetEntPropEnt(entity, Prop_Send, "m_hOriginalLauncher");
+			if(!IsValidWeapon(launcher))
+				return;
+
+			int iItemDefinitionIndex = GetEntProp(launcher, Prop_Send, "m_iItemDefinitionIndex");
+			switch(iItemDefinitionIndex)
 			{
-				int iItemDefinitionIndex = GetEntProp(CWeapon, Prop_Send, "m_iItemDefinitionIndex");
-				switch(iItemDefinitionIndex)
+				case 222:
 				{
-					case 222:
-					{
-						SetEntityModel(entity, "models/weapons/c_models/c_madmilk/c_madmilk.mdl");
-						ApplyJarChanges(entity, CWeapon, 1);
-					}
-					case 1121:
-					{
-						SetEntityModel(entity, "models/weapons/c_models/c_breadmonster/c_breadmonster_milk.mdl");
-						ApplyJarChanges(entity, CWeapon, 1);
-					}
-					case 58,1149:
-					{
-						SetEntityModel(entity, "models/weapons/c_models/urinejar.mdl");
-						ApplyJarChanges(entity, CWeapon, 0);
-					}
-					case 1105:
-					{
-						SetEntityModel(entity, "models/weapons/c_models/c_breadmonster/c_breadmonster.mdl");
-						ApplyJarChanges(entity, CWeapon, 0);
-					}
-					case 812,833:
-					{
-						SetEntityModel(entity, "models/weapons/c_models/c_sd_cleaver/c_sd_cleaver.mdl");
-					}
-					case 307:
-					{
-						SetEntityModel(entity, "models/weapons/c_models/c_caber/c_caber.mdl");
-					}
+					SetEntityModel(entity, "models/weapons/c_models/c_madmilk/c_madmilk.mdl");
+					ApplyJarChanges(entity, launcher, 1);
+				}
+				case 1121:
+				{
+					SetEntityModel(entity, "models/weapons/c_models/c_breadmonster/c_breadmonster_milk.mdl");
+					ApplyJarChanges(entity, launcher, 1);
+				}
+				case 58,1149:
+				{
+					SetEntityModel(entity, "models/weapons/c_models/urinejar.mdl");
+					ApplyJarChanges(entity, launcher, 0);
+				}
+				case 1105:
+				{
+					SetEntityModel(entity, "models/weapons/c_models/c_breadmonster/c_breadmonster.mdl");
+					ApplyJarChanges(entity, launcher, 0);
+				}
+				case 812,833:
+				{
+					SetEntityModel(entity, "models/weapons/c_models/c_sd_cleaver/c_sd_cleaver.mdl");
+				}
+				case 307:
+				{
+					SetEntityModel(entity, "models/weapons/c_models/c_caber/c_caber.mdl");
 				}
 			}
 		}
@@ -2888,7 +2888,8 @@ public onProjectileSpawned(entity)
 		if(!IsValidWeapon(CWeapon))
 			return;
 
-		if(!canOverride[owner])
+		int launcher = GetEntPropEnt(entity, Prop_Send, "m_hOriginalLauncher");
+		if(!IsValidWeapon(launcher))
 			return;
 
 		if(TF2Attrib_HookValueInt(0, "sunburst_projectile", CWeapon)){
@@ -3074,9 +3075,9 @@ PrecisionHoming(entity)
 		if(IsValidClient3(client))
 		{
 			float addedRadius = 0.0;
-			int CWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
-			if(IsValidWeapon(CWeapon)) {
-				addedRadius += GetAttribute(CWeapon, "projectile homing radius", 0.0);
+			int launcher = GetEntPropEnt(entity, Prop_Send, "m_hOriginalLauncher");
+			if(IsValidWeapon(launcher)) {
+				addedRadius += GetAttribute(launcher, "projectile homing radius", 0.0);
 			}
 			float precision = TF2Attrib_HookValueFloat(0.0, "precision_powerup", client);
 
@@ -3102,9 +3103,9 @@ FragmentProperties(entity)
 		int client = getOwner(entity);
 		if(IsValidClient3(client))
 		{
-			int CWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
-			if(IsValidWeapon(CWeapon)) {
-				projectileFragCount[entity] = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "explosive_frag_count", CWeapon));
+			int launcher = GetEntPropEnt(entity, Prop_Send, "m_hOriginalLauncher");
+			if(IsValidWeapon(launcher)) {
+				projectileFragCount[entity] = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "explosive_frag_count", launcher));
 			}
 		}
     } 
@@ -4365,18 +4366,6 @@ ExplosionHookEffects(entity){
 		SetEntProp(iEntity, Prop_Data, "m_nSolidType", 6);
 		SetEntProp(iEntity, Prop_Send, "m_CollisionGroup", 13);
 	}
-}
-
-finishProjectileSpawning(int ref){
-	int entity = EntRefToEntIndex(ref);
-	if(!IsValidEntity(entity))
-		return;
-
-	int owner = getOwner(entity);
-	if(!IsValidClient3(owner))
-		return;
-
-	canOverride[owner] = false;
 }
 
 PopulateFireRateMap(){

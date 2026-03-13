@@ -3,6 +3,9 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 	if(IsValidClient3(victim))
 	{
 		lastKBSource[victim] = attacker;
+		if(TF2_IsPlayerInCondition(victim, TFCond_UberchargedHidden) || TF2_IsPlayerInCondition(victim, TFCond_Ubercharged))
+			return Plugin_Continue;
+
 		if(!(damagetype & DMG_PIERCING)){
 			float dmgMult = TF2Attrib_HookValueFloat(1.0, "dmg_incoming_mult", victim);
 			if(dmgMult < 1.0)

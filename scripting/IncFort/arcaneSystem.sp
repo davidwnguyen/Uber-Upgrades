@@ -1756,7 +1756,6 @@ CastTransientMoonlight(int client, int attuneSlot){
 		{
 			SetEntPropEnt(iEntity, Prop_Send, "m_hLauncher", CWeapon);
 		}
-		SetEntPropEnt(iEntity, Prop_Send, "m_hOriginalLauncher", client);
 		SetEntProp(iEntity, Prop_Send, "m_usSolidFlags", 0x0008);
 		SetEntProp(iEntity, Prop_Data, "m_nSolidType", 6);
 		SetEntProp(iEntity, Prop_Send, "m_CollisionGroup", 13);

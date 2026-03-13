@@ -944,7 +944,6 @@ public OnEntityCreated(entity, const char[] classname)
 		{
 			RequestFrame(monoculusBonus, reference);
 		}
-		RequestFrame(finishProjectileSpawning, reference);
 	}
 	else if(StrContains(classname, "tf_weapon", false) == 0)
 	{
@@ -2606,7 +2605,6 @@ public Action TF2_CalcIsAttackCritical(int client, int weapon, char[] weaponname
 	if(!IsValidClient3(client) || !IsValidEdict(client))
 		return Plugin_Continue;
 
-	canOverride[client] = true;
 	canShootAgain[client] = true;
 	if(IsValidWeapon(weapon))
 	{
