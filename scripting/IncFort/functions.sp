@@ -4438,6 +4438,7 @@ PopulateFireRateMap(){
 	weaponFireRateMap.SetValue("tf_weapon_revolver", 2.0);
 	weaponFireRateMap.SetValue("tf_weapon_mechanical_arm", 6.7);
 	weaponFireRateMap.SetValue("tf_weapon_pda_engineer_build", 10.0);
+	weaponFireRateMap.SetValue("tf_weapon_medigun", TICKRATE);
 }
 
 PopulateArcaneMap(){
