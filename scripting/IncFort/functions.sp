@@ -2418,12 +2418,12 @@ ExplosiveArrow(entity)
 			jarateWeapon[entity] = EntIndexToEntRef(CWeapon)
 			SDKHook(entity, SDKHook_StartTouchPost, IgnitionArrowCollision);
 		}
-	}
 
-	if(GetAttribute(CWeapon, "weapon ability id", 0.0) == 2)
-	{
-		jarateWeapon[entity] = EntIndexToEntRef(CWeapon)
-		SDKHook(entity, SDKHook_StartTouchPost, ExplosiveArrowCollision);
+		if(GetAttribute(CWeapon, "weapon ability id", 0.0) == 2)
+		{
+			jarateWeapon[entity] = EntIndexToEntRef(CWeapon)
+			SDKHook(entity, SDKHook_StartTouchPost, ExplosiveArrowCollision);
+		}
 	}
 }
 
