@@ -4241,6 +4241,7 @@ cleanSlateClient(int client){
 	pylonCooldown[client] = 0.0;
 	infernalDetonationCooldown[client] = 0.0;
 	LSPool[client] = 0.0;
+	detonateParticleCooldown[client] = 0.0;
 	clearAllBuffs(client);
 	removeAfterburn(client);
 	removeRecoup(client);

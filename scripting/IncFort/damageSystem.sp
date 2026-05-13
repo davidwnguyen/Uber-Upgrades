@@ -1637,7 +1637,10 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 			}
 			if(detonateAccumulation > 0){
 				SDKHooks_TakeDamage(victim, attacker, attacker, detonateAccumulation, DMG_BURN|DMG_PREVENT_PHYSICS_FORCE|DMG_IGNOREHOOK, _, _, _, false);
-				CreateParticleEx(victim, "bombinomicon_burningdebris");
+				if(GetGameTime() > detonateParticleCooldown[attacker]){
+					CreateParticleEx(victim, "bombinomicon_burningdebris");
+					detonateParticleCooldown[attacker] = GetGameTime() + 0.5;
+				}
 			}else{
 				//afterburn slop
 				if(damagetype & DMG_IGNITE || 

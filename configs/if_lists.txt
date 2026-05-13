@@ -2399,4 +2399,29 @@
 			"1"		"Frostborn Wrath"
 		}
 	}
+	"explosive_shotgun"
+	{
+		"special_tweaks_listid"		"2"
+		"Damage upgrades"
+		{
+			"0"		"damage bonus"
+			"1"		"ap (global)"
+			"2"		"Shotgun Damage Bonus"
+		}
+		"Scattergun specific upgrades"
+		{
+			"0"		"fire rate bonus(old)"
+			"1"		"clip size bonus"
+			"2"		"faster reload rate"
+			"3"		"reload clip all at once"
+			"4"		"bullets per shot bonus"
+			"5"		"weapon spread bonus(H)"
+			"6"		"projectile penetration heavy"
+		}
+		"Special Tweaks"
+		{
+			"0"		"Armor Piercing Shells"
+			"1"		"Frostborn Wrath"
+		}
+	}
 }
