@@ -26,6 +26,7 @@ Handle g_hGlobalSettings;
 ConVar g_hCvarEnabled;
 ConVar g_hCvarPlayerControlEnabled;
 bool g_bPlayerEnabled[MAXPLAYERS + 1] =  { true, ... };
+bool isMvM = false;
 
 // ====[ PLUGIN ]======================================================
 public Plugin myinfo = {
@@ -67,7 +68,9 @@ public Action TF2Items_OnGiveNamedItem(int client, char[] classname, int itemDef
 	// If disabled, use the default values.
 	if (!GetConVarBool(g_hCvarEnabled) || (GetConVarBool(g_hCvarPlayerControlEnabled) && !g_bPlayerEnabled[client]))
 		return Plugin_Continue;
-	if(IsFakeClient(client) || TF2_IsPlayerInCondition(client, TFCond_Disguised))
+	if(TF2_IsPlayerInCondition(client, TFCond_Disguised))
+		return Plugin_Continue;
+	if(IsFakeClient(client) && isMvM)
 		return Plugin_Continue;
 	 
 	// Find item. If any is found, override the attributes with these.
@@ -111,6 +114,12 @@ public void OnClientConnected(int client) {
 
 public void OnClientDisconnect(int client) {
 	g_bPlayerEnabled[client] = true;
+}
+
+public void OnMapStart()
+{
+	int i = FindEntityByClassname(-1, "tf_logic_mann_vs_machine");
+	if (i > MaxClients && IsValidEdict(i)) isMvM = true;
 }
 
 /*
