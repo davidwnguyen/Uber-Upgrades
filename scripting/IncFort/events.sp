@@ -3153,6 +3153,47 @@ public Action TF2_CalcIsAttackCritical(int client, int weapon, char[] weaponname
 					}
 				}
 			}
+			case 51.0:
+			{
+				int iEntity = CreateEntityByName("tf_projectile_arrow");
+				if (IsValidEdict(iEntity)) 
+				{
+					int iTeam = GetClientTeam(client);
+					float fwd[3]
+					SetEntPropEnt(iEntity, Prop_Send, "m_hOwnerEntity", client);
+					SetEntProp(iEntity, Prop_Send, "m_iTeamNum", iTeam);
+
+					GetClientEyePosition(client, fOrigin);
+					GetClientEyeAngles(client, fAngles);
+					fAngles[0] -= 10.0;
+
+					GetAngleVectors(fAngles, vBuffer, NULL_VECTOR, NULL_VECTOR);
+					GetAngleVectors(fAngles,fwd, NULL_VECTOR, NULL_VECTOR);
+					AddVectors(fOrigin, fwd, fOrigin);
+					float velocityBonus = TF2Attrib_HookValueFloat(1.0, "mult_projectile_speed", weapon);
+					ScaleVector(vBuffer, 1300.0*velocityBonus);
+					
+					TeleportEntity(iEntity, fOrigin, fAngles, vBuffer);
+					DispatchSpawn(iEntity);
+
+					SetEntPropVector(iEntity, Prop_Send, "m_vInitialVelocity", vBuffer );
+					SetEntPropEnt(iEntity, Prop_Send, "m_hLauncher", weapon);
+					SetEntProp(iEntity, Prop_Send, "m_usSolidFlags", 0x0008);
+					SetEntProp(iEntity, Prop_Data, "m_nSolidType", 6);
+					SetEntProp(iEntity, Prop_Send, "m_CollisionGroup", 13);
+					SetEntProp(iEntity, Prop_Send, "m_bCritical", result);
+					SDKHook(iEntity, SDKHook_StartTouch, OnStartTouchWarriorArrow);
+					CreateSpriteTrail(iEntity, "0.33", "5.0", "1.0",
+						iTeam == 2 ? "materials/effects/arrowtrail_red.vmt":"materials/effects/arrowtrail_blu.vmt", "255 255 255");
+
+					DataPack pack = CreateDataPack();
+					pack.WriteCell(EntIndexToEntRef(iEntity))
+					pack.WriteFloat(3.0);
+
+					CreateTimer(0.1, Timer_SetEntityGravity, pack);
+					CreateTimer(0.4/velocityBonus, Timer_HailArrowSplit, EntIndexToEntRef(iEntity));
+				}
+			}
 		}
 		if(projActive != Address_Null && TF2Attrib_GetValue(projActive) == 2.0)
 		{

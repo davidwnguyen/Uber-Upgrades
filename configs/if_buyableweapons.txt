@@ -505,7 +505,7 @@
 		"weapon_class"	"tf_weapon_grenadelauncher"
 		"weapon_menu"	"tf_weapon_grenadelauncher"
 		"class"			"demo"
-		"description"	"Base weapon is the Iron Bomber.\nShoots a spray of 3 grenades, but fires 2x slower.\nGrenades explode on impact.\nOn Hit: detonate one stack of afterburn."
+		"description"	"Base weapon is the Iron Bomber.\nConverts fire rate bonus into damage bonus.\nShoots a spray of 3 grenades, but fires 2x slower.\nGrenades explode on impact.\nOn Hit: detonate one stack of afterburn."
 		"cost"			"10000.0"
 		"Converts Firerate to Damage"	"1"
 		"Increased Projectile Count" 	"3"
@@ -514,5 +514,32 @@
 		"grenade explode on impact"		"1"
 		"detonate afterburn stacks on hit"	"1"
 		"projectile blue highlight effect"		"1"
+	}
+	"Sunriser"
+	{
+		"index"			"210"
+		"weapon_class"	"tf_weapon_revolver"
+		"weapon_menu"	"tf_weapon_revolver"
+		"class"			"spy"
+		"description"	"Base weapon is the Revolver.\nConverts fire rate bonus into damage bonus.\nShoots 5x faster, but deals 0.15x damage.\nApplies afterburn that lasts for 10s."
+		"cost"			"3000.0"
+		"Converts Firerate to Damage"	"1"
+		"weapon fire rate"				"0.2"
+		"weapon damage mult"			"0.2"
+		"afterburn rating"				"4"
+		"paintkit_proto_def_index"		"402"
+		"set_item_texture_wear"			"0.0"
+	}
+	"Hail"
+	{
+		"index"			"298"
+		"weapon_class"	"tf_weapon_minigun"
+		"weapon_menu"	"tf_weapon_minigun"
+		"class"			"heavy"
+		"description"	"Base Weapon is Iron Curtain.\nFires 2x slower.\nConverts fire rate bonus into damage bonus.\nInstead shoots heavy weight arrows.\nArrows deal 25 damage on impact.\nAfter travelling 520HU, arrows split into 4 with spread."
+		"cost"			"4000.0"
+		"Converts Firerate to Damage"	"1"
+		"weapon fire rate"				"2"
+		"override projectile type"		"51.0"
 	}
 }

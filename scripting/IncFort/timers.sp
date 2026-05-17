@@ -2152,18 +2152,7 @@ public Action:ReEnable(Handle timer, any:ref)
 		KillTimer(timer)
 	}
 }
-public Action:ArrowThink(Handle timer, any:ref) 
-{ 
-	int entity = EntRefToEntIndex(ref); 
-    if(IsValidEdict(entity) && !gravChanges[entity]) 
-    { 
-		SetEntityGravity(entity, 0.001);
-    }
-	else
-	{
-		KillTimer(timer)
-	}
-}
+
 public Action ElectricBallThink(Handle timer, any ref){
 	int entity = EntRefToEntIndex(ref); 
     if(IsValidEntity(entity)) 
@@ -2230,6 +2219,7 @@ public Action Timer_LocusMine(Handle timer, int ref)
     int entity = EntRefToEntIndex(ref);
 	if(!IsValidEdict(entity))
 		return Plugin_Stop;
+
 	int client = GetEntPropEnt(entity, Prop_Data, "m_hThrower"); 
 	if(!IsValidClient3(client))
 		return Plugin_Stop;
@@ -2278,4 +2268,78 @@ public Action Timer_LocusMine(Handle timer, int ref)
 		return Plugin_Stop;
 	}
 	return Plugin_Continue;
+}
+
+public Action Timer_SetEntityGravity(Handle timer, DataPack data) 
+{  
+	data.Reset();
+	int entity = EntRefToEntIndex(ReadPackCell(data));
+	float amount = ReadPackFloat(data);
+	if(IsValidEntity(entity))
+	{
+		SetEntityGravity(entity, amount);
+	}
+	delete data;
+	return Plugin_Continue;
+}
+
+public Action Timer_HailArrowSplit(Handle timer, int ref) 
+{
+    int entity = EntRefToEntIndex(ref);
+	if(!IsValidEdict(entity))
+		return Plugin_Stop;
+
+	int client = GetEntPropEnt(entity, Prop_Data, "m_hOwnerEntity"); 
+	if(!IsValidClient3(client))
+		return Plugin_Stop;
+
+	float fwd[3], fOrigin[3], fAngles[3], vBuffer[3];
+	GetEntPropVector(entity, Prop_Send, "m_vInitialVelocity", vBuffer);
+	GetEntPropVector(entity, Prop_Data, "m_vecOrigin", fOrigin);
+	CreateParticleEx(client, "ExplosionCore_sapperdestroyed", -1, -1, fOrigin);
+	float initialSpeed = GetVectorLength(vBuffer);
+	for(int i = 0; i < 4; i++){
+		int iEntity = CreateEntityByName("tf_projectile_arrow");
+		if (!IsValidEdict(iEntity)) 
+			continue;
+
+		int iTeam = GetClientTeam(client);
+		int weapon = GetEntPropEnt(entity, Prop_Send, "m_hLauncher");
+		if (!IsValidWeapon(weapon))
+			return Plugin_Stop;
+
+		SetEntPropEnt(iEntity, Prop_Send, "m_hOwnerEntity", client);
+		SetEntProp(iEntity, Prop_Send, "m_iTeamNum", iTeam);
+		GetEntPropVector(entity, Prop_Data, "m_angRotation", fAngles);
+
+		fAngles[0] += GetRandomFloat(-5.0, 5.0);
+		fAngles[1] += GetRandomFloat(-5.0, 5.0);
+		GetAngleVectors(fAngles, vBuffer, NULL_VECTOR, NULL_VECTOR);
+		GetAngleVectors(fAngles,fwd, NULL_VECTOR, NULL_VECTOR);
+		ScaleVector(fwd, 50.0);
+		AddVectors(fOrigin, fwd, fOrigin);
+		ScaleVector(vBuffer, initialSpeed);
+		
+		TeleportEntity(iEntity, fOrigin, fAngles, vBuffer);
+		DispatchSpawn(iEntity);
+
+		SetEntPropVector(iEntity, Prop_Send, "m_vInitialVelocity", vBuffer );
+		SetEntPropEnt(iEntity, Prop_Send, "m_hLauncher", weapon);
+		SetEntProp(iEntity, Prop_Send, "m_usSolidFlags", 0x0008);
+		SetEntProp(iEntity, Prop_Data, "m_nSolidType", 6);
+		SetEntProp(iEntity, Prop_Send, "m_CollisionGroup", 13);
+		SetEntProp(iEntity, Prop_Send, "m_bCritical", GetEntProp(entity, Prop_Send, "m_bCritical"));
+		SDKHook(iEntity, SDKHook_StartTouch, OnStartTouchWarriorArrow);
+		CreateSpriteTrail(iEntity, "0.33", "5.0", "1.0",
+			iTeam == 2 ? "materials/effects/arrowtrail_red.vmt":"materials/effects/arrowtrail_blu.vmt", "255 255 255");
+
+		DataPack pack = CreateDataPack();
+		pack.WriteCell(EntIndexToEntRef(iEntity))
+		pack.WriteFloat(5.0);
+
+		CreateTimer(0.1, Timer_SetEntityGravity, pack);
+	}
+
+	RemoveEntity(entity);
+	return Plugin_Stop;
 }
