@@ -363,7 +363,6 @@ BrowseWeaponsListKV(Handle kv, &u_id = -1, att_id = -1, level = 0)
 			upgrades_weapon[u_id] = Buf
 			upgrades_weapon_nb_att[u_id] = 0
 			att_id = 0
-			PrintToServer("Adding custom weapon | %s. | #%i",upgrades_weapon[u_id], u_id)
 		}
 		if (level == 2)
 		{

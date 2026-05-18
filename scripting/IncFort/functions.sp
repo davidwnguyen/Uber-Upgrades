@@ -4311,35 +4311,35 @@ ExplosionHookEffects(entity){
 
 	++stickiesDetonated[owner];
 
-	int CWeapon = GetEntPropEnt(owner, Prop_Send, "m_hActiveWeapon");
-	if(!IsValidWeapon(CWeapon))
+	int weapon = GetEntPropEnt(entity, Prop_Send, "m_hLauncher");
+	if(!IsValidWeapon(weapon))
 		return;
 	
 	float position[3];
 	GetEntPropVector(entity, Prop_Data, "m_vecOrigin", position);
 	position[2] += 15.0;
 
-	float chance = GetAttribute(CWeapon, "sticky recursive explosion chance", 0.0)
+	float chance = GetAttribute(weapon, "sticky recursive explosion chance", 0.0)
 	if(chance >= GetRandomFloat(0.0,1.0)){
 		DataPack hPack = CreateDataPack();
 		hPack.Reset();
 		WritePackCell(hPack, EntIndexToEntRef(owner));
-		WritePackCell(hPack, EntIndexToEntRef(CWeapon));
+		WritePackCell(hPack, EntIndexToEntRef(weapon));
 		WritePackCell(hPack, entity);
 		WritePackFloat(hPack, position[0]);
 		WritePackFloat(hPack, position[1]);
 		WritePackFloat(hPack, position[2]);
-		WritePackFloat(hPack, 90.0 * TF2_GetDamageModifiers(owner, CWeapon));
-		WritePackFloat(hPack, 120.0 * TF2Attrib_HookValueFloat(1.0, "mult_explosion_radius", CWeapon));
+		WritePackFloat(hPack, 90.0 * TF2_GetDamageModifiers(owner, weapon));
+		WritePackFloat(hPack, 120.0 * TF2Attrib_HookValueFloat(1.0, "mult_explosion_radius", weapon));
 		CreateTimer(0.2, RecursiveExplosions, hPack, TIMER_REPEAT);
 	}
 
-	float waspsCount = GetAttribute(CWeapon, "explosion wasps", 0.0)
+	float waspsCount = GetAttribute(weapon, "explosion wasps", 0.0)
 	if(waspsCount > 0){
 		int targetsList[MAXPLAYERS+1];
 		float victimPosition[3];
 		int index;
-		float damage = 40.0 * TF2_GetDamageModifiers(owner, CWeapon);
+		float damage = 40.0 * TF2_GetDamageModifiers(owner, weapon);
 		for(int i=1;i<=MaxClients;++i){
 			if(!IsValidClient3(i))
 				continue;
@@ -4399,11 +4399,42 @@ ExplosionHookEffects(entity){
 		DispatchSpawn(iEntity);
 		setProjGravity(iEntity, 9.0);
 		SDKHook(iEntity, SDKHook_Touch, OnCollisionExplosiveFrag);
-		jarateWeapon[iEntity] = EntIndexToEntRef(CWeapon);
+		jarateWeapon[iEntity] = EntIndexToEntRef(weapon);
 		CreateTimer(1.0,SelfDestruct,EntIndexToEntRef(iEntity));
 		SetEntProp(iEntity, Prop_Send, "m_usSolidFlags", 0x0008);
 		SetEntProp(iEntity, Prop_Data, "m_nSolidType", 6);
 		SetEntProp(iEntity, Prop_Send, "m_CollisionGroup", 13);
+	}
+
+	int bulletCount = RoundToCeil(TF2Attrib_HookValueFloat(1.0, "fan_of_bullets_count", weapon));
+	if(bulletCount > 0){
+		float endPos[3], fAngles[3], direction[3];
+		TracePlayerAim(owner, endPos);
+		SubtractVectors(endPos, position, direction);
+		GetVectorAngles(direction, fAngles);
+
+		const float spread = 8.0;
+		fAngles[1] -= spread + spread/bulletCount;
+
+		for(int j = 0; j < bulletCount; ++j){
+			fAngles[1] += (spread*2)/bulletCount;
+			float tracepos[3];
+
+			Handle traceray = TR_TraceRayFilterEx(position, fAngles, MASK_PLAYERSOLID_BRUSHONLY, RayType_Infinite, PenetrationCallTrace, owner);
+			if (TR_DidHit(traceray)) {
+				TR_GetEndPosition(tracepos, traceray);
+			}
+			delete traceray;
+			
+			SpawnBulletTracer(position, tracepos, "bullet_pistol_tracer01_red");
+			
+			for(int i = 1; i< MAXENTITIES; ++i){
+				if(isPenetrated[i]){
+					SDKHooks_TakeDamage(i,owner,owner,15.0,DMG_BULLET,weapon,_,_,false);
+					isPenetrated[i] = false;
+				}
+			}
+		}
 	}
 }
 
