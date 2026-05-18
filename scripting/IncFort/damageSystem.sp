@@ -1571,9 +1571,9 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 					}
 				}
 				for(int i = 1; i< MAXENTITIES; ++i){
-					if(isPenetrated[i]){
+					if(penetrationCount[i] > 0){
 						SDKHooks_TakeDamage(i,attacker,attacker,baseDamage[attacker]*TF2_GetDamageModifiers(attacker, weapon)*conferenceBonus,DMG_BULLET|DMG_IGNOREHOOK,_,_,_,false);
-						isPenetrated[i] = false;
+						penetrationCount[i] = 0;
 					}
 				}
 			}

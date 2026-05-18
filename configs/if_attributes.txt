@@ -1740,9 +1740,9 @@
 			"ref"		"sticky arm time bonus"
 			"display"		"%.2fs"
 			"cost"		"300"
-			"value"		"-0.20"
+			"value"		"-0.4"
 			"init"		"0.00"
-			"max"		"-0.65"
+			"max"		"-0.8"
 		}
 		"92"
 		{

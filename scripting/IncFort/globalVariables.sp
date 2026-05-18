@@ -334,6 +334,7 @@ int AttunedSpells[MAXPLAYERS+1][Max_Attunement_Slots];
 int recursiveExplosionCount[MAXENTITIES];
 int arcaneSpellCount;
 int kingParticle[MAXPLAYERS+1];
+int penetrationCount[MAXENTITIES+1];
 
 //Floats
 float MoneyBonusKill
@@ -441,7 +442,6 @@ bool miniCritStatus[MAXPLAYERS+1];
 bool RageActive[MAXPLAYERS+1];
 bool canBypassRestriction[MAXPLAYERS+1];
 bool isTagged[MAXPLAYERS+1][MAXPLAYERS+1];
-bool isPenetrated[MAXENTITIES+1];
 bool isPrimed[MAXENTITIES+1];
 bool snowstormActive[MAXPLAYERS+1];
 bool failLock;

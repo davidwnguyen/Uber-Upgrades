@@ -551,12 +551,12 @@
 		"weapon_class"	"tf_weapon_pipebomblauncher"
 		"weapon_menu"	"tf_quickiebomb"
 		"class"			"demo"
-		"description"	"Base Weapon is Stickybomb Launcher.\nStickies spray a fan of 7 bullets on explosion, dealing 15 dmg per pellet.\nConverts fire rate into damage bonus.\nFires 5x faster, but deals 0.2x damage."
+		"description"	"Base Weapon is Stickybomb Launcher.\nStickies spray a fan of 9 bullets on explosion, dealing 15 base damage per pellet.\nConverts fire rate into damage bonus.\nFires 5x faster, but deals 0.125x damage."
 		"cost"			"10000.0"
 		"paintkit_proto_def_index"					"432"
-		"fan of bullets count"						"7"
+		"fan of bullets count"						"9"
 		"Converts Firerate to Damage"				"1"
 		"weapon fire rate"				"0.2"
-		"weapon damage mult"			"0.2"
+		"weapon damage mult"			"0.125"
 	}
 }

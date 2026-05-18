@@ -3125,7 +3125,7 @@ public Action TF2_CalcIsAttackCritical(int client, int weapon, char[] weaponname
 			}
 			case 50.0:
 			{
-				int bulletCount = RoundToCeil(TF2Attrib_HookValueFloat(1.0, "fan_of_bullets_count", weapon));
+				int bulletCount = RoundToCeil(TF2Attrib_HookValueFloat(0.0, "fan_of_bullets_count", weapon));
 				GetClientEyePosition(client, fOrigin);
 				GetClientEyeAngles(client, fAngles);
 
@@ -3144,12 +3144,11 @@ public Action TF2_CalcIsAttackCritical(int client, int weapon, char[] weaponname
 					delete traceray;
 					
 					SpawnBulletTracer(fOrigin, endpos, "bullet_pistol_tracer01_red");
-					
-					for(int i = 1; i< MAXENTITIES; ++i){
-						if(isPenetrated[i]){
-							SDKHooks_TakeDamage(i,client,client,25.0,DMG_BULLET,weapon,_,_,false);
-							isPenetrated[i] = false;
-						}
+				}
+				for(int i = 1; i < MAXENTITIES; ++i){
+					if(penetrationCount[i] > 0){
+						SDKHooks_TakeDamage(i,client,client,25.0*penetrationCount[i],DMG_BULLET,weapon,_,_,false);
+						penetrationCount[i] = 0;
 					}
 				}
 			}

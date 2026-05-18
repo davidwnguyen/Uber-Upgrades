@@ -3425,7 +3425,10 @@ stock SentryMultishot(entity)
 stock bool PenetrationCallTrace(int entity, int contentsMask, any data) {
 	if(entity != 0 && IsValidEntity(entity) && IsValidForDamage(entity)){
 		if(IsOnDifferentTeams(entity,data)){
-			isPenetrated[entity] = true;
+			if(penetrationCount[entity] < 0)
+				penetrationCount[entity] = 0;
+
+			penetrationCount[entity]++;
 			return false;
 		}
 		return false;
@@ -4406,7 +4409,7 @@ ExplosionHookEffects(entity){
 		SetEntProp(iEntity, Prop_Send, "m_CollisionGroup", 13);
 	}
 
-	int bulletCount = RoundToCeil(TF2Attrib_HookValueFloat(1.0, "fan_of_bullets_count", weapon));
+	int bulletCount = RoundToCeil(TF2Attrib_HookValueFloat(0.0, "fan_of_bullets_count", weapon));
 	if(bulletCount > 0){
 		float endPos[3], fAngles[3], direction[3];
 		TracePlayerAim(owner, endPos);
@@ -4427,12 +4430,11 @@ ExplosionHookEffects(entity){
 			delete traceray;
 			
 			SpawnBulletTracer(position, tracepos, "bullet_pistol_tracer01_red");
-			
-			for(int i = 1; i< MAXENTITIES; ++i){
-				if(isPenetrated[i]){
-					SDKHooks_TakeDamage(i,owner,owner,15.0,DMG_BULLET,weapon,_,_,false);
-					isPenetrated[i] = false;
-				}
+		}
+		for(int i = 1; i< MAXENTITIES; ++i){
+			if(penetrationCount[i] > 0){
+				SDKHooks_TakeDamage(i,owner,owner,15.0*penetrationCount[i],DMG_BULLET,weapon,_,_,false);
+				penetrationCount[i] = 0;
 			}
 		}
 	}
