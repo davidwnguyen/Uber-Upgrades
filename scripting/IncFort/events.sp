@@ -166,6 +166,15 @@ public Event_Playerhurt(Handle event, const char[] name, bool:dontBroadcast)
 						}
 					}
 				}
+				int arrowNovaCap = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "arrow_nova_altfire_cap", CWeapon));
+				if(arrowNovaCap && arrowExpulsionCooldown[attacker]-GetGameTime() <= 2.5){
+					arrowNovaCount[attacker][client]++;
+					if(arrowNovaCount[attacker][client] > arrowNovaCap){
+						arrowNovaCount[attacker][client] = arrowNovaCap;
+					} else if (arrowNovaCount[attacker][client] <= 0){
+						arrowNovaCount[attacker][client] = 1;
+					}
+				}
 			}
 		}
 	}
@@ -2219,6 +2228,67 @@ public Action OnPlayerRunCmd(int client, int& buttons, int& impulse, float vel[3
 				else if (maelstromChargeCount[client] > 0) {
 					char CooldownTime[32]
 					Format(CooldownTime, sizeof(CooldownTime), "Maelstrom Charge: %i/25", maelstromChargeCount[client]); 
+					SetHudTextParams(x, y, TICKINTERVAL*10, 0, 101, 189, 255, 0, 0.0, 0.0, 0.0);
+					ShowSyncHudText(client, hudAbility, CooldownTime);
+				}
+
+				
+				float arrowNovaDamage = TF2Attrib_HookValueFloat(0.0, "arrow_nova_altfire", CWeapon);
+				if(arrowNovaDamage){
+					char CooldownTime[32];
+					if(arrowExpulsionCooldown[client]-GetGameTime() < 0){
+						Format(CooldownTime, sizeof(CooldownTime), "Arrow Nova: READY (M2)"); 
+						if(buttons & IN_ATTACK2){
+							arrowExpulsionCooldown[client] = GetGameTime() + 3.0;
+							for(int i = 1; i<=MaxClients; i++){
+								if(!IsValidClient3(i))
+									continue;
+								if(!IsPlayerAlive(i))
+									continue;
+								if(!IsOnDifferentTeams(client, i))
+									continue;
+								if(arrowNovaCount[client][i] == 0)
+									continue;
+								
+								float fAngles[3], fOrigin[3], vBuffer[3];
+								fAngles[0] = 0.2;
+								fAngles[1] = GetRandomFloat(-180.0, 180.0);
+								fAngles[2] = 0.0;
+								GetClientAbsOrigin(i, fOrigin);
+								fOrigin[2] += 30.0;
+
+								for(int j = 0; j < arrowNovaCount[client][i]; j++){
+									fAngles[1] += 360.0/arrowNovaCount[client][i];
+									int iEntity = CreateEntityByName("tf_projectile_arrow");
+									if (!IsValidEdict(iEntity)) 
+										continue;
+
+									SetEntPropEnt(iEntity, Prop_Send, "m_hOwnerEntity", client);
+									SetEntProp(iEntity, Prop_Send, "m_iTeamNum", GetClientTeam(client));
+
+									GetAngleVectors(fAngles, vBuffer, NULL_VECTOR, NULL_VECTOR);
+									ScaleVector(vBuffer, 1000.0);
+									
+									TeleportEntity(iEntity, fOrigin, fAngles, vBuffer);
+									DispatchSpawn(iEntity);
+
+									SetEntPropVector(iEntity, Prop_Send, "m_vInitialVelocity", vBuffer );
+									SetEntPropEnt(iEntity, Prop_Send, "m_hLauncher", weapon);
+									SetEntProp(iEntity, Prop_Send, "m_usSolidFlags", 0x0008);
+									SetEntProp(iEntity, Prop_Data, "m_nSolidType", 6);
+									SetEntProp(iEntity, Prop_Send, "m_CollisionGroup", 13);
+									projectileDamage[iEntity] = arrowNovaDamage;
+									SDKHook(iEntity, SDKHook_StartTouch, OnStartTouchPiercingArrow);
+									CreateSpriteTrail(iEntity, "0.33", "5.0", "1.0",
+										GetClientTeam(client) == 2 ? "materials/effects/arrowtrail_red.vmt":"materials/effects/arrowtrail_blu.vmt", "255 255 255");
+								}
+								arrowNovaCount[client][i] = 0;
+							}
+						}
+					}
+					else {
+						Format(CooldownTime, sizeof(CooldownTime), "Arrow Nova: %.1fs", arrowExpulsionCooldown[client]-GetGameTime()); 
+					}
 					SetHudTextParams(x, y, TICKINTERVAL*10, 0, 101, 189, 255, 0, 0.0, 0.0, 0.0);
 					ShowSyncHudText(client, hudAbility, CooldownTime);
 				}

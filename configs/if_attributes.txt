@@ -7671,6 +7671,48 @@
 			"init"		"0"
 			"max"		"1"
 		}
+		"1747"
+		{
+			"name"		"custom_paintkit_seed_lo"
+			"ref"		"custom_paintkit_seed_lo"
+			"display"	"%.0f"
+			"cost"		"0"
+			"value"		"1"
+			"init"		"0"
+			"max"		"2147483647"
+		}
+		"1748"
+		{
+			"name"		"custom_paintkit_seed_hi"
+			"ref"		"custom_paintkit_seed_hi"
+			"display"	"%.0f"
+			"cost"		"0"
+			"value"		"1"
+			"init"		"0"
+			"max"		"2147483647"
+		}
+		"1749"
+		{
+			"name"		"arrow nova altfire damage"
+			"ref"		"arrow nova altfire damage"
+			"attr_class"	"arrow_nova_altfire"
+			"display"	"%.0f"
+			"cost"		"0"
+			"value"		"1"
+			"init"		"0"
+			"max"		"0"
+		}
+		"1750"
+		{
+			"name"		"arrow nova altfire cap"
+			"ref"		"arrow nova altfire cap"
+			"attr_class"	"arrow_nova_altfire_cap"
+			"display"	"%.0f"
+			"cost"		"0"
+			"value"		"1"
+			"init"		"0"
+			"max"		"0"
+		}
 		//Filler
 		"1900.0"
 		{

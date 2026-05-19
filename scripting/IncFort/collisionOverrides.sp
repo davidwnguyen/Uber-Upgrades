@@ -1158,3 +1158,63 @@ public Action:OnAirblastArrowCollision(entity, client)
 	RemoveEntity(entity);
 	return Plugin_Stop;
 }
+public Action:OnStartTouchPiercingArrow(entity, other)
+{
+	SDKHook(entity, SDKHook_Touch, OnCollisionPiercingArrow);
+	return Plugin_Handled;
+}
+public Action:OnCollisionPiercingArrow(entity, client)
+{
+	SDKUnhook(entity, SDKHook_Touch, OnCollisionPiercingArrow);
+	if(!client)
+		return Plugin_Continue;
+
+	Action action = Plugin_Continue;
+	
+	if(IsValidForDamage(client))
+	{
+		if(HasEntProp(entity, Prop_Send, "m_hOwnerEntity"))
+		{
+			int owner = GetEntPropEnt(entity, Prop_Send, "m_hOwnerEntity")
+			if(IsValidClient3(owner) && IsOnDifferentTeams(entity,client))
+			{
+				float origin[3];
+				float ProjAngle[3];
+				float vBuffer[3];
+				GetEntPropVector(entity, Prop_Data, "m_vecOrigin", origin);
+				GetEntPropVector(entity, Prop_Data, "m_angRotation", ProjAngle);
+				GetAngleVectors(ProjAngle, vBuffer, NULL_VECTOR, NULL_VECTOR);
+				ScaleVector(vBuffer, 50.0);
+				AddVectors(origin, vBuffer, origin);
+				TeleportEntity(entity, origin,NULL_VECTOR,NULL_VECTOR);
+				RequestFrame(fixPiercingVelocity,EntIndexToEntRef(entity))
+				
+				int CWeapon = GetEntPropEnt(owner, Prop_Send, "m_hActiveWeapon");
+				if(IsValidEdict(CWeapon))
+				{
+					int damageType = GetEntProp(entity, Prop_Send, "m_bCritical") ? DMG_BULLET|DMG_CRIT : DMG_BULLET;
+					SDKHooks_TakeDamage(client, entity, owner, projectileDamage[entity], damageType, CWeapon, _, _, false);
+				}
+				if(IsValidClient3(client))
+					ShouldNotHome[entity][client] = true;
+				action = Plugin_Stop;
+			}
+		}
+	}
+	if(IsValidEdict(entity))
+	{
+		float origin[3];
+		float ProjAngle[3];
+		float vBuffer[3];
+		GetEntPropVector(entity, Prop_Data, "m_vecOrigin", origin);
+		GetEntPropVector(entity, Prop_Data, "m_angRotation", ProjAngle);
+		GetAngleVectors(ProjAngle, vBuffer, NULL_VECTOR, NULL_VECTOR);
+		ScaleVector(vBuffer, 20.0);
+		AddVectors(origin, vBuffer, origin);
+		TeleportEntity(entity, origin,NULL_VECTOR,NULL_VECTOR);
+		RequestFrame(fixPiercingVelocity,EntIndexToEntRef(entity))
+		action = Plugin_Stop;
+	}
+
+	return action;
+}

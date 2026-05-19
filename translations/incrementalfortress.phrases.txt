@@ -1,5 +1,14 @@
 "Phrases"
 {
+	"arrow nova altfire damage"{
+		"en"		"Arrow Nova Alt-Fire Damage"
+	}
+	"custom_paintkit_seed_lo"{
+		"en"		"custom_paintkit_seed_lo"
+	}
+	"custom_paintkit_seed_hi"{
+		"en"		"custom_paintkit_seed_hi"
+	}
 	"fan of bullets count"{
 		"en"		"Bullets per Shot"
 	}

@@ -4245,6 +4245,7 @@ cleanSlateClient(int client){
 	infernalDetonationCooldown[client] = 0.0;
 	LSPool[client] = 0.0;
 	detonateParticleCooldown[client] = 0.0;
+	arrowExpulsionCooldown[client] = 0.0;
 	clearAllBuffs(client);
 	removeAfterburn(client);
 	removeRecoup(client);
@@ -4253,6 +4254,7 @@ cleanSlateClient(int client){
 	{
 		corrosiveDOT[client][i][0] = 0.0;
 		corrosiveDOT[client][i][1] = 0.0;
+		arrowNovaCount[client][i] = 0;
 		isTagged[i][client] = false;
 		if(client == tagTeamTarget[i])
 			tagTeamTarget[i] = -1;
