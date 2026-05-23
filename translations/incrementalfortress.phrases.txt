@@ -2400,9 +2400,6 @@
 	"fish damage override"{
 		"en"		"Hits Displayed On Killfeed"
 	}
-	"Set Weapon Mode"{
-		"en"		"Set Weapon Mode"
-	}
 	"distortion_trail"{
 		"en"		"Classic Bullet Trail"
 	}

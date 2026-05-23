@@ -1345,7 +1345,7 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 				if(!IsValidClient3(healer))
 					continue;
 				
-				int healingWeapon = TF2Util_GetPlayerLoadoutEntity(healer, 1);
+				int healingWeapon = GetEntPropEnt(healer, Prop_Send, "m_hActiveWeapon");
 				if(!IsValidWeapon(healingWeapon))
 					continue;
 				
@@ -1387,7 +1387,7 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 					if(!IsValidClient3(healer))
 						continue;
 						
-					int healingWeapon = TF2Util_GetPlayerLoadoutEntity(healer, 1);
+					int healingWeapon = GetEntPropEnt(healer, Prop_Send, "m_hActiveWeapon");
 					if(!IsValidWeapon(healingWeapon))
 						continue;
 					
@@ -1661,7 +1661,7 @@ public float genericPlayerDamageModification(victim, attacker, inflictor, float 
 					if(!IsValidClient3(healer))
 						continue;
 
-					int healingWeapon = TF2Util_GetPlayerLoadoutEntity(healer, 1);
+					int healingWeapon = GetEntPropEnt(healer, Prop_Send, "m_hActiveWeapon");
 					if(!IsValidWeapon(healingWeapon))
 						continue;
 

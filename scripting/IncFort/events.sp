@@ -66,7 +66,7 @@ public Event_Playerhurt(Handle event, const char[] name, bool:dontBroadcast)
 					if(!IsValidClient3(healer))
 						continue;
 						
-					int healingWeapon = TF2Util_GetPlayerLoadoutEntity(healer, 1);
+					int healingWeapon = GetEntPropEnt(healer, Prop_Send, "m_hActiveWeapon");
 					if(!IsValidWeapon(healingWeapon))
 						continue;
 
@@ -205,7 +205,7 @@ public Event_UberDeployed(Event event, const char[] name, bool dontBroadcast){
 	if(!IsValidClient3(medic) || !IsPlayerAlive(medic) || TF2_GetPlayerClass(medic) != TFClass_Medic)
 		return;
 	
-	int medigun = TF2Util_GetPlayerLoadoutEntity(medic, 1);
+	int medigun = GetEntPropEnt(medic, Prop_Send, "m_hActiveWeapon");
 	if(!IsValidWeapon(medigun))
 		return;
 	
