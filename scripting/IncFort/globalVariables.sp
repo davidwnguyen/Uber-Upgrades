@@ -457,6 +457,8 @@ bool isBotScrambled[MAXPLAYERS+1];
 bool isMvM;
 bool hasSupernovaSplashed[MAXPLAYERS+1];
 bool isWarpFlagged[MAXPLAYERS+1];
+bool g_NativeVotes;
+
 //bool isHitForMelee[MAXPLAYERS+1][MAXENTITIES];
 //Other Datatypes
 TFClassType current_class[MAXPLAYERS+1]
@@ -507,3 +509,15 @@ int locusMinesProjCount[MAXENTITIES];
 bool hasHit[MAXENTITIES][30];
 int currentAttackCounter;
 int projectileAttackCounter[MAXENTITIES];
+
+// copy and pasted voteslop :wilted_rose:
+#define VOTE_NAME 0
+#define VOTE_AUTHID 1
+char g_VoteInfo[2][65];
+
+enum VoteType
+{
+	difficulty
+};
+
+VoteType g_VoteType = difficulty;

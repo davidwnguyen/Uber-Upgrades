@@ -25,6 +25,7 @@
 #include <tf2_sentryfirebullet>
 #include <tf_econ_dynamic>
 #include <vscript>
+#include <nativevotes>
 
 #pragma tabsize 0
 
@@ -111,3 +112,4 @@ public Plugin:myinfo =
 #include "IncFort/databases.sp"
 #include "IncFort/events.sp"
 #include "IncFort/arcaneSystem.sp"
+#include "IncFort/voteSystem.sp"

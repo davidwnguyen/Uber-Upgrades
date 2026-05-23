@@ -1,5 +1,9 @@
 "Phrases"
 {
+	// Vote menu stuff
+	"Difficulty Vote"{
+		"en"		"Change Bot Difficulty Multiplier to:"
+	}
 	"arrow nova altfire damage"{
 		"en"		"Arrow Nova Alt-Fire Damage"
 	}

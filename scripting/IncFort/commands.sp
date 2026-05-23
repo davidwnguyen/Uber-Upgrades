@@ -178,7 +178,7 @@ public Action:ShowHelp(client, args)
 		CPrintToChat(client, "{gray}Help | {gold}This server is running Incremental Fortress v%s", PLUGIN_VERSION);
 		if(!isMvM)
 		{
-			CPrintToChat(client, "{gray}Help | {gold}/votemenu can be used to adjust how many bots and how difficult they are.")
+			CPrintToChat(client, "{gray}Help | {gold}/votedifficulty can be used to adjust how difficult bots are.")
 		}
 	}
 	return Plugin_Handled;

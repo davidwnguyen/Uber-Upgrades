@@ -70,7 +70,7 @@ public UberShopinitMenusHandlers()
 	cvar_MoneyBonusKill = CreateConVar("sm_if_moneybonuskill", "600", "Sets the money bonus a client gets for killing");
 	cvar_StartMoney = CreateConVar("sm_if_startmoney", "60000", "Sets the starting money");
 	cvar_ServerMoneyMult = CreateConVar("sm_if_moneymult", "1.0", "Sets the Cash Multiplier");
-	cvar_BotMultiplier = CreateConVar("sm_if_botmultiplier", "0.65", "Sets the bot stat multiplier.: default 0.65");
+	cvar_BotMultiplier = CreateConVar("sm_if_botmultiplier", "1.0", "Sets the bot stat multiplier.: default 1.0");
 	cvar_DisableBotUpgrade = CreateConVar("sm_if_disablebotupgrades","0","Disables bot upgrades if set to 1");
 	cvar_DisableCooldowns = CreateConVar("sm_if_disablecooldowns","0","Disables arcane cooldowns if set to 1");
 	
@@ -126,6 +126,8 @@ public UberShopinitMenusHandlers()
 	RegConsoleCmd("sm_stats", ShowMults, "Shows all your multipliers.");
 	RegConsoleCmd("sm_arcane", Command_UseArcane, "Use specified arcane spell.");
 	RegConsoleCmd("sm_showhelp", ShowHelp, "Displays all if help.");
+
+	RegConsoleCmd("sm_votedifficulty", Command_VoteDifficulty, "Vote for IF bot difficulty.");
 	
 	HookEvent("player_hurt", Event_Playerhurt, EventHookMode_Pre);
 	HookEvent("player_chargedeployed", Event_UberDeployed);
@@ -557,4 +559,12 @@ public OnPluginEnd()
 			OnClientDisconnect(i);
 
 	//DeleteDatabase();
+}
+
+public void OnLibraryAdded(const char[] name)
+{
+	if (StrEqual(name, "nativevotes"))
+	{
+		g_NativeVotes = true;
+	}
 }
