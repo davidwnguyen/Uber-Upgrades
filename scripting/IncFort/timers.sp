@@ -4,143 +4,144 @@ public Action:Timer_Second(Handle timer)
 	{
 		if(singularBuysPerMinute[client] > 0)
 			singularBuysPerMinute[client]--;
-		if (IsValidClient3(client))
+		if (!IsValidClient3(client))
+			continue;
+		if (!IsPlayerAlive(client))
+			continue;
+		
+		if(TF2Attrib_HookValueFloat(0.0, "regeneration_powerup", client) == 1.0){
+			for(int i=0;i<3;++i){
+				int weapon = TF2Util_GetPlayerLoadoutEntity(client, i);
+				if(!IsValidWeapon(weapon))
+					continue;
+				if(!HasEntProp(weapon, Prop_Send, "m_iPrimaryAmmoType"))
+					continue;
+				
+				int type = GetEntProp(weapon, Prop_Send, "m_iPrimaryAmmoType"); 
+				SetAmmo_Weapon(weapon, TF2Util_GetPlayerMaxAmmo(client, type, current_class[client]));
+			}
+		}
+		else if(TF2Attrib_HookValueFloat(0.0, "regeneration_powerup", client) == 2.0){
+			for(int i=0;i<3;++i){
+				int weapon = TF2Util_GetPlayerLoadoutEntity(client, i);
+				if(!IsValidWeapon(weapon))
+					continue;
+				if(!HasEntProp(weapon, Prop_Send, "m_iPrimaryAmmoType"))
+					continue;
+				if(GetAttribute(weapon, "auto fires full clip all at once", 0.0) || GetAttribute(weapon, "auto fires full clip", 0.0))
+					continue;
+
+				if(HasEntProp(weapon, Prop_Send, "m_iClip1")){
+					if(TF2Util_GetWeaponMaxClip(weapon) == -1)
+						SetAmmo_Weapon(weapon, TF2Util_GetPlayerMaxAmmo(client, GetEntProp(weapon, Prop_Send, "m_iPrimaryAmmoType"), current_class[client]));
+					else
+						SetEntProp(weapon, Prop_Send, "m_iClip1", 4*TF2Util_GetWeaponMaxClip(weapon));
+				}
+				if(HasEntProp(weapon, Prop_Send, "m_flEnergy")){
+					SetEntPropFloat(weapon, Prop_Send, "m_flEnergy", 4.0*TF2Util_GetWeaponMaxClip(weapon));
+				}
+			}
+		}
+		
+		if(IsValidClient(client)){
+			GetClientCookie(client, hArmorXPos, ArmorXPos[client], sizeof(ArmorXPos));
+			GetClientCookie(client, hArmorYPos, ArmorYPos[client], sizeof(ArmorYPos));
+		}
+
+		ArcanePower[client] = TF2Attrib_HookValueFloat(1.0, "arcane_power", client);
+		ArcaneDamage[client] = TF2Attrib_HookValueFloat(1.0, "arcane_damage", client) * GetAttribute(client, "damage mult 12", 1.0) * GetAttribute(client, "damage mult 4", 1.0) * ArcanePower[client] * ArcanePower[client] * ArcanePower[client];
+		fl_MaxFocus[client] = (100.0+TF2Attrib_HookValueInt(0, "arcane_focus_max", client)) * ArcanePower[client];
+		fl_RegenFocus[client] = fl_MaxFocus[client] * TICKINTERVAL * 0.05 * TF2Attrib_HookValueFloat(1.0, "arcane_focus_regeneration", client);
+
+		bool isOnFire = false;
+		float damageAccumulation[MAXPLAYERS];
+		for(int i=0;i < MAX_AFTERBURN_STACKS; ++i){
+			if(playerAfterburn[client][i].remainingTicks <= 0)
+				continue;
+
+			int owner = playerAfterburn[client][i].owner;
+			if(!IsValidClient3(owner))
+				continue;
+
+			damageAccumulation[owner] += playerAfterburn[client][i].damage;
+			playerAfterburn[client][i].remainingTicks--;
+		}
+
+		for(int owner=1;owner<=MaxClients;++owner){
+			if(damageAccumulation[owner] > 0){
+				SDKHooks_TakeDamage(client, owner, owner, damageAccumulation[owner], DMG_BURN|DMG_PREVENT_PHYSICS_FORCE|DMG_IGNOREHOOK, _, _, _, false);
+				isOnFire = true;
+			}
+		}
+
+		if(!isOnFire)
+			TF2_RemoveCondition(client, TFCond_OnFire);
+
+		switch(TF2Attrib_HookValueFloat(0.0, "player_boss_type", client))
 		{
-			if(TF2Attrib_HookValueFloat(0.0, "regeneration_powerup", client) == 1.0){
-				for(int i=0;i<3;++i){
-					int weapon = TF2Util_GetPlayerLoadoutEntity(client, i);
-					if(!IsValidWeapon(weapon))
-						continue;
-					if(!HasEntProp(weapon, Prop_Send, "m_iPrimaryAmmoType"))
-						continue;
-					
-					int type = GetEntProp(weapon, Prop_Send, "m_iPrimaryAmmoType"); 
-					SetAmmo_Weapon(weapon, TF2Util_GetPlayerMaxAmmo(client, type, current_class[client]));
-				}
-			}
-			else if(TF2Attrib_HookValueFloat(0.0, "regeneration_powerup", client) == 2.0){
-				for(int i=0;i<3;++i){
-					int weapon = TF2Util_GetPlayerLoadoutEntity(client, i);
-					if(!IsValidWeapon(weapon))
-						continue;
-					if(!HasEntProp(weapon, Prop_Send, "m_iPrimaryAmmoType"))
-						continue;
-					if(GetAttribute(weapon, "auto fires full clip all at once", 0.0) || GetAttribute(weapon, "auto fires full clip", 0.0))
-						continue;
-
-					if(HasEntProp(weapon, Prop_Send, "m_iClip1")){
-						if(TF2Util_GetWeaponMaxClip(weapon) == -1)
-							SetAmmo_Weapon(weapon, TF2Util_GetPlayerMaxAmmo(client, GetEntProp(weapon, Prop_Send, "m_iPrimaryAmmoType"), current_class[client]));
-						else
-							SetEntProp(weapon, Prop_Send, "m_iClip1", 4*TF2Util_GetWeaponMaxClip(weapon));
-					}
-					if(HasEntProp(weapon, Prop_Send, "m_flEnergy")){
-						SetEntPropFloat(weapon, Prop_Send, "m_flEnergy", 4.0*TF2Util_GetWeaponMaxClip(weapon));
-					}
-				}
-			}
-			
-			if(IsValidClient(client)){
-				GetClientCookie(client, hArmorXPos, ArmorXPos[client], sizeof(ArmorXPos));
-				GetClientCookie(client, hArmorYPos, ArmorYPos[client], sizeof(ArmorYPos));
-			}
-
-			ArcanePower[client] = TF2Attrib_HookValueFloat(1.0, "arcane_power", client);
-			ArcaneDamage[client] = TF2Attrib_HookValueFloat(1.0, "arcane_damage", client) * GetAttribute(client, "damage mult 12", 1.0) * GetAttribute(client, "damage mult 4", 1.0) * ArcanePower[client] * ArcanePower[client] * ArcanePower[client];
-			fl_MaxFocus[client] = (100.0+TF2Attrib_HookValueInt(0, "arcane_focus_max", client)) * ArcanePower[client];
-			fl_RegenFocus[client] = fl_MaxFocus[client] * TICKINTERVAL * 0.05 * TF2Attrib_HookValueFloat(1.0, "arcane_focus_regeneration", client);
-
-			bool isOnFire = false;
-			float damageAccumulation[MAXPLAYERS];
-			for(int i=0;i < MAX_AFTERBURN_STACKS; ++i){
-				if(playerAfterburn[client][i].remainingTicks <= 0)
-					continue;
-
-				int owner = playerAfterburn[client][i].owner;
-				if(!IsValidClient3(owner))
-					continue;
-
-				damageAccumulation[owner] += playerAfterburn[client][i].damage;
-				playerAfterburn[client][i].remainingTicks--;
-			}
-
-			for(int owner=1;owner<=MaxClients;++owner){
-				if(damageAccumulation[owner] > 0){
-					SDKHooks_TakeDamage(client, owner, owner, damageAccumulation[owner], DMG_BURN|DMG_PREVENT_PHYSICS_FORCE|DMG_IGNOREHOOK, _, _, _, false);
-					isOnFire = true;
-				}
-			}
-
-			if(!isOnFire)
-				TF2_RemoveCondition(client, TFCond_OnFire);
-
-			switch(TF2Attrib_HookValueFloat(0.0, "player_boss_type", client))
+			case 7.0:
 			{
-				case 7.0:
+				CreateParticleEx(client, "utaunt_arcane_yellow_parent", 1, _, _, 1.0);
+				int CWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
+				if(IsValidEdict(CWeapon))
 				{
-					CreateParticleEx(client, "utaunt_arcane_yellow_parent", 1, _, _, 10.0);
-					int CWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
-					if(IsValidEdict(CWeapon))
+						
+					float clientpos[3];
+					GetClientAbsOrigin(client,clientpos);
+					clientpos[0] += GetRandomFloat(-200.0,200.0);
+					clientpos[1] += GetRandomFloat(-200.0,200.0);
+					clientpos[2] = getLowestPosition(clientpos);
+					// define where the lightning strike starts
+					float startpos[3];
+					startpos[0] = clientpos[0];
+					startpos[1] = clientpos[1];
+					startpos[2] = clientpos[2] + 1600;
+					
+					int color[4];
+					color = {255,228,0,255};
+					
+					// define the direction of the sparks
+					float dir[3] = {0.0, 0.0, 0.0};
+					
+					TE_SetupBeamPoints(startpos, clientpos, g_LightningSprite, 0, 0, 0, 0.2, 20.0, 10.0, 0, 1.0, color, 3);
+					TE_SendToAll();
+					
+					TE_SetupSparks(clientpos, dir, 5000, 1000);
+					TE_SendToAll();
+					
+					TE_SetupEnergySplash(clientpos, dir, false);
+					TE_SendToAll();
+					
+					TE_SetupSmoke(clientpos, g_SmokeSprite, 5.0, 10);
+					TE_SendToAll();
+					
+					TE_SetupBeamRingPoint(clientpos, 20.0, 650.0, g_LightningSprite, spriteIndex, 0, 5, 0.5, 10.0, 1.0, color, 200, 0);
+					TE_SendToAll();
+					
+					EmitAmbientSound("ambient/explosions/explode_9.wav", startpos, client, 50);
+					
+					float LightningDamage = 10.0*TF2_GetDPSModifiers(client,CWeapon);
+					int i = -1;
+					while ((i = FindEntityByClassname(i, "*")) != -1)
 					{
-						CreateParticleEx(CWeapon, "utaunt_auroraglow_orange_parent", 1, _, _, 10.0);
+						if(!IsValidForDamage(i))
+							continue;
+						if(!IsOnDifferentTeams(client,i))
+							continue;
+						
+						float VictimPos[3];
+						GetEntPropVector(i, Prop_Data, "m_vecOrigin", VictimPos);
+						VictimPos[2] += 30.0;
+						if(GetVectorDistance(clientpos,VictimPos,true) > 422500.0) //650HU
+							continue;
+						if(!IsPointVisible(clientpos,VictimPos))
+							continue;
 							
-						float clientpos[3];
-						GetClientAbsOrigin(client,clientpos);
-						clientpos[0] += GetRandomFloat(-200.0,200.0);
-						clientpos[1] += GetRandomFloat(-200.0,200.0);
-						clientpos[2] = getLowestPosition(clientpos);
-						// define where the lightning strike starts
-						float startpos[3];
-						startpos[0] = clientpos[0];
-						startpos[1] = clientpos[1];
-						startpos[2] = clientpos[2] + 1600;
-						
-						int color[4];
-						color = {255,228,0,255};
-						
-						// define the direction of the sparks
-						float dir[3] = {0.0, 0.0, 0.0};
-						
-						TE_SetupBeamPoints(startpos, clientpos, g_LightningSprite, 0, 0, 0, 0.2, 20.0, 10.0, 0, 1.0, color, 3);
-						TE_SendToAll();
-						
-						TE_SetupSparks(clientpos, dir, 5000, 1000);
-						TE_SendToAll();
-						
-						TE_SetupEnergySplash(clientpos, dir, false);
-						TE_SendToAll();
-						
-						TE_SetupSmoke(clientpos, g_SmokeSprite, 5.0, 10);
-						TE_SendToAll();
-						
-						TE_SetupBeamRingPoint(clientpos, 20.0, 650.0, g_LightningSprite, spriteIndex, 0, 5, 0.5, 10.0, 1.0, color, 200, 0);
-						TE_SendToAll();
-						
-						EmitAmbientSound("ambient/explosions/explode_9.wav", startpos, client, 50);
-						
-						float LightningDamage = 10.0*TF2_GetDPSModifiers(client,CWeapon);
-						int i = -1;
-						while ((i = FindEntityByClassname(i, "*")) != -1)
-						{
-							if(!IsValidForDamage(i))
-								continue;
-							if(!IsOnDifferentTeams(client,i))
-								continue;
-							
-							float VictimPos[3];
-							GetEntPropVector(i, Prop_Data, "m_vecOrigin", VictimPos);
-							VictimPos[2] += 30.0;
-							if(GetVectorDistance(clientpos,VictimPos,true) > 422500.0) //650HU
-								continue;
-							if(!IsPointVisible(clientpos,VictimPos))
-								continue;
-								
-							SDKHooks_TakeDamage(i,client,client, LightningDamage, DMG_IGNOREHOOK, _,_,_,false);
+						SDKHooks_TakeDamage(i,client,client, LightningDamage, DMG_IGNOREHOOK, _,_,_,false);
 
-							if(i <= MaxClients){
-								RadiationBuildup[i] += 150.0;
-								checkRadiation(i,client);
-							}
+						if(i <= MaxClients){
+							RadiationBuildup[i] += 150.0;
+							checkRadiation(i,client);
 						}
 					}
 				}
