@@ -915,7 +915,7 @@ public Action:CollisionFrozenFrag(entity, client)
 			{
 				if(IsOnDifferentTeams(owner,client))
 				{
-					float damageDealt = 0.5*TF2Util_GetEntityMaxHealth(jarateWeapon[entity]);
+					float damageDealt = 0.65*TF2Util_GetEntityMaxHealth(jarateWeapon[entity]);
 					SDKHooks_TakeDamage(client, entity, owner, damageDealt, DMG_PREVENT_PHYSICS_FORCE|DMG_IGNOREHOOK|DMG_PIERCING, CWeapon, _,_,false);
 					RemoveEntity(entity);
 				}

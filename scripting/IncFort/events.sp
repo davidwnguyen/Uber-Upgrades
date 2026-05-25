@@ -1261,21 +1261,22 @@ public Action:Event_PlayerDeath(Handle event, const char[] name, bool:dontBroadc
 	}
 	if(hasBuffIndex(client, Buff_Frozen)){
 		int owner = playerBuffs[client][getBuffInArray(client, Buff_Frozen)].inflictor;
-		for(int i = 0;i<9;++i)
+		float fAngles[3], fOrigin[3], vBuffer[3], fVelocity[3], fwd[3];
+		GetEntPropVector(client, Prop_Send, "m_vecOrigin", fOrigin);
+		fOrigin[2] += 35.0;
+
+		for(int i = 0;i<12;++i)
 		{
 			int iEntity = CreateEntityByName("tf_projectile_syringe");
 			if (!IsValidEdict(iEntity)) 
 				continue;
 
 			int iTeam = GetClientTeam(owner);
-			float fAngles[3],fOrigin[3],vBuffer[3]
-			float fVelocity[3]
-			float fwd[3]
 			SetEntPropEnt(iEntity, Prop_Send, "m_hOwnerEntity", owner);
 			SetEntProp(iEntity, Prop_Send, "m_iTeamNum", iTeam);
-			GetEntPropVector(client, Prop_Send, "m_vecOrigin", fOrigin);
-			fAngles[0] = GetRandomFloat(0.0,-60.0)
-			fAngles[1] = GetRandomFloat(-179.0,179.0)
+
+			fAngles[0] = GetRandomFloat(-10.0,-40.0);
+			fAngles[1] = GetRandomFloat(-179.0,179.0);
 
 			GetAngleVectors(fAngles,fwd, NULL_VECTOR, NULL_VECTOR);
 			ScaleVector(fwd, 30.0);
@@ -1283,39 +1284,19 @@ public Action:Event_PlayerDeath(Handle event, const char[] name, bool:dontBroadc
 			AddVectors(fOrigin, fwd, fOrigin);
 			GetAngleVectors(fAngles, vBuffer, NULL_VECTOR, NULL_VECTOR);
 			
-			float velocity = 2000.0;
-			fVelocity[0] = vBuffer[0]*velocity;
-			fVelocity[1] = vBuffer[1]*velocity;
-			fVelocity[2] = vBuffer[2]*velocity;
+			fVelocity[0] = vBuffer[0]*1500.0;
+			fVelocity[1] = vBuffer[1]*1500.0;
+			fVelocity[2] = vBuffer[2]*1500.0;
 			
 			TeleportEntity(iEntity, fOrigin, fAngles, fVelocity);
 			DispatchSpawn(iEntity);
-			SetEntityGravity(iEntity, 9.0);
+			SetEntityGravity(iEntity, 5.0);
 
 			jarateWeapon[iEntity] = client;
 			SDKHook(iEntity, SDKHook_Touch, CollisionFrozenFrag);
-			SetEntPropFloat(iEntity, Prop_Send, "m_flModelScale", 1.5);
-
-			float vecBossMin[3], vecBossMax[3];
-			GetEntPropVector(iEntity, Prop_Send, "m_vecMins", vecBossMin);
-			GetEntPropVector(iEntity, Prop_Send, "m_vecMaxs", vecBossMax);
-			
-			float vecScaledBossMin[3], vecScaledBossMax[3];
-			
-			vecScaledBossMin = vecBossMin;
-			vecScaledBossMax = vecBossMax;
-
-			vecScaledBossMin[0] -= 3.0;
-			vecScaledBossMax[0] += 3.0;
-			vecScaledBossMin[1] -= 3.0;
-			vecScaledBossMax[1] += 3.0;
-			vecScaledBossMin[2] -= 3.0;
-			vecScaledBossMax[2] += 3.0;
-			
-			SetEntPropVector(iEntity, Prop_Send, "m_vecMins", vecScaledBossMin);
-			SetEntPropVector(iEntity, Prop_Send, "m_vecMaxs", vecScaledBossMax);
-			SetEntityRenderColor(iEntity, 0, 128, 255, 90);
-			CreateTimer(3.0, SelfDestruct, EntIndexToEntRef(iEntity));
+			SetEntPropFloat(iEntity, Prop_Send, "m_flModelScale", 2.5);
+			SetEntityRenderColor(iEntity, 0, 128, 255, 180);
+			CreateTimer(5.0, SelfDestruct, EntIndexToEntRef(iEntity));
 		}
 	}
 
