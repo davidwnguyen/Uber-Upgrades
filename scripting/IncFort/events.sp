@@ -2239,6 +2239,7 @@ public Action OnPlayerRunCmd(int client, int& buttons, int& impulse, float vel[3
 					if(arrowExpulsionCooldown[client]-GetGameTime() < 0){
 						Format(CooldownTime, sizeof(CooldownTime), "Arrow Nova: READY (M2)"); 
 						if(buttons & IN_ATTACK2){
+							int team = GetClientTeam(client);
 							arrowExpulsionCooldown[client] = GetGameTime() + 3.0;
 							for(int i = 1; i<=MaxClients; i++){
 								if(!IsValidClient3(i))
@@ -2255,7 +2256,7 @@ public Action OnPlayerRunCmd(int client, int& buttons, int& impulse, float vel[3
 								fAngles[1] = GetRandomFloat(-180.0, 180.0);
 								fAngles[2] = 0.0;
 								GetClientAbsOrigin(i, fOrigin);
-								fOrigin[2] += 30.0;
+								fOrigin[2] += 50.0;
 
 								for(int j = 0; j < arrowNovaCount[client][i]; j++){
 									fAngles[1] += 360.0/arrowNovaCount[client][i];
@@ -2264,23 +2265,24 @@ public Action OnPlayerRunCmd(int client, int& buttons, int& impulse, float vel[3
 										continue;
 
 									SetEntPropEnt(iEntity, Prop_Send, "m_hOwnerEntity", client);
-									SetEntProp(iEntity, Prop_Send, "m_iTeamNum", GetClientTeam(client));
+									SetEntProp(iEntity, Prop_Send, "m_iTeamNum", team);
 
 									GetAngleVectors(fAngles, vBuffer, NULL_VECTOR, NULL_VECTOR);
 									ScaleVector(vBuffer, 1000.0);
 									
 									TeleportEntity(iEntity, fOrigin, fAngles, vBuffer);
-									DispatchSpawn(iEntity);
 
 									SetEntPropVector(iEntity, Prop_Send, "m_vInitialVelocity", vBuffer );
 									SetEntPropEnt(iEntity, Prop_Send, "m_hLauncher", weapon);
 									SetEntProp(iEntity, Prop_Send, "m_usSolidFlags", 0x0008);
 									SetEntProp(iEntity, Prop_Data, "m_nSolidType", 6);
 									SetEntProp(iEntity, Prop_Send, "m_CollisionGroup", 13);
+
+									DispatchSpawn(iEntity);
 									projectileDamage[iEntity] = arrowNovaDamage;
 									SDKHook(iEntity, SDKHook_StartTouch, OnStartTouchPiercingArrow);
 									CreateSpriteTrail(iEntity, "0.33", "5.0", "1.0",
-										GetClientTeam(client) == 2 ? "materials/effects/arrowtrail_red.vmt":"materials/effects/arrowtrail_blu.vmt", "255 255 255");
+										team == 2 ? "materials/effects/arrowtrail_red.vmt":"materials/effects/arrowtrail_blu.vmt", "255 255 255");
 								}
 								arrowNovaCount[client][i] = 0;
 							}

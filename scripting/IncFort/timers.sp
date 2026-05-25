@@ -152,18 +152,22 @@ public Action:Timer_Second(Handle timer)
 	{
 		for(int i = 1; i <= MaxClients; ++i)
 		{
-			if(IsValidClient3(i))
+			if(!IsValidClient3(i))
+				continue;
+			if(!IsFakeClient(i))
+				continue;
+			if(IsClientObserver(i))
+				continue;
+			if(!IsPlayerAlive(i))
+				continue;
+			if(!TF2_IsPlayerInCondition(i, TFCond_UberchargedHidden))
+			
+			BotTimer[i] -= 1.0;
+			if(BotTimer[i] <= 0.0)
 			{
-				if(IsFakeClient(i) && !IsClientObserver(i) && IsPlayerAlive(i) && TF2_IsPlayerInCondition(i, TFCond_UberchargedHidden))
-				{
-					BotTimer[i] -= 1.0;
-					if(BotTimer[i] <= 0.0)
-					{
-						BotTimer[i] = 45.0;
-						PrintToServer("Slaying %N due to staying ubered for too long.", i);
-						ForcePlayerSuicide(i);
-					}
-				}
+				BotTimer[i] = 45.0;
+				PrintToServer("Slaying %N due to staying ubered for too long.", i);
+				ForcePlayerSuicide(i);
 			}
 		}
 	}

@@ -116,10 +116,10 @@
 		{
 			"gamestage"						"1"
 			"restriction"					"1"
-			"accuracy scales damage"		"1"
-			"ammo conservation"				"5"
-			"damage causes freeze"			"120"
-			"crit damage mod"					"3.0"
+			"accuracy scales damage"		"2"
+			"ammo conservation"				"6.7"
+			"damage causes freeze"			"175"
+			"crit damage mod"					"5.0"
 		}
 		"Scorchiest Shot"
 		{
@@ -140,7 +140,7 @@
 			"gamestage"						"1"
 			"restriction"					"1"
 			"additive piercing damage"		"30"
-			"damage causes freeze"			"120"
+			"damage causes freeze"			"140"
 			"crit damage mod"				"5.0"
 		}
 		"Fireball Volley"
@@ -165,7 +165,7 @@
 			"gamestage"						"1"
 			"restriction"					"1"
 			"additive piercing damage"		"10"
-			"damage causes freeze"			"140"
+			"damage causes freeze"			"150"
 			"crit damage mod"				"5.0"
 			"projectile penetration"		"1"
 		}
@@ -316,7 +316,7 @@
 			"gamestage"						"1"
 			"restriction"					"1"
 			"Ability : Immolation"			"1"
-			"immolation ratio"				"2.0"
+			"immolation ratio"				"3.0"
 			"afterburn time increased(N)"	"1.0"
 			"dmg per pct hp missing"		"0.1"
 			"additive piercing damage"		"5"
