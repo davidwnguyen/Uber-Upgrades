@@ -2262,6 +2262,7 @@ public Action OnPlayerRunCmd(int client, int& buttons, int& impulse, float vel[3
 
 									DispatchSpawn(iEntity);
 									projectileDamage[iEntity] = arrowNovaDamage;
+									homingDelay[iEntity] = 9999.0;
 									SDKHook(iEntity, SDKHook_StartTouch, OnStartTouchPiercingArrow);
 									CreateSpriteTrail(iEntity, "0.33", "5.0", "1.0",
 										team == 2 ? "materials/effects/arrowtrail_red.vmt":"materials/effects/arrowtrail_blu.vmt", "255 255 255");

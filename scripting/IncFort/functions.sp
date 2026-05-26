@@ -1481,6 +1481,10 @@ DisplayItemChange(client,itemidx)
 		{
 			ChangeString = "The Conniver's Kunai | +35% lifesteal.";
 		}
+		case 649:
+		{
+			ChangeString = "The Spy-cicle | Damage dealt contributes to enemy freeze buildup at 135%.";
+		}
 		//Spy Misc
 		case 735,736,810,831,933,1080,1102:
 		{

@@ -501,5 +501,10 @@
 			"1"				"airblast fires arrows;1"
 			"2"				"disable custom airblast;1"
 		}
+		"649"//Spy-cicle
+		{
+			"preserve_attributes"	"1"
+			"1"				"damage causes freeze;1.35"
+		}
 	}
 }
