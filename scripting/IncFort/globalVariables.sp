@@ -336,6 +336,7 @@ int arcaneSpellCount;
 int kingParticle[MAXPLAYERS+1];
 int penetrationCount[MAXENTITIES+1];
 int arrowNovaCount[MAXPLAYERS+1][MAXPLAYERS+1];
+int rocketSplitCount[MAXENTITIES+1];
 
 //Floats
 float MoneyBonusKill

@@ -999,6 +999,7 @@ public OnEntityDestroyed(entity)
 	isProjectileParented[entity] = false;
 	projectileExplosionBounceDamage[entity] = 0.0;
 	projectileExplosionBounceRadius[entity] = 0.0;
+	rocketSplitCount[entity] = 0;
 
 	//isProjectileSlash[entity][0] = 0.0;
 	//isProjectileSlash[entity][1] = 0.0;

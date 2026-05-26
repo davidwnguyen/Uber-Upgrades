@@ -2348,3 +2348,59 @@ public Action Timer_HailArrowSplit(Handle timer, int ref)
 	RemoveEntity(entity);
 	return Plugin_Stop;
 }
+
+public Action Timer_RocketSplit(Handle timer, int ref) 
+{
+    int entity = EntRefToEntIndex(ref);
+	if(!IsValidEdict(entity))
+		return Plugin_Stop;
+
+	int client = GetEntPropEnt(entity, Prop_Data, "m_hOwnerEntity"); 
+	if(!IsValidClient3(client))
+		return Plugin_Stop;
+
+	float fOrigin[3], fAngles[3], vBuffer[3];
+	GetEntPropVector(entity, Prop_Data, "m_vecVelocity", vBuffer);
+	GetEntPropVector(entity, Prop_Data, "m_vecOrigin", fOrigin);
+	GetEntPropVector(entity, Prop_Data, "m_angRotation", fAngles);
+	float initialSpeed = GetVectorLength(vBuffer);
+	float damage = GetEntDataFloat(entity, FindSendPropInfo("CTFProjectile_Rocket", "m_iDeflected") + 4);  
+	fAngles[1] -= 5.0;
+	for(int i = 0; i < 2; i++){
+		int iEntity = CreateEntityByName("tf_projectile_rocket");
+		if (!IsValidEdict(iEntity)) 
+			continue;
+
+		int iTeam = GetClientTeam(client);
+		int weapon = GetEntPropEnt(entity, Prop_Send, "m_hLauncher");
+		if (!IsValidWeapon(weapon))
+			return Plugin_Stop;
+
+		SetEntPropEnt(iEntity, Prop_Send, "m_hOwnerEntity", client);
+		SetEntProp(iEntity, Prop_Send, "m_iTeamNum", iTeam);
+		
+		GetAngleVectors(fAngles, vBuffer, NULL_VECTOR, NULL_VECTOR);
+		ScaleVector(vBuffer, initialSpeed);
+		
+		TeleportEntity(iEntity, fOrigin, fAngles, vBuffer);
+		DispatchSpawn(iEntity);
+
+		SetEntPropEnt(iEntity, Prop_Send, "m_hLauncher", weapon);
+		SetEntProp(iEntity, Prop_Send, "m_usSolidFlags", 0x0008);
+		SetEntProp(iEntity, Prop_Data, "m_nSolidType", 6);
+		SetEntProp(iEntity, Prop_Send, "m_CollisionGroup", 13);
+		SetEntProp(iEntity, Prop_Send, "m_bCritical", GetEntProp(entity, Prop_Send, "m_bCritical"));
+		SetEntDataFloat(iEntity, FindSendPropInfo("CTFProjectile_Rocket", "m_iDeflected") + 4, damage, true);
+		fAngles[1] += 10.0;
+		rocketSplitCount[iEntity] = rocketSplitCount[entity] + 1;
+
+		float splitDistance = TF2Attrib_HookValueFloat(0.0, "rockets_split_while_travelling", weapon);
+		int splitCap = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "maximum_rocket_split_count", weapon));
+		if(splitDistance && rocketSplitCount[iEntity] < splitCap){
+			CreateTimer(splitDistance/GetVectorLength(vBuffer), Timer_RocketSplit, EntIndexToEntRef(iEntity));
+		}
+	}
+
+	RemoveEntity(entity);
+	return Plugin_Stop;
+}

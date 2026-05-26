@@ -7703,6 +7703,38 @@
 			"init"		"0"
 			"max"		"0"
 		}
+		"1751"
+		{
+			"name"		"mult projectile scale"
+			"ref"		"mult projectile scale"
+			"display"	"%.0f%%"
+			"cost"		"0"
+			"value"		"0.1"
+			"init"		"0.00"
+			"max"		"0.00"
+		}
+		"1752"
+		{
+			"name"		"rockets split while travelling"
+			"ref"		"rockets split while travelling"
+			"attr_class"	"rockets_split_while_travelling"
+			"display"	"%.0f"
+			"cost"		"0"
+			"value"		"1"
+			"init"		"0"
+			"max"		"0"
+		}
+		"1753"
+		{
+			"name"		"maximum rocket split count"
+			"ref"		"maximum rocket split count"
+			"attr_class"	"maximum_rocket_split_count"
+			"display"	"%.0f"
+			"cost"		"0"
+			"value"		"1"
+			"init"		"0"
+			"max"		"0"
+		}
 		//Filler
 		"1900.0"
 		{

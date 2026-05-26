@@ -2962,6 +2962,13 @@ public onProjectileSpawned(entity)
 			TeleportEntity(entity, NULL_VECTOR, NULL_VECTOR, vBuffer);
 			delete trace;
 		}
+
+		float splitDistance = TF2Attrib_HookValueFloat(0.0, "rockets_split_while_travelling", launcher);
+		if(splitDistance){
+			float currentVelocity[3];
+			GetEntPropVector(entity, Prop_Data, "m_vecVelocity", currentVelocity);
+			CreateTimer(splitDistance/GetVectorLength(currentVelocity), Timer_RocketSplit, EntIndexToEntRef(entity));
+		}
 	}
 }
 

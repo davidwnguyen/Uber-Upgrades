@@ -1,6 +1,14 @@
 "Phrases"
 {
-	// Vote menu stuff
+	"rockets split while travelling"{
+		"en"		"Rockets Split while Travelling"
+	}
+	"maximum rocket split count"{
+		"en"		"Maximum Rocket Split Count"
+	}
+	"mult projectile scale"{
+		"en"		"Projectile Size Multiplier"
+	}
 	"Difficulty Vote"{
 		"en"		"Change Bot Difficulty Multiplier to:"
 	}
