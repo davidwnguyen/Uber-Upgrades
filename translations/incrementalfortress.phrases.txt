@@ -1,5 +1,17 @@
 "Phrases"
 {
+	"jar damage mult"{
+		"en"		"Jar Explosion Damage Multiplier"
+	}
+	"frag velocity mult"{
+		"en"		"Explosive Fragment Speed Multiplier"
+	}
+	"explosive fragment type"{
+		"en"		"Explosive Fragment Type"
+	}
+	"explosive fragment is uniform"{
+		"en"		"Explosive Fragments Are Uniform"
+	}
 	"rockets split while travelling"{
 		"en"		"Rockets Split while Travelling"
 	}

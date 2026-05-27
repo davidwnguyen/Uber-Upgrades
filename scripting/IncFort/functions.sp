@@ -3152,6 +3152,7 @@ FragmentProperties(entity)
 			int launcher = GetEntPropEnt(entity, Prop_Send, "m_hOriginalLauncher");
 			if(IsValidWeapon(launcher)) {
 				projectileFragCount[entity] = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "explosive_frag_count", launcher));
+				projectileUniformFrag[entity] = (TF2Attrib_HookValueFloat(0.0, "explosive_frag_count", launcher)) != 0;
 			}
 		}
     } 
@@ -4387,39 +4388,58 @@ ExplosionHookEffects(entity){
 			}
 		}
 	}
-	for(int i = 0;i<projectileFragCount[entity];++i)
-	{
-		int iEntity = CreateEntityByName("tf_projectile_syringe");
-		if (!IsValidEdict(iEntity)) 
-			continue;
 
-		int iTeam = GetClientTeam(owner);
-		float fAngles[3], fOrigin[3], vBuffer[3], fVelocity[3], fwd[3];
-		fOrigin[0] = position[0]; fOrigin[1] = position[1]; fOrigin[2] = position[2];
-		SetEntPropEnt(iEntity, Prop_Send, "m_hOwnerEntity", owner);
-		SetEntProp(iEntity, Prop_Send, "m_iTeamNum", iTeam);
-		fAngles[0] = GetRandomFloat(0.0,-60.0)
-		fAngles[1] = GetRandomFloat(-179.0,179.0)
+	if(projectileFragCount[entity] > 0){
+		float fAngles[3];
 
-		GetAngleVectors(fAngles,fwd, NULL_VECTOR, NULL_VECTOR);
-		ScaleVector(fwd, 30.0);
-		AddVectors(fOrigin, fwd, fOrigin);
-		GetAngleVectors(fAngles, vBuffer, NULL_VECTOR, NULL_VECTOR);
+		if(projectileUniformFrag[entity]){
+			fAngles[0] = -30.0;
+		}
+		int fragType = RoundToCeil(TF2Attrib_HookValueFloat(0.0, "explosive_fragment_type", weapon));
+		for(int i = 0;i<projectileFragCount[entity];++i)
+		{
+			int iEntity = CreateEntityByName("tf_projectile_syringe");
+			if (!IsValidEdict(iEntity)) 
+				continue;
 
-		float velocity = 1500.0;
-		fVelocity[0] = vBuffer[0]*velocity;
-		fVelocity[1] = vBuffer[1]*velocity;
-		fVelocity[2] = vBuffer[2]*velocity;
-		
-		TeleportEntity(iEntity, fOrigin, fAngles, fVelocity);
-		DispatchSpawn(iEntity);
-		setProjGravity(iEntity, 9.0);
-		SDKHook(iEntity, SDKHook_Touch, OnCollisionExplosiveFrag);
-		jarateWeapon[iEntity] = EntIndexToEntRef(weapon);
-		CreateTimer(1.0,SelfDestruct,EntIndexToEntRef(iEntity));
-		SetEntProp(iEntity, Prop_Send, "m_usSolidFlags", 0x0008);
-		SetEntProp(iEntity, Prop_Data, "m_nSolidType", 6);
-		SetEntProp(iEntity, Prop_Send, "m_CollisionGroup", 13);
+			int iTeam = GetClientTeam(owner);
+			float fOrigin[3], vBuffer[3], fVelocity[3], fwd[3];
+			AddVectors(fOrigin, position, fOrigin);
+			
+			SetEntPropEnt(iEntity, Prop_Send, "m_hOwnerEntity", owner);
+			SetEntProp(iEntity, Prop_Send, "m_iTeamNum", iTeam);
+			if(projectileUniformFrag[entity]){
+				fAngles[1] += 360.0/projectileFragCount[entity];
+			}
+			else{
+				fAngles[0] = GetRandomFloat(0.0,-60.0);
+				fAngles[1] = GetRandomFloat(-179.0,179.0);
+			}
+			GetAngleVectors(fAngles,fwd, NULL_VECTOR, NULL_VECTOR);
+			ScaleVector(fwd, 30.0);
+			AddVectors(fOrigin, fwd, fOrigin);
+			GetAngleVectors(fAngles, vBuffer, NULL_VECTOR, NULL_VECTOR);
+
+			float velocity = 1500.0*TF2Attrib_HookValueFloat(1.0, "frag_velocity_mult", weapon);
+			fVelocity[0] = vBuffer[0]*velocity;
+			fVelocity[1] = vBuffer[1]*velocity;
+			fVelocity[2] = vBuffer[2]*velocity;
+			
+			TeleportEntity(iEntity, fOrigin, fAngles, fVelocity);
+			DispatchSpawn(iEntity);
+			setProjGravity(iEntity, 9.0);
+			if(fragType == 1){
+				jarateType[iEntity] = 0;
+				SDKHook(iEntity, SDKHook_StartTouch, OnStartTouchJars);
+			}else{
+				SDKHook(iEntity, SDKHook_Touch, OnCollisionExplosiveFrag);
+			}
+			jarateWeapon[iEntity] = EntIndexToEntRef(weapon);
+			CreateTimer(1.0,SelfDestruct,EntIndexToEntRef(iEntity));
+			SetEntProp(iEntity, Prop_Send, "m_usSolidFlags", 0x0008);
+			SetEntProp(iEntity, Prop_Data, "m_nSolidType", 6);
+			SetEntProp(iEntity, Prop_Send, "m_CollisionGroup", 13);
+		}
 	}
 
 	int bulletCount = RoundToCeil(TF2Attrib_HookValueFloat(0.0, "fan_of_bullets_count", weapon));

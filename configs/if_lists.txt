@@ -1549,6 +1549,7 @@
 			"1"		"ap (global)"
 			"2"		"Increased Overall Damage"
 			"4"		"projectile penetration heavy"
+			"5"		"custom_paintkit_seed_hi"
 		}
 		"Sniper specific upgrades"
 		{

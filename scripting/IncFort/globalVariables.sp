@@ -494,6 +494,7 @@ float projectileDamage[MAXENTITIES];
 float entitySpawnTime[MAXENTITIES];
 int projectileFragCount[MAXENTITIES];
 int projectileMaxBounces[MAXENTITIES];
+bool projectileUniformFrag[MAXENTITIES];
 float projectileExplosionBounceDamage[MAXENTITIES];
 float projectileExplosionBounceRadius[MAXENTITIES];
 /*-- homing shit --*/

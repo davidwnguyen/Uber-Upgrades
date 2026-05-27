@@ -7735,6 +7735,50 @@
 			"init"		"0"
 			"max"		"0"
 		}
+		"1754"
+		{
+			"name"		"explosive fragment is uniform"
+			"ref"		"explosive fragment is uniform"
+			"attr_class"	"explosive_fragment_is_uniform"
+			"display"		"%.0f"
+			"cost"		"1"
+			"value"		"1"
+			"init"		"0"
+			"max"		"1"
+		}
+		"1755"
+		{
+			"name"		"explosive fragment type"
+			"ref"		"explosive fragment type"
+			"attr_class"	"explosive_fragment_type"
+			"display"		"%.0f"
+			"cost"		"1"
+			"value"		"1"
+			"init"		"0"
+			"max"		"1"
+		}
+		"1756"
+		{
+			"name"		"frag velocity mult"
+			"ref"		"frag velocity mult"
+			"attr_class"	"frag_velocity_mult"
+			"display"		"%.0f%%"
+			"cost"		"0"
+			"value"		"0.1"
+			"init"		"1"
+			"max"		"1.0"
+		}
+		"1757"
+		{
+			"name"		"jar damage mult"
+			"ref"		"jar damage mult"
+			"attr_class"	"jar_damage_mult"
+			"display"		"%.0f%%"
+			"cost"		"0"
+			"value"		"0.1"
+			"init"		"1"
+			"max"		"1.0"
+		}
 		//Filler
 		"1900.0"
 		{

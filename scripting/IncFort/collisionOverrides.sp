@@ -687,6 +687,7 @@ public Action:OnTouchExplodeJar(entity, other)
 			Radius *= TF2Attrib_GetValue(blastRadius2)
 		}
 		float damageBoost = TF2_GetDamageModifiers(owner, CWeapon);
+		float jarMult = TF2Attrib_HookValueFloat(1.0, "jar_damage_mult", CWeapon);
 		if(entityMaelstromChargeCount[entity] > 0){
 			Radius *= 1.35;
 			float startpos[3];
@@ -750,7 +751,7 @@ public Action:OnTouchExplodeJar(entity, other)
 							{
 								case 0:
 								{
-									SDKHooks_TakeDamage(i,entity,owner,30.0*damageBoost,DMG_BULLET|DMG_IGNOREHOOK,CWeapon,_,_,false);
+									SDKHooks_TakeDamage(i,entity,owner,30.0*damageBoost*jarMult,DMG_BULLET|DMG_IGNOREHOOK,CWeapon,_,_,false);
 									if(isPlayer){
 										miniCritStatusVictim[i] = GetGameTime()+8.0;
 										Buff jarateDebuff;
@@ -763,7 +764,7 @@ public Action:OnTouchExplodeJar(entity, other)
 									if(isPlayer)
 										TF2_AddCondition(i,TFCond_Milked,0.01);
 										
-									SDKHooks_TakeDamage(i,entity,owner,30.0*damageBoost,DMG_BULLET|DMG_IGNOREHOOK,CWeapon,_,_,false);
+									SDKHooks_TakeDamage(i,entity,owner,30.0*damageBoost*jarMult,DMG_BULLET|DMG_IGNOREHOOK,CWeapon,_,_,false);
 								}
 							}//corrosiveDOT
 							if(isPlayer)
@@ -821,44 +822,52 @@ public Action:OnTouchExplodeJar(entity, other)
 		}
 
 		float fragCount = TF2Attrib_HookValueFloat(0.0, "explosive_frag_count", CWeapon);
-		for(i = 0;i<RoundToNearest(fragCount);++i)
-		{
-			int iEntity = CreateEntityByName("tf_projectile_syringe");
-			if (!IsValidEdict(iEntity)) 
-				continue;
+		if(fragCount > 0){
+			bool isUniform = TF2Attrib_HookValueFloat(0.0, "explosive_fragment_is_uniform", CWeapon) != 0;
+			float fAngles[3];
+			if(isUniform){
+				fAngles[0] = -30.0;
+			}
+			for(i = 0;i<RoundToNearest(fragCount);++i)
+			{
+				int iEntity = CreateEntityByName("tf_projectile_syringe");
+				if (!IsValidEdict(iEntity)) 
+					continue;
 
-			int iTeam = GetClientTeam(owner);
-			float fAngles[3]
-			float fOrigin[3];
-			float vBuffer[3]
-			float fVelocity[3]
-			float fwd[3]
-			SetEntPropEnt(iEntity, Prop_Send, "m_hOwnerEntity", owner);
-			SetEntProp(iEntity, Prop_Send, "m_iTeamNum", iTeam);
-			fOrigin = clientvec;
-			fAngles[0] = GetRandomFloat(0.0,-60.0)
-			fAngles[1] = GetRandomFloat(-179.0,179.0)
+				int iTeam = GetClientTeam(owner);
+				float fOrigin[3],vBuffer[3],fVelocity[3],fwd[3];
+				SetEntPropEnt(iEntity, Prop_Send, "m_hOwnerEntity", owner);
+				SetEntProp(iEntity, Prop_Send, "m_iTeamNum", iTeam);
+				fOrigin = clientvec;
+				if(isUniform){
+					fAngles[1] += 360.0/RoundToNearest(fragCount);
+				}
+				else{
+					fAngles[0] = GetRandomFloat(0.0,-60.0);
+					fAngles[1] = GetRandomFloat(-179.0,179.0);
+				}
 
-			GetAngleVectors(fAngles,fwd, NULL_VECTOR, NULL_VECTOR);
-			ScaleVector(fwd, 30.0);
-			
-			AddVectors(fOrigin, fwd, fOrigin);
-			GetAngleVectors(fAngles, vBuffer, NULL_VECTOR, NULL_VECTOR);
-			
-			float velocity = 1500.0;
-			fVelocity[0] = vBuffer[0]*velocity;
-			fVelocity[1] = vBuffer[1]*velocity;
-			fVelocity[2] = vBuffer[2]*velocity;
-			
-			TeleportEntity(iEntity, fOrigin, fAngles, fVelocity);
-			DispatchSpawn(iEntity);
-			setProjGravity(iEntity, 9.0);
-			SDKHook(iEntity, SDKHook_Touch, OnCollisionExplosiveFrag);
-			jarateWeapon[iEntity] = EntIndexToEntRef(CWeapon);
-			CreateTimer(1.0,SelfDestruct,EntIndexToEntRef(iEntity));
-			SetEntProp(iEntity, Prop_Send, "m_usSolidFlags", 0x0008);
-			SetEntProp(iEntity, Prop_Data, "m_nSolidType", 6);
-			SetEntProp(iEntity, Prop_Send, "m_CollisionGroup", 13);
+				GetAngleVectors(fAngles,fwd, NULL_VECTOR, NULL_VECTOR);
+				ScaleVector(fwd, 30.0);
+				
+				AddVectors(fOrigin, fwd, fOrigin);
+				GetAngleVectors(fAngles, vBuffer, NULL_VECTOR, NULL_VECTOR);
+				
+				float velocity = 1500.0*TF2Attrib_HookValueFloat(1.0, "frag_velocity_mult", CWeapon);
+				fVelocity[0] = vBuffer[0]*velocity;
+				fVelocity[1] = vBuffer[1]*velocity;
+				fVelocity[2] = vBuffer[2]*velocity;
+				
+				TeleportEntity(iEntity, fOrigin, fAngles, fVelocity);
+				DispatchSpawn(iEntity);
+				setProjGravity(iEntity, 9.0);
+				SDKHook(iEntity, SDKHook_Touch, OnCollisionExplosiveFrag);
+				jarateWeapon[iEntity] = EntIndexToEntRef(CWeapon);
+				CreateTimer(1.0,SelfDestruct,EntIndexToEntRef(iEntity));
+				SetEntProp(iEntity, Prop_Send, "m_usSolidFlags", 0x0008);
+				SetEntProp(iEntity, Prop_Data, "m_nSolidType", 6);
+				SetEntProp(iEntity, Prop_Send, "m_CollisionGroup", 13);
+			}
 		}
 	}
 	switch(mode){
