@@ -418,6 +418,8 @@ public Action:OnTakeDamageAlive(victim, &attacker, &inflictor, float &damage, &d
 		//Prevent piercing damage from being guardian'd
 		int VictimCWeapon = GetEntPropEnt(victim, Prop_Send, "m_hActiveWeapon");
 		if(IsValidWeapon(VictimCWeapon)){
+			damage *= ConsumePierce(TF2Attrib_HookValueFloat(1.0, "damage_taken_multiplier_when_active", VictimCWeapon), damageForce[0]);
+
 			if(HasEntProp(VictimCWeapon, Prop_Send, "m_hHealingTarget") && miniCritStatusVictim[victim] < GetGameTime()){
 				if(TF2Attrib_HookValueFloat(0.0, "escape plan healing", VictimCWeapon)){
 					int healingTarget = GetEntPropEnt(VictimCWeapon, Prop_Send, "m_hHealingTarget");

@@ -1,5 +1,11 @@
 "Phrases"
 {
+	"damage taken multiplier when active"{
+		"en"		"Damage Taken Multiplier While Active"
+	}
+	"jar cannot fragment"{
+		"en"		"Jar Cannot Fragment"
+	}
 	"jar damage mult"{
 		"en"		"Jar Explosion Damage Multiplier"
 	}

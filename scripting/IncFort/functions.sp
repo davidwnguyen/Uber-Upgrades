@@ -82,6 +82,11 @@ float GetResistance(int client, bool includeReduction = false, float penetration
 		TotalResistance /= TF2Attrib_HookValueFloat(1.0, "dmg_incoming_mult", client);
 		TotalResistance *= TF2Attrib_HookValueFloat(1.0, "dmg_taken_divided", client);
 
+		int CWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
+		if(IsValidWeapon(CWeapon)){
+			TotalResistance /= TF2Attrib_HookValueFloat(1.0, "damage_taken_multiplier_when_active", CWeapon);
+		}
+
 		Address DodgeBody = TF2Attrib_GetByName(client, "SET BONUS: chance of hunger decrease");
 		if(DodgeBody != Address_Null)
 			TotalResistance /= 1-TF2Attrib_GetValue(DodgeBody);

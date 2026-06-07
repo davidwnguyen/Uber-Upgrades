@@ -822,7 +822,8 @@ public Action:OnTouchExplodeJar(entity, other)
 		}
 
 		float fragCount = TF2Attrib_HookValueFloat(0.0, "explosive_frag_count", CWeapon);
-		if(fragCount > 0){
+		bool cannotFragment = TF2Attrib_HookValueInt(0, "jar_cannot_fragment", CWeapon) != 0;
+		if(fragCount > 0 && !cannotFragment){
 			bool isUniform = TF2Attrib_HookValueFloat(0.0, "explosive_fragment_is_uniform", CWeapon) != 0;
 			float fAngles[3];
 			if(isUniform){

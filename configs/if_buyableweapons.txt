@@ -694,11 +694,11 @@
 		"weapon_class"	"tf_weapon_sniperrifle"
 		"weapon_menu"	"chargelessRifle"
 		"class"			"sniper"
-		"description"	"Base weapon is the Sydney Sleeper.\nShoots a high velocity dart that bursts into 5 jarate on impact.\nOn jarate impact:\nsplinter into 5 explosive frags that deal very low damage.\nCannot charge sniper rifle.\nConverts fire rate bonus into damage bonus.\nDeals 0.25x damage."
+		"description"	"Base weapon is the Sydney Sleeper.\nShoots a high velocity dart that bursts into 5 jarate on impact.\nCannot charge sniper rifle.\nConverts fire rate bonus into damage bonus.\nFires 1.5x slower."
 		"cost"			"9000.0"
 		"Converts Firerate to Damage"				"1"
 		"mini rockets"								"1"
-		"weapon damage mult"						"0.25"
+		"weapon fire rate"							"1.5"
 		"centerfire projectile"						"1"
 		"override projectile type"					"2"
 		"projectile speed multiplier"				"15"
@@ -709,6 +709,6 @@
 		"explosive fragment type"					"1"
 		"frag velocity mult"						"0.65"
 		"jar damage mult"							"0.01"
-		"frag explosion radius mult"				"2"
+		"jar cannot fragment"						"1"
 	}
 }

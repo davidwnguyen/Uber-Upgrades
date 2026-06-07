@@ -7779,6 +7779,29 @@
 			"init"		"1"
 			"max"		"1.0"
 		}
+		"1758"
+		{
+			"name"		"jar cannot fragment"
+			"ref"		"jar cannot fragment"
+			"attr_class"	"jar_cannot_fragment"
+			"display"		"%.0f"
+			"cost"		"0"
+			"value"		"1"
+			"init"		"0"
+			"max"		"1"
+		}
+		"1759"
+		{
+			"name"		"damage taken multiplier when active"
+			"ref"		"damage taken multiplier when active"
+			"attr_class"	"damage_taken_multiplier_when_active"
+			"display"		"%.0f%%"
+			"cost"		"1400"
+			"increase_ratio" 	"0.35"
+			"value"		"-0.05"
+			"init"		"1"
+			"max"		"0.7"
+		}
 		//Filler
 		"1900.0"
 		{

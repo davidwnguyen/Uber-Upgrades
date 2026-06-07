@@ -979,6 +979,7 @@
 			"0"		"melee attack rate bonus"
 			"1"		"melee range multiplier"
 			"2"		"increase player capture value"
+			"3"		"damage taken multiplier when active"
 		}
 		"Special Tweaks"
 		{
@@ -1119,6 +1120,7 @@
 			"2"		"increase player capture value"
 			"4"		"upgrade rate increase"
 			"5"		"Construction rate increased"
+			"6"		"damage taken multiplier when active"
 		}
 		"Special Tweaks"
 		{
@@ -1549,7 +1551,6 @@
 			"1"		"ap (global)"
 			"2"		"Increased Overall Damage"
 			"4"		"projectile penetration heavy"
-			"5"		"custom_paintkit_seed_hi"
 		}
 		"Sniper specific upgrades"
 		{
@@ -1642,6 +1643,7 @@
 			"0"		"melee attack rate bonus(spy)"
 			"1"		"melee range multiplier"
 			"2"		"increase player capture value"
+			"3"		"damage taken multiplier when active"
 		}
 		"Special Tweaks"
 		{
@@ -1659,11 +1661,7 @@
 	}
 	"democharge"
 	{
-		"special_tweaks_listid"		"2"
-		"Protection upgrades"
-		{
-			"0"		"dmg from all reduced(wearable)"
-		}
+		"special_tweaks_listid"		"1"
 		"Charge upgrades"
 		{
 			"0"		"charge time increased"
@@ -1678,19 +1676,11 @@
 	}
 	"ali_shoes"
 	{
-		"special_tweaks_listid"		"2"
-		"Protection upgrades"
-		{
-			"0"		"dmg from all reduced(wearable)"
-		}
+		"special_tweaks_listid"		"-1"
 		"Charge upgrades"
 		{
 			"0"		"charge time increased"
 			"1"		"charge recharge rate increased"
-		}
-		"Special Tweaks"
-		{
-			"0"		"Agile Latticing"
 		}
 	}
 	
@@ -1761,6 +1751,7 @@
 			"0"		"melee attack rate bonus"
 			"1"		"melee range multiplier"
 			"2"		"increase player capture value"
+			"3"		"damage taken multiplier when active"
 		}
 		"Special Tweaks"
 		{
@@ -1782,6 +1773,7 @@
 			"0"		"melee attack rate bonus"
 			"1"		"melee range multiplier"
 			"2"		"increase player capture value"
+			"3"		"damage taken multiplier when active"
 		}
 		"Special Tweaks"
 		{
@@ -1917,6 +1909,7 @@
 			"1"		"melee range multiplier"
 			"2"		"blast radius increased"
 			"3"		"caber self damage reduction"
+			"4"		"damage taken multiplier when active"
 		}
 		"Special Tweaks"
 		{
@@ -2058,6 +2051,7 @@
 			"0"		"melee attack rate bonus"
 			"1"		"melee range multiplier"
 			"2"		"increase player capture value"
+			"3"		"damage taken multiplier when active"
 		}
 		"Special Tweaks"
 		{
@@ -2163,6 +2157,7 @@
 			"1"		"effect bar recharge rate increased"
 			"2"		"melee range multiplier"
 			"3"		"increase player capture value"
+			"4"		"damage taken multiplier when active"
 		}
 		"Special Tweaks"
 		{
