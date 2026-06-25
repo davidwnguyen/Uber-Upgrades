@@ -2364,7 +2364,11 @@ public Action Timer_RocketSplit(Handle timer, int ref)
 	GetEntPropVector(entity, Prop_Data, "m_vecOrigin", fOrigin);
 	GetEntPropVector(entity, Prop_Data, "m_angRotation", fAngles);
 	float initialSpeed = GetVectorLength(vBuffer);
-	float damage = GetEntDataFloat(entity, FindSendPropInfo("CTFProjectile_Rocket", "m_iDeflected") + 4);  
+	float damage = GetEntDataFloat(entity, FindSendPropInfo("CTFProjectile_Rocket", "m_iDeflected") + 4); 
+	int weapon = GetEntPropEnt(entity, Prop_Send, "m_hLauncher");
+	if (!IsValidWeapon(weapon))
+		return Plugin_Stop;
+			
 	fAngles[1] -= 5.0;
 	for(int i = 0; i < 2; i++){
 		int iEntity = CreateEntityByName("tf_projectile_rocket");
@@ -2372,9 +2376,6 @@ public Action Timer_RocketSplit(Handle timer, int ref)
 			continue;
 
 		int iTeam = GetClientTeam(client);
-		int weapon = GetEntPropEnt(entity, Prop_Send, "m_hLauncher");
-		if (!IsValidWeapon(weapon))
-			return Plugin_Stop;
 
 		SetEntPropEnt(iEntity, Prop_Send, "m_hOwnerEntity", client);
 		SetEntProp(iEntity, Prop_Send, "m_iTeamNum", iTeam);
@@ -2383,13 +2384,12 @@ public Action Timer_RocketSplit(Handle timer, int ref)
 		ScaleVector(vBuffer, initialSpeed);
 		
 		TeleportEntity(iEntity, fOrigin, fAngles, vBuffer);
-		DispatchSpawn(iEntity);
 
 		SetEntPropEnt(iEntity, Prop_Send, "m_hLauncher", weapon);
+		SetEntPropEnt(iEntity, Prop_Send, "m_hOriginalLauncher", weapon);
 		SetEntProp(iEntity, Prop_Send, "m_usSolidFlags", 0x0008);
-		SetEntProp(iEntity, Prop_Data, "m_nSolidType", 6);
-		SetEntProp(iEntity, Prop_Send, "m_CollisionGroup", 13);
 		SetEntProp(iEntity, Prop_Send, "m_bCritical", GetEntProp(entity, Prop_Send, "m_bCritical"));
+		DispatchSpawn(iEntity);
 		SetEntDataFloat(iEntity, FindSendPropInfo("CTFProjectile_Rocket", "m_iDeflected") + 4, damage, true);
 		fAngles[1] += 10.0;
 		rocketSplitCount[iEntity] = rocketSplitCount[entity] + 1;

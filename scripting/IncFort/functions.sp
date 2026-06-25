@@ -2973,7 +2973,7 @@ public onProjectileSpawned(entity)
 		}
 
 		float splitDistance = TF2Attrib_HookValueFloat(0.0, "rockets_split_while_travelling", launcher);
-		if(splitDistance){
+		if(splitDistance && rocketSplitCount[entity] == 0){
 			float currentVelocity[3];
 			GetEntPropVector(entity, Prop_Data, "m_vecVelocity", currentVelocity);
 			CreateTimer(splitDistance/GetVectorLength(currentVelocity), Timer_RocketSplit, EntIndexToEntRef(entity));
