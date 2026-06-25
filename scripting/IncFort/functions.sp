@@ -3157,7 +3157,7 @@ FragmentProperties(entity)
 			int launcher = GetEntPropEnt(entity, Prop_Send, "m_hOriginalLauncher");
 			if(IsValidWeapon(launcher)) {
 				projectileFragCount[entity] = RoundToNearest(TF2Attrib_HookValueFloat(0.0, "explosive_frag_count", launcher));
-				projectileUniformFrag[entity] = (TF2Attrib_HookValueFloat(0.0, "explosive_frag_count", launcher)) != 0;
+				projectileUniformFrag[entity] = (TF2Attrib_HookValueFloat(0.0, "explosive_fragment_is_uniform", launcher)) != 0;
 			}
 		}
     } 
