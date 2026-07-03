@@ -337,6 +337,7 @@ int kingParticle[MAXPLAYERS+1];
 int penetrationCount[MAXENTITIES+1];
 int arrowNovaCount[MAXPLAYERS+1][MAXPLAYERS+1];
 int rocketSplitCount[MAXENTITIES+1];
+int BotTimer[MAXPLAYERS+1];
 
 //Floats
 float MoneyBonusKill
@@ -379,7 +380,6 @@ float weaponArtCooldown[MAXPLAYERS+1];
 float weaponArtParticle[MAXPLAYERS+1];
 float powerupParticle[MAXPLAYERS+1];
 float hitParticle[MAXPLAYERS+1];
-float BotTimer[MAXPLAYERS+1];
 float LastCharge[MAXPLAYERS+1];
 //float lastDamageTaken[MAXPLAYERS+1];
 float flNextSecondaryAttack[MAXPLAYERS+1];

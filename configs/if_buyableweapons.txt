@@ -246,7 +246,7 @@
 	{
 		"index"			"200"
 		"weapon_class"	"tf_weapon_scattergun"
-		"weapon_menu"	"proj_scattergun"
+		"weapon_menu"	"proj_singleshot"
 		"class"			"scout"
 		"description"	"Base Weapon is Scattergun\nFires a burst of 3 rockets rapidly.\nConverts all fire rate into damage bonus.\n+100% projectile speed."
 		"cost"			"10000.0"

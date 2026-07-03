@@ -3369,7 +3369,6 @@ public Event_PlayerRespawn(Handle event, const char[] name, bool:dontBroadcast)
 		cleanSlateClient(client);
 		if(IsFakeClient(client)){
 			if(isMvM){
-				BotTimer[client] = 45.0;
 				if(IsValidForDamage(TankTeleporter) && !GetEntProp(TankTeleporter, Prop_Send, "m_bDisabled")){
 					char classname[128]; 
 					GetEdictClassname(TankTeleporter, classname, sizeof(classname)); 

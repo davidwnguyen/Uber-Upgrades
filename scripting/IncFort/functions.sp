@@ -1949,10 +1949,25 @@ refreshUpgrades(client, slot)
 
 		for(int i = 0;i < NB_SLOTS_UED; i++) {
 			int weapon = TF2Util_GetPlayerLoadoutEntity(client, i);
-			if(!IsValidEntity(weapon))
+			if(i == 5 && IsValidEntity(EntRefToEntIndex(UniqueWeaponRef[client]))) {
+				weapon = EntRefToEntIndex(UniqueWeaponRef[client]);
+			}
+			
+			if(!IsValidWeapon(weapon))
 				continue;
 
+			float replaceMult = 1.0;
+
+			TF2Attrib_RemoveByName(weapon, "spread penalty");
+			// Aimless powerup reverses spread bonus
+			if(TF2Attrib_HookValueFloat(0.0, "precision_powerup", weapon) == 2){
+				float spreadBonus = GetAttribute(weapon, "weapon spread bonus", 1.0);
+				TF2Attrib_SetByName(weapon,"spread penalty", 1/(spreadBonus*spreadBonus));
+				replaceMult *= 1+3.0*(1-spreadBonus);
+			}
+
 			TF2Attrib_SetByName(weapon, "projectile spread multiplier", TF2Attrib_HookValueFloat(1.0, "mult_spread_scale", weapon));
+			TF2Attrib_SetByName(weapon,"damage mult 15", replaceMult);
 		}
 
 		if(IsValidEntity(uniqueWeaponID)) {
@@ -3313,6 +3328,7 @@ GivePowerupDescription(int client, char[] name, int amount){
 	else if(StrEqual("precision powerup", name)){
 		if(amount == 2){
 			CPrintToChat(client, "{community}Aimless Powerup {default}| {lightcyan}Projectiles randomly sway and deal up to +300%% damage based on their distance of landing. Only projectiles that sway deal extra damage.");
+			CPrintToChat(client, "{lightcyan}\"Weapon Spread Bonus\" upgrade now instead increases spread, and boosts damage by 300%% of value.");
 		}else if(amount == 3){
 			CPrintToChat(client, "{community}Railgun Powerup {default}| {lightcyan}All weapons have 4x slower fire rate, but 4x outgoing damage. Grants +35%% conditional damage reduction pierce.");
 		}else{
@@ -3536,7 +3552,7 @@ ResetVariables(){
 		weaponArtCooldown[client] = 0.0;
 		weaponArtParticle[client] = 0.0;
 		powerupParticle[client] = 0.0;
-		BotTimer[client] = 0.0;
+		BotTimer[client] = 8;
 		LastCharge[client] = 0.0;
 		//lastDamageTaken[client] = 0.0;
 		flNextSecondaryAttack[client] = 0.0;

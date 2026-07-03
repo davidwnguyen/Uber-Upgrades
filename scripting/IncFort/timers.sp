@@ -161,11 +161,16 @@ public Action:Timer_Second(Handle timer)
 			if(!IsPlayerAlive(i))
 				continue;
 			if(!TF2_IsPlayerInCondition(i, TFCond_UberchargedHidden))
+				continue;
+
+			float velocity[3];
+			GetEntPropVector(i, Prop_Data, "m_vecVelocity", velocity);
+			if(GetVectorLength(velocity, true) != 0)
+				continue;
 			
-			BotTimer[i] -= 1.0;
-			if(BotTimer[i] <= 0.0)
+			BotTimer[i]--;
+			if(BotTimer[i] == 0)
 			{
-				BotTimer[i] = 45.0;
 				PrintToServer("Slaying %N due to staying ubered for too long.", i);
 				ForcePlayerSuicide(i);
 			}
