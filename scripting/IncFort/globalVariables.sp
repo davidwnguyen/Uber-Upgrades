@@ -338,6 +338,7 @@ int penetrationCount[MAXENTITIES+1];
 int arrowNovaCount[MAXPLAYERS+1][MAXPLAYERS+1];
 int rocketSplitCount[MAXENTITIES+1];
 int BotTimer[MAXPLAYERS+1];
+int TauntAttackTimeOffset;
 
 //Floats
 float MoneyBonusKill

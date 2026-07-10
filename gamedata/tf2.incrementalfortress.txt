@@ -25,6 +25,11 @@
 				"linux"		"245"
 				"windows"	"244"
 			}
+			"m_flTauntAttackTime" 
+			{
+				"windows"	"32"
+				"linux"		"32"
+			}
 		}
 		"Functions"
 		{
@@ -288,6 +293,13 @@
 				"return"		"void"
 				"this"			"entity"
 			}
+			"CTFPlayer::OnTauntSucceeded()"
+			{
+				"signature"		"CTFPlayer::OnTauntSucceeded()"
+				"callconv"		"thiscall"
+				"return"		"void"
+				"this"			"entity"
+			}
 		}
 		"Signatures"
 		{
@@ -444,6 +456,11 @@
 			{
 				"library"		"server"
 				"linux"			"@_ZN13CTFWeaponBase12FinishReloadEv"
+			}
+			"CTFPlayer::OnTauntSucceeded()"
+			{
+				"library"		"server"
+				"linux"			"@_ZN9CTFPlayer16OnTauntSucceededEPKcii"
 			}
 		}
 	}

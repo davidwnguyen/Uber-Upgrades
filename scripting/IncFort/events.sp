@@ -436,6 +436,13 @@ public MRESReturn OnCondApply(Address pPlayerShared, Handle hParams) {
 						healingBuff.init("Incoming Healing Boost", "", Buff_HealingBuff, 1, client, 8.0, healSeverity);
 						insertBuff(client, healingBuff);
 					}
+
+					float tauntRate = TF2Attrib_HookValueFloat(1.0, "taunt_time_mult", CWeapon);
+					if(tauntRate != 1.0){
+						TF2Attrib_SetByName(CWeapon, "gesture speed increase", tauntRate);
+					}
+
+					RequestFrame(ApplyTauntAttackSpeed, EntIndexToEntRef(client));
 				}
 			}
 		}
@@ -2605,6 +2612,19 @@ public OnGameFrame()
 public MRESReturn OnScattergunFinishReload(int weapon){
 	SDKCall(g_SDKCallScattergunReload, weapon);
 	return MRES_Supercede;
+}
+public MRESReturn OnTaunt(int client){
+	int CWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
+	if(IsValidEdict(CWeapon))
+	{
+		float tauntRate = TF2Attrib_HookValueFloat(1.0, "taunt_time_mult", CWeapon);
+		if(tauntRate != 1.0){
+			TF2Attrib_SetByName(CWeapon, "gesture speed increase", tauntRate);
+		}
+
+		RequestFrame(ApplyTauntAttackSpeed, EntIndexToEntRef(client));
+	}
+	return MRES_Ignored;
 }
 public MRESReturn OnBlastExplosion(int entity, Handle hReturn){
 	ExplosionHookEffects(entity);

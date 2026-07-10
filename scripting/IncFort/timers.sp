@@ -2409,3 +2409,8 @@ public Action Timer_RocketSplit(Handle timer, int ref)
 	RemoveEntity(entity);
 	return Plugin_Stop;
 }
+
+public Action Timer_TauntAttackSpeed(Handle timer, int ref){
+	ApplyTauntAttackSpeed(ref);
+	return Plugin_Stop;
+}

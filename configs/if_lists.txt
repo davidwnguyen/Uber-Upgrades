@@ -1924,6 +1924,7 @@
 		{
 			"0"		"rocket specialist"
 			"1"		"air control when blast jumping"
+			"2"		"damage taken multiplier when active"
 		}
 		"Special Tweaks"
 		{
@@ -2346,7 +2347,7 @@
 			"1"		"effect bar recharge rate increased"
 			"2"		"health regen buff"
 			"3"		"afterburn immunity buff"
-			"4"		"gesture speed increase (consu)"
+			"4"		"taunt speed increase"
 		}
 		"Special Tweaks"
 		{
@@ -2363,7 +2364,7 @@
 			"1"		"mult_item_meter_charge_rate"
 			"2"		"health regen buff"
 			"3"		"afterburn immunity buff"
-			"4"		"gesture speed increase (consu)"
+			"4"		"taunt speed increase"
 		}
 		"Special Tweaks"
 		{

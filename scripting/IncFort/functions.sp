@@ -4621,3 +4621,25 @@ PopulateProjectileLifespanMap(){
 	projectileLifespanMap.SetValue("tf_projectile_stun_ball", 2.0);
 	projectileLifespanMap.SetValue("tf_projectile_ball_ornament", 2.0);
 }
+
+ApplyTauntAttackSpeed(int ref){
+	int client = EntRefToEntIndex(ref);
+	if(!IsValidClient3(client))
+		return;
+
+	int CWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
+	if(!IsValidWeapon(CWeapon))
+		return;
+
+	if(!TF2_IsPlayerInCondition(client, TFCond_Taunting)){
+		TF2Attrib_RemoveByName(CWeapon, "gesture speed increase");
+		return;
+	}
+
+	float attackRate = TF2Attrib_HookValueFloat(1.0, "mult_gesture_time", CWeapon);
+	if(attackRate != 1.0) {
+		float newTime = (GetEntDataFloat(client, TauntAttackTimeOffset)-GetGameTime())/attackRate;
+		SetEntDataFloat(client, TauntAttackTimeOffset, GetGameTime() + newTime, true);
+		CreateTimer(newTime, Timer_TauntAttackSpeed, ref);
+	}
+}

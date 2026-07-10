@@ -95,7 +95,7 @@ public Plugin:myinfo =
 	author = "",
 	description = "Incremental game styled MvM upgrades on any gamemode.",
 	version = PLUGIN_VERSION,
-	url = "https://github.com/rustedBlood/Incremental-Fortress",
+	url = "https://github.com/davidwnguyen/Incremental-Fortress",
 }
 
 #include "IncFort/globalVariables.sp"

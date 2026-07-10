@@ -1,5 +1,8 @@
 "Phrases"
 {
+	"taunt speed increase"{
+		"en"		"Taunt Speed Increased"
+	}
 	"damage taken multiplier when active"{
 		"en"		"Damage Taken Multiplier While Active"
 	}

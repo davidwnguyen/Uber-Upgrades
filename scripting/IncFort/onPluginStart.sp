@@ -475,7 +475,16 @@ public void OnPluginStart()
 	else
 		DHookEnableDetour(g_DHookOnScattergunFinishReload, false, OnScattergunFinishReload);
 
+	//Hooking onto taunting before calculations
+	Handle g_DHookOnTaunt = DHookCreateFromConf(hConf, "CTFPlayer::OnTauntSucceeded()")
+	if(g_DHookOnTaunt == null)
+		PrintToServer("OnTaunt failed");
+	else
+		DHookEnableDetour(g_DHookOnTaunt, false, OnTaunt);
+		
 	g_offset_CTFPlayerShared_pOuter = view_as<Address>(GameConfGetOffset(hConf, "CTFPlayerShared::m_pOuter"));
+	TauntAttackTimeOffset = FindSendPropInfo("CTFPlayer", "m_iSpawnCounter") - GameConfGetOffset(hConf, "m_flTauntAttackTime");
+
 	delete hConf;
 			
 	//Cookies
