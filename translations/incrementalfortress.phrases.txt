@@ -1,5 +1,8 @@
 "Phrases"
 {
+	"rocketjump attackrate bonus"{
+		"en"		"Fire Rate while Rocket Jumping"
+	}
 	"taunt speed increase"{
 		"en"		"Taunt Speed Increased"
 	}
@@ -1847,9 +1850,6 @@
 	}
 	"stickybomb_charge_damage_increase"{
 		"en"		"Charge Damage Bonus"
-	}
-	"rocketjump attackrate bonus"{
-		"en"		"Fire Rate While Airborne"
 	}
 	"spunup_damage_resistance"{
 		"en"		"Damage Resistance While Spun-Up"
